@@ -710,7 +710,7 @@ Angularコンパイラーは、`<app-banner>`要素に対して`BannerStubCompon
 
 <docs-code header="hero-detail.component.spec.ts (selected tests)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="selected-tests"/>
 
-## コンポーネントプロバイダーのオーバーライド
+## コンポーネントプロバイダーのオーバーライド {#override-component-providers}
 
 `HeroDetailComponent`は独自の`HeroDetailService`を提供します。
 

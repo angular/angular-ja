@@ -18,8 +18,7 @@ Angular CLIには、通常`build`ターゲットとして使用される4つの�
 
 特定のプロジェクトで使用されているビルダーは、そのプロジェクトの`build`ターゲットを調べることで判断できます。
 
-<docs-code language="json">
-
+```json
 {
   "projects": {
     "my-app": {
@@ -36,8 +35,7 @@ Angular CLIには、通常`build`ターゲットとして使用される4つの�
     }
   }
 }
-
-</docs-code>
+```
 
 このページでは、`@angular-devkit/build-angular:application`の使用法とオプションについて説明します。
 
@@ -52,8 +50,7 @@ CLIを使用すると、設定でサイズしきい値を設定して、アプ�
 
 サイズ境界は、CLI設定ファイル`angular.json`の、各[設定済み環境](tools/cli/environments)の`budgets`セクションで定義します。
 
-<docs-code language="json">
-
+```json
 {
   …
   "configurations": {
@@ -69,8 +66,7 @@ CLIを使用すると、設定でサイズしきい値を設定して、アプ�
     }
   }
 }
-
-</docs-code>
+```
 
 アプリケーション全体および特定のパーツに対してサイズバジェットを指定できます。
 各バジェットエントリは、特定のタイプのバジェットを設定します。
@@ -112,8 +108,7 @@ Angular CLIは、ブラウザアプリケーションがCommonJSモジュール�
 CommonJS依存関係に遭遇した場合は、メンテナーにECMAScriptモジュールのサポートを依頼するか、自分でそのサポートに貢献するか、またはニーズを満たす代替の依存関係を使用することを検討してください。
 CommonJS依存関係を使用するのが最善の選択肢である場合は、`angular.json`にある`build`オプションの`allowedCommonJsDependencies`オプションにCommonJSモジュール名を追加することで、これらの警告を無効にできます。
 
-<docs-code language="json">
-
+```json
 "build": {
   "builder": "@angular-devkit/build-angular:browser",
   "options": {
@@ -124,8 +119,7 @@ CommonJS依存関係を使用するのが最善の選択肢である場合は、
    }
    …
 },
-
-</docs-code>
+```
 
 ## ブラウザの互換性を設定する {#configuring-browser-compatibility}
 
@@ -147,3 +141,10 @@ HELPFUL: [browsersl.ist](https://browsersl.ist)を使用して、`browserslist`�
 Angularは[Tailwind CSS](https://tailwindcss.com/)、ユーティリティファーストのCSSフレームワークをサポートしています。
 
 Tailwind CSSをAngular CLIと統合するには、[AngularでのTailwind CSSの使用](guide/tailwind)を参照してください。
+
+## クリティカルCSSのインライン化 {#critical-css-inlining}
+
+Angularは、[First Contentful Paint (FCP)](https://web.dev/first-contentful-paint)を改善するために、アプリケーションのクリティカルCSS定義をインライン化できます。
+このオプションはデフォルトで有効になっています。[`styles`カスタマイズオプション](reference/configs/workspace-config#styles-optimization-options)でこのインライン化を無効にできます。
+
+この最適化は、初期ビューポートのレンダリングに必要なCSSを抽出し、生成されたHTMLに直接インライン化します。これにより、ブラウザは完全なスタイルシートの読み込みを待たずに、より高速にコンテンツを表示できます。残りのCSSはバックグラウンドで非同期に読み込まれます。Angular CLIは、アプリケーションのHTMLとスタイルを分析するために[Beasties](https://github.com/danielroe/beasties)を使用します。

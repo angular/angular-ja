@@ -13,12 +13,12 @@ AngularのCLIコマンドである`ng deploy`はあなたのプロジェクト�
 
 例えば、以下のコマンドは[Firebase](https://firebase.google.com/)にプロジェクトを自動的にデプロイできます。
 
-<docs-code language="shell">
+```shell
 
 ng add @angular/fire
 ng deploy
 
-</docs-code>
+```
 
 コマンドは対話的です。
 このケースでは、Firebaseアカウントを持っているか作成しなくてはならず、それを使用して認証しなくてはなりません。
@@ -28,10 +28,10 @@ ng deploy
 各パッケージの`deploy`コマンドは異なるコマンドラインオプションを要求します。
 以下のパッケージ名に関連付けられたリンクをたどることで、より詳細を読むことができます。
 
-| デプロイ先                                                        | セットアップコマンド                                                                       |
-|:---                                                               |:---                                                                                  |
+| デプロイ先                                                        | セットアップコマンド                                                                        |
+| :---------------------------------------------------------------- | :------------------------------------------------------------------------------------------ |
 | [Firebase hosting](https://firebase.google.com/docs/hosting)      | [`ng add @angular/fire`](https://npmjs.org/package/@angular/fire)                           |
-| [Vercel](https://vercel.com/solutions/angular)                    | [`vercel init angular`](https://github.com/vercel/vercel/tree/main/examples/angular) |
+| [Vercel](https://vercel.com/solutions/angular)                    | [`vercel init angular`](https://github.com/vercel/vercel/tree/main/examples/angular)        |
 | [Netlify](https://www.netlify.com)                                | [`ng add @netlify-builder/deploy`](https://npmjs.org/package/@netlify-builder/deploy)       |
 | [GitHub pages](https://pages.github.com)                          | [`ng add angular-cli-ghpages`](https://npmjs.org/package/angular-cli-ghpages)               |
 | [Amazon Cloud S3](https://aws.amazon.com/s3/?nc2=h_ql_prod_st_s3) | [`ng add @jefiozie/ngx-aws-deploy`](https://www.npmjs.com/package/@jefiozie/ngx-aws-deploy) |
@@ -60,17 +60,17 @@ ng deploy
 もしアプリケーションがAngularのルーターを使っているならば、持っていないファイルを要求した時、アプリケーションのホストページ(`index.html`)を返すよう設定しなければなりません。
 
 ルーティングされたアプリケーションは「ディープリンク」をサポートするべきです。
-*ディープリンク*はアプリケーションの中のコンポーネントへの経路を指定したURLです。
-例えば、`http://my-app.test/users/42`は`id`42のユーザーを表示するユーザー詳細ページへの*ディープリンク*です。
+_ディープリンク_はアプリケーションの中のコンポーネントへの経路を指定したURLです。
+例えば、`http://my-app.test/users/42`は`id`42のユーザーを表示するユーザー詳細ページへの_ディープリンク_です。
 
 ユーザーが最初にindexページをロードし、それから起動中のクライアント内からそのURLに移動するのは問題ありません。
-Angularのルーターは*クライアントサイド*でナビゲーションを実行し、新しいHTMLを要求しません。
+Angularのルーターは_クライアントサイド_でナビゲーションを実行し、新しいHTMLを要求しません。
 
-しかし、電子メール内のディープリンクをクリックしたり、ブラウザのアドレスバーにディープリンクを入力したり、既にディープリンクに紐づけられたページをブラウザでリフレッシュするときさえも、実行しているアプリケーションの*外部*ですべてブラウザ自身によって処理されます。
+しかし、電子メール内のディープリンクをクリックしたり、ブラウザのアドレスバーにディープリンクを入力したり、既にディープリンクに紐づけられたページをブラウザでリフレッシュするときさえも、実行しているアプリケーションの_外部_ですべてブラウザ自身によって処理されます。
 Angularのルーターを迂回して、ブラウザは`/users/42`に対するサーバーへの直接のリクエストを作成します。
 
 静的なサーバーは`http://my-app.test/`に対するリクエストを受け取ると決まって`index.html`を返します。
-しかし、デフォルトでほとんどサーバーは`index.html`を代わりに返すよう設定されて*いないかぎり*`http://my-app.test/users/42`を拒否して`404 - Not Found`エラーを返します。
+しかし、デフォルトでほとんどサーバーは`index.html`を代わりに返すよう設定されて_いないかぎり_`http://my-app.test/users/42`を拒否して`404 - Not Found`エラーを返します。
 フォールバックルートを設定するか、サーバー上で404ページを`index.html`にする設定することで、Angularはディープリンクに関するサービスを提供し、正しいルートを表示できます。
 いくつかのサーバーはこのフォールバックの挙動を"Single-Page Application"(SPA)モードと呼びます。
 
@@ -81,20 +81,20 @@ Angularのルーターを迂回して、ブラウザは`/users/42`に対する�
 
 ### 異なるサーバーからデータをリクエストする(CORS)
 
-アプリケーション自身のホストサーバー以外のサーバーにネットワークリクエストを行う際、Web開発者は[*クロスオリジンリソース共有*](https://developer.mozilla.org/docs/Web/HTTP/CORS "クロスオリジンリソース共有")エラーに遭遇するかもしれません。
+アプリケーション自身のホストサーバー以外のサーバーにネットワークリクエストを行う際、Web開発者は[_クロスオリジンリソース共有_](https://developer.mozilla.org/docs/Web/HTTP/CORS 'クロスオリジンリソース共有')エラーに遭遇するかもしれません。
 ブラウザはサーバーが明示的に許可していない限りそのようなリクエストを禁止します。
 
 これらのエラーに関してAngularまたはクライアントアプリケーションでできることは何もありません。
-*サーバー*はアプリケーションのリクエストを受け付けるよう設定されていなければなりません。
-特定のサーバーでCORSを有効にする方法は[enable-cors.org](https://enable-cors.org/server.html "CORSサーバーの有効化")を読んでください。
+_サーバー_はアプリケーションのリクエストを受け付けるよう設定されていなければなりません。
+特定のサーバーでCORSを有効にする方法は[enable-cors.org](https://enable-cors.org/server.html 'CORSサーバーの有効化')を読んでください。
 
 ## プロダクションの最適化
 
 `ng build`は特に設定しない限り`production`設定を使います。この設定はビルド最適化機能を有効にします。
 
 | 機能                                                                  | 詳細                                                                                          |
-|:---                                                                   |:---                                                                                           |
-| [事前(AOT)コンパイル](guide/aot-compiler)                             | Angularコンポーネントのテンプレートの事前コンパイル。                                         |
+| :-------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------- |
+| [事前(AOT)コンパイル](tools/cli/aot-compiler)                         | Angularコンポーネントのテンプレートの事前コンパイル。                                         |
 | [プロダクションモード](tools/cli/deployment#development-only-features)| 実行時のパフォーマンスを最高にするためのアプリケーションの最適化                              |
 | バンドル                                                              | 多数のアプリケーションおよびライブラリを連結してデプロイされるファイルを最小限の数にする。    |
 | 最小化                                                                | 余分なホワイトスペース、コメントおよびオプショナルなトークンを取り除く。                      |
@@ -108,9 +108,9 @@ CLIのビルドオプションとそれらの効果についてより多く知�
 `ng serve`を使ってローカルでアプリケーションを起動するとき、Angularは開発用の設定を使用することで、
 実行時に以下が使用可能になります:
 
-* [`expression-changed-after-checked`](errors/NG0100)の検出のような安全な追加のチェック。
-* より詳細なエラーメッセージ。
-* [デバッグ関数](api#core-global)および[Angular DevTools](tools/devtools)をサポートするグローバルな`ng`変数のような追加のデバッグユーティリティ。
+- [`expression-changed-after-checked`](errors/NG0100)の検出のような安全な追加のチェック。
+- より詳細なエラーメッセージ。
+- [デバッグ関数](api#core-global)および[Angular DevTools](tools/devtools)をサポートするグローバルな`ng`変数のような追加のデバッグユーティリティ。
 
 これらの機能は開発中は便利ですが、アプリケーションに追加のコードが必要で、プロダクションでは望まれません。
 エンドユーザーのためのバンドルサイズにネガティブな影響を与えないよう、これらの機能を安全に使うために、Angular CLIは
@@ -120,13 +120,13 @@ CLIのビルドオプションとそれらの効果についてより多く知�
 
 ## `--deploy-url`
 
-`--deploy-url`は画像、スクリプト、スタイルシートといった資材のための関連するURLを解決するためのベースとなるパスを*コンパイル*時に指定するのに使われるコマンドラインオプションです。
+`--deploy-url`は画像、スクリプト、スタイルシートといった資材のための関連するURLを解決するためのベースとなるパスを_コンパイル_時に指定するのに使われるコマンドラインオプションです。
 
-<docs-code language="shell">
+```shell
 
 ng build --deploy-url /my/assets
 
-</docs-code>
+```
 
 `--deploy-url`の効果と目的は[`<base href>`](guide/routing/common-router-tasks)と重なります。両者とも初期のスクリプト、スタイルシート、遅延して読み込まれるスクリプト、cssリソースのために使用できます。
 

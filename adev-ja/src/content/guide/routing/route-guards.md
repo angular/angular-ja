@@ -28,7 +28,7 @@ TIP: Angularプロジェクトで個別のTypeScriptファイルを作成する�
 
 Note: `CanMatch` は異なる動作をします — `false` を返すと、Angularはナビゲーションを完全にブロックする代わりに、他のマッチするルートを試行します。
 
-## ルートガードの種類
+## ルートガードの種類 {#types-of-route-guards}
 
 Angularは、それぞれ異なる目的を持つ4種類のルートガードを提供します。
 
@@ -187,7 +187,7 @@ const routes: Routes = [
     children: [
       // /users/list - 保護されている
       { path: 'list', component: UserListComponent },
-      // /useres/detail/:id - 保護されている
+      // /users/detail/:id - 保護されている
       { path: 'detail/:id', component: UserDetailComponent }
     ]
   },

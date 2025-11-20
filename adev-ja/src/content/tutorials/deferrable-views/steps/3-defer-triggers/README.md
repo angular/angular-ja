@@ -29,8 +29,8 @@
 
 複数のイベントトリガーを一度に定義できます。これらのトリガーはOR条件として評価されます。
 
-* 例: `@defer (on viewport; on timer(2s))`
-* 例: `@defer (on viewport; when customizedCondition)`
+- 例: `@defer (on viewport; on timer(2s))`
+- 例: `@defer (on viewport; when customizedCondition)`
 
 このアクティビティでは、トリガーを使用して遅延可能ビューをロードする条件を指定する方法を学習します。
 
@@ -63,8 +63,9 @@
 <button type="button" #showComments>Show all comments</button>
 
 @defer (on hover) {
-  <article-comments />
+<article-comments />
 } @placeholder (minimum 1s) {
+
   <p>Placeholder for comments</p>
 } @loading (minimum 1s; after 500ms) {
   <p>Loading comments...</p>
@@ -84,8 +85,9 @@ NOTE: [テンプレート変数に関する詳細については、ドキュメ�
 <button type="button" #showComments>Show all comments</button>
 
 @defer (on hover; on interaction(showComments)) {
-  <article-comments />
+<article-comments />
 } @placeholder (minimum 1s) {
+
   <p>Placeholder for comments</p>
 } @loading (minimum 1s; after 500ms) {
   <p>Loading comments...</p>
@@ -95,8 +97,9 @@ NOTE: [テンプレート変数に関する詳細については、ドキュメ�
 </docs-code>
 
 これらの変更により、ページは次の条件のいずれかが満たされるまで、コメントセクションのレンダリングを待機します。
-* ユーザーがコメントセクションのプレースホルダーにホバーする
-* ユーザーが「すべてのコメントを表示」ボタンをクリックする
+
+- ユーザーがコメントセクションのプレースホルダーにホバーする
+- ユーザーが「すべてのコメントを表示」ボタンをクリックする
 
 ページをリロードして、コメントセクションをレンダリングするためのさまざまなトリガーを試すことができます。
 </docs-step>

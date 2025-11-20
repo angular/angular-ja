@@ -1,7 +1,7 @@
 # 軽量インジェクショントークンを使用したクライアントアプリケーションサイズの最適化
 
 このページでは、ライブラリ開発者に推奨される依存性の注入テクニックの概要を概念的に説明します。
-*軽量インジェクショントークン* を使用してライブラリを設計すると、ライブラリを使用するクライアントアプリケーションのバンドルサイズを最適化できます。
+_軽量インジェクショントークン_ を使用してライブラリを設計すると、ライブラリを使用するクライアントアプリケーションのバンドルサイズを最適化できます。
 
 ツリーシェイク可能なプロバイダーを使用することで、コンポーネントと注入可能なサービス間の依存関係の構造を管理してバンドルサイズを最適化できます。
 通常、これにより、アプリケーションで実際に使用されていない提供されたコンポーネントまたはサービスが、コンパイラによってバンドルから削除されます。
@@ -25,7 +25,7 @@ Angularがインジェクショントークンを格納する方法により、�
 <docs-code language="html">
 
 <lib-card>;
-  <lib-header>…</lib-header>;
+<lib-header>…</lib-header>;
 </lib-card>;
 
 </docs-code>
@@ -40,11 +40,11 @@ Angularがインジェクショントークンを格納する方法により、�
 class LibHeaderComponent {}
 
 @Component({
-  selector: 'lib-card',
-  …,
+selector: 'lib-card',
+…,
 })
 class LibCardComponent {
-  @ContentChild(LibHeaderComponent) header: LibHeaderComponent|null = null;
+@ContentChild(LibHeaderComponent) header: LibHeaderComponent|null = null;
 }
 
 </docs-code>
@@ -57,13 +57,13 @@ class LibCardComponent {
 @ContentChild(LibHeaderComponent) header: LibHeaderComponent;
 </docs-code>
 
-* これらの参照の1つは *型の位置* にあります。つまり、 `LibHeaderComponent` を型として指定します: `header: LibHeaderComponent;`。
-* もう1つの参照は *値の位置* にあります。つまり、LibHeaderComponentは `@ContentChild()` パラメータデコレーターの値です: `@ContentChild(LibHeaderComponent)`。
+- これらの参照の1つは _型の位置_ にあります。つまり、 `LibHeaderComponent` を型として指定します: `header: LibHeaderComponent;`。
+- もう1つの参照は _値の位置_ にあります。つまり、LibHeaderComponentは `@ContentChild()` パラメータデコレーターの値です: `@ContentChild(LibHeaderComponent)`。
 
 コンパイラはこれらの位置にあるトークン参照を異なる方法で処理します。
 
-* コンパイラは、TypeScriptから変換した後の *型の位置* の参照を消去するため、ツリーシェイクには影響しません。
-* コンパイラは、*値の位置* の参照をランタイムに保持する必要があり、これが**妨げます** コンポーネントがツリーシェイクされること。
+- コンパイラは、TypeScriptから変換した後の _型の位置_ の参照を消去するため、ツリーシェイクには影響しません。
+- コンパイラは、_値の位置_ の参照をランタイムに保持する必要があり、これが**妨げます** コンポーネントがツリーシェイクされること。
 
 この例では、コンパイラは値位置にある `LibHeaderComponent` トークンを保持します。
 これにより、アプリケーションで実際に `<lib-header>` をどこでも使用していない場合でも、参照されるコンポーネントがツリーシェイクされることがなくなります。
@@ -74,8 +74,8 @@ class LibCardComponent {
 ツリーシェイクの問題は、コンポーネントがインジェクショントークンとして使用されると発生します。
 これは次の2つのケースで発生します。
 
-* トークンは、[コンテンツクエリ](guide/components/queries#content-queries)で値の位置で使用されます。
-* トークンは、コンストラクター注入の型指定子として使用されます。
+- トークンは、[コンテンツクエリ](guide/components/queries#content-queries)で値の位置で使用されます。
+- トークンは、コンストラクター注入の型指定子として使用されます。
 
 次の例では、 `OtherComponent` トークンの両方の使用により、 `OtherComponent` が保持され、使用されていない場合にツリーシェイクされることがなくなります。
 
@@ -83,7 +83,7 @@ class LibCardComponent {
 class MyComponent {
   constructor(@Optional() other: OtherComponent) {}
 
-  @ContentChild(OtherComponent) other: OtherComponent|null;
+@ContentChild(OtherComponent) other: OtherComponent|null;
 }
 </docs-code>
 
@@ -104,20 +104,20 @@ HELPFUL: ライブラリは、[ツリーシェイク可能なプロバイダー]
 abstract class LibHeaderToken {}
 
 @Component({
-  selector: 'lib-header',
-  providers: [
-    {provide: LibHeaderToken, useExisting: LibHeaderComponent}
-  ]
-  …,
+selector: 'lib-header',
+providers: [
+{provide: LibHeaderToken, useExisting: LibHeaderComponent}
+]
+…,
 })
 class LibHeaderComponent extends LibHeaderToken {}
 
 @Component({
-  selector: 'lib-card',
-  …,
+selector: 'lib-card',
+…,
 })
 class LibCardComponent {
-  @ContentChild(LibHeaderToken) header: LibHeaderToken|null = null;
+@ContentChild(LibHeaderToken) header: LibHeaderToken|null = null;
 }
 </docs-code>
 
@@ -152,30 +152,30 @@ abstract class LibHeaderToken {
 }
 
 @Component({
-  selector: 'lib-header',
-  providers: [
-    {provide: LibHeaderToken, useExisting: LibHeaderComponent}
-  ]
-  …,
+selector: 'lib-header',
+providers: [
+{provide: LibHeaderToken, useExisting: LibHeaderComponent}
+]
+…,
 })
 class LibHeaderComponent extends LibHeaderToken {
-  doSomething(): void {
-    // Concrete implementation of `doSomething`
-  }
+doSomething(): void {
+// Concrete implementation of `doSomething`
+}
 }
 
 @Component({
-  selector: 'lib-card',
-  …,
+selector: 'lib-card',
+…,
 })
 class LibCardComponent implement AfterContentInit {
-  @ContentChild(LibHeaderToken) header: LibHeaderToken|null = null;
+@ContentChild(LibHeaderToken) header: LibHeaderToken|null = null;
 
-  ngAfterContentInit(): void {
-    if (this.header !== null) {
-      this.header?.doSomething();
-    }
-  }
+ngAfterContentInit(): void {
+if (this.header !== null) {
+this.header?.doSomething();
+}
+}
 }
 </docs-code>
 

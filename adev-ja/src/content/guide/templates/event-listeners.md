@@ -98,9 +98,9 @@ Angularでは、組み込みの `code` サフィックスを提供すること�
 
 これは、異なるオペレーティングシステム間でキーボードイベントを一貫して処理する場合に役立ちます。たとえば、MacOSデバイスでAltキーを使用する場合、`key` プロパティはAltキーで既に修飾された文字に基づいてキーを報告します。これは、Alt + Sのような組み合わせが `'ß'` の `key` 値を報告することを意味します。ただし、`code` プロパティは、生成された文字ではなく、押された物理的なまたは仮想的なボタンに対応します。
 
-## Preventing event default behavior
+## イベントのデフォルト動作の防止 {#preventing-event-default-behavior}
 
-If your event handler should replace the native browser behavior, you can use the event object's [`preventDefault` method](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault):
+イベントハンドラーがネイティブのブラウザ動作を置き換える必要がある場合は、イベントオブジェクトの [`preventDefault` メソッド](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault)を使用できます。
 
 ```angular-ts
 @Component({
@@ -117,4 +117,110 @@ export class AppComponent{
 }
 ```
 
-If the event handler statement evaluates to `false`, Angular automatically calls `preventDefault()`, similar to [native event handler attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes#event_handler_attributes). *Always prefer explicitly calling `preventDefault`*, as this approach makes the code's intent obvious.
+イベントハンドラーのステートメントが `false` と評価された場合、Angularは自動的に `preventDefault()` を呼び出します。これは、[ネイティブのイベントハンドラー属性](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes#event_handler_attributes)と同様です。_常に明示的に `preventDefault` を呼び出すことを推奨します_。このアプローチによって、コードの意図が明確になります。
+
+## イベント処理の拡張 {#extend-event-handling}
+
+Angularのイベントシステムは、`EVENT_MANAGER_PLUGINS` インジェクショントークンで登録されたカスタムイベントプラグインを介して拡張可能です。
+
+### Event Pluginの実装 {#implementing-event-plugin}
+
+カスタムイベントプラグインを作成するには、`EventManagerPlugin` クラスを拡張し、必要なメソッドを実装します。
+
+```ts
+import { Injectable } from '@angular/core';
+import { EventManagerPlugin } from '@angular/platform-browser';
+
+@Injectable()
+export class DebounceEventPlugin extends EventManagerPlugin {
+  constructor() {
+    super(document);
+  }
+
+  // Define which events this plugin supports
+  override supports(eventName: string) {
+    return /debounce/.test(eventName);
+  }
+
+  // Handle the event registration
+  override addEventListener(
+    element: HTMLElement,
+    eventName: string,
+    handler: Function
+  ) {
+    // Parse the event: e.g., "click.debounce.500"
+    // event: "click", delay: 500
+    const [event, method , delay = 300 ] = eventName.split('.');
+
+    let timeoutId: number;
+
+    const listener = (event: Event) => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+          handler(event);
+      }, delay);
+    };
+
+    element.addEventListener(event, listener);
+
+    // Return cleanup function
+    return () => {
+      clearTimeout(timeoutId);
+      element.removeEventListener(event, listener);
+    };
+  }
+}
+```
+
+アプリケーションのプロバイダーで `EVENT_MANAGER_PLUGINS` トークンを使用してカスタムプラグインを登録します。
+
+```ts
+import { bootstrapApplication } from '@angular/platform-browser';
+import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+import { DebounceEventPlugin } from './debounce-event-plugin';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    {
+      provide: EVENT_MANAGER_PLUGINS,
+      useClass: DebounceEventPlugin,
+      multi: true
+    }
+  ]
+});
+```
+
+登録後、テンプレート内でカスタムイベント構文を使用できます。`host` プロパティでも使用できます。
+
+```angular-ts
+@Component({
+  template: `
+    <input
+      type="text"
+      (input.debounce.500)="onSearch($event.target.value)"
+      placeholder="Search..."
+    />
+  `,
+  ...
+})
+export class Search {
+ onSearch(query: string): void {
+    console.log('Searching for:', query);
+  }
+}
+```
+
+```ts
+@Component({
+  ...,
+  host: {
+    '(click.debounce.500)': 'handleDebouncedClick()',
+  },
+})
+export class AwesomeCard {
+  handleDebouncedClick(): void {
+   console.log('Debounced click!');
+  }
+}
+```

@@ -26,7 +26,7 @@
 
 この基本バージョンは、より多くの種類の質問、より洗練されたレンダリング、優れたユーザー体験をサポートするように進化させることができます。
 
-## プロジェクトでリアクティブフォームを有効にする
+## プロジェクトでリアクティブフォームを有効にする {#enable-reactive-forms-for-your-project}
 
 動的フォームはリアクティブフォームに基づいています。
 
@@ -37,7 +37,7 @@
     <docs-code header="dynamic-form-question.component.ts" path="adev/src/content/examples/dynamic-form/src/app/dynamic-form-question.component.ts"/>
 </docs-code-multifile>
 
-## フォームオブジェクトモデルを作成する
+## フォームオブジェクトモデルを作成する {#create-a-form-object-model}
 
 動的フォームには、フォーム機能に必要なすべてのシナリオを記述できるオブジェクトモデルが必要です。
 例のヒーローアプリケーションフォームは、一連の質問です。つまり、フォーム内の各コントロールは質問をし、回答を受け入れる必要があります。
@@ -47,9 +47,9 @@
 
 次の `QuestionBase` は、フォーム内の質問とその回答を表すことができる一連のコントロールのベースクラスです。
 
-<docs-code header="src/app/question-base.ts" path="adev/src/content/examples/dynamic-form/src/app/question-base.ts"/>
+<docs-code header="question-base.ts" path="adev/src/content/examples/dynamic-form/src/app/question-base.ts"/>
 
-### コントロールクラスを定義する
+### コントロールクラスを定義する {#define-control-classes}
 
 このベースから、例では、異なるコントロールタイプを表す `TextboxQuestion` と `DropdownQuestion` の2つの新しいクラスを派生させます。
 次のステップでフォームテンプレートを作成するときは、適切なコントロールを動的にレンダリングするために、これらの特定の質問タイプをインスタンス化します。
@@ -62,21 +62,21 @@
 
 <docs-code header="question-dropdown.ts" path="adev/src/content/examples/dynamic-form/src/app/question-dropdown.ts"/>
 
-### フォームグループを構成する
+### フォームグループを構成する {#compose-form-groups}
 
 動的フォームは、サービスを使用して、質問モデルのメタデータに基づいて、入力コントロールのグループ化されたセットを作成します。
 次の `QuestionControlService` は、質問モデルからメタデータを使用する `FormGroup` インスタンスのセットを収集します。
 デフォルト値と検証ルールを指定できます。
 
-<docs-code header="src/app/question-control.service.ts" path="adev/src/content/examples/dynamic-form/src/app/question-control.service.ts"/>
+<docs-code header="question-control.service.ts" path="adev/src/content/examples/dynamic-form/src/app/question-control.service.ts"/>
 
-## 動的フォームコンテンツを構成する
+## 動的フォームコンテンツを構成する {#compose-dynamic-form-contents}
 
 動的フォーム自体は、後で追加するコンテナーコンポーネントで表されます。
 各質問は、フォームコンポーネントのテンプレートで、`DynamicFormQuestionComponent` のインスタンスと一致する `<app-question>` タグで表されます。
 
 `DynamicFormQuestionComponent` は、データバインドされた質問オブジェクトの値に基づいて、個々の質問の詳細をレンダリングする責任があります。
-フォームは、[`[formGroup]` ディレクティブ](api/forms/FormGroupDirective "API リファレンス") に依存して、テンプレートHTMLを基礎となるコントロールオブジェクトに接続します。
+フォームは、[`[formGroup]` ディレクティブ](api/forms/FormGroupDirective 'API リファレンス') に依存して、テンプレートHTMLを基礎となるコントロールオブジェクトに接続します。
 `DynamicFormQuestionComponent` は、フォームグループを作成し、質問モデルにより定義されたコントロールでそれらを埋め、表示と検証ルールを指定します。
 
 <docs-code-multifile>
@@ -87,10 +87,10 @@
 `DynamicFormQuestionComponent` の目標は、モデルで定義された質問タイプを提示することです。
 現時点では質問タイプが2つしかありませんが、さらに多くのタイプが考えられます。
 テンプレートの `@switch` ブロックは、表示する質問タイプを決定します。
-スイッチは、[`formControlName`](api/forms/FormControlName "FormControlName ディレクティブ API リファレンス") と [`formGroup`](api/forms/FormGroupDirective "FormGroupDirective API リファレンス") セレクターを持つディレクティブを使用します。
+スイッチは、[`formControlName`](api/forms/FormControlName 'FormControlName ディレクティブ API リファレンス') と [`formGroup`](api/forms/FormGroupDirective 'FormGroupDirective API リファレンス') セレクターを持つディレクティブを使用します。
 両方のディレクティブは `ReactiveFormsModule` で定義されています。
 
-### データを供給する
+### データを供給する {#supply-data}
 
 個々のフォームを構築するために、特定の質問セットを供給するサービスも必要です。
 この演習では、ハードコードされたサンプルデータからこの質問の配列を供給する `QuestionService` を作成します。
@@ -100,9 +100,9 @@
 
 `QuestionService` は、`input()` questionsにバインドされた配列の形式で、質問セットを供給します。
 
-<docs-code header="src/app/question.service.ts" path="adev/src/content/examples/dynamic-form/src/app/question.service.ts"/>
+<docs-code header="question.service.ts" path="adev/src/content/examples/dynamic-form/src/app/question.service.ts"/>
 
-## 動的フォームテンプレートを作成する
+## 動的フォームテンプレートを作成する {#create-a-dynamic-form-template}
 
 `DynamicFormComponent` コンポーネントは、テンプレートで `<app-dynamic-form>` を使用して表されるフォームのエントリポイントであり、メインコンテナーです。
 
@@ -113,7 +113,7 @@
     <docs-code header="dynamic-form.component.ts" path="adev/src/content/examples/dynamic-form/src/app/dynamic-form.component.ts"/>
 </docs-code-multifile>
 
-### フォームを表示する
+### フォームを表示する {#display-the-form}
 
 動的フォームのインスタンスを表示するには、`AppComponent` シェルテンプレートは、`QuestionService` から返された `questions` 配列を、フォームコンテナーコンポーネント `<app-dynamic-form>` に渡します。
 
@@ -121,7 +121,7 @@
 
 このモデルとデータの分離により、_質問_ オブジェクトモデルと互換性がある限り、あらゆるタイプのアンケートにコンポーネントを再利用できます。
 
-### 有効なデータを確保する
+### 有効なデータを確保する {#ensuring-valid-data}
 
 フォームテンプレートは、特定の質問についてハードコードされた仮定を一切行わずに、メタデータの動的データバインドを使用してフォームをレンダリングします。
 コントロールメタデータと検証基準の両方を動的に追加します。
@@ -133,7 +133,7 @@
 
 <img alt="Dynamic-Form" src="assets/images/guide/dynamic-form/dynamic-form.png">
 
-## 次のステップ
+## 次のステップ {#next-steps}
 
 <docs-pill-row>
   <docs-pill title="フォーム入力の検証" href="guide/forms/reactive-forms#validating-form-input" />

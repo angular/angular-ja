@@ -75,7 +75,7 @@ Part 1. **ボタンにクリックハンドラーを追加します。**
 
 Part 2. **プレースホルダーをリソースの状態処理に置き換えます。**
 
-```html
+```angular-html
 @if (isLoading()) {
   <p>Loading user...</p>
 } @else if (hasError()) {

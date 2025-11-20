@@ -68,7 +68,7 @@ isWithinWorkingHours = computed(() => {
 
 1. 通知については、`Loading...`を@ifブロックに置き換えます。
 
-```html
+```angular-html
 @if (notificationsEnabled()) {
   Enabled
 } @else {
@@ -78,13 +78,13 @@ isWithinWorkingHours = computed(() => {
 
 2. メッセージについては、`Loading...`を以下に置き換えます。
 
-```html
+```angular-html
 {{ statusMessage() }}
 ```
 
 3. 勤務時間については、`Loading...`を@ifブロックに置き換えます。
 
-```html
+```angular-html
 @if (isWithinWorkingHours()) {
   Yes
 } @else {

@@ -8,7 +8,7 @@ Angularでは、**ルート**は特定のURLパスまたはパターンに対し
 
 次にルートの基本的な例を示します。
 
-```angular-ts
+```ts
 import { AdminPage } from './app-admin/app-admin.component';
 
 const adminPage = {
@@ -25,7 +25,7 @@ const adminPage = {
 
 ルートのコレクションは次のようになります。
 
-```angular-ts
+```ts
 import { Routes } from '@angular/router';
 import { HomePage } from './home-page/home-page.component';
 import { AdminPage } from './about-page/admin-page.component';
@@ -50,7 +50,7 @@ Angular CLIなしでAngularアプリケーションをブートストラップ�
 
 `providers`配列内で、`provideRouter`関数呼び出しとルートを追加することで、Angularルーターをアプリケーションに追加できます。
 
-```angular-ts
+```ts
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
@@ -87,9 +87,9 @@ IMPORTANT: パラメーターは、URLの[クエリ文字列](https://en.wikiped
 
 次の例は、URLを介して渡されたユーザーIDに基づいてユーザープロファイルコンポーネントを表示します。
 
-```angular-ts
+```ts
 import { Routes } from '@angular/router';
-import { UserProfile } from './user-profile/user-profile;
+import { UserProfile } from './user-profile/user-profile';
 
 const routes: Routes = [
   { path: 'user/:id', component: UserProfile }
@@ -107,7 +107,7 @@ const routes: Routes = [
 
 複数のパラメーターを持つパスを定義できます。
 
-```angular-ts
+```ts
 import { Routes } from '@angular/router';
 import { UserProfile } from './user-profile/user-profile.component';
 import { SocialMediaFeed } from './user-profile/social–media-feed.component';
@@ -128,7 +128,7 @@ const routes: Routes = [
 
 一般的な例は、ページが見つかりませんコンポーネントの定義です。
 
-```angular-ts
+```ts
 import { Home } from './home/home.component';
 import { UserProfile } from './user-profile/user-profile.component';
 import { NotFound } from './not-found/not-found.component';
@@ -150,7 +150,7 @@ Tip: ワイルドカードルートは通常、ルート配列の最後に配置
 
 次の例は、最も具体的なものから最も具体的でないものへと定義されたルートを示しています。
 
-```angular-ts
+```ts
 const routes: Routes = [
   { path: '', component: HomeComponent },              // 空のパス
   { path: 'users/new', component: NewUserComponent },  // 静的、最も具体的
@@ -181,7 +181,7 @@ Angularルーティングでコンポーネントがどのように、いつ読�
 
 `component`プロパティでルートを定義すると、参照されるコンポーネントは、ルート構成と同じJavaScriptバンドルの一部として即時読み込みされます。
 
-```angular-ts
+```ts
 import { Routes } from "@angular/router";
 import { HomePage } from "./components/home/home-page"
 import { LoginPage } from "./components/auth/login-page"
@@ -208,7 +208,7 @@ export const routes: Routes = [
 
 `loadComponent`プロパティを使用すると、そのルートがアクティブになる時点でのみ、ルートのJavaScriptを遅延読み込みできます。
 
-```angular-ts
+```ts
 import { Routes } from "@angular/router";
 
 export const routes: Routes = [
@@ -229,6 +229,29 @@ export const routes: Routes = [
 
 遅延読み込みルートは、初期バンドルからJavaScriptの大部分を削除することで、Angularアプリケーションの読み込み速度を大幅に向上させることができます。これらのコード部分は、ユーザーが対応するルートにアクセスしたときにのみルーターが要求する個別のJavaScript「チャンク」にコンパイルされます。
 
+### 注入コンテキストでの遅延読み込み {#injection-context-lazy-loading}
+
+ルーターは`loadComponent`と`loadChildren`を**現在のルートの注入コンテキスト**内で実行します。これにより、これらのローダー関数内で`inject`を呼び出して、そのルートで宣言されたプロバイダー、階層的な依存性の注入を介して親ルートから継承されたプロバイダー、またはグローバルに利用可能なプロバイダーにアクセスできます。これにより、コンテキストを認識した遅延読み込みが可能になります。
+
+```ts
+import { Routes } from '@angular/router';
+import { inject } from '@angular/core';
+import { FeatureFlags } from './feature-flags';
+
+export const routes: Routes = [
+  {
+    path: 'dashboard',
+    // ルートのインジェクションコンテキスト内で実行されます
+    loadComponent: () => {
+      const flags = inject(FeatureFlags);
+      return flags.isPremium
+        ? import('./dashboard/premium-dashboard').then(m => m.PremiumDashboard)
+        : import('./dashboard/basic-dashboard').then(m => m.BasicDashboard);
+    },
+  },
+];
+```
+
 ### 即時ルートと遅延ルートのどちらを使用すべきか {#should-i-use-an-eager-or-a-lazy-route}
 
 ルートが即時読み込みか遅延読み込みかを決定する際には、多くの要素を考慮する必要があります。
@@ -241,7 +264,7 @@ Note: 遅延ルートは、ユーザーが要求する初期データの量を�
 
 コンポーネントをレンダリングする代わりに、別のルートにリダイレクトするルートを定義できます。
 
-```angular-ts
+```ts
 import { BlogComponent } from './home/blog.component';
 
 const routes: Routes = [
@@ -298,13 +321,51 @@ const routes: Routes = [
 
 ルートタイトルは、[`TitleStrategy`](/api/router/TitleStrategy) 抽象クラスを継承するサービスを介しても設定できます。デフォルトでは、Angularは[`DefaultTitleStrategy`](/api/router/DefaultTitleStrategy)を使用します。
 
+### ページタイトルのためのTitleStrategyの使用 {#using-titlestrategy-for-page-titles}
+
+ドキュメントタイトルの構成方法を一元的に制御する必要がある高度なシナリオでは、`TitleStrategy`を実装します。
+
+`TitleStrategy`は、Angularが使用するデフォルトのタイトル戦略をオーバーライドするために提供できるトークンです。カスタムの`TitleStrategy`を提供して、アプリケーションのサフィックスの追加、パンくずリストからのタイトルのフォーマット、ルートデータからのタイトルの動的生成などの規約を実装できます。
+
+```ts
+import { Injectable } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { TitleStrategy, RouterStateSnapshot } from '@angular/router';
+
+@Injectable()
+export class AppTitleStrategy extends TitleStrategy {
+  private readonly title = inject(Title);
+
+  updateTitle(snapshot: RouterStateSnapshot): void {
+    // PageTitleは、ルートの"Title"が設定されている場合はそれと等しくなります
+    // 設定されていない場合は、index.htmlで指定された"title"を使用します
+    const pageTitle = this.buildTitle(snapshot) || this.title.getTitle();
+    this.title.setTitle(`MyAwesomeApp - ${pageTitle}`);
+  }
+}
+```
+
+カスタム戦略を使用するには、アプリケーションレベルで`TitleStrategy`トークンを使用してそれを提供します。
+
+```ts
+import { provideRouter, TitleStrategy } from '@angular/router';
+import { AppTitleStrategy } from './app-title.strategy';
+
+export const appConfig = {
+  providers: [
+    provideRouter(routes),
+    { provide: TitleStrategy, useClass: AppTitleStrategy },
+  ],
+};
+```
+
 ## 依存性の注入のためのルートレベルプロバイダー {#route-level-providers-for-dependency-injection}
 
 各ルートには、[依存性の注入](/guide/di)を介してそのルートのコンテンツに依存性を提供する`providers`プロパティがあります。
 
 これが役立つ一般的なシナリオには、ユーザーが管理者であるかどうかに基づいて異なるサービスを持つアプリケーションが含まれます。
 
-```angular-ts
+```ts
 export const ROUTES: Route[] = [
   {
     path: 'admin',
@@ -336,7 +397,7 @@ Angularのプロバイダーと注入に関する詳細については、[依存
 
 `data`プロパティを介して任意の静的データをルートに関連付けることで、ルート固有のメタデータ（例: 分析トラッキング、権限など）を一元化できます。
 
-```angular-ts
+```ts
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
@@ -372,7 +433,7 @@ const routes: Routes = [
 
 `children`プロパティを使用して、任意のルート定義に子ルートを追加できます。
 
-```angular-ts
+```ts
 const routes: Routes = [
   {
     path: 'product/:id',
@@ -410,3 +471,4 @@ const routes: Routes = [
 ## 次のステップ {#next-steps}
 
 [アウトレットでルートのコンテンツを表示する方法](/guide/routing/show-routes-with-outlets)を学びましょう。
+

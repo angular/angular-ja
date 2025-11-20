@@ -39,7 +39,7 @@ import {provideRouter} from '@angular/router';
 import {routes} from './app.routes';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes)],
+providers: [provideRouter(routes)],
 };
 </docs-code>
 
@@ -55,16 +55,15 @@ export const appConfig: ApplicationConfig = {
 import {RouterOutlet} from '@angular/router';
 
 @Component({
-  ...
-  template: `
-    <nav>
+...
+template: `     <nav>
       <a href="/">Home</a>
       |
       <a href="/user">User</a>
     </nav>
     <router-outlet />
   `,
-  imports: [RouterOutlet],
+imports: [RouterOutlet],
 })
 export class App {}
 </docs-code>
@@ -76,5 +75,3 @@ export class App {}
 これで、アプリケーションはAngular Routerを使用できるようになりました。素晴らしいですね！🙌
 
 勢いを維持して、次のステップであるアプリケーションのルートの定義を学びましょう。
-
-

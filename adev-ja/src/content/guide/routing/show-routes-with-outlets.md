@@ -8,7 +8,7 @@
 <app-footer />
 ```
 
-```angular-ts
+```ts
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
@@ -23,7 +23,7 @@ export class AppComponent {}
 
 この例では、アプリケーションに次のルートが定義されている場合:
 
-```angular-ts
+```ts
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
@@ -96,7 +96,7 @@ const routes: Routes = [
 
 子ルートは他のルートと同様に、`path`と`component`の両方が必要です。唯一の違いは、子ルートを親ルート内の`children`配列に配置することです。
 
-```angular-ts
+```ts
 const routes: Routes = [
   {
     path: 'settings-component',
@@ -133,7 +133,7 @@ const routes: Routes = [
 
 Angularは、各ルートで定義された`outlet`プロパティにアウトレットの名前を一致させます。
 
-```angular-ts
+```ts
 {
   path: 'user/:id',
   component: UserDetails,
@@ -164,6 +164,46 @@ Angularは、各ルートで定義された`outlet`プロパティにアウト�
 ```
 
 詳細については、[RouterOutletのAPIドキュメント](/api/router/RouterOutlet?tab=api)を参照してください。
+
+## ルーティングされたコンポーネントへのコンテキストデータの受け渡し {#passing-contextual-data-to-routed-components}
+
+ルーティングされたコンポーネントにコンテキストデータを渡すには、多くの場合、グローバルステートや複雑なルート設定が必要です。これを簡単にするために、各`RouterOutlet`は`routerOutletData`入力をサポートしています。ルーティングされたコンポーネントとその子コンポーネントは、`ROUTER_OUTLET_DATA`インジェクショントークンを使用してこのデータをシグナルとして読み取ることができ、ルート定義を変更せずにアウトレット固有の設定が可能になります。
+
+```angular-ts
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-dashboard',
+  imports: [RouterOutlet],
+  template: `
+    <h2>Dashboard</h2>
+    <router-outlet [routerOutletData]="{ layout: 'sidebar' }" />
+  `,
+})
+export class DashboardComponent {}
+```
+
+ルーティングされたコンポーネントは、`ROUTER_OUTLET_DATA`を使用して提供されたアウトレットデータをインジェクトできます。
+
+```angular-ts
+import { Component, inject } from '@angular/core';
+import { ROUTER_OUTLET_DATA } from '@angular/router';
+
+@Component({
+  selector: 'app-stats',
+  template: `<p>Stats view (layout: {{ outletData().layout }})</p>`,
+})
+export class StatsComponent {
+  outletData = inject(ROUTER_OUTLET_DATA) as Signal<{ layout: string }>;
+}
+```
+
+Angularがそのアウトレット内で`StatsComponent`をアクティブ化すると、インジェクトされたデータとして`{ layout: 'sidebar' }`を受け取ります。
+
+NOTE: `routerOutletData`入力が設定されていない場合、インジェクトされる値はデフォルトでnullです。
+
+---
 
 ## 次のステップ {#next-steps}
 

@@ -19,11 +19,11 @@ TIP: このガイドは、すでに[コンポーネントハーネスの概要�
 
 [Component Dev Kit (CDK)](https://material.angular.dev/cdk/categories)は、コンポーネントを構築するための動作プリミティブのセットです。コンポーネントハーネスを使用するには、まずnpmから`@angular/cdk`をインストールします。これは、Angular CLIを使用してターミナルから実行できます。
 
-<docs-code language="shell">
-  ng add @angular/cdk
-</docs-code>
+```shell
+ng add @angular/cdk
+```
 
-TestElement実装の作成 {#creating-a-testelement-implementation}
+## `TestElement`実装の作成 {#creating-a-testelement-implementation}
 
 すべてのテスト環境は`TestElement`実装を定義する必要があります。`TestElement`インターフェースは、DOM要素の環境に依存しない表現の役割を果たします。これにより、ハーネスは基盤となる環境に関係なくDOM要素と対話できます。一部の環境ではDOM要素との同期的な対話がサポートされていないため（例: WebDriver）、すべての`TestElement`メソッドは非同期であり、操作の結果を`Promise`で返します。
 

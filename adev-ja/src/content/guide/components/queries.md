@@ -15,10 +15,10 @@ TIP: このガイドでは、[基本概念のガイド](essentials)を読んで�
 
 ビュークエリは、コンポーネントの_ビュー_（コンポーネント自身のテンプレートで定義された要素）内の要素から結果を取得します。`viewChild`関数を使用して単一の結果をクエリできます。
 
-<docs-code language="angular-ts" highlight="[14, 15]">
+```typescript {highlight: [14, 15]}
 @Component({
   selector: 'custom-card-header',
-  /*...*/
+  /* ... */
 })
 export class CustomCardHeader {
   text: string;
@@ -32,7 +32,7 @@ export class CustomCard {
   header = viewChild(CustomCardHeader);
   headerText = computed(() => this.header()?.text);
 }
-</docs-code>
+```
 
 この例では、`CustomCard`コンポーネントは子`CustomCardHeader`をクエリし、`computed`で結果を使用しています。
 
@@ -40,10 +40,10 @@ export class CustomCard {
 
 `viewChildren`関数を使用して、複数結果をクエリできます。
 
-<docs-code language="angular-ts" highlight="[17, 19, 20, 21, 22, 23]">
+```typescript {highlight: [17]}
 @Component({
   selector: 'custom-card-action',
-  /*...*/
+  /* ... */
 })
 export class CustomCardAction {
   text: string;
@@ -51,8 +51,7 @@ export class CustomCardAction {
 
 @Component({
   selector: 'custom-card',
-  template: `
-    <custom-card-action>Save</custom-card-action>
+  template: `<custom-card-action>Save</custom-card-action>
     <custom-card-action>Cancel</custom-card-action>
   `,
 })
@@ -60,7 +59,7 @@ export class CustomCard {
   actions = viewChildren(CustomCardAction);
   actionsTexts = computed(() => this.actions().map(action => action.text);
 }
-</docs-code>
+```
 
 `viewChildren`は、クエリ結果の`Array`を含むシグナルを作成します。
 
@@ -70,10 +69,10 @@ export class CustomCard {
 
 コンテンツクエリは、コンポーネントの_コンテンツ_（コンポーネントが使用されているテンプレート内でコンポーネントの中にネストされた要素）内の要素から結果を取得します。`contentChild`関数を使用して単一の結果をクエリできます。
 
-<docs-code language="angular-ts" highlight="[14, 15]">
+```typescript {highlight: [14, 15]}
 @Component({
   selector: 'custom-toggle',
-  /*...*/
+  /* ... */
 })
 export class CustomToggle {
   text: string;
@@ -81,26 +80,25 @@ export class CustomToggle {
 
 @Component({
   selector: 'custom-expando',
-  /*...*/
+  /* ... */
 })
 export class CustomExpando {
   toggle = contentChild(CustomToggle);
   toggleText = computed(() => this.toggle()?.text);
 }
 
-@Component({ 
-  /* ... */
-  // CustomToggle is used inside CustomExpando as content.  
-  template: `
+@Component({
+/* ... */
+// CustomToggle is used inside CustomExpando as content.
+template: `
     <custom-expando>
       <custom-toggle>Show</custom-toggle>
     </custom-expando>
   `
 })
-export class UserProfile { }
-</docs-code>
 
-この例では、`CustomExpando`コンポーネントは子`CustomToggle`をクエリし、`computed`で結果にアクセスしています。
+export class UserProfile { }
+```
 
 クエリが結果を見つけられない場合、その値は`undefined`になります。これは、ターゲット要素が存在しないか、`@if`によって非表示になっている場合に発生する可能性があります。Angularは、アプリケーションの状態が変化するにつれて`contentChild`の結果を最新の状態に保ちます。
 
@@ -108,10 +106,10 @@ export class UserProfile { }
 
 `contentChildren`関数を使用して、複数結果をクエリできます。
 
-<docs-code language="angular-ts" highlight="[14, 16, 17, 18, 19, 20]">
+```typescript {highlight: [14, 16, 17, 18, 19, 20]}
 @Component({
   selector: 'custom-menu-item',
-  /*...*/
+  /* ... */
 })
 export class CustomMenuItem {
   text: string;
@@ -119,8 +117,9 @@ export class CustomMenuItem {
 
 @Component({
   selector: 'custom-menu',
-  /*...*/
+  /* ... */
 })
+
 export class CustomMenu {
   items = contentChildren(CustomMenuItem);
   itemTexts = computed(() => this.items().map(item => item.text));
@@ -136,7 +135,7 @@ export class CustomMenu {
   `
 })
 export class UserProfile { }
-</docs-code>
+```
 
 `contentChildren`は、クエリ結果の`Array`を含むシグナルを作成します。
 
@@ -146,7 +145,7 @@ export class UserProfile { }
 
 子クエリ（`viewChild`または`contentChild`）が結果を見つけられない場合、その値は`undefined`になります。これは、ターゲット要素が`@if`や`@for`などの制御フロー文によって非表示になっている場合に発生する可能性があります。このため、子クエリは`undefined`を含む値型を持つシグナルを返します。
 
-場合によっては、特に`viewChild`を使用する場合、特定の子が常に利用可能であることが確実な場合があります。他の場合では、特定の子が存在することを厳格に適用したい場合があります。これらの場合、*必須クエリ*を使用できます。
+場合によっては、特に`viewChild`を使用する場合、特定の子が常に利用可能であることが確実な場合があります。他の場合では、特定の子が存在することを厳格に適用したい場合があります。これらの場合、_必須クエリ_を使用できます。
 
 ```angular-ts
 @Component({/* ... */})
@@ -216,6 +215,7 @@ export class CustomList {
 デフォルトでは、クエリロケーターは、検索対象の要素と取得される値の両方を示します。代わりに、`read`オプションを指定して、ロケーターによって一致した要素から別の値を取得できます。
 
 ```ts
+
 @Component({/*...*/})
 export class CustomExpando {
   toggle = contentChild(ExpandoContent, {read: TemplateRef});
@@ -229,13 +229,13 @@ export class CustomExpando {
 
 ### コンテンツの子孫
 
-デフォルトでは、`contentChildren`クエリはコンポーネントの直接の子要素のみを検索し、子孫要素にはトラバースしません。  
+デフォルトでは、`contentChildren`クエリはコンポーネントの直接の子要素のみを検索し、子孫要素にはトラバースしません。
 一方、`contentChild`クエリはデフォルトで子孫要素も検索します。
 
-<docs-code language="angular-ts" highlight="[13, 14, 15, 16]">
+```typescript {highlight: [13, 14, 15, 16]}
 @Component({
   selector: 'custom-expando',
-  /*...*/
+  /* ... */
 })
 export class CustomExpando {
   toggle = contentChildren(CustomToggle); // none found
@@ -244,8 +244,7 @@ export class CustomExpando {
 
 @Component({
   selector: 'user-profile',
-  template: `
-    <custom-expando>
+  template: `     <custom-expando>
       <some-other-component>
         <custom-toggle>Show</custom-toggle>
       </some-other-component>
@@ -253,13 +252,14 @@ export class CustomExpando {
   `
 })
 export class UserProfile { }
-</docs-code>
+```
 
 上記の例では、`CustomExpando` は `<custom-expando>` の直接の子要素ではないため、`contentChildren` を用いると `<custom-toggle>` を検出できません。`descendants: true` を設定することで、同じテンプレート内のすべての子孫を対象にクエリを実行するように設定できます。ただし、クエリはコンポーネントの境界を越えて、他のテンプレートの要素にアクセスすることは _決して_ ありません。
 
 ビュークエリにはこのオプションはありません。これは、常に子孫をトラバースするためです。
 
 ## デコレーターベースのクエリ
+
 TIP: Angularチームは新規プロジェクトにはシグナルベースのクエリ関数の使用を推奨していますが、
 元のデコレーターベースのクエリAPIは引き続き完全にサポートされています。
 
@@ -269,10 +269,10 @@ TIP: Angularチームは新規プロジェクトにはシグナルベースの�
 
 `@ViewChild`デコレーターを使用して、単一の結果をクエリできます。
 
-<docs-code language="angular-ts" highlight="[14, 16, 17, 18]">
+```typescript {highlight: [14, 16, 17, 18]}
 @Component({
   selector: 'custom-card-header',
-  /*...*/
+  /* ... */
 })
 export class CustomCardHeader {
   text: string;
@@ -289,7 +289,7 @@ export class CustomCard {
     console.log(this.header.text);
   }
 }
-</docs-code>
+```
 
 この例では、`CustomCard`コンポーネントは子`CustomCardHeader`をクエリし、`ngAfterViewInit`で結果にアクセスしています。
 
@@ -299,10 +299,10 @@ Angularは、アプリケーションの状態が変化するにつれて`@ViewC
 
 `@ViewChildren`デコレーターを使用して、複数の結果をクエリできます。
 
-<docs-code language="angular-ts" highlight="[17, 19, 20, 21, 22, 23]">
+```typescript {highlight: [17, 19, 20, 21, 22, 23]}
 @Component({
   selector: 'custom-card-action',
-  /*...*/
+  /* ... */
 })
 export class CustomCardAction {
   text: string;
@@ -324,7 +324,7 @@ export class CustomCard {
     });
   }
 }
-</docs-code>
+```
 
 `@ViewChildren`は、クエリ結果を含む`QueryList`オブジェクトを作成します。`changes`プロパティを使用して、時間の経過とともにクエリ結果の変更を購読できます。
 
@@ -332,10 +332,10 @@ export class CustomCard {
 
 `@ContentChild`デコレーターを使用して、単一の結果をクエリできます。
 
-<docs-code language="angular-ts" highlight="[14, 16, 17, 18, 25]">
+```typescript {highlight: [14, 16, 17, 18, 25]}
 @Component({
   selector: 'custom-toggle',
-  /*...*/
+  /* ... */
 })
 export class CustomToggle {
   text: string;
@@ -343,8 +343,9 @@ export class CustomToggle {
 
 @Component({
   selector: 'custom-expando',
-  /*...*/
+  /* ... */
 })
+
 export class CustomExpando {
   @ContentChild(CustomToggle) toggle: CustomToggle;
 
@@ -362,7 +363,7 @@ export class CustomExpando {
   `
 })
 export class UserProfile { }
-</docs-code>
+```
 
 この例では、`CustomExpando`コンポーネントは子`CustomToggle`をクエリし、`ngAfterContentInit`で結果にアクセスしています。
 
@@ -372,10 +373,10 @@ Angularは、アプリケーションの状態が変化するにつれて`@Conte
 
 `@ContentChildren`デコレーターを使用して、複数の結果をクエリできます。
 
-<docs-code language="angular-ts" highlight="[14, 16, 17, 18, 19, 20]">
+```typescript {highlight: [15, 17, 18, 19, 20, 21]}
 @Component({
   selector: 'custom-menu-item',
-  /*...*/
+  /* ... */
 })
 export class CustomMenuItem {
   text: string;
@@ -383,8 +384,9 @@ export class CustomMenuItem {
 
 @Component({
   selector: 'custom-menu',
-  /*...*/
+  /* ... */
 })
+
 export class CustomMenu {
   @ContentChildren(CustomMenuItem) items: QueryList<CustomMenuItem>;
 
@@ -405,7 +407,7 @@ export class CustomMenu {
   `
 })
 export class UserProfile { }
-</docs-code>
+```
 
 `@ContentChildren`は、クエリ結果を含む`QueryList`オブジェクトを作成します。`changes`プロパティを使用して、時間の経過とともにクエリ結果の変更を購読できます。
 
@@ -454,4 +456,3 @@ export class CustomCard {
 子コンポーネントに直接状態を書き込むことは避けてください。このパターンは、理解しにくく、[ExpressionChangedAfterItHasBeenChecked](errors/NG0100)エラーが発生しやすい壊れやすいコードにつながる可能性があります。
 
 親コンポーネントまたは祖先コンポーネントに直接状態を書き込むことは決してしないでください。このパターンは、理解しにくく、[ExpressionChangedAfterItHasBeenChecked](errors/NG0100)エラーが発生しやすい壊れやすいコードにつながる可能性があります。
-

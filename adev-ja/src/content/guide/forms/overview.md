@@ -5,7 +5,10 @@
 アプリケーションは、ユーザーのログインやプロフィールの更新、機密情報を入力したりその他多くのデータ入力タスクを実行できるようにするために、フォームを使用します。
 
 Angularは、フォームを通じてユーザー入力を処理するために、リアクティブとテンプレート駆動の2つの異なるアプローチを提供します。
+
 どちらもビューからのユーザー入力イベントをキャプチャし、ユーザー入力を検証してフォームモデルとデータモデルを作成して更新し、変更を追跡する方法を提供します。
+
+TIP: 新しい実験的なSignal Formsをお探しの場合は、[基本ガイドのSignal Forms](/essentials/signal-forms)をご確認ください！
 
 このガイドは、状況に合わせてどちらのタイプのフォームが最適か判断するのに役立つ情報を提供します。
 両方のアプローチで使用される一般的なビルディングブロックを紹介します。
@@ -70,7 +73,7 @@ Angularは、フォームを通じてユーザー入力を処理するために�
 次のコンポーネントは、リアクティブフォームを使用して、単一コントロールの入力フィールドを実装しています。
 この例では、フォームモデルは `FormControl` インスタンスです。
 
-<docs-code path="adev/src/content/examples/forms-overview/src/app/reactive/favorite-color/favorite-color.component.ts"/>
+<docs-code language="angular-ts" path="adev/src/content/examples/forms-overview/src/app/reactive/favorite-color/favorite-color.component.ts"/>
 
 IMPORTANT: リアクティブフォームでは、フォームモデルが真実の源です。`<input>` 要素の `[formControl]` ディレクティブを通じて、特定の時点におけるフォーム要素の値とステータスを提供します。
 
@@ -81,7 +84,7 @@ IMPORTANT: リアクティブフォームでは、フォームモデルが真実
 
 次のコンポーネントは、テンプレート駆動フォームを使用して、単一コントロールの同じ入力フィールドを実装しています。
 
-<docs-code path="adev/src/content/examples/forms-overview/src/app/template/favorite-color/favorite-color.component.ts"/>
+<docs-code language="angular-ts" path="adev/src/content/examples/forms-overview/src/app/template/favorite-color/favorite-color.component.ts"/>
 
 IMPORTANT: テンプレート駆動フォームでは、真実の源はテンプレートです。`NgModel` ディレクティブは、`FormControl` インスタンスを自動的に管理します。
 
@@ -94,7 +97,7 @@ IMPORTANT: テンプレート駆動フォームでは、真実の源はテンプ
 リアクティブフォームとテンプレート駆動フォームは、ユーザーからの変更またはプログラムによる変更からデータが流れる方法が異なります。
 次の図は、上記で定義されたお気に入りの色の入力フィールドを使用して、各タイプのフォームの両方のデータフローを示しています。
 
-### リアクティブフォームのデータフロー
+### リアクティブフォームのデータフロー {#data-flow-in-reactive-forms}
 
 リアクティブフォームでは、ビュー内の各フォーム要素は、フォームモデル（`FormControl` インスタンス）に直接リンクされています。
 ビューからモデルへの更新、およびモデルからビューへの更新は同期であり、UIのレンダリング方法に依存しません。
@@ -140,7 +143,7 @@ flowchart TB
     CVA-->|"Updates the value of the &lt;input&gt;"|I
 ```
 
-### テンプレート駆動フォームのデータフロー
+### テンプレート駆動フォームのデータフロー {#data-flow-in-template-driven-forms}
 
 テンプレート駆動フォームでは、各フォーム要素は、フォームモデルを内部的に管理するディレクティブにリンクされています。
 

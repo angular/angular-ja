@@ -38,7 +38,7 @@ CSRF 保護は、バックエンドの状態を変更できるリクエストで
 
 以下のように `provideHttpClient` コールに追加します。
 
-<docs-code language="ts">
+```ts
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(
@@ -49,13 +49,13 @@ export const appConfig: ApplicationConfig = {
     ),
   ]
 };
-</docs-code>
+```
 
 ### XSRF 保護の無効化
 
 組み込みのXSRF保護メカニズムがアプリケーションで機能しない場合は、`withNoXsrfProtection` 機能を使用して無効にできます。
 
-<docs-code language="ts">
+```ts
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(
@@ -63,4 +63,4 @@ export const appConfig: ApplicationConfig = {
     ),
   ]
 };
-</docs-code>
+```

@@ -76,7 +76,7 @@ export class HighlightDirective {
 <docs-step title="テンプレートでディレクティブを使用する">
 リアクティブなディレクティブをデモンストレーションするために、アプリのテンプレートを更新します。
 
-```ts
+```angular-ts
 template: `
   <div>
     <h1>Directive with Signals</h1>

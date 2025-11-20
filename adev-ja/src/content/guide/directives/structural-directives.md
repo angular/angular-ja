@@ -124,13 +124,13 @@ export class SelectDirective {
 
 これで`SelectDirective`は起動して実行できるようになりました。次のステップとして、[テンプレートタイプチェックのサポートを追加](#typing-the-directives-context)できます。
 
-## 構造ディレクティブの構文リファレンス
+## 構造ディレクティブの構文リファレンス {#structural-directive-syntax-reference}
 
 独自の構造ディレクティブを作成する際は、次の構文を使用します。
 
 <docs-code hideCopy language="typescript">
 
-*:prefix="( :let | :expression ) (';' | ',')? ( :let | :as | :keyExp )*"
+_:prefix="( :let | :expression ) (';' | ',')? ( :let | :as | :keyExp )_"
 
 </docs-code>
 
@@ -154,23 +154,23 @@ let = "let" :local "=" :export ";"?
 
 Angularは、構造ディレクティブの省略記法を次の通常のバインディング構文に変換します。
 
-| 省略記法 | 変換 |
-|:--- |:--- |
-| `prefix`と裸の`expression` | `[prefix]="expression"` |
-| `keyExp` | `[prefixKey]="expression"` (`prefix`が`key`に追加されます) |
-| `let local` | `let-local="export"` |
+| 省略記法                       | 変換                                                     |
+| :------------------------------ | :-------------------------------------------------------------- |
+| `prefix`と裸の`expression` | `[prefix]="expression"`                                         |
+| `keyExp`                        | `[prefixKey]="expression"` (`prefix`が`key`に追加されます) |
+| `let local`                     | `let-local="export"`                                            |
 
 ### 省略記法の例
 
 次の表は、省略記法の例を示しています。
 
-| 省略記法 | Angularが構文をどのように解釈するか |
-|:--- |:--- |
-| `*myDir="let item of [1,2,3]"` | `<ng-template myDir let-item [myDirOf]="[1, 2, 3]">` |
+| 省略記法                                                             | Angularが構文をどのように解釈するか                                                                             |
+| :-------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------ |
+| `*myDir="let item of [1,2,3]"`                                        | `<ng-template myDir let-item [myDirOf]="[1, 2, 3]">`                                                          |
 | `*myDir="let item of [1,2,3] as items; trackBy: myTrack; index as i"` | `<ng-template myDir let-item [myDirOf]="[1,2,3]" let-items="myDirOf" [myDirTrackBy]="myTrack" let-i="index">` |
-| `*ngComponentOutlet="componentClass";` | `<ng-template [ngComponentOutlet]="componentClass">` |
-| `*ngComponentOutlet="componentClass; inputs: myInputs";` | `<ng-template [ngComponentOutlet]="componentClass" [ngComponentOutletInputs]="myInputs">` |
-| `*myDir="exp as value"` | `<ng-template [myDir]="exp" let-value="myDir">` |
+| `*ngComponentOutlet="componentClass";`                                | `<ng-template [ngComponentOutlet]="componentClass">`                                                          |
+| `*ngComponentOutlet="componentClass; inputs: myInputs";`              | `<ng-template [ngComponentOutlet]="componentClass" [ngComponentOutletInputs]="myInputs">`                     |
+| `*myDir="exp as value"`                                               | `<ng-template [myDir]="exp" let-value="myDir">`                                                               |
 
 ## カスタムディレクティブのテンプレートタイプチェックを改善する
 
@@ -178,11 +178,11 @@ Angularは、構造ディレクティブの省略記法を次の通常のバイ�
 これらのガードは、Angularテンプレートタイプチェッカーがコンパイル時にテンプレート内の間違いを見つけるのに役立ち、ランタイムエラーを回避できます。
 2種類のガードが可能です。
 
-* `ngTemplateGuard_(input)`を使用すると、特定の入力の型に基づいて入力式をどのように絞り込むかを制御できます。
-* `ngTemplateContextGuard`は、ディレクティブ自体の型に基づいて、テンプレートのコンテキストオブジェクトの型を判断するために使用されます。
+- `ngTemplateGuard_(input)`を使用すると、特定の入力の型に基づいて入力式をどのように絞り込むかを制御できます。
+- `ngTemplateContextGuard`は、ディレクティブ自体の型に基づいて、テンプレートのコンテキストオブジェクトの型を判断するために使用されます。
 
 このセクションでは、両方の種類のガードの例を示します。
-詳細については、[テンプレートタイプチェック](tools/cli/template-typecheck "テンプレートタイプチェックガイド")を参照してください。
+詳細については、[テンプレートタイプチェック](tools/cli/template-typecheck 'テンプレートタイプチェックガイド')を参照してください。
 
 ### テンプレートガードによるタイプの絞り込み
 
@@ -190,8 +190,8 @@ Angularは、構造ディレクティブの省略記法を次の通常のバイ�
 
 入力ガードで可能な絞り込みは2つあります。
 
-* TypeScriptの型アサーション関数に基づいて入力式を絞り込む。
-* 入力式の真偽値に基づいて入力式を絞り込む。
+- TypeScriptの型アサーション関数に基づいて入力式を絞り込む。
+- 入力式の真偽値に基づいて入力式を絞り込む。
 
 型アサーション関数を定義して入力式を絞り込むには、次の手順を実行します。
 

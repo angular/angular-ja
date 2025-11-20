@@ -18,22 +18,31 @@ _Angular elements_ はAngularコンポーネントを _カスタム要素_（Web
 
 ワークスペースに`@angular/elements`パッケージを追加するには、次のコマンドを実行します。
 
-<docs-code language="shell">
-
-npm install @angular/elements --save
-
-</docs-code>
+<docs-code-multifile>
+  <docs-code header="npm" language="shell">
+    npm install @angular/elements
+  </docs-code>
+  <docs-code header="yarn" language="shell">
+    yarn add @angular/elements
+  </docs-code>
+  <docs-code header="pnpm" language="shell">
+    pnpm add @angular/elements
+  </docs-code>
+  <docs-code header="bun" language="shell">
+    bun add @angular/elements
+  </docs-code>
+</docs-code-multifile>
 
 ### 仕組み {#how-it-works}
 
 `createCustomElement()`関数は、コンポーネントをブラウザにカスタム要素として登録できるクラスに変換します。
 設定したクラスをブラウザのカスタム要素レジストリに登録した後、新しい要素を、DOMに直接追加するコンテンツ内で組み込みのHTML要素と同じように使用します。
 
-<docs-code language="html">
+```html
 
 <my-popup message="Use Angular!"></my-popup>
 
-</docs-code>
+```
 
 カスタム要素がページに配置されると、ブラウザは登録されたクラスのインスタンスを作成し、それをDOMに追加します。
 コンテンツはコンポーネントのテンプレートによって提供され、Angularテンプレート構文を使用し、コンポーネントとDOMデータを使用してレンダリングされます。
@@ -58,14 +67,14 @@ IMPORTANT: コンポーネントのセレクターをカスタム要素のタグ
 カスタム要素はAngularコンポーネントを_ホスト_し、コンポーネントで定義されたデータとロジック、および標準のDOM API間のブリッジを提供します。
 コンポーネントのプロパティとロジックは、HTML属性とブラウザのイベントシステムに直接マッピングされます。
 
-* 作成APIは、入力プロパティを探してコンポーネントを解析し、カスタム要素に対応する属性を定義します。
+- 作成APIは、入力プロパティを探してコンポーネントを解析し、カスタム要素に対応する属性を定義します。
   プロパティ名をカスタム要素と互換性があるように変換します。カスタム要素は大文字と小文字の区別を認識しません。
   結果として得られる属性名は、ダッシュで区切られた小文字を使用します。
   例えば、`inputProp = input({alias: 'myInputProp'})`を持つコンポーネントは、対応するカスタム要素として`my-input-prop`という属性を定義します。
 
-* コンポーネントの出力はHTMLの[カスタムイベント](https://developer.mozilla.org/docs/Web/API/CustomEvent)としてディスパッチされ、カスタムイベントの名前は出力名と一致します。
-    例えば、`valueChanged = output()`を持つコンポーネントの場合、対応するカスタム要素は"valueChanged"という名前のイベントをディスパッチし、出力されたデータはイベントの`detail`プロパティに格納されます。
-    エイリアスを提供した場合、その値が使用されます。`clicks = output<string>({alias: 'myClick'});`は"myClick"という名前のディスパッチイベントを生成します。
+- コンポーネントの出力はHTMLの[カスタムイベント](https://developer.mozilla.org/docs/Web/API/CustomEvent)としてディスパッチされ、カスタムイベントの名前は出力名と一致します。
+  例えば、`valueChanged = output()`を持つコンポーネントの場合、対応するカスタム要素は"valueChanged"という名前のイベントをディスパッチし、出力されたデータはイベントの`detail`プロパティに格納されます。
+  エイリアスを提供した場合、その値が使用されます。`clicks = output<string>({alias: 'myClick'});`は"myClick"という名前のディスパッチイベントを生成します。
 
 詳細については、Webコンポーネントのドキュメントの[カスタムイベントの作成](https://developer.mozilla.org/docs/Web/Guide/Events/Creating_and_triggering_events#Creating_custom_events)を参照してください。
 
@@ -81,7 +90,7 @@ Angularカスタム要素を使用すると、必要なインフラストラク�
 | ファイル                 | 詳細                                                                                                                                                                                                                         |
 | :-------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `popup.component.ts`  | 入力メッセージを表示するシンプルなポップアップ要素を、アニメーションとスタイル付きで定義します。                                                                                                                             |
-| `popup.service.ts`    | `PopupComponent`を呼び出す2つの異なる方法を提供する注入可能サービスを作成します。動的コンポーネントとして、またはカスタム要素として。動的読み込み方式には、より多くのセットアップが必要であることに注目してください。        |  |
+| `popup.service.ts`    | `PopupComponent`を呼び出す2つの異なる方法を提供する注入可能サービスを作成します。動的コンポーネントとして、またはカスタム要素として。動的読み込み方式には、より多くのセットアップが必要であることに注目してください。        |
 | `app.component.ts`    | `PopupService`を使用して実行時にDOMにポップアップを追加する、アプリケーションのルートコンポーネントを定義します。アプリケーションの実行時、ルートコンポーネントのコンストラクターは`PopupComponent`をカスタム要素に変換します。 |
 
 比較のため、デモでは両方の方法を示しています。
@@ -109,33 +118,33 @@ Angularで作成されたカスタム要素は`NgElement`（これはさらに`H
 カスタム要素の正しい型を取得したい場合、いくつかの選択肢があります。
 次のコンポーネントに基づいて`my-dialog`カスタム要素を作成すると仮定します。
 
-<docs-code language="typescript">
+```ts
 
 @Component(…)
 class MyDialog {
   content =  input(string);
 }
 
-</docs-code>
+```
 
 正確な型定義を取得する最も簡単な方法は、関連するDOMメソッドの戻り値を正しい型にキャストすることです。
 そのためには、`NgElement`および`WithProperties`型（両方とも`@angular/elements`からエクスポートされています）を使用します。
 
-<docs-code language="typescript">
+```ts
 
 const aDialog = document.createElement('my-dialog') as NgElement & WithProperties<{content: string}>;
 aDialog.content = 'Hello, world!';
-aDialog.content = 123;  // <-- ERROR: TypeScript knows this should be a string.
-aDialog.body = 'News';  // <-- ERROR: TypeScript knows there is no `body` property on `aDialog`.
+aDialog.content = 123; // <-- ERROR: TypeScript knows this should be a string.
+aDialog.body = 'News'; // <-- ERROR: TypeScript knows there is no `body` property on `aDialog`.
 
-</docs-code>
+```
 
 これは、カスタム要素に対して型チェックやオートコンプリートサポートなどのTypeScript機能を素早く利用するための良い方法です。
 しかし、複数の場所で必要になる場合、すべての出現箇所で戻り値をキャストする必要があるため、煩雑になる可能性があります。
 
 各カスタム要素の型を一度だけ定義すればよい代替方法は、`HTMLElementTagNameMap`を拡張することです。これは、TypeScriptがタグ名に基づいて返された要素の型を推論するために使用するものです（`document.createElement()`、`document.querySelector()`などのDOMメソッドの場合）。
 
-<docs-code language="typescript">
+```ts
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -145,18 +154,18 @@ declare global {
   }
 }
 
-</docs-code>
+```
 
 これで、TypeScriptは組み込み要素と同じように正しい型を推論できます。
 
-<docs-code language="typescript">
+```ts
 
 document.createElement('div')               //--> HTMLDivElement (built-in element)
 document.querySelector('foo')               //--> Element        (unknown element)
 document.createElement('my-dialog')         //--> NgElement & WithProperties<{content: string}> (custom element)
 document.querySelector('my-other-element')  //--> NgElement & WithProperties<{foo: 'bar'}>      (custom element)
 
-</docs-code>
+```
 
 ## 制限事項 {#limitations}
 

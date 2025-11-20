@@ -36,7 +36,7 @@ CSSを出力するすべてのツールと連携します。
 ## スタイルのスコープ
 
 各コンポーネントには、**ビューカプセル化**設定があり、フレームワークがコンポーネントのスタイルをどのようにスコープするかを決定します。
-ビューカプセル化モードには、`Emulated`、`ShadowDom`、`None`の3つのモードがあります。
+ビューカプセル化モードには、`Emulated`、`ShadowDom`、`ExperimentalIsolatedShadowDom`、`None`の4つのモードがあります。
 モードは、`@Component`デコレーターで指定できます。
 
 <docs-code language="angular-ts" highlight="[3]">
@@ -59,13 +59,13 @@ export class ProfilePhoto { }
 エミュレートされたカプセル化を持つコンポーネント内の要素に影響を与える可能性があります。
 
 エミュレートされたモードでは、Angularは
-[`:host`](https://developer.mozilla.org/docs/Web/CSS/:host)
-および[`:host-context()`](https://developer.mozilla.org/docs/Web/CSS/:host-context)擬似
-クラスを、
-[Shadow DOM](https://developer.mozilla.org/docs/Web/Web_Components/Using_shadow_DOM)
-を使用せずにサポートします。
-コンパイル時に、フレームワークはこれらの擬似クラスを属性に変換するため、実行時にこれらのネイティブ擬似クラスのルール(ブラウザの互換性、特異性など)に準拠しません。
-Angularのエミュレートされたカプセル化モードは、
+[`:host`](https://developer.mozilla.org/docs/Web/CSS/:host)擬似クラスをサポートします。
+[`:host-context()`](https://developer.mozilla.org/docs/Web/CSS/:host-context)擬似クラスは
+モダンブラウザでは非推奨ですが、Angularのコンパイラは完全にサポートします。これらの擬似クラスは
+ネイティブの[Shadow DOM](https://developer.mozilla.org/docs/Web/Web_Components/Using_shadow_DOM)
+に依存せずに使用できます。
+コンパイル時に、フレームワークはこれらの擬似クラスを属性に変換するため、実行時にこれらのネイティブ擬似クラスのルール(ブラウザの互換性、特異性など)に準拠しません。Angularの
+エミュレートされたカプセル化モードは、
 `::shadow`や`::part`など、Shadow DOMに関連するその他の擬似クラスをサポートしていません。
 
 #### `::ng-deep`
@@ -82,13 +82,19 @@ Angularのエミュレートされたカプセル化モードは、カスタム�
 を使用して、コンポーネント内のスタイルをスコープします。
 このモードを有効にすると、Angularはコンポーネントのホスト要素にシャドウルートを添付し、コンポーネントのテンプレートとスタイルを対応するシャドウツリーにレンダリングします。
 
-このモードでは、*そのコンポーネントのスタイルのみ*がコンポーネントのテンプレート内の要素に適用されることが厳密に保証されます。グローバルスタイルはシャドウツリー内の要素に影響を与えることができず、シャドウツリー内のスタイルはシャドウツリー外の要素に影響を与えることができません。
+シャドウツリー内のスタイルは、そのシャドウツリー外の要素に影響を与えることができません。
 
 ただし、`ShadowDom`カプセル化を有効にすると、スタイルのスコープ以外にも影響があります。
 シャドウツリーにコンポーネントをレンダリングすると、イベントの伝播、
 [`<slot>` API](https://developer.mozilla.org/docs/Web/Web_Components/Using_templates_and_slots)
 とのやり取り、ブラウザの開発者ツールによる要素の表示方法に影響を与えます。
 このオプションを有効にする前に、アプリケーションでShadow DOMを使用することのすべての影響を理解してください。
+
+### ViewEncapsulation.ExperimentalIsolatedShadowDom
+
+上記と同様に動作しますが、このモードでは、_そのコンポーネントのスタイルのみ_が
+コンポーネントのテンプレート内の要素に適用されることが厳密に保証されます。グローバルスタイルはシャドウツリー内の要素に影響を与えることができず、シャドウツリー内の
+スタイルはシャドウツリー外の要素に影響を与えることができません。
 
 ### ViewEncapsulation.None
 

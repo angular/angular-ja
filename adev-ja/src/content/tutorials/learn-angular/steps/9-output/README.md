@@ -25,11 +25,10 @@ class Child {
 class Child {
   ...
 
-  onClick() {
-    this.count++;
-    this.incrementCountEvent.emit(this.count);
-  }
-
+onClick() {
+this.count++;
+this.incrementCountEvent.emit(this.count);
+}
 }
 </docs-code>
 

@@ -65,6 +65,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'introduction/essentials/templates',
           },
           {
+            label: 'シグナルを使ったフォーム',
+            path: 'essentials/signal-forms',
+            contentPath: 'introduction/essentials/signal-forms',
+          },
+          {
             label: '依存性の注入によるモジュール設計',
             path: 'essentials/dependency-injection',
             contentPath: 'introduction/essentials/dependency-injection',
@@ -282,26 +287,25 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
       },
       {
         label: '依存性の注入',
+        status: 'updated',
         children: [
           {
             label: '概要',
             path: 'guide/di',
             contentPath: 'guide/di/overview',
+            status: 'updated',
           },
           {
-            label: '依存性の注入を理解する',
-            path: 'guide/di/dependency-injection',
-            contentPath: 'guide/di/dependency-injection',
-          },
-          {
-            label: '注入可能なサービスの作成',
-            path: 'guide/di/creating-injectable-service',
-            contentPath: 'guide/di/creating-injectable-service',
+            label: 'サービスの作成と使用',
+            path: 'guide/di/creating-and-using-services',
+            contentPath: 'guide/di/creating-and-using-services',
+            status: 'updated',
           },
           {
             label: '依存性プロバイダーの定義',
-            path: 'guide/di/dependency-injection-providers',
-            contentPath: 'guide/di/dependency-injection-providers',
+            path: 'guide/di/defining-dependency-providers',
+            contentPath: 'guide/di/defining-dependency-providers',
+            status: 'updated',
           },
           {
             label: '注入コンテキスト',
@@ -416,11 +420,36 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
       },
       {
         label: 'フォーム',
+        status: 'updated',
         children: [
           {
             label: '概要',
             path: 'guide/forms',
             contentPath: 'guide/forms/overview',
+          },
+          {
+            label: 'Signalフォーム',
+            status: 'new',
+            children: [
+              {
+                label: '概要',
+                path: 'guide/forms/signals/overview',
+                contentPath: 'guide/forms/signals/overview',
+                status: 'new',
+              },
+              {
+                label: 'フォームモデル',
+                path: 'guide/forms/signals/models',
+                contentPath: 'guide/forms/signals/models',
+                status: 'new',
+              },
+              {
+                label: '他のフォームシステムとの比較',
+                path: 'guide/forms/signals/comparison',
+                contentPath: 'guide/forms/signals/comparison',
+                status: 'new',
+              },
+            ],
           },
           {
             label: 'リアクティブフォーム',
@@ -518,16 +547,6 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/testing/overview',
           },
           {
-            label: 'コードカバレッジ',
-            path: 'guide/testing/code-coverage',
-            contentPath: 'guide/testing/code-coverage',
-          },
-          {
-            label: 'サービスのテスト',
-            path: 'guide/testing/services',
-            contentPath: 'guide/testing/services',
-          },
-          {
             label: 'コンポーネントのテストの基本',
             path: 'guide/testing/components-basics',
             contentPath: 'guide/testing/components-basics',
@@ -536,6 +555,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             label: 'コンポーネントのテストシナリオ',
             path: 'guide/testing/components-scenarios',
             contentPath: 'guide/testing/components-scenarios',
+          },
+          {
+            label: 'サービスのテスト',
+            path: 'guide/testing/services',
+            contentPath: 'guide/testing/services',
           },
           {
             label: '属性ディレクティブのテスト',
@@ -559,14 +583,14 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/testing/debugging',
           },
           {
+            label: 'コードカバレッジ',
+            path: 'guide/testing/code-coverage',
+            contentPath: 'guide/testing/code-coverage',
+          },
+          {
             label: 'テストユーティリティAPI',
             path: 'guide/testing/utility-apis',
             contentPath: 'guide/testing/utility-apis',
-          },
-          {
-            label: '実験的なユニットテストシステム',
-            path: 'guide/testing/unit-tests',
-            contentPath: 'guide/testing/experimental-unit-test',
           },
           {
             label: 'コンポーネントハーネスの概要',
@@ -587,6 +611,87 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             label: 'テスト環境にハーネスサポートを追加する',
             path: 'guide/testing/component-harnesses-testing-environments',
             contentPath: 'guide/testing/component-harnesses-testing-environments',
+          },
+          {
+            label: 'KarmaからVitestへの移行',
+            path: 'guide/testing/migrating-to-vitest',
+            contentPath: 'guide/testing/migrating-to-vitest',
+          },
+          {
+            label: 'KarmaとJasmineによるテスト',
+            path: 'guide/testing/karma',
+            contentPath: 'guide/testing/karma',
+          },
+        ],
+      },
+      {
+        label: 'Angular Aria',
+        status: 'new',
+        children: [
+          {
+            label: '概要',
+            path: 'guide/aria/overview',
+            contentPath: 'guide/aria/overview',
+          },
+          {
+            label: 'Accordion',
+            path: 'guide/aria/accordion',
+            contentPath: 'guide/aria/accordion',
+          },
+          {
+            label: 'Autocomplete',
+            path: 'guide/aria/autocomplete',
+            contentPath: 'guide/aria/autocomplete',
+          },
+          {
+            label: 'Combobox',
+            path: 'guide/aria/combobox',
+            contentPath: 'guide/aria/combobox',
+          },
+          {
+            label: 'Grid',
+            path: 'guide/aria/grid',
+            contentPath: 'guide/aria/grid',
+          },
+          {
+            label: 'Listbox',
+            path: 'guide/aria/listbox',
+            contentPath: 'guide/aria/listbox',
+          },
+          {
+            label: 'Menu',
+            path: 'guide/aria/menu',
+            contentPath: 'guide/aria/menu',
+          },
+          {
+            label: 'Menubar',
+            path: 'guide/aria/menubar',
+            contentPath: 'guide/aria/menubar',
+          },
+          {
+            label: 'Multiselect',
+            path: 'guide/aria/multiselect',
+            contentPath: 'guide/aria/multiselect',
+          },
+          {
+            label: 'Select',
+            path: 'guide/aria/select',
+            contentPath: 'guide/aria/select',
+          },
+          {
+            label: 'Tabs',
+            path: 'guide/aria/tabs',
+            contentPath: 'guide/aria/tabs',
+          },
+          {
+            label: 'Toolbar',
+            path: 'guide/aria/toolbar',
+            contentPath: 'guide/aria/toolbar',
+          },
+          {
+            label: 'Tree',
+            path: 'guide/aria/tree',
+            contentPath: 'guide/aria/tree',
           },
         ],
       },
@@ -702,6 +807,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         label: 'Angular CLI MCPサーバーセットアップ',
         path: 'ai/mcp',
         contentPath: 'ai/mcp-server-setup',
+      },
+      {
+        label: 'Angular AI Tutor',
+        path: 'ai/ai-tutor',
+        contentPath: 'ai/ai-tutor',
       },
     ],
   },
@@ -915,6 +1025,17 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
     ],
   },
   {
+    label: '開発者向けイベント',
+    children: [
+      {
+        label: 'Angular v21 Release',
+        path: 'events/v21',
+        contentPath: 'events/v21',
+        status: 'new',
+      },
+    ],
+  },
+  {
     label: '拡張エコシステム',
     children: [
       {
@@ -946,7 +1067,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/animations/reusable-animations',
           },
           {
-            label: 'Migrating to Native CSS Animations',
+            label: 'ネイティブCSSアニメーションへの移行',
             path: 'guide/animations/migration',
             contentPath: 'guide/animations/migration',
           },
@@ -1337,10 +1458,10 @@ const REFERENCE_SUB_NAVIGATION_DATA: NavigationItem[] = [
     ],
   },
   {
-    label: 'Extended Diagnostics',
+    label: '拡張診断',
     children: [
       {
-        label: 'Overview',
+        label: '概要',
         path: 'extended-diagnostics',
         contentPath: 'reference/extended-diagnostics/overview',
       },
@@ -1410,34 +1531,58 @@ const REFERENCE_SUB_NAVIGATION_DATA: NavigationItem[] = [
         contentPath: 'reference/migrations/inject-function',
       },
       {
-        label: 'Lazy-loaded routes',
+        label: '遅延読み込みルート',
         path: 'reference/migrations/route-lazy-loading',
         contentPath: 'reference/migrations/route-lazy-loading',
       },
       {
-        label: 'Signal inputs',
+        label: 'Signal入力',
         path: 'reference/migrations/signal-inputs',
         contentPath: 'reference/migrations/signal-inputs',
       },
       {
-        label: 'Outputs',
+        label: '出力',
         path: 'reference/migrations/outputs',
         contentPath: 'reference/migrations/outputs',
       },
       {
-        label: 'Signal queries',
+        label: 'Signalクエリ',
         path: 'reference/migrations/signal-queries',
         contentPath: 'reference/migrations/signal-queries',
       },
       {
-        label: 'Clean up unused imports',
+        label: '未使用のインポートのクリーンアップ',
         path: 'reference/migrations/cleanup-unused-imports',
         contentPath: 'reference/migrations/cleanup-unused-imports',
       },
       {
-        label: 'Self-closing tags',
+        label: '自己閉鎖タグ',
         path: 'reference/migrations/self-closing-tags',
         contentPath: 'reference/migrations/self-closing-tags',
+      },
+      {
+        label: 'NgClassからClassへ',
+        path: 'reference/migrations/ngclass-to-class',
+        contentPath: 'reference/migrations/ngclass-to-class',
+        status: 'new',
+      },
+      {
+        label: 'NgStyleからStyleへ',
+        path: 'reference/migrations/ngstyle-to-style',
+        contentPath: 'reference/migrations/ngstyle-to-style',
+        status: 'new',
+      },
+      {
+        label: 'Routerテストモジュールのマイグレーション',
+        path: 'reference/migrations/router-testing-module-migration',
+        contentPath: 'reference/migrations/router-testing-module-migration',
+        status: 'new',
+      },
+      {
+        label: 'CommonModuleからスタンドアロンへ',
+        path: 'reference/migrations/common-to-standalone',
+        contentPath: 'reference/migrations/common-to-standalone',
+        status: 'new',
       },
     ],
   },

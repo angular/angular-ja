@@ -1,6 +1,6 @@
 # `ng-content` を使ったコンテンツの投影
 
-TIP: このガイドは、すでに [基本概念のガイド](essentials) を読んだことを前提としています。Angularを初めて使う場合は、まずそちらを読んでください。
+TIP: このガイドは、すでに [基本ガイド](essentials) を読んだことを前提としています。Angularを初めて使う場合は、まずそちらを読んでください。
 
 多くの場合、さまざまな種類のコンテンツを格納するコンポーネントを作成する必要があります。
 例えば、カスタムカードコンポーネントを作成したいとします。
@@ -13,12 +13,12 @@ TIP: このガイドは、すでに [基本概念のガイド](essentials) を�
 export class CustomCard {/* ... */}
 ```
 
-**`<ng-content>`要素は、コンテンツを配置する場所を示すプレースホルダーとして使用できます。**:
+**`<ng-content>`要素は、コンテンツを配置する場所を示すプレースホルダーとして使用できます**:
 
 ```angular-ts
 @Component({
   selector: 'custom-card',
-  template: '<div class="card-shadow"> <ng-content></ng-content> </div>',
+  template: '<div class="card-shadow"> <ng-content/> </div>',
 })
 export class CustomCard {/* ... */}
 ```
@@ -73,7 +73,7 @@ Angularは常にレンダリングされたコンテンツのDOMノードをイ�
 その`<ng-content>`プレースホルダが非表示であってもです。コンポーネントコンテンツの条件付きレンダリングについては
 [テンプレートフラグメント](api/core/ng-template)を参照してください。
 
-## 複数のコンテンツプレースホルダー
+## 複数のコンテンツプレースホルダー {#multiple-content-placeholders}
 
 Angularは、CSSセレクターに基づいて、複数の異なる要素を異なる`<ng-content>`プレースホルダーへの投影をサポートしています。
 上記のカードの例を拡張して、`select`属性を使用して、
@@ -175,7 +175,7 @@ export class App {}
 コンポーネントに`select`属性を持たない`<ng-content>`プレースホルダーが含まれていない場合、
 コンポーネントのいずれかのプレースホルダーに一致しない要素はDOMにレンダリングされません。
 
-## フォールバックコンテンツ
+## フォールバックコンテンツ {#fallback-content}
 
 Angularは、コンポーネントの`<ng-content>`プレースホルダーに一致する子コンテンツがない場合、コンポーネントの`<ng-content>`プレースホルダーに*フォールバックコンテンツ*を表示できます。`<ng-content>`要素自体に子コンテンツを追加することで、フォールバックコンテンツを指定できます。
 
@@ -207,7 +207,7 @@ Angularは、コンポーネントの`<ng-content>`プレースホルダーに�
 </custom-card>
 ```
 
-## 投影のためのコンテンツのエイリアシング
+## 投影のためのコンテンツのエイリアシング {#aliasing-content-for-projection}
 
 Angularは、任意の要素にCSSセレクターを指定できる特殊な属性`ngProjectAs`をサポートしています。
 `ngProjectAs`を持つ要素が`<ng-content>`プレースホルダーに対してチェックされると、

@@ -30,18 +30,19 @@ Bindings that change over time should read values from [signals](/guide/signals)
 ```angular-ts
 @Component({
   template: `
-    <!-- Does not necessarily update when `welcomeMessage` changes. --> 
-    <p>{{ welcomeMessage }}</p> 
+    <!-- Does not necessarily update when `welcomeMessage` changes. -->
+    <p>{{ welcomeMessage }}</p>
 
     <p>Your color preference is {{ theme() }}.</p> <!-- Always updates when the value of the `name` signal changes. -->
   `
   ...
 })
 export class AppComponent {
-  welcomeMessage = "Welcome, enjoy this app that we built for you"; 
+  welcomeMessage = "Welcome, enjoy this app that we built for you";
   theme = signal('dark');
 }
 ```
+
 For more details, see the [Signals guide](/guide/signals).
 
 Continuing the theme example, if a user clicks on a button that updates the `theme` signal to `'light'` after the page loads, the page updates accordingly to:
@@ -92,7 +93,7 @@ You can bind to directive properties as well.
 
 ### Attributes
 
-When you need to set HTML attributes that do not have corresponding DOM properties, such as ARIA attributes or SVG attributes, you can bind attributes to elements in your template with the `attr.` prefix.
+When you need to set HTML attributes that do not have corresponding DOM properties, such as SVG attributes, you can bind attributes to elements in your template with the `attr.` prefix.
 
 ```angular-html
 <!-- Bind the `role` attribute on the `<ul>` element to the component's `listRole` property. -->
@@ -110,12 +111,6 @@ You can also use text interpolation syntax in properties and attributes by using
 ```angular-html
 <!-- Binds a value to the `alt` property of the image element's DOM object. -->
 <img src="profile-photo.jpg" alt="Profile photo of {{ firstName() }}" >
-```
-
-To bind to an attribute with the text interpolation syntax, prefix the attribute name with `attr.`
-
-```angular-html
-<button attr.aria-label="Save changes to {{ objectType() }}">
 ```
 
 ## CSS class and style property bindings
@@ -193,7 +188,7 @@ When binding `class` to an array or an object, Angular compares the previous val
 
 If an element has multiple bindings for the same CSS class, Angular resolves collisions by following its style precedence order.
 
-NOTE: Class bindings do not support space-separated class names in a single key. They also don't support mutations on objects as the reference of the binding remains the same. If you need one or the other, use the [ngClass](/api/common/NgClass) directive. 
+NOTE: Class bindings do not support space-separated class names in a single key. They also don't support mutations on objects as the reference of the binding remains the same. If you need one or the other, use the [ngClass](/api/common/NgClass) directive.
 
 ### CSS style properties
 
@@ -245,3 +240,17 @@ The above example renders the following DOM.
 When binding `style` to an object, Angular compares the previous value to the current value with the triple-equals operator (`===`). You must create a new object instance when you modify these values in order to Angular to apply any updates.
 
 If an element has multiple bindings for the same style property, Angular resolves collisions by following its style precedence order.
+
+## ARIA attributes
+
+Angular supports binding string values to ARIA attributes.
+
+```angular-html
+<button type="button" [aria-label]="actionLabel()">
+  {{ actionLabel() }}
+</button>
+```
+
+Angular writes the string value to the element’s `aria-label` attribute and removes it when the bound value is `null`.
+
+Some ARIA features expose DOM properties or directive inputs that accept structured values (such as element references). Use standard property bindings for those cases. See the [accessibility guide](best-practices/a11y#aria-attributes-and-properties) for examples and additional guidance.

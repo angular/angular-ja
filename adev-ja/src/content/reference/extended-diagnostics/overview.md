@@ -9,7 +9,7 @@ The Angular compiler includes "extended diagnostics" which identify many of thes
 Currently, Angular supports the following extended diagnostics:
 
 | Code     | Name                                                                  |
-| :------- |:----------------------------------------------------------------------|
+| :------- | :-------------------------------------------------------------------- |
 | `NG8101` | [`invalidBananaInBox`](extended-diagnostics/NG8101)                   |
 | `NG8102` | [`nullishCoalescingNotNullable`](extended-diagnostics/NG8102)         |
 | `NG8103` | [`missingControlFlowDirective`](extended-diagnostics/NG8103)          |
@@ -25,6 +25,7 @@ Currently, Angular supports the following extended diagnostics:
 | `NG8115` | [`uninvokedTrackFunction`](extended-diagnostics/NG8115)               |
 | `NG8116` | [`missingStructuralDirective`](extended-diagnostics/NG8116)           |
 | `NG8117` | [`uninvokedFunctionInTextInterpolation`](extended-diagnostics/NG8117) |
+| `NG8021` | [`deferTriggerMisconfiguration`](extended-diagnostics/NG8021)         |
 
 ## Configuration
 
@@ -52,7 +53,8 @@ Check severity can be configured as an [Angular compiler option](reference/confi
       // The category to use for any diagnostics not listed in `checks` above.
       "defaultCategory": "error"
     }
-  }
+
+}
 }
 </docs-code>
 

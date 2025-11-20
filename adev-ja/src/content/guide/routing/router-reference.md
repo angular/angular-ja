@@ -56,7 +56,7 @@
 最新のHTML5ブラウザが最初に`pushState`をサポートしたため、多くの人がこれらのURLを「HTML5スタイル」URLと呼んでいます。
 
 HELPFUL: HTML5スタイルのナビゲーションはルーターのデフォルトです。
-[LocationStrategyとブラウザURLスタイル](#locationstrategy-and-browser-url-styles)のセクションで、HTML5スタイルが推奨される理由、その動作を調整する方法、必要に応じて古いハッシュ\(`#`\)スタイルに切り替える方法を学びましょう。
+[LocationStrategyとブラウザURLスタイル](common-router-tasks#locationstrategy-and-browser-url-styles)のセクションで、HTML5スタイルが推奨される理由、その動作を調整する方法、必要に応じて古いハッシュ\(`#`\)スタイルに切り替える方法を学びましょう。
 
 `pushState`ルーティングを機能させるには、アプリケーションの`index.html`に[`<base href>`要素](https://developer.mozilla.org/docs/Web/HTML/Element/base 'base href')を追加する必要があります。
 ブラウザは、CSSファイル、スクリプト、画像を相対URLで参照する際に、`<base href>`の値をプレフィックスとして使用します。
@@ -94,7 +94,6 @@ scheme    authority      path        query   fragment
 
 1. ルーターに適切な`APP_BASE_HREF`値を提供します。
 2. すべてのWebリソース（CSS、画像、スクリプト、テンプレートHTMLファイル）にルートURL（`authority`を持つURL）を使用します。
-
    - `<base href>`の`path`は"/"で終わる必要があります。ブラウザは、最も右の"/"に続く`path`内の文字を無視するためです。
    - `<base href>`に`query`部分が含まれている場合、`query`は、ページ内のリンクの`path`が空で`query`がない場合にのみ使用されます。
      これは、`<base href>`内の`query`が`HashLocationStrategy`を使用している場合にのみ含まれることを意味します。

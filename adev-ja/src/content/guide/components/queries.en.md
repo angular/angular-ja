@@ -15,7 +15,7 @@ There are two categories of query: **view queries** and **content queries.**
 
 View queries retrieve results from the elements in the component's _view_ — the elements defined in the component's own template. You can query for a single result with the `viewChild` function.
 
-<docs-code language="angular-ts" highlight="[14, 15]">
+```typescript {highlight: [14, 15]}
 @Component({
   selector: 'custom-card-header',
   /*...*/
@@ -32,7 +32,7 @@ export class CustomCard {
   header = viewChild(CustomCardHeader);
   headerText = computed(() => this.header()?.text);
 }
-</docs-code>
+```
 
 In this example, the `CustomCard` component queries for a child `CustomCardHeader` and uses the result in a `computed`.
 
@@ -40,7 +40,7 @@ If the query does not find a result, its value is `undefined`. This may occur if
 
 You can also query for multiple results with the `viewChildren` function.
 
-<docs-code language="angular-ts" highlight="[17, 19, 20, 21, 22, 23]">
+```typescript {highlight: [17]}
 @Component({
   selector: 'custom-card-action',
   /*...*/
@@ -51,8 +51,7 @@ export class CustomCardAction {
 
 @Component({
   selector: 'custom-card',
-  template: `
-    <custom-card-action>Save</custom-card-action>
+  template: `<custom-card-action>Save</custom-card-action>
     <custom-card-action>Cancel</custom-card-action>
   `,
 })
@@ -60,7 +59,7 @@ export class CustomCard {
   actions = viewChildren(CustomCardAction);
   actionsTexts = computed(() => this.actions().map(action => action.text);
 }
-</docs-code>
+```
 
 `viewChildren` creates a signal with an `Array` of the query results.
 
@@ -70,7 +69,7 @@ export class CustomCard {
 
 Content queries retrieve results from the elements in the component's _content_— the elements nested inside the component in the template where it's used. You can query for a single result with the `contentChild` function.
 
-<docs-code language="angular-ts" highlight="[14, 15]">
+```typescript {highlight: [14, 15]}
 @Component({
   selector: 'custom-toggle',
   /*...*/
@@ -81,26 +80,25 @@ export class CustomToggle {
 
 @Component({
   selector: 'custom-expando',
-  /*...*/
+  /* ... */
 })
 export class CustomExpando {
   toggle = contentChild(CustomToggle);
   toggleText = computed(() => this.toggle()?.text);
 }
 
-@Component({ 
-  /* ... */
-  // CustomToggle is used inside CustomExpando as content.  
-  template: `
+@Component({
+/* ... */
+// CustomToggle is used inside CustomExpando as content.
+template: `
     <custom-expando>
       <custom-toggle>Show</custom-toggle>
     </custom-expando>
   `
 })
-export class UserProfile { }
-</docs-code>
 
-In this example, the `CustomExpando` component queries for a child `CustomToggle` and accesses the result in a `computed`.
+export class UserProfile { }
+```
 
 If the query does not find a result, its value is `undefined`. This may occur if the target element is absent or hidden by `@if`. Angular keeps the result of `contentChild` up to date as your application state changes.
 
@@ -108,7 +106,7 @@ By default, content queries find only _direct_ children of the component and do 
 
 You can also query for multiple results with the `contentChildren` function.
 
-<docs-code language="angular-ts" highlight="[14, 16, 17, 18, 19, 20]">
+```typescript {highlight: [14, 16, 17, 18, 19, 20]}
 @Component({
   selector: 'custom-menu-item',
   /*...*/
@@ -121,6 +119,7 @@ export class CustomMenuItem {
   selector: 'custom-menu',
   /*...*/
 })
+
 export class CustomMenu {
   items = contentChildren(CustomMenuItem);
   itemTexts = computed(() => this.items().map(item => item.text));
@@ -136,7 +135,7 @@ export class CustomMenu {
   `
 })
 export class UserProfile { }
-</docs-code>
+```
 
 `contentChildren` creates a signal with an `Array` of the query results.
 
@@ -146,7 +145,7 @@ export class UserProfile { }
 
 If a child query (`viewChild` or `contentChild`) does not find a result, its value is `undefined`. This may occur if the target element is hidden by a control flow statement like `@if` or `@for`. Because of this, the child queries return a signal that include `undefined` in their value type.
 
-In some cases, especially with `viewChild`, you know with certainty that a specific child is always available. In other cases, you may want to strictly enforce that a specific child is present. For these cases, you can use a *required query*.
+In some cases, especially with `viewChild`, you know with certainty that a specific child is always available. In other cases, you may want to strictly enforce that a specific child is present. For these cases, you can use a _required query_.
 
 ```angular-ts
 @Component({/* ... */})
@@ -216,6 +215,7 @@ All query functions accept an options object as a second parameter. These option
 By default, the query locator indicates both the element you're searching for and the value retrieved. You can alternatively specify the `read` option to retrieve a different value from the element matched by the locator.
 
 ```ts
+
 @Component({/*...*/})
 export class CustomExpando {
   toggle = contentChild(ExpandoContent, {read: TemplateRef});
@@ -230,9 +230,9 @@ Developers most commonly use `read` to retrieve `ElementRef` and `TemplateRef`.
 ### Content descendants
 
 By default, `contentChildren` queries find only _direct_ children of the component and do not traverse into descendants.
-`contentChild` queries do traverse into descendants by default. 
+`contentChild` queries do traverse into descendants by default.
 
-<docs-code language="angular-ts" highlight="[13, 14, 15, 16]">
+```typescript {highlight: [13, 14, 15, 16]}
 @Component({
   selector: 'custom-expando',
   /*...*/
@@ -244,8 +244,7 @@ export class CustomExpando {
 
 @Component({
   selector: 'user-profile',
-  template: `
-    <custom-expando>
+  template: `     <custom-expando>
       <some-other-component>
         <custom-toggle>Show</custom-toggle>
       </some-other-component>
@@ -253,13 +252,14 @@ export class CustomExpando {
   `
 })
 export class UserProfile { }
-</docs-code>
+```
 
 In the example above, `CustomExpando` cannot find `<custom-toggle>` with `contentChildren` because it is not a direct child of `<custom-expando>`. By setting `descendants: true`, you configure the query to traverse all descendants in the same template. Queries, however, _never_ pierce into components to traverse elements in other templates.
 
 View queries do not have this option because they _always_ traverse into descendants.
 
 ## Decorator-based queries
+
 TIP: While the Angular team recommends using the signal-based query function for new projects, the
 original decorator-based query APIs remain fully supported.
 
@@ -269,7 +269,7 @@ You can alternatively declare queries by adding the corresponding decorator to a
 
 You can query for a single result with the `@ViewChild` decorator.
 
-<docs-code language="angular-ts" highlight="[14, 16, 17, 18]">
+```typescript {highlight: [14, 16, 17, 18]}
 @Component({
   selector: 'custom-card-header',
   /*...*/
@@ -289,7 +289,7 @@ export class CustomCard {
     console.log(this.header.text);
   }
 }
-</docs-code>
+```
 
 In this example, the `CustomCard` component queries for a child `CustomCardHeader` and accesses the result in `ngAfterViewInit`.
 
@@ -299,7 +299,7 @@ Angular keeps the result of `@ViewChild` up to date as your application state ch
 
 You can also query for multiple results with the `@ViewChildren` decorator.
 
-<docs-code language="angular-ts" highlight="[17, 19, 20, 21, 22, 23]">
+```typescript {highlight: [17, 19, 20, 21, 22, 23]}
 @Component({
   selector: 'custom-card-action',
   /*...*/
@@ -324,7 +324,7 @@ export class CustomCard {
     });
   }
 }
-</docs-code>
+```
 
 `@ViewChildren` creates a `QueryList` object that contains the query results. You can subscribe to changes to the query results over time via the `changes` property.
 
@@ -332,7 +332,7 @@ export class CustomCard {
 
 You can query for a single result with the `@ContentChild` decorator.
 
-<docs-code language="angular-ts" highlight="[14, 16, 17, 18, 25]">
+```typescript {highlight: [14, 16, 17, 18, 25]}
 @Component({
   selector: 'custom-toggle',
   /*...*/
@@ -345,6 +345,7 @@ export class CustomToggle {
   selector: 'custom-expando',
   /*...*/
 })
+
 export class CustomExpando {
   @ContentChild(CustomToggle) toggle: CustomToggle;
 
@@ -362,7 +363,7 @@ export class CustomExpando {
   `
 })
 export class UserProfile { }
-</docs-code>
+```
 
 In this example, the `CustomExpando` component queries for a child `CustomToggle` and accesses the result in `ngAfterContentInit`.
 
@@ -372,7 +373,7 @@ Angular keeps the result of `@ContentChild` up to date as your application state
 
 You can also query for multiple results with the `@ContentChildren` decorator.
 
-<docs-code language="angular-ts" highlight="[14, 16, 17, 18, 19, 20]">
+```typescript {highlight: [15, 17, 18, 19, 20, 21]}
 @Component({
   selector: 'custom-menu-item',
   /*...*/
@@ -385,6 +386,7 @@ export class CustomMenuItem {
   selector: 'custom-menu',
   /*...*/
 })
+
 export class CustomMenu {
   @ContentChildren(CustomMenuItem) items: QueryList<CustomMenuItem>;
 
@@ -405,7 +407,7 @@ export class CustomMenu {
   `
 })
 export class UserProfile { }
-</docs-code>
+```
 
 `@ContentChildren` creates a `QueryList` object that contains the query results. You can subscribe to changes to the query results over time via the `changes` property.
 

@@ -8,7 +8,7 @@ In Angular, a **route** is an object that defines which component should render 
 
 Here is a basic example of a route:
 
-```angular-ts
+```ts
 import { AdminPage } from './app-admin/app-admin.component';
 
 const adminPage = {
@@ -25,7 +25,7 @@ Most projects define routes in a separate file that contains `routes` in the fil
 
 A collection of routes looks like this:
 
-```angular-ts
+```ts
 import { Routes } from '@angular/router';
 import { HomePage } from './home-page/home-page.component';
 import { AdminPage } from './about-page/admin-page.component';
@@ -50,7 +50,7 @@ When bootstrapping an Angular application without the Angular CLI, you can pass 
 
 Inside of the `providers` array, you can add the Angular router to your application by adding a `provideRouter` function call with your routes.
 
-```angular-ts
+```ts
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
@@ -87,9 +87,9 @@ Learn more about [query parameters in Angular in this guide](/guide/routing/read
 
 The following example displays a user profile component based on the user id passed in through the URL.
 
-```angular-ts
+```ts
 import { Routes } from '@angular/router';
-import { UserProfile } from './user-profile/user-profile;
+import { UserProfile } from './user-profile/user-profile';
 
 const routes: Routes = [
   { path: 'user/:id', component: UserProfile }
@@ -107,7 +107,7 @@ Valid route parameter names must start with a letter (a-z, A-Z) and can only con
 
 You can also define paths with multiple parameters:
 
-```angular-ts
+```ts
 import { Routes } from '@angular/router';
 import { UserProfile } from './user-profile/user-profile.component';
 import { SocialMediaFeed } from './user-profile/social–media-feed.component';
@@ -128,7 +128,7 @@ When you need to catch all routes for a specific path, the solution is a wildcar
 
 A common example is defining a Page Not Found component.
 
-```angular-ts
+```ts
 import { Home } from './home/home.component';
 import { UserProfile } from './user-profile/user-profile.component';
 import { NotFound } from './not-found/not-found.component';
@@ -150,7 +150,7 @@ When you define routes, the order is important because Angular uses a first-matc
 
 The following example shows routes defined from most-specific to least specific:
 
-```angular-ts
+```ts
 const routes: Routes = [
   { path: '', component: HomeComponent },              // Empty path
   { path: 'users/new', component: NewUserComponent },  // Static, most specific
@@ -181,7 +181,7 @@ Each approach offers distinct advantages for different scenarios.
 
 When you define a route with the `component` property, the referenced component is eagerly loaded as part of the same JavaScript bundle as the route configuration.
 
-```angular-ts
+```ts
 import { Routes } from "@angular/router";
 import { HomePage } from "./components/home/home-page"
 import { LoginPage } from "./components/auth/login-page"
@@ -208,7 +208,7 @@ While including more JavaScript in your initial page load leads to slower initia
 
 You can use the `loadComponent` property to lazily load the JavaScript for a route only at the point at which that route would become active.
 
-```angular-ts
+```ts
 import { Routes } from "@angular/router";
 
 export const routes: Routes = [
@@ -229,6 +229,29 @@ The `loadComponent` property accepts a loader function that returns a Promise th
 
 Lazily loading routes can significantly improve the load speed of your Angular application by removing large portions of JavaScript from the initial bundle. These portions of your code compile into separate JavaScript "chunks" that the router requests only when the user visits the corresponding route.
 
+### Injection context lazy loading
+
+The Router executes `loadComponent` and `loadChildren` within the **injection context of the current route**, allowing you to call `inject` inside these loader functions to access providers declared on that route, inherited from parent routes through hierarchical dependency injection, or available globally. This enables context-aware lazy loading.
+
+```ts
+import { Routes } from '@angular/router';
+import { inject } from '@angular/core';
+import { FeatureFlags } from './feature-flags';
+
+export const routes: Routes = [
+  {
+    path: 'dashboard',
+    // Runs inside the route's injection context
+    loadComponent: () => {
+      const flags = inject(FeatureFlags);
+      return flags.isPremium
+        ? import('./dashboard/premium-dashboard').then(m => m.PremiumDashboard)
+        : import('./dashboard/basic-dashboard').then(m => m.BasicDashboard);
+    },
+  },
+];
+```
+
 ### Should I use an eager or a lazy route?
 
 There are many factors to consider when deciding on whether a route should be eager or lazy.
@@ -241,7 +264,7 @@ Note: While lazy routes have the upfront performance benefit of reducing the amo
 
 You can define a route that redirects to another route instead of rendering a component:
 
-```angular-ts
+```ts
 import { BlogComponent } from './home/blog.component';
 
 const routes: Routes = [
@@ -299,13 +322,51 @@ const routes: Routes = [
 
 Route titles can also be set via a service extending the [`TitleStrategy`](/api/router/TitleStrategy) abstract class. By default, Angular uses the [`DefaultTitleStrategy`](/api/router/DefaultTitleStrategy).
 
+### Using TitleStrategy for page titles
+
+For advanced scenarios where you need centralized control over how the document title is composed, implement a `TitleStrategy`.
+
+`TitleStrategy` is a token you can provide to override the default title strategy used by Angular. You can supply a custom `TitleStrategy` to implement conventions such as adding an application suffix, formatting titles from breadcrumbs, or generating titles dynamically from route data.
+
+```ts
+import { Injectable } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { TitleStrategy, RouterStateSnapshot } from '@angular/router';
+
+@Injectable()
+export class AppTitleStrategy extends TitleStrategy {
+  private readonly title = inject(Title);
+
+  updateTitle(snapshot: RouterStateSnapshot): void {
+    // PageTitle is equal to the "Title" of a route if it's set
+    // If its not set it will use the "title" given in index.html
+    const pageTitle = this.buildTitle(snapshot) || this.title.getTitle();
+    this.title.setTitle(`MyAwesomeApp - ${pageTitle}`);
+  }
+}
+```
+
+To use the custom strategy, provide it with the `TitleStrategy` token at the application level:
+
+```ts
+import { provideRouter, TitleStrategy } from '@angular/router';
+import { AppTitleStrategy } from './app-title.strategy';
+
+export const appConfig = {
+  providers: [
+    provideRouter(routes),
+    { provide: TitleStrategy, useClass: AppTitleStrategy },
+  ],
+};
+```
+
 ## Route-level providers for dependency injection
 
 Each route has a `providers` property that lets you provide dependencies to that route's content via [dependency injection](/guide/di).
 
 Common scenarios where this can be helpful include applications that have different services based on whether the user is an admin or not.
 
-```angular-ts
+```ts
 export const ROUTES: Route[] = [
   {
     path: 'admin',
@@ -337,7 +398,7 @@ There are two ways to work with route data: static data that remains constant, a
 
 You can associate arbitrary static data with a route via the `data` property in order to centralize things like route-specific metadata (e.g., analytics tracking, permissions, etc.):
 
-```angular-ts
+```ts
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
@@ -373,7 +434,7 @@ Nested routes, also known as child routes, are a common technique for managing m
 
 You can add child routes to any route definition with the `children` property:
 
-```angular-ts
+```ts
 const routes: Routes = [
   {
     path: 'product/:id',

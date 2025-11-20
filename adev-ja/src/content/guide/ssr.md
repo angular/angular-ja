@@ -211,7 +211,7 @@ export const serverRoutes: ServerRoute[] = [
 
 [`getPrerenderParams`](api/ssr/ServerRoutePrerenderWithParams#getPrerenderParams 'API reference') は [`RenderMode.Prerender`](api/ssr/RenderMode#Prerender 'API reference') にのみ適用されるため、この関数は常に_ビルド時_に実行されます。`getPrerenderParams` は、データのためにブラウザ固有またはサーバー固有のAPIに依存してはなりません。
 
-IMPORTANT: `getPrerenderParams` 内で `inject` を使用する場合、`inject` は同期的に使用する必要があることに注意してください。非同期コールバック内や `await` ステートメントの後に呼び出すことはできません。詳細については、[`runInInjectionContext`](api/core/runInInjectionContext) を参照してください。
+IMPORTANT: `getPrerenderParams` 内で [`inject`](api/core/inject 'API reference') を使用する場合、`inject` は同期的に使用する必要があることに注意してください。非同期コールバック内や `await` ステートメントの後に呼び出すことはできません。詳細については、`runInInjectionContext` を参照してください。
 
 #### フォールバック戦略 {#fallback-strategies}
 
@@ -219,11 +219,11 @@ IMPORTANT: `getPrerenderParams` 内で `inject` を使用する場合、`inject`
 
 利用可能なフォールバック戦略は次のとおりです。
 
--   **Server:** サーバーサイドレンダリングにフォールバックします。これは、`fallback` プロパティが指定されていない場合の**デフォルト**の動作です。
--   **Client:** クライアントサイドレンダリングにフォールバックします。
--   **None:** フォールバックなし。Angularは、プリレンダリングされていないパスへのリクエストを処理しません。
+- **Server:** サーバーサイドレンダリングにフォールバックします。これは、`fallback` プロパティが指定されていない場合の**デフォルト**の動作です。
+- **Client:** クライアントサイドレンダリングにフォールバックします。
+- **None:** フォールバックなし。Angularは、プリレンダリングされていないパスへのリクエストを処理しません。
 
-```typescript
+```ts
 // app.routes.server.ts
 import { RenderMode, PrerenderFallback, ServerRoute } from '@angular/ssr';
 
@@ -246,26 +246,58 @@ export const serverRoutes: ServerRoute[] = [
 
 一部の一般的なブラウザAPIと機能は、サーバーでは利用できない場合があります。アプリケーションは、`window`、`document`、`navigator`、`location` などのブラウザ固有のグローバルオブジェクトや、`HTMLElement` の特定のプロパティを使用できません。
 
-一般に、ブラウザ固有のシンボルに依存するコードは、サーバーではなくブラウザでのみ実行されるべきです。これは、[`afterEveryRender`](api/core/afterEveryRender) および [`afterNextRender`](api/core/afterNextRender) ライフサイクルフックによって強制できます。これらはブラウザでのみ実行され、サーバーではスキップされます。
+一般に、ブラウザ固有のシンボルに依存するコードは、サーバーではなくブラウザでのみ実行されるべきです。これは、`afterEveryRender` および `afterNextRender` ライフサイクルフックによって強制できます。これらはブラウザでのみ実行され、サーバーではスキップされます。
 
 ```angular-ts
-import { Component, ViewChild, afterNextRender } from '@angular/core';
+import { Component, viewChild, afterNextRender } from '@angular/core';
 
 @Component({
   selector: 'my-cmp',
   template: `<span #content>{{ ... }}</span>`,
 })
 export class MyComponent {
-  @ViewChild('content') contentRef: ElementRef;
+  contentRef = viewChild.required<ElementRef>('content');
 
   constructor() {
     afterNextRender(() => {
       // これはサーバーではなくブラウザでのみ実行されるため、`scrollHeight` のチェックは安全です。
-      console.log('content height: ' + this.contentRef.nativeElement.scrollHeight);
+      console.log('content height: ' + this.contentRef().nativeElement.scrollHeight);
     });
   }
 }
 ```
+
+## サーバーでプロバイダーを設定する {#setting-providers-on-the-server}
+
+サーバー側では、トップレベルのプロバイダー値は、アプリケーションコードが最初に解析および評価されたときに一度設定されます。
+これは、`useValue` で設定されたプロバイダーは、サーバーアプリケーションが再起動されるまで、複数のリクエストにわたって値を保持することを意味します。
+
+リクエストごとに新しい値を生成したい場合は、`useFactory` を使用してファクトリープロバイダーを使用します。ファクトリー関数は、受信リクエストごとに実行され、毎回新しい値が作成されてトークンに割り当てられることを保証します。
+
+## DIを介したDocumentへのアクセス {#accessing-document-via-di}
+
+サーバーサイドレンダリングを使用する場合、`document` のようなブラウザ固有のグローバルを直接参照することは避けるべきです。代わりに、[`DOCUMENT`](api/core/DOCUMENT) トークンを使用して、プラットフォームに依存しない方法でdocumentオブジェクトにアクセスします。
+
+```ts
+import { Injectable, inject, DOCUMENT } from '@angular/core';
+
+@Injectable({ providedIn: 'root' })
+export class CanonicalLinkService {
+  private readonly document = inject(DOCUMENT);
+
+  // サーバーレンダリング中に <link rel="canonical"> タグを注入し、
+  // 生成されたHTMLに正しいcanonical URLが含まれるようにします
+  setCanonical(href: string): void {
+    const link = this.document.createElement('link');
+    link.rel = 'canonical';
+    link.href = href;
+    this.document.head.appendChild(link);
+  }
+}
+
+```
+
+HELPFUL: メタタグの管理には、Angularは `Meta` サービスを提供しています。
 
 ## DIを介したリクエストとレスポンスへのアクセス {#accessing-request-and-response-via-di}
 
@@ -323,18 +355,129 @@ IMPORTANT: 上記のトークンは、次のシナリオでは `null` になり�
 
 ## HttpClient使用時のデータキャッシュ {#caching-data-when-using-httpclient}
 
-[`HttpClient`](api/common/http/HttpClient) は、サーバーで実行されているときに送信ネットワークリクエストをキャッシュします。この情報はシリアル化され、サーバーから送信される初期HTMLの一部としてブラウザに転送されます。ブラウザでは、`HttpClient` はキャッシュにデータがあるかどうかを確認し、ある場合は、初期アプリケーションレンダリング中に新しいHTTPリクエストを行う代わりにそれを再利用します。`HttpClient` は、ブラウザで実行中にアプリケーションが[安定](api/core/ApplicationRef#isStable)すると、キャッシュの使用を停止します。
+`HttpClient` は、サーバーで実行されているときに送信ネットワークリクエストをキャッシュします。この情報はシリアル化され、サーバーから送信される初期HTMLの一部としてブラウザに転送されます。ブラウザでは、`HttpClient` はキャッシュにデータがあるかどうかを確認し、ある場合は、初期アプリケーションレンダリング中に新しいHTTPリクエストを行う代わりにそれを再利用します。`HttpClient` は、ブラウザで実行中にアプリケーションが[安定](api/core/ApplicationRef#isStable)すると、キャッシュの使用を停止します。
 
-デフォルトでは、`HttpClient` は `Authorization` または `Proxy-Authorization` ヘッダーを含まないすべての `HEAD` および `GET` リクエストをキャッシュします。ハイドレーションを提供する際に [`withHttpTransferCacheOptions`](api/platform-browser/withHttpTransferCacheOptions) を使用して、これらの設定をオーバーライドできます。
+### キャッシュオプションの設定 {#configuring-the-caching-options}
 
-```typescript
+サーバーサイドレンダリング (SSR) 中にAngularがHTTPレスポンスをキャッシュし、ハイドレーション中にそれらを再利用する方法を、`HttpTransferCacheOptions` を設定することでカスタマイズできます。
+この設定は、`provideClientHydration()` 内で `withHttpTransferCacheOptions` を使用してグローバルに提供されます。
+
+デフォルトでは、`HttpClient` は `Authorization` または `Proxy-Authorization` ヘッダーを含まないすべての `HEAD` および `GET` リクエストをキャッシュします。ハイドレーション設定に `withHttpTransferCacheOptions` を使用することで、これらの設定をオーバーライドできます。
+
+```ts
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideClientHydration, withHttpTransferCacheOptions } from '@angular/platform-browser';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideClientHydration(
+      withHttpTransferCacheOptions({
+        includeHeaders: ['ETag', 'Cache-Control'],
+        filter: (req) => !req.url.includes('/api/profile'),
+        includePostRequests: true,
+        includeRequestsWithAuthHeaders: false,
+      }),
+    ),
+  ],
+});
+```
+
+---
+
+### `includeHeaders` {#includeheaders}
+
+サーバーレスポンスのどのヘッダーをキャッシュエントリに含めるかを指定します。
+デフォルトではヘッダーは含まれません。
+
+```ts
+withHttpTransferCacheOptions({
+  includeHeaders: ['ETag', 'Cache-Control'],
+});
+```
+
+IMPORTANT: 認証トークンのような機密性の高いヘッダーを含めることは避けてください。これらはリクエスト間でユーザー固有のデータを漏洩させる可能性があります。
+
+---
+
+### `includePostRequests` {#includepostrequests}
+
+デフォルトでは、`GET` および `HEAD` リクエストのみがキャッシュされます。
+GraphQLクエリなどの読み取り操作として使用される場合、`POST` リクエストのキャッシュを有効にできます。
+
+```ts
+withHttpTransferCacheOptions({
+  includePostRequests: true,
+});
+```
+
+これは、`POST` リクエストが**冪等**であり、サーバーとクライアントのレンダリング間で再利用しても安全な場合にのみ使用してください。
+
+---
+
+### `includeRequestsWithAuthHeaders` {#includerequestswithauthheaders}
+
+`Authorization` または `Proxy-Authorization` ヘッダーを含むリクエストをキャッシュ対象とするかどうかを決定します。
+デフォルトでは、ユーザー固有のレスポンスのキャッシュを防ぐために、これらは除外されます。
+
+```ts
+withHttpTransferCacheOptions({
+  includeRequestsWithAuthHeaders: true,
+});
+```
+
+認証ヘッダーがレスポンス内容に影響を**与えない**場合(例: 分析API用のパブリックトークン)のみ有効にしてください。
+
+### リクエストごとのオーバーライド {#perrequest-overrides}
+
+`transferCache` リクエストオプションを使用して、特定のリクエストのキャッシュ動作をオーバーライドできます。
+
+```ts
+// このリクエストに特定のヘッダーを含める
+http.get('/api/profile', { transferCache: { includeHeaders: ['CustomHeader'] } });
+```
+
+### キャッシュの無効化 {#disabling-caching}
+
+サーバーから送信されるリクエストのHTTPキャッシュを、グローバルまたは個別に無効にできます。
+
+#### グローバル {#globally}
+
+アプリケーション内のすべてのリクエストのキャッシュを無効にするには、`withNoHttpTransferCache` 機能を使用します。
+
+```ts
+import { bootstrapApplication, provideClientHydration, withNoHttpTransferCache } from '@angular/platform-browser';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideClientHydration(withNoHttpTransferCache())
+  ]
+});
+```
+
+#### `filter` {#filter}
+
+`withHttpTransferCacheOptions` の [`filter`](api/common/http/HttpTransferCacheOptions) オプションを使用して、特定のリクエストのキャッシュを選択的に無効にできます。たとえば、特定のAPIエンドポイントのキャッシュを無効にできます。
+
+```ts
+import { bootstrapApplication, provideClientHydration, withHttpTransferCacheOptions } from '@angular/platform-browser';
+
 bootstrapApplication(AppComponent, {
   providers: [
     provideClientHydration(withHttpTransferCacheOptions({
-      includePostRequests: true
+      filter: (req) => !req.url.includes('/api/sensitive-data')
     }))
   ]
 });
+```
+
+このオプションを使用して、ユーザー固有または動的なデータ(例: `/api/profile`)を持つエンドポイントを除外します。
+
+#### 個別 {#individually}
+
+個々のリクエストのキャッシュを無効にするには、`HttpRequest` で [`transferCache`](api/common/http/HttpRequest#transferCache) オプションを指定できます。
+
+```ts
+httpClient.get('/api/sensitive-data', { transferCache: false });
 ```
 
 ## サーバーの設定 {#configuring-a-server}
@@ -343,7 +486,7 @@ bootstrapApplication(AppComponent, {
 
 `@angular/ssr/node` は、Node.js環境向けに `@angular/ssr` を拡張したものです。Node.jsアプリケーション内でサーバーサイドレンダリングを実装しやすくするAPIを提供します。関数と使用例の完全なリストについては、[`@angular/ssr/node` APIリファレンス](api/ssr/node/AngularNodeAppEngine) を参照してください。
 
-```typescript
+```ts
 // server.ts
 import { AngularNodeAppEngine, createNodeRequestHandler, writeResponseToNodeResponse } from '@angular/ssr/node';
 import express from 'express';
@@ -374,7 +517,7 @@ export const reqHandler = createNodeRequestHandler(app);
 
 `@angular/ssr` は、Node.js以外のプラットフォームでAngularアプリケーションをサーバーサイドレンダリングするための重要なAPIを提供します。Web APIの標準的な [`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request) および [`Response`](https://developer.mozilla.org/en-US/docs/Web/API/Response) オブジェクトを活用することで、さまざまなサーバー環境にAngular SSRを統合できます。詳細情報と例については、[`@angular/ssr` APIリファレンス](api/ssr/AngularAppEngine) を参照してください。
 
-```typescript
+```ts
 // server.ts
 import { AngularAppEngine, createRequestHandler } from '@angular/ssr';
 

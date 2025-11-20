@@ -4,7 +4,7 @@
 
 ## データリゾルバーとは？ {#what-are-data-resolvers}
 
-データリゾルバーは、[`ResolveFn`](api/router/ResolveFn)関数を実装するサービスです。これは、ルートがアクティブになる前に実行され、API、データベース、またはその他のソースからデータをフェッチできます。解決されたデータは、[`ActivatedRoute`](api/router/ActivatedRoute)を介してコンポーネントで利用可能になります。
+データリゾルバーは、`ResolveFn`関数を実装するサービスです。これは、ルートがアクティブになる前に実行され、API、データベース、またはその他のソースからデータをフェッチできます。解決されたデータは、`ActivatedRoute`を介してコンポーネントで利用可能になります。
 
 ## データリゾルバーを使用する理由 {#why-use-data-resolvers}
 
@@ -17,9 +17,9 @@
 
 ## リゾルバの作成 {#creating-a-resolver}
 
-リゾルバは、[`ResolveFn`](api/router/ResolveFn)型の関数を記述することで作成します。
+リゾルバは、`ResolveFn`型の関数を記述することで作成します。
 
-これは、[`ActivatedRouteSnapshot`](api/router/ActivatedRouteSnapshot)と[`RouterStateSnapshot`](api/router/RouterStateSnapshot)をパラメータとして受け取ります。
+これは、`ActivatedRouteSnapshot`と`RouterStateSnapshot`をパラメータとして受け取ります。
 
 以下は、[`inject`](api/core/inject)関数を使用してルートをレンダリングする前にユーザー情報を取得するリゾルバです。
 
@@ -44,7 +44,7 @@ export const settingsResolver: ResolveFn<Settings> = (route: ActivatedRouteSnaps
 
 ## ルーティングにリゾルバーを設定する {#configuring-routes-with-resolvers}
 
-ルートに1つ以上のデータリゾルバーを追加したい場合は、ルート設定の`resolve`キーの下に追加できます。[`Routes`](api/router/Routes)型は、ルート設定の構造を定義します。
+ルートに1つ以上のデータリゾルバーを追加したい場合は、ルート設定の`resolve`キーの下に追加できます。`Routes`型は、ルート設定の構造を定義します。
 
 ```ts
 import { Routes } from '@angular/router';
@@ -67,7 +67,7 @@ export const routes: Routes = [
 
 ### ActivatedRouteを使用する {#using-activatedroute}
 
-[`signal`](api/core/signal)関数を使用して[`ActivatedRoute`](api/router/ActivatedRoute)からスナップショットデータにアクセスすることで、コンポーネントで解決済みデータにアクセスできます。
+`signal`関数を使用して`ActivatedRoute`からスナップショットデータにアクセスすることで、コンポーネントで解決済みデータにアクセスできます。
 
 ```angular-ts
 import { Component, inject, computed } from '@angular/core';
@@ -92,7 +92,7 @@ export class UserDetail {
 
 ### withComponentInputBindingを使用する {#using-withcomponentinputbinding}
 
-解決済みデータにアクセスする別のアプローチは、[`provideRouter`](api/router/provideRouter)でルーターを設定する際に[`withComponentInputBinding()`](api/router/withComponentInputBinding)を使用することです。これにより、解決済みデータをコンポーネントの入力として直接渡すことができます。
+解決済みデータにアクセスする別のアプローチは、`provideRouter`でルーターを設定する際に`withComponentInputBinding()`を使用することです。これにより、解決済みデータをコンポーネントの入力として直接渡すことができます。
 
 ```ts
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -106,7 +106,7 @@ bootstrapApplication(App, {
 });
 ```
 
-この設定により、[`input`](api/core/input)関数と、必須入力には[`input.required`](api/core/input#required)を使用して、リゾルバーキーと一致する入力をコンポーネントで定義できます。
+この設定により、`input`関数と、必須入力には`input.required`を使用して、リゾルバーキーと一致する入力をコンポーネントで定義できます。
 
 ```angular-ts
 import { Component, input } from '@angular/core';
@@ -133,9 +133,9 @@ export class UserDetail {
 
 データリゾルバーでエラーを処理する主な方法は3つあります。
 
-1. [withNavigationErrorHandlerでのエラー処理の一元化](#centralize-error-handling-in-withnavigationerrorhandler)
-2. [ルーターイベントのサブスクリプションによるエラー管理](#managing-errors-through-a-subscription-to-router-events)
-3. [リゾルバーでの直接的なエラー処理](#handling-errors-directly-in-the-resolver)
+1. `withNavigationErrorHandler`でのエラー処理の一元化
+2. ルーターイベントのサブスクリプションによるエラー管理
+3. リゾルバーでの直接的なエラー処理
 
 ### `withNavigationErrorHandler`でのエラー処理の一元化 {#centralize-error-handling-in-withnavigationerrorhandler}
 
@@ -234,7 +234,7 @@ export class App {
 
 ### リゾルバーでの直接的なエラー処理 {#handling-errors-directly-in-the-resolver}
 
-以下は、エラーをログに記録し、`Router`サービスを使用して汎用的な`/users`ページにナビゲートし直す`userResolver`の更新された例です。
+以下は、エラーをログに記録し、`Router`サービスを使用して汎用の`/users`ページにナビゲートし直す`userResolver`の更新された例です。
 
 ```ts
 import { inject } from '@angular/core';
@@ -296,3 +296,38 @@ export class App {
 - **ナビゲーションUXを考慮する**: データフェッチ中にナビゲーションがブロックされるため、リゾルバー実行中にローディングインジケーターを実装してください
 - **適切なタイムアウトを設定する**: 無期限にハングしてナビゲーションをブロックする可能性のあるリゾルバーは避けてください
 - **型安全性**: 解決されたデータにはTypeScriptインターフェースを使用してください
+
+## 子リゾルバーで親の解決済みデータを読み取る {#reading-parent-resolved-data-in-child-resolvers}
+
+リゾルバーは親から子へと実行されます。親ルートがリゾルバーを定義している場合、その解決済みデータは、後で実行される子リゾルバーで利用可能になります。
+
+```ts
+import { inject } from '@angular/core';
+import { provideRouter , ActivatedRouteSnapshot } from '@angular/router';
+import { userResolver } from './resolvers';
+import { UserPosts } from './pages';
+import { PostService } from './services',
+import type { User } from './types';
+
+provideRouter([
+  {
+    path: 'users/:id',
+    resolve: { user: userResolver }, // user resolver in the parent route
+    children: [
+      {
+        path: 'posts',
+        component: UserPosts,
+        // route.data.user is available here while this resolver runs
+        resolve: {
+          posts: (route: ActivatedRouteSnapshot) => {
+            const postService = inject(PostService);
+            const user = route.data['user'] as User; // parent data
+            const userId = user.id;
+            return postService.getPostByUser(userId);
+          },
+        },
+      },
+    ],
+  },
+]);
+```

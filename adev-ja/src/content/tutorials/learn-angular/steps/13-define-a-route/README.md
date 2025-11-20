@@ -48,11 +48,11 @@ import {Routes} from '@angular/router';
 import {Home} from './home/home';
 
 export const routes: Routes = [
-  {
-    path: '',
-    title: 'App Home Page',
-    component: Home,
-  },
+{
+path: '',
+title: 'App Home Page',
+component: Home,
+},
 ];
 </docs-code>
 
@@ -63,5 +63,3 @@ export const routes: Routes = [
 このアクティビティでは、Angularアプリケーションでルートを定義および構成する方法を学びました。素晴らしいですね。🙌
 
 アプリケーションでルーティングを完全に有効にするための道のりは、あとわずかです。頑張ってください。
-
-

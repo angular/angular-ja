@@ -17,17 +17,12 @@ Angularは、[リテラル値](https://developer.mozilla.org/en-US/docs/Glossary
 | Array           | `['Onion', 'Cheese', 'Garlic']` |
 | null            | `null`                          |
 | Template string | `` `Hello ${name}` ``           |
-
-### サポートされていないリテラル
-
-| Literal type | Example value |
-| ------------ | ------------- |
-| RegExp       | `/\d+/`       |
+| RegExp          | `/\d+/`                         |
 
 ### サポートされていない値リテラル
 
 | Literal type | Example values |
-|--------------|----------------|
+| ------------ | -------------- |
 | BigInt       | `1n`           |
 
 ## グローバル
@@ -105,7 +100,7 @@ NOTE: オプショナルチェーンは、標準JavaScriptバージョンとは�
 
 Angular式は、コンポーネントクラスのコンテキストと、関連する[テンプレート変数](/guide/templates/variables)、ローカル変数、およびグローバル変数のコンテキストで評価されます。
 
-When referring to component class members, `this` is always implied. However, if a template declares a [template variables](guide/templates/variables) with the same name as a member, the variable shadows that member. You can unambiguously reference such a class member by explicitly using `this.`. This can be useful when creating an `@let` declaration that shadows a class member, e.g. for signal narrowing purposes.
+コンポーネントクラスのメンバーを参照する場合、`this`は常に暗黙的に指定されます。ただし、テンプレートが同じ名前の[テンプレート変数](guide/templates/variables)を宣言している場合、その変数はメンバーをシャドウします。このようなクラスメンバーは、明示的に`this.`を使用することで明確に参照できます。これは、クラスメンバーをシャドウする`@let`宣言を作成する場合に便利です。たとえば、シグナルの絞り込み目的で使用できます。
 
 ## 宣言
 

@@ -177,6 +177,24 @@ Angularは、読み込みが完了すると、プレースホルダーコンテ�
 }
 ```
 
+`IntersectionObserver`のオプションをカスタマイズしたい場合、`viewport`トリガーはオブジェクトリテラルの受け渡しをサポートしています。このリテラルは、`root`を除く`IntersectionObserver`の2番目のパラメータからすべてのプロパティをサポートしています。オブジェクトリテラル記法を使用する場合は、`trigger`プロパティを使用してトリガーを渡す必要があります。
+
+```angular-html
+<div #greeting>Hello!</div>
+
+<!-- With options and a trigger -->
+@defer (on viewport({trigger: greeting, rootMargin: '100px', threshold: 0.5})) {
+  <greetings-cmp />
+}
+
+<!-- With options and an implied trigger -->
+@defer (on viewport({rootMargin: '100px', threshold: 0.5})) {
+  <greetings-cmp />
+} @placeholder {
+  <div>Implied trigger</div>
+}
+```
+
 #### `interaction`
 
 `interaction`トリガーは、ユーザーが`click`または`keydown`イベントを通じて指定された要素と対話すると、遅延コンテンツを読み込みます。
@@ -191,7 +209,7 @@ Angularは、読み込みが完了すると、プレースホルダーコンテ�
 }
 ```
 
-Alternatively, you can specify a [template reference variable](/guide/templates/variables) in the same template as the `@defer` block as the element that is watched for interactions. This variable is passed in as a parameter on the viewport trigger.
+または、`@defer`ブロックと同じテンプレート内に、対話が監視される要素として[テンプレート参照変数](/guide/templates/variables)を指定できます。この変数は、viewportトリガーのパラメータとして渡されます。
 
 ```angular-html
 <div #greeting>こんにちは！</div>
@@ -342,3 +360,26 @@ it('さまざまな状態で`@defer`ブロックをレンダリングする', as
 初期読み込み時にユーザーのビューポートに表示されるコンポーネントを遅延させることは避けてください。これを行うと、累積レイアウトシフト(CLS)が増加するため、Core Web Vitalsに悪影響を与える可能性があります。
 
 必要な場合、初期ページレンダリング中にコンテンツが読み込まれる`immediate`、`timer`、`viewport`、カスタム`when`トリガーは避けてください。
+
+### アクセシビリティに配慮する {#keep-accessibility-in-mind}
+
+`@defer`ブロックを使用する場合は、スクリーンリーダーなどの支援技術を使用するユーザーへの影響を考慮してください。
+遅延セクションにフォーカスしているスクリーンリーダーは、最初はプレースホルダーまたは読み込み中のコンテンツを読み上げますが、遅延コンテンツが読み込まれたときに変更を通知しない場合があります。
+
+遅延コンテンツの変更がスクリーンリーダーに通知されるようにするには、`@defer`ブロックをライブリージョンを持つ要素でラップできます。
+
+```angular-html
+<div aria-live="polite" aria-atomic="true">
+  @defer (on timer(2000)) {
+    <user-profile [user]="currentUser" />
+  } @placeholder {
+    Loading user profile...
+  } @loading {
+    Please wait...
+  } @error {
+    Failed to load profile
+  }
+</div>
+```
+
+これにより、遷移（プレースホルダー &rarr; 読み込み中 &rarr; コンテンツ/エラー）が発生したときに、変更がユーザーに通知されるようになります。

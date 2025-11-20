@@ -18,6 +18,8 @@ const localizedFilePatterns: Array<string | readonly string[]> = [
   'src/app/features/update/update.component.ts',
   'src/app/features/update/update.component.html',
   // Application files
+  'src/index.html',
+  'src/app/core/services/a-dev-title-strategy.ts',
   'src/app/routing/sub-navigation-data.ts',
   'shared-docs/components/table-of-contents/table-of-contents.component.html',
   'shared-docs/components/cookie-popup/cookie-popup.component.html',

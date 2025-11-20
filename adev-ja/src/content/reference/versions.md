@@ -1,30 +1,31 @@
 # バージョン互換性
 
-次の表は、各バージョンのAngularで必要となる 
-Node.js、TypeScript、RxJSのバージョンを示しています。
+次の表は、各バージョンのAngularで必要となるNode.js、TypeScript、RxJSの
+バージョンを示しています。
 
-## アクティブにサポートされているバージョン
+## アクティブにサポートされているバージョン {#actively-supported-versions}
 
 この表は、[アクティブにサポートされている Angular のバージョン](reference/releases#actively-supported-versions) を対象としています。
 
 | Angular            | Node.js                             | TypeScript     | RxJS               |
 | ------------------ | ----------------------------------- | -------------- | ------------------ |
-| 20.2.x \|\| 20.3.x | ^20.19.0 \|\| ^22.12.0 \|\| ^24.0.0 | >=5.9.0 <6.0.0 | ^6.5.3 \|\| ^7.4.0 |
+| 21.0.x             | ^20.19.0 \|\| ^22.12.0 \|\| ^24.0.0 | >=5.9.0 <6.0.0 | ^6.5.3 \|\| ^7.4.0 |
+| 20.2.x \|\| 20.3.x | ^20.19.0 \|\| ^22.12.0 \|\| ^24.0.0 | >=5.8.0 <6.0.0 | ^6.5.3 \|\| ^7.4.0 |
 | 20.0.x \|\| 20.1.x | ^20.19.0 \|\| ^22.12.0 \|\| ^24.0.0 | >=5.8.0 <5.9.0 | ^6.5.3 \|\| ^7.4.0 |
 | 19.2.x             | ^18.19.1 \|\| ^20.11.1 \|\| ^22.0.0 | >=5.5.0 <5.9.0 | ^6.5.3 \|\| ^7.4.0 |
 | 19.1.x             | ^18.19.1 \|\| ^20.11.1 \|\| ^22.0.0 | >=5.5.0 <5.8.0 | ^6.5.3 \|\| ^7.4.0 |
 | 19.0.x             | ^18.19.1 \|\| ^20.11.1 \|\| ^22.0.0 | >=5.5.0 <5.7.0 | ^6.5.3 \|\| ^7.4.0 |
-| 18.1.x \|\| 18.2.x | ^18.19.1 \|\| ^20.11.1 \|\| ^22.0.0 | >=5.4.0 <5.6.0 | ^6.5.3 \|\| ^7.4.0 |
-| 18.0.x             | ^18.19.1 \|\| ^20.11.1 \|\| ^22.0.0 | >=5.4.0 <5.5.0 | ^6.5.3 \|\| ^7.4.0 |
 
-## サポートされていない Angular バージョン
+## サポートされていない Angular バージョン {#unsupported-angular-versions}
 
-この表は、長期サポート (LTS) の対象外となっているAngularのバージョンを対象としています。
-この情報は、各バージョンがLTSを終了したときに正しいものであり、それ以降の保証はありません。
+この表は、長期サポート (LTS) の対象外となっているAngularのバージョンを対象としています。この
+情報は、各バージョンがLTSを終了したときに正しいものであり、それ以降の保証はありません。
 過去の参照のためにここで記載されています。
 
 | Angular            | Node.js                              | TypeScript     | RxJS               |
 | ------------------ | ------------------------------------ | -------------- | ------------------ |
+| 18.1.x \|\| 18.2.x | ^18.19.1 \|\| ^20.11.1 \|\| ^22.0.0  | >=5.4.0 <5.6.0 | ^6.5.3 \|\| ^7.4.0 |
+| 18.0.x             | ^18.19.1 \|\| ^20.11.1 \|\| ^22.0.0  | >=5.4.0 <5.5.0 | ^6.5.3 \|\| ^7.4.0 |
 | 17.3.x             | ^18.13.0 \|\| ^20.9.0                | >=5.2.0 <5.5.0 | ^6.5.3 \|\| ^7.4.0 |
 | 17.1.x \|\| 17.2.x | ^18.13.0 \|\| ^20.9.0                | >=5.2.0 <5.4.0 | ^6.5.3 \|\| ^7.4.0 |
 | 17.0.x             | ^18.13.0 \|\| ^20.9.0                | >=5.2.0 <5.3.0 | ^6.5.3 \|\| ^7.4.0 |
@@ -49,7 +50,7 @@ Node.js、TypeScript、RxJSのバージョンを示しています。
 | 9.1.x              | ^10.13.0 \|\| ^12.11.0               | >=3.6.0 <3.9.0 | ^6.5.3             |
 | 9.0.x              | ^10.13.0 \|\| ^12.11.0               | >=3.6.0 <3.8.0 | ^6.5.3             |
 
-### v9 以前のバージョン
+### v9 以前のバージョン {#before-v9}
 
 Angular v9まで、AngularとAngular CLIのバージョンは同期していませんでした。
 
@@ -68,23 +69,25 @@ Angular v9まで、AngularとAngular CLIのバージョンは同期していま�
 | 4.0.x \|\| 4.1.x            | 1.0.x \|\| 1.1.x \|\| 1.2.x | ^6.9.0              | >=2.1.6 <2.4.0 | ^5.0.1 |
 | 2.x                         | -                           | ^6.9.0              | >=1.8.0 <2.2.0 | ^5.0.1 |
 
-## ブラウザサポート
+## ブラウザサポート {#browser-support}
 
-Angular uses the ["widely available" Baseline](https://web.dev/baseline) to define browser
-support. For each major version, Angular supports browsers included in the Baseline of a
-chosen date near the release date for that major.
+Angularは、ブラウザサポートを定義するために["widely available" Baseline](https://web.dev/baseline)を使用しています。
+各メジャーバージョンについて、Angularはそのメジャーバージョンのリリース日に近い選択された日付のBaselineに含まれる
+ブラウザをサポートします。
 
-The "widely available" Baseline includes browsers released less than 30 months (2.5 years)
-of the chosen date within Baseline's core browser set (Chrome, Edge, Firefox, Safari) and
-targets supporting approximately 95% of web users.
+"widely available" Baselineには、Baselineのコアブラウザセット（Chrome、Edge、Firefox、Safari）内で選択された日付から30か月（2.5年）未満にリリースされたブラウザが含まれ、
+約95%のWebユーザーをサポートすることを
+目標としています。
 
 | Angular | Baseline Date | Browser Set                 |
 | ------- | ------------- | --------------------------- |
+| v21     | 2025-10-20    | [Browser Set][browsers-v21] |
 | v20     | 2025-04-30    | [Browser Set][browsers-v20] |
 
+[browsers-v21]: https://web-platform-dx.github.io/web-features/supported-browsers/?widelyAvailableOnDate=2025-10-20&includeDownstream=false
 [browsers-v20]: https://web-platform-dx.github.io/web-features/supported-browsers/?widelyAvailableOnDate=2025-04-30&includeDownstream=false
 
-Angular versions prior to v20 support the following specific browser versions:
+v20より前のAngularバージョンは、次の特定のブラウザバージョンをサポートしています:
 
 | ブラウザ | サポートされているバージョン                          |
 | :------ | :------------------------------------------ |
@@ -95,7 +98,7 @@ Angular versions prior to v20 support the following specific browser versions:
 | iOS     | 最新の 2 つのメジャーバージョン                |
 | Android | 最新の 2 つのメジャーバージョン                |
 
-## ポリフィル
+## ポリフィル {#polyfills}
 
 Angularは、Webプラットフォームの最新の標準に基づいて構築されています。
 このように幅広いブラウザをターゲットにすることは、すべてのブラウザが最新のブラウザのすべての機能をサポートしていないため、困難です。
@@ -107,7 +110,7 @@ IMPORTANT: 提案されているポリフィルは、フルAngularアプリケ�
 
 HELPFUL: ポリフィルは、古くて遅いブラウザを最新の高速なブラウザに魔法のようには変換できません。
 
-## CLI プロジェクトでのポリフィルの有効化
+## CLI プロジェクトでのポリフィルの有効化 {#enabling-polyfills-with-cli-projects}
 
 [Angular CLI](tools/cli) は、ポリフィルをサポートしています。
 CLIを使用してプロジェクトを作成していない場合は、[CLI 以外のユーザー向けのポリフィル手順](#polyfills-for-non-cli-users) を参照してください。
@@ -131,7 +134,7 @@ TypeScriptファイルを作成する場合は、`tsconfig` ファイルの `fil
 }
 </docs-code>
 
-## CLI 以外のユーザー向けのポリフィル
+## CLI 以外のユーザー向けのポリフィル {#polyfills-for-non-cli-users}
 
 CLIを使用していない場合は、ホストWebページ（`index.html`）にポリフィルスクリプトを直接追加します。
 
@@ -146,14 +149,14 @@ CLIを使用していない場合は、ホストWebページ（`index.html`）�
    * これらのオプションは、開始パフォーマンスを向上させるためだけに使用してください。
    * 追跡が難しいバグが発生する可能性があるため、どのような操作を行っているのかを理解している場合にのみ使用してください。
    */
-  // &lowbar;&lowbar;Zone_disable_requestAnimationFrame = true; // requestAnimationFrame のパッチを無効にする
-  // &lowbar;&lowbar;Zone_disable_on_property = true; // onclick などの onProperty のパッチを無効にする
-  // &lowbar;&lowbar;zone_symbol__UNPATCHED_EVENTS = ['scroll', 'mousemove']; // 指定したイベント名のパッチを無効にする
+  // __Zone_disable_requestAnimationFrame = true; // requestAnimationFrame のパッチを無効にする
+  // __Zone_disable_on_property = true; // onclick などの onProperty のパッチを無効にする
+  // __zone_symbol__UNPATCHED_EVENTS = ['scroll', 'mousemove']; // 指定したイベント名のパッチを無効にする
   /*
    * Edge 開発者ツールでは、addEventListener も zone.js によってラップされます。
    * 次のフラグを使用すると、Edge に対する zone.js のパッチをバイパスできます。
    */
-  // &lowbar;&lowbar;Zone_enable_cross_context_check = true;
+  // __Zone_enable_cross_context_check = true;
 </script>
 <!-- Angular で必要な zone.js -->
 <script src="node_modules/zone.js/bundles/zone.umd.js"></script>

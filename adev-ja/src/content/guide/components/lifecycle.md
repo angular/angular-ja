@@ -161,6 +161,12 @@ export class UserProfile {
 `DestroyRef` を使用して、クリーンアップコードをすべて `ngOnDestroy` メソッドに置くのではなく、
 クリーンアップコードに近い場所にセットアップコードを保持できます。
 
+##### インスタンス破棄の検出
+
+`DestroyRef` は、指定されたインスタンスが既に破棄されているかどうかを確認できる `destroyed` プロパティを提供します。これは、特に遅延または非同期ロジックを扱う際に、破棄されたコンポーネントでの操作を避けるのに役立ちます。
+
+`destroyRef.destroyed` をチェックすることで、インスタンスがクリーンアップされた後にコードが実行されるのを防ぎ、`NG0911: View has already been destroyed.` などの潜在的なエラーを回避できます。
+
 ### ngDoCheck
 
 `ngDoCheck` メソッドは、
@@ -237,7 +243,7 @@ AngularでDOMを操作する方法については、[DOM API の使用](guide/co
 
 レンダリングコールバックは、サーバーサイドレンダリング中またはビルド時の事前レンダリング中は実行されません。
 
-#### afterEveryRender フェーズ
+#### after\*Render フェーズ
 
 `afterEveryRender` または `afterNextRender` を使用する場合、
 オプションで作業をフェーズに分割できます。

@@ -5,6 +5,7 @@
 ## RouterLinkの使い方 {#how-to-use-routerlink}
 
 通常のアンカー要素`<a>`に`href`属性を使用する代わりに、Angularルーティングを活用するために、適切なパスを持つ`RouterLink`ディレクティブを追加します。
+
 ```angular-ts
 import {RouterLink} from '@angular/router';
 @Component({
@@ -99,6 +100,9 @@ export class AppDashboard {
     this.router.navigate(['/search'], {
       queryParams: { category: 'books', sort: 'price' }
     });
+
+    // With matrix parameters
+    this.router.navigate(['/products', { featured: true, onSale: true }]);
   }
 }
 ```
@@ -143,7 +147,7 @@ export class UserDetailComponent {
 
 `router.navigateByUrl()`メソッドは、配列セグメントではなくURLパス文字列を使用してプログラムでナビゲートする直接的な方法を提供します。このメソッドは、完全なURLパスがあり、絶対ナビゲーションを実行する必要がある場合に最適です。特に、外部から提供されるURLやディープリンクのシナリオで役立ちます。
 
-```angular-ts
+```ts
 // Standard route navigation
 router.navigateByUrl('/products);
 
@@ -155,11 +159,14 @@ router.navigateByUrl('/products/123?view=details#reviews');
 
 // Navigate with query parameters
 router.navigateByUrl('/search?category=books&sortBy=price');
+
+// With matrix parameters
+router.navigateByUrl('/sales-awesome;isOffer=true;showModal=false')
 ```
 
 履歴内の現在のURLを置き換える必要がある場合、`navigateByUrl`は`replaceUrl`オプションを持つ設定オブジェクトも受け入れます。
 
-```angular-ts
+```ts
 // Replace current URL in history
 router.navigateByUrl('/checkout', {
   replaceUrl: true

@@ -60,7 +60,7 @@ decreaseQuantity(id: string) {
 <docs-step title="メインアプリケーションコンポーネントを更新する" {#update-the-main-app-component}>
 `app.ts`のメインアプリケーションコンポーネントを更新して、カートサービスを使用し、カートコンポーネントを表示します。
 
-```ts
+```angular-ts
 import {Component, inject} from '@angular/core';
 import {CartStore} from './cart-store';
 import {CartDisplay} from './cart-display';

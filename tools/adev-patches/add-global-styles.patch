@@ -1,8 +1,8 @@
 diff --git a/adev/shared-docs/styles/_typography.scss b/adev/shared-docs/styles/_typography.scss
-index 1c4e2ce0e7..8e897e21f9 100644
+index 241b9050eb..10cb1e918b 100644
 --- a/adev/shared-docs/styles/_typography.scss
 +++ b/adev/shared-docs/styles/_typography.scss
-@@ -110,4 +110,10 @@
+@@ -109,4 +109,10 @@
      margin-block: 1rem;
      transition: border-color 0.3s ease;
    }
@@ -14,13 +14,13 @@ index 1c4e2ce0e7..8e897e21f9 100644
 +  }
  }
 diff --git a/adev/src/local-styles.scss b/adev/src/local-styles.scss
-index 2c83a2ad4a..ef2da20372 100644
+index 926fe7ec11..78c44f1f43 100644
 --- a/adev/src/local-styles.scss
 +++ b/adev/src/local-styles.scss
-@@ -1,3 +1,21 @@
- @use './styles/xterm';
- 
- @include xterm.xterm();
+@@ -7,3 +7,21 @@
+ @tailwind base;
+ @tailwind components;
+ @tailwind utilities;
 +
 +// adev-ja overrides
 +

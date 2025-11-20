@@ -4,21 +4,17 @@ This schematic helps developers to convert eagerly loaded component routes to la
 
 Run the schematic using the following command:
 
-<docs-code language="shell">
-
+```shell
 ng generate @angular/core:route-lazy-loading
-
-</docs-code>
+```
 
 ### `path` config option
 
 By default, migration will go over the entire application. If you want to apply this migration to a subset of the files, you can pass the path argument as shown below:
 
-<docs-code language="shell">
-
+```shell
 ng generate @angular/core:route-lazy-loading --path src/app/sub-component
-
-</docs-code>
+```
 
 The value of the path parameter is a relative path within the project.
 
@@ -36,9 +32,9 @@ The migration will check all the components in the routes, check if they are sta
 
 #### Before
 
-<docs-code language="typescript">
+```typescript
 // app.module.ts
-import { HomeComponent } from './home/home.component';
+import {HomeComponent} from './home/home.component';
 
 @NgModule({
   imports: [
@@ -52,11 +48,11 @@ import { HomeComponent } from './home/home.component';
   ],
 })
 export class AppModule {}
-</docs-code>
+```
 
 #### After
 
-<docs-code language="typescript">
+```typescript
 // app.module.ts
 @NgModule({
   imports: [
@@ -70,6 +66,6 @@ export class AppModule {}
   ],
 })
 export class AppModule {}
-</docs-code>
+```
 
 This migration will also collect information about all the components declared in NgModules and output the list of routes that use them (including corresponding location of the file). Consider making those components standalone and run this migration again. You can use an existing migration ([see](reference/migrations/standalone)) to convert those components to standalone.

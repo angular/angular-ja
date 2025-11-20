@@ -3,9 +3,9 @@
 適切に設計されたアニメーションは、アプリケーションをより楽しく、分かりやすく使用できるようにしますが、単なる装飾ではありません。
 アニメーションは、いくつかの方法でアプリケーションとユーザー体験を向上させることができます。
 
-* アニメーションがないと、ウェブページの遷移は突然で不快に感じられることがあります
-* モーションはユーザー体験を大幅に向上させるため、アニメーションはユーザーが自分のアクションに対するアプリケーションの応答を検出する機会を与えます
-* 優れたアニメーションは、ワークフロー全体でユーザーの注意をスムーズに誘導できます
+- アニメーションがないと、ウェブページの遷移は突然で不快に感じられることがあります
+- モーションはユーザー体験を大幅に向上させるため、アニメーションはユーザーが自分のアクションに対するアプリケーションの応答を検出する機会を与えます
+- 優れたアニメーションは、ワークフロー全体でユーザーの注意をスムーズに誘導できます
 
 Angularは、アプリケーションの要素をアニメーション化するために`animate.enter`と`animate.leave`を提供します。これら2つの機能は、適切なタイミングでenterおよびleaveのCSSクラスを適用するか、サードパーティライブラリからアニメーションを適用する関数を呼び出します。`animate.enter`と`animate.leave`はディレクティブではありません。これらはAngularコンパイラによって直接サポートされる特別なAPIです。これらは要素に直接使用できるほか、ホストバインディングとしても使用できます。
 
@@ -14,9 +14,9 @@ Angularは、アプリケーションの要素をアニメーション化する�
 `animate.enter`はDOMに_入る_要素をアニメーション化するために使用できます。CSSクラスと、transitionまたはキーフレームアニメーションのいずれかを使用して、enterアニメーションを定義できます。
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/enter-and-leave/enter.ts">
-    <docs-code header="src/app/enter.ts" path="adev/src/content/examples/animations/src/app/enter-and-leave/enter.ts" />
-    <docs-code header="src/app/enter.html" path="adev/src/content/examples/animations/src/app/enter-and-leave/enter.html" />
-    <docs-code header="src/app/enter.css" path="adev/src/content/examples/animations/src/app/enter-and-leave/enter.css"/>
+    <docs-code header="enter.ts" path="adev/src/content/examples/animations/src/app/enter-and-leave/enter.ts" />
+    <docs-code header="enter.html" path="adev/src/content/examples/animations/src/app/enter-and-leave/enter.html" />
+    <docs-code header="enter.css" path="adev/src/content/examples/animations/src/app/enter-and-leave/enter.css"/>
 </docs-code-multifile>
 
 アニメーションが完了すると、Angularは`animate.enter`で指定したクラスをDOMから削除します。アニメーションクラスは、アニメーションがアクティブな間のみ存在します。
@@ -28,9 +28,9 @@ NOTE: 要素で複数のキーフレームアニメーションまたはtransiti
 CSSトランジションの使用についての簡単な注意：キーフレームアニメーションの代わりにトランジションを使用することを選択した場合、`animate.enter`で要素に追加されるクラスは、トランジションがアニメーション_する先の_状態を表します。基本要素のCSSは、アニメーションが実行されないときの要素の外観であり、CSSトランジションの終了状態に似ている可能性があります。そのため、トランジションが機能するために適切な_from_状態を持つために、`@starting-style`と組み合わせる必要があります。
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/enter-and-leave/enter-binding.ts">
-    <docs-code header="src/app/enter-binding.ts" path="adev/src/content/examples/animations/src/app/enter-and-leave/enter-binding.ts" />
-    <docs-code header="src/app/enter-binding.html" path="adev/src/content/examples/animations/src/app/enter-and-leave/enter-binding.html" />
-    <docs-code header="src/app/enter-binding.css" path="adev/src/content/examples/animations/src/app/enter-and-leave/enter-binding.css"/>
+    <docs-code header="enter-binding.ts" path="adev/src/content/examples/animations/src/app/enter-and-leave/enter-binding.ts" />
+    <docs-code header="enter-binding.html" path="adev/src/content/examples/animations/src/app/enter-and-leave/enter-binding.html" />
+    <docs-code header="enter-binding.css" path="adev/src/content/examples/animations/src/app/enter-and-leave/enter-binding.css"/>
 </docs-code-multifile>
 
 ## `animate.leave`
@@ -38,9 +38,9 @@ CSSトランジションの使用についての簡単な注意：キーフレ�
 `animate.leave` を使用して、要素がDOMから_離れる_ときにアニメーションを適用できます。CSSクラスと、transformまたはキーフレームアニメーションのいずれかを使用して、離脱アニメーションを定義できます。
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/enter-and-leave/leave.ts">
-    <docs-code header="src/app/leave.ts" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave.ts" />
-    <docs-code header="src/app/leave.html" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave.html" />
-    <docs-code header="src/app/leave.css" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave.css"/>
+    <docs-code header="leave.ts" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave.ts" />
+    <docs-code header="leave.html" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave.html" />
+    <docs-code header="leave.css" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave.css"/>
 </docs-code-multifile>
 
 アニメーションが完了すると、Angularはアニメーション化された要素をDOMから自動的に削除します。
@@ -50,9 +50,9 @@ NOTE: 要素に複数のキーフレームアニメーションまたはtransiti
 `animate.leave` はsignalsやその他のbindingでも使用できます。`animate.leave` は単一のクラスまたは複数のクラスで使用できます。スペースで区切られた単純な文字列として指定するか、文字列配列として指定します。
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-binding.ts">
-    <docs-code header="src/app/leave-binding.ts" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-binding.ts" />
-    <docs-code header="src/app/leave-binding.html" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-binding.html" />
-    <docs-code header="src/app/leave-binding.css" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-binding.css"/>
+    <docs-code header="leave-binding.ts" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-binding.ts" />
+    <docs-code header="leave-binding.html" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-binding.html" />
+    <docs-code header="leave-binding.css" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-binding.css"/>
 </docs-code-multifile>
 
 ## イベントバインディング、関数、およびサードパーティライブラリ {#event-bindings-functions-and-third-party-libraries}
@@ -60,9 +60,9 @@ NOTE: 要素に複数のキーフレームアニメーションまたはtransiti
 `animate.enter`と`animate.leave`はどちらも、関数呼び出しを可能にするイベントバインディング構文をサポートしています。この構文を使用して、コンポーネントコード内の関数を呼び出したり、[GSAP](https://gsap.com/)、[anime.js](https://animejs.com/)などのサードパーティのアニメーションライブラリ、またはその他のJavaScriptアニメーションライブラリを利用したり可能です。
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-event.ts">
-    <docs-code header="src/app/leave-event.ts" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-event.ts" />
-    <docs-code header="src/app/leave-event.html" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-event.html" />
-    <docs-code header="src/app/leave-event.css" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-event.css"/>
+    <docs-code header="leave-event.ts" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-event.ts" />
+    <docs-code header="leave-event.html" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-event.html" />
+    <docs-code header="leave-event.css" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-event.css"/>
 </docs-code-multifile>
 
 `$event`オブジェクトは`AnimationCallbackEvent`型です。これには`target`として要素が含まれ、アニメーションが終了したときにフレームワークに通知するための`animationComplete()`関数を提供します。
@@ -74,6 +74,10 @@ IMPORTANT: Angularが要素を削除するためには、`animate.leave`を使�
 ```typescript
   { provide: MAX_ANIMATION_TIMEOUT, useValue: 6000 }
 ```
+
+## レガシーAngularアニメーションとの互換性 {#compatibility-with-legacy-angular-animations}
+
+同じコンポーネント内でレガシーアニメーションと`animate.enter`および`animate.leave`を一緒に使用できません。そうすると、enterクラスが要素に残ったり、leavingノードが削除されなかったりします。それ以外では、同じ_アプリケーション_内でレガシーアニメーションと新しい`animate.enter`および`animate.leave`アニメーションの両方を使用することは問題ありません。唯一の注意点はコンテンツプロジェクションです。レガシーアニメーションを持つコンポーネントから`animate.enter`または`animate.leave`を持つ別のコンポーネントにコンテンツをプロジェクトする場合、またはその逆の場合、これは同じコンポーネント内で一緒に使用した場合と同じ動作になります。これはサポートされていません。
 
 ## テスト {#testing}
 

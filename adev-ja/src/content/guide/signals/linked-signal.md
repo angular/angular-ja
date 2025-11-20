@@ -108,7 +108,7 @@ export class ShippingMethodPicker {
 
 `computation`は、`source`の新しい値と`previous`オブジェクトを受け取る関数です。`previous`オブジェクトには、`previous.source`（`source`の以前の値）、`previous.value`（`linkedSignal`の以前の値）の2つのプロパティがあります。これらの以前の値を使用して、計算の新しい結果を決定できます。
 
-HELPFUL: When using the `previous` parameter, it is necessary to provide the generic type arguments of `linkedSignal` explicitly. The first generic type corresponds with the type of `source` and the second generic type determines the output type of `computation`.  
+HELPFUL: `previous`パラメーターを使用する場合、`linkedSignal`のジェネリック型引数を明示的に指定する必要があります。最初のジェネリック型は`source`の型に対応し、2番目のジェネリック型は`computation`の出力型を決定します。
 
 ## カスタムの等価比較
 

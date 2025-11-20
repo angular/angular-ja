@@ -124,7 +124,7 @@ export class SelectDirective {
 
 これで`SelectDirective`は起動して実行できるようになりました。次のステップとして、[テンプレートタイプチェックのサポートを追加](#typing-the-directives-context)できます。
 
-## 構造ディレクティブの構文リファレンス
+## 構造ディレクティブの構文リファレンス {#structural-directive-syntax-reference}
 
 独自の構造ディレクティブを作成する際は、次の構文を使用します。
 

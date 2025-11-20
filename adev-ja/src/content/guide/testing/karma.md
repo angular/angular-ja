@@ -1,24 +1,24 @@
-# Testing with Karma and Jasmine
+# KarmaとJasmineを使用したテスト
 
-While [Vitest](https://vitest.dev) is the default test runner for new Angular projects, [Karma](https://karma-runner.github.io) is still a supported and widely used test runner. This guide provides instructions for testing your Angular application using the Karma test runner with the [Jasmine](https://jasmine.github.io) testing framework.
+新しいAngularプロジェクトでは[Vitest](https://vitest.dev)がデフォルトのテストランナーですが、[Karma](https://karma-runner.github.io)も引き続きサポートされており、広く使われているテストランナーです。このガイドでは、Karmaテストランナーと[Jasmine](https://jasmine.github.io)テストフレームワークを使用して、Angularアプリケーションをテストする手順を説明します。
 
-## Setting Up Karma and Jasmine
+## KarmaとJasmineのセットアップ {#setting-up-karma-and-jasmine}
 
-You can set up Karma and Jasmine for a new project or add it to an existing one.
+KarmaとJasmineは、新規プロジェクトでセットアップすることも、既存のプロジェクトに追加できます。
 
-### For New Projects
+### 新規プロジェクトの場合 {#for-new-projects}
 
-To create a new project with Karma and Jasmine pre-configured, run the `ng new` command with the `--test-runner=karma` option:
+KarmaとJasmineが事前設定された新規プロジェクトを作成するには、`ng new`コマンドを`--test-runner=karma`オプション付きで実行します:
 
 ```shell
 ng new my-karma-app --test-runner=karma
 ```
 
-### For Existing Projects
+### 既存のプロジェクトの場合 {#for-existing-projects}
 
-To add Karma and Jasmine to an existing project, follow these steps:
+既存のプロジェクトにKarmaとJasmineを追加するには、次の手順に従います:
 
-1.  **Install the necessary packages:**
+1.  **必要なパッケージをインストールします:**
 
     <docs-code-multifile>
       <docs-code header="npm" language="shell">
@@ -35,9 +35,9 @@ To add Karma and Jasmine to an existing project, follow these steps:
       </docs-code>
     </docs-code-multifile>
 
-2.  **Configure the test runner in `angular.json`:**
+2.  **`angular.json`でテストランナーを設定します:**
 
-    In your `angular.json` file, find the `test` target and set the `runner` option to `karma`:
+    `angular.json`ファイルで`test`ターゲットを見つけ、`runner`オプションを`karma`に設定します:
 
     ```json
     {
@@ -59,9 +59,9 @@ To add Karma and Jasmine to an existing project, follow these steps:
     }
     ```
 
-3.  **Update `tsconfig.spec.json` for Jasmine types:**
+3.  **Jasmineの型定義のために`tsconfig.spec.json`を更新します:**
 
-    To ensure TypeScript recognizes global testing functions like `describe` and `it`, add `"jasmine"` to the `types` array in your `tsconfig.spec.json`:
+    TypeScriptが`describe`や`it`のようなグローバルなテスト関数を認識できるように、`tsconfig.spec.json`の`types`配列に`"jasmine"`を追加します:
 
     ```json
     {
@@ -76,17 +76,17 @@ To add Karma and Jasmine to an existing project, follow these steps:
     }
     ```
 
-## Running Tests
+## テストの実行 {#running-tests}
 
-Once your project is configured, run the tests using the [`ng test`](cli/test) command:
+プロジェクトの設定が完了したら、[`ng test`](cli/test)コマンドを使用してテストを実行します:
 
 ```shell
 ng test
 ```
 
-The `ng test` command builds the application in _watch mode_ and launches the [Karma test runner](https://karma-runner.github.io).
+`ng test`コマンドは、アプリケーションを_ウォッチモード_でビルドし、[Karmaテストランナー](https://karma-runner.github.io)を起動します。
 
-The console output looks like below:
+コンソールの出力は以下のようになります:
 
 ```shell
 
@@ -99,31 +99,31 @@ TOTAL: 3 SUCCESS
 
 ```
 
-The test output is displayed in the browser using [Karma Jasmine HTML Reporter](https://github.com/dfederm/karma-jasmine-html-reporter).
+テスト出力は[Karma Jasmine HTML Reporter](https://github.com/dfederm/karma-jasmine-html-reporter)を使用してブラウザに表示されます。
 
-<img alt="Jasmine HTML Reporter in the browser" src="assets/images/guide/testing/initial-jasmine-html-reporter.png">
+<img alt="ブラウザに表示されたJasmine HTML Reporter" src="assets/images/guide/testing/initial-jasmine-html-reporter.png">
 
-Click on a test row to re-run just that test or click on a description to re-run the tests in the selected test group ("test suite").
+テスト行をクリックしてそのテストだけを再実行するか、説明をクリックして選択したテストグループ（「テストスイート」）のテストを再実行します。
 
-Meanwhile, the `ng test` command is watching for changes. To see this in action, make a small change to a source file and save. The tests run again, the browser refreshes, and the new test results appear.
+その間、`ng test`コマンドは変更を監視しています。これを実際に確認するには、ソースファイルに小さな変更を加えて保存します。テストが再実行されてブラウザが更新され、新しいテスト結果が表示されます。
 
-## Configuration
+## 設定 {#configuration}
 
-The Angular CLI takes care of Jasmine and Karma configuration for you. It constructs the full configuration in memory, based on options specified in the `angular.json` file.
+Angular CLIがJasmineとKarmaの設定を代行します。`angular.json`ファイルで指定されたオプションに基づいて、完全な設定をメモリ内に構築します。
 
-### Customizing Karma Configuration
+### Karma設定のカスタマイズ {#customizing-karma-configuration}
 
-If you want to customize Karma, you can create a `karma.conf.js` by running the following command:
+Karmaをカスタマイズしたい場合は、次のコマンドを実行して`karma.conf.js`を作成できます:
 
 ```shell
 ng generate config karma
 ```
 
-HELPFUL: Read more about Karma configuration in the [Karma configuration guide](http://karma-runner.github.io/6.4/config/configuration-file.html).
+HELPFUL: Karmaの設定については、[Karma設定ガイド](http://karma-runner.github.io/6.4/config/configuration-file.html)で詳しく説明されています。
 
-### Setting the Test Runner in `angular.json`
+### `angular.json`でのテストランナーの設定 {#setting-the-test-runner-in-angularjson}
 
-To explicitly set Karma as the test runner for your project, locate the `test` target in your `angular.json` file and set the `runner` option to `karma`:
+プロジェクトのテストランナーとしてKarmaを明示的に設定するには、`angular.json`ファイル内の`test`ターゲットを見つけ、`runner`オプションを`karma`に設定します:
 
 ```json
 {
@@ -145,11 +145,11 @@ To explicitly set Karma as the test runner for your project, locate the `test` t
 }
 ```
 
-## Code coverage enforcement
+## コードカバレッジの強制 {#code-coverage-enforcement}
 
-To enforce a minimum code coverage level, you can use the `check` property in the `coverageReporter` section of your `karma.conf.js` file.
+最小コードカバレッジレベルを強制するには、`karma.conf.js`ファイルの`coverageReporter`セクションにある`check`プロパティを使用できます。
 
-For example, to require a minimum of 80% coverage:
+たとえば、最小80%のカバレッジを要求するには:
 
 ```javascript
 coverageReporter: {
@@ -170,30 +170,30 @@ coverageReporter: {
 }
 ```
 
-This will cause the test run to fail if the specified coverage thresholds are not met.
+指定されたカバレッジのしきい値が満たされない場合、これによりテスト実行は失敗します。
 
-## Testing in continuous integration
+## 継続的インテグレーションでのテスト {#testing-in-continuous-integration}
 
-To run your Karma tests in a CI environment, use the following command:
+CI環境でKarmaテストを実行するには、次のコマンドを使用します:
 
 ```shell
 ng test --no-watch --no-progress --browsers=ChromeHeadless
 ```
 
-NOTE: The `--no-watch` and `--no-progress` flags are crucial for Karma in CI environments to ensure tests run once and exit cleanly. The `--browsers=ChromeHeadless` flag is also essential for running tests in a browser environment without a graphical interface.
+NOTE: CI環境において、Karmaでテストを一度だけ実行して正常に終了させるためには、`--no-watch`と`--no-progress`フラグが不可欠です。また、`--browsers=ChromeHeadless`フラグは、グラフィカルインターフェースを持たないブラウザ環境でテストを実行するために必須です。
 
-## Debugging tests
+## テストのデバッグ {#debugging-tests}
 
-If your tests aren't working as you expect, you can inspect and debug them in the browser.
+テストが期待どおりに動作しない場合は、ブラウザで検査およびデバッグできます。
 
-To debug an application with the Karma test runner:
+Karmaテストランナーでアプリケーションをデバッグするには:
 
-1.  Reveal the Karma browser window. See [Set up for testing](guide/testing/overview#set-up-for-testing) if you need help with this step.
-2.  Click the **DEBUG** button to open a new browser tab and re-run the tests.
-3.  Open the browser's **Developer Tools**. On Windows, press `Ctrl-Shift-I`. On macOS, press `Command-Option-I`.
-4.  Pick the **Sources** section.
-5.  Press `Control/Command-P`, and then start typing the name of your test file to open it.
-6.  Set a breakpoint in the test.
-7.  Refresh the browser, and notice how it stops at the breakpoint.
+1.  Karmaブラウザウィンドウを表示します。このステップでヘルプが必要な場合は、[テストのセットアップ](guide/testing/overview#set-up-for-testing)を参照してください。
+2.  **DEBUG**ボタンをクリックして新しいブラウザタブを開き、テストを再実行します。
+3.  ブラウザの**開発者ツール**を開きます。Windowsでは、`Ctrl-Shift-I`を押します。macOSでは、`Command-Option-I`を押します。
+4.  **Sources**セクションを選択します。
+5.  `Control/Command-P`を押し、テストファイルの名前を入力して開きます。
+6.  テストにブレークポイントを設定します。
+7.  ブラウザを更新すると、ブレークポイントで停止することがわかります。
 
-<img alt="Karma debugging" src="assets/images/guide/testing/karma-1st-spec-debug.png">
+<img alt="Karmaのデバッグ" src="assets/images/guide/testing/karma-1st-spec-debug.png">

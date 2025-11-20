@@ -18,7 +18,7 @@ Angularテストユーティリティには、`TestBed`、`ComponentFixture`、�
 | `ComponentFixtureAutoDetect` | [自動的な変更検出](guide/testing/components-scenarios#automatic-change-detection) をオンにするサービスの提供トークン。                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `getTestBed`                 | 現在の `TestBed` のインスタンスを取得します。通常、`TestBed` クラスの静的クラスメソッドが十分なため、これは不要です。`TestBed` インスタンスは、静的メソッドとして利用できない、まれに使用されるメンバーをいくつか公開します。                                                                                                                                                                                                                                                                                                                                                                     |
 
-## `TestBed` クラスの概要
+## `TestBed` クラスの概要 {#testbed-class-summary}
 
 `TestBed` クラスは、主要なAngularテストユーティリティの1つです。
 APIは非常に大きく、少しづつ調べていくまで、圧倒される可能性があります。
@@ -76,13 +76,13 @@ set?: Partial<T>;
 `TestBed` インスタンスのメソッドのいくつかは、静的な `TestBed` _クラス_ メソッドではカバーされていません。
 これらは、めったに必要ありません。
 
-## `ComponentFixture`
+## `ComponentFixture` {#the-componentfixture}
 
 `TestBed.createComponent<T>` は、コンポーネント `T` のインスタンスを作成し、そのコンポーネントの強く型付けされた `ComponentFixture` を返します。
 
 `ComponentFixture` のプロパティとメソッドは、コンポーネント、そのDOM表現、およびAngular環境の側面へのアクセスを提供します。
 
-### `ComponentFixture` のプロパティ
+### `ComponentFixture` のプロパティ {#componentfixture-properties}
 
 以下は、テスターにとって最も重要なプロパティを、ユーティリティの利用頻度順に示します。
 
@@ -93,7 +93,7 @@ set?: Partial<T>;
 | `nativeElement`     | コンポーネントのルートにあるネイティブ DOM 要素。                                                                                                                                                                                                                                      |
 | `changeDetectorRef` | コンポーネントの `ChangeDetectorRef`。 <br /> `ChangeDetectorRef` は、コンポーネントが `ChangeDetectionStrategy.OnPush` メソッドを持っているか、コンポーネントの変更検知がプログラムによって制御されている場合に最も役立ちます。                                                          |
 
-### `ComponentFixture` のメソッド
+### `ComponentFixture` のメソッド {#componentfixture-methods}
 
 *fixture* メソッドは、Angularにコンポーネントツリーで特定のタスクを実行させます。
 シミュレートされたユーザーアクションに応答して、Angularの動作をトリガーするには、これらのメソッドを呼び出します。
@@ -109,7 +109,7 @@ set?: Partial<T>;
 | `whenStable`        | fixture が安定したら解決される Promise を返します。 <br /> 非同期アクティビティまたは非同期的な変更検知の完了後にテストを再開するには、その Promise をフックします。[whenStable](guide/testing/components-scenarios#whenstable) を参照してください。                                                                                                                                                                                                                                                                                                   |
 | `destroy`           | コンポーネントの破棄をトリガーします。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
-#### `DebugElement`
+#### `DebugElement` {#debugelement}
 
 `DebugElement` は、コンポーネントのDOM表現に関する重要な洞察を提供します。
 

@@ -181,7 +181,7 @@ const req = httpTesting.expectOne('/api/config');
 expect(req.request.headers.get('X-Authentication-Token')).toEqual(service.getAuthToken());
 ```
 
-同様のインターセプターは、クラスベースのインターセプターで実装することもできます。
+同様のインターセプターは、クラスベースのインターセプターで実装できます。
 
 ```ts
 @Injectable()

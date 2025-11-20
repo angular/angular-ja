@@ -1,6 +1,6 @@
 # 階層型インジェクター
 
-このガイドでは、解決ルール、修飾子、および高度なパターンを含む、Angularの階層型依存性の注入システムについて詳しく説明します。
+このガイドでは、解決ルール、修飾子、および高度なパターンを含む、Angularの階層的な依存性の注入システムについて詳しく説明します。
 
 NOTE: インジェクター階層とプロバイダースコープに関する基本概念については、[依存性プロバイダーの定義ガイド](guide/di/defining-dependency-providers#injector-hierarchy-in-angular)を参照してください。
 
@@ -242,7 +242,7 @@ export class SelfComponent {
 
 `skipSelf` は `self` の反対です。
 `skipSelf` を使用すると、Angularは現在の `ElementInjector` ではなく、親 `ElementInjector` でサービスの検索を開始します。
-そのため、親 `ElementInjector` が `emoji` にシダ <code>🌿</code> 値を使用していたが、コンポーネントの `providers` 配列にカエデの葉 <code>🍁</code> が含まれている場合、Angular はカエデの葉 <code>🍁</code> を無視して、シダ <code>🌿</code> を使用します。
+そのため、親`ElementInjector`が`emoji`にシダ<code>🌿</code>値を使用していたが、コンポーネントの`providers`配列にカエデの葉<code>🍁</code>が含まれている場合、Angularはカエデの葉<code>🍁</code>を無視して、シダ<code>🌿</code>を使用します。
 
 これをコードで確認するために、親コンポーネントが使用する `emoji` の次の値を想定します。これは、このサービスと同じです。
 

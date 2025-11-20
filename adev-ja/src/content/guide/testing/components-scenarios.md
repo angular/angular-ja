@@ -781,7 +781,7 @@ providers?: any[];
 
 </docs-code>
 
-### _スパイスタブ_（`HeroDetailServiceSpy`）を提供する
+### _スパイスタブ_（`HeroDetailServiceSpy`）を提供する {#provide-a-spy-stub-herodetailservicespy}
 
 この例では、コンポーネントの`providers`配列を、`HeroDetailServiceSpy`を含む新しい配列に完全に置き換えます。
 

@@ -3,7 +3,7 @@
 正確性と完全性を確保するために、ユーザー入力を検証することで、データ品質を全体的に向上させることができます。
 このページでは、UIからのユーザー入力を検証し、リアクティブフォームとテンプレート駆動フォームの両方で、役立つ検証メッセージを表示する方法について説明します。
 
-## テンプレート駆動フォームでの入力検証
+## テンプレート駆動フォームでの入力検証 {#validating-input-in-template-driven-forms}
 
 テンプレート駆動フォームに検証を追加するには、[ネイティブHTMLフォーム検証](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5/Constraint_validation)の場合と同じように、検証属性を追加します。
 Angularは、これらの属性をフレームワーク内のバリデーター関数と一致させるためにディレクティブを使用します。
@@ -17,43 +17,42 @@ Angularは、これらの属性をフレームワーク内のバリデーター�
 
 例で示されている次の機能に注目してください。
 
-* `<input>`要素には、HTML検証属性(`required`と`minlength`)があります。
-    また、カスタムバリデーターディレクティブ`forbiddenName`もあります。
-    詳細については、[カスタムバリデーター](#defining-custom-validators)セクションを参照してください。
+- `<input>`要素には、HTML検証属性(`required`と`minlength`)があります。
+  また、カスタムバリデーターディレクティブ`forbiddenName`もあります。
+  詳細については、[カスタムバリデーター](#defining-custom-validators)セクションを参照してください。
 
-* `#name="ngModel"`は、`NgModel`を`name`というローカル変数にエクスポートします。
-    `NgModel`は、基になる`FormControl`インスタンスの多くのプロパティをミラーリングしているため、テンプレート内でこれを使用して、`valid`や`dirty`などのコントロールの状態を確認できます。
-    コントロールプロパティの完全なリストについては、[AbstractControl](api/forms/AbstractControl) APIリファレンスを参照してください。
+- `#name="ngModel"`は、`NgModel`を`name`というローカル変数にエクスポートします。
+  `NgModel`は、基になる`FormControl`インスタンスの多くのプロパティをミラーリングしているため、テンプレート内でこれを使用して、`valid`や`dirty`などのコントロールの状態を確認できます。
+  コントロールプロパティの完全なリストについては、[AbstractControl](api/forms/AbstractControl) APIリファレンスを参照してください。
+  - 最も外側の`@if`は、`name`が無効で、コントロールが`dirty`または`touched`の場合にのみ、ネストされたメッセージのセットを表示します。
 
-  * The outermost `@if` reveals a set of nested messages but only if the `name` is invalid and the control is either `dirty` or `touched`.
-
-  * Each nested `@if` can present a custom message for one of the possible validation errors.
-        `required`、`minlength`、`forbiddenName`のメッセージがあります。
+  - ネストされた各`@if`は、考えられる検証エラーの1つに対してカスタムメッセージを表示できます。
+    `required`、`minlength`、`forbiddenName`のメッセージがあります。
 
 HELPFUL: ユーザーがフォームを編集する機会がある前に、バリデーターがエラーを表示しないようにするには、コントロールの`dirty`または`touched`状態のいずれかをチェックする必要があります。
 
-* ユーザーが監視対象のフィールドの値を変更すると、コントロールは「dirty」としてマークされます。
-* ユーザーがフォームコントロール要素からフォーカスを外すと、コントロールは「touched」としてマークされます。
+- ユーザーが監視対象のフィールドの値を変更すると、コントロールは「dirty」としてマークされます。
+- ユーザーがフォームコントロール要素からフォーカスを外すと、コントロールは「touched」としてマークされます。
 
-## リアクティブフォームでの入力検証
+## リアクティブフォームでの入力検証 {#validating-input-in-reactive-forms}
 
 リアクティブフォームでは、真実の源はコンポーネントクラスです。
 テンプレートで属性を通じてバリデーターを追加する代わりに、コンポーネントクラスのフォームコントロールモデルに直接バリデーター関数を追加します。
 その後、Angularは、コントロールの値が変更されるたびにこれらの関数を呼び出します。
 
-### バリデーター関数
+### バリデーター関数 {#validator-functions}
 
 バリデーター関数は、同期または非同期にすることができます。
 
-| バリデーターの種類   | 詳細 |
-|:---              |:---     |
-| 同期バリデーター  | コントロールインスタンスを受け取り、検証エラーのセットまたは`null`をすぐに返す同期関数。`FormControl`をインスタンス化する際に、第2引数として渡します。                       |
-| 非同期バリデーター | コントロールインスタンスを受け取り、後で検証エラーのセットまたは`null`を発行するPromiseまたはObservableを返す非同期関数。`FormControl`をインスタンス化する際に、第3引数として渡します。 |
+| バリデーターの種類   | 詳細                                                                                                                                                                                          |
+| :------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 同期バリデーター     | コントロールインスタンスを受け取り、検証エラーのセットまたは`null`をすぐに返す同期関数。`FormControl`をインスタンス化する際に、第2引数として渡します。                                        |
+| 非同期バリデーター   | コントロールインスタンスを受け取り、後で検証エラーのセットまたは`null`を発行するPromiseまたはObservableを返す非同期関数。`FormControl`をインスタンス化する際に、第3引数として渡します。 |
 
 パフォーマンス上の理由から、Angularは、すべての同期バリデーターが合格した場合にのみ非同期バリデーターを実行します。
 各バリデーターは、エラーが設定される前に完了する必要があります。
 
-### 組み込みのバリデーター関数
+### 組み込みのバリデーター関数 {#built-in-validator-functions}
 
 [独自のバリデーター関数](#defining-custom-validators)を作成することも、Angularの組み込みのバリデーターのいくつかを使用することもできます。
 
@@ -90,25 +89,25 @@ HELPFUL: ユーザーがフォームを編集する機会がある前に、バ�
 
 <docs-code header="shared/forbidden-name.directive.ts (forbiddenNameValidator)" path="adev/src/content/examples/form-validation/src/app/shared/forbidden-name.directive.ts" visibleRegion="custom-validator"/>
 
-関数は、*特定の*禁止されている名前を検出するための正規表現を受け取り、バリデーター関数を返すファクトリです。
+関数は、_特定の_禁止されている名前を検出するための正規表現を受け取り、バリデーター関数を返すファクトリです。
 
 このサンプルでは、禁止されている名前は「bob」なので、バリデーターは「bob」を含むアクター名をすべて拒否します。
 他の場所では、「alice」や、構成された正規表現に一致する名前を拒否することもできます。
 
 `forbiddenNameValidator`ファクトリは、構成されたバリデーター関数を返します。
-その関数はAngularコントロールオブジェクトを受け取り、コントロール値が有効な場合は`null`を返し、無効な場合は検証エラーオブジェクトを返します。
+その関数はAngularコントロールオブジェクトを受け取り、コントロール値が有効な場合は`null`を返し、_無効な場合は_検証エラーオブジェクトを返します。
 検証エラーオブジェクトには通常、検証キーの名前である`'forbiddenName'`というプロパティと、エラーメッセージに挿入できる任意の値の辞書である`{name}`という値を持つプロパティがあります。
 
 カスタム非同期バリデーターは同期バリデーターに似ていますが、代わりに後で`null`または検証エラーオブジェクトを発行するPromiseまたはオブザーバブルを返す必要があります。
 オブザーバブルの場合、オブザーバブルは完了する必要があります。その時点で、フォームは最後の発行された値を検証に使用します。
 
-### カスタムバリデーターをリアクティブフォームに追加する
+### カスタムバリデーターをリアクティブフォームに追加する {#adding-custom-validators-to-reactive-forms}
 
 リアクティブフォームでは、`FormControl`に直接関数を渡すことで、カスタムバリデーターを追加します。
 
 <docs-code header="reactive/actor-form-reactive.component.ts (validator functions)" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.1.ts" visibleRegion="custom-validator"/>
 
-### カスタムバリデーターをテンプレート駆動フォームに追加する
+### カスタムバリデーターをテンプレート駆動フォームに追加する {#adding-custom-validators-to-template-driven-forms}
 
 テンプレート駆動フォームでは、テンプレートにディレクティブを追加します。ディレクティブは、バリデーター関数をラップします。
 たとえば、対応する`ForbiddenValidatorDirective`は、`forbiddenNameValidator`のラッパーとして機能します。
@@ -129,7 +128,7 @@ Angularは、ディレクティブが`NG_VALIDATORS`プロバイダーに自身�
 <docs-code header="template/actor-form-template.component.html (forbidden-name-input)" path="adev/src/content/examples/form-validation/src/app/template/actor-form-template.component.html" visibleRegion="name-input"/>
 
 HELPFUL: カスタム検証ディレクティブが`useExisting`ではなく`useClass`でインスタンス化されていることに注意してください。
-登録されたバリデーターは、`ForbiddenValidatorDirective`の*このインスタンス*である必要があります。フォーム内のインスタンスで、`forbiddenName`プロパティが「bob」にバインドされています。
+登録されたバリデーターは、`ForbiddenValidatorDirective`の_このインスタンス_である必要があります。フォーム内のインスタンスで、`forbiddenName`プロパティが「bob」にバインドされています。
 
 `useExisting`を`useClass`に置き換えると、`forbiddenName`を持たない新しいクラスインスタンスを登録することになります。
 
@@ -139,44 +138,44 @@ Angularは、多くのコントロールプロパティをフォームコント�
 これらのクラスを使用して、フォームの状態に応じてフォームコントロール要素のスタイルを設定します。
 現在サポートされているクラスは次のとおりです。
 
-* `.ng-valid`
-* `.ng-invalid`
-* `.ng-pending`
-* `.ng-pristine`
-* `.ng-dirty`
-* `.ng-untouched`
-* `.ng-touched`
-* `.ng-submitted` （囲んでいるフォーム要素のみ）
+- `.ng-valid`
+- `.ng-invalid`
+- `.ng-pending`
+- `.ng-pristine`
+- `.ng-dirty`
+- `.ng-untouched`
+- `.ng-touched`
+- `.ng-submitted` \(囲んでいるフォーム要素のみ\)
 
 次の例では、アクターフォームは`.ng-valid`と`.ng-invalid`クラスを使用して、
 各フォームコントロールの境界線の色を設定しています。
 
 <docs-code header="forms.css (status classes)" path="adev/src/content/examples/form-validation/src/assets/forms.css"/>
 
-## クロスフィールド検証
+## クロスフィールド検証 {#cross-field-validation}
 
-クロスフィールドバリデーターは、フォーム内の異なるフィールドの値を比較し、組み合わせで受け入れるか拒否する[カスタムバリデーター](#defining-custom-validators "カスタムバリデーターについて読む")です。
+クロスフィールドバリデーターは、フォーム内の異なるフィールドの値を比較し、組み合わせで受け入れるか拒否する[カスタムバリデーター](#defining-custom-validators 'カスタムバリデーターについて読む')です。
 たとえば、互いに非互換なオプションを提供するフォームがある場合、ユーザーはAまたはBを選択できますが、両方は選択できません。
 フィールドの値によっては、他の値に依存する場合もあります。ユーザーは、Aを選択した場合にのみBを選択できます。
 
 次のクロス検証の例は、次の方法を示しています。
 
-* 2つの兄弟コントロールの値に基づいて、リアクティブまたはテンプレートベースのフォーム入力を検証する
-* ユーザーがフォームとやり取りし、検証に失敗した場合に、説明的なエラーメッセージを表示する
+- 2つの兄弟コントロールの値に基づいて、リアクティブまたはテンプレートベースのフォーム入力を検証する
+- ユーザーがフォームとやり取りし、検証に失敗した場合に、説明的なエラーメッセージを表示する
 
 これらの例では、クロス検証を使用して、アクターがアクターフォームに記入することで、役割で同じ名前を再利用しないようにしています。
 バリデーターは、アクター名と役割が一致しないことを確認することで、これを実現します。
 
-### クロス検証をリアクティブフォームに追加する
+### クロス検証をリアクティブフォームに追加する {#adding-cross-validation-to-reactive-forms}
 
 フォームは、次の構造になっています。
 
 <docs-code language="javascript">
 
 const actorForm = new FormGroup({
-  'name': new FormControl(),
-  'role': new FormControl(),
-  'skill': new FormControl()
+'name': new FormControl(),
+'role': new FormControl(),
+'skill': new FormControl()
 });
 
 </docs-code>
@@ -190,9 +189,9 @@ const actorForm = new FormGroup({
 <docs-code language="javascript">
 
 const actorForm = new FormGroup({
-  'name': new FormControl(),
-  'role': new FormControl(),
-  'skill': new FormControl()
+'name': new FormControl(),
+'role': new FormControl(),
+'skill': new FormControl()
 }, { validators: unambiguousRoleValidator });
 
 </docs-code>
@@ -215,7 +214,7 @@ const actorForm = new FormGroup({
 
 この`@if`は、`FormGroup`に`unambiguousRoleValidator`バリデーターが返したクロス検証エラーがある場合に、エラーを表示しますが、ユーザーが[フォームとやり取りを完了](#control-status-css-classes)した場合のみです。
 
-### クロス検証をテンプレート駆動フォームに追加する
+### クロス検証をテンプレート駆動フォームに追加する {#adding-cross-validation-to-template-driven-forms}
 
 テンプレート駆動フォームの場合、バリデーター関数をラップするディレクティブを作成する必要があります。
 次の例に示すように、[`NG_VALIDATORS`トークン](/api/forms/NG_VALIDATORS)を使用して、そのディレクティブをバリデーターとして提供します。
@@ -233,14 +232,14 @@ const actorForm = new FormGroup({
 
 これは、テンプレート駆動フォームとリアクティブフォームの両方で同じです。
 
-## 非同期バリデーターの作成
+## 非同期バリデーターの作成 {#creating-asynchronous-validators}
 
 非同期バリデーターは、`AsyncValidatorFn`と`AsyncValidator`インターフェースを実装します。
 これらは、同期バリデーターと非常に似ており、次の点が異なります。
 
-* `validate()`関数はPromiseまたはオブザーバブルを返す必要があります。
-* 返されるオブザーバブルは有限である必要があります。つまり、ある時点で完了する必要があります。
-    無限のオブザーバブルを有限のオブザーバブルに変換するには、オブザーバブルを`first`、`last`、`take`、`takeUntil`などのフィルタリング演算子でパイプします。
+- `validate()`関数はPromiseまたはオブザーバブルを返す必要があります。
+- 返されるオブザーバブルは有限である必要があります。つまり、ある時点で完了する必要があります。
+  無限のオブザーバブルを有限のオブザーバブルに変換するには、オブザーバブルを`first`、`last`、`take`、`takeUntil`などのフィルタリング演算子でパイプします。
 
 非同期検証は、同期検証の後に実行され、同期検証が成功した場合にのみ実行されます。
 このチェックにより、フォームは、基本的な検証方法がすでに無効な入力を検出している場合、潜在的にコストのかかる非同期検証プロセス（HTTPリクエストなど）を回避できます。
@@ -255,12 +254,11 @@ const actorForm = new FormGroup({
 
 <input [(ngModel)]="name" #model="ngModel" appSomeAsyncValidator>
 @if(model.pending) {
-  <app-spinner />
+<app-spinner />
 }
-
 </docs-code>
 
-### カスタム非同期バリデーターの実装
+### カスタム非同期バリデーターの実装 {#implementing-a-custom-async-validator}
 
 次の例では、非同期バリデーターは、アクターがすでに割り当てられている役割にキャストされないようにします。
 新しいアクターは常にオーディションを受けており、古いアクターは引退しているため、利用可能な役割のリストを事前に取得はできません。
@@ -270,7 +268,7 @@ const actorForm = new FormGroup({
 
 <docs-code path="adev/src/content/examples/form-validation/src/app/shared/role.directive.ts" visibleRegion="async-validator"/>
 
-The `actorsService` property is initialized with an instance of the `ActorsService` token, which defines the following interface.
+`actorsService`プロパティは、次のインターフェースを定義する`ActorsService`トークンのインスタンスで初期化されます。
 
 <docs-code language="typescript">
 interface ActorsService {
@@ -295,7 +293,7 @@ interface ActorsService {
 しばらくすると、Observableチェーンが完了し、非同期検証が完了します。
 `pending`フラグは`false`に設定され、フォームの有効性が更新されます。
 
-### 非同期バリデーターをリアクティブフォームに追加する
+### 非同期バリデーターをリアクティブフォームに追加する {#adding-async-validators-to-reactive-forms}
 
 リアクティブフォームで非同期バリデーターを使用するには、最初にバリデーターをコンポーネントクラスのプロパティに注入します。
 
@@ -309,7 +307,7 @@ interface ActorsService {
 
 <docs-code path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.2.ts" visibleRegion="async-validator-usage"/>
 
-### 非同期バリデーターをテンプレート駆動フォームに追加する
+### 非同期バリデーターをテンプレート駆動フォームに追加する {#adding-async-validators-to-template-driven-forms}
 
 テンプレート駆動フォームで非同期バリデーターを使用するには、新しいディレクティブを作成し、そのディレクティブに`NG_ASYNC_VALIDATORS`プロバイダーを登録します。
 
@@ -321,7 +319,7 @@ interface ActorsService {
 
 <docs-code header="template/actor-form-template.component.html (unique-unambiguous-role-input)" path="adev/src/content/examples/form-validation/src/app/template/actor-form-template.component.html" visibleRegion="role-input"/>
 
-### 非同期バリデーターのパフォーマンスの最適化
+### 非同期バリデーターのパフォーマンスの最適化 {#optimizing-performance-of-async-validators}
 
 デフォルトでは、すべてのバリデーターは、フォームの値が変更されるたびに実行されます。
 同期バリデーターの場合、これは通常、アプリケーションのパフォーマンスに目立った影響を与えません。
@@ -342,7 +340,7 @@ interface ActorsService {
 new FormControl('', {updateOn: 'blur'});
 </docs-code>
 
-## ネイティブHTMLフォーム検証との相互作用
+## ネイティブHTMLフォーム検証との相互作用 {#interaction-with-native-html-form-validation}
 
 デフォルトでは、Angularは囲んでいる`<form>`に`novalidate`属性を追加することで[ネイティブHTMLフォーム検証](https://developer.mozilla.org/docs/Web/Guide/HTML/Constraint_validation)を無効にし、これらの属性をフレームワーク内のバリデーター関数と一致させるためにディレクティブを使用します。
 ネイティブ検証を**組み合わせて**Angularベースの検証を使用したい場合は、`ngNativeValidate`ディレクティブを使用して、ネイティブ検証を再び有効にできます。

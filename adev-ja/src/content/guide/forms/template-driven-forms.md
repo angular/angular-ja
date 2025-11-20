@@ -22,7 +22,7 @@ Angularテンプレートを使用して、ログインフォーム、コンタ�
 - `ngModel`を使用して、入力コントロールの値を読み書きするための双方向データバインディングを作成する
 - コントロールの状態を追跡する特別なCSSクラスを使用して、視覚的なフィードバックを提供する
 - ユーザーに検証エラーを表示し、フォームの状態に基づいてフォームコントロールからの入力を条件付きで許可する
-- [テンプレート参照変数](guide/templates/reference-variables)を使用して、HTML要素間で情報を共有する
+- [テンプレート参照変数](guide/templates/variables#template-reference-variables)を使用して、HTML要素間で情報を共有する
 
 ## テンプレート駆動型フォームの構築
 
@@ -59,48 +59,47 @@ Angularテンプレートを使用して、ログインフォーム、コンタ�
 
 1. 提供されたサンプルアプリケーションは、フォームに反映されるデータモデルを定義する`Actor`クラスを作成します。
 
-   <docs-code header="src/app/actor.ts" language="typescript" path="adev/src/content/examples/forms/src/app/actor.ts"/>
+<docs-code header="actor.ts" language="typescript" path="adev/src/content/examples/forms/src/app/actor.ts"/>
 
 1. フォームのレイアウトと詳細は、`ActorFormComponent`クラスで定義されます。
 
-   <docs-code header="src/app/actor-form/actor-form.component.ts (v1)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" visibleRegion="v1"/>
+   <docs-code header="actor-form.component.ts (v1)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" visibleRegion="v1"/>
 
    コンポーネントの`selector`値は"app-actor-form"であるため、このフォームを`<app-actor-form>`タグを使用して親テンプレートにドロップできます。
 
-1. 次のコードは、新しいアクターインスタンスを作成し、初期フォームにサンプルアクターを表示します。
+2. 次のコードは、新しいアクターインスタンスを作成し、初期フォームにサンプルアクターを表示します。
 
    <docs-code language="typescript" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" language="typescript" visibleRegion="Marilyn"/>
 
    このデモでは、`model`と`skills`のダミーデータを使用しています。
    実際のアプリでは、データサービスを注入して実際のデータを取得して保存するか、これらのプロパティを入力と出力として公開します。
 
-1. The component enables the Forms feature by importing the `FormsModule` module.
+3. コンポーネントは、`FormsModule`モジュールをインポートすることでフォーム機能を有効にします。
 
    <docs-code language="typescript" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" language="typescript" visibleRegion="imports"/>
 
-1. フォームは、ルートコンポーネントのテンプレートで定義されたアプリケーションレイアウトに表示されます。
+4. フォームは、ルートコンポーネントのテンプレートで定義されたアプリケーションレイアウトに表示されます。
 
-   <docs-code header="src/app/app.component.html" language="html" path="adev/src/content/examples/forms/src/app/app.component.html"/>
+   <docs-code header="app.component.html" language="html" path="adev/src/content/examples/forms/src/app/app.component.html"/>
 
    初期テンプレートは、2つのフォームグループと送信ボタンを持つフォームのレイアウトを定義します。
    フォームグループは、Actorデータモデルの2つのプロパティ（名前とスタジオ）に対応します。
    各グループには、ラベルとユーザー入力を得るためのボックスがあります。
-
    - **名前**`<input>`コントロール要素には、HTML5の`required`属性があります
    - **スタジオ**`<input>`コントロール要素には、`studio`はオプションであるため、属性がありません
 
    **Submit**ボタンには、スタイリングのためのいくつかのクラスがあります。
    現時点では、フォームのレイアウトはすべてプレーンなHTML5で、バインディングやディレクティブはありません。
 
-1. サンプルフォームは、[Twitter Bootstrap](https://getbootstrap.com/css)の`container`、`form-group`、`form-control`、`btn`といったスタイルクラスを使用しています。
+5. サンプルフォームは、[Twitter Bootstrap](https://getbootstrap.com/css)の`container`、`form-group`、`form-control`、`btn`といったスタイルクラスを使用しています。
    これらのスタイルを使用するには、アプリケーションのスタイルシートでライブラリをインポートします。
 
-   <docs-code header="src/styles.css" path="adev/src/content/examples/forms/src/styles.1.css"/>
+<docs-code header="src/styles.css" path="adev/src/content/examples/forms/src/styles.1.css"/>
 
 1. フォームでは、アクターのスキルを、`ActorFormComponent`で内部的に維持されている事前定義された`skills`リストから選択する必要があります。
-   The Angular `@for` loop iterates over the data values to populate the `<select>` element.
+   Angularの`@for`ループは、データ値をイテレートして`<select>`要素を生成します。
 
-   <docs-code header="src/app/actor-form/actor-form.component.html (skills)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="skills"/>
+<docs-code header="actor-form.component.html (skills)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="skills"/>
 
 アプリケーションを今すぐ実行すると、選択コントロールにスキルのリストが表示されます。
 入力要素は、まだデータ値やイベントにバインドされていないため、空欄であり、動作しません。
@@ -116,7 +115,7 @@ Angularテンプレートを使用して、ログインフォーム、コンタ�
 1. **名前**ラベルの隣の`<input>`タグを探します。
 1. `ngModel`ディレクティブを追加し、双方向データバインディング構文`[(ngModel)]="..."`を使用します。
 
-<docs-code header="src/app/actor-form/actor-form.component.html (excerpt)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="ngModelName-1"/>
+<docs-code header="actor-form.component.html (excerpt)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="ngModelName-1"/>
 
 HELPFUL: この例では、各入力タグの後に一時的な診断用補間`{{model.name}}`が追加され、対応するプロパティの現在のデータ値が表示されます。コメントは、双方向データバインディングの動作を観察し終わったら、診断用行を削除するよう思い出させてくれます。
 
@@ -124,12 +123,12 @@ HELPFUL: この例では、各入力タグの後に一時的な診断用補間`{
 
 コンポーネントで`FormsModule`をインポートすると、Angularはテンプレートの`<form>`タグに[NgForm](api/forms/NgForm)ディレクティブを自動的に作成してアタッチします（`NgForm`のセレクターは`<form>`要素と一致する`form`だからです）。
 
-`NgForm`とフォーム全体のステータスにアクセスするには、[テンプレート参照変数](guide/templates/reference-variables)を宣言します。
+`NgForm`とフォーム全体のステータスにアクセスするには、[テンプレート参照変数](guide/templates/variables#template-reference-variables)を宣言します。
 
 1. テンプレートファイル`actor-form.component.html`を編集します。
 1. テンプレート参照変数`#actorForm`を付けて`<form>`タグを更新し、次の値を設定します。
 
-   <docs-code header="src/app/actor-form/actor-form.component.html (excerpt)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="template-variable"/>
+   <docs-code header="actor-form.component.html (excerpt)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="template-variable"/>
 
    `actorForm`テンプレート変数は、フォーム全体を管理する`NgForm`ディレクティブインスタンスへの参照になります。
 
@@ -154,7 +153,7 @@ Angularは、割り当てられた名前を使用して、親`<form>`要素に�
 
 これらの変更を加えた後、フォームテンプレートは次のようになります。
 
-<docs-code header="src/app/actor-form/actor-form.component.html (excerpt)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="ngModel-2"/>
+<docs-code header="actor-form.component.html (excerpt)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="ngModel-2"/>
 
 次のことに注意してください。
 
@@ -204,7 +203,6 @@ Angularは、`form`要素に`ng-submitted`クラスを適用しますが、
    </docs-code>
 
 1. **Name** `<input>`ボックスで次のように操作し、表示されるクラスを観察します。
-
    - 見るだけで触れずにいます。
      クラスは触られていないか、原始状態または有効であることを示しています。
 
@@ -263,12 +261,12 @@ Angularは、`form`要素に`ng-submitted`クラスを適用しますが、
 `name`コントロールのプロパティを、メッセージ`<div>`要素の`hidden`プロパティにバインドすることで、エラーメッセージを表示または非表示にします。
 </docs-step>
 
-<docs-code header="src/app/actor-form/actor-form.component.html (hidden-error-msg)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="hidden-error-msg"/>
+<docs-code header="actor-form.component.html (hidden-error-msg)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="hidden-error-msg"/>
 
 <docs-step title="名前への条件付きエラーメッセージを追加">
 次の例のように、`name`入力ボックスに条件付きエラーメッセージを追加します。
 
-<docs-code header="src/app/actor-form/actor-form.component.html (excerpt)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="name-with-error-msg"/>
+<docs-code header="actor-form.component.html (excerpt)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="name-with-error-msg"/>
 </docs-step>
 </docs-workflow>
 
@@ -293,11 +291,11 @@ Angularは、`form`要素に`ng-submitted`クラスを適用しますが、
 1. テンプレートで、フォームの下部に"New Actor"`<button>`要素を配置します。
 1. コンポーネントファイルで、アクターデータモデルにアクター作成メソッドを追加します。
 
-   <docs-code header="src/app/actor-form/actor-form.component.ts (New Actor method)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" visibleRegion="new-actor"/>
+<docs-code header="actor-form.component.ts (New Actor method)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" visibleRegion="new-actor"/>
 
 1. ボタンのクリックイベントを、アクター作成メソッド`newActor()`にバインドします。
 
-   <docs-code header="src/app/actor-form/actor-form.component.html (New Actor button)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="new-actor-button-no-reset"/>
+<docs-code header="actor-form.component.html (New Actor button)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="new-actor-button-no-reset"/>
 
 1. アプリケーションを再度実行し、**New Actor**ボタンをクリックします。
 
@@ -312,7 +310,7 @@ Angularは、`form`要素に`ng-submitted`クラスを適用しますが、
 
 1. フォームコントロールの原始状態を復元するには、`newActor()`メソッドを呼び出した後に、フォームの`reset()`メソッドを呼び出してすべてのフラグを強制的にクリアします。
 
-   <docs-code header="src/app/actor-form/actor-form.component.html (Reset the form)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="new-actor-button-form-reset"/>
+   <docs-code header="actor-form.component.html (Reset the form)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="new-actor-button-form-reset"/>
 
    これで、**New Actor**をクリックすると、フォームとそのコントロールフラグの両方がリセットされます。
 
@@ -328,7 +326,7 @@ Angularは、`form`要素に`ng-submitted`クラスを適用しますが、
 <docs-step title="ngOnSubmitを監視する">
 フォームの[`ngSubmit`](api/forms/NgForm#properties)イベントプロパティを、アクターフォームコンポーネントの`onSubmit()`メソッドにバインドします。
 
-<docs-code header="src/app/actor-form/actor-form.component.html (ngSubmit)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="ngSubmit"/>
+<docs-code header="actor-form.component.html (ngSubmit)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="ngSubmit"/>
 </docs-step>
 
 <docs-step title="disabledプロパティをバインドする">
@@ -336,7 +334,7 @@ Angularは、`form`要素に`ng-submitted`クラスを適用しますが、
 
 フォームの全体的な有効性を示すプロパティを、**Submit**ボタンの`disabled`プロパティにバインドします。
 
-<docs-code header="src/app/actor-form/actor-form.component.html (submit-button)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="submit-button"/>
+<docs-code header="actor-form.component.html (submit-button)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="submit-button"/>
 </docs-step>
 
 <docs-step title="アプリケーションを実行する">
@@ -359,11 +357,11 @@ Angularは、`form`要素に`ng-submitted`クラスを適用しますが、
 <docs-step title="フォームをラップする">
 フォーム全体を`<div>`でラップし、その`hidden`プロパティを`ActorFormComponent.submitted`プロパティにバインドします。
 
-<docs-code header="src/app/actor-form/actor-form.component.html (excerpt)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="edit-div"/>
+<docs-code header="actor-form.component.html (excerpt)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="edit-div"/>
 
 メインフォームは、`submitted`プロパティがフォームを送信するまでは偽であるため、最初から表示されます。これは、`ActorFormComponent`からの次のフラグメントで示されています。
 
-<docs-code header="src/app/actor-form/actor-form.component.ts (submitted)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" visibleRegion="submitted"/>
+<docs-code header="actor-form.component.ts (submitted)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" visibleRegion="submitted"/>
 
 **Submit**ボタンをクリックすると、`submitted`フラグが真になり、フォームが消えます。
 </docs-step>
@@ -371,7 +369,7 @@ Angularは、`form`要素に`ng-submitted`クラスを適用しますが、
 <docs-step title="送信された状態を追加する">
 フォームが送信された状態の間に別のものを表示するには、新しい`<div>`ラッパーの下に次のHTMLを追加します。
 
-<docs-code header="src/app/actor-form/actor-form.component.html (excerpt)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="submitted"/>
+<docs-code header="actor-form.component.html (excerpt)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="submitted"/>
 
 この`<div>`は、補間バインディングで読み取り専用の俳優を表示します。これは、コンポーネントが送信された状態の間にのみ表示されます。
 
@@ -401,8 +399,8 @@ Angularは、`form`要素に`ng-submitted`クラスを適用しますが、
 アプリケーションの最終バージョンを示すコードを次に示します。
 
 <docs-code-multifile>
-    <docs-code header="actor-form/actor-form.component.ts" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" visibleRegion="final"/>
-    <docs-code header="actor-form/actor-form.component.html" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="final"/>
+    <docs-code header="actor-form.component.ts" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" visibleRegion="final"/>
+    <docs-code header="actor-form.component.html" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="final"/>
     <docs-code header="actor.ts" path="adev/src/content/examples/forms/src/app/actor.ts"/>
     <docs-code header="app.component.html" path="adev/src/content/examples/forms/src/app/app.component.html"/>
     <docs-code header="app.component.ts" path="adev/src/content/examples/forms/src/app/app.component.ts"/>

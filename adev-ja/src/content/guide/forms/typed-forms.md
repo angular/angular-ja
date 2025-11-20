@@ -8,7 +8,7 @@ Angular 14から、リアクティブフォームはデフォルトで厳密に�
 
 <docs-video src="https://www.youtube.com/embed/L-odCf4MfJc" alt="Angular の型付きフォーム" />
 
-Angularリアクティブフォームでは、*フォームモデル* を明示的に指定します。単純な例として、この基本的なユーザーログインフォームを考えてみましょう。
+Angularリアクティブフォームでは、_フォームモデル_ を明示的に指定します。単純な例として、この基本的なユーザーログインフォームを考えてみましょう。
 
 ```ts
 const login = new FormGroup({
@@ -29,7 +29,7 @@ const emailDomain = login.value.email.domain;
 
 追加された安全性に加えて、型はIDEでのより良いオートコンプリートや、フォーム構造を明示的に指定する方法など、さまざまな他の改善を可能にします。
 
-これらの改善は、現時点では *リアクティブ* フォーム（[*テンプレート駆動* フォーム](guide/forms/template-driven-forms) ではありません）のみに適用されます。
+これらの改善は、現時点では _リアクティブ_ フォーム（[_テンプレート駆動_ フォーム](guide/forms/template-driven-forms) ではありません）のみに適用されます。
 
 ## 型なしフォーム
 
@@ -56,7 +56,7 @@ const email = new FormControl('angularrox@gmail.com');
 
 ### ヌラビリティ
 
-疑問に思うかもしれません。なぜこのコントロールの型には `null` が含まれているのでしょうか？これは、コントロールがいつでも `reset` を呼び出すことで `null` になる可能性があるためです。
+疑問に思うかもしれません。なぜこのコントロールの型には `null` が含まれているのでしょうか? これは、コントロールがいつでも `reset` を呼び出すことで `null` になる可能性があるためです。
 
 ```ts
 const email = new FormControl('angularrox@gmail.com');
@@ -99,9 +99,24 @@ const names = new FormArray([new FormControl('Alex')]);
 names.push(new FormControl('Jess'));
 ```
 
+複数のエントリを一度に追加する必要がある場合は、`aliases.push()` に配列を渡します。
+
+```ts
+const aliases = new FormArray([new FormControl('ng')]);
+aliases.push([new FormControl('ngDev'), new FormControl('ngAwesome')]);
+```
+
 この `FormArray` は、内部コントロール型 `FormControl<string|null>` を持つことになります。
 
 配列内に複数の異なる要素型を含めたい場合は、`UntypedFormArray` を使用する必要があります。なぜなら、TypeScriptはどの要素型がどの位置に発生するかを推測できないからです。
+
+`FormArray` は、含まれているすべてのコントロールを削除する `clear()` メソッドも提供します。
+
+```ts
+const aliases = new FormArray([new FormControl('ngDev'), new FormControl('ngAwesome')]);
+aliases.clear();
+console.log(aliases.length); // 0
+```
 
 ## `FormGroup` と `FormRecord`
 
@@ -124,11 +139,11 @@ const login = new FormGroup({
 
 より具体的には、`login.value.email` の型は `string|undefined` であり、TypeScriptは、`undefined` である可能性のある値を処理するように強制します（`strictNullChecks` を有効にしている場合）。
 
-無効なコントロールを含む値にアクセスしたい場合、つまり `undefined` である可能性のあるフィールドをバイパスしたい場合は、`login.getRawValue()` を使用できます。
+無効なコントロールを_含む_値にアクセスしたい場合、つまり `undefined` である可能性のあるフィールドをバイパスしたい場合は、`login.getRawValue()` を使用できます。
 
 ### オプションのコントロールと動的グループ
 
-一部のフォームには、存在する可能性がある場合とない場合があるコントロールが含まれており、実行時に追加または削除できます。これらのコントロールは、*オプションフィールド* を使用して表すことができます。
+一部のフォームには、存在する可能性がある場合とない場合があるコントロールが含まれており、実行時に追加または削除できます。これらのコントロールは、_オプションフィールド_ を使用して表すことができます。
 
 ```ts
 interface LoginForm {

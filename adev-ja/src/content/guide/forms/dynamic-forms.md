@@ -47,7 +47,7 @@
 
 次の `QuestionBase` は、フォーム内の質問とその回答を表すことができる一連のコントロールのベースクラスです。
 
-<docs-code header="src/app/question-base.ts" path="adev/src/content/examples/dynamic-form/src/app/question-base.ts"/>
+<docs-code header="question-base.ts" path="adev/src/content/examples/dynamic-form/src/app/question-base.ts"/>
 
 ### コントロールクラスを定義する
 
@@ -68,7 +68,7 @@
 次の `QuestionControlService` は、質問モデルからメタデータを使用する `FormGroup` インスタンスのセットを収集します。
 デフォルト値と検証ルールを指定できます。
 
-<docs-code header="src/app/question-control.service.ts" path="adev/src/content/examples/dynamic-form/src/app/question-control.service.ts"/>
+<docs-code header="question-control.service.ts" path="adev/src/content/examples/dynamic-form/src/app/question-control.service.ts"/>
 
 ## 動的フォームコンテンツを構成する
 
@@ -76,7 +76,7 @@
 各質問は、フォームコンポーネントのテンプレートで、`DynamicFormQuestionComponent` のインスタンスと一致する `<app-question>` タグで表されます。
 
 `DynamicFormQuestionComponent` は、データバインドされた質問オブジェクトの値に基づいて、個々の質問の詳細をレンダリングする責任があります。
-フォームは、[`[formGroup]` ディレクティブ](api/forms/FormGroupDirective "API リファレンス") に依存して、テンプレートHTMLを基礎となるコントロールオブジェクトに接続します。
+フォームは、[`[formGroup]` ディレクティブ](api/forms/FormGroupDirective 'API リファレンス') に依存して、テンプレートHTMLを基礎となるコントロールオブジェクトに接続します。
 `DynamicFormQuestionComponent` は、フォームグループを作成し、質問モデルにより定義されたコントロールでそれらを埋め、表示と検証ルールを指定します。
 
 <docs-code-multifile>
@@ -87,7 +87,7 @@
 `DynamicFormQuestionComponent` の目標は、モデルで定義された質問タイプを提示することです。
 現時点では質問タイプが2つしかありませんが、さらに多くのタイプが考えられます。
 テンプレートの `@switch` ブロックは、表示する質問タイプを決定します。
-スイッチは、[`formControlName`](api/forms/FormControlName "FormControlName ディレクティブ API リファレンス") と [`formGroup`](api/forms/FormGroupDirective "FormGroupDirective API リファレンス") セレクターを持つディレクティブを使用します。
+スイッチは、[`formControlName`](api/forms/FormControlName 'FormControlName ディレクティブ API リファレンス') と [`formGroup`](api/forms/FormGroupDirective 'FormGroupDirective API リファレンス') セレクターを持つディレクティブを使用します。
 両方のディレクティブは `ReactiveFormsModule` で定義されています。
 
 ### データを供給する
@@ -100,7 +100,7 @@
 
 `QuestionService` は、`input()` questionsにバインドされた配列の形式で、質問セットを供給します。
 
-<docs-code header="src/app/question.service.ts" path="adev/src/content/examples/dynamic-form/src/app/question.service.ts"/>
+<docs-code header="question.service.ts" path="adev/src/content/examples/dynamic-form/src/app/question.service.ts"/>
 
 ## 動的フォームテンプレートを作成する
 

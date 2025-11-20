@@ -5,7 +5,10 @@ Handling user input with forms is the cornerstone of many common applications.
 Applications use forms to enable users to log in, to update a profile, to enter sensitive information, and to perform many other data-entry tasks.
 
 Angular provides two different approaches to handling user input through forms: reactive and template-driven.
+
 Both capture user input events from the view, validate the user input, create a form model and data model to update, and provide a way to track changes.
+
+TIP: If you're looking for the new experimental Signal Forms, check out our [essential Signal Forms guide](/essentials/signal-forms)!
 
 This guide provides information to help you decide which type of form works best for your situation.
 It introduces the common building blocks used by both approaches.
@@ -70,7 +73,7 @@ The `[formControl]` directive links the explicitly created `FormControl` instanc
 The following component implements an input field for a single control, using reactive forms.
 In this example, the form model is the `FormControl` instance.
 
-<docs-code path="adev/src/content/examples/forms-overview/src/app/reactive/favorite-color/favorite-color.component.ts"/>
+<docs-code language="angular-ts" path="adev/src/content/examples/forms-overview/src/app/reactive/favorite-color/favorite-color.component.ts"/>
 
 IMPORTANT: In reactive forms, the form model is the source of truth; it provides the value and status of the form element at any given point in time, through the `[formControl]` directive on the `<input>` element.
 
@@ -81,7 +84,7 @@ The directive `NgModel` creates and manages a `FormControl` instance for a given
 
 The following component implements the same input field for a single control, using template-driven forms.
 
-<docs-code path="adev/src/content/examples/forms-overview/src/app/template/favorite-color/favorite-color.component.ts"/>
+<docs-code language="angular-ts" path="adev/src/content/examples/forms-overview/src/app/template/favorite-color/favorite-color.component.ts"/>
 
 IMPORTANT: In a template-driven form the source of truth is the template. The `NgModel` directive automatically manages the `FormControl` instance for you.
 

@@ -8,9 +8,9 @@ Angularアプリケーションを構築する際、Angular CLIを使用して�
 
 カスタムビルドパイプラインを維持したいニッチなユースケースがいくつかあります。次に例を示します。
 
-* 異なるツールチェーンを使用している既存のアプリケーションがあり、それにAngularを追加したい場合
-* [モジュールフェデレーション](https://module-federation.io/)に強く結びついており、バンドラーに依存しない[ネイティブフェデレーション](https://www.npmjs.com/package/@angular-architects/native-federation)を採用できない場合
-* お気に入りのビルドツールを使用して、短期間の実験を作成したい場合
+- 異なるツールチェーンを使用している既存のアプリケーションがあり、それにAngularを追加したい場合
+- [モジュールフェデレーション](https://module-federation.io/)に強く結びついており、バンドラーに依存しない[ネイティブフェデレーション](https://www.npmjs.com/package/@angular-architects/native-federation)を採用できない場合
+- お気に入りのビルドツールを使用して、短期間の実験を作成したい場合
 
 ## どのような選択肢がありますか？
 

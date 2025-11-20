@@ -1,5 +1,5 @@
 diff --git a/adev/src/app/core/services/a-dev-title-strategy.ts b/adev/src/app/core/services/a-dev-title-strategy.ts
-index 75a1daa0e9..6acf3ec62f 100644
+index d023d95b94..31d1549da8 100644
 --- a/adev/src/app/core/services/a-dev-title-strategy.ts
 +++ b/adev/src/app/core/services/a-dev-title-strategy.ts
 @@ -13,7 +13,7 @@ import {ActivatedRouteSnapshot, RouterStateSnapshot, TitleStrategy} from '@angul
@@ -12,7 +12,7 @@ index 75a1daa0e9..6acf3ec62f 100644
  export const DEFAULT_PAGE_TITLE = 'Overview';
  
 diff --git a/adev/src/index.html b/adev/src/index.html
-index f6d4c0eb48..292608d443 100644
+index c000bd4d26..21a860798e 100644
 --- a/adev/src/index.html
 +++ b/adev/src/index.html
 @@ -1,6 +1,6 @@
@@ -23,7 +23,7 @@ index f6d4c0eb48..292608d443 100644
    <head>
      <script>
        // This logic must execute early, so that we set the necessary
-@@ -42,13 +42,13 @@
+@@ -42,12 +42,12 @@
      </style>
  
      <meta charset="utf-8" />
@@ -33,20 +33,16 @@ index f6d4c0eb48..292608d443 100644
      <meta name="viewport" content="width=device-width, initial-scale=1" />
  
      <!-- Primary Meta Tags -->
--    <meta name="title" content="Angular" />
 -    <meta name="description" content="The web development framework for building modern apps." />
-+    <meta name="title" content="Angular 日本語版" />
 +    <meta name="description" content="モダンなアプリを構築するためのウェブ開発フレームワーク" />
- 
-     <!-- Favicons -->
-     <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png" />
-@@ -68,21 +68,21 @@
- 
+     <meta name="author" content="Angular Team" />
+     <meta
+       name="keywords"
+@@ -73,10 +73,10 @@
      <!-- Open Graph / Facebook -->
      <meta property="og:type" content="website" />
--    <meta property="og:url" content="https://angular.dev/" />
+     <meta property="og:url" content="https://angular.dev/" />
 -    <meta property="og:title" content="Angular" />
-+    <meta property="og:url" content="https://angular.jp/" />
 +    <meta property="og:title" content="Angular 日本語版" />
      <meta
        property="og:description"
@@ -55,11 +51,11 @@ index f6d4c0eb48..292608d443 100644
      />
      <meta property="og:image" content="https://angular.dev/assets/images/ng-image.jpg" />
  
-     <!-- Twitter -->
+@@ -85,10 +85,10 @@
+     <meta name="twitter:creator" content="@Angular" />
      <meta property="twitter:card" content="summary_large_image" />
--    <meta property="twitter:url" content="https://angular.dev/" />
+     <meta property="twitter:url" content="https://angular.dev/" />
 -    <meta property="twitter:title" content="Angular" />
-+    <meta property="twitter:url" content="https://angular.jp/" />
 +    <meta property="twitter:title" content="Angular 日本語版" />
      <meta
        property="twitter:description"

@@ -93,7 +93,7 @@ Angularの `@for` ブロックは、JavaScriptの `continue` や `break` のよ�
 @for (item of items; track item.name) {
   <li> {{ item.name }}</li>
 } @empty {
-  <li aria-hidden="true"> There are no items.</li>
+  <li> There are no items. </li>
 }
 ```
 

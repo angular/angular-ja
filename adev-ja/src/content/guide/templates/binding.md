@@ -30,18 +30,19 @@ export class AppComponent {
 ```angular-ts
 @Component({
   template: `
-    <!-- `welcomeMessage`が変更されても必ずしも更新されるわけではありません。 --> 
-    <p>{{ welcomeMessage }}</p> 
+    <!-- `welcomeMessage`が変更されても必ずしも更新されるわけではありません。 -->
+    <p>{{ welcomeMessage }}</p>
 
     <p>Your color preference is {{ theme() }}.</p> <!-- `name`シグナルの値が変更されたとき、常に更新されます。 -->
   `
   ...
 })
 export class AppComponent {
-  welcomeMessage = "Welcome, enjoy this app that we built for you"; 
+  welcomeMessage = "Welcome, enjoy this app that we built for you";
   theme = signal('dark');
 }
 ```
+
 詳細については、[シグナルガイド](/guide/signals)を参照してください。
 
 テーマの例を続けると、ユーザーがページの読み込み後に`theme`シグナルを`'light'`に更新するボタンをクリックした場合、ページはそれに応じて以下のように更新されます。
@@ -90,9 +91,9 @@ HTML要素のDOMインスタンス、[コンポーネント](guide/components)�
 <img [ngSrc]="profilePhotoUrl()" alt="The current user's profile photo">
 ```
 
-### 属性
+### 属性 {#attributes}
 
-対応するDOMプロパティを持たないHTML属性（ARIA属性やSVG属性など）を設定する必要がある場合は、テンプレート内の要素に属性をバインドするために`attr.`プレフィックスを使用できます。
+対応するDOMプロパティを持たないHTML属性(SVG属性など)を設定する必要がある場合は、テンプレート内の要素に属性をバインドするために`attr.`プレフィックスを使用できます。
 
 ```angular-html
 <!-- `<ul>`要素の`role`属性をコンポーネントの`listRole`プロパティにバインドします。 -->
@@ -112,13 +113,7 @@ HTML要素のDOMインスタンス、[コンポーネント](guide/components)�
 <img src="profile-photo.jpg" alt="Profile photo of {{ firstName() }}" >
 ```
 
-テキスト補間構文を使用して属性にバインドするには、属性名の前に`attr.`を付けます。
-
-```angular-html
-<button attr.aria-label="Save changes to {{ objectType() }}">
-```
-
-## CSSクラスとスタイルプロパティのバインディング
+## CSSクラスとスタイルプロパティのバインディング {#css-class-and-style-property-bindings}
 
 Angularは、要素にCSSクラスとCSSスタイルプロパティをバインドするための追加機能をサポートしています。
 
@@ -245,3 +240,17 @@ export class UserProfile {
 `style`をオブジェクトにバインドする場合、Angularは以前の値と現在の値を3つ等しい演算子(`===`)を使用して比較します。これらの値を変更する場合は、Angularが更新を適用するために、新しいオブジェクトインスタンスを作成する必要があります。
 
 要素に同じスタイルプロパティの複数のバインディングがある場合、Angularはスタイルの優先順位に従って競合を解決します。
+
+## ARIA属性 {#aria-attributes}
+
+Angularは、ARIA属性への文字列値のバインディングをサポートしています。
+
+```angular-html
+<button type="button" [aria-label]="actionLabel()">
+  {{ actionLabel() }}
+</button>
+```
+
+Angularは、要素の`aria-label`属性に文字列値を書き込み、バインドされた値が`null`の場合は削除します。
+
+一部のARIA機能は、構造化された値(要素参照など)を受け取るDOMプロパティまたはディレクティブ入力を公開しています。これらの場合は、標準のプロパティバインディングを使用してください。例と追加のガイダンスについては、[アクセシビリティガイド](best-practices/a11y#aria-attributes-and-properties)を参照してください。

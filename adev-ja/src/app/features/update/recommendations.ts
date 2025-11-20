@@ -2742,4 +2742,12 @@ export const RECOMMENDATIONS: Step[] = [
       action:
         'テンプレートでは括弧が常に尊重されるようになりました。これは、null合体演算子が括弧内にネストされている場合にランタイムエラーを引き起こす可能性があります。例：`(foo?.bar).baz`は、`foo`がnullishの場合、ネイティブJavaScriptと同様にエラーを投げます。',
     },
+  {
+    possibleIn: 2000,
+    necessaryAsOf: 2000,
+    level: ApplicationComplexity.Advanced,
+    step: '20.0.0_router_generate_error_redirectTo_and_canMatch_incompatible_together',
+    action:
+      'ルート設定がより厳密に検証されるようになりました。`redirectTo`と`canMatch`保護を組み合わせたルートはエラーを生成します。これらのプロパティはデフォルトで互いに互換性がないためです。',
+  },
 ];

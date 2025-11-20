@@ -22,12 +22,12 @@ class HeroService {}
 次のステップは、それをDIで提供できるようにすることです。
 依存関係は、複数の場所で提供できます。
 
-- [**推奨**: `providedIn` を使用してアプリケーションのルートレベルで提供する](#推奨-アプリケーションのルートレベルでprovidedInを使用して提供する)
+- [**推奨**: `providedIn` を使用してアプリケーションのルートレベルで提供する](#preferred-at-the-application-root-level-using-providedin)
 - [コンポーネントレベルで提供する](#コンポーネントレベルで提供する)
 - [`ApplicationConfig` を使用してアプリケーションのルートレベルで提供する](#applicationconfigを使用してアプリケーションのルートレベルで提供する)
 - [`NgModule` ベースのアプリケーション](#ngmoduleベースのアプリケーション)
 
-### **推奨**: `providedIn` を使用してアプリケーションのルートレベルで提供する
+### **推奨**: `providedIn` を使用してアプリケーションのルートレベルで提供する {#preferred-at-the-application-root-level-using-providedin}
 
 `providedIn` を使用してアプリケーションのルートレベルでサービスを提供すると、そのサービスを他のすべてのクラスに注入できます。
 `providedIn` を使用すると、AngularとJavaScriptコードのオプティマイザーは、使用されていないサービスを効果的に削除できます（ツリーシェーキングとして知られています）。

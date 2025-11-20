@@ -83,7 +83,7 @@ resetAll() {
 
 パート2. **`???`プレースホルダーを@ifブロックに置き換えます。**
 
-```html
+```angular-html
 @if (agreedToTerms()) {
   Yes
 } @else {

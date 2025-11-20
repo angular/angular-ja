@@ -50,7 +50,7 @@ toggleNotifications() {
 <docs-step title="テンプレートを更新して手動通知コントロールを追加する">
 テンプレートを更新して、通知用のトグルボタンを追加します。
 
-```html
+```angular-html
 <div class="status-info">
   <div class="notifications">
     <strong>Notifications:</strong>

@@ -13,7 +13,7 @@
 
 ```ts
 // Add imports for signal inputs
-import {Component, input} from '@angular/core';
+import {Component, input, ChangeDetectionStrategy} from '@angular/core';
 
 // Add these signal inputs
 name = input.required<string>();
@@ -27,7 +27,7 @@ available = input<boolean>(true);
 <docs-step title="入力をテンプレートに接続">
 `product-card`のテンプレートを更新して、シグナル入力値を表示します。
 
-```html
+```angular-html
 <div class="product-card">
   <h3>{{ name() }}</h3>
   <p class="price">\${{ price() }}</p>

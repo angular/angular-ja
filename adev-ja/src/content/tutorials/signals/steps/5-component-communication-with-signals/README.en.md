@@ -13,7 +13,7 @@ Add signal `input()` functions to receive data in the `product-card` component.
 
 ```ts
 // Add imports for signal inputs
-import {Component, input} from '@angular/core';
+import {Component, input, ChangeDetectionStrategy} from '@angular/core';
 
 // Add these signal inputs
 name = input.required<string>();
@@ -27,7 +27,7 @@ Notice how `input.required()` creates an input that must be provided, while `inp
 <docs-step title="Connect inputs to the template">
 Update the template in `product-card` to display the signal input values.
 
-```html
+```angular-html
 <div class="product-card">
   <h3>{{ name() }}</h3>
   <p class="price">\${{ price() }}</p>

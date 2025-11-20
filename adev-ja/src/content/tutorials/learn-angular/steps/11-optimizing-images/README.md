@@ -35,8 +35,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { NgOptimizedImage } from '@angular/common';
 
 @Component({
-  template: `
-    ...
+template: `     ...
     <li>
       静的画像:
       <img ngSrc="/assets/logo.svg" alt="Angular ロゴ" width="32" height="32" />
@@ -47,7 +46,7 @@ import { NgOptimizedImage } from '@angular/common';
     </li>
     ...
   `,
-  imports: [NgOptimizedImage],
+imports: [NgOptimizedImage],
 })
 </docs-code>
 

@@ -1,24 +1,24 @@
-# Learn Angular Signal Forms
+# Angularシグナルフォームを学ぶ
 
-This interactive tutorial will teach you how to build reactive forms using Angular's experimental Signal Forms API.
+このインタラクティブなチュートリアルでは、Angularの実験的なシグナルフォームAPIを使用してリアクティブフォームを構築する方法を学びます。
 
-IMPORTANT: Signal Forms is currently [experimental](reference/releases#experimental). The API may change before stabilizing. Check the [official documentation](guide/forms/signal-forms) for the latest updates.
+IMPORTANT: シグナルフォームは現在[実験的](reference/releases#experimental)です。安定化する前にAPIが変更される可能性があります。最新の更新については[公式ドキュメント](guide/forms/signal-forms)を確認してください。
 
-## How to use this tutorial
+## このチュートリアルの使い方 {#how-to-use-this-tutorial}
 
-This tutorial assumes you understand Angular's core concepts and have basic familiarity with signals. If you're new to Angular, read our [essentials guide](/essentials). If you're new to signals, complete the [signals tutorial](/tutorials/signals) first.
+このチュートリアルは、Angularのコア概念を理解しており、シグナルの基本的な知識があることを前提としています。Angularが初めての場合は、[基本ガイド](/essentials)を読んでください。シグナルが初めての場合は、まず[シグナルチュートリアル](/tutorials/signals)を完了してください。
 
-Each step represents a concept in Signal Forms. You'll build a complete login form from scratch, learning the fundamentals step by step.
+各ステップはシグナルフォームのコンセプトを表しています。ゼロから完全なログインフォームを構築し、基礎を段階的に学びます。
 
-**Your learning path:**
+**学習パス:**
 
-1. Set up the form model with TypeScript and signals
-2. Connect the form to your template
-3. Add validation rules
-4. Display validation errors to users
-5. Handle form submission
-6. Explore advanced topics and next steps
+1. TypeScriptとシグナルを使用してフォームモデルを設定
+2. フォームをテンプレートに接続
+3. バリデーションルールを追加
+4. バリデーションエラーをユーザーに表示
+5. フォーム送信を処理
+6. 高度なトピックと次のステップを探索
 
-If you get stuck, click "Reveal answer" at the top.
+詰まった場合は、上部の「答えを表示」をクリックしてください。
 
-Alright, let's [get started](/tutorials/signal-forms/1-set-up-form-model)!
+それでは、[始めましょう](/tutorials/signal-forms/1-set-up-form-model)!

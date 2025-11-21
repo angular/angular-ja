@@ -1,25 +1,25 @@
-# Set up the form model
+# フォームモデルを設定
 
-Every Signal Form starts with a form data model - a signal that defines the shape of your data, and stores your form data.
+すべてのシグナルフォームは、データの形状を定義し、フォームデータを格納するシグナルであるフォームデータモデルから始まります。
 
-In this lesson, you'll learn how to:
+このレッスンでは、次の方法を学びます:
 
-- Define a TypeScript interface for your form data
-- Create a signal to hold form values
-- Use the `form()` function to create a Signal Form
+- フォームデータのTypeScriptインターフェースを定義
+- フォーム値を保持するシグナルを作成
+- `form()` 関数を使用してシグナルフォームを作成
 
-Let's build the foundation for our login form!
+ログインフォームの基礎を構築しましょう!
 
 <hr />
 
 <docs-workflow>
 
-<docs-step title="Define the LoginData interface">
-Create a TypeScript interface that defines the structure of your login form data. The form will have:
+<docs-step title="LoginDataインターフェースを定義">
+ログインフォームデータの構造を定義するTypeScriptインターフェースを作成します。フォームには次のものが含まれます:
 
-- An `email` field (string)
-- A `password` field (string)
-- A `rememberMe` field (boolean)
+- `email` フィールド（文字列）
+- `password` フィールド（文字列）
+- `rememberMe` フィールド（真偽値）
 
 ```ts
 interface LoginData {
@@ -29,11 +29,11 @@ interface LoginData {
 }
 ```
 
-Add this interface above the `@Component` decorator.
+このインターフェースを `@Component` デコレーターの上に追加します。
 </docs-step>
 
-<docs-step title="Import signal and form">
-Import the `signal` function from `@angular/core` and the `form` function from `@angular/forms/signals`:
+<docs-step title="signalとformをインポート">
+`@angular/core` から `signal` 関数を、`@angular/forms/signals` から `form` 関数をインポートします:
 
 ```ts
 import { Component, signal } from '@angular/core';
@@ -42,8 +42,8 @@ import { form } from '@angular/forms/signals';
 
 </docs-step>
 
-<docs-step title="Create the form model signal">
-In your component class, create a `loginModel` signal with initial values. Use the `LoginData` interface as the type parameter:
+<docs-step title="フォームモデルシグナルを作成">
+コンポーネントクラスで、初期値を持つ `loginModel` シグナルを作成します。型パラメータとして `LoginData` インターフェースを使用します:
 
 ```ts
 loginModel = signal<LoginData>({
@@ -53,21 +53,21 @@ loginModel = signal<LoginData>({
 });
 ```
 
-The initial values start as empty strings for text fields and `false` for the checkbox.
+初期値は、テキストフィールドには空文字列、チェックボックスには `false` として開始します。
 </docs-step>
 
-<docs-step title="Create the form">
-Now create the form by passing your model signal to the `form()` function:
+<docs-step title="フォームを作成">
+モデルシグナルを `form()` 関数に渡してフォームを作成します:
 
 ```ts
 loginForm = form(this.loginModel);
 ```
 
-The `form()` function creates a form from your model, giving you access to field state and validation.
+`form()` 関数は、モデルからフォームを作成し、フィールドの状態とバリデーションへのアクセスを提供します。
 </docs-step>
 
 </docs-workflow>
 
-Excellent! You've set up your form model. The `loginModel` signal holds your form data, and the `loginForm` provides access to each field with type safety.
+素晴らしい! フォームモデルを設定しました。`loginModel` シグナルがフォームデータを保持し、`loginForm` が型安全性を備えた各フィールドへのアクセスを提供します。
 
-Next, you'll learn [how to connect your form to the template](/tutorials/signal-forms/2-connect-form-template)!
+次に、[フォームをテンプレートに接続する方法](/tutorials/signal-forms/2-connect-form-template)を学びます!

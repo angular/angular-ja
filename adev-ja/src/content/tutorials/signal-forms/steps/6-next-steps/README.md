@@ -1,32 +1,32 @@
-# Congratulations!
+# おめでとうございます!
 
-You've completed the Signal Forms tutorial and built a complete login form from scratch!
+シグナルフォームチュートリアルを完了し、ゼロから完全なログインフォームを構築しました!
 
-## What you learned
+## 学んだこと {#what-you-learned}
 
-Throughout this tutorial, you learned the fundamentals of Angular Signal Forms:
+このチュートリアル全体を通して、Angularシグナルフォームの基礎を学びました:
 
-1. **Form Models** - Creating type-safe form data with signals and the `form()` function
-2. **Field Binding** - Using the `[field]` directive for two-way data binding and displaying the field with `value()`
-3. **Validation** - Applying built-in validators (such as `required()`, `email()`) with custom messages
-4. **Error Display** - Showing validation errors conditionally based on field state
-5. **Form Submission** - Handling form submission with the `submit()` function
+1. **フォームモデル** - シグナルと `form()` 関数を使用した型安全なフォームデータの作成
+2. **フィールドバインディング** - 双方向データバインディングのための `[field]` ディレクティブの使用と、`value()` によるフィールドの表示
+3. **バリデーション** - カスタムメッセージを使用した組み込みバリデーター（`required()`、`email()` など）の適用
+4. **エラー表示** - フィールドの状態に基づいたバリデーションエラーの条件付き表示
+5. **フォーム送信** - `submit()` 関数を使用したフォーム送信の処理
 
-## Next steps
+## 次のステップ {#next-steps}
 
-Ready to learn more? Here are recommended next steps:
+もっと学ぶ準備はできましたか？推奨される次のステップは次のとおりです:
 
-### Explore the documentation
+### ドキュメントを探索 {#explore-the-documentation}
 
-- **[Signal Forms Overview](guide/forms/signal-forms)** - Introduction to Signal Forms and when to use them
-- **[Form Models Guide](guide/forms/signal-forms/models)** - Deep dive into form models and data management
+- **[シグナルフォーム概要](guide/forms/signal-forms)** - シグナルフォームの紹介といつ使用するか
+- **[フォームモデルガイド](guide/forms/signal-forms/models)** - フォームモデルとデータ管理の詳細
   <!-- TODO: Uncomment when the guides are available -->
   <!-- - **[Validation Guide](guide/forms/signal-forms/validation)** - Comprehensive validation reference
 - **[Field State Management Guide](guide/forms/signal-forms/field-state-management)** - Advanced state patterns
 - **[Custom Controls Guide](guide/forms/signal-forms/custom-controls)** - Building reusable form components -->
 
-## Keep learning
+## 学び続ける {#keep-learning}
 
-Remember: Signal Forms is experimental, so check the [official documentation](guide/forms/signal-forms) for updates to the API.
+覚えておいてください: シグナルフォームは実験的であるため、APIの更新については[公式ドキュメント](guide/forms/signal-forms)を確認してください。
 
-Happy coding!
+楽しいコーディングを!

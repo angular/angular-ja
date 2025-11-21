@@ -1,21 +1,21 @@
-# Add validation to your form
+# フォームにバリデーションを追加
 
-Adding validation to your form is critical to ensure users enter valid data. Signal Forms uses validators in a schema function that you pass to the `form()` function.
+フォームにバリデーションを追加することは、ユーザーが有効なデータを入力することを保証するために重要です。シグナルフォームは、`form()` 関数に渡すスキーマ関数内でバリデーターを使用します。
 
-In this activity, you'll learn how to:
+このアクティビティでは、次の方法を学びます:
 
-- Import built-in validators
-- Define a schema function for your form
-- Apply validators to specific fields with custom error messages
+- 組み込みバリデーターをインポート
+- フォームのスキーマ関数を定義
+- カスタムエラーメッセージを使用して特定のフィールドにバリデーターを適用
 
-Let's add validation!
+バリデーションを追加しましょう!
 
 <hr />
 
 <docs-workflow>
 
-<docs-step title="Import the validators">
-Import the `required` and `email` validators from `@angular/forms/signals`:
+<docs-step title="バリデーターをインポート">
+`@angular/forms/signals` から `required` と `email` バリデーターをインポートします:
 
 ```ts
 import { form, Field, required, email } from '@angular/forms/signals';
@@ -23,8 +23,8 @@ import { form, Field, required, email } from '@angular/forms/signals';
 
 </docs-step>
 
-<docs-step title="Add a schema function to your form">
-Update your `form()` call to include a schema function as the second parameter. The schema function receives a `fieldPath` parameter that lets you access each field:
+<docs-step title="フォームにスキーマ関数を追加">
+`form()` 呼び出しを更新して、2番目のパラメータとしてスキーマ関数を含めます。スキーマ関数は、各フィールドにアクセスできる `fieldPath` パラメータを受け取ります:
 
 ```ts
 loginForm = form(this.loginModel, (fieldPath) => {
@@ -34,8 +34,8 @@ loginForm = form(this.loginModel, (fieldPath) => {
 
 </docs-step>
 
-<docs-step title="Add validation to the email field">
-Inside the schema function, add validation for the email field. Use both `required()` and `email()` validators:
+<docs-step title="emailフィールドにバリデーションを追加">
+スキーマ関数内で、emailフィールドのバリデーションを追加します。`required()` と `email()` の両方のバリデーターを使用します:
 
 ```ts
 loginForm = form(this.loginModel, (fieldPath) => {
@@ -44,11 +44,11 @@ loginForm = form(this.loginModel, (fieldPath) => {
 });
 ```
 
-The `message` option provides custom error messages for users.
+`message` オプションは、ユーザーにカスタムエラーメッセージを提供します。
 </docs-step>
 
-<docs-step title="Add validation to the password field">
-Add validation for the password field using the `required()` validator:
+<docs-step title="passwordフィールドにバリデーションを追加">
+`required()` バリデーターを使用して、passwordフィールドのバリデーションを追加します:
 
 ```ts
 loginForm = form(this.loginModel, (fieldPath) => {
@@ -62,6 +62,6 @@ loginForm = form(this.loginModel, (fieldPath) => {
 
 </docs-workflow>
 
-Perfect! You've added validation to your form. The validators run automatically as users interact with the form. When validation fails, the field's state will reflect the errors.
+完璧! フォームにバリデーションを追加しました。バリデーターは、ユーザーがフォームと対話すると自動的に実行されます。バリデーションが失敗すると、フィールドの状態がエラーを反映します。
 
-Next, you'll learn [how to display validation errors in the template](/tutorials/signal-forms/4-display-errors)!
+次に、[テンプレートでバリデーションエラーを表示する方法](/tutorials/signal-forms/4-display-errors)を学びます!

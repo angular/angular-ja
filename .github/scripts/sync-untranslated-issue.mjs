@@ -106,7 +106,7 @@ function formatFileEntry(filepath, links, checkoutIssueNumber = null) {
   }
 
   if (checkoutIssueNumber) {
-    linksText += ` | [#${checkoutIssueNumber}](https://github.com/angular/angular-ja/issues/${checkoutIssueNumber})`;
+    linksText += ` | #${checkoutIssueNumber}`;
     return `- [x] ${displayName} (${linksText})`;
   } else {
     linksText += ` | [📝 翻訳宣言](${links.issueUrl})`;

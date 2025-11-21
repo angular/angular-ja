@@ -44,7 +44,6 @@
  */
 
 const ISSUE_TITLE = 'Tracking: 未翻訳ドキュメント一覧';
-const OLD_ISSUE_TITLE = '[自動更新] 未翻訳ドキュメント一覧'; // 後方互換性のため
 const LABELS = ['type: translation', '翻訳者募集中'];
 
 /** @type {Record<string, string>} */
@@ -215,9 +214,7 @@ export default async ({github, context, core, filesData}) => {
     creator: 'github-actions[bot]'
   });
 
-  const trackingIssue = issues.find(issue =>
-    issue.title === ISSUE_TITLE || issue.title === OLD_ISSUE_TITLE
-  );
+  const trackingIssue = issues.find(issue => issue.title === ISSUE_TITLE);
 
   const issueBody = generateIssueBody(filesData);
 

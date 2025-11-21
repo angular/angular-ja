@@ -1,69 +1,69 @@
-# Comparison with other form approaches
+# 他のフォームアプローチとの比較
 
-Angular provides three approaches to building forms: Signal Forms, Reactive Forms, and Template-driven Forms. Each has distinct patterns for managing state, validation, and data flow. This guide helps you understand the differences and choose the right approach for your project.
+Angularは、シグナルフォーム、リアクティブフォーム、テンプレート駆動フォームという3つのフォーム構築アプローチを提供します。それぞれ、状態管理、バリデーション、データフローのための異なるパターンを持っています。このガイドは、その違いを理解し、あなたのプロジェクトに適したアプローチを選択するのに役立ちます。
 
-NOTE: Signal Forms are [experimental](reference/releases#experimental) as of Angular v21. The API may change before stabilizing.
+NOTE: シグナルフォームはAngular v21の時点では[experimental](reference/releases#experimental)です。APIは安定化する前に変更される可能性があります。
 
-## Quick comparison
+## クイック比較 {#quick-comparison}
 
-| Feature          | Signal Forms                       | Reactive Forms                        | Template-driven Forms   |
+| 機能             | シグナルフォーム                   | リアクティブフォーム                  | テンプレート駆動フォーム|
 | ---------------- | ---------------------------------- | ------------------------------------- | ----------------------- |
-| Source of truth  | User-defined writable signal model | `FormControl`/`FormGroup`             | User model in component |
-| Type safety      | Inferred from model                | Explicit with typed forms             | Minimal                 |
-| Validation       | Schema with path-based validators  | List of validators passed to Controls | Directive-based         |
-| State management | Signal-based                       | Observable-based                      | Angular-managed         |
-| Setup            | Signal + schema function           | FormControl tree                      | NgModel in template     |
-| Best for         | Signal-based apps                  | Complex forms                         | Simple forms            |
-| Learning curve   | Medium                             | Medium-High                           | Low                     |
-| Status           | Experimental (v21+)                | Stable                                | Stable                  |
+| 信頼できる情報源 | ユーザー定義の書き込み可能なシグナルモデル | `FormControl`/`FormGroup`             | コンポーネント内のユーザーモデル |
+| 型安全性         | モデルから推論                     | 型付きフォームで明示的に指定          | 最小限                  |
+| バリデーション   | パスベースのバリデーターを持つスキーマ | コントロールに渡されるバリデーターのリスト | ディレクティブベース    |
+| 状態管理         | シグナルベース                     | Observableベース                      | Angularによる管理       |
+| セットアップ     | シグナル + スキーマ関数            | FormControlツリー                     | テンプレート内のNgModel |
+| 最適な用途       | シグナルベースのアプリケーション             | 複雑なフォーム                        | シンプルなフォーム      |
+| 学習曲線         | 中                                 | 中〜高                                | 低                      |
+| ステータス       | 実験的 (v21+)                      | 安定                                  | 安定                    |
 
-## By example: Login form
+## 例: ログインフォーム {#by-example-login-form}
 
-The best way to understand the differences is to see the same form implemented in all three approaches.
+違いを理解する最善の方法は、3つのアプローチすべてで実装された同じフォームを見ることです。
 
 <docs-code-multifile>
-  <docs-code header="Signal forms" path="adev/src/content/examples/signal-forms/src/comparison/app/signal-forms.ts"/>
-  <docs-code header="Reactive forms" path="adev/src/content/examples/signal-forms/src/comparison/app/reactive-forms.ts"/>
-  <docs-code header="Template-driven forms" path="adev/src/content/examples/signal-forms/src/comparison/app/template-driven-forms.ts"/>
+  <docs-code header="シグナルフォーム" path="adev/src/content/examples/signal-forms/src/comparison/app/signal-forms.ts"/>
+  <docs-code header="リアクティブフォーム" path="adev/src/content/examples/signal-forms/src/comparison/app/reactive-forms.ts"/>
+  <docs-code header="テンプレート駆動フォーム" path="adev/src/content/examples/signal-forms/src/comparison/app/template-driven-forms.ts"/>
 </docs-code-multifile>
 
-## Understanding the differences
+## 違いを理解する
 
-The three approaches make different design choices that affect how you write and maintain your forms. These differences stem from where each approach stores form state and how it manages validation.
+3つのアプローチは、フォームの作成と保守の方法に影響を与える異なる設計上の選択をしています。これらの違いは、各アプローチがフォームの状態をどこに保存し、バリデーションをどのように管理するかに起因します。
 
-### Where your form data lives
+### フォームデータがどこに存在するか {#where-your-form-data-lives}
 
-The most fundamental difference is where each approach considers the "source of truth" for form values.
+最も根本的な違いは、各アプローチがフォームの値の「信頼できる情報源 (source of truth)」をどこに置くかです。
 
-Signal Forms stores data in a writable signal. When you need the current form values, you call the signal:
+シグナルフォームは、書き込み可能なシグナルにデータを保存します。現在のフォームの値が必要な場合は、シグナルを呼び出します。
 
 ```ts
 const credentials = this.loginModel(); // { email: '...', password: '...' }
 ```
 
-This keeps your form data in a single reactive container that automatically notifies Angular when values change. The form structure mirrors your data model exactly.
+これにより、フォームデータは単一のリアクティブなコンテナに保持され、値が変更されると自動的にAngularに通知されます。フォームの構造は、データモデルを正確に反映します。
 
-Reactive Forms stores data inside FormControl and FormGroup instances. You access values through the form hierarchy:
+Reactive Formsは、`FormControl`と`FormGroup`のインスタンス内にデータを保存します。フォームの階層を通じて値にアクセスします。
 
 ```ts
 const credentials = this.loginForm.value; // { email: '...', password: '...' }
 ```
 
-This separates form state management from your component's data model. The form structure is explicit but requires more setup code.
+これにより、フォームの状態管理がコンポーネントのデータモデルから分離されます。フォームの構造は明示的ですが、より多くのセットアップコードが必要です。
 
-Template-driven Forms stores data in component properties. You access values directly:
+テンプレート駆動フォームは、コンポーネントのプロパティにデータを保存します。値に直接アクセスします。
 
 ```ts
 const credentials = { email: this.email, password: this.password };
 ```
 
-This is the most direct approach but requires manually assembling values when you need them. Angular manages form state through directives in the template.
+これは最も直接的なアプローチですが、値が必要なときに手動で組み立てる必要があります。Angularは、テンプレート内のディレクティブを通じてフォームの状態を管理します。
 
-### How validation works
+### バリデーションの仕組み {#how-validation-works}
 
-Each approach defines validation rules differently, affecting where your validation logic lives and how you maintain it.
+各アプローチはバリデーションルールを異なる方法で定義し、バリデーションロジックがどこに存在し、どのように保守するかに影響します。
 
-Signal Forms uses a schema function where you bind validators to field paths:
+シグナルフォームは、バリデーターをフィールドパスにバインドするスキーマ関数を使用します。
 
 ```ts
 loginForm = form(this.loginModel, (fieldPath) => {
@@ -72,9 +72,9 @@ loginForm = form(this.loginModel, (fieldPath) => {
 });
 ```
 
-All validation rules live together in one place. The schema function runs once during form creation, and validators execute automatically when field values change. Error messages are part of the validation definition.
+すべてのバリデーションルールが1か所にまとめられます。スキーマ関数はフォーム作成時に一度だけ実行され、フィールドの値が変更されるとバリデーターが自動的に実行されます。エラーメッセージはバリデーション定義の一部です。
 
-Reactive Forms attaches validators when creating controls:
+Reactive Formsは、コントロールを作成するときにバリデーターをアタッチします。
 
 ```ts
 loginForm = new FormGroup({
@@ -82,21 +82,21 @@ loginForm = new FormGroup({
 });
 ```
 
-Validators are tied to individual controls in the form structure. This distributes validation across your form definition. Error messages typically live in your template.
+バリデーターは、フォーム構造内の個々のコントロールに結び付けられます。これにより、バリデーションがフォーム定義全体に分散されます。エラーメッセージは通常、テンプレート内に記述します。
 
-Template-driven Forms uses directive attributes in the template:
+テンプレート駆動フォームは、テンプレート内でディレクティブ属性を使用します。
 
 ```html
 <input [(ngModel)]="email" required email />
 ```
 
-Validation rules live in your template alongside the HTML. This keeps validation close to the UI but spreads logic across template and component.
+バリデーションルールは、HTMLとともにテンプレート内に記述されます。これにより、バリデーションはUIの近くに保たれますが、ロジックはテンプレートとコンポーネントに分散します。
 
-### Type safety and autocomplete
+### 型安全性とオートコンプリート {#type-safety-and-autocomplete}
 
-TypeScript integration differs significantly between approaches, affecting how much the compiler helps you avoid errors.
+TypeScriptの統合はアプローチによって大きく異なり、コンパイラがエラーを回避するのにどれだけ役立つかに影響します。
 
-Signal Forms infers types from your model structure:
+シグナルフォームは、モデル構造から型を推論します。
 
 ```ts
 const loginModel = signal({ email: '', password: '' });
@@ -104,9 +104,9 @@ const loginForm = form(loginModel);
 // TypeScript knows: loginForm.email exists and returns FieldState<string>
 ```
 
-You define your data shape once in the signal, and TypeScript automatically knows what fields exist and their types. Accessing `loginForm.username` (which doesn't exist) produces a type error.
+シグナルでデータ構造を一度定義すると、TypeScriptはどのフィールドが存在し、その型が何かを自動的に認識します。`loginForm.username`（存在しない）にアクセスすると、型エラーが発生します。
 
-Reactive Forms requires explicit type annotations with typed forms:
+Reactive Formsは、型付きフォームで明示的な型アノテーションを必要とします。
 
 ```ts
 const loginForm = new FormGroup({
@@ -116,9 +116,9 @@ const loginForm = new FormGroup({
 // TypeScript knows: loginForm.controls.email is FormControl<string>
 ```
 
-You specify types for each control individually. TypeScript validates your form structure, but you maintain type information separately from your data model.
+各コントロールの型を個別に指定します。TypeScriptはフォーム構造を検証しますが、型情報はデータモデルとは別に保守します。
 
-Template-driven Forms offers minimal type safety:
+テンプレート駆動フォームは、最小限の型安全性しか提供しません。
 
 ```ts
 email = '';
@@ -126,38 +126,38 @@ password = '';
 // TypeScript only knows these are strings, no form-level typing
 ```
 
-TypeScript understands your component properties but has no knowledge of form structure or validation. You lose compile-time checking for form operations.
+TypeScriptはコンポーネントのプロパティを理解しますが、フォームの構造やバリデーションについては何も知りません。フォーム操作に対するコンパイル時チェックが失われます。
 
-## Choose your approach
+## アプローチを選択する
 
-### Use Signal Forms if:
+### 次の場合はシグナルフォームを使用します: {#use-signal-forms-if}
 
-- You're building new signal-based applications (Angular v21+)
-- You want type safety inferred from your model structure
-- You're comfortable working with experimental features
-- Schema-based validation appeals to you
-- Your team is familiar with signals
+- 新しいシグナルベースのアプリケーションを構築している (Angular v21+)
+- モデル構造から推論される型安全性が欲しい
+- 実験的な機能の利用に抵抗がない
+- スキーマベースのバリデーションに魅力を感じる
+- チームがシグナルに精通している
 
-### Use Reactive Forms if:
+### 次の場合はReactive Formsを使用します: {#use-reactive-forms-if}
 
-- You need production-ready stability
-- You're building complex, dynamic forms
-- You prefer observable-based patterns
-- You need fine-grained control over form state
-- You're working on an existing reactive forms codebase
+- 本番環境で利用できる安定性が必要である
+- 複雑で動的なフォームを構築している
+- Observableベースのパターンを好む
+- フォームの状態をきめ細かく制御する必要がある
+- 既存のリアクティブフォームのコードベースで作業している
 
-### Use Template-driven Forms if:
+### 次の場合はTemplate-driven Formsを使用します: {#use-template-driven-forms-if}
 
-- You're building simple forms (login, contact, search)
-- You're doing rapid prototyping
-- Your form logic is straightforward
-- You prefer keeping form logic in templates
-- You're working on an existing template-driven codebase
+- シンプルなフォーム（ログイン、問い合わせ、検索）を構築している
+- 迅速なプロトタイピングを行っている
+- フォームロジックが単純である
+- フォームロジックをテンプレート内に保持することを好む
+- 既存のテンプレート駆動フォームのコードベースで作業している
 
-## Next steps
+## 次のステップ {#next-steps}
 
-To learn more about each approach:
+各アプローチについてさらに学ぶには:
 
-- **Signal Forms**: See the [Overview guide](guide/forms/signal-forms/overview) to get started, or dive into [Form Models](guide/forms/signal-forms/models), [Validation](guide/forms/signal-forms/validation), and [Field State Management](guide/forms/signal-forms/field-state-management)
-- **Reactive Forms**: See the [Reactive Forms guide](guide/forms/reactive-forms) in Angular documentation
-- **Template-driven Forms**: See the [Template-driven Forms guide](guide/forms/template-driven-forms) in Angular documentation
+- **シグナルフォーム**: [概要ガイド](guide/forms/signal-forms/overview)から始めるか、[フォームモデル](guide/forms/signal-forms/models)、[バリデーション](guide/forms/signal-forms/validation)、[フィールド状態管理](guide/forms/signal-forms/field-state-management)を詳しく見てください
+- **リアクティブフォーム**: Angularドキュメントの[リアクティブフォームガイド](guide/forms/reactive-forms)を参照してください
+- **テンプレート駆動フォーム**: Angularドキュメントの[テンプレート駆動フォームガイド](guide/forms/template-driven-forms)を参照してください

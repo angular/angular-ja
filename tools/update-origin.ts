@@ -8,7 +8,12 @@ import { adevJaDir, rootDir } from './lib/workspace';
 
 const localizedFilePatterns: Array<string | readonly string[]> = [
   // Text contents
-  ['src/content/**/*.md', '!src/content/**/license.md'],
+  [
+    'src/content/**/*.md',
+    '!src/content/**/license.md',
+    '!src/content/kitchen-sink.md',
+    '!src/content/examples/**/readme.md',
+  ],
   // Tutorial config files
   'src/content/tutorials/**/config.json',
   // Update home files

@@ -1,20 +1,20 @@
-# Creating and using services
+# サービスの作成と使用
 
-Services are reusable pieces of code that can be shared across your Angular application. They typically handle data fetching, business logic, or other functionality that multiple components need to access.
+サービスは、Angularアプリケーション全体で共有できる再利用可能なコードです。サービスは通常、複数のコンポーネントがアクセスする必要のあるデータ取得、ビジネスロジック、またはその他の機能を扱います。
 
-## Creating a service
+## サービスの作成 {#creating-a-service}
 
-You can create a service with the [Angular CLI](tools/cli) with the following command:
+次のコマンドで[Angular CLI](tools/cli)を使用してサービスを作成できます。
 
 ```bash
 ng generate service CUSTOM_NAME
 ```
 
-This creates a dedicated `CUSTOM_NAME.ts` file in your `src` directory.
+これにより、`src`ディレクトリに専用の`CUSTOM_NAME.ts`ファイルが作成されます。
 
-You can also manually create a service by adding the `@Injectable()` decorator to a TypeScript class. This tells Angular that the service can be injected as a dependency.
+TypeScriptクラスに`@Injectable()`デコレーターを追加して、手動でサービスを作成できます。これにより、そのサービスが依存性として注入可能であることがAngularに伝播します。
 
-Here is an example of a service that allows users to add and request data:
+以下は、ユーザーがデータを追加したり要求したりできるサービスの例です。
 
 ```ts
 // 📄 src/app/basic-data-store.ts
@@ -34,21 +34,21 @@ export class BasicDataStore {
 }
 ```
 
-## How services become available
+## サービスが利用可能になる仕組み {#how-services-become-available}
 
-When you use `@Injectable({ providedIn: 'root' })` in your service, Angular:
+サービスで`@Injectable({ providedIn: 'root' })`を使用すると、Angularは次のことを行います:
 
-- **Creates a single instance** (singleton) for your entire application
-- **Makes it available everywhere** without any additional configuration
-- **Enables tree-shaking** so the service is only included in your JavaScript bundle if it's actually used
+- **アプリケーション全体で単一のインスタンス** (シングルトン) を作成します
+- **追加の設定なしでどこでも利用可能**にします
+- **ツリーシェイキングを有効にし**、サービスが実際に使用される場合にのみJavaScriptバンドルに含まれるようにします
 
-This is the recommended approach for most services.
+これは、ほとんどのサービスで推奨されるアプローチです。
 
-## Injecting a service
+## サービスを注入する
 
-Once you've created a service with `providedIn: 'root'`, you can inject it anywhere in your application using the `inject()` function from `@angular/core`.
+`providedIn: 'root'`でサービスを作成すると、`@angular/core`の`inject()`関数を使ってアプリケーションのどこにでも注入できます。
 
-### Injecting into a component
+### コンポーネントへの注入 {#injecting-into-a-component}
 
 ```angular-ts
 import { Component, inject } from '@angular/core';
@@ -70,7 +70,7 @@ export class ExampleComponent {
 }
 ```
 
-### Injecting into another service
+### 別のサービスへの注入 {#injecting-into-another-service}
 
 ```ts
 import { inject, Injectable } from '@angular/core';
@@ -93,13 +93,13 @@ export class BasicDataStore {
 }
 ```
 
-## Next steps
+## 次のステップ {#next-steps}
 
-While `providedIn: 'root'` covers most use cases, Angular offers additional ways to provide services for specialized scenarios:
+`providedIn: 'root'`はほとんどのユースケースをカバーしていますが、Angularは特殊なシナリオのためにサービスを提供するための追加の方法を提供しています:
 
-- **Component-specific instances** - When components need their own isolated service instances
-- **Manual configuration** - For services that require runtime configuration
-- **Factory providers** - For dynamic service creation based on runtime conditions
-- **Value providers** - For providing configuration objects or constants
+- **コンポーネント固有のインスタンス** - コンポーネントが独自の独立したサービスインスタンスを必要とする場合
+- **手動設定** - 実行時の設定が必要なサービス向け
+- **ファクトリープロバイダー** - 実行時の条件に基づいて動的にサービスを作成するため
+- **値プロバイダー** - 設定オブジェクトや定数を提供するため
 
-You can learn more about these advanced patterns in the next guide: [defining dependency providers](/guide/di/defining-dependency-providers).
+これらの高度なパターンについての詳細は、次のガイドで学ぶことができます: [依存性プロバイダーの定義](/guide/di/defining-dependency-providers).

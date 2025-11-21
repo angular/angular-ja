@@ -17,6 +17,7 @@ function categorizeFile(filepath: string): string {
   if (filepath.startsWith('src/content/best-practices/')) return 'best-practices';
   if (filepath.startsWith('src/content/cli/')) return 'cli';
   if (filepath.startsWith('src/content/tools/')) return 'tools';
+  if (filepath.startsWith('src/content/ecosystem/')) return 'ecosystem';
   if (filepath.startsWith('src/app/') || filepath.startsWith('src/shared-docs/')) return 'app';
   return 'other';
 }

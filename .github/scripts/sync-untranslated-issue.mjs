@@ -54,12 +54,13 @@ const CATEGORY_EMOJIS = {
   'best-practices': '⚡ Best Practices',
   cli: '🔧 CLI',
   tools: '🛠️ Tools',
+  ecosystem: '🌐 Ecosystem',
   app: '🧩 Components/App',
   other: '📦 その他'
 };
 
 /** @type {string[]} */
-const CATEGORY_ORDER = ['guide', 'tutorial', 'reference', 'best-practices', 'cli', 'tools', 'app', 'other'];
+const CATEGORY_ORDER = ['guide', 'tutorial', 'reference', 'best-practices', 'cli', 'tools', 'ecosystem', 'app', 'other'];
 
 /**
  * Generate URLs for a file

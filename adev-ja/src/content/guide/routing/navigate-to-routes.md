@@ -149,7 +149,7 @@ export class UserDetailComponent {
 
 ```ts
 // Standard route navigation
-router.navigateByUrl('/products);
+router.navigateByUrl('/products');
 
 // Navigate to nested route
 router.navigateByUrl('/products/featured');

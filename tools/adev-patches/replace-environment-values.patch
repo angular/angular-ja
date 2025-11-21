@@ -1,18 +1,16 @@
 diff --git a/adev/src/app/environment.ts b/adev/src/app/environment.ts
-index 733b01d357..c84ac6bf7c 100644
+index 4a8b03193f..7491f820f7 100644
 --- a/adev/src/app/environment.ts
 +++ b/adev/src/app/environment.ts
-@@ -11,11 +11,11 @@ export default {
+@@ -21,9 +21,9 @@ export default {
    // Those values are publicly visible in the search request headers, and presents search-only keys.
    // https://www.algolia.com/doc/guides/security/api-keys/#search-only-api-key
    algolia: {
 -    appId: 'L1XWT2UJ7F',
 -    apiKey: 'dfca7ed184db27927a512e5c6668b968',
+-    indexName: indexName,
 +    appId: 'D4RZISVST0',
 +    apiKey: '77e5a0684280325e2e1f313e0fcc11b8',
-     // The indexName value must match the branch it's on.
-     // So it needs to be updated on release of the new major on the patch branch.
--    indexName: 'angular_next_dev',
 +    indexName: 'angular_jp_v19',
    },
 -  googleAnalyticsId: 'G-XB6NEVW32B',

@@ -43,6 +43,6 @@ export class App {
 
 </docs-workflow>
 
-これで、divは編集可能になりました。素晴らしいですね👍
+これで、divは編集可能になりました。すばらしいですね👍
 
 プロパティバインディングは、Angularの強力な機能の1つです。詳細については、[Angularドキュメント](guide/templates/property-binding)をご覧ください。

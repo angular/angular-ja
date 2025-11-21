@@ -53,4 +53,4 @@ profileForm = new FormGroup({
 
 これで、リアクティブフォームでの検証の仕方の基本を理解しました。
 
-Angularでのフォーム操作に関するこれらの基本的な概念を学ぶのは素晴らしいですね。さらに学びたい場合は、[Angularフォームドキュメント](guide/forms/form-validation) を参照してください。
+Angularでのフォーム操作に関するこれらの基本的な概念を学ぶのはすばらしいですね。さらに学びたい場合は、[Angularフォームドキュメント](guide/forms/form-validation) を参照してください。

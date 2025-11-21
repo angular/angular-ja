@@ -210,7 +210,7 @@ export class OptionalComponent {
 
 たとえば、次の `SelfNoDataComponent` では、プロパティとして注入された `LeafService` に注目してください。
 
-```ts {header:"src/app/self-no-data/self-no-data.component.ts", highlight=[7]}>
+```ts {header: 'self-no-data.component.ts', highlight: [7]}
 @Component({
   selector: 'app-self-no-data',
   templateUrl: './self-no-data.component.html',
@@ -246,7 +246,7 @@ export class SelfComponent {
 
 これをコードで確認するために、親コンポーネントが使用する `emoji` の次の値を想定します。これは、このサービスと同じです。
 
-```ts {header:"src/app/leaf.service.ts"}
+```ts {header: 'leaf.service.ts'}
 export class LeafService {
   emoji = '🌿';
 }
@@ -255,7 +255,7 @@ export class LeafService {
 子コンポーネントに、異なる値、カエデの葉 🍁 が含まれていると想像してください。ただし、親の値を使用したいとします。
 これが `skipSelf` を使用する場合です。
 
-```ts {header:"src/app/skipself/skipself.component.ts" highlight:[[6],[10]]}
+```ts {header:"skipself.component.ts" highlight:[[6],[10]]}
 @Component({
   selector: 'app-skipself',
   templateUrl: './skipself.component.html',
@@ -293,17 +293,17 @@ class Person {
 ツリーのさらに上にサービスインスタンスがある場合でも、Angularは検索を続けません。
 `host` を次のように使用します。
 
-```ts {header:"src/app/host/host.component.ts" highlight:[[6],[10]]}
+```ts {header:"host.component.ts" highlight:[[6],[9]]}
 @Component({
-selector: 'app-host',
-templateUrl: './host.component.html',
-styleUrls: ['./host.component.css'],
-// provide the service
-providers: [{ provide: FlowerService, useValue: { emoji: '🌷' } }]
+  selector: 'app-host',
+  templateUrl: './host.component.html',
+  styleUrls: ['./host.component.css'],
+  // provide the service
+  providers: [{provide: FlowerService, useValue: {emoji: '🌷'}}],
 })
 export class HostComponent {
-// use host when injecting the service
-flower = inject(FlowerService, {host: true, optional: true});
+  // use host when injecting the service
+  flower = inject(FlowerService, {host: true, optional: true});
 }
 ```
 
@@ -315,7 +315,7 @@ flower = inject(FlowerService, {host: true, optional: true});
 
 `@angular/core` からそれぞれをインポートし、サービスを注入するときにコンポーネントクラスのコンストラクターでそれぞれを使用します。
 
-```ts {header:"src/app/self-no-data/self-no-data.component.ts" highlight:[3]}
+```ts {header:"self-no-data.component.ts" highlight:[2]}
 export class SelfNoDataComponent {
   constructor(@Self() @Optional() public leaf?: LeafService) { }
 }
@@ -385,7 +385,7 @@ HELPFUL: 通常、コンポーネントとそのテンプレートは別々の�
 
 この例では、 `emoji` の値が赤いハイビスカス <code>🌺</code> である、 `root` に提供される `FlowerService` があります。
 
-```ts {header:"src/app/flower.service.ts"}
+```ts {header:"lower.service.ts"}
 @Injectable({
   providedIn: 'root'
 })
@@ -480,17 +480,17 @@ Emoji from FlowerService: 🌺
 
 次に、 `ChildComponent` クラスで、今後のセクションでより複雑な解決ルールを説明するために、 `FlowerService` のプロバイダーを追加します。
 
-```typescript
+```ts
 @Component({
-selector: 'app-child',
-templateUrl: './child.component.html',
-styleUrls: ['./child.component.css'],
-// use the providers array to provide a service
-providers: [{ provide: FlowerService, useValue: { emoji: '🌻' } }]
+  selector: 'app-child',
+  templateUrl: './child.component.html',
+  styleUrls: ['./child.component.css'],
+  // use the providers array to provide a service
+  providers: [{provide: FlowerService, useValue: {emoji: '🌻'}}],
 })
 export class ChildComponent {
-// inject the service
-flower = inject(FlowerService);
+  // inject the service
+  flower = inject(FlowerService);
 }
 ```
 
@@ -548,22 +548,22 @@ HELPFUL: ステップは `providers` 配列を使用する場合と同じです�
 最初に、 `emoji` プロパティがクジラ <code>🐳</code> である `AnimalService` を作成します。
 
 ```typescript
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
-providedIn: 'root'
+  providedIn: 'root',
 })
 export class AnimalService {
-emoji = '🐳';
+  emoji = '🐳';
 }
 ```
 
 `FlowerService` と同じパターンに従って、 `AppComponent` クラスに `AnimalService` を注入します。
 
-```typescript
+```ts
 export class AppComponent {
-    public flower = inject(FlowerService);
-    public animal = inject(AnimalService);
+  public flower = inject(FlowerService);
+  public animal = inject(AnimalService);
 }
 ```
 
@@ -574,18 +574,17 @@ HELPFUL: `FlowerService` に関連するコードはすべてそのままにし�
 
 ```typescript
 @Component({
-selector: 'app-child',
-templateUrl: './child.component.html',
-styleUrls: ['./child.component.css'],
-// provide services
-providers: [{ provide: FlowerService, useValue: { emoji: '🌻' } }],
-viewProviders: [{ provide: AnimalService, useValue: { emoji: '🐶' } }]
+  selector: 'app-child',
+  templateUrl: './child.component.html',
+  styleUrls: ['./child.component.css'],
+  // provide services
+  providers: [{provide: FlowerService, useValue: {emoji: '🌻'}}],
+  viewProviders: [{provide: AnimalService, useValue: {emoji: '🐶'}}],
 })
 export class ChildComponent {
-// inject services
-flower = inject(FlowerService);
-animal = inject(AnimalService)
-...
+  // inject services
+  flower = inject(FlowerService);
+  animal = inject(AnimalService);
 }
 ```
 
@@ -660,10 +659,10 @@ export class InspectorComponent {
 
 `InspectorComponent` を `ChildComponent` の `imports` 配列に追加することを忘れないでください。
 
-```typescript
+```ts
 @Component({
-...
-imports: [InspectorComponent]
+  ...
+  imports: [InspectorComponent]
 })
 ```
 
@@ -754,7 +753,7 @@ Emoji from AnimalService: 🐶
 この呼び出しは、`child.component.ts` に示すように、`<app-child>` のプロパティ初期化子です。
 
 ```typescript
-flower = inject(FlowerService, { skipSelf: true })
+  flower = inject(FlowerService, { skipSelf: true })
 ```
 
 `skipSelf` を使用すると、`<app-child>` インジェクターは `FlowerService` を自分自身で探しません。
@@ -945,9 +944,9 @@ inject(AnimalService, {skipSelf:true, host: true, optional: true})=>"🦔">
 
 ```typescript
 @Component({
-selector: 'app-villains-list',
-templateUrl: './villains-list.component.html',
-providers: [VillainsService]
+  selector: 'app-villains-list',
+  templateUrl: './villains-list.component.html',
+  providers: [VillainsService],
 })
 export class VillainsListComponent {}
 ```
@@ -982,85 +981,87 @@ export class VillainsListComponent {}
 また、注入によって取得したアプリケーション全体のシングルトン `HeroService` に委任します。
 
 ```typescript
-import { Injectable } from '@angular/core';
-import { HeroTaxReturn } from './hero';
-import { HeroesService } from './heroes.service';
+import {inject, Injectable} from '@angular/core';
+import {HeroTaxReturn} from './hero';
+import {HeroesService} from './heroes.service';
 
 @Injectable()
 export class HeroTaxReturnService {
-private currentTaxReturn!: HeroTaxReturn;
-private originalTaxReturn!: HeroTaxReturn;
+  private currentTaxReturn!: HeroTaxReturn;
+  private originalTaxReturn!: HeroTaxReturn;
 
-private heroService = inject(HeroesService);
+  private heroService = inject(HeroesService);
 
-set taxReturn(htr: HeroTaxReturn) {
-this.originalTaxReturn = htr;
-this.currentTaxReturn = htr.clone();
-}
+  set taxReturn(htr: HeroTaxReturn) {
+    this.originalTaxReturn = htr;
+    this.currentTaxReturn = htr.clone();
+  }
 
-get taxReturn(): HeroTaxReturn {
-return this.currentTaxReturn;
-}
+  get taxReturn(): HeroTaxReturn {
+    return this.currentTaxReturn;
+  }
 
-restoreTaxReturn() {
-this.taxReturn = this.originalTaxReturn;
-}
+  restoreTaxReturn() {
+    this.taxReturn = this.originalTaxReturn;
+  }
 
-saveTaxReturn() {
-this.taxReturn = this.currentTaxReturn;
-this.heroService.saveTaxReturn(this.currentTaxReturn).subscribe();
-}
+  saveTaxReturn() {
+    this.taxReturn = this.currentTaxReturn;
+    this.heroService.saveTaxReturn(this.currentTaxReturn).subscribe();
+  }
 }
 ```
 
 以下は、 `HeroTaxReturnService` を使用する `HeroTaxReturnComponent` です。
 
 ```typescript
-import { Component, EventEmitter, input, output } from '@angular/core';
-import { HeroTaxReturn } from './hero';
-import { HeroTaxReturnService } from './hero-tax-return.service';
+import {Component, input, output} from '@angular/core';
+import {HeroTaxReturn} from './hero';
+import {HeroTaxReturnService} from './hero-tax-return.service';
 
 @Component({
-selector: 'app-hero-tax-return',
-templateUrl: './hero-tax-return.component.html',
-styleUrls: [ './hero-tax-return.component.css' ],
-providers: [ HeroTaxReturnService ]
+  selector: 'app-hero-tax-return',
+  templateUrl: './hero-tax-return.component.html',
+  styleUrls: ['./hero-tax-return.component.css'],
+  providers: [HeroTaxReturnService],
 })
 export class HeroTaxReturnComponent {
-message = '';
+  message = '';
 
-close = output<void>();
+  close = output<void>();
 
-get taxReturn(): HeroTaxReturn {
-return this.heroTaxReturnService.taxReturn;
-}
+  get taxReturn(): HeroTaxReturn {
+    return this.heroTaxReturnService.taxReturn;
+  }
 
-taxReturn = input.required<HeroTaxReturn>();
+  taxReturn = input.required<HeroTaxReturn>();
 
-constructor() {
-effect(() => {
-this.heroTaxReturnService.taxReturn = this.taxReturn();
-})
-}
+  constructor() {
+    effect(() => {
+      this.heroTaxReturnService.taxReturn = this.taxReturn();
+    });
+  }
 
-private heroTaxReturnService = inject(HeroTaxReturnService);
+  private heroTaxReturnService = inject(HeroTaxReturnService);
 
-onCanceled() {
-this.flashMessage('Canceled');
-this.heroTaxReturnService.restoreTaxReturn();
-}
+  onCanceled() {
+    this.flashMessage('Canceled');
+    this.heroTaxReturnService.restoreTaxReturn();
+  }
 
-onClose() { this.close.emit(); }
+  onClose() {
+    this.close.emit();
+  }
 
-onSaved() {
-this.flashMessage('Saved');
-this.heroTaxReturnService.saveTaxReturn();
-}
+  onSaved() {
+    this.flashMessage('Saved');
+    this.heroTaxReturnService.saveTaxReturn();
+  }
 
-flashMessage(msg: string) {
-this.message = msg;
-setTimeout(() => this.message = '', 500);
-}
+  flashMessage(msg: string) {
+    this.message = msg;
+    setTimeout(() => (this.message = ''), 500);
+  }
 }
 ```
 
@@ -1075,7 +1076,7 @@ _編集対象の税務申告_ は、 `input` プロパティを介して到着�
 これを防ぐために、コンポーネントレベルのインジェクター `HeroTaxReturnComponent` を構成して、コンポーネントメタデータの `providers` プロパティを使用してサービスを提供します。
 
 ```typescript
-providers: [HeroTaxReturnService]
+  providers: [HeroTaxReturnService]
 ```
 
 `HeroTaxReturnComponent` には、 `HeroTaxReturnService` の独自の提供者がいます。

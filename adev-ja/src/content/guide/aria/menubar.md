@@ -3,7 +3,7 @@
 
 <docs-pill-row>
   <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/menubar/" title="メニューバーARIAパターン"/>
-  <docs-pill href="/api/aria/menu/Menu" title="Menu APIリファレンス"/>
+  <docs-pill href="/api/aria/menu/MenuBar" title="メニューバーAPIリファレンス"/>
 </docs-pill-row>
 
 ## 概要 {#overview}

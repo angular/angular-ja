@@ -1,8 +1,8 @@
-<docs-decorative-header title="シグナルを使ったフォーム" imgSrc="adev/src/assets/images/signals.svg"> <!-- markdownlint-disable-line -->
-シグナルフォームはAngularのシグナルを基に構築されており、フォームの状態を管理するためのリアクティブで型安全な方法を提供します。
-</docs-decorative-header>
+<docs-decorative-header title="シグナルを使ったフォーム" imgSrc="adev/src/assets/images/signals.svg"> </docs-decorative-header>
 
-シグナルフォームはAngularのシグナルを使用してフォームの状態を管理し、データモデルとUI間の自動的な同期を提供します。
+IMPORTANT: シグナルフォームは[実験的](/reference/releases#experimental)です。APIは将来のリリースで変更される可能性があります。本番アプリケーションでは、リスクを理解せずに実験的なAPIを使用しないでください。
+
+シグナルフォームはAngularのシグナルを使用してフォームの状態を管理し、AngularのシグナルでデータモデルとUI間の自動的な同期を提供します。
 
 このガイドでは、シグナルフォームでフォームを作成するための中心的な概念を順を追って説明します。その仕組みは次のとおりです:
 
@@ -208,9 +208,9 @@ Select要素は、静的オプションと動的オプションの両方で動�
 
 NOTE: 複数選択(`<select multiple>`)は、現時点では`[field]`ディレクティブでサポートされていません。
 
-## バリデーションと状態
+## バリデーションと状態 {#validation-and-state}
 
-シグナルフォームには、フォームフィールドに適用できる組み込みのバリデーターが用意されています。バリデーションを追加するには、`form()`の第2引数にスキーマ関数を渡します。この関数は、フォームモデル内のフィールドを参照できる**スキーマパス**パラメーターを受け取ります:
+シグナルフォームには、フォームフィールドに適用できる組み込みのバリデーターが用意されています。バリデーションを追加するには、`form()`の第2引数にスキーマ関数を渡します:
 
 ```ts
 const loginForm = form(loginModel, (schemaPath) => {
@@ -220,7 +220,7 @@ const loginForm = form(loginModel, (schemaPath) => {
 });
 ```
 
-NOTE: スキーマパスパラメーターは、バリデーションルールを適用するためのフィールドへのパスを提供します。フィールドの値と状態にアクセスするには、フィールドツリー（`loginForm.email()`など）を使用してください。
+スキーマ関数は、バリデーションルールを設定するためのフィールドへのパスを提供する**スキーマパス**パラメーターを受け取ります。
 
 一般的なバリデーターには次のものがあります:
 
@@ -257,7 +257,15 @@ email(schemaPath.email, { message: 'Please enter a valid email address' });
 | `touched()`  | ユーザーがフィールドにフォーカスしてぼかした場合に`true`を返します           |
 | `dirty()`    | ユーザーが値を変更した場合に`true`を返します                               |
 | `disabled()` | フィールドが無効になっている場合に`true`を返します                           |
+| `readonly()` | フィールドが読み取り専用になっている場合に`true`を返します                   |
 | `pending()`  | 非同期バリデーションが進行中の場合に`true`を返します                         |
 | `errors()`   | `kind`と`message`プロパティを持つバリデーションエラーの配列を返します       |
 
-TIP: `debounce()`バリデーションルールを使用して、ユーザーが入力を停止するかフィールドを離れるまでエラー表示を遅延させます。これにより、ユーザーがまだ入力中にエラーが表示されるのを防ぎます。
+## 次のステップ {#next-steps}
+
+シグナルフォームとその仕組みについてさらに詳しく学ぶには、詳細なガイドをご覧ください:
+
+- [概要](guide/forms/signals/overview) - シグナルフォームの紹介といつ使用するか
+- [フォームモデル](guide/forms/signals/models) - シグナルを使用したフォームデータの作成と管理
+- [フィールドの状態管理](guide/forms/signals/field-state-management) - バリデーション状態、インタラクションの追跡、フィールドの可視性の操作
+- [バリデーション](guide/forms/signals/validation) - 組み込みバリデーター、カスタムバリデーションルール、非同期バリデーション

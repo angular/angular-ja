@@ -241,7 +241,7 @@ export class MyForm {
 }
 ```
 
-TIP: フォームモデルの作成と管理に関する完全な情報については、[フォームモデルガイド](guide/forms/signal-forms/models)を参照してください。
+TIP: フォームモデルの作成と管理に関する完全な情報については、[フォームモデルガイド](guide/forms/signals/models)を参照してください。
 
 `[field]="userForm.username"`をバインドすると、Fieldディレクティブは次のようになります：
 
@@ -422,7 +422,7 @@ accountForm = form(this.accountModel, schemaPath => {
 
 このガイドでは、シグナルフォームと連携するカスタムコントロールの構築について説明しました。関連ガイドでは、シグナルフォームの他の側面について探求します:
 
-- [フォームモデルガイド](guide/forms/signal-forms/models) - フォームモデルの作成と更新
+- [フォームモデルガイド](guide/forms/signals/models) - フォームモデルの作成と更新
   <!-- TODO: ガイドが利用可能になったらコメントを解除してください -->
-  <!-- - [フィールド状態管理ガイド](guide/forms/signal-forms/field-state-management) - フォーム状態シグナルの使用 -->
-  <!-- - [バリデーションガイド](guide/forms/signal-forms/validation) - フォームへのバリデーションの追加 -->
+  <!-- - [フィールド状態管理ガイド](guide/forms/signals/field-state-management) - フォーム状態シグナルの使用 -->
+  <!-- - [バリデーションガイド](guide/forms/signals/validation) - フォームへのバリデーションの追加 -->

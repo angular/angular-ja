@@ -1,6 +1,11 @@
 <docs-decorative-header title="ツールバー">
 </docs-decorative-header>
 
+<docs-pill-row>
+  <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/" title="ツールバーARIAパターン"/>
+  <docs-pill href="/api/aria/toolbar/Toolbar" title="ツールバーAPIリファレンス"/>
+</docs-pill-row>
+
 ## 概要
 
 キーボードナビゲーションで関連するコントロールとアクションをグループ化するためのコンテナで、一般的にテキストフォーマット、ツールバー、コマンドパネルに使用されます。

@@ -11,20 +11,21 @@ NOTE: InjectionTokenとカスタムプロバイダーの包括的な説明につ
 
 Angularは、`@Component`または`@Directive`の基になる要素を、`ElementRef`インジェクショントークンを使用してインジェクションすることで公開します。
 
-<docs-code language="typescript" highlight="[7]">
-import { Directive, ElementRef } from '@angular/core';
+```ts {highlight:[7]}
+import {Directive, ElementRef, inject} from '@angular/core';
 
 @Directive({
-selector: '[appHighlight]'
+  selector: '[appHighlight]',
 })
 export class HighlightDirective {
-private element = inject(ElementRef)
+  private element = inject(ElementRef);
 
-update() {
-this.element.nativeElement.style.color = 'red';
+  update() {
+    this.element.nativeElement.style.color = 'red';
+  }
 }
-}
-</docs-code>
+
+```
 
 ## 前方参照を使用して循環した依存関係を解決する {#resolve-circular-dependencies-with-a-forward-reference}
 
@@ -42,11 +43,11 @@ Angularの`forwardRef()`関数は、Angularが後で解決できる_間接的な
 `providers`配列は、`@Component()`デコレーター関数のプロパティであり、クラス定義の前に表示される必要があります。
 `forwardRef`を使用して、このような循環参照を解消できます。
 
-<docs-code header="app.component.ts" language="typescript" highlight="[4]">
+```typescript {header: 'app.component.ts', highlight: [4]}
 providers: [
   {
     provide: PARENT_MENU_ITEM,
     useExisting: forwardRef(() => MenuItem),
   },
 ],
-</docs-code>
+```

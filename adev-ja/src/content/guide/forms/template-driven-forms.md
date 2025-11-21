@@ -59,7 +59,7 @@ Angularテンプレートを使用して、ログインフォーム、コンタ�
 
 1. 提供されたサンプルアプリケーションは、フォームに反映されるデータモデルを定義する`Actor`クラスを作成します。
 
-<docs-code header="actor.ts" language="typescript" path="adev/src/content/examples/forms/src/app/actor.ts"/>
+   <docs-code header="actor.ts" language="typescript" path="adev/src/content/examples/forms/src/app/actor.ts"/>
 
 1. フォームのレイアウトと詳細は、`ActorFormComponent`クラスで定義されます。
 
@@ -67,18 +67,18 @@ Angularテンプレートを使用して、ログインフォーム、コンタ�
 
    コンポーネントの`selector`値は"app-actor-form"であるため、このフォームを`<app-actor-form>`タグを使用して親テンプレートにドロップできます。
 
-2. 次のコードは、新しいアクターインスタンスを作成し、初期フォームにサンプルアクターを表示します。
+1. 次のコードは、新しいアクターインスタンスを作成し、初期フォームにサンプルアクターを表示します。
 
    <docs-code language="typescript" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" language="typescript" visibleRegion="Marilyn"/>
 
    このデモでは、`model`と`skills`のダミーデータを使用しています。
    実際のアプリでは、データサービスを注入して実際のデータを取得して保存するか、これらのプロパティを入力と出力として公開します。
 
-3. コンポーネントは、`FormsModule`モジュールをインポートすることでフォーム機能を有効にします。
+1. コンポーネントは、`FormsModule`モジュールをインポートすることでフォーム機能を有効にします。
 
    <docs-code language="typescript" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" language="typescript" visibleRegion="imports"/>
 
-4. フォームは、ルートコンポーネントのテンプレートで定義されたアプリケーションレイアウトに表示されます。
+1. フォームは、ルートコンポーネントのテンプレートで定義されたアプリケーションレイアウトに表示されます。
 
    <docs-code header="app.component.html" language="html" path="adev/src/content/examples/forms/src/app/app.component.html"/>
 
@@ -91,15 +91,15 @@ Angularテンプレートを使用して、ログインフォーム、コンタ�
    **Submit**ボタンには、スタイリングのためのいくつかのクラスがあります。
    現時点では、フォームのレイアウトはすべてプレーンなHTML5で、バインディングやディレクティブはありません。
 
-5. サンプルフォームは、[Twitter Bootstrap](https://getbootstrap.com/css)の`container`、`form-group`、`form-control`、`btn`といったスタイルクラスを使用しています。
+1. サンプルフォームは、[Twitter Bootstrap](https://getbootstrap.com/css)の`container`、`form-group`、`form-control`、`btn`といったスタイルクラスを使用しています。
    これらのスタイルを使用するには、アプリケーションのスタイルシートでライブラリをインポートします。
 
-<docs-code header="src/styles.css" path="adev/src/content/examples/forms/src/styles.1.css"/>
+   <docs-code header="styles.css" path="adev/src/content/examples/forms/src/styles.1.css"/>
 
 1. フォームでは、アクターのスキルを、`ActorFormComponent`で内部的に維持されている事前定義された`skills`リストから選択する必要があります。
    Angularの`@for`ループは、データ値をイテレートして`<select>`要素を生成します。
 
-<docs-code header="actor-form.component.html (skills)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="skills"/>
+   <docs-code header="actor-form.component.html (skills)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="skills"/>
 
 アプリケーションを今すぐ実行すると、選択コントロールにスキルのリストが表示されます。
 入力要素は、まだデータ値やイベントにバインドされていないため、空欄であり、動作しません。
@@ -230,11 +230,11 @@ Angularは、`form`要素に`ng-submitted`クラスを適用しますが、
 1. これらのクラス定義を新しい`forms.css`ファイルに追加します。
 1. 新しいファイルを、`index.html`と同じレベルにプロジェクトに追加します。
 
-<docs-code header="src/assets/forms.css" language="css" path="adev/src/content/examples/forms/src/assets/forms.css"/>
+   <docs-code header="forms.css" language="css" path="adev/src/content/examples/forms/src/assets/forms.css"/>
 
 1. `index.html`ファイルで、新しいスタイルシートを含めるように`<head>`タグを更新します。
 
-<docs-code header="src/index.html (styles)" path="adev/src/content/examples/forms/src/index.html" visibleRegion="styles"/>
+   <docs-code header="index.html (styles)" path="adev/src/content/examples/forms/src/index.html" visibleRegion="styles"/>
 
 ### 検証エラーメッセージの表示と非表示
 
@@ -291,11 +291,11 @@ Angularは、`form`要素に`ng-submitted`クラスを適用しますが、
 1. テンプレートで、フォームの下部に"New Actor"`<button>`要素を配置します。
 1. コンポーネントファイルで、アクターデータモデルにアクター作成メソッドを追加します。
 
-<docs-code header="actor-form.component.ts (New Actor method)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" visibleRegion="new-actor"/>
+   <docs-code header="actor-form.component.ts (New Actor method)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" visibleRegion="new-actor"/>
 
 1. ボタンのクリックイベントを、アクター作成メソッド`newActor()`にバインドします。
 
-<docs-code header="actor-form.component.html (New Actor button)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="new-actor-button-no-reset"/>
+   <docs-code header="actor-form.component.html (New Actor button)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" visibleRegion="new-actor-button-no-reset"/>
 
 1. アプリケーションを再度実行し、**New Actor**ボタンをクリックします。
 

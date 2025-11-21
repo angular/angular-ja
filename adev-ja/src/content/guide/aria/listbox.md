@@ -1,6 +1,11 @@
 <docs-decorative-header title="リストボックス">
 </docs-decorative-header>
 
+<docs-pill-row>
+  <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/listbox/" title="リストボックスパターン"/>
+  <docs-pill href="/api?query=listbox#angular_aria_listbox" title="リストボックスAPIリファレンス"/>
+</docs-pill-row>
+
 ## 概要 {#overview}
 
 ユーザーが選択するためのオプションのリストを表示するディレクティブで、キーボードナビゲーション、単一または複数選択、スクリーンリーダーをサポートしています。

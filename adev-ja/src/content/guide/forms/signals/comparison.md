@@ -158,6 +158,6 @@ TypeScriptはコンポーネントのプロパティを理解しますが、フ�
 
 各アプローチについてさらに学ぶには:
 
-- **シグナルフォーム**: [概要ガイド](guide/forms/signal-forms/overview)から始めるか、[フォームモデル](guide/forms/signal-forms/models)、[バリデーション](guide/forms/signal-forms/validation)、[フィールド状態管理](guide/forms/signal-forms/field-state-management)を詳しく見てください
+- **シグナルフォーム**: [概要ガイド](guide/forms/signals/overview)から始めるか、[フォームモデル](guide/forms/signals/models)、[バリデーション](guide/forms/signals/validation)、[フィールド状態管理](guide/forms/signals/field-state-management)を詳しく見てください
 - **リアクティブフォーム**: Angularドキュメントの[リアクティブフォームガイド](guide/forms/reactive-forms)を参照してください
 - **テンプレート駆動フォーム**: Angularドキュメントの[テンプレート駆動フォームガイド](guide/forms/template-driven-forms)を参照してください

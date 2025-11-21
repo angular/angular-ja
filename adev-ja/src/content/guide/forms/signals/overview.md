@@ -20,7 +20,7 @@ Webアプリケーションにおけるフォームの構築には、フィー�
 シグナルフォームは、シグナルを使用して構築された新しいアプリケーションで最適に機能します。リアクティブフォームを使用している既存のアプリケーションで作業している場合や、本番環境での安定性の保証が必要な場合は、リアクティブフォームが依然として確実な選択肢です。
 
 <!-- TODO: UNCOMMENT SECTION BELOW WHEN AVAILABLE -->
-<!-- NOTE: If you're coming from template or reactive forms, you may be interested in our [comparison guide](guide/forms/signal-forms/comparison). -->
+<!-- NOTE: If you're coming from template or reactive forms, you may be interested in our [comparison guide](guide/forms/signals/comparison). -->
 
 ## 前提条件 {#prerequisites}
 
@@ -52,8 +52,8 @@ To learn more about how Signal Forms work, check out the following guides:
 
 <docs-pill-row>
   <docs-pill href="essentials/signal-forms" title="Signal forms essentials" />
-  <docs-pill href="guide/forms/signal-forms/models" title="Form models" />
-  <docs-pill href="guide/forms/signal-forms/field-state-management" title="Field state management" />
-  <docs-pill href="guide/forms/signal-forms/validation" title="Validation" />
-  <docs-pill href="guide/forms/signal-forms/custom-controls" title="Custom controls" />
+  <docs-pill href="guide/forms/signals/models" title="Form models" />
+  <docs-pill href="guide/forms/signals/field-state-management" title="Field state management" />
+  <docs-pill href="guide/forms/signals/validation" title="Validation" />
+  <docs-pill href="guide/forms/signals/custom-controls" title="Custom controls" />
 </docs-pill-row> -->

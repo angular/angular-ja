@@ -3,7 +3,7 @@
 
 <docs-pill-row>
   <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/grid/" title="グリッドARIAパターン"/>
-  <docs-pill href="/api?query=accordion#angular_aria_accordion" title="グリッドAPIリファレンス"/>
+  <docs-pill href="/api?query=grid#angular_aria_grid" title="グリッドAPIリファレンス"/>
 </docs-pill-row>
 
 ## 概要 {#overview}

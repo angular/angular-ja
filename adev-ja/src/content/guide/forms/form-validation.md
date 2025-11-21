@@ -13,7 +13,7 @@ Angularは、これらの属性をフレームワーク内のバリデーター�
 その後、`ngModel`をローカルテンプレート変数にエクスポートすることで、コントロールの状態を調べることができます。
 次の例では、`NgModel`を`name`という変数にエクスポートします。
 
-<docs-code header="template/actor-form-template.component.html (name)" path="adev/src/content/examples/form-validation/src/app/template/actor-form-template.component.html" visibleRegion="name-with-error-msg"/>
+<docs-code header="actor-form-template.component.html (name)" path="adev/src/content/examples/form-validation/src/app/template/actor-form-template.component.html" visibleRegion="name-with-error-msg"/>
 
 例で示されている次の機能に注目してください。
 
@@ -62,7 +62,7 @@ HELPFUL: ユーザーがフォームを編集する機会がある前に、バ�
 アクターフォームをリアクティブフォームに更新するには、いくつかの組み込みバリデーターを使用します。
 今回は、関数形式で、次の例のようにします。
 
-<docs-code header="reactive/actor-form-reactive.component.ts (validator functions)" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.1.ts" visibleRegion="form-group"/>
+<docs-code header="actor-form-reactive.component.ts (validator functions)" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.1.ts" visibleRegion="form-group"/>
 
 この例では、`name`コントロールは、2つの組み込みバリデーター(`Validators.required`と`Validators.minLength(4)`)と、1つのカスタムバリデーター`forbiddenNameValidator`を設定しています。
 
@@ -74,7 +74,7 @@ HELPFUL: ユーザーがフォームを編集する機会がある前に、バ�
 
 `name`入力のテンプレートをもう一度見ると、テンプレート駆動の例とかなり似ています。
 
-<docs-code header="reactive/actor-form-reactive.component.html (name with error msg)" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.html" visibleRegion="name-with-error-msg"/>
+<docs-code header="actor-form-reactive.component.html (name with error msg)" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.html" visibleRegion="name-with-error-msg"/>
 
 このフォームは、テンプレート駆動バージョンとは、ディレクティブをエクスポートしなくなった点が異なります。代わりに、コンポーネントクラスで定義された`name`ゲッターを使用します。
 
@@ -87,7 +87,7 @@ HELPFUL: ユーザーがフォームを編集する機会がある前に、バ�
 前の例の`forbiddenNameValidator`関数を考えてみてください。
 その関数の定義は次のようになります。
 
-<docs-code header="shared/forbidden-name.directive.ts (forbiddenNameValidator)" path="adev/src/content/examples/form-validation/src/app/shared/forbidden-name.directive.ts" visibleRegion="custom-validator"/>
+<docs-code header="forbidden-name.directive.ts (forbiddenNameValidator)" path="adev/src/content/examples/form-validation/src/app/shared/forbidden-name.directive.ts" visibleRegion="custom-validator"/>
 
 関数は、_特定の_禁止されている名前を検出するための正規表現を受け取り、バリデーター関数を返すファクトリです。
 
@@ -105,7 +105,7 @@ HELPFUL: ユーザーがフォームを編集する機会がある前に、バ�
 
 リアクティブフォームでは、`FormControl`に直接関数を渡すことで、カスタムバリデーターを追加します。
 
-<docs-code header="reactive/actor-form-reactive.component.ts (validator functions)" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.1.ts" visibleRegion="custom-validator"/>
+<docs-code header="actor-form-reactive.component.ts (validator functions)" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.1.ts" visibleRegion="custom-validator"/>
 
 ### カスタムバリデーターをテンプレート駆動フォームに追加する {#adding-custom-validators-to-template-driven-forms}
 
@@ -115,17 +115,17 @@ HELPFUL: ユーザーがフォームを編集する機会がある前に、バ�
 Angularは、ディレクティブが`NG_VALIDATORS`プロバイダーに自身を登録するため、ディレクティブの検証プロセスにおける役割を認識します。次の例に示すように。
 `NG_VALIDATORS`は、拡張可能なバリデーターのコレクションを持つ、定義済みのプロバイダーです。
 
-<docs-code header="shared/forbidden-name.directive.ts (providers)" path="adev/src/content/examples/form-validation/src/app/shared/forbidden-name.directive.ts" visibleRegion="directive-providers"/>
+<docs-code header="forbidden-name.directive.ts (providers)" path="adev/src/content/examples/form-validation/src/app/shared/forbidden-name.directive.ts" visibleRegion="directive-providers"/>
 
 その後、ディレクティブクラスは`Validator`インターフェースを実装するため、Angularフォームと簡単に統合できます。
 以下は、ディレクティブ全体の概要です。
 
-<docs-code header="shared/forbidden-name.directive.ts (directive)" path="adev/src/content/examples/form-validation/src/app/shared/forbidden-name.directive.ts" visibleRegion="directive"/>
+<docs-code header="forbidden-name.directive.ts (directive)" path="adev/src/content/examples/form-validation/src/app/shared/forbidden-name.directive.ts" visibleRegion="directive"/>
 
 `ForbiddenValidatorDirective`の準備ができたら、セレクター`appForbiddenName`を入力要素に追加して、アクティブ化できます。
 たとえば、次のとおりです。
 
-<docs-code header="template/actor-form-template.component.html (forbidden-name-input)" path="adev/src/content/examples/form-validation/src/app/template/actor-form-template.component.html" visibleRegion="name-input"/>
+<docs-code header="actor-form-template.component.html (forbidden-name-input)" path="adev/src/content/examples/form-validation/src/app/template/actor-form-template.component.html" visibleRegion="name-input"/>
 
 HELPFUL: カスタム検証ディレクティブが`useExisting`ではなく`useClass`でインスタンス化されていることに注意してください。
 登録されたバリデーターは、`ForbiddenValidatorDirective`の_このインスタンス_である必要があります。フォーム内のインスタンスで、`forbiddenName`プロパティが「bob」にバインドされています。
@@ -170,15 +170,13 @@ Angularは、多くのコントロールプロパティをフォームコント�
 
 フォームは、次の構造になっています。
 
-<docs-code language="javascript">
-
+```ts
 const actorForm = new FormGroup({
-'name': new FormControl(),
-'role': new FormControl(),
-'skill': new FormControl()
+  'name': new FormControl(),
+  'role': new FormControl(),
+  'skill': new FormControl(),
 });
-
-</docs-code>
+```
 
 `name`と`role`は兄弟コントロールであることに注意してください。
 1つのカスタムバリデーターで両方のコントロールを評価するには、共通の祖先コントロールである`FormGroup`で検証する必要があります。
@@ -186,19 +184,20 @@ const actorForm = new FormGroup({
 
 `FormGroup`にバリデーターを追加するには、作成時に第2引数として新しいバリデーターを渡します。
 
-<docs-code language="javascript">
-
-const actorForm = new FormGroup({
-'name': new FormControl(),
-'role': new FormControl(),
-'skill': new FormControl()
-}, { validators: unambiguousRoleValidator });
-
-</docs-code>
+```ts
+const actorForm = new FormGroup(
+  {
+    'name': new FormControl(),
+    'role': new FormControl(),
+    'skill': new FormControl(),
+  },
+  {validators: unambiguousRoleValidator},
+);
+```
 
 バリデーターのコードは次のとおりです。
 
-<docs-code header="shared/unambiguous-role.directive.ts" path="adev/src/content/examples/form-validation/src/app/shared/unambiguous-role.directive.ts" visibleRegion="cross-validation-validator"/>
+<docs-code header="unambiguous-role.directive.ts" path="adev/src/content/examples/form-validation/src/app/shared/unambiguous-role.directive.ts" visibleRegion="cross-validation-validator"/>
 
 `unambiguousRoleValidator`バリデーターは、`ValidatorFn`インターフェースを実装しています。
 これはAngularコントロールオブジェクトを引数として受け取り、フォームが有効な場合は`null`を返し、無効な場合は`ValidationErrors`を返します。
@@ -210,7 +209,7 @@ const actorForm = new FormGroup({
 
 より良いユーザーエクスペリエンスを提供するために、フォームが無効な場合、テンプレートに適切なエラーメッセージが表示されます。
 
-<docs-code header="reactive/actor-form-template.component.html" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.html" visibleRegion="cross-validation-error-message"/>
+<docs-code header="actor-form-template.component.html" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.html" visibleRegion="cross-validation-error-message"/>
 
 この`@if`は、`FormGroup`に`unambiguousRoleValidator`バリデーターが返したクロス検証エラーがある場合に、エラーを表示しますが、ユーザーが[フォームとやり取りを完了](#control-status-css-classes)した場合のみです。
 
@@ -219,16 +218,16 @@ const actorForm = new FormGroup({
 テンプレート駆動フォームの場合、バリデーター関数をラップするディレクティブを作成する必要があります。
 次の例に示すように、[`NG_VALIDATORS`トークン](/api/forms/NG_VALIDATORS)を使用して、そのディレクティブをバリデーターとして提供します。
 
-<docs-code header="shared/unambiguous-role.directive.ts" path="adev/src/content/examples/form-validation/src/app/shared/unambiguous-role.directive.ts" visibleRegion="cross-validation-directive"/>
+<docs-code header="unambiguous-role.directive.ts" path="adev/src/content/examples/form-validation/src/app/shared/unambiguous-role.directive.ts" visibleRegion="cross-validation-directive"/>
 
 新しいディレクティブをHTMLテンプレートに追加する必要があります。
 バリデーターはフォームの最上位レベルで登録する必要があるため、次のテンプレートは`form`タグにディレクティブを配置しています。
 
-<docs-code header="template/actor-form-template.component.html" path="adev/src/content/examples/form-validation/src/app/template/actor-form-template.component.html" visibleRegion="cross-validation-register-validator"/>
+<docs-code header="actor-form-template.component.html" path="adev/src/content/examples/form-validation/src/app/template/actor-form-template.component.html" visibleRegion="cross-validation-register-validator"/>
 
 より良いユーザーエクスペリエンスを提供するために、フォームが無効な場合、適切なエラーメッセージが表示されます。
 
-<docs-code header="template/actor-form-template.component.html" path="adev/src/content/examples/form-validation/src/app/template/actor-form-template.component.html" visibleRegion="cross-validation-error-message"/>
+<docs-code header="actor-form-template.component.html" path="adev/src/content/examples/form-validation/src/app/template/actor-form-template.component.html" visibleRegion="cross-validation-error-message"/>
 
 これは、テンプレート駆動フォームとリアクティブフォームの両方で同じです。
 
@@ -250,13 +249,13 @@ const actorForm = new FormGroup({
 一般的なUIパターンは、非同期検証の実行中にスピナーを表示することです。
 次の例は、テンプレート駆動フォームでこれを実現する方法を示しています。
 
-<docs-code language="html">
-
+```angular-html
 <input [(ngModel)]="name" #model="ngModel" appSomeAsyncValidator>
+
 @if(model.pending) {
-<app-spinner />
+  <app-spinner />
 }
-</docs-code>
+```
 
 ### カスタム非同期バリデーターの実装 {#implementing-a-custom-async-validator}
 
@@ -266,15 +265,15 @@ const actorForm = new FormGroup({
 
 次のコードは、`AsyncValidator`インターフェースを実装するバリデータークラス`UniqueRoleValidator`を作成します。
 
-<docs-code path="adev/src/content/examples/form-validation/src/app/shared/role.directive.ts" visibleRegion="async-validator"/>
+<docs-code header="role.directive.ts" path="adev/src/content/examples/form-validation/src/app/shared/role.directive.ts" visibleRegion="async-validator"/>
 
 `actorsService`プロパティは、次のインターフェースを定義する`ActorsService`トークンのインスタンスで初期化されます。
 
-<docs-code language="typescript">
+```ts
 interface ActorsService {
   isRoleTaken: (role: string) => Observable<boolean>;
 }
-</docs-code>
+```
 
 実際のアプリケーションでは、`ActorsService`は、アクターデータベースにHTTPリクエストを送信して役割が利用可能かどうかを確認する役割を担います。
 バリデーターの観点から、サービスの実際の実装は重要でないため、例では`ActorsService`インターフェースに対してのみコードを作成できます。
@@ -297,7 +296,7 @@ interface ActorsService {
 
 リアクティブフォームで非同期バリデーターを使用するには、最初にバリデーターをコンポーネントクラスのプロパティに注入します。
 
-<docs-code path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.2.ts" visibleRegion="async-validator-inject"/>
+<docs-code header="actor-form-reactive.component.2.ts" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.2.ts" visibleRegion="async-validator-inject"/>
 
 次に、バリデーター関数を`FormControl`に直接渡して、適用します。
 
@@ -305,7 +304,7 @@ interface ActorsService {
 `asyncValidators`の値は、単一の非同期バリデーター関数、または関数の配列にすることができます。
 `FormControl`オプションの詳細については、[AbstractControlOptions](api/forms/AbstractControlOptions) APIリファレンスを参照してください。
 
-<docs-code path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.2.ts" visibleRegion="async-validator-usage"/>
+<docs-code header="actor-form-reactive.component.2.ts" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.2.ts" visibleRegion="async-validator-usage"/>
 
 ### 非同期バリデーターをテンプレート駆動フォームに追加する {#adding-async-validators-to-template-driven-forms}
 
@@ -313,11 +312,11 @@ interface ActorsService {
 
 次の例では、ディレクティブは、実際の検証ロジックを含む`UniqueRoleValidator`クラスを注入し、検証を実行する必要があるときにAngularによってトリガーされる`validate`関数でそれを呼び出します。
 
-<docs-code path="adev/src/content/examples/form-validation/src/app/shared/role.directive.ts" visibleRegion="async-validator-directive"/>
+<docs-code header="role.directive.ts" path="adev/src/content/examples/form-validation/src/app/shared/role.directive.ts" visibleRegion="async-validator-directive"/>
 
 その後、同期バリデーターと同様に、ディレクティブのセレクターを入力に追加して、アクティブ化します。
 
-<docs-code header="template/actor-form-template.component.html (unique-unambiguous-role-input)" path="adev/src/content/examples/form-validation/src/app/template/actor-form-template.component.html" visibleRegion="role-input"/>
+<docs-code header="actor-form-template.component.html (unique-unambiguous-role-input)" path="adev/src/content/examples/form-validation/src/app/template/actor-form-template.component.html" visibleRegion="role-input"/>
 
 ### 非同期バリデーターのパフォーマンスの最適化 {#optimizing-performance-of-async-validators}
 
@@ -330,15 +329,15 @@ interface ActorsService {
 
 テンプレート駆動フォームでは、テンプレートでプロパティを設定します。
 
-<docs-code language="html">
+```angular-html
 <input [(ngModel)]="name" [ngModelOptions]="{updateOn: 'blur'}">
-</docs-code>
+```
 
 リアクティブフォームでは、`FormControl`インスタンスでプロパティを設定します。
 
-<docs-code language="typescript">
+```ts
 new FormControl('', {updateOn: 'blur'});
-</docs-code>
+```
 
 ## ネイティブHTMLフォーム検証との相互作用 {#interaction-with-native-html-form-validation}
 

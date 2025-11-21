@@ -31,6 +31,8 @@ async function main() {
   for (const file of files) {
     const ext = extname(file);
     if (file.includes(`.en${ext}`)) continue;
+    // tutorialのconfig.jsonは除外
+    if (file.startsWith('src/content/tutorials/') && file.endsWith('config.json')) continue;
     if (!(await exists(resolve(adevJaDir, getEnFilePath(file))))) {
       untranslated.push(file);
     }

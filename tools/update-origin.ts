@@ -13,6 +13,7 @@ const localizedFilePatterns: Array<string | readonly string[]> = [
     '!src/content/**/license.md',
     '!src/content/kitchen-sink.md',
     '!src/content/examples/**/readme.md',
+    '!src/content/tutorials/README.md',
   ],
   // Tutorial config files
   'src/content/tutorials/**/config.json',

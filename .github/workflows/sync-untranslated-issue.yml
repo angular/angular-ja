@@ -1,0 +1,46 @@
+name: Sync Untranslated Files Issue
+
+on:
+  push:
+    branches:
+      - main
+      - feature/untranslated-tracking-issue
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  update-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+          cache: pnpm
+
+      - run: pnpm install
+
+      - name: Get untranslated files
+        id: files
+        run: |
+          FILES_JSON=$(pnpm run list-untranslated --json)
+          echo "data<<EOF" >> $GITHUB_OUTPUT
+          echo "$FILES_JSON" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Update tracking issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const script = require('./.github/scripts/sync-untranslated-issue.js')
+            const filesData = JSON.parse(`${{ steps.files.outputs.data }}`)
+            await script({github, context, core, filesData})

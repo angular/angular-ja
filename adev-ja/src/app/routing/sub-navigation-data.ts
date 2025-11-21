@@ -1000,7 +1000,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         contentPath: 'best-practices/a11y',
       },
       {
-        label: 'Angularでの未処理のエラー',
+        label: 'Angularにおける未処理エラー',
         path: 'best-practices/error-handling',
         contentPath: 'best-practices/error-handling',
       },

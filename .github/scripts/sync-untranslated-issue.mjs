@@ -2,9 +2,51 @@
  * @fileoverview GitHub Actions script to sync untranslated files tracking issue
  */
 
+/**
+ * @typedef {Object} UntranslatedFile
+ * @property {string} path - File path relative to adev-ja
+ * @property {string} category - File category (guide, tutorial, etc.)
+ * @property {string} extension - File extension without dot
+ */
+
+/**
+ * @typedef {Object} FilesData
+ * @property {number} count - Total number of untranslated files
+ * @property {UntranslatedFile[]} files - Array of untranslated files
+ */
+
+/**
+ * @typedef {Object} FileLinks
+ * @property {string} githubUrl - GitHub blob URL
+ * @property {string|null} previewUrl - Preview URL on angular.jp (null for non-md files)
+ * @property {string} issueUrl - Issue creation URL with pre-filled title
+ */
+
+/**
+ * @typedef {Object} GitHubContext
+ * @property {Object} repo
+ * @property {string} repo.owner - Repository owner
+ * @property {string} repo.repo - Repository name
+ */
+
+/**
+ * @typedef {Object} GitHubAPI
+ * @property {Object} rest
+ * @property {Object} rest.issues
+ * @property {Function} rest.issues.listForRepo
+ * @property {Function} rest.issues.create
+ * @property {Function} rest.issues.update
+ */
+
+/**
+ * @typedef {Object} ActionsCore
+ * @property {Function} info - Log info message
+ */
+
 const ISSUE_TITLE = 'Tracking: 未翻訳ドキュメント一覧';
 const LABELS = ['type: translation', '翻訳者募集中'];
 
+/** @type {Record<string, string>} */
 const CATEGORY_EMOJIS = {
   guide: '📖 Guide',
   tutorial: '🎓 Tutorial',
@@ -15,10 +57,13 @@ const CATEGORY_EMOJIS = {
   other: '📦 その他'
 };
 
+/** @type {string[]} */
 const CATEGORY_ORDER = ['guide', 'tutorial', 'reference', 'best-practices', 'cli', 'app', 'other'];
 
 /**
  * Generate URLs for a file
+ * @param {string} filepath - File path relative to adev-ja
+ * @returns {FileLinks} Object containing GitHub, preview, and issue URLs
  */
 function generateLinks(filepath) {
   const githubUrl = `https://github.com/angular/angular-ja/blob/main/adev-ja/${filepath}`;
@@ -45,6 +90,9 @@ function generateLinks(filepath) {
 
 /**
  * Format a file entry for the issue body
+ * @param {string} filepath - File path relative to adev-ja
+ * @param {FileLinks} links - Object containing URLs for the file
+ * @returns {string} Markdown formatted list item
  */
 function formatFileEntry(filepath, links) {
   const displayName = filepath.replace('src/content/', '');
@@ -60,6 +108,8 @@ function formatFileEntry(filepath, links) {
 
 /**
  * Group files by category
+ * @param {UntranslatedFile[]} files - Array of untranslated files
+ * @returns {Record<string, UntranslatedFile[]>} Files grouped by category
  */
 function groupByCategory(files) {
   const groups = {};
@@ -75,6 +125,8 @@ function groupByCategory(files) {
 
 /**
  * Generate issue body
+ * @param {FilesData} filesData - Object containing untranslated files data
+ * @returns {string} Markdown formatted issue body
  */
 function generateIssueBody(filesData) {
   const { count, files } = filesData;
@@ -140,6 +192,12 @@ function generateIssueBody(filesData) {
 
 /**
  * Main function
+ * @param {Object} params - Parameters
+ * @param {GitHubAPI} params.github - GitHub API instance
+ * @param {GitHubContext} params.context - GitHub Actions context
+ * @param {ActionsCore} params.core - GitHub Actions core utilities
+ * @param {FilesData} params.filesData - Untranslated files data
+ * @returns {Promise<void>}
  */
 export default async ({github, context, core, filesData}) => {
   const owner = context.repo.owner;

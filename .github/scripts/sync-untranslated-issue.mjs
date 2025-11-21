@@ -2,7 +2,7 @@
  * @fileoverview GitHub Actions script to sync untranslated files tracking issue
  */
 
-const ISSUE_TITLE = '[自動更新] 未翻訳ドキュメント一覧';
+const ISSUE_TITLE = 'Tracking: 未翻訳ドキュメント一覧';
 const LABELS = ['type: translation', '翻訳者募集中'];
 
 const CATEGORY_EMOJIS = {

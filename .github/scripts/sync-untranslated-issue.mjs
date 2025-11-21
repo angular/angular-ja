@@ -75,7 +75,7 @@ function generateLinks(filepath) {
     .replace('src/content/', '')
     .replace(/\.(md|ts|html|json)$/, '');
 
-  const issueUrl = `https://github.com/angular/angular-ja/issues/new?template=----.md&title=${encodeURIComponent(title + ' の翻訳')}`;
+  const issueUrl = `https://github.com/angular/angular-ja/issues/new?template=translation-checkout.md&title=${encodeURIComponent('translate: ' + title)}`;
 
   // .mdファイルのみプレビューURL生成
   let previewUrl = null;
@@ -226,11 +226,11 @@ export default async ({github, context, core, filesData}) => {
   core.info(`Found ${checkoutIssues.length} Translation Checkout issues`);
 
   // Issueタイトルからファイルパスを抽出してマップを作成
-  // タイトル形式: "{ファイルパス} の翻訳"
+  // タイトル形式: "translate: {ファイルパス}"
   // 前方一致でマッチング（ディレクトリ名での宣言に対応）
   const checkoutIssuesMap = new Map();
   for (const issue of checkoutIssues) {
-    const match = issue.title.match(/^(.+)\s+の翻訳$/);
+    const match = issue.title.match(/^translate:\s*(.+)$/);
     if (match) {
       const declaredPath = `src/content/${match[1]}`;
       // 各未翻訳ファイルに対して前方一致チェック

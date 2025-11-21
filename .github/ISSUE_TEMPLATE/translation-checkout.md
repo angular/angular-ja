@@ -1,11 +1,17 @@
 ---
 name: 翻訳宣言
 about: 未翻訳ドキュメントの翻訳を宣言するためのIssueです
-title: "{ファイル名} の翻訳"
+title: "translate: "
 labels: 'type: Translation Checkout'
 assignees: ''
 
 ---
+
+<!--
+⚠️ タイトル形式を変更しないでください
+タイトルは必ず "translate: {ファイルパス}" の形式にしてください
+例: translate: guide/animations/complex-sequences
+-->
 
 ## 翻訳宣言
 

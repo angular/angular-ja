@@ -103,7 +103,7 @@ function formatFileEntry(filepath, links) {
   }
   linksText += ` | [📝 翻訳宣言](${links.issueUrl})`;
 
-  return `- [ ] **${displayName}** (${linksText})`;
+  return `- [ ] ${displayName} (${linksText})`;
 }
 
 /**

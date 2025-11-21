@@ -14,7 +14,7 @@ NOTE: フォームモデルは、コンポーネントの双方向バインデ�
 
 フォームモデルは、Angularの`signal()`関数で作成される書き込み可能なシグナルです。このシグナルは、フォームのデータ構造を表すオブジェクトを保持します。
 
-```ts
+```angular-ts
 import { Component, signal } from '@angular/core'
 import { form, Field } from '@angular/forms/signals'
 
@@ -150,7 +150,7 @@ onSubmit() {
 
 テンプレートやリアクティブな計算で個々のフィールドを扱う場合は、フィールドの状態にアクセスします:
 
-```ts
+```angular-ts
 @Component({
   template: `
     <p>Current email: {{ loginForm.email().value() }}</p>
@@ -292,7 +292,7 @@ export class UserProfileComponent {
 
 ### 例: 両方向 {#example-both-directions}
 
-```ts
+```angular-ts
 @Component({
   template: `
     <input type="text" [field]="userForm.name" />
@@ -386,7 +386,7 @@ userForm.settings.theme // FieldTree<string>
 
 テンプレートでは、トップレベルのフィールドと同じ方法でネストされたフィールドをバインドします:
 
-```ts
+```angular-ts
 @Component({
   template: `
     <input [field]="userForm.profile.firstName" />

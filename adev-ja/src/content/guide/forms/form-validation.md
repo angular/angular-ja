@@ -42,7 +42,7 @@ HELPFUL: ユーザーがフォームを編集する機会がある前に、バ�
 
 ### バリデーター関数 {#validator-functions}
 
-バリデーター関数は、同期または非同期にすることができます。
+バリデーター関数は、同期または非同期にできます。
 
 | バリデーターの種類   | 詳細                                                                                                                                                                                          |
 | :------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -54,7 +54,7 @@ HELPFUL: ユーザーがフォームを編集する機会がある前に、バ�
 
 ### 組み込みのバリデーター関数 {#built-in-validator-functions}
 
-[独自のバリデーター関数](#defining-custom-validators)を作成することも、Angularの組み込みのバリデーターのいくつかを使用することもできます。
+[独自のバリデーター関数](#defining-custom-validators)を作成したり、Angularの組み込みのバリデーターのいくつかを使用したりできます。
 
 `required`や`minlength`など、テンプレート駆動フォームで属性として使用できるものと同じ組み込みバリデーターはすべて、`Validators`クラスから関数として使用できます。
 組み込みのバリデーターの完全なリストについては、[Validators](api/forms/Validators) APIリファレンスを参照してください。
@@ -92,14 +92,14 @@ HELPFUL: ユーザーがフォームを編集する機会がある前に、バ�
 関数は、_特定の_禁止されている名前を検出するための正規表現を受け取り、バリデーター関数を返すファクトリです。
 
 このサンプルでは、禁止されている名前は「bob」なので、バリデーターは「bob」を含むアクター名をすべて拒否します。
-他の場所では、「alice」や、構成された正規表現に一致する名前を拒否することもできます。
+他の場所では、「alice」や、構成された正規表現に一致する名前を拒否できます。
 
 `forbiddenNameValidator`ファクトリは、構成されたバリデーター関数を返します。
 その関数はAngularコントロールオブジェクトを受け取り、コントロール値が有効な場合は`null`を返し、_無効な場合は_検証エラーオブジェクトを返します。
 検証エラーオブジェクトには通常、検証キーの名前である`'forbiddenName'`というプロパティと、エラーメッセージに挿入できる任意の値の辞書である`{name}`という値を持つプロパティがあります。
 
-カスタム非同期バリデーターは同期バリデーターに似ていますが、代わりに後で`null`または検証エラーオブジェクトを発行するPromiseまたはオブザーバブルを返す必要があります。
-オブザーバブルの場合、オブザーバブルは完了する必要があります。その時点で、フォームは最後の発行された値を検証に使用します。
+カスタム非同期バリデーターは同期バリデーターに似ていますが、代わりに後で`null`または検証エラーオブジェクトを発行するPromiseまたはObservableを返す必要があります。
+Observableの場合、Observableは完了する必要があります。その時点で、フォームは最後の発行された値を検証に使用します。
 
 ### カスタムバリデーターをリアクティブフォームに追加する {#adding-custom-validators-to-reactive-forms}
 
@@ -207,7 +207,7 @@ const actorForm = new FormGroup(
 値が一致しない場合、役割は曖昧ではなく、両方が有効で、バリデーターは`null`を返します。
 値が一致する場合、アクターの役割は曖昧で、バリデーターはエラーオブジェクトを返すことでフォームを無効にする必要があります。
 
-より良いユーザーエクスペリエンスを提供するために、フォームが無効な場合、テンプレートに適切なエラーメッセージが表示されます。
+より良いユーザー体験を提供するために、フォームが無効な場合、テンプレートに適切なエラーメッセージが表示されます。
 
 <docs-code header="actor-form-template.component.html" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.html" visibleRegion="cross-validation-error-message"/>
 
@@ -225,7 +225,7 @@ const actorForm = new FormGroup(
 
 <docs-code header="actor-form-template.component.html" path="adev/src/content/examples/form-validation/src/app/template/actor-form-template.component.html" visibleRegion="cross-validation-register-validator"/>
 
-より良いユーザーエクスペリエンスを提供するために、フォームが無効な場合、適切なエラーメッセージが表示されます。
+より良いユーザー体験を提供するために、フォームが無効な場合、適切なエラーメッセージが表示されます。
 
 <docs-code header="actor-form-template.component.html" path="adev/src/content/examples/form-validation/src/app/template/actor-form-template.component.html" visibleRegion="cross-validation-error-message"/>
 
@@ -236,9 +236,9 @@ const actorForm = new FormGroup(
 非同期バリデーターは、`AsyncValidatorFn`と`AsyncValidator`インターフェースを実装します。
 これらは、同期バリデーターと非常に似ており、次の点が異なります。
 
-- `validate()`関数はPromiseまたはオブザーバブルを返す必要があります。
-- 返されるオブザーバブルは有限である必要があります。つまり、ある時点で完了する必要があります。
-  無限のオブザーバブルを有限のオブザーバブルに変換するには、オブザーバブルを`first`、`last`、`take`、`takeUntil`などのフィルタリング演算子でパイプします。
+- `validate()`関数はPromiseまたはObservableを返す必要があります。
+- 返されるObservableは有限である必要があります。つまり、ある時点で完了する必要があります。
+  無限のObservableを有限のObservableに変換するには、Observableを`first`、`last`、`take`、`takeUntil`などのフィルタリング演算子でパイプします。
 
 非同期検証は、同期検証の後に実行され、同期検証が成功した場合にのみ実行されます。
 このチェックにより、フォームは、基本的な検証方法がすでに無効な入力を検出している場合、潜在的にコストのかかる非同期検証プロセス（HTTPリクエストなど）を回避できます。
@@ -301,7 +301,7 @@ interface ActorsService {
 次に、バリデーター関数を`FormControl`に直接渡して、適用します。
 
 次の例では、`UnambiguousRoleValidator`の`validate`関数が、`roleControl`に適用されています。この関数をコントロールの`asyncValidators`オプションに渡し、`ActorFormReactiveComponent`に注入された`UnambiguousRoleValidator`のインスタンスにバインドしています。
-`asyncValidators`の値は、単一の非同期バリデーター関数、または関数の配列にすることができます。
+`asyncValidators`の値は、単一の非同期バリデーター関数、または関数の配列にできます。
 `FormControl`オプションの詳細については、[AbstractControlOptions](api/forms/AbstractControlOptions) APIリファレンスを参照してください。
 
 <docs-code header="actor-form-reactive.component.2.ts" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.2.ts" visibleRegion="async-validator-usage"/>
@@ -310,7 +310,7 @@ interface ActorsService {
 
 テンプレート駆動フォームで非同期バリデーターを使用するには、新しいディレクティブを作成し、そのディレクティブに`NG_ASYNC_VALIDATORS`プロバイダーを登録します。
 
-次の例では、ディレクティブは、実際の検証ロジックを含む`UniqueRoleValidator`クラスを注入し、検証を実行する必要があるときにAngularによってトリガーされる`validate`関数でそれを呼び出します。
+次の例では、ディレクティブは、実際の検証ロジックを含む`UniqueRoleValidator`クラスを注入し、Angularが検証する必要があるときにトリガーする`validate`関数でそれを呼び出します。
 
 <docs-code header="role.directive.ts" path="adev/src/content/examples/form-validation/src/app/shared/role.directive.ts" visibleRegion="async-validator-directive"/>
 

@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - feature/untranslated-tracking-issue
   issues:
     types: [opened, closed, reopened, labeled]
   workflow_dispatch:

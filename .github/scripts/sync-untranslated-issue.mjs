@@ -63,6 +63,29 @@ const CATEGORY_EMOJIS = {
 const CATEGORY_ORDER = ['guide', 'tutorial', 'reference', 'best-practices', 'cli', 'tools', 'ecosystem', 'app', 'other'];
 
 /**
+ * Generate preview path from file path
+ * @param {string} filepath - File path relative to adev-ja
+ * @returns {string} Preview path for angular.jp
+ */
+function generatePreviewPath(filepath) {
+  const basePath = filepath
+    .replace('src/content/', '')
+    .replace(/\/README\.md$/, '') // READMEの場合はディレクトリのみ
+    .replace(/\.md$/, '');
+
+  // チュートリアルの特殊なパス変換
+  if (basePath.startsWith('tutorials/')) {
+    // tutorials/first-app/intro -> tutorials/first-app
+    // tutorials/first-app/steps/01-hello-world -> tutorials/first-app/01-hello-world
+    return basePath
+      .replace(/\/intro$/, '') // intro ディレクトリを削除
+      .replace(/\/steps\//, '/'); // steps/ を削除
+  }
+
+  return basePath;
+}
+
+/**
  * Generate URLs for a file
  * @param {string} filepath - File path relative to adev-ja
  * @returns {FileLinks} Object containing GitHub, preview, and issue URLs
@@ -78,14 +101,9 @@ function generateLinks(filepath) {
   const issueUrl = `https://github.com/angular/angular-ja/issues/new?template=translation-checkout.md&title=${encodeURIComponent('translate: ' + title)}`;
 
   // .mdファイルのみプレビューURL生成
-  let previewUrl = null;
-  if (filepath.endsWith('.md')) {
-    const previewPath = filepath
-      .replace('src/content/', '')
-      .replace(/\/README\.md$/, '') // READMEの場合はディレクトリのみ
-      .replace(/\.md$/, '');
-    previewUrl = `https://angular.jp/${previewPath}`;
-  }
+  const previewUrl = filepath.endsWith('.md')
+    ? `https://angular.jp/${generatePreviewPath(filepath)}`
+    : null;
 
   return { githubUrl, previewUrl, issueUrl };
 }

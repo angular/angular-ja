@@ -47,6 +47,17 @@ rules:
   - expected: 参照してください
     pattern: ご参照ください
 
+  - expected: みなさん
+    pattern:
+      - 皆様
+      - 皆さん
+      - みな様
+
+  - expected: すばらしい
+    pattern:
+      - 素晴らしい
+      - 素晴しい
+
   - expected: 伝播する
     pattern: 伝わる
 

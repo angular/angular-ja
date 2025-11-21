@@ -32,7 +32,7 @@ jobs:
       - name: Get untranslated files
         id: files
         run: |
-          FILES_JSON=$(pnpm run list-untranslated --json 2>/dev/null)
+          FILES_JSON=$(npx tsx tools/list-untranslated.ts --json)
           echo "data<<EOF" >> $GITHUB_OUTPUT
           echo "$FILES_JSON" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT

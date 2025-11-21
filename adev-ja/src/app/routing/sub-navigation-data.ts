@@ -69,6 +69,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             label: 'シグナルを使ったフォーム',
             path: 'essentials/signal-forms',
             contentPath: 'introduction/essentials/signal-forms',
+            status: 'new',
           },
           {
             label: '依存性の注入によるモジュール設計',

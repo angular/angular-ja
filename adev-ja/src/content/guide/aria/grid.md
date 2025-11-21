@@ -1,14 +1,14 @@
-<docs-decorative-header title="Grid">
+<docs-decorative-header title="グリッド">
 </docs-decorative-header>
 
 <docs-pill-row>
-  <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/grid/" title="Grid ARIA pattern"/>
-  <docs-pill href="/api?query=accordion#angular_aria_accordion" title="Grid API Reference"/>
+  <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/grid/" title="グリッドARIAパターン"/>
+  <docs-pill href="/api?query=accordion#angular_aria_accordion" title="グリッドAPIリファレンス"/>
 </docs-pill-row>
 
-## Overview
+## 概要 {#overview}
 
-A grid enables users to navigate two-dimensional data or interactive elements using directional arrow keys, Home, End, and Page Up/Down. Grids work for data tables, calendars, spreadsheets, and layout patterns that group related interactive elements.
+グリッドを使用すると、ユーザーは方向矢印キー、Home、End、Page Up/Downを使用して2次元データやインタラクティブな要素をナビゲートできます。グリッドは、データテーブル、カレンダー、スプレッドシート、および関連するインタラクティブな要素をグループ化するレイアウトパターンで機能します。
 
 <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/grid/src/overview/basic/app/app.component.ts">
   <docs-code header="TS" path="adev/src/content/examples/aria/grid/src/overview/basic/app/app.component.ts"/>
@@ -16,40 +16,40 @@ A grid enables users to navigate two-dimensional data or interactive elements us
   <docs-code header="CSS" path="adev/src/content/examples/aria/grid/src/overview/basic/app/app.component.css"/>
 </docs-code-multifile>
 
-## Usage
+## 使用法 {#usage}
 
-Grids work well for data or interactive elements organized in rows and columns where users need keyboard navigation in multiple directions.
+グリッドは、ユーザーが複数の方向へのキーボードナビゲーションを必要とする、行と列で構成されたデータやインタラクティブな要素に適しています。
 
-**Use grids when:**
+**次の場合にグリッドを使用します:**
 
-- Building interactive data tables with editable or selectable cells
-- Creating calendars or date pickers
-- Implementing spreadsheet-like interfaces
-- Grouping interactive elements (buttons, checkboxes) to reduce tab stops on a page
-- Building interfaces requiring two-dimensional keyboard navigation
+- 編集可能または選択可能なセルを持つインタラクティブなデータテーブルを構築する場合
+- カレンダーや日付ピッカーを作成する場合
+- スプレッドシートのようなインターフェースを実装する場合
+- ページのタブストップを減らすために、インタラクティブな要素（ボタン、チェックボックス）をグループ化する場合
+- 2次元のキーボードナビゲーションを必要とするインターフェースを構築する場合
 
-**Avoid grids when:**
+**次の場合にグリッドの使用を避けます:**
 
-- Displaying simple read-only tables (use semantic HTML `<table>` instead)
-- Showing single-column lists (use [Listbox](guide/aria/listbox) instead)
-- Displaying hierarchical data (use [Tree](guide/aria/tree) instead)
-- Building forms without tabular layout (use standard form controls)
+- 単純な読み取り専用のテーブルを表示する場合（代わりにセマンティックなHTMLの`<table>`を使用します）
+- 単一列のリストを表示する場合（代わりに[Listbox](guide/aria/listbox)を使用します）
+- 階層データを表示する場合（代わりに[Tree](guide/aria/tree)を使用します）
+- 表形式のレイアウトではないフォームを構築する場合（標準のフォームコントロールを使用します）
 
-## Features
+## 機能 {#features}
 
-- **Two-dimensional navigation** - Arrow keys move between cells in all directions
-- **Focus modes** - Choose between roving tabindex or activedescendant focus strategies
-- **Selection support** - Optional cell selection with single or multi-select modes
-- **Wrapping behavior** - Configure how navigation wraps at grid edges (continuous, loop, or nowrap)
-- **Range selection** - Select multiple cells with modifier keys or dragging
-- **Disabled states** - Disable the entire grid or individual cells
-- **RTL support** - Automatic right-to-left language navigation
+- **2次元ナビゲーション** - 矢印キーですべての方向にセル間を移動
+- **フォーカスモード** - roving tabindexまたはactivedescendantのフォーカス戦略から選択
+- **選択のサポート** - 単一または複数選択モードによるオプションのセル選択
+- **折り返し動作** - グリッドの端でナビゲーションがどのように折り返すかを設定 (continuous、loop、またはnowrap)
+- **範囲選択** - 修飾キーまたはドラッグで複数のセルを選択
+- **無効状態** - グリッド全体または個々のセルを無効化
+- **RTLサポート** - 右から左へ記述する言語の自動ナビゲーション
 
-## Examples
+## 例 {#examples}
 
-### Data table grid
+### データテーブルグリッド {#data-table-grid}
 
-Use a grid for interactive tables where users need to navigate between cells using arrow keys. This example shows a basic data table with keyboard navigation.
+ユーザーが矢印キーを使ってセル間を移動する必要があるインタラクティブなテーブルには、グリッドを使用します。この例は、キーボードナビゲーションを備えた基本的なデータテーブルを示しています。
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -68,11 +68,11 @@ Use a grid for interactive tables where users need to navigate between cells usi
   </docs-tab>
 </docs-tab-group>
 
-Apply the `ngGrid` directive to the table element, `ngGridRow` to each row, and `ngGridCell` to each cell.
+`ngGrid`ディレクティブをテーブル要素に、`ngGridRow`を各行に、`ngGridCell`を各セルに適用します。
 
-### Calendar grid
+### カレンダーグリッド {#calendar-grid}
 
-Calendars are a common use case for grids. This example shows a month view where users navigate dates using arrow keys.
+カレンダーはグリッドの一般的なユースケースです。この例は、ユーザーが矢印キーを使って日付を移動する月表示を示しています。
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -98,11 +98,11 @@ Calendars are a common use case for grids. This example shows a month view where
   </docs-tab>
 </docs-tab-group>
 
-Users can activate a date by pressing Enter or Space when focused on a cell.
+ユーザーは、セルにフォーカスが当たっているときにEnterキーまたはSpaceキーを押すことで、日付をアクティブにできます。
 
-### Layout grid
+### レイアウトグリッド {#layout-grid}
 
-Use a layout grid to group interactive elements and reduce tab stops. This example shows a grid of pill buttons.
+レイアウトグリッドを使用して、インタラクティブな要素をグループ化し、タブストップを減らします。この例は、ピルボタンのグリッドを示しています。
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -128,11 +128,11 @@ Use a layout grid to group interactive elements and reduce tab stops. This examp
   </docs-tab>
 </docs-tab-group>
 
-Instead of tabbing through each button, users navigate with arrow keys and only one button receives tab focus.
+各ボタンをタブで移動する代わりに、ユーザーは矢印キーで移動し、1つのボタンのみがタブフォーカスを受け取ります。
 
-### Selection and focus modes
+### 選択とフォーカスモード {#selection-and-focus-modes}
 
-Enable selection with `[enableSelection]="true"` and configure how focus and selection interact.
+`[enableSelection]="true"`で選択を有効にし、フォーカスと選択がどのように相互作用するかを設定します。
 
 ```angular-html
 <table ngGrid
@@ -147,68 +147,68 @@ Enable selection with `[enableSelection]="true"` and configure how focus and sel
 </table>
 ```
 
-**Selection modes:**
+**選択モード:**
 
-- `follow`: Focused cell is automatically selected
-- `explicit`: Users select cells with Space or click
+- `follow`: フォーカスされたセルが自動的に選択されます
+- `explicit`: ユーザーがSpaceキーまたはクリックでセルを選択します
 
-**Focus modes:**
+**フォーカスモード:**
 
-- `roving`: Focus moves to cells using `tabindex` (better for simple grids)
-- `activedescendant`: Focus stays on grid container, `aria-activedescendant` indicates active cell (better for virtual scrolling)
+- `roving`: `tabindex`を使用してフォーカスがセルに移動します（単純なグリッドに適しています）
+- `activedescendant`: フォーカスはグリッドコンテナに留まり、`aria-activedescendant`がアクティブなセルを示します（仮想スクロールに適しています）
 
-## APIs
+## API
 
-### Grid
+### Grid {#grid}
 
-The container directive that provides keyboard navigation and focus management for rows and cells.
+行とセルのキーボードナビゲーションとフォーカス管理を提供するコンテナディレクティブです。
 
-#### Inputs
+#### Inputs {#inputs}
 
-| Property               | Type                                 | Default    | Description                                                   |
+| プロパティ             | 型                                   | デフォルト   | 説明                                                          |
 | ---------------------- | ------------------------------------ | ---------- | ------------------------------------------------------------- |
-| `enableSelection`      | `boolean`                            | `false`    | Whether selection is enabled for the grid                     |
-| `disabled`             | `boolean`                            | `false`    | Disables the entire grid                                      |
-| `softDisabled`         | `boolean`                            | `true`     | When `true`, disabled cells are focusable but not interactive |
-| `focusMode`            | `'roving' \| 'activedescendant'`     | `'roving'` | Focus strategy used by the grid                               |
-| `rowWrap`              | `'continuous' \| 'loop' \| 'nowrap'` | `'loop'`   | Navigation wrapping behavior along rows                       |
-| `colWrap`              | `'continuous' \| 'loop' \| 'nowrap'` | `'loop'`   | Navigation wrapping behavior along columns                    |
-| `multi`                | `boolean`                            | `false`    | Whether multiple cells can be selected                        |
-| `selectionMode`        | `'follow' \| 'explicit'`             | `'follow'` | Whether selection follows focus or requires explicit action   |
-| `enableRangeSelection` | `boolean`                            | `false`    | Enable range selections with modifier keys or dragging        |
+| `enableSelection`      | `boolean`                            | `false`    | グリッドの選択が有効かどうか                                  |
+| `disabled`             | `boolean`                            | `false`    | グリッド全体を無効にします                                    |
+| `softDisabled`         | `boolean`                            | `true`     | `true`の場合、無効化されたセルはフォーカス可能ですが、インタラクティブではありません |
+| `focusMode`            | `'roving' \| 'activedescendant'`     | `'roving'` | グリッドで使用されるフォーカス戦略                            |
+| `rowWrap`              | `'continuous' \| 'loop' \| 'nowrap'` | `'loop'`   | 行に沿ったナビゲーションの折り返し動作                        |
+| `colWrap`              | `'continuous' \| 'loop' \| 'nowrap'` | `'loop'`   | 列に沿ったナビゲーションの折り返し動作                        |
+| `multi`                | `boolean`                            | `false`    | 複数のセルを選択できるかどうか                                |
+| `selectionMode`        | `'follow' \| 'explicit'`             | `'follow'` | 選択がフォーカスに追従するか、明示的なアクションを必要とするか |
+| `enableRangeSelection` | `boolean`                            | `false`    | 修飾キーまたはドラッグによる範囲選択を有効にします            |
 
-### GridRow
+### GridRow {#gridrow}
 
-Represents a row within a grid and serves as a container for grid cells.
+グリッド内の行を表し、グリッドセルのコンテナとして機能します。
 
-#### Inputs
+#### Inputs {#inputs}
 
-| Property   | Type     | Default | Description                           |
+| プロパティ | 型       | デフォルト | 説明                                  |
 | ---------- | -------- | ------- | ------------------------------------- |
-| `rowIndex` | `number` | auto    | The index of this row within the grid |
+| `rowIndex` | `number` | auto    | グリッド内でのこの行のインデックス    |
 
-### GridCell
+### GridCell {#gridcell}
 
-Represents an individual cell within a grid row.
+グリッド行内の個々のセルを表します。
 
-#### Inputs
+#### Inputs {#inputs}
 
-| Property      | Type                         | Default        | Description                                             |
+| プロパティ    | 型                           | デフォルト     | 説明                                                    |
 | ------------- | ---------------------------- | -------------- | ------------------------------------------------------- |
-| `id`          | `string`                     | auto           | Unique identifier for the cell                          |
-| `role`        | `string`                     | `'gridcell'`   | Cell role: `gridcell`, `columnheader`, or `rowheader`   |
-| `disabled`    | `boolean`                    | `false`        | Disables this cell                                      |
-| `selected`    | `boolean`                    | `false`        | Whether the cell is selected (supports two-way binding) |
-| `selectable`  | `boolean`                    | `true`         | Whether the cell can be selected                        |
-| `rowSpan`     | `number`                     | —              | Number of rows the cell spans                           |
-| `colSpan`     | `number`                     | —              | Number of columns the cell spans                        |
-| `rowIndex`    | `number`                     | —              | Row index of the cell                                   |
-| `colIndex`    | `number`                     | —              | Column index of the cell                                |
-| `orientation` | `'vertical' \| 'horizontal'` | `'horizontal'` | Orientation for widgets within the cell                 |
-| `wrap`        | `boolean`                    | `true`         | Whether widget navigation wraps within the cell         |
+| `id`          | `string`                     | auto           | セルの一意の識別子                                      |
+| `role`        | `string`                     | `'gridcell'`   | セルのロール: `gridcell`、`columnheader`、または`rowheader` |
+| `disabled`    | `boolean`                    | `false`        | このセルを無効にします                                  |
+| `selected`    | `boolean`                    | `false`        | セルが選択されているかどうか (双方向バインディングをサポート) |
+| `selectable`  | `boolean`                    | `true`         | セルが選択可能かどうか                                  |
+| `rowSpan`     | `number`                     | —              | セルがまたがる行の数                                    |
+| `colSpan`     | `number`                     | —              | セルがまたがる列の数                                    |
+| `rowIndex`    | `number`                     | —              | セルの行インデックス                                    |
+| `colIndex`    | `number`                     | —              | セルの列インデックス                                    |
+| `orientation` | `'vertical' \| 'horizontal'` | `'horizontal'` | セル内のウィジェットの方向                              |
+| `wrap`        | `boolean`                    | `true`         | ウィジェットのナビゲーションがセル内で折り返すかどうか    |
 
-#### Signals
+#### シグナル {#signals}
 
-| Property | Type              | Description                          |
+| プロパティ | 型                | 説明                                 |
 | -------- | ----------------- | ------------------------------------ |
-| `active` | `Signal<boolean>` | Whether the cell currently has focus |
+| `active` | `Signal<boolean>` | セルが現在フォーカスを持っているかどうか |

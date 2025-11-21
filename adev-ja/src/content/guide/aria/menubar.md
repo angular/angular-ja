@@ -1,14 +1,76 @@
-<docs-decorative-header title="Menubar">
+<docs-decorative-header title="メニューバー">
 </docs-decorative-header>
 
 <docs-pill-row>
-  <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/menubar/" title="Menubar ARIA pattern"/>
-  <docs-pill href="/api/aria/menu/Menu" title="Menu API Reference"/>
+  <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/menubar/" title="メニューバーARIAパターン"/>
+  <docs-pill href="/api/aria/menu/Menu" title="Menu APIリファレンス"/>
 </docs-pill-row>
 
-## Overview
+## 概要 {#overview}
 
-The manubar is a horizontal navigation bar that provides persistent access to application menus. Menubars organize commands into logical categories like File, Edit, and View, helping users discover and execute application features through keyboard or mouse interaction.
+メニューバーは、アプリケーションメニューへの永続的なアクセスを提供する水平ナビゲーションバーです。メニューバーは、ファイル、編集、表示などの論理的なカテゴリーにコマンドを整理し、ユーザーがキーボードやマウスの操作を通じてアプリケーションの機能を発見し、実行するのに役立ちます。
+
+<docs-tab-group>
+  <docs-tab label="基本">
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/menubar/src/basic/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/menubar/src/basic/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/menubar/src/basic/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/menubar/src/basic/app/app.css"/>
+    </docs-code-multifile>
+  </docs-tab>
+
+  <docs-tab label="マテリアル">
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/menubar/src/basic/material/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/menubar/src/basic/material/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/menubar/src/basic/material/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/menubar/src/basic/material/app/app.css"/>
+    </docs-code-multifile>
+  </docs-tab>
+
+  <docs-tab label="レトロ">
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/menubar/src/basic/retro/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/menubar/src/basic/retro/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/menubar/src/basic/retro/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/menubar/src/basic/retro/app/app.css"/>
+    </docs-code-multifile>
+  </docs-tab>
+</docs-tab-group>
+
+## 使い方 {#usage}
+
+メニューバーは、アプリケーションのコマンドを永続的で発見しやすいナビゲーションに整理するのに適しています。
+
+**メニューバーを使用する場合:**
+
+- アプリケーションのコマンドバー(ファイル、編集、表示、挿入、フォーマットなど)を構築する場合
+- インターフェース全体で表示され続ける永続的なナビゲーションを作成する場合
+- コマンドを論理的なトップレベルのカテゴリーに整理する場合
+- キーボードサポート付きの水平メニューナビゲーションが必要な場合
+- デスクトップスタイルのアプリケーションインターフェースを構築する場合
+
+**メニューバーを避けるべき場合:**
+
+- 個々のアクションのためのドロップダウンメニューを構築する場合(代わりに[トリガー付きMenu](guide/aria/menu)を使用してください)
+- コンテキストメニューを作成する場合([Menu](guide/aria/menu)ガイドパターンを使用してください)
+- シンプルなスタンドアロンのアクションリストの場合(代わりに[Menu](guide/aria/menu)を使用してください)
+- 水平方向のスペースが限られているモバイルインターフェースの場合
+- ナビゲーションがサイドバーまたはヘッダーのナビゲーションパターンに属する場合
+
+## 機能 {#features}
+
+- **水平ナビゲーション** - 左右の矢印キーでトップレベルのカテゴリー間を移動
+- **永続的な可視性** - 常に表示され、モーダルでも非表示でもない
+- **ホバーで開く** - 最初のキーボードまたはクリック操作の後、ホバーでサブメニューが開く
+- **ネストされたサブメニュー** - 複数レベルのメニュー深度をサポート
+- **キーボードナビゲーション** - 矢印キー、Enter/Space、Escape、および先行入力サーチ
+- **無効状態** - メニューバー全体または個々の項目を無効化
+- **RTLサポート** - 右から左へ記述する言語のナビゲーションを自動でサポート
+
+## 例 {#examples}
+
+### 基本的なメニューバー {#basic-menubar}
+
+メニューバーは、トップレベルのカテゴリーに整理されたアプリケーションコマンドへの永続的なアクセスを提供します。ユーザーは左/右矢印キーでカテゴリー間を移動し、Enterキーまたは下矢印キーでメニューを開きます。
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -36,73 +98,11 @@ The manubar is a horizontal navigation bar that provides persistent access to ap
   </docs-tab>
 </docs-tab-group>
 
-## Usage
+右矢印キーを押すと、File、Edit、Viewの間を移動します。Enterキーまたは下矢印キーを押すとメニューが開き、上/下矢印キーでサブメニュー項目を操作できます。
 
-Menubars work well for organizing application commands into persistent, discoverable navigation.
+### 無効化されたメニューバーアイテム {#disabled-menubar-items}
 
-**Use menubars when:**
-
-- Building application command bars (such as File, Edit, View, Insert, Format)
-- Creating persistent navigation that stays visible across the interface
-- Organizing commands into logical top-level categories
-- Need horizontal menu navigation with keyboard support
-- Building desktop-style application interfaces
-
-**Avoid menubars when:**
-
-- Building dropdown menus for individual actions (use [Menu with trigger](guide/aria/menu) instead)
-- Creating context menus (use [Menu](guide/aria/menu) guide pattern)
-- Simple standalone action lists (use [Menu](guide/aria/menu) instead)
-- Mobile interfaces where horizontal space is limited
-- Navigation belongs in a sidebar or header navigation pattern
-
-## Features
-
-- **Horizontal navigation** - Left/Right arrow keys move between top-level categories
-- **Persistent visibility** - Always visible, not modal or dismissable
-- **Hover-to-open** - Submenus open on hover after first keyboard or click interaction
-- **Nested submenus** - Support multiple levels of menu depth
-- **Keyboard navigation** - Arrow keys, Enter/Space, Escape, and typeahead search
-- **Disabled states** - Disable entire menubar or individual items
-- **RTL support** - Automatic right-to-left language navigation
-
-## Examples
-
-### Basic menubar
-
-A menubar provides persistent access to application commands organized into top-level categories. Users navigate between categories with Left/Right arrows and open menus with Enter or Down arrow.
-
-<docs-tab-group>
-  <docs-tab label="Basic">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/menubar/src/basic/app/app.ts">
-      <docs-code header="app.ts" path="adev/src/content/examples/aria/menubar/src/basic/app/app.ts"/>
-      <docs-code header="app.html" path="adev/src/content/examples/aria/menubar/src/basic/app/app.html"/>
-      <docs-code header="app.css" path="adev/src/content/examples/aria/menubar/src/basic/app/app.css"/>
-    </docs-code-multifile>
-  </docs-tab>
-
-  <docs-tab label="Material">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/menubar/src/basic/material/app/app.ts">
-      <docs-code header="app.ts" path="adev/src/content/examples/aria/menubar/src/basic/material/app/app.ts"/>
-      <docs-code header="app.html" path="adev/src/content/examples/aria/menubar/src/basic/material/app/app.html"/>
-      <docs-code header="app.css" path="adev/src/content/examples/aria/menubar/src/basic/material/app/app.css"/>
-    </docs-code-multifile>
-  </docs-tab>
-
-  <docs-tab label="Retro">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/menubar/src/basic/retro/app/app.ts">
-      <docs-code header="app.ts" path="adev/src/content/examples/aria/menubar/src/basic/retro/app/app.ts"/>
-      <docs-code header="app.html" path="adev/src/content/examples/aria/menubar/src/basic/retro/app/app.html"/>
-      <docs-code header="app.css" path="adev/src/content/examples/aria/menubar/src/basic/retro/app/app.css"/>
-    </docs-code-multifile>
-  </docs-tab>
-</docs-tab-group>
-
-Press Right arrow to move between File, Edit, and View. Press Enter or Down arrow to open a menu and navigate submenu items with Up/Down arrows.
-
-### Disabled menubar items
-
-Disable specific menu items or the entire menubar to prevent interaction. Control whether disabled items can receive keyboard focus with the `softDisabled` input.
+特定のメニュー項目またはメニューバー全体を無効にして、インタラクションを防ぎます。`softDisabled`入力で、無効化された項目がキーボードフォーカスを受け取れるかどうかを制御します。
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -130,11 +130,11 @@ Disable specific menu items or the entire menubar to prevent interaction. Contro
   </docs-tab>
 </docs-tab-group>
 
-When `[softDisabled]="true"` on the menubar, disabled items can receive focus but cannot be activated. When `[softDisabled]="false"`, disabled items are skipped during keyboard navigation.
+メニューバーで`[softDisabled]="true"`の場合、無効化された項目はフォーカスを受け取れますが、アクティブにはできません。`[softDisabled]="false"`の場合、無効化された項目はキーボードナビゲーション中にスキップされます。
 
-### RTL support
+### RTLサポート {#rtl-support}
 
-Menubars automatically adapt to right-to-left (RTL) languages. Arrow key navigation reverses direction, and submenus position on the left side.
+メニューバーは、右から左へ記述する言語（RTL）に自動的に適応します。矢印キーによるナビゲーションの方向は逆になり、サブメニューは左側に配置されます。
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -162,37 +162,37 @@ Menubars automatically adapt to right-to-left (RTL) languages. Arrow key navigat
   </docs-tab>
 </docs-tab-group>
 
-The `dir="rtl"` attribute enables RTL mode. Left arrow moves right, Right arrow moves left, maintaining natural navigation for RTL language users.
+`dir="rtl"`属性はRTLモードを有効にします。左矢印キーは右に、右矢印キーは左に移動し、RTL言語のユーザーにとって自然なナビゲーションを維持します。
 
-## APIs
+## API {#apis}
 
-The menubar pattern uses directives from Angular's Aria library. See the [Menu guide](guide/aria/menu) for complete API documentation.
+メニューバーパターンはAngularのAriaライブラリのディレクティブを使用します。完全なAPIドキュメントについては、[Menuガイド](guide/aria/menu)を参照してください。
 
-### MenuBar
+### MenuBar {#menubar}
 
-The horizontal container for top-level menu items.
+トップレベルのメニューアイテムのための水平コンテナです。
 
-#### Inputs
+#### Inputs {#inputs}
 
-| Property       | Type      | Default | Description                                                   |
+| プロパティ     | 型        | デフォルト | 説明                                                          |
 | -------------- | --------- | ------- | ------------------------------------------------------------- |
-| `disabled`     | `boolean` | `false` | Disables the entire menubar                                   |
-| `wrap`         | `boolean` | `true`  | Whether keyboard navigation wraps from last to first item     |
-| `softDisabled` | `boolean` | `true`  | When `true`, disabled items are focusable but not interactive |
+| `disabled`     | `boolean` | `false` | メニューバー全体を無効にします                                  |
+| `wrap`         | `boolean` | `true`  | キーボードナビゲーションが最後のアイテムから最初のアイテムにラップするかどうか |
+| `softDisabled` | `boolean` | `true`  | `true`の場合、無効化されたアイテムはフォーカス可能ですが、インタラクティブではありません |
 
-See the [Menu API documentation](guide/aria/menu#apis) for complete details on all available inputs and signals.
+利用可能なすべての入力とシグナルの詳細については、[Menu APIドキュメント](guide/aria/menu#apis)を参照してください。
 
-### MenuItem
+### MenuItem {#menuitem}
 
-Individual items within the menubar. Same API as Menu - see [MenuItem](guide/aria/menu#menuitem).
+メニューバー内の個々のアイテムです。Menuと同じAPIです - [MenuItem](guide/aria/menu#menuitem)を参照してください。
 
-**Menubar-specific behavior:**
+**メニューバー固有の動作:**
 
-- Left/Right arrows navigate between menubar items (vs Up/Down in vertical menus)
-- First keyboard interaction or click enables hover-to-open for submenus
-- Enter or Down arrow opens the submenu and focuses the first item
-- `aria-haspopup="menu"` indicates items with submenus
+- 左右の矢印キーでメニューバーのアイテム間を移動します（垂直メニューでは上下）
+- 最初のキーボード操作またはクリックで、サブメニューのホバーで開く機能が有効になります
+- Enterキーまたは下矢印キーでサブメニューを開き、最初のアイテムにフォーカスします
+- `aria-haspopup="menu"`はサブメニューを持つアイテムを示します
 
-### MenuTrigger
+### MenuTrigger {#menutrigger}
 
-Not typically used in menubars - MenuItem handles trigger behavior directly when it has an associated submenu. See [MenuTrigger](guide/aria/menu#menutrigger) for standalone menu trigger patterns.
+通常メニューバーでは使用されません - MenuItemは関連するサブメニューがある場合、トリガーの動作を直接処理します。スタンドアロンのメニュートリガーパターンについては、[MenuTrigger](guide/aria/menu#menutrigger)を参照してください。

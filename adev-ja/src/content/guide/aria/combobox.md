@@ -1,14 +1,74 @@
-<docs-decorative-header title="Combobox">
+<docs-decorative-header title="コンボボックス">
 </docs-decorative-header>
 
 <docs-pill-row>
-  <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/combobox/" title="Combobox ARIA pattern"/>
-  <docs-pill href="/api?query=accordion#angular_aria_accordion" title="Combobox API Reference"/>
+  <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/combobox/" title="コンボボックスARIAパターン"/>
+  <docs-pill href="/api?query=accordion#angular_aria_accordion" title="コンボボックスAPIリファレンス"/>
 </docs-pill-row>
 
-## Overview
+## 概要 {#overview}
 
-A directive that coordinates a text input with a popup, providing the primitive directive for autocomplete, select, and multiselect patterns.
+テキスト入力とポップアップを連携させ、オートコンプリート、セレクト、マルチセレクトのパターンにプリミティブディレクティブを提供するディレクティブです。
+
+<docs-tab-group>
+  <docs-tab label="基本">
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.ts">
+      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.ts"/>
+      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.html"/>
+      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.css"/>
+    </docs-code-multifile>
+  </docs-tab>
+
+  <docs-tab label="Material">
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.ts">
+      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.ts"/>
+      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.html"/>
+      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.css"/>
+    </docs-code-multifile>
+  </docs-tab>
+
+  <docs-tab label="レトロ">
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.ts">
+      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.ts"/>
+      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.html"/>
+      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.css"/>
+    </docs-code-multifile>
+  </docs-tab>
+</docs-tab-group>
+
+## 使い方 {#usage}
+
+コンボボックスは、テキスト入力とポップアップを連携させるプリミティブディレクティブです。オートコンプリート、セレクト、マルチセレクトパターンの基盤を提供します。次のような場合には、コンボボックスを直接使用することを検討してください：
+
+- **カスタムオートコンプリートパターンの構築** - 特殊なフィルタリングやサジェスチョンの動作を作成する
+- **カスタム選択コンポーネントの作成** - 独自の要件を持つドロップダウンを開発する
+- **入力とポップアップの連携** - テキスト入力をリストボックス、ツリー、またはダイアログコンテンツと組み合わせる
+- **特定のフィルターモードの実装** - 手動、自動選択、またはハイライトの動作を使用する
+
+代わりに、次のような場合はドキュメント化されたパターンを使用してください：
+
+- フィルタリング付きの標準的なオートコンプリートが必要な場合 - すぐに使える例については、[Autocompleteパターン](guide/aria/autocomplete)を参照してください
+- 単一選択のドロップダウンが必要な場合 - 完全なドロップダウンの実装については、[Selectパターン](guide/aria/select)を参照してください
+- 複数選択のドロップダウンが必要な場合 - コンパクトな表示の複数選択については、[Multiselectパターン](guide/aria/multiselect)を参照してください
+
+Note: [Autocomplete](guide/aria/autocomplete)、[Select](guide/aria/select)、[Multiselect](guide/aria/multiselect)のガイドでは、このディレクティブを特定のユースケースのために[Listbox](guide/aria/listbox)と組み合わせた、ドキュメント化されたパターンが示されています。
+
+## 機能 {#features}
+
+Angularのコンボボックスは、完全にアクセシブルな入力とポップアップの連携システムを以下の機能とともに提供します:
+
+- **ポップアップ付きテキスト入力** - 入力フィールドとポップアップコンテンツを連携させます
+- **3つのフィルターモード** - 手動、自動選択、またはハイライトの動作
+- **キーボードナビゲーション** - 矢印キー、Enter、Escapeキーのハンドリング
+- **スクリーンリーダーのサポート** - `role="combobox"`や`aria-expanded`を含む組み込みのARIA属性
+- **ポップアップ管理** - ユーザーインタラクションに基づく自動的な表示/非表示
+- **シグナルベースのリアクティビティ** - Angularシグナルを使用したリアクティブな状態管理
+
+## 例
+
+### オートコンプリート {#autocomplete}
+
+ユーザーが入力するにつれてオプションをフィルタリングして提案する、アクセシブルな入力フィールドです。リストから値を見つけて選択するのに役立ちます。
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -36,71 +96,11 @@ A directive that coordinates a text input with a popup, providing the primitive 
   </docs-tab>
 </docs-tab-group>
 
-## Usage
+`filterMode="manual"`設定は、フィルタリングと選択を完全に制御します。入力は、オプションリストをフィルタリングするシグナルを更新します。ユーザーは矢印キーで移動し、Enterキーまたはクリックで選択します。このモードは、カスタムフィルタリングロジックに最も柔軟性を提供します。完全なフィルタリングパターンと例については、[オートコンプリートガイド](guide/aria/autocomplete)を参照してください。
 
-Combobox is the primitive directive that coordinates a text input with a popup. It provides the foundation for autocomplete, select, and multiselect patterns. Consider using combobox directly when:
+### 読み取り専用モード {#readonly-mode}
 
-- **Building custom autocomplete patterns** - Creating specialized filtering or suggestion behavior
-- **Creating custom selection components** - Developing dropdowns with unique requirements
-- **Coordinating input with popup** - Pairing text input with listbox, tree, or dialog content
-- **Implementing specific filter modes** - Using manual, auto-select, or highlight behaviors
-
-Use documented patterns instead when:
-
-- Standard autocomplete with filtering is needed - See the [Autocomplete pattern](guide/aria/autocomplete) for ready-to-use examples
-- Single-selection dropdowns are needed - See the [Select pattern](guide/aria/select) for complete dropdown implementation
-- Multiple-selection dropdowns are needed - See the [Multiselect pattern](guide/aria/multiselect) for multi-select with compact display
-
-Note: The [Autocomplete](guide/aria/autocomplete), [Select](guide/aria/select), and [Multiselect](guide/aria/multiselect) guides show documented patterns that combine this directive with [Listbox](guide/aria/listbox) for specific use cases.
-
-## Features
-
-Angular's combobox provides a fully accessible input-popup coordination system with:
-
-- **Text Input with Popup** - Coordinates input field with popup content
-- **Three Filter Modes** - Manual, auto-select, or highlight behaviors
-- **Keyboard Navigation** - Arrow keys, Enter, Escape handling
-- **Screen Reader Support** - Built-in ARIA attributes including role="combobox" and aria-expanded
-- **Popup Management** - Automatic show/hide based on user interaction
-- **Signal-Based Reactivity** - Reactive state management using Angular signals
-
-## Examples
-
-### Autocomplete
-
-An accessible input field that filters and suggests options as users type, helping them find and select values from a list.
-
-<docs-tab-group>
-  <docs-tab label="Basic">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.ts">
-      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.ts"/>
-      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.html"/>
-      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.css"/>
-    </docs-code-multifile>
-  </docs-tab>
-
-  <docs-tab label="Material">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.ts">
-      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.ts"/>
-      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.html"/>
-      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.css"/>
-    </docs-code-multifile>
-  </docs-tab>
-
-  <docs-tab label="Retro">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.ts">
-      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.ts"/>
-      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.html"/>
-      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.css"/>
-    </docs-code-multifile>
-  </docs-tab>
-</docs-tab-group>
-
-The `filterMode="manual"` setting gives complete control over filtering and selection. The input updates a signal that filters the options list. Users navigate with arrow keys and select with Enter or click. This mode provides the most flexibility for custom filtering logic. See the [Autocomplete guide](guide/aria/autocomplete) for complete filtering patterns and examples.
-
-### Readonly mode
-
-A pattern that combines a readonly combobox with listbox to create single-selection dropdowns with keyboard navigation and screen reader support.
+読み取り専用のコンボボックスとリストボックスを組み合わせて、キーボードナビゲーションとスクリーンリーダーをサポートする単一選択のドロップダウンを作成するパターンです。
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -128,13 +128,13 @@ A pattern that combines a readonly combobox with listbox to create single-select
   </docs-tab>
 </docs-tab-group>
 
-The `readonly` attribute prevents typing in the input field. The popup opens on click or arrow keys. Users navigate options with keyboard and select with Enter or click.
+`readonly`属性は、入力フィールドへの入力を防ぎます。ポップアップはクリックまたは矢印キーで開きます。ユーザーはキーボードでオプションを移動し、Enterキーかクリックで選択します。
 
-This configuration provides the foundation for the [Select](guide/aria/select) and [Multiselect](guide/aria/multiselect) patterns. See those guides for complete dropdown implementations with triggers and overlay positioning.
+この設定は、[Select](guide/aria/select)および[Multiselect](guide/aria/multiselect)パターンの基盤を提供します。トリガーとオーバーレイの位置決めを含む完全なドロップダウンの実装については、これらのガイドを参照してください。
 
-### Dialog popup
+### ダイアログポップアップ {#dialog-popup}
 
-Popups sometimes need modal behavior with a backdrop and focus trap. The combobox dialog directive provides this pattern for specialized use cases.
+ポップアップには、背景とフォーカストラップを備えたモーダルな動作が必要な場合があります。コンボボックスダイアログディレクティブは、特殊なユースケースのためにこのパターンを提供します。
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -162,64 +162,64 @@ Popups sometimes need modal behavior with a backdrop and focus trap. The combobo
   </docs-tab>
 </docs-tab-group>
 
-The `ngComboboxDialog` directive creates a modal popup using the native dialog element. This provides backdrop behavior and focus trapping. Use dialog popups when the selection interface requires modal interaction or when the popup content is complex enough to warrant full-screen focus.
+`ngComboboxDialog`ディレクティブは、ネイティブのdialog要素を使用してモーダルポップアップを作成します。これにより、背景の動作とフォーカストラップが提供されます。選択インターフェースがモーダルなインタラクションを必要とする場合や、ポップアップのコンテンツがフルスクリーンのフォーカスを必要とするほど複雑な場合に、ダイアログポップアップを使用します。
 
-## APIs
+## API {#apis}
 
-### Combobox Directive
+### Comboboxディレクティブ {#combobox-directive}
 
-The `ngCombobox` directive coordinates a text input with a popup.
+`ngCombobox`ディレクティブは、テキスト入力とポップアップを連携させます。
 
-#### Inputs
+#### 入力 {#inputs}
 
-| Property         | Type                                           | Default    | Description                                      |
+| プロパティ       | 型                                             | デフォルト   | 説明                                             |
 | ---------------- | ---------------------------------------------- | ---------- | ------------------------------------------------ |
-| `filterMode`     | `'manual'` \| `'auto-select'` \| `'highlight'` | `'manual'` | Controls selection behavior                      |
-| `disabled`       | `boolean`                                      | `false`    | Disables the combobox                            |
-| `readonly`       | `boolean`                                      | `false`    | Makes combobox readonly (for Select/Multiselect) |
-| `firstMatch`     | `V`                                            | -          | Value of first matching item for auto-select     |
-| `alwaysExpanded` | `boolean`                                      | `false`    | Keeps popup always open                          |
+| `filterMode`     | `'manual'` \| `'auto-select'` \| `'highlight'` | `'manual'` | 選択の動作を制御します                           |
+| `disabled`       | `boolean`                                      | `false`    | コンボボックスを無効にします                     |
+| `readonly`       | `boolean`                                      | `false`    | コンボボックスを読み取り専用にします（Select/Multiselect用） |
+| `firstMatch`     | `V`                                            | -          | 自動選択のために、最初に一致した項目の値         |
+| `alwaysExpanded` | `boolean`                                      | `false`    | ポップアップを常に開いたままにします             |
 
-**Filter Modes:**
+**フィルターモード:**
 
-- **`'manual'`** - User controls filtering and selection explicitly. The popup shows options based on your filtering logic. Users select with Enter or click. This mode provides the most flexibility.
-- **`'auto-select'`** - Input value automatically updates to the first matching option as users type. Requires the `firstMatch` input for coordination. See the [Autocomplete guide](guide/aria/autocomplete#auto-select-mode) for examples.
-- **`'highlight'`** - Highlights matching text without changing the input value. Users navigate with arrow keys and select with Enter.
+- **`'manual'`** - ユーザーがフィルタリングと選択を明示的に制御します。ポップアップには、あなたのフィルタリングロジックに基づいたオプションが表示されます。ユーザーはEnterキーまたはクリックで選択します。このモードは最も柔軟性があります。
+- **`'auto-select'`** - ユーザーが入力すると、入力値は最初に一致したオプションに自動的に更新されます。連携のために`firstMatch`入力が必要です。例については[オートコンプリートガイド](guide/aria/autocomplete#auto-select-mode)を参照してください。
+- **`'highlight'`** - 入力値を変更せずに、一致するテキストをハイライトします。ユーザーは矢印キーで移動し、Enterキーで選択します。
 
-#### Signals
+#### シグナル {#signals}
 
-| Property   | Type              | Description                     |
+| プロパティ | 型                | 説明                            |
 | ---------- | ----------------- | ------------------------------- |
-| `expanded` | `Signal<boolean>` | Whether popup is currently open |
+| `expanded` | `Signal<boolean>` | ポップアップが現在開いているかどうか |
 
-#### Methods
+#### メソッド {#methods}
 
-| Method     | Parameters | Description            |
+| メソッド   | パラメータ | 説明                   |
 | ---------- | ---------- | ---------------------- |
-| `open`     | none       | Opens the combobox     |
-| `close`    | none       | Closes the combobox    |
-| `expand`   | none       | Expands the combobox   |
-| `collapse` | none       | Collapses the combobox |
+| `open`     | なし       | コンボボックスを開きます   |
+| `close`    | なし       | コンボボックスを閉じます   |
+| `expand`   | なし       | コンボボックスを展開します |
+| `collapse` | なし       | コンボボックスを折りたたみます |
 
-### ComboboxInput Directive
+### ComboboxInputディレクティブ {#comboboxinput-directive}
 
-The `ngComboboxInput` directive connects an input element to the combobox.
+`ngComboboxInput`ディレクティブは、入力要素をコンボボックスに接続します。
 
-#### Model
+#### モデル {#model}
 
-| Property | Type     | Description                              |
+| プロパティ | 型       | 説明                                     |
 | -------- | -------- | ---------------------------------------- |
-| `value`  | `string` | Two-way bindable value using `[(value)]` |
+| `value`  | `string` | `[(value)]`を使用した双方向バインディング可能な値 |
 
-The input element receives keyboard handling and ARIA attributes automatically.
+入力要素は、キーボード操作とARIA属性を自動的に受け取ります。
 
-### ComboboxPopup Directive
+### ComboboxPopupディレクティブ {#comboboxpopup-directive}
 
-The `ngComboboxPopup` directive (host directive) manages popup visibility and coordination. Typically used with `ngComboboxPopupContainer` in an `ng-template` or with CDK Overlay.
+`ngComboboxPopup`ディレクティブ（ホストディレクティブ）は、ポップアップの可視性と連携を管理します。通常、`ng-template`内の`ngComboboxPopupContainer`またはCDK Overlayと一緒に使用されます。
 
-### ComboboxPopupContainer Directive
+### ComboboxPopupContainerディレクティブ {#comboboxpopupcontainer-directive}
 
-The `ngComboboxPopupContainer` directive marks an `ng-template` as the popup content.
+`ngComboboxPopupContainer`ディレクティブは、`ng-template`をポップアップのコンテンツとしてマークします。
 
 ```html
 <ng-template ngComboboxPopupContainer>
@@ -227,11 +227,11 @@ The `ngComboboxPopupContainer` directive marks an `ng-template` as the popup con
 </ng-template>
 ```
 
-Used with Popover API or CDK Overlay for positioning.
+Popover APIまたはCDK Overlayと一緒に使用して、位置決めします。
 
-### ComboboxDialog Directive
+### ComboboxDialogディレクティブ {#comboboxdialog-directive}
 
-The `ngComboboxDialog` directive creates a modal combobox popup.
+`ngComboboxDialog`ディレクティブは、モーダルなコンボボックスポップアップを作成します。
 
 ```html
 <dialog ngComboboxDialog>
@@ -239,17 +239,17 @@ The `ngComboboxDialog` directive creates a modal combobox popup.
 </dialog>
 ```
 
-Use for modal popup behavior with backdrop and focus trap.
+背景とフォーカストラップを備えたモーダルポップアップの動作に使用します。
 
-### Related patterns and directives
+### 関連するパターンとディレクティブ {#related-patterns-and-directives}
 
-Combobox is the primitive directive for these documented patterns:
+Comboboxは、これらのドキュメント化されたパターンのためのプリミティブディレクティブです:
 
-- **[Autocomplete](guide/aria/autocomplete)** - Filtering and suggestions pattern (uses Combobox with filter modes)
-- **[Select](guide/aria/select)** - Single selection dropdown pattern (uses Combobox with `readonly`)
-- **[Multiselect](guide/aria/multiselect)** - Multiple selection pattern (uses Combobox with `readonly` + multi-enabled Listbox)
+- **[オートコンプリート](guide/aria/autocomplete)** - フィルタリングと提案のパターン（フィルターモード付きのComboboxを使用）
+- **[セレクト](guide/aria/select)** - 単一選択のドロップダウンパターン（`readonly`付きのComboboxを使用）
+- **[マルチセレクト](guide/aria/multiselect)** - 複数選択のパターン（`readonly` + 複数選択が有効なListbox付きのComboboxを使用）
 
-Combobox typically combines with:
+Comboboxは通常、以下と組み合わせて使用されます:
 
-- **[Listbox](guide/aria/listbox)** - Most common popup content
-- **[Tree](guide/aria/tree)** - Hierarchical popup content (see Tree guide for examples)
+- **[Listbox](guide/aria/listbox)** - 最も一般的なポップアップコンテンツ
+- **[Tree](guide/aria/tree)** - 階層的なポップアップコンテンツ（例についてはTreeガイドを参照）

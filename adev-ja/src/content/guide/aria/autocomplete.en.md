@@ -1,67 +1,9 @@
-<docs-decorative-header title="オートコンプリート">
+<docs-decorative-header title="Autocomplete">
 </docs-decorative-header>
 
-## 概要 {#overview}
+## Overview
 
-ユーザーが入力するにつれてオプションをフィルタリングして提案し、リストから値を見つけて選択するのに役立つ、アクセシブルな入力フィールドです。
-
-<docs-tab-group>
-  <docs-tab label="基本">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.ts">
-      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.ts"/>
-      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.html"/>
-      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.css"/>
-    </docs-code-multifile>
-  </docs-tab>
-
-  <docs-tab label="Material">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.ts">
-      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.ts"/>
-      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.html"/>
-      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.css"/>
-    </docs-code-multifile>
-  </docs-tab>
-
-  <docs-tab label="レトロ">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.ts">
-      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.ts"/>
-      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.html"/>
-      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.css"/>
-    </docs-code-multifile>
-  </docs-tab>
-</docs-tab-group>
-
-## 使用法 {#usage}
-
-オートコンプリートは、タイピングがスクロールよりも速い大規模なオプションのセットからユーザーが選択する必要がある場合に最適です。次のような場合にオートコンプリートの使用を検討してください:
-
-- **オプションリストが長い** (20項目以上) - タイピングすることで、ドロップダウンをスクロールするよりも速く選択肢を絞り込めます
-- **ユーザーが探しているものを知っている** - 期待される値の一部を入力できます (州名、製品名、ユーザー名など)
-- **オプションが予測可能なパターンに従っている** - ユーザーが部分一致を推測できます (国コード、メールドメイン、カテゴリーなど)
-- **スピードが重要である** - フォームは、広範なナビゲーションなしで迅速に選択できるというメリットがあります
-
-次のような場合はオートコンプリートを避けてください:
-
-- リストのオプションが10個未満の場合 - 通常のドロップダウンやラジオグループの方が視認性が高いためです
-- ユーザーがオプションを閲覧する必要がある場合 - 発見が重要である場合は、すべてのオプションを最初から表示します
-- オプションが馴染みのないものである場合 - ユーザーはリストに存在することを知らないものを入力できないためです
-
-## 機能 {#features}
-
-Angularのオートコンプリートは、以下の機能を備えた、完全にアクセシブルなコンボボックスの実装を提供します：
-
-- **キーボードナビゲーション** - 矢印キーでオプションを移動し、Enterで選択、Escapeで閉じます
-- **スクリーンリーダーのサポート** - 支援技術のための組み込みARIA属性
-- **3つのフィルターモード** - 自動選択、手動選択、またはハイライト表示の動作から選択できます
-- **シグナルベースのリアクティビティ** - Angularシグナルを使用したリアクティブな状態管理
-- **Popover APIとの統合** - ネイティブのHTML Popover APIを活用し、最適な配置を実現します
-- **双方向テキストのサポート** - 右から左へ記述する言語（RTL）に自動的に対応します
-
-## 例
-
-### 自動選択モード {#auto-select-mode}
-
-ユーザーがテキストの一部を入力すると、その入力が利用可能なオプションと一致することの即時確認が期待されます。自動選択モードは、ユーザーが入力するにつれて、フィルタリングされた最初のオプションに一致するように入力値を更新し、必要なキーストロークの数を減らし、検索が正しい方向に向かっていることを即座にフィードバックします。
+An accessible input field that filters and suggests options as users type, helping them find and select values from a list.
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -89,9 +31,67 @@ Angularのオートコンプリートは、以下の機能を備えた、完全�
   </docs-tab>
 </docs-tab-group>
 
-### 手動選択モード {#manual-selection-mode}
+## Usage
 
-手動選択モードでは、ユーザーが候補リストをナビゲートしている間、入力されたテキストは変更されず、自動更新による混乱を防ぎます。入力は、ユーザーがEnterキーまたはクリックで明示的に選択を確定した場合にのみ変更されます。
+Autocomplete works best when users need to select from a large set of options where typing is faster than scrolling. Consider using autocomplete when:
+
+- **The option list is long** (more than 20 items) - Typing narrows down choices faster than scrolling through a dropdown
+- **Users know what they're looking for** - They can type part of the expected value (like a state name, product, or username)
+- **Options follow predictable patterns** - Users can guess partial matches (like country codes, email domains, or categories)
+- **Speed matters** - Forms benefit from quick selection without extensive navigation
+
+Avoid autocomplete when:
+
+- The list has fewer than 10 options - A regular dropdown or radio group provides better visibility
+- Users need to browse options - If discovery is important, show all options upfront
+- Options are unfamiliar - Users can't type what they don't know exists in the list
+
+## Features
+
+Angular's autocomplete provides a fully accessible combobox implementation with:
+
+- **Keyboard Navigation** - Navigate options with arrow keys, select with Enter, close with Escape
+- **Screen Reader Support** - Built-in ARIA attributes for assistive technologies
+- **Three Filter Modes** - Choose between auto-select, manual selection, or highlighting behavior
+- **Signal-Based Reactivity** - Reactive state management using Angular signals
+- **Popover API Integration** - Leverages the native HTML Popover API for optimal positioning
+- **Bidirectional Text Support** - Automatically handles right-to-left (RTL) languages
+
+## Examples
+
+### Auto-select mode
+
+Users typing partial text expect immediate confirmation that their input matches an available option. Auto-select mode updates the input value to match the first filtered option as users type, reducing the number of keystrokes needed and providing instant feedback that their search is on the right track.
+
+<docs-tab-group>
+  <docs-tab label="Basic">
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.ts">
+      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.ts"/>
+      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.html"/>
+      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.css"/>
+    </docs-code-multifile>
+  </docs-tab>
+
+  <docs-tab label="Material">
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.ts">
+      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.ts"/>
+      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.html"/>
+      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.css"/>
+    </docs-code-multifile>
+  </docs-tab>
+
+  <docs-tab label="Retro">
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.ts">
+      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.ts"/>
+      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.html"/>
+      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.css"/>
+    </docs-code-multifile>
+  </docs-tab>
+</docs-tab-group>
+
+### Manual selection mode
+
+Manual selection mode keeps the typed text unchanged while users navigate the suggestion list, preventing confusion from automatic updates. The input only changes when users explicitly confirm their choice with Enter or a click.
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -119,9 +119,9 @@ Angularのオートコンプリートは、以下の機能を備えた、完全�
   </docs-tab>
 </docs-tab-group>
 
-### ハイライトモード {#highlight-mode}
+### Highlight mode
 
-ハイライトモードでは、ユーザーは矢印キーでオプションをナビゲートできますが、Enterキーまたはクリックで明示的に新しいオプションを選択するまで、閲覧中に入力値は変更されません。
+Highlight mode allows the user to navigate options with arrow keys without changing the input value as they browse until they explicitly select a new option with Enter or click.
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -149,42 +149,42 @@ Angularのオートコンプリートは、以下の機能を備えた、完全�
   </docs-tab>
 </docs-tab-group>
 
-## API
+## APIs
 
-### Comboboxディレクティブ {#combobox-directive}
+### Combobox Directive
 
-`ngCombobox`ディレクティブは、オートコンプリート機能のためのコンテナを提供します。
+The `ngCombobox` directive provides the container for autocomplete functionality.
 
-#### 入力 {#inputs}
+#### Inputs
 
-| プロパティ   | 型                                             | デフォルト | 説明                                                 |
-| ------------ | ---------------------------------------------- | ---------- | ---------------------------------------------------- |
-| `filterMode` | `'auto-select'` \| `'manual'` \| `'highlight'` | `'manual'` | 選択の動作を制御します                               |
-| `disabled`   | `boolean`                                      | `false`    | コンボボックスを無効にします                         |
-| `firstMatch` | `string`                                       | -          | ポップアップ内で最初に一致したアイテムの値を表します |
+| Property     | Type                                           | Default    | Description                                       |
+| ------------ | ---------------------------------------------- | ---------- | ------------------------------------------------- |
+| `filterMode` | `'auto-select'` \| `'manual'` \| `'highlight'` | `'manual'` | Controls selection behavior                       |
+| `disabled`   | `boolean`                                      | `false`    | Disables the combobox                             |
+| `firstMatch` | `string`                                       | -          | The value of the first matching item in the popup |
 
-#### 出力 {#outputs}
+#### Outputs
 
-| プロパティ | 型                | 説明                                                 |
-| ---------- | ----------------- | ---------------------------------------------------- |
-| `expanded` | `Signal<boolean>` | ポップアップが現在開いているかどうかを示すSignalです |
+| Property   | Type              | Description                                           |
+| ---------- | ----------------- | ----------------------------------------------------- |
+| `expanded` | `Signal<boolean>` | Signal indicating whether the popup is currently open |
 
-### ComboboxInputディレクティブ {#comboboxinput-directive}
+### ComboboxInput Directive
 
-`ngComboboxInput`ディレクティブは、input要素をコンボボックスに接続します。
+The `ngComboboxInput` directive connects an input element to the combobox.
 
-#### モデル {#model}
+#### Model
 
-| プロパティ | 型       | 説明                                                         |
+| Property | Type     | Description                                                  |
 | -------- | -------- | ------------------------------------------------------------ |
-| `value`  | `string` | `[(value)]`を使用した、inputの双方向バインディング可能な文字列値です |
+| `value`  | `string` | Two-way bindable string value of the input using `[(value)]` |
 
-### ComboboxPopupContainerディレクティブ {#comboboxpopupcontainer-directive}
+### ComboboxPopupContainer Directive
 
-`ngComboboxPopupContainer`ディレクティブは、ポップアップのコンテンツをラップし、その表示を管理します。
+The `ngComboboxPopupContainer` directive wraps the popup content and manages its display.
 
-popover要素内の`<ng-template>`と共に使用する必要があります。
+Must be used with `<ng-template>` inside a popover element.
 
-### 関連コンポーネント {#related-components}
+### Related components
 
-オートコンプリートは、候補リストをレンダリングするために[Listbox](/api/aria/listbox/Listbox)と[Option](/api/aria/listbox/Option)ディレクティブを使用します。追加のカスタマイズオプションについては、[Listboxのドキュメント](/guide/aria/listbox)を参照してください。
+Autocomplete uses [Listbox](/api/aria/listbox/Listbox) and [Option](/api/aria/listbox/Option) directives to render the suggestion list. See the [Listbox documentation](/guide/aria/listbox) for additional customization options.

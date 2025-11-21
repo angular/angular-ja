@@ -305,14 +305,23 @@ async function main() {
     await writeFile(errorLogPath, errorDetails, 'utf-8');
   }
 
-  consola.box(`
-翻訳完了
+  if (failed.length === 0) {
+    consola.success('翻訳完了');
+  } else {
+    consola.warn('翻訳完了（一部失敗）');
+  }
 
-成功: ${succeeded.length}件
-失敗: ${failed.length}件
-${failed.length > 0 ? '\n失敗したファイル:\n' + failed.map((r) => `  - ${r.file}`).join('\n') : ''}
-${errorLogPath ? `\nエラー詳細: ${errorLogPath}` : ''}
-  `);
+  consola.info(`成功: ${succeeded.length}件`);
+  consola.info(`失敗: ${failed.length}件`);
+
+  if (failed.length > 0) {
+    console.log('\n失敗したファイル:');
+    failed.forEach((r) => console.log(r.file));
+  }
+
+  if (errorLogPath) {
+    consola.info(`エラー詳細: ${errorLogPath}`);
+  }
 
   if (failed.length > 0) {
     process.exit(1);

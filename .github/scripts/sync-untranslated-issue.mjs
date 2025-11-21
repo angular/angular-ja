@@ -94,18 +94,24 @@ function generateLinks(filepath) {
  * Format a file entry for the issue body
  * @param {string} filepath - File path relative to adev-ja
  * @param {FileLinks} links - Object containing URLs for the file
+ * @param {number|null} checkoutIssueNumber - Translation Checkout issue number if exists
  * @returns {string} Markdown formatted list item
  */
-function formatFileEntry(filepath, links) {
+function formatFileEntry(filepath, links, checkoutIssueNumber = null) {
   const displayName = filepath.replace('src/content/', '');
 
   let linksText = `[GitHub](${links.githubUrl})`;
   if (links.previewUrl) {
     linksText += ` | [プレビュー](${links.previewUrl})`;
   }
-  linksText += ` | [📝 翻訳宣言](${links.issueUrl})`;
 
-  return `- [ ] ${displayName} (${linksText})`;
+  if (checkoutIssueNumber) {
+    linksText += ` | [#${checkoutIssueNumber}](https://github.com/angular/angular-ja/issues/${checkoutIssueNumber})`;
+    return `- [x] ${displayName} (${linksText})`;
+  } else {
+    linksText += ` | [📝 翻訳宣言](${links.issueUrl})`;
+    return `- [ ] ${displayName} (${linksText})`;
+  }
 }
 
 /**
@@ -128,9 +134,10 @@ function groupByCategory(files) {
 /**
  * Generate issue body
  * @param {FilesData} filesData - Object containing untranslated files data
+ * @param {Map<string, number>} checkoutIssuesMap - Map of file paths to issue numbers
  * @returns {string} Markdown formatted issue body
  */
-function generateIssueBody(filesData) {
+function generateIssueBody(filesData, checkoutIssuesMap) {
   const { count, files } = filesData;
 
   if (count === 0) {
@@ -174,7 +181,8 @@ function generateIssueBody(filesData) {
 
     for (const file of categoryFiles) {
       const links = generateLinks(file.path);
-      body += formatFileEntry(file.path, links) + '\n';
+      const checkoutIssueNumber = checkoutIssuesMap.get(file.path) || null;
+      body += formatFileEntry(file.path, links, checkoutIssueNumber) + '\n';
     }
 
     body += '\n';
@@ -207,6 +215,29 @@ export default async ({github, context, core, filesData}) => {
 
   core.info(`Processing ${filesData.count} untranslated files...`);
 
+  // Translation Checkout ラベルの全Issue (open only) を取得
+  const { data: checkoutIssues } = await github.rest.issues.listForRepo({
+    owner,
+    repo,
+    state: 'open',
+    labels: 'type: Translation Checkout'
+  });
+
+  core.info(`Found ${checkoutIssues.length} Translation Checkout issues`);
+
+  // Issueタイトルからファイルパスを抽出してマップを作成
+  // タイトル形式: "{ファイルパス} の翻訳"
+  const checkoutIssuesMap = new Map();
+  for (const issue of checkoutIssues) {
+    const match = issue.title.match(/^(.+)\s+の翻訳$/);
+    if (match) {
+      const filepath = `src/content/${match[1]}`;
+      checkoutIssuesMap.set(filepath, issue.number);
+    }
+  }
+
+  core.info(`Mapped ${checkoutIssuesMap.size} files to checkout issues`);
+
   // 既存のトラッキングIssueを検索 (state: all で closed も含む)
   const { data: issues } = await github.rest.issues.listForRepo({
     owner,
@@ -218,7 +249,7 @@ export default async ({github, context, core, filesData}) => {
 
   const trackingIssue = issues.find(issue => issue.title === ISSUE_TITLE);
 
-  const issueBody = generateIssueBody(filesData);
+  const issueBody = generateIssueBody(filesData, checkoutIssuesMap);
 
   if (trackingIssue) {
     core.info(`Found existing tracking issue #${trackingIssue.number}`);

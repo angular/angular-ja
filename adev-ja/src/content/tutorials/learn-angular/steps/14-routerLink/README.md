@@ -51,4 +51,4 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 
 これで、ナビゲーション内のリンクをクリックしてもちらつきはなく、ページの内容自体（つまり `router-outlet`）のみが変更されます🎉
 
-Angularでのルーティングについて学ぶことは素晴らしいことです。これは`Router` APIの表面的な部分に過ぎません。詳細については、[Angular Router ドキュメント](guide/routing)をご覧ください。
+Angularでのルーティングについて学ぶことはすばらしいことです。これは`Router` APIの表面的な部分に過ぎません。詳細については、[Angular Router ドキュメント](guide/routing)をご覧ください。

@@ -32,7 +32,7 @@ jobs:
       - name: Get untranslated files
         id: files
         run: |
-          FILES_JSON=$(pnpm run list-untranslated --json)
+          FILES_JSON=$(pnpm run list-untranslated --json 2>/dev/null)
           echo "data<<EOF" >> $GITHUB_OUTPUT
           echo "$FILES_JSON" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT

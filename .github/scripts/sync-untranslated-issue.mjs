@@ -99,7 +99,7 @@ function formatFileEntry(filepath, links) {
 
   let linksText = `[GitHub](${links.githubUrl})`;
   if (links.previewUrl) {
-    linksText += ` | <a href="${links.previewUrl}" target="_blank">プレビュー</a>`;
+    linksText += ` | [プレビュー](${links.previewUrl})`;
   }
   linksText += ` | [📝 翻訳宣言](${links.issueUrl})`;
 

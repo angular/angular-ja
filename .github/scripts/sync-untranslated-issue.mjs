@@ -141,7 +141,7 @@ function generateIssueBody(filesData) {
 /**
  * Main function
  */
-module.exports = async ({github, context, core, filesData}) => {
+export default async ({github, context, core, filesData}) => {
   const owner = context.repo.owner;
   const repo = context.repo.repo;
 

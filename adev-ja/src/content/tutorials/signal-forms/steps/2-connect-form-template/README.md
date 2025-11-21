@@ -1,22 +1,22 @@
-# Connect your form to the template
+# フォームをテンプレートに接続
 
-Now, you need to connect your form to the template using the `[field]` directive. This creates two-way data binding between your form model and the input elements.
+次に、`[field]` ディレクティブを使用してフォームをテンプレートに接続する必要があります。これにより、フォームモデルと入力要素の間に双方向データバインディングが作成されます。
 
-In this lesson, you'll learn how to:
+このレッスンでは、次の方法を学びます:
 
-- Import the `Field` directive
-- Use the `[field]` directive to bind form fields to inputs
-- Connect text inputs and checkboxes to your form
-- Display form field values in the template
+- `Field` ディレクティブをインポート
+- `[field]` ディレクティブを使用してフォームフィールドを入力にバインド
+- テキスト入力とチェックボックスをフォームに接続
+- テンプレートにフォームフィールド値を表示
 
-Let's wire up the template!
+テンプレートを配線しましょう!
 
 <hr />
 
 <docs-workflow>
 
-<docs-step title="Import the Field directive">
-Import the `Field` directive from `@angular/forms/signals` and add it to your component's imports array:
+<docs-step title="Fieldディレクティブをインポート">
+`@angular/forms/signals` から `Field` ディレクティブをインポートし、コンポーネントのimports配列に追加します:
 
 ```ts
 import { form, Field } from '@angular/forms/signals';
@@ -32,18 +32,18 @@ import { form, Field } from '@angular/forms/signals';
 
 </docs-step>
 
-<docs-step title="Bind the email field">
-In your template, add the `[field]` directive to the email input:
+<docs-step title="emailフィールドをバインド">
+テンプレートで、email入力に `[field]` ディレクティブを追加します:
 
 ```html
 <input type="email" [field]="loginForm.email" />
 ```
 
-The `loginForm.email` expression accesses the email field from your form.
+`loginForm.email` 式は、フォームからemailフィールドにアクセスします。
 </docs-step>
 
-<docs-step title="Bind the password field">
-Add the `[field]` directive to the password input:
+<docs-step title="passwordフィールドをバインド">
+password入力に `[field]` ディレクティブを追加します:
 
 ```html
 <input type="password" [field]="loginForm.password" />
@@ -51,8 +51,8 @@ Add the `[field]` directive to the password input:
 
 </docs-step>
 
-<docs-step title="Bind the checkbox field">
-Add the `[field]` directive to the checkbox input:
+<docs-step title="checkboxフィールドをバインド">
+checkbox入力に `[field]` ディレクティブを追加します:
 
 ```html
 <input type="checkbox" [field]="loginForm.rememberMe" />
@@ -60,8 +60,8 @@ Add the `[field]` directive to the checkbox input:
 
 </docs-step>
 
-<docs-step title="Display the form values">
-Below the form, there's a debug section to show current form values. Display each field value using `.value()`:
+<docs-step title="フォーム値を表示">
+フォームの下に、現在のフォーム値を表示するデバッグセクションがあります。`.value()` を使用して各フィールド値を表示します:
 
 ```html
 <p>Email: {{ loginForm.email().value() }}</p>
@@ -69,11 +69,11 @@ Below the form, there's a debug section to show current form values. Display eac
 <p>Remember me: {{ loginForm.rememberMe().value() ? 'Yes' : 'No' }}</p>
 ```
 
-Form field values are signals, so the displayed values update automatically as you type.
+フォームフィールド値はシグナルであるため、入力すると表示される値が自動的に更新されます。
 </docs-step>
 
 </docs-workflow>
 
-Great work! You've connected your form to the template and displayed the form values. The `[field]` directive handles two-way data binding automatically - as you type, the `loginModel` signal updates, and the displayed values update immediately.
+素晴らしい! フォームをテンプレートに接続し、フォーム値を表示しました。`[field]` ディレクティブは双方向データバインディングを自動的に処理します - 入力すると、`loginModel` シグナルが更新され、表示される値が即座に更新されます。
 
-Next, you'll learn [how to add validation to your form](/tutorials/signal-forms/3-add-validation)!
+次に、[フォームにバリデーションを追加する方法](/tutorials/signal-forms/3-add-validation)を学びます!

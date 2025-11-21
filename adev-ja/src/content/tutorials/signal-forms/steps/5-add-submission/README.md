@@ -1,22 +1,22 @@
-# Add form submission
+# フォーム送信を追加
 
-Finally, let's learn how to handle form submission. You'll learn how to use the `submit()` function to run async operations when the form is valid, and disable the submit button when the form has errors.
+最後に、フォーム送信の処理方法を学びましょう。`submit()` 関数を使用して、フォームが有効なときに非同期処理を実行し、フォームにエラーがあるときに送信ボタンを無効にする方法を学びます。
 
-In this activity, you'll learn how to:
+このアクティビティでは、次の方法を学びます:
 
-- Import the `submit()` function
-- Create a submission handler method
-- Use `submit()` to run logic only when valid
-- Disable the submit button based on form state
+- `submit()` 関数をインポート
+- 送信ハンドラーメソッドを作成
+- `submit()` を使用して有効なときのみロジックを実行
+- フォームの状態に基づいて送信ボタンを無効化
 
-Let's complete the form!
+フォームを完成させましょう!
 
 <hr />
 
 <docs-workflow>
 
-<docs-step title="Import the submit function">
-Import the `submit` function from `@angular/forms/signals`:
+<docs-step title="submit関数をインポート">
+`@angular/forms/signals` から `submit` 関数をインポートします:
 
 ```ts
 import { form, Field, required, email, submit } from '@angular/forms/signals';
@@ -24,8 +24,8 @@ import { form, Field, required, email, submit } from '@angular/forms/signals';
 
 </docs-step>
 
-<docs-step title="Add the onSubmit method">
-In your component class, add an `onSubmit()` method that handles form submission:
+<docs-step title="onSubmitメソッドを追加">
+コンポーネントクラスで、フォーム送信を処理する `onSubmit()` メソッドを追加します:
 
 ```ts
 onSubmit(event: Event) {
@@ -38,11 +38,11 @@ onSubmit(event: Event) {
 }
 ```
 
-The `submit()` function only runs your async callback if the form is valid. It also handles the form's submission state automatically.
+`submit()` 関数は、フォームが有効な場合にのみ非同期コールバックを実行します。また、フォームの送信状態も自動的に処理します。
 </docs-step>
 
-<docs-step title="Bind the submit handler to the form">
-In your template, bind the `onSubmit()` method to the form's submit event:
+<docs-step title="送信ハンドラーをフォームにバインド">
+テンプレートで、`onSubmit()` メソッドをフォームのsubmitイベントにバインドします:
 
 ```html
 <form (submit)="onSubmit($event)">
@@ -50,8 +50,8 @@ In your template, bind the `onSubmit()` method to the form's submit event:
 
 </docs-step>
 
-<docs-step title="Disable the button when form is invalid">
-Update the submit button to be disabled when the form is invalid:
+<docs-step title="フォームが無効なときにボタンを無効化">
+フォームが無効なときに無効になるように送信ボタンを更新します:
 
 ```html
 <button type="submit" [disabled]="loginForm().invalid()">
@@ -59,11 +59,11 @@ Update the submit button to be disabled when the form is invalid:
 </button>
 ```
 
-This prevents submission when the form has validation errors.
+これにより、フォームにバリデーションエラーがあるときの送信を防ぎます。
 </docs-step>
 
 </docs-workflow>
 
-Congratulations! You've built a complete login form with Signal Forms.
+おめでとうございます! シグナルフォームを使用して完全なログインフォームを構築しました。
 
-Ready to see what you've learned and explore advanced topics? Continue to [the next steps](/tutorials/signal-forms/6-next-steps)!
+学んだことを確認し、高度なトピックを探索する準備はできましたか？[次のステップ](/tutorials/signal-forms/6-next-steps)に進みましょう!

@@ -1,5 +1,5 @@
 {
   "openFiles": ["src/app/app.html", "src/app/app.ts"],
   "type": "editor",
-  "title": "バリデーションエラーを表示"
+  "title": "Display validation errors"
 }

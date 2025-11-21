@@ -38,6 +38,9 @@ importers:
       langchain:
         specifier: 0.3.28
         version: 0.3.28(@langchain/core@0.3.58(openai@5.13.1(zod@3.25.76)))(@langchain/google-genai@0.2.12(@langchain/core@0.3.58(openai@5.13.1(zod@3.25.76))))(openai@5.13.1(zod@3.25.76))
+      p-limit:
+        specifier: ^7.2.0
+        version: 7.2.0
       prh:
         specifier: 5.4.4
         version: 5.4.4
@@ -1605,6 +1608,10 @@ packages:
     resolution: {integrity: sha512-vvcXsLAJ9Dr5rQOPk7toZQZJApBl2K4J6dANSsEuh6QI41JYcsS/qhTGa9ErIUUgK3WNQoJYvylxvjqmiqEA9Q==}
     engines: {node: '>=4'}
 
+  p-limit@7.2.0:
+    resolution: {integrity: sha512-ATHLtwoTNDloHRFFxFJdHnG6n2WUeFjaR8XQMFdKIv0xkXjrER8/iG9iu265jOM95zXHAfv9oTkqhrfbIzosrQ==}
+    engines: {node: '>=20'}
+
   p-locate@2.0.0:
     resolution: {integrity: sha512-nQja7m7gSKuewoVRen45CtVfODR3crN3goVQ0DDZ9N3yHxgpkuBhZqsaiotSQRrADUrne346peY7kT3TSACykg==}
     engines: {node: '>=4'}
@@ -2336,6 +2343,10 @@ packages:
     resolution: {integrity: sha512-lcYcMxX2PO9XMGvAJkJ3OsNMw+/7FKes7/hgerGUYWIoWu5j/+YQqcZr5JnPZWzOsEBgMbSbiSTn/dv/69Mkpw==}
     engines: {node: '>= 14.6'}
     hasBin: true
+
+  yocto-queue@1.2.2:
+    resolution: {integrity: sha512-4LCcse/U2MHZ63HAJVE+v71o7yOdIe4cZ70Wpf8D/IyjDKYQLV5GD46B+hSTjJsvV5PztjvHoU580EftxjDZFQ==}
+    engines: {node: '>=12.20'}
 
   yoctocolors@2.1.2:
     resolution: {integrity: sha512-CzhO+pFNo8ajLM2d2IW/R93ipy99LWjtwblvC1RsoSUMZgyLbYFr221TnSNT7GjGdYui6P459mw9JH/g/zW2ug==}
@@ -4083,6 +4094,10 @@ snapshots:
     dependencies:
       p-try: 1.0.0
 
+  p-limit@7.2.0:
+    dependencies:
+      yocto-queue: 1.2.2
+
   p-locate@2.0.0:
     dependencies:
       p-limit: 1.3.0
@@ -5104,6 +5119,8 @@ snapshots:
   xtend@4.0.2: {}
 
   yaml@2.8.1: {}
+
+  yocto-queue@1.2.2: {}
 
   yoctocolors@2.1.2: {}
 

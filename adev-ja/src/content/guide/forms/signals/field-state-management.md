@@ -1,14 +1,14 @@
-# Field state management
+# フィールドの状態管理
 
-Signal Forms' field state allows you to react to user interactions by providing reactive signals for validation status (such as `valid`, `invalid`, `errors`), interaction tracking (such as `touched`, `dirty`), and availability (such as `disabled`, `hidden`).
+シグナルフォームのフィールドの状態は、バリデーションの状態（`valid`、`invalid`、`errors`など）、インタラクションの追跡（`touched`、`dirty`など）、可用性（`disabled`、`hidden`など）のためのリアクティブなシグナルを提供し、ユーザーのインタラクションに反応できるようにします。
 
-## Understanding field state
+## フィールドの状態を理解する
 
-When you create a form with the `form()` function, it returns a **field tree** - an object structure that mirrors your form model. Each field in the tree is accessible via dot notation (like `form.email`).
+`form()`関数でフォームを作成すると、**フィールドツリー**が返されます。これはフォームモデルを反映したオブジェクト構造です。ツリー内の各フィールドには、ドット記法（`form.email`など）でアクセスできます。
 
-### Accessing field state
+### フィールドの状態へのアクセス {#accessing-field-state}
 
-When you call any field in the field tree as a function (like `form.email()`), it returns a `FieldState` object containing reactive signals that track the field's validation, interaction, and availability state. For example, the `invalid()` signal tells you whether the field has validation errors:
+フィールドツリー内の任意のフィールドを関数として（`form.email()`のように）呼び出すと、`FieldState`オブジェクトが返されます。これには、フィールドのバリデーション、インタラクション、および可用性の状態を追跡するリアクティブなシグナルが含まれています。たとえば、`invalid()`シグナルは、フィールドにバリデーションエラーがあるかどうかを示します:
 
 ```angular-ts
 import { Component, signal } from '@angular/core'
@@ -43,42 +43,42 @@ export class Registration {
 }
 ```
 
-In this example, the template checks `registrationForm.email().invalid()` to determine whether to display an error message.
+この例では、テンプレートは`registrationForm.email().invalid()`をチェックして、エラーメッセージを表示するかどうかを判断します。
 
-### Field state signals
+### フィールドの状態シグナル {#field-state-signals}
 
-The most commonly used signal is `value()`, a [writable signal](guide/forms/signal-forms/models#updating-models) that provides access to the field's current value:
+最も一般的に使用されるシグナルは`value()`です。これはフィールドの現在の値へのアクセスを提供する[書き込み可能なシグナル](guide/forms/signal-forms/models#updating-models)です:
 
 ```ts
 const emailValue = registrationForm.email().value()
 console.log(emailValue) // Current email string
 ```
 
-Beyond `value()`, field state includes signals for validation, interaction tracking, and availability control:
+`value()`に加えて、フィールドの状態には、バリデーション、インタラクションの追跡、および可用性の制御のためのシグナルが含まれています:
 
-| Category                                | Signal       | Description                                                                       |
+| カテゴリー | シグナル | 説明 |
 | --------------------------------------- | ------------ | --------------------------------------------------------------------------------- |
-| **[Validation](#validation-state)**     | `valid()`    | Field passes all validation rules and has no pending validators                   |
-|                                         | `invalid()`  | Field has validation errors                                                       |
-|                                         | `errors()`   | Array of validation error objects                                                 |
-|                                         | `pending()`  | Async validation in progress                                                      |
-| **[Interaction](#interaction-state)**   | `touched()`  | User has focused and blurred the field (if interactive)                           |
-|                                         | `dirty()`    | User has modified the field (if interactive), even if value matches initial state |
-| **[Availability](#availability-state)** | `disabled()` | Field is disabled and doesn't affect parent form state                            |
-|                                         | `hidden()`   | Indicates field should be hidden; visibility in template is controlled with `@if` |
-|                                         | `readonly()` | Field is readonly and doesn't affect parent form state                            |
+| **[バリデーション](#validation-state)** | `valid()` | フィールドがすべてのバリデーションルールに合格し、保留中のバリデーターがない |
+| | `invalid()` | フィールドにバリデーションエラーがある |
+| | `errors()` | バリデーションエラーオブジェクトの配列 |
+| | `pending()` | 非同期バリデーションが進行中 |
+| **[インタラクション](#interaction-state)** | `touched()` | ユーザーがフィールドにフォーカスし、フォーカスを外した（インタラクティブな場合） |
+| | `dirty()` | ユーザーがフィールドを変更した（インタラクティブな場合）。値が初期状態と一致していても同様 |
+| **[可用性](#availability-state)** | `disabled()` | フィールドが無効化されており、親フォームの状態に影響しない |
+| | `hidden()` | フィールドを非表示にすることを示す。テンプレートでの可視性は`@if`で制御される |
+| | `readonly()` | フィールドが読み取り専用であり、親フォームの状態に影響しない |
 
-These signals enable you to build responsive form user experiences that react to user behavior. The sections below explore each category in detail.
+これらのシグナルを使用すると、ユーザーの行動に反応するレスポンシブなフォームのユーザー体験を構築できます。以下のセクションでは、各カテゴリーを詳しく説明します。
 
-## Validation state
+## バリデーション状態 {#validation-state}
 
-Validation state signals tell you whether a field is valid and what errors it contains.
+バリデーション状態シグナルは、フィールドが有効かどうか、またどのようなエラーを含んでいるかを示します。
 
-NOTE: This guide focuses on **using** validation state in your templates and logic (such as reading `valid()`, `invalid()`, `errors()` to display feedback). For information on **defining** validation rules and creating custom validators, see the Validation guide (coming soon).
+NOTE: このガイドでは、テンプレートやロジックでバリデーション状態を**使用する**こと（フィードバックを表示するために`valid()`、`invalid()`、`errors()`を読み取るなど）に焦点を当てています。バリデーションルールを**定義**したり、カスタムバリデーターを作成したりする方法については、バリデーションガイド（近日、公開予定）を参照してください。
 
-### Checking validity
+### 有効性のチェック {#checking-validity}
 
-Use `valid()` and `invalid()` to check validation status:
+`valid()`と`invalid()`を使用してバリデーションステータスをチェックします:
 
 ```angular-ts
 @Component({
@@ -98,26 +98,26 @@ export class Login {
 }
 ```
 
-| Signal      | Returns `true` when                                             |
+| シグナル    | 次の場合に`true`を返します                                      |
 | ----------- | --------------------------------------------------------------- |
-| `valid()`   | Field passes all validation rules and has no pending validators |
-| `invalid()` | Field has validation errors                                     |
+| `valid()`   | フィールドがすべてのバリデーションルールに合格し、保留中のバリデーターがない場合 |
+| `invalid()` | フィールドにバリデーションエラーがある場合                                |
 
-When checking validity in code, use `invalid()` instead of `!valid()` if you want to distinguish between "has errors" and "validation pending." The reason for this is that both `valid()` and `invalid()` can be `false` simultaneously when async validation is pending because the field isn't valid yet since validation not complete and is also isn't invalid since no errors have been found yet.
+コードで有効性をチェックする際、「エラーがある」と「バリデーションが保留中」を区別したい場合は、`!valid()`の代わりに`invalid()`を使用してください。これは、非同期バリデーションが保留中の場合、`valid()`と`invalid()`の両方が同時に`false`になる可能性があるためです。バリデーションが完了していないためフィールドはまだ有効ではなく、またエラーがまだ見つかっていないため無効でもありません。
 
-### Reading validation errors
+### バリデーションエラーの読み取り {#reading-validation-errors}
 
-Access the array of validation errors with `errors()`. Each error object contains:
+`errors()`でバリデーションエラーの配列にアクセスします。各エラーオブジェクトには以下が含まれます:
 
-| Property  | Description                                                     |
+| プロパティ | 説明                                                            |
 | --------- | --------------------------------------------------------------- |
-| `kind`    | The validation rule that failed (such as "required" or "email") |
-| `message` | Optional human-readable error message                           |
-| `field`   | Reference to the `FieldTree` where the error occurred           |
+| `kind`    | 失敗したバリデーションルール（"required"や"email"など）           |
+| `message` | オプションの人間が読める形式のエラーメッセージ                  |
+| `field`   | エラーが発生した`FieldTree`への参照                           |
 
-NOTE: The `message` property is optional. Validators can provide custom error messages, but if not specified, you may need to map error `kind` values to your own messages.
+NOTE: `message`プロパティはオプションです。バリデーターはカスタムエラーメッセージを提供できますが、指定されていない場合は、エラーの`kind`値を独自メッセージにマッピングする必要があるかもしれません。
 
-Here's an example of how to display errors in your template:
+以下は、テンプレートでエラーを表示する方法の例です:
 
 ```angular-ts
 @Component({
@@ -135,11 +135,11 @@ Here's an example of how to display errors in your template:
 })
 ```
 
-This approach loops through all errors for a field, displaying each error message to the user.
+このアプローチでは、フィールドのすべてのエラーをループ処理し、各エラーメッセージをユーザーに表示します。
 
-### Pending validation
+### 保留中のバリデーション {#pending-validation}
 
-The `pending()` signal indicates async validation is in progress:
+`pending()`シグナルは、非同期バリデーションが進行中であることを示します:
 
 ```angular-ts
 @Component({
@@ -157,21 +157,21 @@ The `pending()` signal indicates async validation is in progress:
 })
 ```
 
-This signal enables you to show loading states while async validation executes.
+このシグナルにより、非同期バリデーションの実行中にローディング状態を表示できます。
 
-## Interaction state
+## インタラクション状態 {#interaction-state}
 
-Interaction state tracks whether users have interacted with fields, enabling patterns like "show errors only after the user has touched a field."
+インタラクション状態は、ユーザーがフィールドを操作したかどうかを追跡し、「ユーザーがフィールドに触れた後にのみエラーを表示する」といったパターンを可能にします。
 
-### Touched state
+### Touched状態 {#touched-state}
 
-The `touched()` signal tracks whether a user has focused and then blurred a field. It becomes `true` when a user focuses and then blurs a field through user interaction (not programmatically). Hidden, disabled, and readonly fields are non-interactive and don't become touched from user interactions.
+`touched()`シグナルは、ユーザーがフィールドにフォーカスし、その後ブラーしたかどうかを追跡します。ユーザー操作によって（プログラム的にではなく）フィールドにフォーカスし、その後ブラーすると`true`になります。非表示、無効、読み取り専用のフィールドは非インタラクティブであり、ユーザー操作によってtouchedになることはありません。
 
-### Dirty state
+### Dirty状態 {#dirty-state}
 
-Forms often need to detect whether data has actually changed - for example, to warn users about unsaved changes or to enable a save button only when necessary. The `dirty()` signal tracks whether the user has modified the field.
+フォームでは、データが実際に変更されたかどうかを検出する必要があることがよくあります。たとえば、未保存の変更についてユーザーに警告したり、必要な場合にのみ保存ボタンを有効にしたりするためです。`dirty()`シグナルは、ユーザーがフィールドを変更したかどうかを追跡します。
 
-The `dirty()` signal becomes `true` when the user modifies an interactive field's value, and remains `true` even if the value is changed back to match the initial value:
+`dirty()`シグナルは、ユーザーがインタラクティブなフィールドの値を変更すると`true`になり、値を元の値に戻しても`true`のままです:
 
 ```angular-ts
 @Component({
@@ -192,33 +192,33 @@ export class Profile {
 }
 ```
 
-Use `dirty()` for "unsaved changes" warnings or to enable save buttons only when data has changed.
+「未保存の変更」の警告や、データが変更された場合にのみ保存ボタンを有効にするには、`dirty()`を使用します。
 
-### Touched vs dirty
+### Touchedとdirtyの比較 {#touched-vs-dirty}
 
-These signals track different user interactions:
+これらのシグナルは、異なるユーザーインタラクションを追跡します:
 
-| Signal      | When it becomes true                                                                                                            |
+| シグナル      | trueになる条件                                                                                                            |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `touched()` | User has focused and blurred an interactive field (even if they didn't change anything)                                         |
-| `dirty()`   | User has modified an interactive field (even if they never blurred it, and even if the current value matches the initial value) |
+| `touched()` | ユーザーがインタラクティブなフィールドにフォーカスしてブラーしたとき（何も変更しなくても）                                         |
+| `dirty()`   | ユーザーがインタラクティブなフィールドを変更したとき（一度もブラーしなくても、また現在の値が初期値と一致していても） |
 
-A field can be in different combinations:
+フィールドは、さまざまな組み合わせの状態になり得ます:
 
-| State                  | Scenario                                                  |
+| 状態                   | シナリオ                                                  |
 | ---------------------- | --------------------------------------------------------- |
-| Touched but not dirty  | User focused and blurred the field but made no changes    |
-| Both touched and dirty | User focused the field, changed the value, and blurred it |
+| Touchedだがdirtyではない  | ユーザーがフィールドにフォーカスしてブラーしたが、変更はしなかった    |
+| Touchedかつdirty | ユーザーがフィールドにフォーカスし、値を変更してブラーした |
 
-NOTE: Hidden, disabled, and readonly fields are non-interactive - they don't become touched or dirty from user interactions.
+NOTE: 非表示、無効、読み取り専用のフィールドは非インタラクティブです。これらはユーザー操作によってtouchedやdirtyになることはありません。
 
-## Availability state
+## 可用性状態 {#availability-state}
 
-Availability state signals control whether fields are interactive, editable, or visible. Disabled, hidden, and readonly fields are non-interactive. They don't affect whether their parent form is valid, touched, or dirty.
+可用性状態シグナルは、フィールドがインタラクティブか、編集可能か、表示されるかを制御します。無効、非表示、読み取り専用のフィールドは非インタラクティブです。これらは、親フォームが有効か、touchedか、dirtyかには影響しません。
 
-### Disabled fields
+### 無効なフィールド {#disabled-fields}
 
-The `disabled()` signal indicates whether a field accepts user input. Disabled fields appear in the UI but users cannot interact with them.
+`disabled()`シグナルは、フィールドがユーザー入力を受け入れるかどうかを示します。無効なフィールドはUIに表示されますが、ユーザーはそれらを操作できません。
 
 ```angular-ts
 import { Component, signal } from '@angular/core'
@@ -228,11 +228,11 @@ import { form, Field, disabled } from '@angular/forms/signals'
   selector: 'app-order',
   imports: [Field],
   template: `
-    <!-- TIP: The `[field]` directive automatically binds the `disabled` attribute based on the field's `disabled()` state, so you don't need to manually add `[disabled]="field().disabled()"` -->
+    <!-- TIP: `[field]`ディレクティブは、フィールドの`disabled()`状態に基づいて`disabled`属性を自動的にバインドするため、手動で`[disabled]="field().disabled()"`を追加する必要はありません -->
     <input [field]="orderForm.couponCode" />
 
     @if (orderForm.couponCode().disabled()) {
-      <p class="info">Coupon code is only available for orders over $50</p>
+      <p class="info">クーポンコードは50ドルを超える注文でのみ利用可能です</p>
     }
   `
 })
@@ -248,20 +248,20 @@ export class Order {
 }
 ```
 
-In this example, we use `valueOf(schemaPath.total)` to check the value of the `total` field to determine whether `couponCode` should be disabled.
+この例では、`valueOf(schemaPath.total)`を使用して`total`フィールドの値をチェックし、`couponCode`を無効にするべきかどうかを判断します。
 
-NOTE: The schema callback parameter (`schemaPath` in these examples) is a `SchemaPathTree` object that provides paths to all fields in your form. You can name this parameter anything you like.
+NOTE: スキーマのコールバックパラメータ（この例では`schemaPath`）は、フォーム内のすべてのフィールドへのパスを提供する`SchemaPathTree`オブジェクトです。このパラメータには好きな名前を付けることができます。
 
-When defining rules like `disabled()`, `hidden()`, or `readonly()`, the logic callback receives a `FieldContext` object that is typically destructured (such as `({valueOf})`). Two methods commonly used in validation rules are:
+`disabled()`、`hidden()`、`readonly()`のようなルールを定義する場合、ロジックコールバックは通常、分割代入される（`({valueOf})`など）`FieldContext`オブジェクトを受け取ります。バリデーションルールで一般的に使用される2つのメソッドは次のとおりです:
 
-- `valueOf(schemaPath.otherField)` - Read the value of another field in the form
-- `value()` - A signal containing the value of the field the rule is applied to
+- `valueOf(schemaPath.otherField)` - フォーム内の別のフィールドの値を読み取ります
+- `value()` - ルールが適用されるフィールドの値を含むシグナル
 
-Disabled fields don't contribute to the parent form's validation state. Even if a disabled field would be invalid, the parent form can still be valid. The `disabled()` state affects interactivity and validation, but does not change the field's value.
+無効なフィールドは、親フォームのバリデーション状態には影響しません。無効なフィールドが不正な値であっても、親フォームは有効になり得ます。`disabled()`状態はインタラクティブ性とバリデーションに影響しますが、フィールドの値は変更しません。
 
-### Hidden fields
+### 非表示のフィールド {#hidden-fields}
 
-The `hidden()` signal indicates whether a field is conditionally hidden. Use `hidden()` with `@if` to show or hide fields based on conditions:
+`hidden()`シグナルは、フィールドが条件付きで非表示になるかどうかを示します。条件に基づいてフィールドを表示または非表示にするには、`@if`と共に`hidden()`を使用します:
 
 ```angular-ts
 import { Component, signal } from '@angular/core'
@@ -273,12 +273,12 @@ import { form, Field, hidden } from '@angular/forms/signals'
   template: `
     <label>
       <input type="checkbox" [field]="profileForm.isPublic" />
-      Make profile public
+      プロフィールを公開する
     </label>
 
     @if (!profileForm.publicUrl().hidden()) {
       <label>
-        Public URL
+        公開URL
         <input [field]="profileForm.publicUrl" />
       </label>
     }
@@ -296,11 +296,11 @@ export class Profile {
 }
 ```
 
-Hidden fields don't participate in validation. If a required field is hidden, it won't prevent form submission. The `hidden()` state affects availability and validation, but does not change the field's value.
+非表示のフィールドはバリデーションに参加しません。必須フィールドが非表示の場合でも、フォームの送信は妨げられません。`hidden()`状態は可用性とバリデーションに影響しますが、フィールドの値は変更しません。
 
-### Readonly fields
+### 読み取り専用フィールド {#readonly-fields}
 
-The `readonly()` signal indicates whether a field is readonly. Readonly fields display their value but users cannot edit them:
+`readonly()`シグナルは、フィールドが読み取り専用かどうかを示します。読み取り専用フィールドは値を表示しますが、ユーザーは編集できません:
 
 ```angular-ts
 import { Component, signal } from '@angular/core'
@@ -311,12 +311,12 @@ import { form, Field, readonly } from '@angular/forms/signals'
   imports: [Field],
   template: `
     <label>
-      Username (cannot be changed)
+      ユーザー名（変更不可）
       <input [field]="accountForm.username" />
     </label>
 
     <label>
-      Email
+      メールアドレス
       <input [field]="accountForm.email" />
     </label>
   `
@@ -333,23 +333,23 @@ export class Account {
 }
 ```
 
-NOTE: The `[field]` directive automatically binds the `readonly` attribute based on the field's `readonly()` state, so you don't need to manually add `[readonly]="field().readonly()"`.
+NOTE: `[field]`ディレクティブは、フィールドの`readonly()`状態に基づいて`readonly`属性を自動的にバインドするため、手動で`[readonly]="field().readonly()"`を追加する必要はありません。
 
-Like disabled and hidden fields, readonly fields are non-interactive and don't affect parent form state. The `readonly()` state affects editability and validation, but does not change the field's value.
+無効フィールドや非表示フィールドと同様に、読み取り専用フィールドは非インタラクティブであり、親フォームの状態に影響を与えません。`readonly()`状態は編集可能性とバリデーションに影響しますが、フィールドの値は変更しません。
 
-### When to use each
+### それぞれをいつ使用するか {#when-to-use-each}
 
-| State        | Use when                                                            | User can see it | User can interact | Contributes to validation |
+| 状態 | 使用する状況 | ユーザーに表示されるか | ユーザーが操作できるか | バリデーションに寄与するか |
 | ------------ | ------------------------------------------------------------------- | --------------- | ----------------- | ------------------------- |
-| `disabled()` | Field temporarily unavailable (such as based on other field values) | Yes             | No                | No                        |
-| `hidden()`   | Field not relevant in current context                               | No (with @if)   | No                | No                        |
-| `readonly()` | Value should be visible but not editable                            | Yes             | No                | No                        |
+| `disabled()` | フィールドが一時的に利用できない場合（他のフィールド値に基づくなど） | はい | いいえ | いいえ |
+| `hidden()` | 現在のコンテキストでフィールドが関連しない場合 | いいえ（@ifを使用） | いいえ | いいえ |
+| `readonly()` | 値は表示されるべきだが、編集はできない場合 | はい | いいえ | いいえ |
 
-## Form-level state
+## フォームレベルの状態 {#form-level-state}
 
-The root form is also a field in the field tree. When you call it as a function, it also returns a `FieldState` object that aggregates the state of all child fields.
+ルートフォームもフィールドツリー内のフィールドです。それを関数として呼び出すと、すべての子フィールドの状態を集約した`FieldState`オブジェクトも返されます。
 
-### Accessing form state
+### フォームの状態へのアクセス {#accessing-form-state}
 
 ```angular-ts
 @Component({
@@ -368,43 +368,43 @@ export class Login {
 }
 ```
 
-In this example, the form is valid only when all child fields are valid. This allows you to enable/disable submit buttons based on overall form validity.
+この例では、すべての子フィールドが有効な場合にのみフォームが有効になります。これにより、フォーム全体の有効性に基づいて送信ボタンを有効化/無効化できます。
 
-### Form-level signals
+### フォームレベルのシグナル {#form-level-signals}
 
-Because the root form is a field, it has the same signals (such as `valid()`, `invalid()`, `touched()`, `dirty()`, etc.).
+ルートフォームはフィールドであるため、同じシグナル（`valid()`、`invalid()`、`touched()`、`dirty()`など）を持ちます。
 
-| Signal      | Form-level behavior                                            |
+| シグナル      | フォームレベルの動作                                           |
 | ----------- | -------------------------------------------------------------- |
-| `valid()`   | All interactive fields are valid and no validators are pending |
-| `invalid()` | At least one interactive field has validation errors           |
-| `pending()` | At least one interactive field has pending async validation    |
-| `touched()` | User has touched at least one interactive field                |
-| `dirty()`   | User has modified at least one interactive field               |
+| `valid()`   | すべてのインタラクティブなフィールドが有効で、保留中のバリデーターがない |
+| `invalid()` | 少なくとも1つのインタラクティブなフィールドにバリデーションエラーがある   |
+| `pending()` | 少なくとも1つのインタラクティブなフィールドに保留中の非同期バリデーションがある |
+| `touched()` | ユーザーが少なくとも1つのインタラクティブなフィールドに触れた          |
+| `dirty()`   | ユーザーが少なくとも1つのインタラクティブなフィールドを変更した        |
 
-### When to use form-level vs field-level
+### フォームレベルとフィールドレベルの使い分け {#when-to-use-form-level-vs-field-level}
 
-**Use form-level state for:**
+**フォームレベルの状態は次の場合に使用します:**
 
-- Submit button enabled/disabled state
-- "Save" button state
-- Overall form validity checks
-- Unsaved changes warnings
+- 送信ボタンの有効/無効状態
+- 「保存」ボタンの状態
+- フォーム全体の有効性チェック
+- 未保存の変更に関する警告
 
-**Use field-level state for:**
+**フィールドレベルの状態は次の場合に使用します:**
 
-- Individual field error messages
-- Field-specific styling
-- Per-field validation feedback
-- Conditional field availability
+- 個々のフィールドのエラーメッセージ
+- フィールド固有のスタイリング
+- フィールドごとのバリデーションフィードバック
+- 条件付きのフィールドの可用性
 
-## State propagation
+## 状態の伝播 {#state-propagation}
 
-Field state propagates from child fields up through parent field groups to the root form.
+フィールドの状態は、子フィールドから親フィールドグループを通じてルートフォームまで伝播します。
 
-### How child state affects parent forms
+### 子の状態が親フォームに与える影響 {#how-child-state-affects-parent-forms}
 
-When a child field becomes invalid, its parent field group becomes invalid, and so does the root form. When a child becomes touched or dirty, the parent field group and root form reflect that change. This aggregation allows you to check validity at any level - field or entire form.
+子フィールドが無効になると、その親フィールドグループも無効になり、ルートフォームも同様に無効になります。子がtouchedまたはdirtyになると、親フィールドグループとルートフォームはその変更を反映します。この集約により、フィールドやフォーム全体など、あらゆるレベルで有効性をチェックできます。
 
 ```ts
 const userModel = signal({
@@ -420,15 +420,15 @@ const userModel = signal({
 
 const userForm = form(userModel)
 
-// If firstName is invalid, profile is invalid
+// firstNameが無効な場合、profileも無効になります
 userForm.profile.firstName().invalid() === true
 // → userForm.profile().invalid() === true
 // → userForm().invalid() === true
 ```
 
-### Hidden, disabled, and readonly fields
+### 非表示、無効、読み取り専用のフィールド {#hidden-disabled-and-readonly-fields}
 
-Hidden, disabled, and readonly fields are non-interactive and don't affect parent form state:
+非表示、無効、読み取り専用のフィールドは非インタラクティブであり、親フォームの状態に影響を与えません:
 
 ```ts
 const orderModel = signal({
@@ -442,17 +442,17 @@ const orderForm = form(orderModel, schemaPath => {
 })
 ```
 
-In this example, when `shippingAddress` is hidden, it doesn't affect form validity. As a result, even if `shippingAddress` is empty and required, the form can be valid.
+この例では、`shippingAddress`が非表示の場合、フォームの有効性には影響しません。その結果、`shippingAddress`が空で必須であっても、フォームは有効になり得ます。
 
-This behavior prevents hidden, disabled, or readonly fields from blocking form submission or affecting validation, touched, and dirty state.
+この動作により、非表示、無効、または読み取り専用のフィールドがフォームの送信をブロックしたり、有効性、touched、dirtyの状態に影響を与えたりするのを防ぎます。
 
-## Using state in templates
+## テンプレートでの状態の使用 {#using-state-in-templates}
 
-Field state signals integrate seamlessly with Angular templates, enabling reactive form user experiences without manual event handling.
+フィールド状態シグナルはAngularテンプレートとシームレスに統合され、手動のイベントハンドリングなしでリアクティブなフォームのユーザー体験を可能にします。
 
-### Conditional error display
+### 条件付きのエラー表示 {#conditional-error-display}
 
-Show errors only after a user has interacted with a field:
+ユーザーがフィールドを操作した後にのみエラーを表示します:
 
 ```angular-ts
 import { Component, signal } from '@angular/core'
@@ -481,11 +481,11 @@ export class Signup {
 }
 ```
 
-This pattern prevents showing errors before users have had a chance to interact with the field. Errors appear only after the user has focused and then left the field.
+このパターンは、ユーザーがフィールドを操作する機会を得る前にエラーが表示されるのを防ぎます。エラーは、ユーザーがフィールドにフォーカスしてから離れた後にのみ表示されます。
 
-### Conditional field availability
+### 条件付きのフィールドの可用性 {#conditional-field-availability}
 
-Use the `hidden()` signal with `@if` to show or hide fields conditionally:
+`hidden()`シグナルを`@if`とともに使用して、条件付きでフィールドを表示または非表示にします:
 
 ```angular-ts
 import { Component, signal } from '@angular/core'
@@ -520,15 +520,15 @@ export class Order {
 }
 ```
 
-Hidden fields don't participate in validation, allowing the form to be submitted even if the hidden field would otherwise be invalid.
+非表示のフィールドはバリデーションに参加しないため、たとえ非表示のフィールドがそうでなければ無効であってもフォームを送信できます。
 
-## Using field state in component logic
+## コンポーネントロジックでのフィールド状態の使用 {#using-field-state-in-component-logic}
 
-Field state signals work with Angular's reactive primitives like `computed()` and `effect()` for advanced form logic.
+フィールド状態のシグナルは、Angularのリアクティブプリミティブである`computed()`や`effect()`と連携して、高度なフォームロジックを実現します。
 
-### Validation checks before submission
+### 送信前のバリデーションチェック {#validation-checks-before-submission}
 
-Check form validity in component methods:
+コンポーネントメソッドでフォームの有効性をチェックします:
 
 ```ts
 export class Registration {
@@ -559,11 +559,11 @@ export class Registration {
 }
 ```
 
-This ensures only valid, fully-validated data reaches your API.
+これにより、有効で完全にバリデーションされたデータのみがAPIに到達することが保証されます。
 
-### Derived state with computed
+### computedによる派生状態 {#derived-state-with-computed}
 
-Create computed signals based on field state to automatically update when the underlying field state changes:
+フィールド状態に基づいてcomputedシグナルを作成すると、基礎となるフィールドの状態が変化したときに自動的に更新されます:
 
 ```ts
 export class Password {
@@ -588,13 +588,13 @@ export class Password {
 }
 ```
 
-### Programmatic state changes
+### プログラムによる状態変更 {#programmatic-state-changes}
 
-While field state typically updates through user interactions (typing, focusing, blurring), you sometimes need to control it programmatically. Common scenarios include form submission and resetting forms.
+フィールドの状態は通常、ユーザーインタラクション（タイピング、フォーカス、ブラー）によって更新されますが、プログラムで制御する必要がある場合もあります。一般的なシナリオには、フォームの送信やフォームのリセットが含まれます。
 
-#### Form submission
+#### フォームの送信 {#form-submission}
 
-When a user submits a form, use the `submit()` function to handle validation and reveal errors:
+ユーザーがフォームを送信するときは、`submit()`関数を使用してバリデーションを処理し、エラーを表示します:
 
 ```ts
 import { Component, signal } from '@angular/core'
@@ -621,11 +621,11 @@ export class Registration {
 }
 ```
 
-The `submit()` function automatically marks all fields as touched (revealing validation errors) and only executes your callback if the form is valid.
+`submit()`関数は、すべてのフィールドを自動的にtouchedとしてマークし（バリデーションエラーを表示）、フォームが有効な場合にのみコールバックを実行します。
 
-#### Resetting forms after submission
+#### 送信後のフォームのリセット {#resetting-forms-after-submission}
 
-After successfully submitting a form, you may want to return it to its initial state - clearing both user interaction history and field values. The `reset()` method clears the touched and dirty flags but doesn't change field values, so you need to update your model separately:
+フォームを正常に送信した後、ユーザーインタラクションの履歴とフィールドの値の両方をクリアして、初期状態に戻したい場合があります。`reset()`メソッドはtouchedフラグとdirtyフラグをクリアしますが、フィールドの値は変更しないため、モデルを別途更新する必要があります:
 
 ```ts
 export class Contact {
@@ -646,11 +646,11 @@ export class Contact {
 }
 ```
 
-This two-step reset ensures the form is ready for new input without showing stale error messages or dirty state indicators.
+この2段階のリセットにより、古いエラーメッセージやdirty状態のインジケーターを表示することなく、フォームが新しい入力に対応できるようになります。
 
-## Styling based on validation state
+## バリデーション状態に基づいたスタイリング {#styling-based-on-validation-state}
 
-You can apply custom styles to your form by binding CSS classes based on the validation state:
+バリデーション状態に基づいてCSSクラスをバインドすることで、フォームにカスタムスタイルを適用できます:
 
 ```angular-ts
 import { Component, signal } from '@angular/core'
@@ -685,11 +685,11 @@ export class StyleExample {
 }
 ```
 
-Checking both `touched()` and validation state ensures styles only appear after the user has interacted with the field.
+`touched()`とバリデーション状態の両方をチェックすることで、ユーザーがフィールドを操作した後にのみスタイルが表示されるようになります。
 
-## Next steps
+## 次のステップ {#next-steps}
 
-Here are other related guides on Signal Forms:
+シグナルフォームに関するその他の関連ガイドは次のとおりです:
 
-- [Form Models guide](guide/forms/signal-forms/models) - Creating models and updating values
-- Validation guide - Defining validation rules and custom validators (coming soon)
+- [フォームモデルガイド](guide/forms/signal-forms/models) - モデルの作成と値の更新
+- バリデーションガイド - バリデーションルールの定義とカスタムバリデーター (近日公開の予定)

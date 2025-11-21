@@ -1,18 +1,18 @@
-# Custom Controls
+# カスタムコントロール
 
-NOTE: This guide assumes familiarity with [Signal Forms essentials](essentials/signal-forms).
+NOTE: このガイドは、[Signal Formsの基本](essentials/signal-forms)に精通していることを前提としています。
 
-The browser's built-in form controls (like input, select, textarea) handle common cases, but applications often need specialized inputs. A date picker with calendar UI, a rich text editor with formatting toolbar, or a tag selector with autocomplete all require custom implementations.
+ブラウザの組み込みフォームコントロール（`input`、`select`、`textarea`など）は一般的なケースを扱いますが、アプリケーションではしばしば特殊な入力が必要になります。カレンダーUIを持つ日付ピッカー、書式設定ツールバーを持つリッチテキストエディタ、オートコンプリート機能を持つタグセレクターなどは、すべてカスタム実装が必要です。
 
-Signal Forms works with any component that implements specific interfaces. A **control interface** defines the properties and signals that allow your component to communicate with the form system. When your component implements one of these interfaces, the `[field]` directive automatically connects your control to form state, validation, and data binding.
+シグナルフォームは、特定のインターフェースを実装するあらゆるコンポーネントと連携して動作します。**コントロールインターフェース**は、コンポーネントがフォームシステムと通信するためのプロパティとシグナルを定義します。コンポーネントがこれらのインターフェースのいずれかを実装すると、`[field]`ディレクティブが自動的にコントロールをフォームの状態、バリデーション、データバインディングに接続します。
 
-## Creating a basic custom control
+## 基本的なカスタムコントロールの作成 {#creating-a-basic-custom-control}
 
-Let's start with a minimal implementation and add features as needed.
+最小限の実装から始めて、必要に応じて機能を追加していきましょう。
 
-### Minimal input control
+### 最小限の入力コントロール {#minimal-input-control}
 
-A basic custom input only needs to implement the `FormValueControl` interface and define the required `value` model signal.
+基本的なカスタム入力は、`FormValueControl`インターフェースを実装し、必須の`value`モデルシグナルを定義するだけで済みます。
 
 ```angular-ts
 import { Component, model } from '@angular/core';
@@ -37,12 +37,12 @@ export class BasicInput implements FormValueControl<string> {
 }
 ```
 
-### Minimal checkbox control
+### 最小限のチェックボックスコントロール {#minimal-checkbox-control}
 
-A checkbox-style control needs two things:
+チェックボックス形式のコントロールには、次の2つが必要です:
 
-1. Implement the `FormCheckboxControl` interface so the `Field` directive will recognize it as a form control
-2. Provide a `checked` model signal
+1. `Field`ディレクティブがフォームコントロールとして認識できるように、`FormCheckboxControl`インターフェースを実装する
+2. `checked`モデルシグナルを提供する
 
 ```angular-ts
 import { Component, model, ChangeDetectionStrategy } from '@angular/core';
@@ -71,9 +71,9 @@ export class BasicToggle implements FormCheckboxControl {
 }
 ```
 
-### Using your custom control
+### カスタムコントロールの使用 {#using-your-custom-control}
 
-Once you've created a control, you can use it anywhere you would use a built-in input by adding the `Field` directive to it:
+コントロールを作成したら、`Field`ディレクティブを追加することで、組み込みの入力を使用する場所ならどこでも使用できます:
 
 ```angular-ts
 import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
@@ -118,99 +118,99 @@ export class Registration {
 }
 ```
 
-NOTE: The schema callback parameter (`schemaPath` in these examples) is a `SchemaPathTree` object that provides paths to all fields in your form. You can name this parameter anything you like.
+NOTE: スキーマのコールバックパラメータ（この例では`schemaPath`）は、フォーム内のすべてのフィールドへのパスを提供する`SchemaPathTree`オブジェクトです。このパラメータには好きな名前を付けることができます。
 
-The `[field]` directive works identically for custom controls and built-in inputs. Signal Forms treats them the same - validation runs, state updates, and data binding works automatically.
+`[field]`ディレクティブは、カスタムコントロールと組み込みの入力で同じように動作します。シグナルフォームはそれらを同じように扱います - バリデーションの実行、状態の更新、データバインディングが自動的に機能します。
 
-## Understanding control interfaces
+## コントロールインターフェースの理解 {#understanding-control-interfaces}
 
-Now that you've seen custom controls in action, let's explore how they integrate with Signal Forms.
+カスタムコントロールの動作を確認したところで、それらがシグナルフォームとどのように統合されるかを見ていきましょう。
 
-### Control interfaces
+### コントロールインターフェース {#control-interfaces}
 
-The `BasicInput` and `BasicToggle` components you created implement specific control interfaces that tell Signal Forms how to interact with them.
+作成した`BasicInput`と`BasicToggle`コンポーネントは、シグナルフォームにそれらとの対話方法を伝える特定のコントロールインターフェースを実装しています。
 
-#### FormValueControl
+#### FormValueControl {#formvaluecontrol}
 
-`FormValueControl` is the interface for most input types - text inputs, number inputs, date pickers, select dropdowns, and any control that edits a single value. When your component implements this interface:
+`FormValueControl`は、テキスト入力、数値入力、日付ピッカー、セレクトドロップダウンなど、単一の値を編集するほとんどの入力タイプのためのインターフェースです。コンポーネントがこのインターフェースを実装する場合：
 
-- **Required property**: Your component must provide a `value` model signal
-- **What the Field directive does**: Binds the form field's value to your control's `value` signal
+- **必須プロパティ**: コンポーネントは`value`モデルシグナルを提供する必要があります
+- **Fieldディレクティブの役割**: フォームフィールドの値をコントロールの`value`シグナルにバインドします
 
-IMPORTANT: Controls implementing `FormValueControl` must NOT have a `checked` property
+IMPORTANT: `FormValueControl`を実装するコントロールは`checked`プロパティを持ってはいけません
 
-#### FormCheckboxControl
+#### FormCheckboxControl {#formcheckboxcontrol}
 
-`FormCheckboxControl` is the interface for checkbox-like controls - toggles, switches, and any control that represents a boolean on/off state. When your component implements this interface:
+`FormCheckboxControl`は、トグル、スイッチなど、ブール値のオン/オフ状態を表すチェックボックスのようなコントロールのためのインターフェースです。コンポーネントがこのインターフェースを実装する場合：
 
-- **Required property**: Your component must provide a `checked` model signal
-- **What the Field directive does**: Binds the form field's value to your control's `checked` signal
+- **必須プロパティ**: コンポーネントは`checked`モデルシグナルを提供する必要があります
+- **Fieldディレクティブの役割**: フォームフィールドの値をコントロールの`checked`シグナルにバインドします
 
-IMPORTANT: Controls implementing `FormCheckboxControl` must NOT have a `value` property
+IMPORTANT: `FormCheckboxControl`を実装するコントロールは`value`プロパティを持ってはいけません
 
-### Optional state properties
+### オプションの状態プロパティ {#optional-state-properties}
 
-Both `FormValueControl` and `FormCheckboxControl` extend `FormUiControl` - a base interface that provides optional properties for integrating with form state.
+`FormValueControl`と`FormCheckboxControl`はどちらも`FormUiControl`を拡張します。これはフォームの状態と統合するためのオプションのプロパティを提供するベースインターフェースです。
 
-All properties are optional. Implement only what your control needs.
+すべてのプロパティはオプションです。コントロールが必要とするものだけを実装してください。
 
-#### Interaction state
+#### インタラクションの状態 {#interaction-state}
 
-Track when users interact with your control:
+ユーザーがコントロールを操作したときを追跡します：
 
-| Property  | Purpose                                          |
+| プロパティ | 目的 |
 | --------- | ------------------------------------------------ |
-| `touched` | Whether the user has interacted with the field   |
-| `dirty`   | Whether the value differs from its initial state |
+| `touched` | ユーザーがフィールドを操作したかどうか |
+| `dirty` | 値が初期状態と異なるかどうか |
 
-#### Validation state
+#### バリデーションの状態 {#validation-state}
 
-Display validation feedback to users:
+ユーザーにバリデーションのフィードバックを表示します：
 
-| Property  | Purpose                                 |
+| プロパティ | 目的 |
 | --------- | --------------------------------------- |
-| `errors`  | Array of current validation errors      |
-| `valid`   | Whether the field is valid              |
-| `invalid` | Whether the field has validation errors |
-| `pending` | Whether async validation is in progress |
+| `errors` | 現在のバリデーションエラーの配列 |
+| `valid` | フィールドが有効かどうか |
+| `invalid` | フィールドにバリデーションエラーがあるかどうか |
+| `pending` | 非同期バリデーションが進行中かどうか |
 
-#### Availability state
+#### 可用性の状態 {#availability-state}
 
-Control whether users can interact with your field:
+ユーザーがフィールドを操作できるかどうかを制御します：
 
-| Property          | Purpose                                                  |
+| プロパティ | 目的 |
 | ----------------- | -------------------------------------------------------- |
-| `disabled`        | Whether the field is disabled                            |
-| `disabledReasons` | Reasons why the field is disabled                        |
-| `readonly`        | Whether the field is readonly (visible but not editable) |
-| `hidden`          | Whether the field is hidden from view                    |
+| `disabled` | フィールドが無効かどうか |
+| `disabledReasons` | フィールドが無効になっている理由 |
+| `readonly` | フィールドが読み取り専用（表示されるが編集不可）かどうか |
+| `hidden` | フィールドがビューから隠されているかどうか |
 
-NOTE: `disabledReasons` is an array of `DisabledReason` objects. Each object has a `field` property (reference to the field tree) and an optional `message` property. Access the message via `reason.message`.
+NOTE: `disabledReasons`は`DisabledReason`オブジェクトの配列です。各オブジェクトは`field`プロパティ（フィールドツリーへの参照）とオプションの`message`プロパティを持ちます。メッセージには`reason.message`を介してアクセスします。
 
-#### Validation constraints
+#### バリデーション制約 {#validation-constraints}
 
-Receive validation constraint values from the form:
+フォームからバリデーション制約の値を受け取ります：
 
-| Property    | Purpose                                              |
+| プロパティ | 目的 |
 | ----------- | ---------------------------------------------------- |
-| `required`  | Whether the field is required                        |
-| `min`       | Minimum numeric value (`undefined` if no constraint) |
-| `max`       | Maximum numeric value (`undefined` if no constraint) |
-| `minLength` | Minimum string length (undefined if no constraint)   |
-| `maxLength` | Maximum string length (undefined if no constraint)   |
-| `pattern`   | Array of regular expression patterns to match        |
+| `required` | フィールドが必須かどうか |
+| `min` | 最小数値（制約がない場合は`undefined`） |
+| `max` | 最大数値（制約がない場合は`undefined`） |
+| `minLength` | 最小の文字列長（制約がない場合はundefined） |
+| `maxLength` | 最大の文字列長（制約がない場合はundefined） |
+| `pattern` | 一致させる正規表現パターンの配列 |
 
-#### Field metadata
+#### フィールドのメタデータ {#field-metadata}
 
-| Property | Purpose                                                            |
+| プロパティ | 目的 |
 | -------- | ------------------------------------------------------------------ |
-| `name`   | The field's name attribute (which is unique across forms and apps) |
+| `name` | フィールドのname属性（フォームやアプリケーション全体で一意） |
 
-The "[Adding state signals](#adding-state-signals)" section below shows how to implement these properties in your controls.
+以下の「[状態シグナルの追加](#adding-state-signals)」セクションでは、これらのプロパティをコントロールに実装する方法を示します。
 
-### How the Field directive works
+### Fieldディレクティブの仕組み {#how-the-field-directive-works}
 
-The `[field]` directive detects which interface your control implements and automatically binds the appropriate signals:
+`[field]`ディレクティブは、コントロールがどのインターフェースを実装しているかを検出し、適切なシグナルを自動的にバインドします：
 
 ```angular-ts
 import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
@@ -241,20 +241,20 @@ export class MyForm {
 }
 ```
 
-TIP: For complete coverage of creating and managing form models, see the [Form Models guide](guide/forms/signal-forms/models).
+TIP: フォームモデルの作成と管理に関する完全な情報については、[フォームモデルガイド](guide/forms/signal-forms/models)を参照してください。
 
-When you bind `[field]="userForm.username"`, the Field directive:
+`[field]="userForm.username"`をバインドすると、Fieldディレクティブは次のようになります：
 
-1. Detects your control implements `FormValueControl`
-2. Internally accesses `userForm.username().value()` and binds it to your control's `value` model signal
-3. Binds form state signals (`disabled()`, `errors()`, etc.) to your control's optional input signals
-4. Updates occur automatically through signal reactivity
+1. コントロールが`FormValueControl`を実装していることを検出します
+2. 内部で`userForm.username().value()`にアクセスし、それをコントロールの`value`モデルシグナルにバインドします
+3. フォームの状態シグナル（`disabled()`、`errors()`など）をコントロールのオプションの入力シグナルにバインドします
+4. 更新はシグナルのリアクティビティを通じて自動的に行われます
 
-## Adding state signals
+## 状態シグナルの追加 {#adding-state-signals}
 
-The minimal controls shown above work, but they don't respond to form state. You can add optional input signals to make your controls react to disabled state, display validation errors, and track user interaction.
+上記の最小限のコントロールは機能しますが、フォームの状態には応答しません。オプションの入力シグナルを追加して、コントロールが無効状態に反応したり、バリデーションエラーを表示したり、ユーザーインタラクションを追跡したりできるようにできます。
 
-Here's a comprehensive example that implements common state properties:
+以下は、一般的な状態プロパティを実装する包括的な例です:
 
 ```angular-ts
 import { Component, model, input, ChangeDetectionStrategy } from '@angular/core';
@@ -314,7 +314,7 @@ export class StatefulInput implements FormValueControl<string> {
 }
 ```
 
-As a result, you can use the control with validation and state management:
+その結果、バリデーションと状態管理を備えたコントロールを使用できます:
 
 ```angular-ts
 import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
@@ -343,17 +343,17 @@ export class Login {
 }
 ```
 
-When the user types an invalid email, the Field directive automatically updates `invalid()` and `errors()`. Your control can display the validation feedback.
+ユーザーが無効なメールアドレスを入力すると、`Field`ディレクティブが自動的に`invalid()`と`errors()`を更新します。あなたのコントロールは、そのバリデーションフィードバックを表示できます。
 
-### Signal types for state properties
+### 状態プロパティのシグナルタイプ {#signal-types-for-state-properties}
 
-Most state properties use `input()` (read-only from the form). Use `model()` for `touched` when your control updates it on user interaction. The `touched` property uniquely supports `model()`, `input()`, or `OutputRef` depending on your needs.
+ほとんどの状態プロパティは`input()`（フォームからの読み取り専用）を使用します。コントロールがユーザーインタラクションに応じて更新する場合は、`touched`に`model()`を使用します。`touched`プロパティは、ニーズに応じて`model()`、`input()`、または`OutputRef`を一意にサポートします。
 
-## Value transformation
+## 値の変換 {#value-transformation}
 
-Controls sometimes display values differently than the form model stores them - a date picker might display "January 15, 2024" while storing "2024-01-15", or a currency input might show "$1,234.56" while storing 1234.56.
+コントロールは、フォームモデルに格納されている値とは異なる形式で値を表示することがあります。例えば、日付ピッカーは「2024-01-15」と格納しながら「January 15, 2024」と表示したり、通貨入力は1234.56と格納しながら「$1,234.56」と表示したりします。
 
-Use `computed()` signals (from `@angular/core`) to transform the model value for display, and handle input events to parse user input back to the storage format:
+`@angular/core`の`computed()`シグナルを使用してモデルの値を表示用に変換し、入力イベントを処理してユーザー入力を格納形式にパースして戻します:
 
 ```angular-ts
 import { Component, model, computed, ChangeDetectionStrategy } from '@angular/core';
@@ -371,10 +371,10 @@ import { FormValueControl } from '@angular/forms/signals';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CurrencyInput implements FormValueControl<number> {
-  value = model<number>(0);  // Stores numeric value (1234.56)
+  value = model<number>(0);  // 数値 (1234.56) を格納します
 
   displayValue = computed(() => {
-    return this.value().toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ','); // Shows "1,234.56"
+    return this.value().toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ','); // 「1,234.56」と表示します
   });
 
   handleInput(input: string) {
@@ -384,45 +384,45 @@ export class CurrencyInput implements FormValueControl<number> {
 }
 ```
 
-## Validation integration
+## バリデーションの統合 {#validation-integration}
 
-Controls display validation state but don't perform validation. Validation happens in the form schema - your control receives `invalid()` and `errors()` signals from the Field directive and displays them (as shown in the StatefulInput example above).
+コントロールはバリデーションの状態を表示しますが、バリデーションは実行しません。バリデーションはフォームスキーマで行われます。コントロールは`Field`ディレクティブから`invalid()`と`errors()`シグナルを受け取り、それらを表示します（上記の`StatefulInput`の例で示されているように）。
 
-The Field directive also passes validation constraint values like `required`, `min`, `max`, `minLength`, `maxLength`, and `pattern`. Your control can use these to enhance the UI:
+`Field`ディレクティブは、`required`、`min`、`max`、`minLength`、`maxLength`、`pattern`のようなバリデーション制約の値も渡します。コントロールはこれらを使用してUIを強化できます：
 
 ```ts
 export class NumberInput implements FormValueControl<number> {
   value = model<number>(0);
 
-  // Constraint values from schema validation rules
+  // スキーマのバリデーションルールからの制約値
   required = input<boolean>(false);
   min = input<number | undefined>(undefined);
   max = input<number | undefined>(undefined);
 }
 ```
 
-When you add `min()` and `max()` validation rules to the schema, the Field directive passes these values to your control. Use them to apply HTML5 attributes or show constraint hints in your template.
+スキーマに`min()`と`max()`のバリデーションルールを追加すると、`Field`ディレクティブはこれらの値をコントロールに渡します。これらを使用して、HTML5属性を適用したり、テンプレートに制約のヒントを表示したりします。
 
-IMPORTANT: Don't implement validation logic in your control. Define validation rules in the form schema and let your control display the results:
+IMPORTANT: コントロールにバリデーションロジックを実装しないでください。バリデーションルールはフォームスキーマで定義し、コントロールにはその結果を表示させるようにしてください：
 
 ```typescript
-// Avoid: Validation in control
+// 悪い例：コントロール内でのバリデーション
 export class BadControl implements FormValueControl<string> {
   value = model<string>('')
-  isValid() { return this.value().length >= 8 } // Don't do this!
+  isValid() { return this.value().length >= 8 } // これは行わないでください！
 }
 
-// Good: Validation in schema, control displays results
+// 良い例：スキーマでバリデーションし、コントロールは結果を表示
 accountForm = form(this.accountModel, schemaPath => {
   minLength(schemaPath.password, 8, { message: 'Password must be at least 8 characters' })
 })
 ```
 
-## Next steps
+## 次のステップ {#next-steps}
 
-This guide covered building custom controls that integrate with Signal Forms. Related guides explore other aspects of Signal Forms:
+このガイドでは、シグナルフォームと連携するカスタムコントロールの構築について説明しました。関連ガイドでは、シグナルフォームの他の側面について探求します:
 
-- [Form Models guide](guide/forms/signal-forms/models) - Creating and updating form models
-  <!-- TODO: Uncomment when guides are available -->
-  <!-- - [Field State Management guide](guide/forms/signal-forms/field-state-management) - Using form state signals -->
-  <!-- - [Validation guide](guide/forms/signal-forms/validation) - Adding validation to your forms -->
+- [フォームモデルガイド](guide/forms/signal-forms/models) - フォームモデルの作成と更新
+  <!-- TODO: ガイドが利用可能になったらコメントを解除してください -->
+  <!-- - [フィールド状態管理ガイド](guide/forms/signal-forms/field-state-management) - フォーム状態シグナルの使用 -->
+  <!-- - [バリデーションガイド](guide/forms/signal-forms/validation) - フォームへのバリデーションの追加 -->

@@ -1,8 +1,8 @@
-# Validation
+# バリデーション
 
-Forms need validation to ensure users provide correct, complete data before submission. Without validation, you would need to handle data quality issues on the server, provide poor user experience with unclear error messages, and manually check every constraint.
+フォームには、ユーザーが送信前に正しく完全なデータを提供することを保証するためにバリデーションが必要です。バリデーションがない場合、サーバー側でデータ品質の問題を処理し、不明瞭なエラーメッセージでユーザー体験を低下させ、すべての制約を手動でチェックする必要があるでしょう。
 
-Signal Forms provides a schema-based validation approach. Validation rules bind to fields using a schema function, run automatically when values change, and expose errors through field state signals. This enables reactive validation that updates as users interact with the form.
+シグナルフォームは、スキーマベースのバリデーションアプローチを提供します。バリデーションルールはスキーマ関数を使用してフィールドにバインドされ、値が変更されると自動的に実行され、フィールド状態シグナルを通じてエラーを公開します。これにより、ユーザーがフォームを操作するにつれて更新されるリアクティブなバリデーションが可能になります。
 
 <docs-code-multifile preview hideCode path="adev/src/content/examples/signal-forms/src/login-validation-complete/app/app.ts">
   <docs-code header="app.ts" path="adev/src/content/examples/signal-forms/src/login-validation-complete/app/app.ts"/>
@@ -10,13 +10,13 @@ Signal Forms provides a schema-based validation approach. Validation rules bind 
   <docs-code header="app.css" path="adev/src/content/examples/signal-forms/src/login-validation-complete/app/app.css"/>
 </docs-code-multifile>
 
-## Validation basics
+## バリデーションの基本 {#validation-basics}
 
-Validation in Signal Forms is defined through a schema function passed as the second argument to `form()`.
+シグナルフォームにおけるバリデーションは、`form()`の第二引数として渡されるスキーマ関数を通じて定義されます。
 
-### The schema function
+### スキーマ関数 {#the-schema-function}
 
-The schema function receives a `SchemaPathTree` object that lets you define your validation rules:
+スキーマ関数は、バリデーションルールを定義するための`SchemaPathTree`オブジェクトを受け取ります:
 
 <docs-code
   header="app.ts"
@@ -25,40 +25,40 @@ The schema function receives a `SchemaPathTree` object that lets you define your
   highlight="[23,24,26]"
 />
 
-The schema function runs once during form initialization. Validation rules bind to fields using the schema path parameter (such as `schemaPath.email`, `schemaPath.password`), and validation runs automatically whenever field values change.
+スキーマ関数はフォームの初期化中に一度だけ実行されます。バリデーションルールはスキーマパスパラメータ（`schemaPath.email`や`schemaPath.password`など）を使用してフィールドにバインドされ、フィールドの値が変更されるたびにバリデーションが自動的に実行されます。
 
-NOTE: The schema callback parameter (`schemaPath` in these examples) is a `SchemaPathTree` object that provides paths to all fields in your form. You can name this parameter anything you like.
+NOTE: スキーマのコールバックパラメータ（この例では`schemaPath`）は、フォーム内のすべてのフィールドへのパスを提供する`SchemaPathTree`オブジェクトです。このパラメータには好きな名前を付けることができます。
 
-### How validation works
+### バリデーションの仕組み {#how-validation-works}
 
-Validation in Signal Forms follows this pattern:
+シグナルフォームのバリデーションは、次のパターンに従います:
 
-1. **Define validation rules in schema** - Bind validation rules to fields in the schema function
-2. **Automatic execution** - Validation rules run when field values change
-3. **Error propagation** - Validation errors are exposed through field state signals
-4. **Reactive updates** - UI automatically updates when validation state changes
+1. **スキーマでバリデーションルールを定義** - スキーマ関数内でバリデーションルールをフィールドにバインドします
+2. **自動実行** - フィールドの値が変更されるとバリデーションルールが実行されます
+3. **エラーの伝播** - バリデーションエラーはフィールドの状態シグナルを通じて公開されます
+4. **リアクティブな更新** - バリデーションの状態が変化するとUIが自動的に更新されます
 
-Validation runs on every value change for interactive fields. Hidden and disabled fields don't run validation - their validation rules are skipped until the field becomes interactive again.
+インタラクティブなフィールドでは、値が変更されるたびにバリデーションが実行されます。非表示および無効化されたフィールドではバリデーションは実行されません - それらのバリデーションルールは、フィールドが再びインタラクティブになるまでスキップされます。
 
-### Validation timing
+### バリデーションのタイミング {#validation-timing}
 
-Validation rules execute in this order:
+バリデーションルールは次の順序で実行されます:
 
-1. **Synchronous validation** - All synchronous validation rules run when value changes
-2. **Asynchronous validation** - Asynchronous validation rules run only after all synchronous validation rules pass
-3. **Field state updates** - The `valid()`, `invalid()`, `errors()`, and `pending()` signals update
+1. **同期バリデーション** - 値が変更されると、すべての同期バリデーションルールが実行されます
+2. **非同期バリデーション** - 非同期バリデーションルールは、すべての同期バリデーションルールが成功した後にのみ実行されます
+3. **フィールドの状態更新** - `valid()`、`invalid()`、`errors()`、`pending()`シグナルが更新されます
 
-Synchronous validation rules (like `required()`, `email()`) complete immediately. Asynchronous validation rules (like `validateHttp()`) may take time and set the `pending()` signal to `true` while executing.
+同期バリデーションルール（`required()`や`email()`など）は即座に完了します。非同期バリデーションルール（`validateHttp()`など）は時間がかかる場合があり、実行中は`pending()`シグナルを`true`に設定します。
 
-All validation rules run on every change - validation doesn't short-circuit after the first error. If a field has both `required()` and `email()` validation rules, both run, and both can produce errors simultaneously.
+すべてのバリデーションルールは変更のたびに実行されます - バリデーションは最初のエラーで中断されません。フィールドに`required()`と`email()`の両方のバリデーションルールがある場合、両方が実行され、両方が同時にエラーを生成する可能性があります。
 
-## Built-in validation rules
+## 組み込みのバリデーションルール {#built-in-validation-rules}
 
-Signal Forms provides validation rules for common validation scenarios. All built-in validation rules accept an options object for custom error messages and conditional logic.
+シグナルフォームは、一般的なバリデーションシナリオのためのバリデーションルールを提供します。すべての組み込みバリデーションルールは、カスタムエラーメッセージと条件付きロジックのためのオプションオブジェクトを受け入れます。
 
-### required()
+### required() {#required}
 
-The `required()` validation rule ensures a field has a value:
+`required()`バリデーションルールは、フィールドに値があることを保証します:
 
 ```angular-ts
 import { Component, signal } from '@angular/core'
@@ -96,15 +96,15 @@ export class RegistrationComponent {
 }
 ```
 
-A field is considered "empty" when:
+フィールドは次の場合に「空」と見なされます:
 
-| Condition                | Example |
+| 条件 | 例 |
 | ------------------------ | ------- |
-| Value is `null`          | `null`, |
-| Value is an empty string | `''`    |
-| Value is an empty array  | `[]`    |
+| 値が`null`である | `null` |
+| 値が空文字列である | `''` |
+| 値が空の配列である | `[]` |
 
-For conditional requirements, use the `when` option:
+条件付きの要件には、`when`オプションを使用します:
 
 ```ts
 registrationForm = form(this.registrationModel, (schemaPath) => {
@@ -115,11 +115,11 @@ registrationForm = form(this.registrationModel, (schemaPath) => {
 })
 ```
 
-The validation rule only runs when the `when` function returns `true`.
+このバリデーションルールは、`when`関数が`true`を返す場合にのみ実行されます。
 
-### email()
+### email() {#email}
 
-The `email()` validation rule checks for valid email format:
+`email()`バリデーションルールは、有効なメール形式をチェックします:
 
 ```angular-ts
 import { Component, signal } from '@angular/core'
@@ -146,11 +146,11 @@ export class ContactComponent {
 }
 ```
 
-The `email()` validation rule uses a standard email format regex. It accepts addresses like `user@example.com` but rejects malformed addresses like `user@` or `@example.com`.
+`email()`バリデーションルールは、標準的なメール形式の正規表現を使用します。`user@example.com`のようなアドレスは受け入れますが、`user@`や`@example.com`のような不正な形式のアドレスは拒否します。
 
-### min() and max()
+### min()とmax() {#min-and-max}
 
-The `min()` and `max()` validation rules work with numeric values:
+`min()`と`max()`バリデーションルールは、数値に対して機能します:
 
 ```angular-ts
 import { Component, signal } from '@angular/core'
@@ -189,7 +189,7 @@ export class AgeFormComponent {
 }
 ```
 
-You can use computed values for dynamic constraints:
+動的な制約のために、算出値を使用できます:
 
 ```ts
 ageForm = form(this.ageModel, (schemaPath) => {
@@ -199,9 +199,9 @@ ageForm = form(this.ageModel, (schemaPath) => {
 })
 ```
 
-### minLength() and maxLength()
+### minLength()とmaxLength() {#minlength-and-maxlength}
 
-The `minLength()` and `maxLength()` validation rules work with strings and arrays:
+`minLength()`と`maxLength()`バリデーションルールは、文字列と配列に対して機能します:
 
 ```angular-ts
 import { Component, signal } from '@angular/core'
@@ -239,11 +239,11 @@ export class PasswordFormComponent {
 }
 ```
 
-For strings, "length" means the number of characters. For arrays, "length" means the number of elements.
+文字列の場合、「length」は文字数を意味します。配列の場合、「length」は要素数を意味します。
 
-### pattern()
+### pattern() {#pattern}
 
-The `pattern()` validation rule validates against a regular expression:
+`pattern()`バリデーションルールは、正規表現に対してバリデーションを行います:
 
 ```angular-ts
 import { Component, signal } from '@angular/core'
@@ -284,37 +284,37 @@ export class PhoneFormComponent {
 }
 ```
 
-Common patterns:
+一般的なパターン:
 
-| Pattern Type     | Regular Expression      | Example      |
+| パターンの種類 | 正規表現 | 例 |
 | ---------------- | ----------------------- | ------------ |
-| Phone            | `/^\d{3}-\d{3}-\d{4}$/` | 555-123-4567 |
-| Postal code (US) | `/^\d{5}$/`             | 12345        |
-| Alphanumeric     | `/^[a-zA-Z0-9]+$/`      | abc123       |
-| URL-safe         | `/^[a-zA-Z0-9_-]+$/`    | my-url_123   |
+| 電話番号 | `/^\d{3}-\d{3}-\d{4}$/` | 555-123-4567 |
+| 郵便番号 (米国) | `/^\d{5}$/` | 12345 |
+| 英数字 | `/^[a-zA-Z0-9]+$/` | abc123 |
+| URLセーフ | `/^[a-zA-Z0-9_-]+$/` | my-url_123 |
 
-## Validation errors
+## バリデーションエラー
 
-When validation rules fail, they produce error objects that describe what went wrong. Understanding error structure helps you provide clear feedback to users.
+バリデーションルールが失敗すると、何が問題だったかを説明するエラーオブジェクトが生成されます。エラーの構造を理解することは、ユーザーに明確なフィードバックを提供するのに役立ちます。
 
-<!-- TODO: Uncomment when field state management guide is published
+<!-- TODO: フィールド状態管理ガイドが公開されたらコメントを解除する
 
-NOTE: This section covers the errors that validation rules produce. For displaying and using validation errors in your UI, see the [Field State Management guide](guide/forms/signal-forms/field-state-management). -->
+NOTE: このセクションでは、バリデーションルールが生成するエラーについて説明します。UIでバリデーションエラーを表示して使用する方法については、[フィールド状態管理ガイド](guide/forms/signal-forms/field-state-management)を参照してください。 -->
 
-### Error structure
+### エラーの構造 {#error-structure}
 
-Each validation error object contains these properties:
+各バリデーションエラーオブジェクトには、以下のプロパティが含まれています:
 
-| Property  | Description                                                              |
+| プロパティ  | 説明                                                              |
 | --------- | ------------------------------------------------------------------------ |
-| `kind`    | The validation rule that failed (e.g., "required", "email", "minLength") |
-| `message` | Optional human-readable error message                                    |
+| `kind`    | 失敗したバリデーションルール（例: "required", "email", "minLength"） |
+| `message` | オプションの人間が読める形式のエラーメッセージ                                    |
 
-Built-in validation rules automatically set the `kind` property. The `message` property is optional - you can provide custom messages through validation rule options.
+組み込みのバリデーションルールは、自動的に`kind`プロパティを設定します。`message`プロパティはオプションで、バリデーションルールのオプションを通じてカスタムメッセージを提供できます。
 
-### Custom error messages
+### カスタムエラーメッセージ {#custom-error-messages}
 
-All built-in validation rules accept a `message` option for custom error text:
+すべての組み込みバリデーションルールは、カスタムエラーテキストのために`message`オプションを受け入れます:
 
 ```angular-ts
 import { Component, signal } from '@angular/core'
@@ -358,11 +358,11 @@ export class SignupComponent {
 }
 ```
 
-Custom messages should be clear, specific, and tell users how to fix the problem. Instead of "Invalid input", use "Password must be at least 12 characters for security".
+カスタムメッセージは、明確で具体的であり、ユーザーに問題の修正方法を伝えるべきです。「無効な入力」の代わりに、「セキュリティのため、パスワードは12文字以上である必要があります」のようにします。
 
-### Multiple errors per field
+### フィールドごとの複数のエラー {#multiple-errors-per-field}
 
-When a field has multiple validation rules, each validation rule runs independently and can produce an error:
+フィールドに複数のバリデーションルールがある場合、各バリデーションルールは独立して実行され、エラーを生成する可能性があります:
 
 ```ts
 signupForm = form(this.signupModel, (schemaPath) => {
@@ -372,22 +372,22 @@ signupForm = form(this.signupModel, (schemaPath) => {
 })
 ```
 
-If the email field is empty, only the `required()` error appears. If the user types "a@b", both `email()` and `minLength()` errors appear. All validation rules run - validation doesn't stop after the first failure.
+emailフィールドが空の場合、`required()`エラーのみが表示されます。ユーザーが"a@b"と入力すると、`email()`と`minLength()`の両方のエラーが表示されます。すべてのバリデーションルールが実行され、最初の失敗でバリデーションが停止することはありません。
 
-TIP: Use the `touched() && invalid()` pattern in your templates to prevent errors from appearing before users have interacted with a field. For comprehensive guidance on displaying validation errors, see the [Field State Management guide](guide/forms/signal-forms/field-state-management#conditional-error-display).
+TIP: テンプレートで`touched() && invalid()`パターンを使用すると、ユーザーがフィールドを操作する前にエラーが表示されるのを防ぐことができます。バリデーションエラーの表示に関する包括的なガイダンスについては、[フィールド状態管理ガイド](guide/forms/signal-forms/field-state-management#conditional-error-display)を参照してください。
 
-## Custom validation rules
+## カスタムバリデーションルール {#custom-validation-rules}
 
-While built-in validation rules handle common cases, you'll often need custom validation logic for business rules, complex formats, or domain-specific constraints.
+組み込みのバリデーションルールは一般的なケースを処理しますが、ビジネスルール、複雑なフォーマット、またはドメイン固有の制約のために、カスタムバリデーションロジックが必要になることがよくあります。
 
-### Using validate()
+### validate()の使用 {#using-validate}
 
-The `validate()` function creates custom validation rules. It receives a validator function that accesses the field context and returns:
+`validate()`関数はカスタムバリデーションルールを作成します。これは、フィールドコンテキストにアクセスし、以下の値を返すバリデーター関数を受け取ります:
 
-| Return Value          | Meaning          |
+| 戻り値                | 意味             |
 | --------------------- | ---------------- |
-| Error object          | Value is invalid |
-| `null` or `undefined` | Value is valid   |
+| エラーオブジェクト        | 値は無効です     |
+| `null` または `undefined` | 値は有効です     |
 
 ```angular-ts
 import { Component, signal } from '@angular/core'
@@ -423,25 +423,25 @@ export class UrlFormComponent {
 }
 ```
 
-The validator function receives a `FieldContext` object with:
+バリデーター関数は、以下のプロパティを持つ`FieldContext`オブジェクトを受け取ります:
 
-| Property        | Type       | Description                                 |
+| プロパティ      | 型         | 説明                                        |
 | --------------- | ---------- | ------------------------------------------- |
-| `value`         | Signal     | Signal containing the current field value   |
-| `state`         | FieldState | The field state reference                   |
-| `field`         | FieldTree  | The field tree reference                    |
-| `valueOf()`     | Method     | Get the value of another field by path      |
-| `stateOf()`     | Method     | Get the state of another field by path      |
-| `fieldTreeOf()` | Method     | Get the field tree of another field by path |
-| `pathKeys`      | Signal     | Path keys from root to current field        |
+| `value`         | Signal     | 現在のフィールド値を含むSignal              |
+| `state`         | FieldState | フィールドの状態への参照                    |
+| `field`         | FieldTree  | フィールドツリーへの参照                    |
+| `valueOf()`     | Method     | パスで指定された他のフィールドの値を取得します |
+| `stateOf()`     | Method     | パスで指定された他のフィールドの状態を取得します |
+| `fieldTreeOf()` | Method     | パスで指定された他のフィールドのフィールドツリーを取得します |
+| `pathKeys`      | Signal     | ルートから現在のフィールドまでのパスキー    |
 
-NOTE: Child fields also have a `key` signal, and array item fields have both `key` and `index` signals.
+NOTE: 子フィールドには`key`シグナルもあり、配列アイテムのフィールドには`key`と`index`の両方のシグナルがあります。
 
-Return an error object with `kind` and `message` when validation fails. Return `null` or `undefined` when validation passes.
+バリデーションが失敗した場合は`kind`と`message`を持つエラーオブジェクトを返します。バリデーションが成功した場合は`null`または`undefined`を返します。
 
-### Reusable validation rules
+### 再利用可能なバリデーションルール {#reusable-validation-rules}
 
-Create reusable validation rule functions by wrapping `validate()`:
+`validate()`をラップして、再利用可能なバリデーションルール関数を作成します:
 
 ```ts
 function url(field: any, options?: { message?: string }) {
@@ -474,7 +474,7 @@ function phoneNumber(field: any, options?: { message?: string }) {
 }
 ```
 
-You can use custom validation rules just like built-in validation rules:
+カスタムバリデーションルールは、組み込みのバリデーションルールと同じように使用できます:
 
 ```ts
 urlForm = form(this.urlModel, (schemaPath) => {
@@ -483,11 +483,11 @@ urlForm = form(this.urlModel, (schemaPath) => {
 })
 ```
 
-## Cross-field validation
+## クロスフィールドバリデーション {#cross-field-validation}
 
-Cross-field validation compares or relates multiple field values.
+クロスフィールドバリデーションは、複数のフィールド値を比較または関連付けます。
 
-A common scenario for cross-field validation is password confirmation:
+クロスフィールドバリデーションの一般的なシナリオは、パスワードの確認です:
 
 ```angular-ts
 import { Component, signal } from '@angular/core'
@@ -541,15 +541,15 @@ export class PasswordChangeComponent {
 }
 ```
 
-The confirmation validation rule accesses the password field value using `valueOf(schemaPath.password)` and compares it to the confirmation value. This validation rule runs reactively - if either password changes, validation reruns automatically.
+確認用のバリデーションルールは`valueOf(schemaPath.password)`を使用してパスワードフィールドの値にアクセスし、確認用の値と比較します。このバリデーションルールはリアクティブに実行されます - どちらかのパスワードが変更されると、バリデーションが自動的に再実行されます。
 
-## Async validation
+## 非同期バリデーション {#async-validation}
 
-Async validation handles validation that requires external data sources, like checking username availability on a server or validating against an API.
+非同期バリデーションは、サーバーでのユーザー名の利用可能性のチェックやAPIに対するバリデーションなど、外部データソースを必要とするバリデーションを処理します。
 
-### Using validateHttp()
+### validateHttp()の使い方 {#using-validatehttp}
 
-The `validateHttp()` function performs HTTP-based validation:
+`validateHttp()`関数は、HTTPベースのバリデーションを実行します:
 
 ```angular-ts
 import { Component, signal, inject } from '@angular/core'
@@ -600,17 +600,17 @@ export class UsernameFormComponent {
 }
 ```
 
-The `validateHttp()` validation rule:
+`validateHttp()`バリデーションルール:
 
-1. Calls the URL or request returned by the `request` function
-2. Maps the successful response to a validation error or `null` using `onSuccess`
-3. Handles request failures (network errors, HTTP errors) using `onError`
-4. Sets `pending()` to `true` while the request is in progress
-5. Only runs after all synchronous validation rules pass
+1. `request`関数によって返されるURLまたはリクエストを呼び出します
+2. `onSuccess`を使用して、成功レスポンスをバリデーションエラーまたは`null`にマッピングします
+3. `onError`を使用して、リクエストの失敗（ネットワークエラー、HTTPエラー）を処理します
+4. リクエストが進行中の間、`pending()`を`true`に設定します
+5. すべての同期バリデーションルールが成功した後にのみ実行されます
 
-### Pending state
+### ペンディング状態 {#pending-state}
 
-While async validation runs, the field's `pending()` signal returns `true`. Use this to show loading indicators:
+非同期バリデーションの実行中、フィールドの`pending()`シグナルは`true`を返します。これを使用してローディングインジケーターを表示します:
 
 ```ts
 @if (form.username().pending()) {
@@ -618,12 +618,12 @@ While async validation runs, the field's `pending()` signal returns `true`. Use 
 }
 ```
 
-The `valid()` signal returns `false` while validation is pending, even if there are no errors yet. The `invalid()` signal only returns `true` if errors exist.
+`valid()`シグナルは、まだエラーがない場合でも、バリデーションがペンディング中の間は`false`を返します。`invalid()`シグナルは、エラーが存在する場合にのみ`true`を返します。
 
-## Next steps
+## 次のステップ {#next-steps}
 
-This guide covered creating and applying validation rules. Related guides explore other aspects of Signal Forms:
+このガイドでは、バリデーションルールの作成と適用について説明しました。関連ガイドでは、シグナルフォームの他の側面について解説します:
 
-- [Form Models guide](guide/forms/signal-forms/models) - Creating and updating form models
+- [フォームモデルガイド](guide/forms/signal-forms/models) - フォームモデルの作成と更新
   <!-- TODO: Uncomment when Field State Management guide is published -->
   <!-- - [Field State Management guide](guide/forms/signal-forms/field-state-management) - Using validation state in templates and displaying errors -->

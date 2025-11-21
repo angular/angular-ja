@@ -1,18 +1,18 @@
-# Form models
+# フォームモデル
 
-Form models are the foundation of Signal Forms, serving as the single source of truth for your form data. This guide explores how to create form models, update them, and design them for maintainability.
+フォームモデルはシグナルフォームの基盤であり、フォームデータのための単一の信頼できる情報源として機能します。このガイドでは、フォームモデルの作成方法、更新方法、そして保守性のための設計方法について説明します。
 
-NOTE: Form models are distinct from Angular's `model()` signal used for component two-way binding. A form model is a writable signal that stores form data, while `model()` creates inputs/outputs for parent/child component communication.
+NOTE: フォームモデルは、コンポーネントの双方向バインディングに使用されるAngularの`model()`シグナルとは異なります。フォームモデルはフォームデータを格納する書き込み可能なシグナルであるのに対し、`model()`は親子コンポーネント間の通信のための入力/出力を作成します。
 
-## What form models solve
+## フォームモデルが解決すること {#what-form-models-solve}
 
-Forms require managing data that changes over time. Without a clear structure, this data can become scattered across component properties, making it difficult to track changes, validate input, or submit data to a server.
+フォームでは、時間とともに変化するデータを管理する必要があります。明確な構造がないと、このデータはコンポーネントのプロパティ全体に散らばってしまい、変更の追跡、入力の検証、サーバーへのデータ送信が困難になります。
 
-Form models solve this by centralizing form data in a single writable signal. When the model updates, the form automatically reflects those changes. When users interact with the form, the model updates accordingly.
+フォームモデルは、フォームデータを単一の書き込み可能なシグナルに集約することで、この問題を解決します。モデルが更新されると、フォームは自動的にその変更を反映します。ユーザーがフォームを操作すると、モデルもそれに応じて更新されます。
 
-## Creating models
+## モデルの作成
 
-A form model is a writable signal created with Angular's `signal()` function. The signal holds an object that represents your form's data structure.
+フォームモデルは、Angularの`signal()`関数で作成される書き込み可能なシグナルです。このシグナルは、フォームのデータ構造を表すオブジェクトを保持します。
 
 ```ts
 import { Component, signal } from '@angular/core'
@@ -36,13 +36,13 @@ export class LoginComponent {
 }
 ```
 
-The `form()` function accepts the model signal and creates a **field tree** - a special object structure that mirrors your model's shape. The field tree is both navigable (access child fields with dot notation like `loginForm.email`) and callable (call a field as a function to access its state).
+`form()`関数はモデルのシグナルを受け取り、モデルの形状を反映した特別なオブジェクト構造である**フィールドツリー**を作成します。フィールドツリーは、ナビゲート可能（`loginForm.email`のようにドット記法で子フィールドにアクセス）であり、呼び出し可能（フィールドを関数として呼び出してその状態にアクセス）でもあります。
 
-The `[field]` directive binds each input element to its corresponding field in the field tree, enabling automatic two-way synchronization between the UI and model.
+`[field]`ディレクティブは、各入力要素をフィールドツリー内の対応するフィールドにバインドし、UIとモデル間の自動的な双方向同期を可能にします。
 
-### Using TypeScript types
+### TypeScriptの型を使用する {#using-typescript-types}
 
-While TypeScript infers types from object literals, defining explicit types improves code quality and provides better IntelliSense support.
+TypeScriptはオブジェクトリテラルから型を推論しますが、明示的な型を定義することでコードの品質が向上し、より良いIntelliSenseのサポートが提供されます。
 
 ```ts
 interface LoginData {
@@ -60,7 +60,7 @@ export class LoginComponent {
 }
 ```
 
-With explicit types, the field tree provides full type safety. Accessing `loginForm.email` is typed as `FieldTree<string>`, and attempting to access a non-existent property results in a compile-time error.
+明示的な型を使用すると、フィールドツリーは完全な型安全性を提供します。`loginForm.email`へのアクセスは`FieldTree<string>`として型付けされ、存在しないプロパティにアクセスしようとするとコンパイル時エラーが発生します。
 
 ```ts
 // TypeScript knows this is FieldTree<string>
@@ -70,9 +70,9 @@ const emailField = loginForm.email
 const usernameField = loginForm.username
 ```
 
-### Initializing all fields
+### すべてのフィールドを初期化する {#initializing-all-fields}
 
-Form models should provide initial values for all fields you want to include in the field tree.
+フォームモデルは、フィールドツリーに含めたいすべてのフィールドに初期値を提供する必要があります。
 
 ```ts
 // Good: All fields initialized
@@ -90,7 +90,7 @@ const userModel = signal({
 })
 ```
 
-For optional fields, explicitly set them to `null` or an empty value:
+オプショナルなフィールドについては、明示的に`null`または空の値を設定してください:
 
 ```ts
 interface UserData {
@@ -106,11 +106,11 @@ const userModel = signal<UserData>({
 })
 ```
 
-Fields set to `undefined` are excluded from the field tree. A model with `{value: undefined}` behaves identically to `{}` - accessing the field returns `undefined` rather than a `FieldTree`.
+`undefined`に設定されたフィールドは、フィールドツリーから除外されます。`{value: undefined}`を持つモデルは`{}`と全く同じように動作し、そのフィールドにアクセスすると`FieldTree`ではなく`undefined`が返されます。
 
-### Dynamic field addition
+### 動的なフィールドの追加 {#dynamic-field-addition}
 
-You can dynamically add fields by updating the model with new properties. The field tree automatically updates to include new fields when they appear in the model value.
+新しいプロパティでモデルを更新することで、動的にフィールドを追加できます。フィールドツリーは、モデルの値に新しいフィールドが現れると、それらを含むように自動的に更新されます。
 
 ```ts
 // Start with just email
@@ -122,15 +122,15 @@ model.update(current => ({ ...current, password: '' }))
 // myForm.password is now available
 ```
 
-This pattern is useful when fields become relevant based on user choices or loaded data.
+このパターンは、ユーザーの選択やロードされたデータに基づいてフィールドが関連性を持つようになる場合に役立ちます。
 
-## Reading model values
+## モデルの値を読み取る {#reading-model-values}
 
-You can access form values in two ways: directly from the model signal, or through individual fields. Each approach serves a different purpose.
+フォームの値には、モデルのシグナルから直接アクセスする方法と、個々のフィールドを介してアクセスする方法の2つがあります。それぞれのアプローチは異なる目的を果たします。
 
-### Reading from the model
+### モデルから読み取る {#reading-from-the-model}
 
-Access the model signal when you need the complete form data, such as during form submission:
+フォームの送信時など、完全なフォームデータが必要な場合は、モデルのシグナルにアクセスします:
 
 ```ts
 onSubmit() {
@@ -142,13 +142,13 @@ onSubmit() {
 }
 ```
 
-The model signal returns the entire data object, making it ideal for operations that work with the complete form state.
+モデルのシグナルはデータオブジェクト全体を返すため、フォームの完全な状態を扱う操作に最適です。
 
-### Reading from field state
+### フィールドの状態から読み取る {#reading-from-field-state}
 
-Each field in the field tree is a function. Calling a field returns a `FieldState` object containing reactive signals for the field's value, validation status, and interaction state.
+フィールドツリー内の各フィールドは関数です。フィールドを呼び出すと、フィールドの値、バリデーションステータス、インタラクションの状態に対するリアクティブなシグナルを含む`FieldState`オブジェクトが返されます。
 
-Access field state when working with individual fields in templates or reactive computations:
+テンプレートやリアクティブな計算で個々のフィールドを扱う場合は、フィールドの状態にアクセスします:
 
 ```ts
 @Component({
@@ -167,24 +167,24 @@ export class LoginComponent {
 }
 ```
 
-Field state provides reactive signals for each field's value, making it suitable for displaying field-specific information or creating derived state.
+フィールドの状態は、各フィールドの値に対するリアクティブなシグナルを提供するため、フィールド固有の情報を表示したり、派生状態を作成したりするのに適しています。
 
-TIP: Field state includes many more signals beyond `value()`, such as validation state (e.g., valid, invalid, errors), interaction tracking (e.g., touched, dirty), and visibility (e.g., hidden, disabled).
+TIP: フィールドの状態には、`value()`以外にも、バリデーションの状態（例: valid、invalid、errors）、インタラクションの追跡（例: touched、dirty）、可視性（例: hidden、disabled）など、さらに多くのシグナルが含まれています。
 
 <!-- TODO: UNCOMMENT BELOW WHEN GUIDE IS AVAILABLE -->
 <!-- See the [Field State Management guide](guide/forms/signal-forms/field-state-management) for complete coverage. -->
 
-## Updating form models programmatically
+## フォームモデルをプログラム的に更新する {#updating-form-models-programmatically}
 
-Form models update through programmatic mechanisms:
+フォームモデルは、プログラム的なメカニズムを通じて更新されます:
 
-1. [Replace the entire form model](#replacing-form-models-with-set) with `set()`
-2. [Update one or more fields](#update-one-or-more-fields-with-update) with `update()`
-3. [Update a single field directly](#update-a-single-field-directly-with-set) through field state
+1. `set()`で[フォームモデル全体を置き換える](#replacing-form-models-with-set)
+2. `update()`で[1つ以上のフィールドを更新する](#update-one-or-more-fields-with-update)
+3. フィールドの状態を通じて[単一のフィールドを直接更新する](#update-a-single-field-directly-with-set)
 
-### Replacing form models with `set()`
+### `set()`でフォームモデルを置き換える {#replacing-form-models-with-set}
 
-Use `set()` on the form model to replace the entire value:
+フォームモデルで`set()`を使用して、値全体を置き換えます:
 
 ```ts
 loadUserData() {
@@ -204,11 +204,11 @@ resetForm() {
 }
 ```
 
-This approach works well when loading data from an API or resetting the entire form.
+このアプローチは、APIからデータを読み込む場合や、フォーム全体をリセットする場合に適しています。
 
-### Update one or more fields with `update()`
+### `update()`で1つ以上のフィールドを更新する {#update-one-or-more-fields-with-update}
 
-Use `update()` to modify specific fields while preserving others:
+`update()`を使用して、他のフィールドを保持しながら特定のフィールドを変更します:
 
 ```ts
 updateEmail(newEmail: string) {
@@ -219,11 +219,11 @@ updateEmail(newEmail: string) {
 }
 ```
 
-This pattern is useful when you need to change one or more fields based on the current model state.
+このパターンは、現在のモデルの状態に基づいて1つ以上のフィールドを変更する必要がある場合に便利です。
 
-### Update a single field directly with `set()`
+### `set()`で単一のフィールドを直接更新する {#update-a-single-field-directly-with-set}
 
-Use `set()` on individual field values to directly update the field state:
+個々のフィールドの値に`set()`を使用して、フィールドの状態を直接更新します:
 
 ```ts
 clearEmail() {
@@ -236,11 +236,11 @@ incrementAge() {
 }
 ```
 
-These are also known as "field-level updates." They automatically propagate to the model signal and keep both in sync.
+これらは「フィールドレベルの更新」としても知られています。これらは自動的にモデルのシグナルに伝播し、両方を同期させ続けます。
 
-### Example: Loading data from an API
+### 例: APIからデータを読み込む {#example-loading-data-from-an-api}
 
-A common pattern involves fetching data and populating the model:
+一般的なパターンは、データを取得してモデルに投入することです:
 
 ```ts
 export class UserProfileComponent {
@@ -264,33 +264,33 @@ export class UserProfileComponent {
 }
 ```
 
-The form fields automatically update when the model changes, displaying the fetched data without additional code.
+モデルが変更されるとフォームのフィールドは自動的に更新され、追加のコードなしで取得したデータを表示します。
 
-## Two-way data binding
+## 双方向データバインディング {#two-way-data-binding}
 
-The `[field]` directive creates automatic two-way synchronization between the model, form state, and UI.
+`[field]`ディレクティブは、モデル、フォームの状態、UIの間で自動的な双方向の同期を作成します。
 
-### How data flows
+### データフローの仕組み {#how-data-flows}
 
-Changes flow bidirectionally:
+変更は双方向に流れます:
 
-**User input → Model:**
+**ユーザー入力 → モデル:**
 
-1. User types in an input element
-2. The `[field]` directive detects the change
-3. Field state updates
-4. Model signal updates
+1. ユーザーが入力要素に入力する
+2. `[field]`ディレクティブが変更を検知する
+3. フィールドの状態が更新される
+4. モデルのシグナルが更新される
 
-**Programmatic update → UI:**
+**プログラムによる更新 → UI:**
 
-1. Code updates the model with `set()` or `update()`
-2. Model signal notifies subscribers
-3. Field state updates
-4. The `[field]` directive updates the input element
+1. コードが`set()`または`update()`でモデルを更新する
+2. モデルのシグナルがサブスクライバーに通知する
+3. フィールドの状態が更新される
+4. `[field]`ディレクティブが入力要素を更新する
 
-This synchronization happens automatically. You don't write subscriptions or event handlers to keep the model and UI in sync.
+この同期は自動的に行われます。モデルとUIを同期させるために、サブスクリプションやイベントハンドラーを記述する必要はありません。
 
-### Example: Both directions
+### 例: 両方向 {#example-both-directions}
 
 ```ts
 @Component({
@@ -311,15 +311,15 @@ export class UserComponent {
 }
 ```
 
-When the user types in the input, `userModel().name` updates. When the button is clicked, the input value changes to "Bob". No manual synchronization code is required.
+ユーザーが入力フィールドに入力すると、`userModel().name`が更新されます。ボタンがクリックされると、入力値は"Bob"に変わります。手動での同期コードは必要ありません。
 
-## Model structure patterns
+## モデル構造のパターン {#model-structure-patterns}
 
-Form models can be flat objects or contain nested objects and arrays. The structure you choose affects how you access fields and organize validation.
+フォームモデルは、フラットなオブジェクトにすることも、ネストされたオブジェクトや配列を含めることもできます。選択する構造は、フィールドへのアクセス方法やバリデーションの構成に影響します。
 
-### Flat vs nested models
+### フラットモデルとネストモデル {#flat-vs-nested-models}
 
-Flat form models keep all fields at the top level:
+フラットなフォームモデルは、すべてのフィールドをトップレベルに保持します:
 
 ```ts
 // Flat structure
@@ -333,7 +333,7 @@ const userModel = signal({
 })
 ```
 
-Nested models group related fields:
+ネストされたモデルは、関連するフィールドをグループ化します:
 
 ```ts
 // Nested structure
@@ -349,21 +349,21 @@ const userModel = signal({
 })
 ```
 
-**Use flat structures when:**
+**次のような場合は、フラットな構造を使用します:**
 
-- Fields don't have clear conceptual groupings
-- You want simpler field access (`userForm.city` vs `userForm.address.city`)
-- Validation rules span multiple potential groups
+- フィールドに明確な概念的なグループ分けがない場合
+- フィールドへのアクセスをよりシンプルにしたい場合 (`userForm.city` vs `userForm.address.city`)
+- バリデーションルールが複数の潜在的なグループにまたがる場合
 
-**Use nested structures when:**
+**次のような場合は、ネストされた構造を使用します:**
 
-- Fields form a clear conceptual group (like an address)
-- The grouped data matches your API structure
-- You want to validate the group as a unit
+- フィールドが明確な概念的なグループ（住所など）を形成する場合
+- グループ化されたデータがAPI構造と一致する場合
+- グループを1つの単位としてバリデーションしたい場合
 
-### Working with nested objects
+### ネストされたオブジェクトの操作 {#working-with-nested-objects}
 
-You can access nested fields by following the object path:
+オブジェクトパスをたどることで、ネストされたフィールドにアクセスできます:
 
 ```ts
 const userModel = signal({
@@ -384,7 +384,7 @@ userForm.profile.firstName // FieldTree<string>
 userForm.settings.theme // FieldTree<string>
 ```
 
-In templates, you bind nested fields the same way as top-level fields:
+テンプレートでは、トップレベルのフィールドと同じ方法でネストされたフィールドをバインドします:
 
 ```ts
 @Component({
@@ -400,9 +400,9 @@ In templates, you bind nested fields the same way as top-level fields:
 })
 ```
 
-### Working with arrays
+### 配列の操作 {#working-with-arrays}
 
-Models can include arrays for collections of items:
+モデルには、アイテムのコレクションとして配列を含めることができます:
 
 ```ts
 const orderModel = signal({
@@ -417,21 +417,21 @@ orderForm.items[0].product // FieldTree<string>
 orderForm.items[0].quantity // FieldTree<number>
 ```
 
-Array items containing objects automatically receive tracking identities, which helps maintain field state even when items change position in the array. This ensures validation state and user interactions persist correctly when arrays are reordered.
+オブジェクトを含む配列のアイテムは自動的に追跡IDを受け取ります。これにより、配列内でアイテムの位置が変わってもフィールドの状態を維持できます。これにより、配列が並べ替えられた場合でも、バリデーションの状態とユーザーインタラクションが正しく維持されることが保証されます。
 
-<!-- TBD: For dynamic arrays and complex array operations, see the [Working with arrays guide](guide/forms/signal-forms/arrays). -->
+<!-- TBD: 動的な配列や複雑な配列操作については、[配列の操作ガイド](guide/forms/signal-forms/arrays)を参照してください。 -->
 
-## Model design best practices
+## モデル設計のベストプラクティス {#model-design-best-practices}
 
-Well-designed form models make forms easier to maintain and extend. Follow these patterns when designing your models.
+適切に設計されたフォームモデルは、フォームの保守と拡張を容易にします。モデルを設計する際には、以下のパターンに従ってください。
 
-### Use specific types
+### 具体的な型を使用する {#use-specific-types}
 
-Always define interfaces or types for your models as shown in [Using TypeScript types](#using-typescript-types). Explicit types provide better IntelliSense, catch errors at compile time, and serve as documentation for what data the form contains.
+[TypeScriptの型を使用する](#using-typescript-types)で示されているように、モデルには常にインターフェースまたは型を定義してください。明示的な型は、より良いIntelliSenseを提供し、コンパイル時にエラーをキャッチし、フォームに含まれるデータに関するドキュメントとして機能します。
 
-### Initialize all fields
+### すべてのフィールドを初期化する {#initialize-all-fields}
 
-Provide initial values for every field in your model:
+モデルのすべてのフィールドに初期値を提供してください:
 
 ```ts
 // Good: All fields initialized
@@ -451,11 +451,11 @@ const taskModel = signal({
 })
 ```
 
-Missing initial values mean those fields won't exist in the field tree, making them inaccessible for form interactions.
+初期値がない場合、それらのフィールドはフィールドツリーに存在せず、フォームのインタラクションでアクセスできなくなります。
 
-### Keep models focused
+### モデルの焦点を絞る {#keep-models-focused}
 
-Each model should represent a single form or a cohesive set of related data:
+各モデルは、単一のフォームまたはまとまりのある関連データのセットを表すべきです:
 
 ```ts
 // Good: Focused on login
@@ -479,11 +479,11 @@ const appModel = signal({
 })
 ```
 
-Separate models for different concerns makes forms easier to understand and reuse. Create multiple forms if you're managing distinct sets of data.
+関心事ごとにモデルを分けることで、フォームが理解しやすく、再利用しやすくなります。異なるデータセットを管理する場合は、複数のフォームを作成してください。
 
-### Consider validation requirements
+### バリデーション要件を考慮する {#consider-validation-requirements}
 
-Design models with validation in mind. Group fields that validate together:
+バリデーションを念頭に置いてモデルを設計します。一緒にバリデーションするフィールドをグループ化してください:
 
 ```ts
 // Good: Password fields grouped for comparison
@@ -494,11 +494,11 @@ interface PasswordChangeData {
 }
 ```
 
-This structure makes cross-field validation (like checking if `newPassword` matches `confirmPassword`) more natural.
+この構造により、フィールド間のバリデーション（`newPassword`が`confirmPassword`と一致するかどうかのチェックなど）がより自然になります。
 
-### Plan for initial state
+### 初期状態を計画する {#plan-for-initial-state}
 
-Consider whether your form starts empty or pre-populated:
+フォームが空の状態で始まるか、事前に入力されているかを考慮してください:
 
 ```ts
 // Form that starts empty (new user)
@@ -524,7 +524,7 @@ async loadExistingUser() {
 }
 ```
 
-For forms that always start with existing data, you might wait to render the form until data loads in order to avoid a flash of empty fields.
+常に既存のデータで始まるフォームの場合、空のフィールドが一瞬表示されるのを避けるために、データが読み込まれるまでフォームのレンダリングを待つことができます。
 
 <!-- TODO: UNCOMMENT WHEN THE GUIDES ARE AVAILABLE -->
 <!-- ## Next steps

@@ -2,7 +2,11 @@ import consola from 'consola';
 import assert from 'node:assert';
 import { readFile, writeFile } from 'node:fs/promises';
 import { parseArgs } from 'node:util';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { cli } from 'textlint';
+import { globby } from 'globby';
+import pLimit from 'p-limit';
 import {
   cpRf,
   exists,
@@ -15,8 +19,10 @@ import { MarkdownTranslator } from './translate';
  * CLI引数の型定義
  */
 interface CliArgs {
-  file: string;
+  pattern: string;
   write?: boolean;
+  concurrency?: number;
+  force?: boolean;
   help?: boolean;
 }
 
@@ -38,16 +44,18 @@ function validateEnvironment(): { googleApiKey: string; geminiModel?: string } {
  */
 function showHelp(): void {
   console.log(`
-使用方法: npx tsx tools/translator/main.ts [オプション] <ファイルパス>
+使用方法: npx tsx tools/translator/main.ts [オプション] <パターン>
 
 Markdownファイルを日本語に翻訳します。
 
 オプション:
-  -w, --write    確認なしで翻訳結果を保存
-  -h, --help     このヘルプメッセージを表示
+  -w, --write            確認なしで翻訳結果を保存
+  -c, --concurrency <n>  並列処理数（デフォルト: 2）
+  --force                翻訳済みファイルを再翻訳
+  -h, --help             このヘルプメッセージを表示
 
 引数:
-  <ファイルパス>  翻訳するMarkdownファイルのパス
+  <パターン>  翻訳するMarkdownファイルのパスまたはglobパターン
 
 環境変数:
   GOOGLE_API_KEY  Google AI API キー（必須）
@@ -55,7 +63,9 @@ Markdownファイルを日本語に翻訳します。
 
 例:
   npx tsx tools/translator/main.ts example.md
-  npx tsx tools/translator/main.ts -w example.md
+  npx tsx tools/translator/main.ts -w "adev-ja/src/content/guide/*.md"
+  npx tsx tools/translator/main.ts -w -c 5 "adev-ja/src/content/**/*.md"
+  npx tsx tools/translator/main.ts -w --force "adev-ja/src/content/guide/*.md"
 `);
 }
 
@@ -66,35 +76,59 @@ function parseCliArgs(): CliArgs {
   const args = parseArgs({
     options: {
       write: { type: 'boolean', default: false, short: 'w' },
+      concurrency: { type: 'string', default: '2', short: 'c' },
+      force: { type: 'boolean', default: false },
       help: { type: 'boolean', default: false, short: 'h' },
     },
     allowPositionals: true,
   });
 
-  const { write, help } = args.values;
-  const [file] = args.positionals;
+  const { write, help, force } = args.values;
+  const concurrency = parseInt(args.values.concurrency || '2', 10);
+  const [pattern] = args.positionals;
 
   if (help) {
     showHelp();
     process.exit(0);
   }
 
-  if (!file) {
+  if (!pattern) {
     showHelp();
-    throw new Error('ファイルパスを指定してください。');
+    throw new Error('ファイルパスまたはglobパターンを指定してください。');
   }
 
-  return { write, file, help };
+  if (isNaN(concurrency) || concurrency < 1) {
+    throw new Error('並列数は1以上の整数で指定してください。');
+  }
+
+  return { write, pattern, concurrency, force, help };
 }
 
 /**
- * ファイルの存在確認
+ * glob パターンからファイルリストを収集
  */
-async function validateFileExistence(file: string): Promise<void> {
-  const fileExists = await exists(file);
-  if (!fileExists) {
-    throw new Error(`ファイルが見つかりません: ${file}`);
+async function collectFiles(pattern: string, force: boolean): Promise<string[]> {
+  const files = await globby(pattern, {
+    ignore: ['**/*.en.md', '**/*.en.ts', '**/*.en.json'],
+  });
+
+  if (files.length === 0) {
+    throw new Error(`パターンに一致するファイルが見つかりません: ${pattern}`);
   }
+
+  // force が false の場合、翻訳済みファイルをフィルタリング
+  if (!force) {
+    const untranslatedFiles: string[] = [];
+    for (const file of files) {
+      const enFile = getEnFilePath(file);
+      if (!(await exists(enFile))) {
+        untranslatedFiles.push(file);
+      }
+    }
+    return untranslatedFiles;
+  }
+
+  return files;
 }
 
 /**
@@ -198,30 +232,91 @@ async function runTextlint(file: string): Promise<void> {
 }
 
 /**
+ * 単一ファイルの翻訳処理（エラーハンドリング含む）
+ */
+async function processSingleFile(
+  file: string,
+  googleApiKey: string,
+  geminiModel: string | undefined,
+  forceWrite: boolean
+): Promise<{ file: string; success: boolean; error?: Error }> {
+  try {
+    consola.start(`翻訳開始: ${file}`);
+
+    const translated = await translateFile(file, googleApiKey, geminiModel);
+    const savedFile = await saveTranslation(file, translated, forceWrite);
+
+    if (!savedFile) {
+      return { file, success: false };
+    }
+
+    // 翻訳結果の分析
+    await validateLineCount(getEnFilePath(savedFile), savedFile);
+    await runTextlint(savedFile);
+
+    consola.success(`翻訳完了: ${file}`);
+    return { file, success: true };
+  } catch (error) {
+    consola.warn(`翻訳失敗: ${file}`);
+    return { file, success: false, error: error as Error };
+  }
+}
+
+/**
  * アプリケーションのメインエントリーポイント
  */
 async function main() {
-  const { write, file } = parseCliArgs();
+  const { write, pattern, concurrency, force } = parseCliArgs();
   const { googleApiKey, geminiModel } = validateEnvironment();
 
-  await validateFileExistence(file);
+  // ファイルリスト収集
+  const files = await collectFiles(pattern, !!force);
 
-  consola.start(`Starting translation for ${file}`);
-
-  const translated = await translateFile(file, googleApiKey, geminiModel);
-
-  console.log(translated);
-  const savedFile = await saveTranslation(file, translated, !!write);
-  if (!savedFile) {
+  if (files.length === 0) {
+    consola.warn('翻訳対象のファイルがありません。');
     return;
   }
 
-  // 翻訳結果の分析
-  consola.start(`翻訳結果を分析...`);
-  // 原文ファイルとの行数比較
-  await validateLineCount(getEnFilePath(savedFile), savedFile);
-  // textlintの実行
-  await runTextlint(savedFile);
+  consola.info(`翻訳対象: ${files.length}件 (並列数: ${concurrency})`);
+
+  // 並列処理制御
+  const limit = pLimit(concurrency!);
+  const results = await Promise.all(
+    files.map((file) =>
+      limit(() => processSingleFile(file, googleApiKey, geminiModel, !!write))
+    )
+  );
+
+  // 最終サマリー表示
+  const succeeded = results.filter((r) => r.success);
+  const failed = results.filter((r) => !r.success);
+
+  // エラー詳細を一時ファイルに保存
+  let errorLogPath: string | null = null;
+  if (failed.length > 0) {
+    errorLogPath = join(tmpdir(), `translate-errors-${Date.now()}.log`);
+    const errorDetails = failed
+      .map((r) => {
+        const errorStack = r.error?.stack || r.error?.message || 'Unknown error';
+        return `\n${'='.repeat(80)}\nファイル: ${r.file}\n${'='.repeat(80)}\n${errorStack}\n`;
+      })
+      .join('\n');
+
+    await writeFile(errorLogPath, errorDetails, 'utf-8');
+  }
+
+  consola.box(`
+翻訳完了
+
+成功: ${succeeded.length}件
+失敗: ${failed.length}件
+${failed.length > 0 ? '\n失敗したファイル:\n' + failed.map((r) => `  - ${r.file}`).join('\n') : ''}
+${errorLogPath ? `\nエラー詳細: ${errorLogPath}` : ''}
+  `);
+
+  if (failed.length > 0) {
+    process.exit(1);
+  }
 }
 
 main().catch((error) => {

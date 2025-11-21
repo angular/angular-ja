@@ -2,7 +2,9 @@ name: Sync Untranslated Files Issue
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - feature/untranslated-tracking-issue
   workflow_dispatch:
 
 permissions:

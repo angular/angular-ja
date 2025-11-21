@@ -102,4 +102,4 @@ providers: [
 
 このディレクティブをワークフローに追加することで、画像がAngularの助けを借りてベストプラクティスを使用して読み込まれるようになりました🎉
 
-詳細については、[NgOptimizedImageのドキュメント](guide/image-optimization) をご覧ください。素晴らしい仕事を続け、次はルーティングについて学びましょう。
+詳細については、[NgOptimizedImageのドキュメント](guide/image-optimization) をご覧ください。すばらしい仕事を続け、次はルーティングについて学びましょう。

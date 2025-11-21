@@ -68,6 +68,6 @@ loginForm = form(this.loginModel);
 
 </docs-workflow>
 
-素晴らしい! フォームモデルを設定しました。`loginModel` シグナルがフォームデータを保持し、`loginForm` が型安全性を備えた各フィールドへのアクセスを提供します。
+すばらしい! フォームモデルを設定しました。`loginModel` シグナルがフォームデータを保持し、`loginForm` が型安全性を備えた各フィールドへのアクセスを提供します。
 
 次に、[フォームをテンプレートに接続する方法](/tutorials/signal-forms/2-connect-form-template)を学びます!

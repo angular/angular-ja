@@ -1,0 +1,47 @@
+name: Sync Untranslated Files Issue
+
+on:
+  push:
+    branches:
+      - main
+  issues:
+    types: [opened, closed, reopened, labeled]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  update-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          submodules: true
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # 4.1.0
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version-file: '.node-version'
+          cache: pnpm
+
+      - run: pnpm install
+
+      - name: Get untranslated files
+        id: files
+        run: |
+          FILES_JSON=$(npx tsx tools/list-untranslated.ts --json)
+          echo "data<<EOF" >> $GITHUB_OUTPUT
+          echo "$FILES_JSON" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Update tracking issue
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            const { default: syncIssue } = await import('${{ github.workspace }}/.github/scripts/sync-untranslated-issue.mjs');
+            const filesData = JSON.parse(`${{ steps.files.outputs.data }}`);
+            await syncIssue({github, context, core, filesData});

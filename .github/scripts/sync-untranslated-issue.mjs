@@ -53,12 +53,13 @@ const CATEGORY_EMOJIS = {
   reference: '📚 Reference',
   'best-practices': '⚡ Best Practices',
   cli: '🔧 CLI',
+  tools: '🛠️ Tools',
   app: '🧩 Components/App',
   other: '📦 その他'
 };
 
 /** @type {string[]} */
-const CATEGORY_ORDER = ['guide', 'tutorial', 'reference', 'best-practices', 'cli', 'app', 'other'];
+const CATEGORY_ORDER = ['guide', 'tutorial', 'reference', 'best-practices', 'cli', 'tools', 'app', 'other'];
 
 /**
  * Generate URLs for a file

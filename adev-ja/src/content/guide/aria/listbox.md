@@ -1,12 +1,12 @@
-<docs-decorative-header title="Listbox">
+<docs-decorative-header title="リストボックス">
 </docs-decorative-header>
 
-## Overview
+## 概要 {#overview}
 
-A directive that displays a list of options for users to select from, supporting keyboard navigation, single or multiple selection, and screen reader support.
+ユーザーが選択するためのオプションのリストを表示するディレクティブで、キーボードナビゲーション、単一または複数選択、スクリーンリーダーをサポートしています。
 
 <docs-tab-group>
-  <docs-tab label="Basic">
+  <docs-tab label="基本">
     <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/listbox/src/basic/app/app.ts">
       <docs-code header="app.ts" path="adev/src/content/examples/aria/listbox/src/basic/app/app.ts"/>
       <docs-code header="app.html" path="adev/src/content/examples/aria/listbox/src/basic/app/app.html"/>
@@ -22,7 +22,7 @@ A directive that displays a list of options for users to select from, supporting
     </docs-code-multifile>
   </docs-tab>
 
-  <docs-tab label="Retro">
+  <docs-tab label="レトロ">
     <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/listbox/src/basic/retro/app/app.ts">
       <docs-code header="app.ts" path="adev/src/content/examples/aria/listbox/src/basic/retro/app/app.ts"/>
       <docs-code header="app.html" path="adev/src/content/examples/aria/listbox/src/basic/retro/app/app.html"/>
@@ -31,47 +31,47 @@ A directive that displays a list of options for users to select from, supporting
   </docs-tab>
 </docs-tab-group>
 
-## Usage
+## 使い方 {#usage}
 
-Listbox is a foundational directive used by the [Select](guide/aria/select), [Multiselect](guide/aria/multiselect), and [Autocomplete](guide/aria/autocomplete) patterns. For most dropdown needs, use those documented patterns instead.
+Listboxは、[Select](guide/aria/select)、[Multiselect](guide/aria/multiselect)、[Autocomplete](guide/aria/autocomplete)の各パターンで使用される基本的なディレクティブです。ほとんどのドロップダウンのニーズには、代わりにこれらのドキュメント化されたパターンを使用してください。
 
-Consider using listbox directly when:
+次のような場合は、listboxを直接使用することを検討してください:
 
-- **Building custom selection components** - Creating specialized interfaces with specific behavior
-- **Visible selection lists** - Displaying selectable items directly on the page (not in dropdowns)
-- **Custom integration patterns** - Integrating with unique popup or layout requirements
+- **カスタム選択コンポーネントの構築** - 特定の動作を持つ特殊なインターフェースを作成する
+- **可視の選択リスト** - 選択可能な項目を（ドロップダウンではなく）ページに直接表示する
+- **カスタム統合パターン** - 独自のポップアップやレイアウト要件と統合する
 
-Avoid listbox when:
+次のような場合は、listboxの使用を避けてください:
 
-- **Navigation menus are needed** - Use the [Menu](guide/aria/menu) directive for actions and commands
+- **ナビゲーションメニューが必要な場合** - アクションやコマンドには[Menu](guide/aria/menu)ディレクティブを使用してください
 
-## Features
+## 機能 {#features}
 
-Angular's listbox provides a fully accessible list implementation with:
+Angularのリストボックスは、以下の機能を備えた完全にアクセシブルなリスト実装を提供します:
 
-- **Keyboard Navigation** - Navigate options with arrow keys, select with Enter or Space
-- **Screen Reader Support** - Built-in ARIA attributes including role="listbox"
-- **Single or Multiple Selection** - `multi` attribute controls selection mode
-- **Horizontal or Vertical** - `orientation` attribute for layout direction
-- **Type-ahead Search** - Type characters to jump to matching options
-- **Signal-Based Reactivity** - Reactive state management using Angular signals
+- **キーボードナビゲーション** - 矢印キーでオプションを移動し、EnterキーまたはSpaceキーで選択
+- **スクリーンリーダーのサポート** - `role="listbox"`を含む組み込みのARIA属性
+- **単一選択または複数選択** - `multi`属性で選択モードを制御
+- **水平または垂直** - `orientation`属性でレイアウト方向を指定
+- **先行入力による検索** - 文字を入力して一致するオプションにジャンプ
+- **シグナルベースのリアクティビティ** - Angularシグナルを使用したリアクティブな状態管理
 
-## Examples
+## 例 {#examples}
 
-### Basic listbox
+### 基本的なリストボックス {#basic-listbox}
 
-Applications sometimes need selectable lists visible directly on the page rather than hidden in a dropdown. A standalone listbox provides keyboard navigation and selection for these visible list interfaces.
+アプリケーションでは、ドロップダウンに隠すのではなく、ページ上に直接表示される選択可能なリストが必要になることがあります。スタンドアロンのリストボックスは、これらの表示されるリストインターフェースに対して、キーボードによるナビゲーションと選択機能を提供します。
 
 <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/listbox/src/basic/app/app.ts">
   <docs-code header="app.ts" path="adev/src/content/examples/aria/listbox/src/basic/app/app.ts" />
   <docs-code header="app.html" path="adev/src/content/examples/aria/listbox/src/basic/app/app.html" />
 </docs-code-multifile>
 
-The `values` model signal provides two-way binding to the selected items. With `selectionMode="explicit"`, users press Space or Enter to select options. For dropdown patterns that combine listbox with combobox and overlay positioning, see the [Select](guide/aria/select) pattern.
+`values`モデルシグナルは、選択されたアイテムへの双方向バインディングを提供します。`selectionMode="explicit"`では、ユーザーはSpaceキーまたはEnterキーを押してオプションを選択します。リストボックスとコンボボックス、オーバーレイ配置を組み合わせたドロップダウンパターンについては、[Select](guide/aria/select)パターンを参照してください。
 
-### Horizontal listbox
+### 水平リストボックス {#horizontal-listbox}
 
-Lists sometimes work better horizontally, such as toolbar-like interfaces or tab-style selections. The `orientation` attribute changes both the layout and keyboard navigation direction.
+ツールバーのようなインターフェースやタブ形式の選択など、リストは水平方向に配置した方がうまく機能する場合があります。`orientation`属性は、レイアウトとキーボードナビゲーションの方向の両方を変更します。
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -99,88 +99,88 @@ Lists sometimes work better horizontally, such as toolbar-like interfaces or tab
   </docs-tab>
 </docs-tab-group>
 
-With `orientation="horizontal"`, left and right arrow keys navigate between options instead of up and down. The listbox automatically handles right-to-left (RTL) languages by reversing navigation direction.
+`orientation="horizontal"`の場合、上下の矢印キーの代わりに、左右の矢印キーでオプション間を移動します。リストボックスは、ナビゲーションの方向を反転させることで、右から左へ記述する言語 (RTL) に自動的に対応します。
 
-### Selection modes
+### 選択モード {#selection-modes}
 
-Listbox supports two selection modes that control when items become selected. Choose the mode that matches your interface's interaction pattern.
+リストボックスは、アイテムがいつ選択されるかを制御する2つの選択モードをサポートしています。インターフェースのインタラクションパターンに合ったモードを選択してください。
 
 <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/listbox/src/modes/app/app.ts">
   <docs-code header="app.ts" path="adev/src/content/examples/aria/listbox/src/modes/app/app.ts" />
   <docs-code header="app.html" path="adev/src/content/examples/aria/listbox/src/modes/app/app.html" />
 </docs-code-multifile>
 
-The `'follow'` mode automatically selects the focused item, providing faster interaction when selection changes frequently. The `'explicit'` mode requires Space or Enter to confirm selection, preventing accidental changes while navigating. Dropdown patterns typically use `'follow'` mode for single selection.
+`'follow'`モードはフォーカスされたアイテムを自動的に選択し、選択が頻繁に変わる場合に、より速いインタラクションを提供します。`'explicit'`モードでは、選択を確定するためにSpaceキーまたはEnterキーが必要で、ナビゲーション中の意図しない変更を防ぎます。ドロップダウンパターンでは、通常、単一選択のために`'follow'`モードが使用されます。
 
-## APIs
+## API
 
-### Listbox Directive
+### Listboxディレクティブ {#listbox-directive}
 
-The `ngListbox` directive creates an accessible list of selectable options.
+`ngListbox`ディレクティブは、選択可能なオプションのアクセシブルなリストを作成します。
 
-#### Inputs
+#### 入力 {#inputs}
 
-| Property         | Type                               | Default      | Description                                  |
+| プロパティ       | 型                                 | デフォルト   | 説明                                         |
 | ---------------- | ---------------------------------- | ------------ | -------------------------------------------- |
-| `id`             | `string`                           | auto         | Unique identifier for the listbox            |
-| `multi`          | `boolean`                          | `false`      | Enables multiple selection                   |
-| `orientation`    | `'vertical'` \| `'horizontal'`     | `'vertical'` | Layout direction of the list                 |
-| `wrap`           | `boolean`                          | `true`       | Whether focus wraps at list edges            |
-| `selectionMode`  | `'follow'` \| `'explicit'`         | `'follow'`   | How selection is triggered                   |
-| `focusMode`      | `'roving'` \| `'activedescendant'` | `'roving'`   | Focus management strategy                    |
-| `softDisabled`   | `boolean`                          | `true`       | Whether disabled items are focusable         |
-| `disabled`       | `boolean`                          | `false`      | Disables the entire listbox                  |
-| `readonly`       | `boolean`                          | `false`      | Makes listbox readonly                       |
-| `typeaheadDelay` | `number`                           | `500`        | Milliseconds before type-ahead search resets |
+| `id`             | `string`                           | auto         | リストボックスの一意の識別子                 |
+| `multi`          | `boolean`                          | `false`      | 複数選択を有効にします                       |
+| `orientation`    | `'vertical'` \| `'horizontal'`     | `'vertical'` | リストのレイアウト方向                       |
+| `wrap`           | `boolean`                          | `true`       | リストの端でフォーカスをラップするかどうか     |
+| `selectionMode`  | `'follow'` \| `'explicit'`         | `'follow'`   | 選択がどのようにトリガーされるか             |
+| `focusMode`      | `'roving'` \| `'activedescendant'` | `'roving'`   | フォーカス管理戦略                           |
+| `softDisabled`   | `boolean`                          | `true`       | 無効化されたアイテムがフォーカス可能かどうか   |
+| `disabled`       | `boolean`                          | `false`      | リストボックス全体を無効にします             |
+| `readonly`       | `boolean`                          | `false`      | リストボックスを読み取り専用にします         |
+| `typeaheadDelay` | `number`                           | `500`        | 先行入力の検索がリセットされるまでのミリ秒   |
 
-#### Model
+#### モデル {#model}
 
-| Property | Type  | Description                               |
-| -------- | ----- | ----------------------------------------- |
-| `values` | `V[]` | Two-way bindable array of selected values |
+| プロパティ | 型    | 説明                                       |
+| -------- | ----- | ------------------------------------------ |
+| `values` | `V[]` | 選択された値の双方向バインディング可能な配列 |
 
-#### Signals
+#### シグナル {#signals}
 
-| Property | Type          | Description                           |
+| プロパティ | 型            | 説明                                  |
 | -------- | ------------- | ------------------------------------- |
-| `values` | `Signal<V[]>` | Currently selected values as a signal |
+| `values` | `Signal<V[]>` | 現在選択されている値（シグナルとして）    |
 
-#### Methods
+#### メソッド {#methods}
 
-| Method                     | Parameters                        | Description                                |
+| メソッド                   | パラメータ                        | 説明                                       |
 | -------------------------- | --------------------------------- | ------------------------------------------ |
-| `scrollActiveItemIntoView` | `options?: ScrollIntoViewOptions` | Scrolls the active item into view          |
-| `gotoFirst`                | none                              | Navigates to the first item in the listbox |
+| `scrollActiveItemIntoView` | `options?: ScrollIntoViewOptions` | アクティブなアイテムを表示領域にスクロールします |
+| `gotoFirst`                | none                              | リストボックスの最初のアイテムに移動します     |
 
-### Option Directive
+### Optionディレクティブ {#option-directive}
 
-The `ngOption` directive marks an item within a listbox.
+`ngOption`ディレクティブは、リストボックス内のアイテムをマークします。
 
-#### Inputs
+#### 入力 {#inputs}
 
-| Property   | Type      | Default | Description                                      |
+| プロパティ | 型        | デフォルト | 説明                                             |
 | ---------- | --------- | ------- | ------------------------------------------------ |
-| `id`       | `string`  | auto    | Unique identifier for the option                 |
-| `value`    | `V`       | -       | The value associated with this option (required) |
-| `label`    | `string`  | -       | Optional label for screen readers                |
-| `disabled` | `boolean` | `false` | Whether this option is disabled                  |
+| `id`       | `string`  | auto    | オプションの一意の識別子                         |
+| `value`    | `V`       | -       | このオプションに関連付けられた値（必須）         |
+| `label`    | `string`  | -       | スクリーンリーダー用のオプションのラベル         |
+| `disabled` | `boolean` | `false` | このオプションが無効かどうか                     |
 
-#### Signals
+#### シグナル {#signals}
 
-| Property   | Type              | Description                     |
+| プロパティ | 型                | 説明                            |
 | ---------- | ----------------- | ------------------------------- |
-| `selected` | `Signal<boolean>` | Whether this option is selected |
-| `active`   | `Signal<boolean>` | Whether this option has focus   |
+| `selected` | `Signal<boolean>` | このオプションが選択されているかどうか |
+| `active`   | `Signal<boolean>` | このオプションにフォーカスがあるかどうか |
 
-### Related patterns
+### 関連パターン {#related-patterns}
 
-Listbox is used by these documented dropdown patterns:
+Listboxは、これらのドキュメント化されたドロップダウンパターンで使用されます：
 
-- **[Select](guide/aria/select)** - Single-selection dropdown pattern using readonly combobox + listbox
-- **[Multiselect](guide/aria/multiselect)** - Multiple-selection dropdown pattern using readonly combobox + listbox with `multi`
-- **[Autocomplete](guide/aria/autocomplete)** - Filterable dropdown pattern using combobox + listbox
+- **[Select](guide/aria/select)** - 読み取り専用のcombobox + listboxを使用した単一選択のドロップダウンパターン
+- **[Multiselect](guide/aria/multiselect)** - `multi`を使用した読み取り専用のcombobox + listboxによる複数選択のドロップダウンパターン
+- **[Autocomplete](guide/aria/autocomplete)** - combobox + listboxを使用したフィルタリング可能なドロップダウンパターン
 
-For complete dropdown patterns with trigger, popup, and overlay positioning, see those pattern guides instead of using listbox alone.
+トリガー、ポップアップ、オーバーレイの配置を含む完全なドロップダウンパターンについては、listboxを単独で使用するのではなく、それらのパターンガイドを参照してください。
 
 <docs-pill-row>
   <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/listbox/" title="Listbox ARIA pattern"/>

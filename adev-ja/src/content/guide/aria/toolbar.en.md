@@ -1,68 +1,9 @@
-<docs-decorative-header title="ツールバー">
+<docs-decorative-header title="Toolbar">
 </docs-decorative-header>
 
-## 概要
+## Overview
 
-キーボードナビゲーションで関連するコントロールとアクションをグループ化するためのコンテナで、一般的にテキストフォーマット、ツールバー、コマンドパネルに使用されます。
-
-<docs-tab-group>
-  <docs-tab label="基本">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/toolbar/src/basic/app/app.ts">
-      <docs-code header="app.ts" path="adev/src/content/examples/aria/toolbar/src/basic/app/app.ts"/>
-      <docs-code header="app.html" path="adev/src/content/examples/aria/toolbar/src/basic/app/app.html"/>
-      <docs-code header="app.css" path="adev/src/content/examples/aria/toolbar/src/basic/app/app.css"/>
-    </docs-code-multifile>
-  </docs-tab>
-
-  <docs-tab label="Material">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/toolbar/src/basic/material/app/app.ts">
-      <docs-code header="app.ts" path="adev/src/content/examples/aria/toolbar/src/basic/material/app/app.ts"/>
-      <docs-code header="app.html" path="adev/src/content/examples/aria/toolbar/src/basic/material/app/app.html"/>
-      <docs-code header="app.css" path="adev/src/content/examples/aria/toolbar/src/basic/material/app/app.css"/>
-    </docs-code-multifile>
-  </docs-tab>
-
-  <docs-tab label="レトロ">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/toolbar/src/basic/retro/app/app.ts">
-      <docs-code header="app.ts" path="adev/src/content/examples/aria/toolbar/src/basic/retro/app/app.ts"/>
-      <docs-code header="app.html" path="adev/src/content/examples/aria/toolbar/src/basic/retro/app/app.html"/>
-      <docs-code header="app.css" path="adev/src/content/examples/aria/toolbar/src/basic/retro/app/app.css"/>
-    </docs-code-multifile>
-  </docs-tab>
-</docs-tab-group>
-
-## 使い方 {#usage}
-
-Toolbarは、ユーザーが頻繁にアクセスする関連コントロールをグループ化するのに最適です。次のような場合にToolbarの使用を検討してください:
-
-- **複数の関連アクション** - 関連する機能を持つコントロールが複数ある場合（テキストフォーマットボタンなど）
-- **キーボードの効率が重要** - ユーザーが矢印キーによる素早いキーボードナビゲーションの恩恵を受ける場合
-- **グループ化されたコントロール** - コントロールをセパレーターで論理的なセクションに整理する必要がある場合
-- **頻繁なアクセス** - ワークフロー内でコントロールが繰り返し使用される場合
-
-次のような場合はToolbarの使用を避けてください:
-
-- 単純なボタングループで十分な場合 - 関連性のない2〜3個のアクションには、個別のボタンの方が適しています
-- コントロールが関連していない場合 - Toolbarは論理的なグループ化を意味するため、関連性のないコントロールはユーザーを混乱させます
-- 複雑なネストされたナビゲーション - 深い階層には、メニューやナビゲーションコンポーネントの方が適しています
-
-## 機能 {#features}
-
-Angularのツールバーは、以下の機能を備えた完全にアクセシブルなツールバーの実装を提供します：
-
-- **キーボードナビゲーション** - 矢印キーでウィジェットを移動し、EnterキーまたはSpaceキーでアクティブ化します
-- **スクリーンリーダーのサポート** - 支援技術のための組み込みARIA属性
-- **ウィジェットグループ** - ラジオボタングループやトグルボタングループのような関連ウィジェットを整理します
-- **柔軟な向き** - 自動キーボードナビゲーションを備えた水平または垂直レイアウト
-- **シグナルベースのリアクティビティ** - Angularシグナルを使用したリアクティブな状態管理
-- **双方向テキストのサポート** - 右から左へ記述する言語（RTL）を自動的に処理します
-- **設定可能なフォーカス** - ラップアラウンドナビゲーションまたは端でのハードストップを選択できます
-
-## 例
-
-### 基本的な水平ツールバー {#basic-horizontal-toolbar}
-
-水平ツールバーは、テキストエディターやデザインツールで一般的なパターンに合わせて、コントロールを左から右に整理します。矢印キーでウィジェット間を移動し、ユーザーがTabキーを押して次のページ要素に移動するまで、ツールバー内にフォーカスを維持します。
+A container for grouping related controls and actions with keyboard navigation, commonly used for text formatting, toolbars, and command panels.
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -90,9 +31,68 @@ Angularのツールバーは、以下の機能を備えた完全にアクセシ�
   </docs-tab>
 </docs-tab-group>
 
-### 垂直ツールバー {#vertical-toolbar}
+## Usage
 
-垂直ツールバーは、コントロールを上から下に積み重ねるため、サイドパネルや垂直コマンドパレットに便利です。上下の矢印キーでウィジェット間を移動します。
+Toolbar works best for grouping related controls that users access frequently. Consider using toolbar when:
+
+- **Multiple related actions** - You have several controls that perform related functions (like text formatting buttons)
+- **Keyboard efficiency matters** - Users benefit from quick keyboard navigation through arrow keys
+- **Grouped controls** - You need to organize controls into logical sections with separators
+- **Frequent access** - Controls are used repeatedly within a workflow
+
+Avoid toolbar when:
+
+- A simple button group is sufficient - For just 2-3 unrelated actions, individual buttons work better
+- Controls aren't related - Toolbar implies a logical grouping; unrelated controls confuse users
+- Complex nested navigation - Deep hierarchies are better served by menus or navigation components
+
+## Features
+
+Angular's toolbar provides a fully accessible toolbar implementation with:
+
+- **Keyboard Navigation** - Navigate widgets with arrow keys, activate with Enter or Space
+- **Screen Reader Support** - Built-in ARIA attributes for assistive technologies
+- **Widget Groups** - Organize related widgets like radio button groups or toggle button groups
+- **Flexible Orientation** - Horizontal or vertical layouts with automatic keyboard navigation
+- **Signal-Based Reactivity** - Reactive state management using Angular signals
+- **Bidirectional Text Support** - Automatically handles right-to-left (RTL) languages
+- **Configurable Focus** - Choose between wrapping navigation or hard stops at edges
+
+## Examples
+
+### Basic horizontal toolbar
+
+Horizontal toolbars organize controls from left to right, matching the common pattern in text editors and design tools. Arrow keys navigate between widgets, maintaining focus within the toolbar until users press Tab to move to the next page element.
+
+<docs-tab-group>
+  <docs-tab label="Basic">
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/toolbar/src/basic/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/toolbar/src/basic/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/toolbar/src/basic/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/toolbar/src/basic/app/app.css"/>
+    </docs-code-multifile>
+  </docs-tab>
+
+  <docs-tab label="Material">
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/toolbar/src/basic/material/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/toolbar/src/basic/material/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/toolbar/src/basic/material/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/toolbar/src/basic/material/app/app.css"/>
+    </docs-code-multifile>
+  </docs-tab>
+
+  <docs-tab label="Retro">
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/toolbar/src/basic/retro/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/toolbar/src/basic/retro/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/toolbar/src/basic/retro/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/toolbar/src/basic/retro/app/app.css"/>
+    </docs-code-multifile>
+  </docs-tab>
+</docs-tab-group>
+
+### Vertical toolbar
+
+Vertical toolbars stack controls top to bottom, useful for side panels or vertical command palettes. Up and down arrow keys navigate between widgets.
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -120,13 +120,13 @@ Angularのツールバーは、以下の機能を備えた完全にアクセシ�
   </docs-tab>
 </docs-tab-group>
 
-### ウィジェットグループ {#widget-groups}
+### Widget groups
 
-ウィジェットグループには、テキストの配置オプションやリストの書式設定の選択肢など、連携して動作する関連コントロールが含まれています。グループは、ツールバーのナビゲーションに参加しながら、独自の内部状態を維持します。
+Widget groups contain related controls that work together, like text alignment options or list formatting choices. Groups maintain their own internal state while participating in toolbar navigation.
 
-上記の例では、配置ボタンは`ngToolbarWidgetGroup`でラップされ、`role="radiogroup"`が設定されており、相互に排他的な選択グループを作成しています。
+In the examples above, the alignment buttons are wrapped in `ngToolbarWidgetGroup` with `role="radiogroup"` to create a mutually exclusive selection group.
 
-`multi`入力は、グループ内の複数のウィジェットを同時に選択できるかどうかを制御します:
+The `multi` input controls whether multiple widgets within a group can be selected simultaneously:
 
 <docs-code language="html" highlight="[15]">
 <!-- Single selection (radio group) -->
@@ -152,14 +152,14 @@ Angularのツールバーは、以下の機能を備えた完全にアクセシ�
 </div>
 </docs-code>
 
-### 無効化されたウィジェット {#disabled-widgets}
+### Disabled widgets
 
-ツールバーは2つの無効化モードをサポートしています:
+Toolbars support two disabled modes:
 
-1. **ソフト無効化**されたウィジェットはフォーカス可能ですが、視覚的には利用不可であることを示します
-2. **ハード無効化**されたウィジェットは、キーボードナビゲーションから完全に削除されます。
+1. **Soft-disabled** widgets remain focusable but visually indicate they're unavailable
+2. **Hard-disabled** widgets are completely removed from keyboard navigation.
 
-デフォルトでは、`softDisabled`は`true`であり、無効化されたウィジェットがフォーカスを受け取ることができます。ハード無効化モードを有効にしたい場合は、ツールバーで`[softDisabled]="false"`を設定します。
+By default, `softDisabled` is `true`, which allows disabled widgets to still receive focus. If you want to enable hard-disabled mode, set `[softDisabled]="false"` on the toolbar.
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -187,9 +187,9 @@ Angularのツールバーは、以下の機能を備えた完全にアクセシ�
   </docs-tab>
 </docs-tab-group>
 
-### 右から左 (RTL) のサポート {#right-to-left-rtl-support}
+### Right-to-left (RTL) support
 
-ツールバーは、右から左に記述する言語を自動的にサポートします。ツールバーを`dir="rtl"`を持つコンテナでラップすると、レイアウトとキーボードナビゲーションの方向が逆になります。矢印キーのナビゲーションは自動的に調整され、左矢印キーは次のウィジェットに、右矢印キーは前のウィジェットに移動します。
+Toolbars automatically support right-to-left languages. Wrap the toolbar in a container with `dir="rtl"` to reverse the layout and keyboard navigation direction. Arrow key navigation adjusts automatically: left arrow moves to the next widget, right arrow to the previous.
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -217,54 +217,54 @@ Angularのツールバーは、以下の機能を備えた完全にアクセシ�
   </docs-tab>
 </docs-tab-group>
 
-## API
+## APIs
 
-### Toolbarディレクティブ {#toolbar-directive}
+### Toolbar Directive
 
-`ngToolbar`ディレクティブは、ツールバー機能のコンテナを提供します。
+The `ngToolbar` directive provides the container for toolbar functionality.
 
-#### 入力 {#inputs}
+#### Inputs
 
-| プロパティ     | 型                             | デフォルト     | 説明                                                   |
+| Property       | Type                           | Default        | Description                                            |
 | -------------- | ------------------------------ | -------------- | ------------------------------------------------------ |
-| `orientation`  | `'vertical'` \| `'horizontal'` | `'horizontal'` | ツールバーが垂直方向か水平方向か                       |
-| `disabled`     | `boolean`                      | `false`        | ツールバー全体を無効にします                           |
-| `softDisabled` | `boolean`                      | `true`         | 無効化された項目がフォーカスを受け取れるかどうか       |
-| `wrap`         | `boolean`                      | `true`         | フォーカスが端で折り返すかどうか                       |
+| `orientation`  | `'vertical'` \| `'horizontal'` | `'horizontal'` | Whether toolbar is vertically or horizontally oriented |
+| `disabled`     | `boolean`                      | `false`        | Disables the entire toolbar                            |
+| `softDisabled` | `boolean`                      | `true`         | Whether disabled items can receive focus               |
+| `wrap`         | `boolean`                      | `true`         | Whether focus should wrap at the edges                 |
 
-### ToolbarWidgetディレクティブ {#toolbarwidget-directive}
+### ToolbarWidget Directive
 
-`ngToolbarWidget`ディレクティブは、要素をツールバー内のナビゲート可能なウィジェットとしてマークします。
+The `ngToolbarWidget` directive marks an element as a navigable widget within the toolbar.
 
-#### 入力 {#inputs}
+#### Inputs
 
-| プロパティ | 型        | デフォルト | 説明                                            |
+| Property   | Type      | Default | Description                                     |
 | ---------- | --------- | ------- | ----------------------------------------------- |
-| `id`       | `string`  | auto    | ウィジェットの一意の識別子                      |
-| `disabled` | `boolean` | `false` | ウィジェットを無効にします                      |
-| `value`    | `V`       | -       | ウィジェットに関連付けられた値（必須）          |
+| `id`       | `string`  | auto    | Unique identifier for the widget                |
+| `disabled` | `boolean` | `false` | Disables the widget                             |
+| `value`    | `V`       | -       | The value associated with the widget (required) |
 
-#### シグナル {#signals}
+#### Signals
 
-| プロパティ | 型                | 説明                                        |
+| Property   | Type              | Description                                 |
 | ---------- | ----------------- | ------------------------------------------- |
-| `active`   | `Signal<boolean>` | ウィジェットが現在フォーカスされているかどうか      |
-| `selected` | `Signal<boolean>` | ウィジェットが（グループ内で）選択されているかどうか |
+| `active`   | `Signal<boolean>` | Whether the widget is currently focused     |
+| `selected` | `Signal<boolean>` | Whether the widget is selected (in a group) |
 
-### ToolbarWidgetGroupディレクティブ {#toolbarwidgetgroup-directive}
+### ToolbarWidgetGroup Directive
 
-`ngToolbarWidgetGroup`ディレクティブは、関連するウィジェットをグループ化します。
+The `ngToolbarWidgetGroup` directive groups related widgets together.
 
-#### 入力 {#inputs}
+#### Inputs
 
-| プロパティ | 型        | デフォルト | 説明                                     |
+| Property   | Type      | Default | Description                              |
 | ---------- | --------- | ------- | ---------------------------------------- |
-| `disabled` | `boolean` | `false` | グループ内のすべてのウィジェットを無効にします |
-| `multi`    | `boolean` | `false` | 複数のウィジェットを選択できるかどうか     |
+| `disabled` | `boolean` | `false` | Disables all widgets in the group        |
+| `multi`    | `boolean` | `false` | Whether multiple widgets can be selected |
 
-### 関連コンポーネント {#related-components}
+### Related components
 
-ツールバーには、ボタン、ツリー、コンボボックスなど、さまざまなウィジェットタイプを含めることができます。特定のウィジェットの実装については、個々のコンポーネントのドキュメントを参照してください。
+Toolbar can contain various widget types including buttons, trees, and comboboxes. See individual component documentation for specific widget implementations.
 
 <docs-pill-row>
   <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/" title="Toolbar ARIA pattern"/>

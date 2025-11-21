@@ -1,14 +1,14 @@
-<docs-decorative-header title="ラジオグループ">
-    <!-- TODO: ラジオグループに関する簡単な説明を追加してください。 -->
+<docs-decorative-header title="Radio Group">
+    <!-- TODO: Add a short description about Radio Group. -->
 </docs-decorative-header>
 
 <docs-pill-row>
   <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/radio/" title="ARIA pattern"/>
-  <!-- TODO: ラジオグループのAPIリファレンスへのリンクを追加してください。 -->
+  <!-- TODO: Add a link to the Radio Group API reference. -->
 </docs-pill-row>
 
 
-<!-- TODO: コード例を非表示にしたトップレベルのコンポーネントプレビューを追加してください。
+<!-- TODO: Add a top level component preview with code example hidden.
 
 <docs-code-multifile preview themed hideCode path="adev/src/content/examples/aria/src/radio/app/app.component.ts">
   <docs-code header="app/app.component.html" path="adev/src/content/examples/aria/src/radio/app/app.component.html"/>
@@ -18,6 +18,6 @@
 
 -->
 
-### TailwindCSSを使用した例 {#example-with-tailwindcss}
+### Example with TailwindCSS
 
-<!-- TODO: さまざまなスタイルのコード例をさらに追加してください。 -->
+<!-- TODO: Add more code examples with different styles. -->

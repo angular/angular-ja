@@ -1,75 +1,14 @@
-<docs-decorative-header title="タブ">
+<docs-decorative-header title="Tabs">
 </docs-decorative-header>
 
 <docs-pill-row>
-  <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/tabs/" title="タブのARIAパターン"/>
-  <docs-pill href="/api/aria/tabs/Tabs" title="Tabs APIリファレンス"/>
+  <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/tabs/" title="Tabs ARIA pattern"/>
+  <docs-pill href="/api/aria/tabs/Tabs" title="Tabs API Reference"/>
 </docs-pill-row>
 
-## 概要 {#overview}
+## Overview
 
-タブは、一度に1つのパネルのみが表示される階層化されたコンテンツセクションを表示します。ユーザーは、タブボタンをクリックするか、矢印キーを使用してタブリストをナビゲートすることで、パネルを切り替えます。
-
-<docs-tab-group>
-  <docs-tab label="基本">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/app/app.ts">
-      <docs-code header="app.ts" path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/app/app.ts"/>
-      <docs-code header="app.html" path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/app/app.html"/>
-      <docs-code header="app.css" path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/app/app.css"/>
-    </docs-code-multifile>
-  </docs-tab>
-
-  <docs-tab label="Material">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/material/app/app.ts">
-      <docs-code header="app.ts" path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/material/app/app.ts"/>
-      <docs-code header="app.html" path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/material/app/app.html"/>
-      <docs-code header="app.css" path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/material/app/app.css"/>
-    </docs-code-multifile>
-  </docs-tab>
-
-  <docs-tab label="レトロ">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/retro/app/app.ts">
-      <docs-code header="app.ts" path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/retro/app/app.ts"/>
-      <docs-code header="app.html" path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/retro/app/app.html"/>
-      <docs-code header="app.css" path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/retro/app/app.css"/>
-    </docs-code-multifile>
-  </docs-tab>
-</docs-tab-group>
-
-## 使い方 {#usage}
-
-タブは、ユーザーが異なるビューやカテゴリーを切り替える際に、関連するコンテンツを個別のセクションに整理するのに適しています。
-
-**タブを使用する場合：**
-
-- 関連するコンテンツを個別のセクションに整理する
-- 複数のカテゴリーを持つ設定パネルを作成する
-- 複数のトピックを持つドキュメントを構築する
-- 異なるビューを持つダッシュボードを実装する
-- ユーザーがコンテキストを切り替える必要があるコンテンツを表示する
-
-**タブを避ける場合：**
-
-- シーケンシャルなフォームやウィザードを構築する（ステッパーパターンを使用）
-- ページ間をナビゲートする（ルーターナビゲーションを使用）
-- 単一のコンテンツセクションを表示する（タブは不要）
-- 7〜8個以上のタブがある（異なるレイアウトを検討）
-
-## 機能 {#features}
-
-- **選択モード** - フォーカス時にタブを自動的にアクティブにするか、手動でのアクティベーションを要求します
-- **キーボードナビゲーション** - 矢印キー、Home、Endキーによる効率的なタブナビゲーション
-- **向き** - 水平または垂直のタブリストレイアウト
-- **遅延コンテンツ** - タブパネルは最初にアクティブになったときにのみレンダリングされます
-- **無効化されたタブ** - フォーカス管理機能付きで個々のタブを無効化します
-- **フォーカスモード** - roving tabindexまたはactivedescendantによるフォーカス戦略
-- **RTLサポート** - 右から左へ記述する言語のナビゲーション
-
-## 例 {#examples}
-
-### フォーカスに追従する選択 {#selection-follows-focus}
-
-フォーカスに追従する選択では、矢印キーで移動するとタブがすぐにアクティブになります。これにより、即座にフィードバックが得られ、軽量なコンテンツに適しています。
+Tabs display layered content sections where only one panel is visible at a time. Users switch between panels by clicking tab buttons or using arrow keys to navigate the tab list.
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -97,11 +36,72 @@
   </docs-tab>
 </docs-tab-group>
 
-この動作を有効にするには、タブリストに `[selectionMode]="'follow'"` を設定します。
+## Usage
 
-### 手動でのアクティブ化 {#manual-activation}
+Tabs work well for organizing related content into distinct sections where users switch between different views or categories.
 
-手動でのアクティブ化では、矢印キーは選択されたタブを変更せずにタブ間でフォーカスを移動します。ユーザーはSpaceキーまたはEnterキーを押して、フォーカスされたタブをアクティブにします。
+**Use tabs when:**
+
+- Organizing related content into distinct sections
+- Creating settings panels with multiple categories
+- Building documentation with multiple topics
+- Implementing dashboards with different views
+- Showing content where users need to switch contexts
+
+**Avoid tabs when:**
+
+- Building sequential forms or wizards (use a stepper pattern)
+- Navigating between pages (use router navigation)
+- Showing single content sections (no need for tabs)
+- Having more than 7-8 tabs (consider a different layout)
+
+## Features
+
+- **Selection modes** - Tabs activate automatically on focus or require manual activation
+- **Keyboard navigation** - Arrow keys, Home, and End for efficient tab navigation
+- **Orientation** - Horizontal or vertical tab list layouts
+- **Lazy content** - Tab panels render only when first activated
+- **Disabled tabs** - Disable individual tabs with focus management
+- **Focus modes** - Roving tabindex or activedescendant focus strategies
+- **RTL support** - Right-to-left language navigation
+
+## Examples
+
+### Selection follows focus
+
+When selection follows focus, tabs activate immediately as you navigate with arrow keys. This provides instant feedback and works well for lightweight content.
+
+<docs-tab-group>
+  <docs-tab label="Basic">
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/app/app.css"/>
+    </docs-code-multifile>
+  </docs-tab>
+
+  <docs-tab label="Material">
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/material/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/material/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/material/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/material/app/app.css"/>
+    </docs-code-multifile>
+  </docs-tab>
+
+  <docs-tab label="Retro">
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/retro/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/retro/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/retro/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/tabs/src/selection-follows-focus/retro/app/app.css"/>
+    </docs-code-multifile>
+  </docs-tab>
+</docs-tab-group>
+
+Set `[selectionMode]="'follow'"` on the tab list to enable this behavior.
+
+### Manual activation
+
+With manual activation, arrow keys move focus between tabs without changing the selected tab. Users press Space or Enter to activate the focused tab.
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -129,11 +129,11 @@
   </docs-tab>
 </docs-tab-group>
 
-重いコンテンツパネルで不要なレンダリングを避けるには、`[selectionMode]="'explicit'"` を使用します。
+Use `[selectionMode]="'explicit'"` for heavy content panels to avoid unnecessary rendering.
 
-### 垂直タブ {#vertical-tabs}
+### Vertical tabs
 
-設定パネルやナビゲーションサイドバーのようなインターフェースでは、タブを垂直に配置します。
+Arrange tabs vertically for interfaces like settings panels or navigation sidebars.
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -161,11 +161,11 @@
   </docs-tab>
 </docs-tab-group>
 
-タブリストに `[orientation]="'vertical'"` を設定します。ナビゲーションは上/下矢印キーに変わります。
+Set `[orientation]="'vertical'"` on the tab list. Navigation changes to Up/Down arrow keys.
 
-### コンテンツの遅延レンダリング {#lazy-content-rendering}
+### Lazy content rendering
 
-`ng-template` で `ngTabContent` ディレクティブを使用すると、タブパネルが最初に表示されるまでレンダリングを遅延させることができます。
+Use the `ngTabContent` directive on an `ng-template` to defer rendering tab panels until they're first shown.
 
 ```angular-html
 <div ngTabs>
@@ -176,25 +176,25 @@
 
   <div ngTabPanel value="tab1">
     <ng-template ngTabContent>
-      <!-- このコンテンツは、タブ1が最初に表示されたときにのみレンダリングされます -->
+      <!-- This content only renders when Tab 1 is first shown -->
       <app-heavy-component />
     </ng-template>
   </div>
 
   <div ngTabPanel value="tab2">
     <ng-template ngTabContent>
-      <!-- このコンテンツは、タブ2が最初に表示されたときにのみレンダリングされます -->
+      <!-- This content only renders when Tab 2 is first shown -->
       <app-another-component />
     </ng-template>
   </div>
 </div>
 ```
 
-デフォルトでは、パネルが非表示になった後もコンテンツはDOMに残ります。パネルが非アクティブ化されたときにコンテンツを削除するには、`[preserveContent]="false"` を設定します。
+By default, content remains in the DOM after the panel is hidden. Set `[preserveContent]="false"` to remove content when the panel is deactivated.
 
-### 無効化されたタブ {#disabled-tabs}
+### Disabled tabs
 
-特定のタブを無効にして、ユーザーの操作を防ぎます。無効化されたタブがキーボードフォーカスを受け取れるかどうかを制御します。
+Disable specific tabs to prevent user interaction. Control whether disabled tabs can receive keyboard focus.
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -222,75 +222,75 @@
   </docs-tab>
 </docs-tab-group>
 
-タブリストで `[softDisabled]="true"` の場合、無効化されたタブはフォーカスを受け取れますが、アクティブにはできません。`[softDisabled]="false"` の場合、無効化されたタブはキーボードナビゲーション中にスキップされます。
+When `[softDisabled]="true"` on the tab list, disabled tabs can receive focus but cannot be activated. When `[softDisabled]="false"`, disabled tabs are skipped during keyboard navigation.
 
-## API
+## APIs
 
-### Tabs {#tabs}
+### Tabs
 
-タブリストとパネルを調整するコンテナディレクティブです。
+The container directive that coordinates tab lists and panels.
 
-このディレクティブには入力と出力がありません。`ngTabList`、`ngTab`、`ngTabPanel`ディレクティブのルートコンテナとして機能します。
+This directive has no inputs or outputs. It serves as the root container for `ngTabList`, `ngTab`, and `ngTabPanel` directives.
 
-### TabList {#tablist}
+### TabList
 
-選択とキーボードナビゲーションを管理するタブボタンのコンテナです。
+The container for tab buttons that manages selection and keyboard navigation.
 
-#### Inputs {#inputs}
+#### Inputs
 
-| プロパティ      | 型                           | デフォルト     | 説明                                                               |
+| Property        | Type                         | Default        | Description                                                        |
 | --------------- | ---------------------------- | -------------- | ------------------------------------------------------------------ |
-| `orientation`   | `'horizontal' \| 'vertical'` | `'horizontal'` | タブリストのレイアウト方向                                         |
-| `wrap`          | `boolean`                    | `false`        | キーボードナビゲーションが最後のタブから最初のタブにラップするかどうか |
-| `softDisabled`  | `boolean`                    | `true`         | `true`の場合、無効化されたタブはフォーカス可能ですが、アクティブにはできません |
-| `selectionMode` | `'follow' \| 'explicit'`     | `'follow'`     | タブがフォーカス時にアクティブになるか、明示的なアクティベーションが必要か |
-| `selectedTab`   | `any`                        | —              | 現在選択されているタブの値（双方向バインディングをサポート）       |
+| `orientation`   | `'horizontal' \| 'vertical'` | `'horizontal'` | Tab list layout direction                                          |
+| `wrap`          | `boolean`                    | `false`        | Whether keyboard navigation wraps from last to first tab           |
+| `softDisabled`  | `boolean`                    | `true`         | When `true`, disabled tabs are focusable but not activatable       |
+| `selectionMode` | `'follow' \| 'explicit'`     | `'follow'`     | Whether tabs activate on focus or require explicit activation      |
+| `selectedTab`   | `any`                        | —              | The value of the currently selected tab (supports two-way binding) |
 
-### Tab {#tab}
+### Tab
 
-個々のタブボタンです。
+An individual tab button.
 
-#### Inputs {#inputs}
+#### Inputs
 
-| プロパティ   | 型        | デフォルト | 説明                                |
-| ---------- | --------- | ------- | ----------------------------------- |
-| `value`    | `any`     | —       | **必須。** このタブの一意な値       |
-| `disabled` | `boolean` | `false` | このタブを無効化します              |
+| Property   | Type      | Default | Description                             |
+| ---------- | --------- | ------- | --------------------------------------- |
+| `value`    | `any`     | —       | **Required.** Unique value for this tab |
+| `disabled` | `boolean` | `false` | Disables this tab                       |
 
-#### シグナル {#signals}
+#### Signals
 
-| プロパティ   | 型                | 説明                                |
-| ---------- | ----------------- | ----------------------------------- |
-| `selected` | `Signal<boolean>` | タブが現在選択されているかどうか    |
-| `active`   | `Signal<boolean>` | タブが現在フォーカスを持っているかどうか |
+| Property   | Type              | Description                           |
+| ---------- | ----------------- | ------------------------------------- |
+| `selected` | `Signal<boolean>` | Whether the tab is currently selected |
+| `active`   | `Signal<boolean>` | Whether the tab currently has focus   |
 
-### TabPanel {#tabpanel}
+### TabPanel
 
-タブに関連付けられたコンテンツパネルです。
+The content panel associated with a tab.
 
-#### Inputs {#inputs}
+#### Inputs
 
-| プロパティ        | 型        | デフォルト | 説明                                                       |
+| Property          | Type      | Default | Description                                                |
 | ----------------- | --------- | ------- | ---------------------------------------------------------- |
-| `value`           | `any`     | —       | **必須。** 関連付けられたタブの`value`と一致する必要があります |
-| `preserveContent` | `boolean` | `true`  | 非アクティブ化後もパネルコンテンツをDOMに保持するかどうか    |
+| `value`           | `any`     | —       | **Required.** Must match the `value` of the associated tab |
+| `preserveContent` | `boolean` | `true`  | Whether to keep panel content in DOM after deactivation    |
 
-#### シグナル {#signals}
+#### Signals
 
-| プロパティ | 型                | 説明                           |
-| --------- | ----------------- | ------------------------------ |
-| `visible` | `Signal<boolean>` | パネルが現在表示されているかどうか |
+| Property  | Type              | Description                            |
+| --------- | ----------------- | -------------------------------------- |
+| `visible` | `Signal<boolean>` | Whether the panel is currently visible |
 
-### TabContent {#tabcontent}
+### TabContent
 
-タブパネルのコンテンツを遅延レンダリングするための構造ディレクティブです。
+A structural directive for lazy rendering tab panel content.
 
-このディレクティブには入力、出力、メソッドはありません。タブパネル内の`ng-template`要素に適用します:
+This directive has no inputs, outputs, or methods. Apply it to an `ng-template` element inside a tab panel:
 
 ```angular-html
 <div ngTabPanel value="tab1">
   <ng-template ngTabContent>
-    <!-- ここのコンテンツは遅延レンダリングされます -->
+    <!-- Content here is lazily rendered -->
   </ng-template>
 </div>
 ```

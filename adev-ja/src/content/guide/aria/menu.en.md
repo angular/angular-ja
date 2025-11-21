@@ -1,75 +1,14 @@
-<docs-decorative-header title="メニュー">
+<docs-decorative-header title="Menu">
 </docs-decorative-header>
 
 <docs-pill-row>
-  <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/menubar/" title="メニューARIAパターン"/>
-  <docs-pill href="/api/aria/menu/Menu" title="Menu APIリファレンス"/>
+  <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/menubar/" title="Menu ARIA pattern"/>
+  <docs-pill href="/api/aria/menu/Menu" title="Menu API Reference"/>
 </docs-pill-row>
 
-## 概要 {#overview}
+## Overview
 
-メニューは、ユーザーにアクションやオプションのリストを提供し、通常はボタンのクリックや右クリックに応じて表示されます。メニューは、矢印キーによるキーボードナビゲーション、サブメニュー、チェックボックス、ラジオボタン、無効化されたアイテムをサポートしています。
-
-<docs-tab-group>
-  <docs-tab label="基本">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/menu/src/menu-trigger/app/app.ts">
-      <docs-code header="app.ts" path="adev/src/content/examples/aria/menu/src/menu-trigger/app/app.ts"/>
-      <docs-code header="app.html" path="adev/src/content/examples/aria/menu/src/menu-trigger/app/app.html"/>
-      <docs-code header="app.css" path="adev/src/content/examples/aria/menu/src/menu-trigger/app/app.css"/>
-    </docs-code-multifile>
-  </docs-tab>
-
-  <docs-tab label="Material">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/menu/src/menu-trigger/material/app/app.ts">
-      <docs-code header="app.ts" path="adev/src/content/examples/aria/menu/src/menu-trigger/material/app/app.ts"/>
-      <docs-code header="app.html" path="adev/src/content/examples/aria/menu/src/menu-trigger/material/app/app.html"/>
-      <docs-code header="app.css" path="adev/src/content/examples/aria/menu/src/menu-trigger/material/app/app.css"/>
-    </docs-code-multifile>
-  </docs-tab>
-
-  <docs-tab label="レトロ">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/menu/src/menu-trigger/retro/app/app.ts">
-      <docs-code header="app.ts" path="adev/src/content/examples/aria/menu/src/menu-trigger/retro/app/app.ts"/>
-      <docs-code header="app.html" path="adev/src/content/examples/aria/menu/src/menu-trigger/retro/app/app.html"/>
-      <docs-code header="app.css" path="adev/src/content/examples/aria/menu/src/menu-trigger/retro/app/app.css"/>
-    </docs-code-multifile>
-  </docs-tab>
-</docs-tab-group>
-
-## 使い方 {#usage}
-
-メニューは、ユーザーが選択できるアクションやコマンドのリストを提示するのに適しています。
-
-**メニューを使用する場合:**
-
-- アプリケーションのコマンドメニュー(File、Edit、View)を構築する場合
-- コンテキストメニュー(右クリックアクション)を作成する場合
-- ドロップダウンのアクションリストを表示する場合
-- ツールバーのドロップダウンを実装する場合
-- 設定やオプションを整理する場合
-
-**メニューを避けるべき場合:**
-
-- サイトナビゲーションを構築する場合(代わりにナビゲーションランドマークを使用してください)
-- フォームのセレクトを作成する場合([Select](guide/aria/select)コンポーネントを使用してください)
-- コンテンツパネルを切り替える場合([Tabs](guide/aria/tabs)を使用してください)
-- 折りたたみ可能なコンテンツを表示する場合([Accordion](guide/aria/accordion)を使用してください)
-
-## 機能 {#features}
-
-- **キーボードナビゲーション** - 矢印キー、Home/End、文字検索による効率的なナビゲーション
-- **サブメニュー** - 自動配置の機能を備えたネストされたメニューのサポート
-- **メニュータイプ** - スタンドアロンメニュー、トリガーメニュー、メニューバー
-- **チェックボックスとラジオボタン** - トグルおよび選択メニューアイテム
-- **無効化されたアイテム** - フォーカス管理を備えたソフトまたはハードな無効状態
-- **自動クローズ動作** - 選択時に閉じる設定が可能
-- **RTLサポート** - 右から左へ記述する言語のナビゲーション
-
-## 例 {#examples}
-
-### トリガー付きメニュー {#menu-with-trigger}
-
-トリガーボタンとメニューを組み合わせることで、ドロップダウンメニューを作成します。トリガーはメニューを開閉します。
+A menu offers a list of actions or options to users, typically appearing in response to a button click or right-click. Menus support keyboard navigation with arrow keys, submenus, checkboxes, radio buttons, and disabled items.
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -97,22 +36,83 @@
   </docs-tab>
 </docs-tab-group>
 
-ユーザーがアイテムを選択するかEscapeキーを押すと、メニューは自動的に閉じます。
+## Usage
 
-### コンテキストメニュー {#context-menu}
+Menus work well for presenting lists of actions or commands that users can choose from.
 
-コンテキストメニューは、ユーザーが要素を右クリックしたときにカーソル位置に表示されます。
+**Use menus when:**
+
+- Building application command menus (File, Edit, View)
+- Creating context menus (right-click actions)
+- Showing dropdown action lists
+- Implementing toolbar dropdowns
+- Organizing settings or options
+
+**Avoid menus when:**
+
+- Building site navigation (use navigation landmarks instead)
+- Creating form selects (use the [Select](guide/aria/select) component)
+- Switching between content panels (use [Tabs](guide/aria/tabs))
+- Showing collapsible content (use [Accordion](guide/aria/accordion))
+
+## Features
+
+- **Keyboard navigation** - Arrow keys, Home/End, and character search for efficient navigation
+- **Submenus** - Nested menu support with automatic positioning
+- **Menu types** - Standalone menus, triggered menus, and menubars
+- **Checkboxes and radios** - Toggle and selection menu items
+- **Disabled items** - Soft or hard disabled states with focus management
+- **Auto-close behavior** - Configurable close on selection
+- **RTL support** - Right-to-left language navigation
+
+## Examples
+
+### Menu with trigger
+
+Create a dropdown menu by pairing a trigger button with a menu. The trigger opens and closes the menu.
+
+<docs-tab-group>
+  <docs-tab label="Basic">
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/menu/src/menu-trigger/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/menu/src/menu-trigger/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/menu/src/menu-trigger/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/menu/src/menu-trigger/app/app.css"/>
+    </docs-code-multifile>
+  </docs-tab>
+
+  <docs-tab label="Material">
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/menu/src/menu-trigger/material/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/menu/src/menu-trigger/material/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/menu/src/menu-trigger/material/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/menu/src/menu-trigger/material/app/app.css"/>
+    </docs-code-multifile>
+  </docs-tab>
+
+  <docs-tab label="Retro">
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/menu/src/menu-trigger/retro/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/menu/src/menu-trigger/retro/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/menu/src/menu-trigger/retro/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/menu/src/menu-trigger/retro/app/app.css"/>
+    </docs-code-multifile>
+  </docs-tab>
+</docs-tab-group>
+
+The menu automatically closes when a user selects an item or presses Escape.
+
+### Context menu
+
+Context menus appear at the cursor position when users right-click an element.
 
 <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/menu/src/menu-context/app/app.ts">
   <docs-code header="app.ts" path="adev/src/content/examples/aria/menu/src/menu-context/app/app.ts"/>
   <docs-code header="app.html" path="adev/src/content/examples/aria/menu/src/menu-context/app/app.html"/>
 </docs-code-multifile>
 
-`contextmenu`イベントの座標を使用してメニューを配置します。
+Position the menu using the `contextmenu` event coordinates.
 
-### スタンドアロンメニュー {#standalone-menu}
+### Standalone menu
 
-スタンドアロンメニューはトリガーを必要とせず、インターフェース上で常に表示されたままになります。
+A standalone menu doesn't require a trigger and remains visible in the interface.
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -140,11 +140,11 @@
   </docs-tab>
 </docs-tab-group>
 
-スタンドアロンメニューは、常に表示されるアクションリストやナビゲーションに適しています。
+Standalone menus work well for always-visible action lists or navigation.
 
-### 無効化されたメニューアイテム {#disabled-menu-items}
+### Disabled menu items
 
-`disabled`入力を使用して特定のメニューアイテムを無効にします。`softDisabled`でフォーカスの動作を制御します。
+Disable specific menu items using the `disabled` input. Control focus behavior with `softDisabled`.
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -172,87 +172,87 @@
   </docs-tab>
 </docs-tab-group>
 
-`[softDisabled]="true"`の場合、無効化されたアイテムはフォーカスを受け取ることができますが、アクティブにできません。`[softDisabled]="false"`の場合、無効化されたアイテムはキーボードナビゲーション中にスキップされます。
+When `[softDisabled]="true"`, disabled items can receive focus but cannot be activated. When `[softDisabled]="false"`, disabled items are skipped during keyboard navigation.
 
-## API {#apis}
+## APIs
 
-### Menu {#menu}
+### Menu
 
-メニューアイテムのコンテナディレクティブです。
+The container directive for menu items.
 
-#### 入力 {#inputs}
+#### Inputs
 
 | Property       | Type      | Default | Description                                                   |
 | -------------- | --------- | ------- | ------------------------------------------------------------- |
-| `disabled`     | `boolean` | `false` | メニュー内のすべてのアイテムを無効にします |
-| `wrap`         | `boolean` | `true`  | キーボードナビゲーションが端で折り返すかどうか |
-| `softDisabled` | `boolean` | `true`  | `true`の場合、無効化されたアイテムはフォーカス可能ですが、インタラクティブではありません |
+| `disabled`     | `boolean` | `false` | Disables all items in the menu                                |
+| `wrap`         | `boolean` | `true`  | Whether keyboard navigation wraps at edges                    |
+| `softDisabled` | `boolean` | `true`  | When `true`, disabled items are focusable but not interactive |
 
-#### メソッド {#methods}
+#### Methods
 
 | Method           | Parameters | Description                        |
 | ---------------- | ---------- | ---------------------------------- |
-| `close`          | none       | メニューを閉じます |
-| `focusFirstItem` | none       | 最初のメニューアイテムにフォーカスを移動します |
+| `close`          | none       | Closes the menu                    |
+| `focusFirstItem` | none       | Moves focus to the first menu item |
 
-### MenuBar {#menubar}
+### MenuBar
 
-複数のメニューを格納する水平コンテナです。
+A horizontal container for multiple menus.
 
-#### 入力 {#inputs}
+#### Inputs
 
 | Property       | Type      | Default | Description                                                   |
 | -------------- | --------- | ------- | ------------------------------------------------------------- |
-| `disabled`     | `boolean` | `false` | メニューバー全体を無効にします |
-| `wrap`         | `boolean` | `true`  | キーボードナビゲーションが端で折り返すかどうか |
-| `softDisabled` | `boolean` | `true`  | `true`の場合、無効化されたアイテムはフォーカス可能ですが、インタラクティブではありません |
+| `disabled`     | `boolean` | `false` | Disables the entire menubar                                   |
+| `wrap`         | `boolean` | `true`  | Whether keyboard navigation wraps at edges                    |
+| `softDisabled` | `boolean` | `true`  | When `true`, disabled items are focusable but not interactive |
 
-### MenuItem {#menuitem}
+### MenuItem
 
-メニュー内の個々のアイテムです。
+An individual item within a menu.
 
-#### 入力 {#inputs}
+#### Inputs
 
 | Property     | Type      | Default | Description                                          |
 | ------------ | --------- | ------- | ---------------------------------------------------- |
-| `value`      | `any`     | —       | **必須。** このアイテムの値です |
-| `disabled`   | `boolean` | `false` | このメニューアイテムを無効にします |
-| `submenu`    | `Menu`    | —       | サブメニューへの参照です |
-| `searchTerm` | `string`  | `''`    | タイプアヘッドの検索語です（双方向バインディングをサポート） |
+| `value`      | `any`     | —       | **Required.** Value for this item                    |
+| `disabled`   | `boolean` | `false` | Disables this menu item                              |
+| `submenu`    | `Menu`    | —       | Reference to a submenu                               |
+| `searchTerm` | `string`  | `''`    | Search term for typeahead (supports two-way binding) |
 
-#### シグナル {#signals}
+#### Signals
 
 | Property   | Type              | Description                                |
 | ---------- | ----------------- | ------------------------------------------ |
-| `active`   | `Signal<boolean>` | アイテムが現在フォーカスを持っているかどうか |
-| `expanded` | `Signal<boolean>` | サブメニューが展開されているかどうか |
-| `hasPopup` | `Signal<boolean>` | アイテムに関連付けられたサブメニューがあるかどうか |
+| `active`   | `Signal<boolean>` | Whether the item currently has focus       |
+| `expanded` | `Signal<boolean>` | Whether the submenu is expanded            |
+| `hasPopup` | `Signal<boolean>` | Whether the item has an associated submenu |
 
-NOTE: MenuItemはパブリックメソッドを公開しません。`submenu`入力を使用して、サブメニューをメニューアイテムに関連付けます。
+NOTE: MenuItem does not expose public methods. Use the `submenu` input to associate submenus with menu items.
 
-### MenuTrigger {#menutrigger}
+### MenuTrigger
 
-メニューを開くボタンまたは要素です。
+A button or element that opens a menu.
 
-#### 入力 {#inputs}
+#### Inputs
 
 | Property       | Type      | Default | Description                                |
 | -------------- | --------- | ------- | ------------------------------------------ |
-| `menu`         | `Menu`    | —       | **必須。** トリガーするメニューです |
-| `disabled`     | `boolean` | `false` | トリガーを無効にします |
-| `softDisabled` | `boolean` | `true`  | `true`の場合、無効化されたトリガーはフォーカス可能です |
+| `menu`         | `Menu`    | —       | **Required.** The menu to trigger          |
+| `disabled`     | `boolean` | `false` | Disables the trigger                       |
+| `softDisabled` | `boolean` | `true`  | When `true`, disabled trigger is focusable |
 
-#### シグナル {#signals}
+#### Signals
 
 | Property   | Type              | Description                                |
 | ---------- | ----------------- | ------------------------------------------ |
-| `expanded` | `Signal<boolean>` | メニューが現在開いているかどうか |
-| `hasPopup` | `Signal<boolean>` | トリガーに関連付けられたメニューがあるかどうか |
+| `expanded` | `Signal<boolean>` | Whether the menu is currently open         |
+| `hasPopup` | `Signal<boolean>` | Whether the trigger has an associated menu |
 
-#### メソッド {#methods}
+#### Methods
 
 | Method   | Parameters | Description                  |
 | -------- | ---------- | ---------------------------- |
-| `open`   | none       | メニューを開きます |
-| `close`  | none       | メニューを閉じます |
-| `toggle` | none       | メニューの開閉を切り替えます |
+| `open`   | none       | Opens the menu               |
+| `close`  | none       | Closes the menu              |
+| `toggle` | none       | Toggles the menu open/closed |

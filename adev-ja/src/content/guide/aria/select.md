@@ -1,12 +1,12 @@
-<docs-decorative-header title="Select">
+<docs-decorative-header title="セレクト">
 </docs-decorative-header>
 
-## Overview
+## 概要 {#overview}
 
-A pattern that combines readonly combobox with listbox to create single-selection dropdowns with keyboard navigation and screen reader support.
+読み取り専用コンボボックスとリストボックスを組み合わせて、キーボードナビゲーションとスクリーンリーダーをサポートする単一選択ドロップダウンを作成するパターンです。
 
 <docs-tab-group>
-  <docs-tab label="Basic">
+  <docs-tab label="基本">
     <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/select/src/icons/app/app.ts">
       <docs-code header="app.ts" path="adev/src/content/examples/aria/select/src/icons/app/app.ts"/>
       <docs-code header="app.html" path="adev/src/content/examples/aria/select/src/icons/app/app.html"/>
@@ -14,7 +14,7 @@ A pattern that combines readonly combobox with listbox to create single-selectio
     </docs-code-multifile>
   </docs-tab>
 
-  <docs-tab label="Material">
+  <docs-tab label="マテリアル">
     <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/select/src/icons/material/app/app.ts">
       <docs-code header="app.ts" path="adev/src/content/examples/aria/select/src/icons/material/app/app.ts"/>
       <docs-code header="app.html" path="adev/src/content/examples/aria/select/src/icons/material/app/app.html"/>
@@ -22,7 +22,7 @@ A pattern that combines readonly combobox with listbox to create single-selectio
     </docs-code-multifile>
   </docs-tab>
 
-  <docs-tab label="Retro">
+  <docs-tab label="レトロ">
     <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/select/src/icons/retro/app/app.ts">
       <docs-code header="app.ts" path="adev/src/content/examples/aria/select/src/icons/retro/app/app.ts"/>
       <docs-code header="app.html" path="adev/src/content/examples/aria/select/src/icons/retro/app/app.html"/>
@@ -31,41 +31,41 @@ A pattern that combines readonly combobox with listbox to create single-selectio
   </docs-tab>
 </docs-tab-group>
 
-## Usage
+## 使い方 {#usage}
 
-The select pattern works best when users need to choose a single value from a familiar set of options.
+selectパターンは、ユーザーがよく知られた選択肢のセットから単一の値を選択する必要がある場合に最適です。
 
-Consider using this pattern when:
+次のような場合にこのパターンの使用を検討してください：
 
-- **The option list is fixed** (fewer than 20 items) - Users can scan and choose without filtering
-- **Options are familiar** - Users recognize the choices without needing to search
-- **Forms need standard fields** - Country, state, category, or status selection
-- **Settings and configuration** - Dropdown menus for preferences or options
-- **Clear option labels** - Each choice has a distinct, scannable name
+- **選択肢のリストが固定されている場合**（20項目未満）- ユーザーはフィルタリングなしで一覧して選択できます
+- **選択肢がよく知られている場合** - ユーザーは検索しなくても選択肢を認識できます
+- **フォームに標準的なフィールドが必要な場合** - 国、州、カテゴリー、またはステータスの選択
+- **設定と構成** - 設定やオプションのためのドロップダウンメニュー
+- **選択肢のラベルが明確な場合** - 各選択肢に、識別しやすく一覧できる名前が付いている
 
-Avoid this pattern when:
+次のような場合はこのパターンを避けてください：
 
-- **The list has more than 20 items** - Use the [Autocomplete pattern](guide/aria/autocomplete) for better filtering
-- **Users need to search options** - [Autocomplete](guide/aria/autocomplete) provides text input and filtering
-- **Multiple selection is needed** - Use the [Multiselect pattern](guide/aria/multiselect) instead
-- **Very few options exist (2-3)** - Radio buttons provide better visibility of all choices
+- **リストに20項目以上ある場合** - より良いフィルタリングのために[Autocompleteパターン](guide/aria/autocomplete)を使用してください
+- **ユーザーが選択肢を検索する必要がある場合** - [Autocomplete](guide/aria/autocomplete)はテキスト入力とフィルタリングを提供します
+- **複数選択が必要な場合** - 代わりに[Multiselectパターン](guide/aria/multiselect)を使用してください
+- **選択肢が非常に少ない場合（2〜3個）** - ラジオボタンはすべての選択肢の可視性を高めます
 
-## Features
+## 機能 {#features}
 
-The select pattern combines [Combobox](guide/aria/combobox) and [Listbox](guide/aria/listbox) directives to provide a fully accessible dropdown with:
+selectパターンは、[Combobox](guide/aria/combobox)と[Listbox](guide/aria/listbox)ディレクティブを組み合わせて、以下の機能を備えた完全にアクセシブルなドロップダウンを提供します:
 
-- **Keyboard Navigation** - Navigate options with arrow keys, select with Enter, close with Escape
-- **Screen Reader Support** - Built-in ARIA attributes for assistive technologies
-- **Custom Display** - Show selected values with icons, formatting, or rich content
-- **Signal-Based Reactivity** - Reactive state management using Angular signals
-- **Smart Positioning** - CDK Overlay handles viewport edges and scrolling
-- **Bidirectional Text Support** - Automatically handles right-to-left (RTL) languages
+- **キーボードナビゲーション** - 矢印キーでオプションを移動し、Enterで選択、Escapeで閉じます
+- **スクリーンリーダーのサポート** - 支援技術のための組み込みARIA属性
+- **カスタム表示** - 選択された値をアイコン、フォーマット、またはリッチコンテンツで表示します
+- **シグナルベースのリアクティビティ** - Angularシグナルを使用したリアクティブな状態管理
+- **スマートな配置** - CDK Overlayがビューポートの端やスクロールを処理します
+- **双方向テキストのサポート** - 右から左へ記述する言語 (RTL) を自動的に処理します
 
-## Examples
+## 例
 
-### Basic select
+### 基本的なセレクト {#basic-select}
 
-Users need a standard dropdown to choose from a list of values. A readonly combobox paired with a listbox provides the familiar select experience with full accessibility support.
+ユーザーは、値のリストから選択するために標準的なドロップダウンを必要とします。読み取り専用のコンボボックスとリストボックスを組み合わせることで、完全なアクセシビリティサポートを備えた、使い慣れたセレクト体験を提供します。
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -93,11 +93,11 @@ Users need a standard dropdown to choose from a list of values. A readonly combo
   </docs-tab>
 </docs-tab-group>
 
-The `readonly` attribute on `ngCombobox` prevents text input while preserving keyboard navigation. Users interact with the dropdown using arrow keys and Enter, just like a native select element.
+`ngCombobox`の`readonly`属性は、キーボードナビゲーションを維持しながらテキスト入力を防ぎます。ユーザーは、ネイティブのselect要素と同じように、矢印キーとEnterキーを使用してドロップダウンを操作します。
 
-### Select with custom display
+### カスタム表示のセレクト {#select-with-custom-display}
 
-Options often need visual indicators like icons or badges to help users identify choices quickly. Custom templates within options allow rich formatting while maintaining accessibility.
+オプションには、ユーザーが選択肢をすばやく識別できるように、アイコンやバッジなどの視覚的なインジケーターが必要になることがよくあります。オプション内のカスタムテンプレートを使用すると、アクセシビリティを維持しながらリッチなフォーマットが可能になります。
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -125,11 +125,11 @@ Options often need visual indicators like icons or badges to help users identify
   </docs-tab>
 </docs-tab-group>
 
-Each option displays an icon alongside the label. The selected value updates to show the chosen option's icon and text, providing clear visual feedback.
+各オプションには、ラベルの横にアイコンが表示されます。選択された値は、選択されたオプションのアイコンとテキストを表示するように更新され、明確な視覚的フィードバックを提供します。
 
-### Disabled select
+### 無効化されたセレクト {#disabled-select}
 
-Selects can be disabled to prevent user interaction when certain form conditions aren't met. The disabled state provides visual feedback and prevents keyboard interaction.
+特定のフォーム条件が満たされていない場合にユーザーの操作を防ぐために、セレクトを無効にできます。無効状態は、視覚的なフィードバックを提供し、キーボード操作を防ぎます。
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -157,37 +157,37 @@ Selects can be disabled to prevent user interaction when certain form conditions
   </docs-tab>
 </docs-tab-group>
 
-When disabled, the select shows a disabled visual state and blocks all user interaction. Screen readers announce the disabled state to assistive technology users.
+無効にすると、セレクトは無効の視覚的状態を示し、すべてのユーザー操作をブロックします。スクリーンリーダーは、支援技術のユーザーに無効状態をアナウンスします。
 
-## APIs
+## API
 
-The select pattern uses the following directives from Angular's Aria library. See the full API documentation in the linked guides.
+selectパターンは、AngularのAriaライブラリから以下のディレクティブを使用します。詳細なAPIドキュメントについては、リンク先のガイドを参照してください。
 
-### Combobox Directives
+### コンボボックスディレクティブ {#combobox-directives}
 
-The select pattern uses `ngCombobox` with the `readonly` attribute to prevent text input while preserving keyboard navigation.
+selectパターンは、キーボードナビゲーションを維持しつつテキスト入力を防ぐために、`readonly`属性を持つ`ngCombobox`を使用します。
 
-#### Inputs
+#### 入力 {#inputs}
 
-| Property   | Type      | Default | Description                               |
+| プロパティ   | 型      | デフォルト | 説明                               |
 | ---------- | --------- | ------- | ----------------------------------------- |
-| `readonly` | `boolean` | `false` | Set to `true` to create dropdown behavior |
-| `disabled` | `boolean` | `false` | Disables the entire select                |
+| `readonly` | `boolean` | `false` | `true`に設定すると、ドロップダウンの動作になります |
+| `disabled` | `boolean` | `false` | select全体を無効にします                |
 
-See the [Combobox API documentation](guide/aria/combobox#apis) for complete details on all available inputs and signals.
+利用可能なすべての入力とシグナルの詳細については、[コンボボックスAPIドキュメント](guide/aria/combobox#apis)を参照してください。
 
-### Listbox Directives
+### リストボックスディレクティブ {#listbox-directives}
 
-The select pattern uses `ngListbox` for the dropdown list and `ngOption` for each selectable item.
+selectパターンは、ドロップダウンリストに`ngListbox`を、選択可能な各項目に`ngOption`を使用します。
 
-#### Model
+#### モデル {#model}
 
-| Property | Type    | Description                                                                  |
+| プロパティ | 型    | 説明                                                                  |
 | -------- | ------- | ---------------------------------------------------------------------------- |
-| `values` | `any[]` | Two-way bindable array of selected values (contains single value for select) |
+| `values` | `any[]` | 選択された値の双方向バインディング可能な配列（selectの場合は単一の値を含む） |
 
-See the [Listbox API documentation](guide/aria/listbox#apis) for complete details on listbox configuration, selection modes, and option properties.
+リストボックスの設定、選択モード、およびオプションのプロパティに関する完全な詳細については、[リストボックスAPIドキュメント](guide/aria/listbox#apis)を参照してください。
 
-### Positioning
+### ポジショニング {#positioning}
 
-The select pattern integrates with [CDK Overlay](api/cdk/overlay/CdkConnectedOverlay) for smart positioning. Use `cdkConnectedOverlay` to handle viewport edges and scrolling automatically.
+selectパターンは、スマートなポジショニングのために[CDK Overlay](api/cdk/overlay/CdkConnectedOverlay)と統合されています。ビューポートの端やスクロールを自動的に処理するには`cdkConnectedOverlay`を使用してください。

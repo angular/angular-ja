@@ -1,14 +1,14 @@
-<docs-decorative-header title="Tree">
+<docs-decorative-header title="ツリー">
 </docs-decorative-header>
 
 <docs-pill-row>
-  <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/treeview/" title="Tree ARIA pattern"/>
-  <docs-pill href="/api/aria/tree/Tree" title="Tree API Reference"/>
+  <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/treeview/" title="ツリーARIAパターン"/>
+  <docs-pill href="/api/aria/tree/Tree" title="ツリーAPIリファレンス"/>
 </docs-pill-row>
 
-## Overview
+## 概要 {#overview}
 
-A tree displays hierarchical data where items can expand to reveal children or collapse to hide them. Users navigate with arrow keys, expand and collapse nodes, and optionally select items for navigation or data selection scenarios.
+ツリーは、アイテムを展開して子を表示したり、折りたたんで非表示にしたりできる階層データを表示します。ユーザーは矢印キーで移動し、ノードを展開・折りたたみ、ナビゲーションやデータ選択のシナリオのためにアイテムを選択できます。
 
 <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/tree/src/single-select/basic/app/app.component.ts">
   <docs-code header="TS" path="adev/src/content/examples/aria/tree/src/single-select/basic/app/app.component.ts"/>
@@ -16,42 +16,42 @@ A tree displays hierarchical data where items can expand to reveal children or c
   <docs-code header="CSS" path="adev/src/content/examples/aria/tree/src/single-select/basic/app/app.component.css"/>
 </docs-code-multifile>
 
-## Usage
+## 使用法 {#usage}
 
-Trees work well for displaying hierarchical data where users need to navigate through nested structures.
+ツリーは、ユーザーがネストされた構造をナビゲートする必要がある階層データを表示するのに適しています。
 
-**Use trees when:**
+**ツリーを使用する場合:**
 
-- Building file system navigation
-- Showing folder and document hierarchies
-- Creating nested menu structures
-- Displaying organization charts
-- Browsing hierarchical data
-- Implementing site navigation with nested sections
+- ファイルシステムのナビゲーションを構築する
+- フォルダーとドキュメントの階層を表示する
+- ネストされたメニュー構造を作成する
+- 組織図を表示する
+- 階層データを閲覧する
+- ネストされたセクションを持つサイトナビゲーションを実装する
 
-**Avoid trees when:**
+**ツリーを避ける場合:**
 
-- Displaying flat lists (use [Listbox](guide/aria/listbox) instead)
-- Showing data tables (use [Grid](guide/aria/grid) instead)
-- Creating simple dropdowns (use [Select](guide/aria/select) instead)
-- Building breadcrumb navigation (use breadcrumb patterns)
+- フラットなリストを表示する場合（代わりに[Listbox](guide/aria/listbox)を使用）
+- データテーブルを表示する場合（代わりに[Grid](guide/aria/grid)を使用）
+- シンプルなドロップダウンを作成する場合（代わりに[Select](guide/aria/select)を使用）
+- パンくずナビゲーションを構築する場合（パンくずパターンを使用）
 
-## Features
+## 機能 {#features}
 
-- **Hierarchical navigation** - Nested tree structure with expand and collapse functionality
-- **Selection modes** - Single or multi-selection with explicit or follow-focus behavior
-- **Selection follows focus** - Optional automatic selection when focus changes
-- **Keyboard navigation** - Arrow keys, Home, End, and type-ahead search
-- **Expand/collapse** - Right/Left arrows or Enter to toggle parent nodes
-- **Disabled items** - Disable specific nodes with focus management
-- **Focus modes** - Roving tabindex or activedescendant focus strategies
-- **RTL support** - Right-to-left language navigation
+- **階層ナビゲーション** - 展開・折りたたみ機能付きのネストされたツリー構造
+- **選択モード** - 明示的またはフォーカス追従動作による単一選択または複数選択
+- **フォーカス追従選択** - フォーカス変更時に任意で自動選択
+- **キーボードナビゲーション** - 矢印キー、Home、End、先行入力による検索
+- **展開/折りたたみ** - 右/左矢印キーまたはEnterキーで親ノードを切り替え
+- **無効化されたアイテム** - フォーカス管理付きで特定のノードを無効化
+- **フォーカスモード** - Roving tabindexまたはactivedescendantフォーカス戦略
+- **RTLサポート** - 右から左へ記述する言語のナビゲーション
 
-## Examples
+## 例
 
-### Navigation tree
+### ナビゲーションツリー {#navigation-tree}
 
-Use a tree for navigation where clicking items triggers actions rather than selecting them.
+アイテムを選択するのではなく、クリックすることでアクションをトリガーするナビゲーションにはツリーを使用します。
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -63,11 +63,11 @@ Use a tree for navigation where clicking items triggers actions rather than sele
   </docs-tab>
 </docs-tab-group>
 
-Set `[nav]="true"` to enable navigation mode. This uses `aria-current` to indicate the current page instead of selection.
+`[nav]="true"`を設定してナビゲーションモードを有効にします。これにより、選択の代わりに`aria-current`を使用して現在のページを示します。
 
-### Single selection
+### 単一選択 {#single-selection}
 
-Enable single selection for scenarios where users choose one item from the tree.
+ユーザーがツリーから1つのアイテムを選択するシナリオでは、単一選択を有効にします。
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -86,11 +86,11 @@ Enable single selection for scenarios where users choose one item from the tree.
   </docs-tab>
 </docs-tab-group>
 
-Leave `[multi]="false"` (the default) for single selection. Users press Space to select the focused item.
+単一選択の場合は、`[multi]="false"`（デフォルト）のままにします。ユーザーはSpaceキーを押してフォーカスされているアイテムを選択します。
 
-### Multi-selection
+### 複数選択 {#multi-selection}
 
-Allow users to select multiple items from the tree.
+ユーザーがツリーから複数のアイテムを選択できるようにします。
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -109,11 +109,11 @@ Allow users to select multiple items from the tree.
   </docs-tab>
 </docs-tab-group>
 
-Set `[multi]="true"` on the tree. Users select items individually with Space or select ranges with Shift+Arrow keys.
+ツリーに`[multi]="true"`を設定します。ユーザーはSpaceキーで個別にアイテムを選択するか、Shift+矢印キーで範囲を選択します。
 
-### Selection follows focus
+### フォーカスに追従する選択 {#selection-follows-focus}
 
-When selection follows focus, the focused item is automatically selected. This simplifies interaction for navigation scenarios.
+選択がフォーカスに追従する場合、フォーカスされたアイテムは自動的に選択されます。これにより、ナビゲーションシナリオでのインタラクションが簡素化されます。
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -132,11 +132,11 @@ When selection follows focus, the focused item is automatically selected. This s
   </docs-tab>
 </docs-tab-group>
 
-Set `[selectionMode]="'follow'"` on the tree. Selection automatically updates as users navigate with arrow keys.
+ツリーに`[selectionMode]="'follow'"`を設定します。ユーザーが矢印キーでナビゲートすると、選択が自動的に更新されます。
 
-### Disabled tree items
+### 無効化されたツリーアイテム {#disabled-tree-items}
 
-Disable specific tree nodes to prevent interaction. Control whether disabled items can receive focus.
+特定のツリーノードを無効にして、インタラクションを防ぎます。無効化されたアイテムがフォーカスを受け取れるかどうかを制御します。
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -155,69 +155,69 @@ Disable specific tree nodes to prevent interaction. Control whether disabled ite
   </docs-tab>
 </docs-tab-group>
 
-When `[softDisabled]="true"` on the tree, disabled items can receive focus but cannot be activated or selected. When `[softDisabled]="false"`, disabled items are skipped during keyboard navigation.
+ツリーで`[softDisabled]="true"`の場合、無効化されたアイテムはフォーカスを受け取ることができますが、アクティブ化または選択できません。`[softDisabled]="false"`の場合、無効化されたアイテムはキーボードナビゲーション中にスキップされます。
 
-## APIs
+## API {#apis}
 
-### Tree
+### Tree {#tree}
 
-The container directive that manages hierarchical navigation and selection.
+階層的なナビゲーションと選択を管理するコンテナディレクティブです。
 
-#### Inputs
+#### Inputs {#inputs}
 
-| Property        | Type                             | Default      | Description                                                   |
+| プロパティ      | 型                               | デフォルト   | 説明                                                          |
 | --------------- | -------------------------------- | ------------ | ------------------------------------------------------------- |
-| `disabled`      | `boolean`                        | `false`      | Disables the entire tree                                      |
-| `softDisabled`  | `boolean`                        | `true`       | When `true`, disabled items are focusable but not interactive |
-| `multi`         | `boolean`                        | `false`      | Whether multiple items can be selected                        |
-| `selectionMode` | `'explicit' \| 'follow'`         | `'explicit'` | Whether selection requires explicit action or follows focus   |
-| `nav`           | `boolean`                        | `false`      | Whether the tree is in navigation mode (uses `aria-current`)  |
-| `wrap`          | `boolean`                        | `true`       | Whether keyboard navigation wraps from last to first item     |
-| `focusMode`     | `'roving' \| 'activedescendant'` | `'roving'`   | Focus strategy used by the tree                               |
-| `values`        | `any[]`                          | `[]`         | Selected item values (supports two-way binding)               |
+| `disabled`      | `boolean`                        | `false`      | ツリー全体を無効にします                                      |
+| `softDisabled`  | `boolean`                        | `true`       | `true`の場合、無効化されたアイテムはフォーカス可能ですが、インタラクティブではありません |
+| `multi`         | `boolean`                        | `false`      | 複数アイテムの選択が可能かどうか                                |
+| `selectionMode` | `'explicit' \| 'follow'`         | `'explicit'` | 選択に明示的なアクションが必要か、フォーカスに追従するかどうか  |
+| `nav`           | `boolean`                        | `false`      | ツリーがナビゲーションモードであるかどうか（`aria-current`を使用） |
+| `wrap`          | `boolean`                        | `true`       | キーボードナビゲーションが最後のアイテムから最初のアイテムにラップするかどうか |
+| `focusMode`     | `'roving' \| 'activedescendant'` | `'roving'`   | ツリーで使用されるフォーカス戦略                              |
+| `values`        | `any[]`                          | `[]`         | 選択されたアイテムの値（双方向バインディングをサポート）      |
 
-#### Methods
+#### メソッド {#methods}
 
-| Method           | Parameters | Description                                   |
+| メソッド         | パラメータ | 説明                                          |
 | ---------------- | ---------- | --------------------------------------------- |
-| `expandAll`      | none       | Expands all tree nodes                        |
-| `collapseAll`    | none       | Collapses all tree nodes                      |
-| `selectAll`      | none       | Selects all items (only in multi-select mode) |
-| `clearSelection` | none       | Clears all selection                          |
+| `expandAll`      | none       | すべてのツリーノードを展開します                      |
+| `collapseAll`    | none       | すべてのツリーノードを折りたたみます                  |
+| `selectAll`      | none       | すべてのアイテムを選択します（複数選択モードのみ）    |
+| `clearSelection` | none       | すべての選択をクリアします                            |
 
-### TreeItem
+### TreeItem {#treeitem}
 
-An individual node in the tree that can contain child nodes.
+子ノードを含むことができるツリー内の個々のノードです。
 
-#### Inputs
+#### Inputs {#inputs}
 
-| Property   | Type      | Default | Description                                             |
+| プロパティ | 型        | デフォルト | 説明                                                    |
 | ---------- | --------- | ------- | ------------------------------------------------------- |
-| `value`    | `any`     | —       | **Required.** Unique value for this tree item           |
-| `disabled` | `boolean` | `false` | Disables this item                                      |
-| `expanded` | `boolean` | `false` | Whether the node is expanded (supports two-way binding) |
+| `value`    | `any`     | —       | **必須。** このツリーアイテムの一意な値                   |
+| `disabled` | `boolean` | `false` | このアイテムを無効にします                                |
+| `expanded` | `boolean` | `false` | ノードが展開されているかどうか（双方向バインディングをサポート） |
 
-#### Signals
+#### シグナル {#signals}
 
-| Property      | Type              | Description                          |
+| プロパティ    | 型                | 説明                                 |
 | ------------- | ----------------- | ------------------------------------ |
-| `selected`    | `Signal<boolean>` | Whether the item is selected         |
-| `active`      | `Signal<boolean>` | Whether the item currently has focus |
-| `hasChildren` | `Signal<boolean>` | Whether the item has child nodes     |
+| `selected`    | `Signal<boolean>` | アイテムが選択されているかどうか             |
+| `active`      | `Signal<boolean>` | アイテムが現在フォーカスを持っているかどうか   |
+| `hasChildren` | `Signal<boolean>` | アイテムが子ノードを持っているかどうか         |
 
-#### Methods
+#### メソッド {#methods}
 
-| Method     | Parameters | Description                 |
+| メソッド   | パラメータ | 説明                        |
 | ---------- | ---------- | --------------------------- |
-| `expand`   | none       | Expands this node           |
-| `collapse` | none       | Collapses this node         |
-| `toggle`   | none       | Toggles the expansion state |
+| `expand`   | none       | このノードを展開します            |
+| `collapse` | none       | このノードを折りたたみます        |
+| `toggle`   | none       | 展開状態を切り替えます            |
 
-### TreeGroup
+### TreeGroup {#treegroup}
 
-A container for child tree items.
+子ツリーアイテムのコンテナです。
 
-This directive has no inputs, outputs, or methods. It serves as a container to organize child `ngTreeItem` elements:
+このディレクティブには、入力、出力、メソッドはありません。子`ngTreeItem`要素を整理するためのコンテナとして機能します:
 
 ```angular-html
 <li ngTreeItem value="parent">

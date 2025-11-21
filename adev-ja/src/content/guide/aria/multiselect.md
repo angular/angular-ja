@@ -1,9 +1,9 @@
-<docs-decorative-header title="Multiselect">
+<docs-decorative-header title="マルチセレクト">
 </docs-decorative-header>
 
-## Overview
+## 概要 {#overview}
 
-A pattern that combines readonly combobox with multi-enabled listbox to create multiple-selection dropdowns with keyboard navigation and screen reader support.
+読み取り専用コンボボックスと複数選択が有効なリストボックスを組み合わせて、キーボードナビゲーションとスクリーンリーダーをサポートする複数選択ドロップダウンを作成するパターンです。
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -31,41 +31,41 @@ A pattern that combines readonly combobox with multi-enabled listbox to create m
   </docs-tab>
 </docs-tab-group>
 
-## Usage
+## 使い方 {#usage}
 
-The multiselect pattern works best when users need to choose multiple related items from a familiar set of options.
+マルチセレクトパターンは、ユーザーがよく知られた選択肢のセットから複数の関連アイテムを選択する必要がある場合に最も効果的です。
 
-Consider using this pattern when:
+このパターンは次のような場合に使用を検討してください:
 
-- **Users need multiple selections** - Tags, categories, filters, or labels where multiple choices apply
-- **The option list is fixed** (fewer than 20 items) - Users can scan options without search
-- **Filtering content** - Multiple criteria can be active simultaneously
-- **Assigning attributes** - Labels, permissions, or features where multiple values make sense
-- **Related choices** - Options that logically work together (such as selecting multiple team members)
+- **ユーザーが複数の選択を必要とする** - 複数の選択肢が適用されるタグ、カテゴリー、フィルター、またはラベル
+- **オプションリストが固定されている** (20項目未満) - ユーザーは検索なしでオプションを一覧できます
+- **コンテンツのフィルタリング** - 複数の基準を同時にアクティブにできます
+- **属性の割り当て** - 複数の値が意味を持つラベル、権限、または機能
+- **関連する選択肢** - 論理的に連携するオプション (複数のチームメンバーを選択するなど)
 
-Avoid this pattern when:
+このパターンは次のような場合には避けてください:
 
-- **Only single selection is needed** - Use the [Select pattern](guide/aria/select) for simpler single-choice dropdowns
-- **The list has more than 20 items with search needed** - Use the [Autocomplete pattern](guide/aria/autocomplete) with multiselect capability
-- **Most or all options will be selected** - A checklist pattern provides better visibility
-- **Choices are independent binary options** - Individual checkboxes communicate the choices more clearly
+- **単一選択のみが必要** - よりシンプルな単一選択のドロップダウンには[セレクトパターン](guide/aria/select)を使用してください
+- **リストが20項目以上あり、検索が必要** - マルチセレクト機能付きの[オートコンプリートパターン](guide/aria/autocomplete)を使用してください
+- **ほとんどまたはすべてのオプションが選択される** - チェックリストパターンの方が視認性が高いです
+- **選択肢が独立した二者択一のオプションである** - 個別のチェックボックスの方が選択肢をより明確に伝えます
 
-## Features
+## 機能 {#features}
 
-The multiselect pattern combines [Combobox](guide/aria/combobox) and [Listbox](guide/aria/listbox) directives to provide a fully accessible dropdown with:
+マルチセレクトパターンは[Combobox](guide/aria/combobox)と[Listbox](guide/aria/listbox)ディレクティブを組み合わせ、以下の機能を備えた完全にアクセシブルなドロップダウンを提供します:
 
-- **Keyboard Navigation** - Navigate options with arrow keys, toggle with Space, close with Escape
-- **Screen Reader Support** - Built-in ARIA attributes including aria-multiselectable
-- **Selection Count Display** - Shows compact "Item + 2 more" pattern for multiple selections
-- **Signal-Based Reactivity** - Reactive state management using Angular signals
-- **Smart Positioning** - CDK Overlay handles viewport edges and scrolling
-- **Persistent Selection** - Selected options remain visible with checkmarks after selection
+- **キーボードナビゲーション** - 矢印キーでオプションを移動、Spaceキーで切り替え、Escapeキーで閉じます
+- **スクリーンリーダーのサポート** - aria-multiselectableを含む組み込みのARIA属性
+- **選択数の表示** - 複数選択時に「アイテム + 他2件」のようなコンパクトなパターンを表示します
+- **シグナルベースのリアクティビティ** - Angularのシグナルを使用したリアクティブな状態管理
+- **スマートな配置** - CDK Overlayがビューポートの端やスクロールを処理します
+- **永続的な選択** - 選択後も、選択されたオプションはチェックマーク付きで表示されたままになります
 
-## Examples
+## 例
 
-### Basic multiselect
+### 基本的な複数選択 {#basic-multiselect}
 
-Users need to select multiple items from a list of options. A readonly combobox paired with a multi-enabled listbox provides familiar multiselect functionality with full accessibility support.
+ユーザーはオプションのリストから複数のアイテムを選択する必要があります。読み取り専用のコンボボックスと複数選択が有効なリストボックスを組み合わせることで、完全なアクセシビリティサポートを備えた使い慣れた複数選択の機能を提供します。
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -93,11 +93,11 @@ Users need to select multiple items from a list of options. A readonly combobox 
   </docs-tab>
 </docs-tab-group>
 
-The `multi` attribute on `ngListbox` enables multiple selection. Press Space to toggle options, and the popup remains open for additional selections. The display shows the first selected item plus a count of remaining selections.
+`ngListbox`の`multi`属性は複数選択を有効にします。スペースキーを押すとオプションが切り替わり、ポップアップは追加の選択のために開いたままになります。表示には、最初に選択されたアイテムと残りの選択数が表示されます。
 
-### Multiselect with custom display
+### カスタム表示の複数選択 {#multiselect-with-custom-display}
 
-Options often need visual indicators like icons or colors to help users identify choices. Custom templates within options allow rich formatting while the display value shows a compact summary.
+オプションには、ユーザーが選択肢を識別しやすくするために、アイコンや色などの視覚的なインジケーターが必要になることがよくあります。オプション内のカスタムテンプレートを使用すると、リッチなフォーマットが可能になり、表示値にはコンパクトなサマリーが表示されます。
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -125,11 +125,11 @@ Options often need visual indicators like icons or colors to help users identify
   </docs-tab>
 </docs-tab-group>
 
-Each option displays an icon alongside its label. The display value updates to show the first selection's icon and text, followed by a count of additional selections. Selected options show a checkmark for clear visual feedback.
+各オプションには、ラベルの横にアイコンが表示されます。表示値は、最初に選択されたアイテムのアイコンとテキスト、その後に続く追加の選択数を表示するように更新されます。選択されたオプションにはチェックマークが表示され、明確な視覚的フィードバックを提供します。
 
-### Controlled selection
+### 制御された選択 {#controlled-selection}
 
-Forms sometimes need to limit the number of selections or validate user choices. Programmatic control over selection enables these constraints while maintaining accessibility.
+フォームでは、選択数を制限したり、ユーザーの選択を検証したりする必要がある場合があります。選択をプログラムで制御することで、アクセシビリティを維持しながらこれらの制約を有効にできます。
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -157,45 +157,45 @@ Forms sometimes need to limit the number of selections or validate user choices.
   </docs-tab>
 </docs-tab-group>
 
-This example limits selections to three items. When the limit is reached, unselected options become disabled, preventing additional selections. A message informs users about the constraint.
+この例では、選択を3つのアイテムに制限しています。制限に達すると、選択されていないオプションは無効になり、追加の選択ができなくなります。メッセージでユーザーに制約を通知します。
 
-## APIs
+## API {#apis}
 
-The multiselect pattern uses the following directives from Angular's Aria library. See the full API documentation in the linked guides.
+マルチセレクトパターンは、AngularのAriaライブラリから以下のディレクティブを使用します。詳細なAPIドキュメントについては、リンク先のガイドを参照してください。
 
-### Combobox Directives
+### Comboboxディレクティブ {#combobox-directives}
 
-The multiselect pattern uses `ngCombobox` with the `readonly` attribute to prevent text input while preserving keyboard navigation.
+マルチセレクトパターンでは、`ngCombobox`と`readonly`属性を使用して、キーボードナビゲーションを維持しながらテキスト入力を防ぎます。
 
-#### Inputs
+#### 入力 {#inputs}
 
-| Property   | Type      | Default | Description                               |
+| プロパティ   | 型        | デフォルト | 説明                                      |
 | ---------- | --------- | ------- | ----------------------------------------- |
-| `readonly` | `boolean` | `false` | Set to `true` to create dropdown behavior |
-| `disabled` | `boolean` | `false` | Disables the entire multiselect           |
+| `readonly` | `boolean` | `false` | `true`に設定するとドロップダウンの動作になります |
+| `disabled` | `boolean` | `false` | マルチセレクト全体を無効化します          |
 
-See the [Combobox API documentation](guide/aria/combobox#apis) for complete details on all available inputs and signals.
+利用可能なすべての入力とシグナルの詳細については、[Combobox APIドキュメント](guide/aria/combobox#apis)を参照してください。
 
-### Listbox Directives
+### Listboxディレクティブ {#listbox-directives}
 
-The multiselect pattern uses `ngListbox` with the `multi` attribute for multiple selection and `ngOption` for each selectable item.
+マルチセレクトパターンでは、複数選択のために`ngListbox`と`multi`属性を、各選択可能な項目のために`ngOption`を使用します。
 
-#### Inputs
+#### 入力 {#inputs}
 
-| Property | Type      | Default | Description                                |
+| プロパティ | 型        | デフォルト | 説明                                       |
 | -------- | --------- | ------- | ------------------------------------------ |
-| `multi`  | `boolean` | `false` | Set to `true` to enable multiple selection |
+| `multi`  | `boolean` | `false` | `true`に設定すると複数選択が可能になります |
 
-#### Model
+#### モデル {#model}
 
-| Property | Type    | Description                               |
+| プロパティ | 型      | 説明                                      |
 | -------- | ------- | ----------------------------------------- |
-| `values` | `any[]` | Two-way bindable array of selected values |
+| `values` | `any[]` | 選択された値の双方向バインディング可能な配列 |
 
-When `multi` is true, users can select multiple options using Space to toggle selection. The popup remains open after selection, allowing additional choices.
+`multi`がtrueの場合、ユーザーはスペースキーを使用して選択を切り替えることで、複数のオプションを選択できます。ポップアップは選択後も開いたままで、追加の選択が可能です。
 
-See the [Listbox API documentation](guide/aria/listbox#apis) for complete details on listbox configuration, selection modes, and option properties.
+リストボックスの設定、選択モード、オプションのプロパティに関する完全な詳細については、[Listbox APIドキュメント](guide/aria/listbox#apis)を参照してください。
 
-### Positioning
+### ポジショニング {#positioning}
 
-The multiselect pattern integrates with [CDK Overlay](api/cdk/overlay/CdkConnectedOverlay) for smart positioning. Use `cdkConnectedOverlay` to handle viewport edges and scrolling automatically.
+マルチセレクトパターンは、スマートなポジショニングのために[CDK Overlay](api/cdk/overlay/CdkConnectedOverlay)と統合されています。`cdkConnectedOverlay`を使用すると、ビューポートの端やスクロールを自動的に処理できます。

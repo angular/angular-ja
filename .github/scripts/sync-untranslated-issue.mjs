@@ -227,12 +227,18 @@ export default async ({github, context, core, filesData}) => {
 
   // Issueタイトルからファイルパスを抽出してマップを作成
   // タイトル形式: "{ファイルパス} の翻訳"
+  // 前方一致でマッチング（ディレクトリ名での宣言に対応）
   const checkoutIssuesMap = new Map();
   for (const issue of checkoutIssues) {
     const match = issue.title.match(/^(.+)\s+の翻訳$/);
     if (match) {
-      const filepath = `src/content/${match[1]}`;
-      checkoutIssuesMap.set(filepath, issue.number);
+      const declaredPath = `src/content/${match[1]}`;
+      // 各未翻訳ファイルに対して前方一致チェック
+      for (const file of filesData.files) {
+        if (file.path.startsWith(declaredPath)) {
+          checkoutIssuesMap.set(file.path, issue.number);
+        }
+      }
     }
   }
 

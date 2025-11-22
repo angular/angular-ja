@@ -73,6 +73,14 @@ function generatePreviewPath(filepath) {
     .replace(/\/README\.md$/, '') // READMEの場合はディレクトリのみ
     .replace(/\.md$/, '');
 
+  // reference 配下の特殊なパス変換
+  if (basePath === 'reference/press-kit') {
+    return 'press-kit';
+  }
+  if (basePath === 'reference/roadmap') {
+    return 'roadmap';
+  }
+
   // チュートリアルの特殊なパス変換
   if (basePath.startsWith('tutorials/')) {
     // tutorials/first-app/intro -> tutorials/first-app

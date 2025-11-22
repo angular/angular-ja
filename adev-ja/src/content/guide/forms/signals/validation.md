@@ -299,7 +299,7 @@ export class PhoneFormComponent {
 
 <!-- TODO: フィールド状態管理ガイドが公開されたらコメントを解除する
 
-NOTE: このセクションでは、バリデーションルールが生成するエラーについて説明します。UIでバリデーションエラーを表示して使用する方法については、[フィールド状態管理ガイド](guide/forms/signal-forms/field-state-management)を参照してください。 -->
+NOTE: このセクションでは、バリデーションルールが生成するエラーについて説明します。UIでバリデーションエラーを表示して使用する方法については、[フィールド状態管理ガイド](guide/forms/signals/field-state-management)を参照してください。 -->
 
 ### エラーの構造 {#error-structure}
 
@@ -374,7 +374,7 @@ signupForm = form(this.signupModel, (schemaPath) => {
 
 emailフィールドが空の場合、`required()`エラーのみが表示されます。ユーザーが"a@b"と入力すると、`email()`と`minLength()`の両方のエラーが表示されます。すべてのバリデーションルールが実行され、最初の失敗でバリデーションが停止することはありません。
 
-TIP: テンプレートで`touched() && invalid()`パターンを使用すると、ユーザーがフィールドを操作する前にエラーが表示されるのを防ぐことができます。バリデーションエラーの表示に関する包括的なガイダンスについては、[フィールド状態管理ガイド](guide/forms/signal-forms/field-state-management#conditional-error-display)を参照してください。
+TIP: テンプレートで`touched() && invalid()`パターンを使用すると、ユーザーがフィールドを操作する前にエラーが表示されるのを防ぐことができます。バリデーションエラーの表示に関する包括的なガイダンスについては、[フィールド状態管理ガイド](guide/forms/signals/field-state-management#conditional-error-display)を参照してください。
 
 ## カスタムバリデーションルール {#custom-validation-rules}
 
@@ -624,6 +624,6 @@ export class UsernameFormComponent {
 
 このガイドでは、バリデーションルールの作成と適用について説明しました。関連ガイドでは、シグナルフォームの他の側面について解説します:
 
-- [フォームモデルガイド](guide/forms/signal-forms/models) - フォームモデルの作成と更新
+- [フォームモデルガイド](guide/forms/signals/models) - フォームモデルの作成と更新
   <!-- TODO: Uncomment when Field State Management guide is published -->
-  <!-- - [Field State Management guide](guide/forms/signal-forms/field-state-management) - Using validation state in templates and displaying errors -->
+  <!-- - [Field State Management guide](guide/forms/signals/field-state-management) - Using validation state in templates and displaying errors -->

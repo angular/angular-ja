@@ -57,13 +57,14 @@ cd my-project
 次に、プロジェクトのファイルルートに`.postcssrc.json`ファイルを追加します。
 PostCSSの設定に`@tailwindcss/postcss`プラグインを追加します。
 
-<docs-code language="json" header=".postcssrc.json">
+```json {header: '.postcssrc.json'}
+
 {
   "plugins": {
     "@tailwindcss/postcss": {}
   }
 }
-</docs-code>
+```
 
 ### 4. Tailwind CSSをインポートする {#import-tailwind-css}
 

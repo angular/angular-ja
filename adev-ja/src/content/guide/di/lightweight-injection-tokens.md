@@ -32,7 +32,9 @@ Angularがインジェクショントークンを格納する方法により、�
 
 一般的な実装では、 `<lib-card>` コンポーネントは、次の例のように `@ContentChild()` または `@ContentChildren()` を使用して `<lib-header>` と `<lib-body>` を取得します。
 
-<docs-code language="typescript" highlight="[12]">
+```ts {highlight: [14]}
+import {Component, ContentChild} from '@angular/core';
+
 @Component({
   selector: 'lib-header',
   …,
@@ -40,22 +42,21 @@ Angularがインジェクショントークンを格納する方法により、�
 class LibHeaderComponent {}
 
 @Component({
-selector: 'lib-card',
-…,
+  selector: 'lib-card',
+  …,
 })
 class LibCardComponent {
-@ContentChild(LibHeaderComponent) header: LibHeaderComponent|null = null;
+  @ContentChild(LibHeaderComponent) header: LibHeaderComponent | null = null;
 }
-
-</docs-code>
+```
 
 `<lib-header>` はオプションなので、要素はテンプレートに最小限の形式 `<lib-card></lib-card>` で表示できます。
 この場合、 `<lib-header>` は使用されず、ツリーシェイクされることを期待しますが、実際にはそうなりません。
 これは、 `LibCardComponent` には `LibHeaderComponent` への参照が2つあるためです。
 
-<docs-code language="typescript">
+```ts
 @ContentChild(LibHeaderComponent) header: LibHeaderComponent;
-</docs-code>
+```
 
 - これらの参照の1つは _型の位置_ にあります。つまり、 `LibHeaderComponent` を型として指定します: `header: LibHeaderComponent;`。
 - もう1つの参照は _値の位置_ にあります。つまり、LibHeaderComponentは `@ContentChild()` パラメータデコレーターの値です: `@ContentChild(LibHeaderComponent)`。
@@ -79,13 +80,13 @@ class LibCardComponent {
 
 次の例では、 `OtherComponent` トークンの両方の使用により、 `OtherComponent` が保持され、使用されていない場合にツリーシェイクされることがなくなります。
 
-<docs-code language="typescript" highlight="[[2],[4]]">
+```ts {highlight: [[2],[4]]}
 class MyComponent {
   constructor(@Optional() other: OtherComponent) {}
 
-@ContentChild(OtherComponent) other: OtherComponent|null;
+  @ContentChild(OtherComponent) other: OtherComponent | null;
 }
-</docs-code>
+```
 
 型指定子としてのみ使用されるトークンは、JavaScriptに変換されると削除されますが、依存性の注入に使用されるすべてのトークンはランタイムで必要です。
 これらは実質的に `constructor(@Optional() other: OtherComponent)` を `constructor(@Optional() @Inject(OtherComponent) other)` に変更されます。
@@ -100,26 +101,24 @@ HELPFUL: ライブラリは、[ツリーシェイク可能なプロバイダー]
 
 次の例は、 `LibHeaderComponent` でどのように機能するかを示しています。
 
-<docs-code language="typescript" language="[[1],[6],[17]]">
+```ts {highlight: [[1],[5], [15]]}
 abstract class LibHeaderToken {}
 
 @Component({
-selector: 'lib-header',
-providers: [
-{provide: LibHeaderToken, useExisting: LibHeaderComponent}
-]
-…,
+  selector: 'lib-header',
+  providers: [{provide: LibHeaderToken, useExisting: LibHeaderComponent}],
+  …,
 })
 class LibHeaderComponent extends LibHeaderToken {}
 
 @Component({
-selector: 'lib-card',
-…,
+  selector: 'lib-card',
+  …,
 })
 class LibCardComponent {
-@ContentChild(LibHeaderToken) header: LibHeaderToken|null = null;
+  @ContentChild(LibHeaderToken) header: LibHeaderToken | null = null;
 }
-</docs-code>
+```
 
 この例では、 `LibCardComponent` 実装は、型位置と値位置のいずれでも `LibHeaderComponent` を参照しなくなりました。
 これにより、 `LibHeaderComponent` の完全なツリーシェイクが可能になります。
@@ -132,9 +131,9 @@ class LibCardComponent {
 要約すると、軽量インジェクショントークンパターンは次のとおりです。
 
 1. 抽象クラスとして表される軽量なインジェクショントークン。
-1. 抽象クラスを実装するコンポーネント定義。
-1. `@ContentChild()` または `@ContentChildren()` を使用した軽量なパターンの注入。
-1. 軽量なインジェクショントークンを実装するプロバイダーであり、軽量インジェクショントークンを実装に関連付けます。
+2. 抽象クラスを実装するコンポーネント定義。
+3. `@ContentChild()` または `@ContentChildren()` を使用した軽量なパターンの注入。
+4. 軽量なインジェクショントークンを実装するプロバイダーであり、軽量インジェクショントークンを実装に関連付けます。
 
 ### API 定義に軽量インジェクショントークンを使用する
 
@@ -146,38 +145,34 @@ class LibCardComponent {
 たとえば、 `LibCardComponent` はこれで `LibHeaderComponent` ではなく `LibHeaderToken` をクエリします。
 次の例は、パターンにより `LibCardComponent` が `LibHeaderComponent` を実際に参照せずに `LibHeaderComponent` と通信する方法を示しています。
 
-<docs-code language="typescript" highlight="[[3],[13,16],[27]]">
+```ts {highlight: [[2],[9],[11],[19]]}
 abstract class LibHeaderToken {
   abstract doSomething(): void;
 }
 
 @Component({
-selector: 'lib-header',
-providers: [
-{provide: LibHeaderToken, useExisting: LibHeaderComponent}
-]
-…,
+  selector: 'lib-header',
+  providers: [{provide: LibHeaderToken, useExisting: LibHeaderComponent}],
 })
 class LibHeaderComponent extends LibHeaderToken {
-doSomething(): void {
-// Concrete implementation of `doSomething`
-}
+  doSomething(): void {
+    // Concrete implementation of `doSomething`
+  }
 }
 
 @Component({
-selector: 'lib-card',
-…,
+  selector: 'lib-card',
 })
-class LibCardComponent implement AfterContentInit {
-@ContentChild(LibHeaderToken) header: LibHeaderToken|null = null;
+class LibCardComponent implements AfterContentInit {
+  @ContentChild(LibHeaderToken) header: LibHeaderToken | null = null;
 
-ngAfterContentInit(): void {
-if (this.header !== null) {
-this.header?.doSomething();
+  ngAfterContentInit(): void {
+    if (this.header !== null) {
+      this.header?.doSomething();
+    }
+  }
 }
-}
-}
-</docs-code>
+```
 
 この例では、親はトークンをクエリして子コンポーネントを取得し、存在する場合、結果のコンポーネント参照を保存します。
 子コンポーネントのメソッドを呼び出す前に、親コンポーネントは子コンポーネントが存在するかどうかを確認します。

@@ -195,6 +195,29 @@ data.set(['test']);
 
 HELPFUL: デフォルトでは、シグナルは参照の等価性（[`Object.is()`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/is) 比較）を使用します。
 
+### シグナルの型チェック
+
+`isSignal`を使用して、値が`Signal`かどうかをチェックできます:
+
+```ts
+const count = signal(0);
+const doubled = computed(() => count() * 2);
+
+isSignal(count); // true
+isSignal(doubled); // true
+isSignal(42); // false
+```
+
+シグナルが書き込み可能かどうかを具体的にチェックするには、`isWritableSignal`を使用します:
+
+```ts
+const count = signal(0);
+const doubled = computed(() => count() * 2);
+
+isWritableSignal(count); // true
+isWritableSignal(doubled); // false
+```
+
 ### 依存関係を追跡せずに読み取る
 
 まれに、`computed`や`effect`などのリアクティブ関数内でシグナルを読み取るコードを実行する必要があり、依存関係を作成しない場合があります。

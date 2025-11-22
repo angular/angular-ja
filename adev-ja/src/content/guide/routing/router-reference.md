@@ -64,7 +64,7 @@ HELPFUL: HTML5スタイルのナビゲーションはルーターのデフォル
 `<base>`要素は`<head>`タグの直後に追加します。
 `app`フォルダがこのアプリケーションのアプリケーションルートである場合、`index.html`の`href`値をここに示されているように設定します。
 
-<docs-code header="src/index.html (base-href)" path="adev/src/content/examples/router/src/index.html" visibleRegion="base-href"/>
+<docs-code header="index.html (base-href)" path="adev/src/content/examples/router/src/index.html" visibleRegion="base-href"/>
 
 ### HTML5 URLと`<base href>` {#html5-urls-and-the-base-href}
 

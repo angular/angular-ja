@@ -47,7 +47,7 @@ export class Registration {
 
 ### フィールドの状態シグナル {#field-state-signals}
 
-最も一般的に使用されるシグナルは`value()`です。これはフィールドの現在の値へのアクセスを提供する[書き込み可能なシグナル](guide/forms/signal-forms/models#updating-models)です:
+最も一般的に使用されるシグナルは`value()`です。これはフィールドの現在の値へのアクセスを提供する[書き込み可能なシグナル](guide/forms/signals/models#updating-models)です:
 
 ```ts
 const emailValue = registrationForm.email().value()
@@ -691,5 +691,5 @@ export class StyleExample {
 
 シグナルフォームに関するその他の関連ガイドは次のとおりです:
 
-- [フォームモデルガイド](guide/forms/signal-forms/models) - モデルの作成と値の更新
+- [フォームモデルガイド](guide/forms/signals/models) - モデルの作成と値の更新
 - バリデーションガイド - バリデーションルールの定義とカスタムバリデーター (近日公開の予定)

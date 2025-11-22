@@ -172,7 +172,7 @@ export class LoginComponent {
 TIP: フィールドの状態には、`value()`以外にも、バリデーションの状態（例: valid、invalid、errors）、インタラクションの追跡（例: touched、dirty）、可視性（例: hidden、disabled）など、さらに多くのシグナルが含まれています。
 
 <!-- TODO: UNCOMMENT BELOW WHEN GUIDE IS AVAILABLE -->
-<!-- See the [Field State Management guide](guide/forms/signal-forms/field-state-management) for complete coverage. -->
+<!-- See the [Field State Management guide](guide/forms/signals/field-state-management) for complete coverage. -->
 
 ## フォームモデルをプログラム的に更新する {#updating-form-models-programmatically}
 
@@ -419,7 +419,7 @@ orderForm.items[0].quantity // FieldTree<number>
 
 オブジェクトを含む配列のアイテムは自動的に追跡IDを受け取ります。これにより、配列内でアイテムの位置が変わってもフィールドの状態を維持できます。これにより、配列が並べ替えられた場合でも、バリデーションの状態とユーザーインタラクションが正しく維持されることが保証されます。
 
-<!-- TBD: 動的な配列や複雑な配列操作については、[配列の操作ガイド](guide/forms/signal-forms/arrays)を参照してください。 -->
+<!-- TBD: 動的な配列や複雑な配列操作については、[配列の操作ガイド](guide/forms/signals/arrays)を参照してください。 -->
 
 ## モデル設計のベストプラクティス {#model-design-best-practices}
 
@@ -530,7 +530,7 @@ async loadExistingUser() {
 <!-- ## Next steps
 
 <docs-pill-row>
-  <docs-pill href="guide/forms/signal-forms/field-state-management" title="Field State Management" />
-  <docs-pill href="guide/forms/signal-forms/validation" title="Validation" />
-  <docs-pill href="guide/forms/signal-forms/arrays" title="Working with Arrays" />
+  <docs-pill href="guide/forms/signals/field-state-management" title="Field State Management" />
+  <docs-pill href="guide/forms/signals/validation" title="Validation" />
+  <docs-pill href="guide/forms/signals/arrays" title="Working with Arrays" />
 </docs-pill-row> -->

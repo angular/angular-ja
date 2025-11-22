@@ -18,15 +18,15 @@
 
 ### ドキュメントを探索 {#explore-the-documentation}
 
-- **[シグナルフォーム概要](guide/forms/signal-forms)** - シグナルフォームの紹介といつ使用するか
-- **[フォームモデルガイド](guide/forms/signal-forms/models)** - フォームモデルとデータ管理の詳細
+- **[シグナルフォーム概要](guide/forms/signals/overview)** - シグナルフォームの紹介といつ使用するか
+- **[フォームモデルガイド](guide/forms/signals/models)** - フォームモデルとデータ管理の詳細
   <!-- TODO: Uncomment when the guides are available -->
-  <!-- - **[Validation Guide](guide/forms/signal-forms/validation)** - Comprehensive validation reference
-- **[Field State Management Guide](guide/forms/signal-forms/field-state-management)** - Advanced state patterns
-- **[Custom Controls Guide](guide/forms/signal-forms/custom-controls)** - Building reusable form components -->
+  <!-- - **[Validation Guide](guide/forms/signals/validation)** - Comprehensive validation reference
+- **[Field State Management Guide](guide/forms/signals/field-state-management)** - Advanced state patterns
+- **[Custom Controls Guide](guide/forms/signals/custom-controls)** - Building reusable form components -->
 
 ## 学び続ける {#keep-learning}
 
-覚えておいてください: シグナルフォームは実験的であるため、APIの更新については[公式ドキュメント](guide/forms/signal-forms)を確認してください。
+覚えておいてください: シグナルフォームは実験的であるため、APIの更新については[公式ドキュメント](guide/forms/signals/overview)を確認してください。
 
 楽しいコーディングを!

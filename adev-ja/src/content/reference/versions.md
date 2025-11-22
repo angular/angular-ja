@@ -120,7 +120,8 @@ CLIを使用してプロジェクトを作成していない場合は、[CLI 以
 
 TypeScriptファイルを作成する場合は、`tsconfig` ファイルの `files` プロパティにそのファイルを含めるようにしてください。
 
-<docs-code language="json">
+```json
+
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
@@ -132,7 +133,7 @@ TypeScriptファイルを作成する場合は、`tsconfig` ファイルの `fil
   ]
   ...
 }
-</docs-code>
+```
 
 ## CLI 以外のユーザー向けのポリフィル {#polyfills-for-non-cli-users}
 

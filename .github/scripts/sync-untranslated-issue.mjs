@@ -80,6 +80,13 @@ function generatePreviewPath(filepath) {
   if (basePath === 'reference/roadmap') {
     return 'roadmap';
   }
+  if (basePath === 'reference/cli') {
+    return 'cli';
+  }
+  // reference/errors, reference/extended-diagnostics は reference/ を削除
+  if (basePath.startsWith('reference/errors/') || basePath.startsWith('reference/extended-diagnostics/')) {
+    return basePath.replace('reference/', '');
+  }
 
   // チュートリアルの特殊なパス変換
   if (basePath.startsWith('tutorials/')) {

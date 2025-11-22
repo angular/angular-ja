@@ -73,12 +73,18 @@ function generatePreviewPath(filepath) {
     .replace(/\/README\.md$/, '') // READMEの場合はディレクトリのみ
     .replace(/\.md$/, '');
 
-  // reference 配下の特殊なパス変換
-  if (basePath === 'reference/press-kit') {
-    return 'press-kit';
-  }
-  if (basePath === 'reference/roadmap') {
-    return 'roadmap';
+  // reference 配下の特殊なパス変換: reference/ プレフィックスを削除
+  const referenceTopLevelPaths = ['press-kit', 'roadmap', 'cli'];
+  if (basePath.startsWith('reference/')) {
+    const subPath = basePath.replace('reference/', '');
+    // トップレベルパス（press-kit, roadmap, cli）
+    if (referenceTopLevelPaths.includes(subPath)) {
+      return subPath;
+    }
+    // サブディレクトリパス（errors/*, extended-diagnostics/*）
+    if (subPath.startsWith('errors/') || subPath.startsWith('extended-diagnostics/')) {
+      return subPath;
+    }
   }
 
   // チュートリアルの特殊なパス変換

@@ -14,6 +14,7 @@ const localizedFilePatterns: Array<string | readonly string[]> = [
     '!src/content/kitchen-sink.md',
     '!src/content/examples/**/readme.md',
     '!src/content/tutorials/README.md',
+    '!src/content/reference/concepts/overview.md',
   ],
   // Tutorial config files
   'src/content/tutorials/**/config.json',

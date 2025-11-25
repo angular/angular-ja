@@ -4,8 +4,7 @@ Angular CLIアプリケーションは、`ng serve`コマンドで配信でき�
 これにより、アプリケーションがコンパイルされ、不要な最適化がスキップされ、開発サーバーが起動し、その後の変更が自動的に再ビルドおよびライブリロードされます。
 サーバーは`Ctrl+C`を押して停止できます。
 
-`ng serve`は、`angular.json`で指定されたデフォルトプロジェクトの`serve`ターゲットのビルダーのみを実行します。
-ここでは任意のビルダーを使用できますが、最も一般的（かつデフォルト）なビルダーは`@angular-devkit/build-angular:dev-server`です。
+`ng serve`は、`angular.json`で指定されたデフォルトプロジェクトの`serve`ターゲットのビルダーのみを実行します。ここでは任意のビルダーを使用できますが、最も一般的(かつデフォルト)なビルダーは`@angular/build:dev-server`です。
 
 特定のプロジェクトで使用されているビルダーは、そのプロジェクトの`serve`ターゲットを調べることで判断できます。
 
@@ -17,10 +16,10 @@ Angular CLIアプリケーションは、`ng serve`コマンドで配信でき�
       "architect": {
         // `ng serve` invokes the Architect target named `serve`.
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           // ...
         },
-        "build": { /* ... */ }
+        "build": { /* ... */ },
         "test": { /* ... */ }
       }
     }
@@ -29,11 +28,9 @@ Angular CLIアプリケーションは、`ng serve`コマンドで配信でき�
 
 ```
 
-このページでは、`@angular-devkit/build-angular:dev-server`の使用法とオプションについて説明します。
-
 ## バックエンドサーバーへのプロキシ {#proxying-to-a-backend-server}
 
-[プロキシサポート](https://webpack.js.org/configuration/dev-server/#devserverproxy)を使用して、特定のURLをバックエンドサーバーに転送するには、`--proxy-config`ビルドオプションにファイルを渡します。
+[プロキシサポート](https://vite.dev/config/server-options#server-proxy)を使用して、特定のURLをバックエンドサーバーに転送するには、`--proxy-config`ビルドオプションにファイルを渡します。
 例えば、`http://localhost:4200/api`へのすべての呼び出しを`http://localhost:3000/api`で実行されているサーバーに転送するには、以下の手順を実行します。
 
 1. プロジェクトの`src/`フォルダーに`proxy.conf.json`ファイルを作成します。
@@ -41,9 +38,9 @@ Angular CLIアプリケーションは、`ng serve`コマンドで配信でき�
 
 ```json
 {
-  "/api": {
-  "target": "http://localhost:3000",
-  "secure": false
+  "/api/**": {
+    "target": "http://localhost:3000",
+    "secure": false
   }
 }
 ```
@@ -56,10 +53,10 @@ Angular CLIアプリケーションは、`ng serve`コマンドで配信でき�
     "my-app": {
       "architect": {
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           "options": {
-          "proxyConfig": "src/proxy.conf.json"
-            }
+            "proxyConfig": "src/proxy.conf.json"
+          }
         }
       }
     }
@@ -70,7 +67,16 @@ Angular CLIアプリケーションは、`ng serve`コマンドで配信でき�
 
 1. このプロキシ設定で開発サーバーを実行するには、`ng serve`を呼び出します。
 
-プロキシ設定ファイルを編集して設定オプションを追加します。以下にいくつかの例を示します。
-すべてのオプションの詳細については、`@angular-devkit/build-angular:browser`を使用する場合は[webpack DevServerドキュメント](https://webpack.js.org/configuration/dev-server/#devserverproxy)を、または`@angular-devkit/build-angular:browser-esbuild`または`@angular-devkit/build-angular:application`を使用する場合は[Vite DevServerドキュメント](https://vite.dev/config/server-options#server-proxy)を参照してください。
+NOTE: プロキシ設定ファイルに加えた変更を適用するには、`ng serve`プロセスを再起動する必要があります。
 
-NOTE: プロキシ設定ファイルを編集した場合、変更を有効にするには`ng serve`プロセスを再起動する必要があります。
+### パスマッチングの挙動はビルダーに依存する {#path-matching-behavior-depends-on-the-builder}
+
+**`@angular/build:dev-server`** ([Vite](https://vite.dev/config/server-options#server-proxy)ベース)
+
+- `/api`は`/api`のみにマッチします。
+- `/api/*`は`/api/users`にマッチしますが、`/api/users/123`にはマッチしません。
+- `/api/**`は`/api/users`と`/api/users/123`の両方にマッチします。
+
+**`@angular-devkit/build-angular:dev-server`** ([Webpack DevServer](https://webpack.js.org/configuration/dev-server/#devserverproxy)ベース)
+
+- `/api`は`/api`とすべてのサブパスにマッチします(`/api/**`と同等)。

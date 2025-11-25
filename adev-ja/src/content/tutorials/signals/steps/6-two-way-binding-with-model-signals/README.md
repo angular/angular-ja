@@ -13,7 +13,7 @@
 
 ```ts
 // Add imports for model signals
-import {Component, model, input} from '@angular/core';
+import {Component, model, input, ChangeDetectionStrategy} from '@angular/core';
 
 // Model signal for two-way binding
 checked = model.required<boolean>();
@@ -85,6 +85,12 @@ resetAll() {
 
 ```angular-html
 @if (agreedToTerms()) {
+  Yes
+} @else {
+  No
+}
+
+@if (enableNotifications()) {
   Yes
 } @else {
   No

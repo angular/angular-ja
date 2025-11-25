@@ -72,7 +72,7 @@ Angularテンプレートを使用して、ログインフォーム、コンタ�
    <docs-code language="typescript" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" language="typescript" visibleRegion="Marilyn"/>
 
    このデモでは、`model`と`skills`のダミーデータを使用しています。
-   実際のアプリでは、データサービスを注入して実際のデータを取得して保存するか、これらのプロパティを入力と出力として公開します。
+   実際のアプリケーションでは、データサービスを注入して実際のデータを取得して保存するか、これらのプロパティを入力と出力として公開します。
 
 1. コンポーネントは、`FormsModule`モジュールをインポートすることでフォーム機能を有効にします。
 
@@ -196,11 +196,10 @@ Angularは、`form`要素に`ng-submitted`クラスを適用しますが、
 
 1. 最初に表示すると、クラスは、値が有効であり、初期化またはリセット以降値が変更されていないこと、初期化またはリセット以降コントロールが訪問されていないことを示しています。
 
-   <docs-code language="html">
+   ```html
 
    <input class="form-control ng-untouched ng-pristine ng-valid">;
-
-   </docs-code>
+   ```
 
 1. **Name** `<input>`ボックスで次のように操作し、表示されるクラスを観察します。
    - 見るだけで触れずにいます。

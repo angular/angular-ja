@@ -86,11 +86,11 @@ SCSSを使用している場合は、`@use`を`./src/styles.scss`に追加しま
 
 たとえば、次の内容を`app.html`ファイルに追加できます:
 
-<docs-code language="html">
+```html
 <h1 class="text-3xl font-bold underline">
   Hello world!
 </h1>
-</docs-code>
+```
 
 ## その他のリソース {#additional-resources}
 

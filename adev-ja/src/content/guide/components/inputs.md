@@ -10,7 +10,7 @@ TIP: 他のウェブフレームワークに精通している場合は、入力
 ```ts {highlight:[5]}
 import {Component, input} from '@angular/core';
 
-@Component({/_..._/})
+@Component({/*...*/})
 export class CustomSlider {
   // Declare an input named 'value' with a default value of zero.
   value = input(0);
@@ -60,7 +60,7 @@ export class CustomSlider {
 ```ts {highlight:[5]}
 import {Component, input, computed} from '@angular/core';
 
-@Component({/_..._/})
+@Component({/*...*/})
 export class CustomSlider {
   // Declare an input named 'value' with a default value of zero.
   value = input(0);
@@ -146,7 +146,7 @@ Angularには、最も一般的な2つのシナリオのための2つの組み�
 ```ts
 import {Component, input, booleanAttribute, numberAttribute} from '@angular/core';
 
-@Component({/_..._/})
+@Component({/*...*/})
 export class CustomSlider {
   disabled = input(false, {transform: booleanAttribute});
   value = input(0, {transform: numberAttribute});
@@ -220,7 +220,7 @@ export class MediaControls {
 
 プレーンなJavaScriptプロパティをモデル入力にバインドできます。
 
-```ts
+```angular-ts
 @Component({
   /* ... */
   // `value`はモデル入力です。

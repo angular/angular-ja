@@ -72,7 +72,7 @@ Angularテンプレートを使用して、ログインフォーム、コンタ�
    <docs-code language="typescript" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.ts" language="typescript" visibleRegion="Marilyn"/>
 
    このデモでは、`model`と`skills`のダミーデータを使用しています。
-   実際のアプリでは、データサービスを注入して実際のデータを取得して保存するか、これらのプロパティを入力と出力として公開します。
+   実際のアプリケーションでは、データサービスを注入して実際のデータを取得して保存するか、これらのプロパティを入力と出力として公開します。
 
 1. コンポーネントは、`FormsModule`モジュールをインポートすることでフォーム機能を有効にします。
 

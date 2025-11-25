@@ -7,26 +7,26 @@
 
 <docs-tab-group>
   <docs-tab label="基本">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.ts">
-      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.ts"/>
-      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.html"/>
-      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.css"/>
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.css"/>
     </docs-code-multifile>
   </docs-tab>
 
   <docs-tab label="Material">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.ts">
-      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.ts"/>
-      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.html"/>
-      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.css"/>
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.css"/>
     </docs-code-multifile>
   </docs-tab>
 
   <docs-tab label="レトロ">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.ts">
-      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.ts"/>
-      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.html"/>
-      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.css"/>
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.css"/>
     </docs-code-multifile>
   </docs-tab>
 </docs-tab-group>
@@ -65,26 +65,26 @@ Angularのオートコンプリートは、以下の機能を備えた、完全�
 
 <docs-tab-group>
   <docs-tab label="Basic">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.ts">
-      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.ts"/>
-      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.html"/>
-      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.component.css"/>
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/autocomplete/src/basic/app/app.css"/>
     </docs-code-multifile>
   </docs-tab>
 
   <docs-tab label="Material">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.ts">
-      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.ts"/>
-      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.html"/>
-      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.component.css"/>
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/autocomplete/src/basic/material/app/app.css"/>
     </docs-code-multifile>
   </docs-tab>
 
   <docs-tab label="Retro">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.ts">
-      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.ts"/>
-      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.html"/>
-      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.component.css"/>
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/autocomplete/src/basic/retro/app/app.css"/>
     </docs-code-multifile>
   </docs-tab>
 </docs-tab-group>
@@ -95,26 +95,26 @@ Angularのオートコンプリートは、以下の機能を備えた、完全�
 
 <docs-tab-group>
   <docs-tab label="Basic">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/manual/app/app.component.ts">
-      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/manual/app/app.component.ts"/>
-      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/manual/app/app.component.html"/>
-      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/manual/app/app.component.css"/>
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/manual/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/autocomplete/src/manual/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/autocomplete/src/manual/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/autocomplete/src/manual/app/app.css"/>
     </docs-code-multifile>
   </docs-tab>
 
   <docs-tab label="Material">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/manual/material/app/app.component.ts">
-      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/manual/material/app/app.component.ts"/>
-      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/manual/material/app/app.component.html"/>
-      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/manual/material/app/app.component.css"/>
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/manual/material/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/autocomplete/src/manual/material/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/autocomplete/src/manual/material/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/autocomplete/src/manual/material/app/app.css"/>
     </docs-code-multifile>
   </docs-tab>
 
   <docs-tab label="Retro">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/manual/retro/app/app.component.ts">
-      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/manual/retro/app/app.component.ts"/>
-      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/manual/retro/app/app.component.html"/>
-      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/manual/retro/app/app.component.css"/>
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/manual/retro/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/autocomplete/src/manual/retro/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/autocomplete/src/manual/retro/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/autocomplete/src/manual/retro/app/app.css"/>
     </docs-code-multifile>
   </docs-tab>
 </docs-tab-group>
@@ -125,26 +125,26 @@ Angularのオートコンプリートは、以下の機能を備えた、完全�
 
 <docs-tab-group>
   <docs-tab label="Basic">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/highlight/app/app.component.ts">
-      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/highlight/app/app.component.ts"/>
-      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/highlight/app/app.component.html"/>
-      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/highlight/app/app.component.css"/>
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/highlight/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/autocomplete/src/highlight/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/autocomplete/src/highlight/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/autocomplete/src/highlight/app/app.css"/>
     </docs-code-multifile>
   </docs-tab>
 
   <docs-tab label="Material">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/highlight/material/app/app.component.ts">
-      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/highlight/material/app/app.component.ts"/>
-      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/highlight/material/app/app.component.html"/>
-      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/highlight/material/app/app.component.css"/>
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/highlight/material/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/autocomplete/src/highlight/material/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/autocomplete/src/highlight/material/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/autocomplete/src/highlight/material/app/app.css"/>
     </docs-code-multifile>
   </docs-tab>
 
   <docs-tab label="Retro">
-    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/highlight/retro/app/app.component.ts">
-      <docs-code header="app.component.ts" path="adev/src/content/examples/aria/autocomplete/src/highlight/retro/app/app.component.ts"/>
-      <docs-code header="app.component.html" path="adev/src/content/examples/aria/autocomplete/src/highlight/retro/app/app.component.html"/>
-      <docs-code header="app.component.css" path="adev/src/content/examples/aria/autocomplete/src/highlight/retro/app/app.component.css"/>
+    <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/autocomplete/src/highlight/retro/app/app.ts">
+      <docs-code header="app.ts" path="adev/src/content/examples/aria/autocomplete/src/highlight/retro/app/app.ts"/>
+      <docs-code header="app.html" path="adev/src/content/examples/aria/autocomplete/src/highlight/retro/app/app.html"/>
+      <docs-code header="app.css" path="adev/src/content/examples/aria/autocomplete/src/highlight/retro/app/app.css"/>
     </docs-code-multifile>
   </docs-tab>
 </docs-tab-group>

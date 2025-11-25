@@ -133,7 +133,7 @@ Angularのツールバーは、以下の機能を備えた完全にアクセシ�
 
 `multi`入力は、グループ内の複数のウィジェットを同時に選択できるかどうかを制御します:
 
-<docs-code language="html" highlight="[15]">
+```html {highlight: [15]}
 <!-- Single selection (radio group) -->
 <div
   ngToolbarWidgetGroup
@@ -155,7 +155,7 @@ Angularのツールバーは、以下の機能を備えた完全にアクセシ�
   <button ngToolbarWidget value="italic">Italic</button>
   <button ngToolbarWidget value="underline">Underline</button>
 </div>
-</docs-code>
+```
 
 ### 無効化されたウィジェット {#disabled-widgets}
 

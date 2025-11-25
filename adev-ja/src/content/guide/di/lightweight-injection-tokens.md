@@ -22,13 +22,12 @@ Angularがインジェクショントークンを格納する方法により、�
 トークン保持が発生する状況をより明確に説明するために、ライブラリカードコンポーネントを提供するライブラリを検討してください。
 このコンポーネントには本体が含まれており、オプションでヘッダーを含めることができます。
 
-<docs-code language="html">
+```angular-html
 
 <lib-card>;
 <lib-header>…</lib-header>;
 </lib-card>;
-
-</docs-code>
+```
 
 一般的な実装では、 `<lib-card>` コンポーネントは、次の例のように `@ContentChild()` または `@ContentChildren()` を使用して `<lib-header>` と `<lib-body>` を取得します。
 

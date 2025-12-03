@@ -381,6 +381,36 @@ _フォーム検証_ は、ユーザー入力が完全で正しいことを確�
 
 </docs-step>
 
+### トップレベルフォーム配列での `FormArrayDirective` の使用
+
+`FormArrayDirective` を使用して、`FormArray` を `<form>` 要素に直接バインドできます。
+これは、フォームがトップレベルの `FormGroup` を使用せず、配列自体が完全なフォームモデルを表す場合に便利です。
+
+```angular-ts
+import { Component } from '@angular/core';
+import { FormArray, FormControl } from '@angular/forms';
+
+@Component({
+  selector: 'form-array-example',
+  template: `
+    <form [formArray]="form">
+      @for (control of form.controls; track $index) {
+        <input [formControlName]="$index">
+      }
+    </form>
+  `,
+})
+export class FormArrayExampleComponent {
+  controls = [
+    new FormControl('fish'),
+    new FormControl('cat'),
+    new FormControl('dog'),
+  ];
+
+  form = new FormArray(this.controls);
+}
+```
+
 <docs-step title="エイリアスの追加">
 
 最初は、フォームには `Alias` フィールドが1つ含まれています。別のフィールドを追加するには、**エイリアスの追加** ボタンをクリックします。また、テンプレートの下部にある `Form Value` によって表示されるフォームモデルに報告されるエイリアスの配列も検証できます。各エイリアスについて、フォームコントロールインスタンスではなく、追加のフィールドを持つ別のフォームグループインスタンスを構成できます。各項目のコントロールを定義するプロセスは同じです。
@@ -542,3 +572,4 @@ export function positiveValues(control: AbstractControl) {
 | `FormGroupDirective`   | 既存の `FormGroup` インスタンスをDOM要素に同期します。                                   |
 | `FormGroupName`        | ネストされた `FormGroup` インスタンスをDOM要素に同期します。                                      |
 | `FormArrayName`        | ネストされた `FormArray` インスタンスをDOM要素に同期します。                                      |
+| `FormArrayDirective`   | スタンドアロンの `FormArray` インスタンスをDOM要素に同期します。                                  |

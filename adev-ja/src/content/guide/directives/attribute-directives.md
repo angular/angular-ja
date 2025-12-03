@@ -33,7 +33,7 @@ HELPFUL: ディレクティブは_ネームスペース_をサポートしてい
 
 ## 属性ディレクティブの適用
 
-1. `HighlightDirective`を使用するには、ディレクティブを属性として持つ`<p>`要素をHTMLテンプレートに追加します。
+`HighlightDirective`を使用するには、ディレクティブを属性として持つ`<p>`要素をHTMLテンプレートに追加します。
 
 <docs-code header="app.component.html" path="adev/src/content/examples/attribute-directives/src/app/app.component.1.html" visibleRegion="applied"/>
 
@@ -45,11 +45,11 @@ Angularは`HighlightDirective`クラスのインスタンスを作成し、`<p>`
 
 1. `@Directive()`デコレーターの`host`プロパティを使用してホストイベントバインディングを構成します。
 
-<docs-code header="src/app/highlight.directive.ts (decorator)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.2.ts" visibleRegion="decorator"/>
+   <docs-code header="src/app/highlight.directive.ts (decorator)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.2.ts" visibleRegion="decorator"/>
 
 1. 2つのイベントハンドラーメソッドを追加し、`host`プロパティを介してホスト要素イベントをそれらにマッピングします。
 
-<docs-code header="highlight.directive.ts (mouse-methods)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.2.ts" visibleRegion="mouse-methods"/>
+   <docs-code header="highlight.directive.ts (mouse-methods)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.2.ts" visibleRegion="mouse-methods"/>
 
 属性ディレクティブをホストするDOM要素（この場合は`<p>`）のイベントを購読するには、ディレクティブの[`host`プロパティ](guide/components/host-elements#binding-to-the-host-element)でイベントリスナーを構成します。
 
@@ -69,19 +69,19 @@ HELPFUL: ハンドラーは、ホストDOM要素`el`に色を設定するヘル�
 
 1. `highlight.directive.ts`で、`@angular/core`から`Input`をインポートします。
 
-<docs-code header="highlight.directive.ts (imports)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.3.ts" visibleRegion="imports"/>
+   <docs-code header="highlight.directive.ts (imports)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.3.ts" visibleRegion="imports"/>
 
-2. `appHighlight` `input`プロパティを追加します。
+1. `appHighlight` `input`プロパティを追加します。
 
    <docs-code header="highlight.directive.ts" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.3.ts" visibleRegion="input"/>
 
    `input()`関数は、ディレクティブの`appHighlight`プロパティをバインディングで使用できるようにするメタデータをクラスに追加します。
 
-3. `app.component.ts`で、`AppComponent`に`color`プロパティを追加します。
+1. `app.component.ts`で、`AppComponent`に`color`プロパティを追加します。
 
-<docs-code header="app.component.ts (class)" path="adev/src/content/examples/attribute-directives/src/app/app.component.1.ts" visibleRegion="class"/>
+   <docs-code header="app.component.ts (class)" path="adev/src/content/examples/attribute-directives/src/app/app.component.1.ts" visibleRegion="class"/>
 
-4. ディレクティブと色を同時に適用するには、`appHighlight`ディレクティブセレクターを使用してプロパティバインディングを使用し、それを`color`に設定します。
+1. ディレクティブと色を同時に適用するには、`appHighlight`ディレクティブセレクターを使用してプロパティバインディングを使用し、それを`color`に設定します。
 
    <docs-code header="app.component.html (color)" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" visibleRegion="color"/>
 
@@ -103,11 +103,11 @@ HELPFUL: ハンドラーは、ホストDOM要素`el`に色を設定するヘル�
 
 1. `highlight.directive.ts`で、`onMouseEnter`メソッドを修正して、最初に`appHighlight`でハイライトしようとします。`appHighlight`が`undefined`の場合は`red`にフォールバックします。
 
-<docs-code header="highlight.directive.ts (mouse-enter)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.3.ts" visibleRegion="mouse-enter"/>
+   <docs-code header="highlight.directive.ts (mouse-enter)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.3.ts" visibleRegion="mouse-enter"/>
 
-1. アプリケーションを起動して、ユーザーがラジオボタンで色を選択できることを確認します。
+4. アプリケーションを起動して、ユーザーがラジオボタンで色を選択できることを確認します。
 
-<img alt="Animated gif of the refactored highlight directive changing color according to the radio button the user selects" src="assets/images/guide/attribute-directives/highlight-directive-v2-anim.gif">
+   <img alt="Animated gif of the refactored highlight directive changing color according to the radio button the user selects" src="assets/images/guide/attribute-directives/highlight-directive-v2-anim.gif">
 
 ## 2番目のプロパティにバインドする
 
@@ -115,13 +115,13 @@ HELPFUL: ハンドラーは、ホストDOM要素`el`に色を設定するヘル�
 
 1. `HighlightDirective`に`defaultColor`という名前の2番目の`input()`プロパティを追加します。
 
-<docs-code header="highlight.directive.ts (defaultColor)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.ts" visibleRegion="defaultColor"/>
+   <docs-code header="highlight.directive.ts (defaultColor)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.ts" visibleRegion="defaultColor"/>
 
-1. ディレクティブの`onMouseEnter`を修正して、最初に`appHighlight`でハイライトしようとします。次に`defaultColor`でハイライトしようとします。両方のプロパティが`undefined`の場合は`red`にフォールバックします。
+2. ディレクティブの`onMouseEnter`を修正して、最初に`appHighlight`でハイライトしようとします。次に`defaultColor`でハイライトしようとします。両方のプロパティが`undefined`の場合は`red`にフォールバックします。
 
-<docs-code header="highlight.directive.ts (mouse-enter)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.ts" visibleRegion="mouse-enter"/>
+   <docs-code header="highlight.directive.ts (mouse-enter)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.ts" visibleRegion="mouse-enter"/>
 
-1. `AppComponent.color`にバインドし、デフォルトカラーとして「violet」を使用するには、次のHTMLを追加します。
+3. `AppComponent.color`にバインドし、デフォルトカラーとして「violet」を使用するには、次のHTMLを追加します。
    この場合、`defaultColor`バインディングは、静的であるため、角括弧`[]`を使用しません。
 
    <docs-code header="app.component.html (defaultColor)" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" visibleRegion="defaultColor"/>

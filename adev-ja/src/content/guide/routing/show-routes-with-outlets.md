@@ -69,10 +69,10 @@ const routes: Routes = [
 
 ```angular-html
 <!-- ユーザーが/adminにアクセスしたときにページにレンダリングされるコンテンツ -->
-<app-header>...</app-header>
-<router-outlet></router-outlet>
-<app-admin-page>...</app-admin-page>
-<app-footer>...</app-footer>
+<app-header />
+<router-outlet />
+<app-admin-page />
+<app-footer />
 ```
 
 ## 子ルートでルートをネストする {#nesting-routes-with-child-routes}

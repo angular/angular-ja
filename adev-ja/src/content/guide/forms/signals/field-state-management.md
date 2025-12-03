@@ -74,7 +74,7 @@ console.log(emailValue) // Current email string
 
 バリデーション状態シグナルは、フィールドが有効かどうか、またどのようなエラーを含んでいるかを示します。
 
-NOTE: このガイドでは、テンプレートやロジックでバリデーション状態を**使用する**こと（フィードバックを表示するために`valid()`、`invalid()`、`errors()`を読み取るなど）に焦点を当てています。バリデーションルールを**定義**したり、カスタムバリデーターを作成したりする方法については、バリデーションガイド（近日、公開予定）を参照してください。
+NOTE: このガイドでは、テンプレートやロジックでバリデーション状態を**使用する**こと（フィードバックを表示するために`valid()`、`invalid()`、`errors()`を読み取るなど）に焦点を当てています。バリデーションルールを**定義**したり、カスタムバリデーターを作成したりする方法については、[バリデーションガイド](guide/forms/signals/validation)を参照してください。
 
 ### 有効性のチェック {#checking-validity}
 
@@ -610,7 +610,7 @@ export class Registration {
   })
 
   onSubmit() {
-    submit(this.registrationForm, () => {
+    submit(this.registrationForm, async () => {
       this.submitToServer()
     })
   }
@@ -689,7 +689,12 @@ export class StyleExample {
 
 ## 次のステップ {#next-steps}
 
-シグナルフォームに関するその他の関連ガイドは次のとおりです:
+このガイドでは、バリデーションと可用性ステータスの処理、インタラクションの追跡、フィールド状態の伝播について説明しました。関連ガイドでは、シグナルフォームの他の側面について探求します:
 
-- [フォームモデルガイド](guide/forms/signals/models) - モデルの作成と値の更新
-- バリデーションガイド - バリデーションルールの定義とカスタムバリデーター (近日公開の予定)
+<!-- TODO: UNCOMMENT WHEN THE GUIDES ARE AVAILABLE -->
+<docs-pill-row>
+  <docs-pill href="guide/forms/signals/models" title="Form models" />
+  <docs-pill href="guide/forms/signals/validation" title="Validation" />
+  <docs-pill href="guide/forms/signals/custom-controls" title="Custom controls" />
+  <!-- <docs-pill href="guide/forms/signals/arrays" title="Working with Arrays" /> -->
+</docs-pill-row>

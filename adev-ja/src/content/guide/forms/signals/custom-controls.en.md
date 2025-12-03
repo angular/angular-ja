@@ -25,7 +25,7 @@ import { FormValueControl } from '@angular/forms/signals';
       <input
         type="text"
         [value]="value()"
-        (input)="value.set(($event.target as HTMLInputElement).value)"
+        (input)="value.set($event.target.value)"
         placeholder="Enter text..."
       />
     </div>
@@ -269,7 +269,7 @@ import type { ValidationError, DisabledReason } from '@angular/forms/signals';
         <input
           type="text"
           [value]="value()"
-          (input)="value.set(($event.target as HTMLInputElement).value)"
+          (input)="value.set($event.target.value)"
           [disabled]="disabled()"
           [readonly]="readonly()"
           [class.invalid]="invalid()"
@@ -365,7 +365,7 @@ import { FormValueControl } from '@angular/forms/signals';
     <input
       type="text"
       [value]="displayValue()"
-      (input)="handleInput(($event.target as HTMLInputElement).value)"
+      (input)="handleInput($event.target.value)"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -422,7 +422,9 @@ accountForm = form(this.accountModel, schemaPath => {
 
 This guide covered building custom controls that integrate with Signal Forms. Related guides explore other aspects of Signal Forms:
 
-- [Form Models guide](guide/forms/signals/models) - Creating and updating form models
-  <!-- TODO: Uncomment when guides are available -->
-  <!-- - [Field State Management guide](guide/forms/signals/field-state-management) - Using form state signals -->
-  <!-- - [Validation guide](guide/forms/signals/validation) - Adding validation to your forms -->
+<docs-pill-row>
+  <docs-pill href="guide/forms/signals/models" title="Form models" />
+  <docs-pill href="guide/forms/signals/field-state-management" title="Field state management" />
+  <docs-pill href="guide/forms/signals/validation" title="Validation" />
+  <!-- <docs-pill href="guide/forms/signals/arrays" title="Working with Arrays" /> -->
+</docs-pill-row>

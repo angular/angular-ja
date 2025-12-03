@@ -171,7 +171,7 @@ HELPFUL: `NgModule` ベースのアプリケーションの場合、Angularは `
 ## 解決修飾子 {#resolution-modifiers}
 
 Angularの解決動作は、`optional`、`self`、`skipSelf`、および `host` を使用して変更できます。
-`@angular/core` からそれぞれをインポートし、サービスを注入するときに `inject` 構成でそれぞれを使用します。
+`@angular/core` からそれぞれをインポートし、サービスを注入するときに [`inject`](/api/core/inject) 構成でそれぞれを使用します。
 
 ### 修飾子の種類 {#types-of-modifiers}
 
@@ -331,7 +331,7 @@ Angularテンプレートの基になる論理構造を理解すると、サー�
 
 ```html
 <app-root>
-  <app-child></app-child>;
+  <app-child />;
 </app-root>
 ```
 
@@ -514,17 +514,18 @@ Emoji from FlowerService: 🌻
 
 ```html
 <app-root @ApplicationConfig
-@Inject(FlowerService) flower=>"🌺">
-<#VIEW>
+          @Inject(FlowerService) flower=>"🌺">
+  <#VIEW>
 
-<p>Emoji from FlowerService: {{flower.emoji}} (🌺)</p>
-<app-child @Provide(FlowerService="🌻")
-@Inject(FlowerService)=>"🌻"> <!-- search ends here -->
-<#VIEW> <!-- search starts here -->
-<h2>Child Component</h2>
-<p>Emoji from FlowerService: {{flower.emoji}} (🌻)</p>
-</#VIEW>
-</app-child>
+  <p>Emoji from FlowerService: {{flower.emoji}} (🌺)</p>
+  <app-child @Provide(FlowerService="🌻" )
+             @Inject(FlowerService)=>"🌻"> <!-- search ends here -->
+    <#VIEW> <!-- search starts here -->
+    <h2>Child Component</h2>
+    <p>Emoji from FlowerService: {{flower.emoji}} (🌻)</p>
+  </
+  #VIEW>
+  </app-child>
 </#VIEW>
 </app-root>
 ```
@@ -615,16 +616,17 @@ Emoji from AnimalService: 🐶
 
 ```html
 <app-root @ApplicationConfig
-@Inject(AnimalService) animal=>"🐳">
-<#VIEW>
-<app-child>
-<#VIEW @Provide(AnimalService="🐶")
-@Inject(AnimalService=>"🐶")>
+          @Inject(AnimalService) animal=>"🐳">
+  <#VIEW>
+  <app-child>
+    <#VIEW @Provide(AnimalService="🐶")
+    @Inject(AnimalService=>"🐶")>
 
-<!-- ^^using viewProviders means AnimalService is available in <#VIEW>-->
-<p>Emoji from AnimalService: {{animal.emoji}} (🐶)</p>
-</#VIEW>
-</app-child>
+    <!-- ^^using viewProviders means AnimalService is available in <#VIEW>-->
+    <p>Emoji from AnimalService: {{animal.emoji}} (🐶)</p>
+  </
+  #VIEW>
+  </app-child>
 </#VIEW>
 </app-root>
 ```
@@ -673,11 +675,11 @@ export class InspectorComponent {
 
 <div class="container">
   <h3>Content projection</h3>
-  <ng-content></ng-content>
+  <ng-content />
 </div>
 <h3>Inside the view</h3>
 
-<app-inspector></app-inspector>
+<app-inspector />
 ```
 
 `<ng-content>` を使用するとコンテンツを投影でき、 `ChildComponent` テンプレート内の `<app-inspector>` は、 `InspectorComponent` を `ChildComponent` の子コンポーネントにします。
@@ -686,7 +688,7 @@ export class InspectorComponent {
 
 ```html
 <app-child>
-  <app-inspector></app-inspector>
+  <app-inspector />
 </app-child>
 ```
 
@@ -713,29 +715,31 @@ Emoji from AnimalService: 🐶
 
 ```html
 <app-root @ApplicationConfig
-@Inject(AnimalService) animal=>"🐳">
-<#VIEW>
-<app-child>
-<#VIEW @Provide(AnimalService="🐶")
-@Inject(AnimalService=>"🐶")>
+          @Inject(AnimalService) animal=>"🐳">
+  <#VIEW>
+  <app-child>
+    <#VIEW @Provide(AnimalService="🐶")
+    @Inject(AnimalService=>"🐶")>
 
-<!-- ^^using viewProviders means AnimalService is available in <#VIEW>-->
-<p>Emoji from AnimalService: {{animal.emoji}} (🐶)</p>
+    <!-- ^^using viewProviders means AnimalService is available in <#VIEW>-->
+    <p>Emoji from AnimalService: {{animal.emoji}} (🐶)</p>
 
-        <div class="container">
-          <h3>Content projection</h3>
-          <app-inspector @Inject(AnimalService) animal=>"🐳">
-            <p>Emoji from AnimalService: {{animal.emoji}} (🐳)</p>
-          </app-inspector>
-        </div>
+    <div class="container">
+      <h3>Content projection</h3>
+      <app-inspector @Inject(AnimalService) animal=>"🐳">
+        <p>Emoji from AnimalService: {{animal.emoji}} (🐳)</p>
+      </app-inspector>
+    </div>
 
-        <app-inspector>
-          <#VIEW @Inject(AnimalService) animal=>"🐶">
-            <p>Emoji from AnimalService: {{animal.emoji}} (🐶)</p>
-          </#VIEW>
-        </app-inspector>
-      </#VIEW>
-    </app-child>
+    <app-inspector>
+      <#VIEW @Inject(AnimalService) animal=>"🐶">
+      <p>Emoji from AnimalService: {{animal.emoji}} (🐶)</p>
+    </
+    #VIEW>
+    </app-inspector>
+  </
+  #VIEW>
+  </app-child>
 
 </#VIEW>
 </app-root>
@@ -769,15 +773,16 @@ Emoji from FlowerService: 🌺
 
 ```html
 <app-root @ApplicationConfig
-@Inject(FlowerService) flower=>"🌺">
-<#VIEW>
-<app-child @Provide(FlowerService="🌻")>
-<#VIEW @Inject(FlowerService, SkipSelf)=>"🌺">
+          @Inject(FlowerService) flower=>"🌺">
+  <#VIEW>
+  <app-child @Provide(FlowerService="🌻" )>
+    <#VIEW @Inject(FlowerService, SkipSelf)=>"🌺">
 
-<!-- With SkipSelf, the injector looks to the next injector up the tree (app-root) -->
+    <!-- With SkipSelf, the injector looks to the next injector up the tree (app-root) -->
 
-</#VIEW>
-</app-child>
+  </
+  #VIEW>
+  </app-child>
 </#VIEW>
 </app-root>
 ```
@@ -790,12 +795,13 @@ Emoji from FlowerService: 🌺
 
 ```html
 <app-root @ApplicationConfig
-@Inject(FlowerService) flower=>"🌺">
-<#VIEW> <!-- end search here with null-->
-<app-child @Provide(FlowerService="🌻")> <!-- start search here -->
-<#VIEW inject(FlowerService, {skipSelf: true, host: true, optional:true})=>null>
-</#VIEW>
-</app-parent>
+          @Inject(FlowerService) flower=>"🌺">
+  <#VIEW> <!-- end search here with null-->
+  <app-child @Provide(FlowerService="🌻" )> <!-- start search here -->
+    <#VIEW inject(FlowerService, {skipSelf: true, host: true, optional:true})=>null>
+  </
+  #VIEW>
+  </app-parent>
 </#VIEW>
 </app-root>
 ```
@@ -824,16 +830,17 @@ Emoji from FlowerService: 🌺
 
 ```html
 <app-root @ApplicationConfig
-@Inject(AnimalService=>"🐳")>
-<#VIEW><!-- search begins here -->
-<app-child>
-<#VIEW @Provide(AnimalService="🐶")
-@Inject(AnimalService, SkipSelf=>"🐳")>
+          @Inject(AnimalService=>"🐳")>
+  <#VIEW><!-- search begins here -->
+  <app-child>
+    <#VIEW @Provide(AnimalService="🐶")
+    @Inject(AnimalService, SkipSelf=>"🐳")>
 
-<!--Add skipSelf -->
+    <!--Add skipSelf -->
 
-</#VIEW>
-</app-child>
+  </
+  #VIEW>
+  </app-child>
 </#VIEW>
 </app-root>
 ```
@@ -863,13 +870,14 @@ export class ChildComponent {
 
 ```html
 <app-root @ApplicationConfig
-@Inject(AnimalService=>"🐳")>
-<#VIEW>
-<app-child>
-<#VIEW @Provide(AnimalService="🐶")
-inject(AnimalService, {host: true}=>"🐶")> <!-- host stops search here -->
-</#VIEW>
-</app-child>
+          @Inject(AnimalService=>"🐳")>
+  <#VIEW>
+  <app-child>
+    <#VIEW @Provide(AnimalService="🐶")
+    inject(AnimalService, {host: true}=>"🐶")> <!-- host stops search here -->
+  </
+  #VIEW>
+  </app-child>
 </#VIEW>
 </app-root>
 ```
@@ -909,17 +917,18 @@ export class ChildComponent {
 
 ```html
 <app-root @ApplicationConfig
-@Inject(AnimalService=>"🐳")>
-<#VIEW @Provide(AnimalService="🦔")
-@Inject(AnimalService, @Optional)=>"🦔">
+          @Inject(AnimalService=>"🐳")>
+  <#VIEW @Provide(AnimalService="🦔")
+  @Inject(AnimalService, @Optional)=>"🦔">
 
-<!-- ^^skipSelf starts here,  host stops here^^ -->
-<app-child>
-<#VIEW @Provide(AnimalService="🐶")
-inject(AnimalService, {skipSelf:true, host: true, optional: true})=>"🦔">
-<!-- Add skipSelf ^^-->
-</#VIEW>
-</app-child>
+  <!-- ^^skipSelf starts here,  host stops here^^ -->
+  <app-child>
+    <#VIEW @Provide(AnimalService="🐶")
+    inject(AnimalService, {skipSelf:true, host: true, optional: true})=>"🦔">
+    <!-- Add skipSelf ^^-->
+  </
+  #VIEW>
+  </app-child>
 </#VIEW>
 </app-root>
 ```

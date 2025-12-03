@@ -14,7 +14,7 @@
 
 注入コンテキストにいるかどうかを知ることで、[`inject`](api/core/inject) 関数を使用してインスタンスを注入できます。
 
-NOTE: クラスコンストラクターとフィールドイニシャライザーでの `inject()` の基本的な使用例については、[概要ガイド](guide/di/overview#where-can-inject-be-used)を参照してください。
+NOTE: クラスコンストラクターとフィールドイニシャライザーでの `inject()` の基本的な使用例については、[概要ガイド](/guide/di#where-can-inject-be-used)を参照してください。
 
 ## コンテキスト内のスタックフレーム
 
@@ -22,22 +22,21 @@ NOTE: クラスコンストラクターとフィールドイニシャライザ�
 
 `CanActivateFn` の例を次に示します。
 
-<docs-code language="typescript" highlight="[3]">
+```ts {highlight: [3]}
 const canActivateTeam: CanActivateFn =
-    (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-      return inject(PermissionsService).canActivate(inject(UserToken), route.params.id);
-    };
-</docs-code>
+  (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+    return inject(PermissionsService).canActivate(inject(UserToken), route.params.id);
+  };
+```
 
 ## 注入コンテキスト内で実行する
 
 すでに注入コンテキスト内にいない状態で、特定の関数を注入コンテキスト内で実行したい場合は、`runInInjectionContext` を使用できます。
 これには、たとえば `EnvironmentInjector` のような特定のインジェクターへのアクセスが必要です。
 
-<docs-code header="src/app/heroes/hero.service.ts" language="typescript"
-           highlight="[9]">
+```ts {highlight: [9], header"hero.service.ts"}
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class HeroService {
   private environmentInjector = inject(EnvironmentInjector);
@@ -48,9 +47,9 @@ export class HeroService {
     });
   }
 }
-</docs-code>
+```
 
-`inject` は、インジェクターが要求されたトークンを解決できる場合にのみインスタンスを返します。
+[`inject`](/api/core/inject) は、インジェクターが要求されたトークンを解決できる場合にのみインスタンスを返します。
 
 ## コンテキストのアサート
 

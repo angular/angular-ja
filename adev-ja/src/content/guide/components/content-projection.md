@@ -95,7 +95,7 @@ export class CardBody {}
 
 ```angular-ts
 <!-- コンポーネントテンプレート -->
-Component({
+@Component({
   selector: 'custom-card',
   template: `
   <div class="card-shadow">
@@ -218,7 +218,7 @@ Angularは要素のIDではなく`ngProjectAs`の値と比較します。
 <div class="card-shadow">
   <ng-content select="card-title"></ng-content>
   <div class="card-divider"></div>
-  <ng-content></ng-content>
+  <ng-content />
 </div>
 ```
 

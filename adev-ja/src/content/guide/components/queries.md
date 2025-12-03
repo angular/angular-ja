@@ -15,7 +15,7 @@ TIP: このガイドでは、[基本概念のガイド](essentials)を読んで�
 
 ビュークエリは、コンポーネントの_ビュー_（コンポーネント自身のテンプレートで定義された要素）内の要素から結果を取得します。`viewChild`関数を使用して単一の結果をクエリできます。
 
-```typescript {highlight: [14, 15]}
+```angular-ts {highlight: [14, 15]}
 @Component({
   selector: 'custom-card-header',
   /* ... */
@@ -40,7 +40,7 @@ export class CustomCard {
 
 `viewChildren`関数を使用して、複数結果をクエリできます。
 
-```typescript {highlight: [17]}
+```angular-ts {highlight: [17]}
 @Component({
   selector: 'custom-card-action',
   /* ... */
@@ -51,13 +51,14 @@ export class CustomCardAction {
 
 @Component({
   selector: 'custom-card',
-  template: `<custom-card-action>Save</custom-card-action>
+  template: `
+    <custom-card-action>Save</custom-card-action>
     <custom-card-action>Cancel</custom-card-action>
   `,
 })
 export class CustomCard {
   actions = viewChildren(CustomCardAction);
-  actionsTexts = computed(() => this.actions().map(action => action.text);
+  actionsTexts = computed(() => this.actions().map(action => action.text));
 }
 ```
 
@@ -69,7 +70,7 @@ export class CustomCard {
 
 コンテンツクエリは、コンポーネントの_コンテンツ_（コンポーネントが使用されているテンプレート内でコンポーネントの中にネストされた要素）内の要素から結果を取得します。`contentChild`関数を使用して単一の結果をクエリできます。
 
-```typescript {highlight: [14, 15]}
+```angular-ts {highlight: [14, 15]}
 @Component({
   selector: 'custom-toggle',
   /* ... */
@@ -106,7 +107,7 @@ export class UserProfile { }
 
 `contentChildren`関数を使用して、複数結果をクエリできます。
 
-```typescript {highlight: [14, 16, 17, 18, 19, 20]}
+```angular-ts {highlight: [14, 16, 17, 18, 19, 20]}
 @Component({
   selector: 'custom-menu-item',
   /* ... */
@@ -147,7 +148,7 @@ export class UserProfile { }
 
 場合によっては、特に`viewChild`を使用する場合、特定の子が常に利用可能であることが確実な場合があります。他の場合では、特定の子が存在することを厳格に適用したい場合があります。これらの場合、_必須クエリ_を使用できます。
 
-```angular-ts
+```ts
 @Component({/* ... */})
 export class CustomCard {
   header = viewChild.required(CustomCardHeader);
@@ -232,7 +233,7 @@ export class CustomExpando {
 デフォルトでは、`contentChildren`クエリはコンポーネントの直接の子要素のみを検索し、子孫要素にはトラバースしません。
 一方、`contentChild`クエリはデフォルトで子孫要素も検索します。
 
-```typescript {highlight: [13, 14, 15, 16]}
+```angular-ts {highlight: [13, 14, 15, 16]}
 @Component({
   selector: 'custom-expando',
   /* ... */
@@ -244,7 +245,8 @@ export class CustomExpando {
 
 @Component({
   selector: 'user-profile',
-  template: `     <custom-expando>
+  template: `
+    <custom-expando>
       <some-other-component>
         <custom-toggle>Show</custom-toggle>
       </some-other-component>
@@ -269,7 +271,7 @@ TIP: Angularチームは新規プロジェクトにはシグナルベースの�
 
 `@ViewChild`デコレーターを使用して、単一の結果をクエリできます。
 
-```typescript {highlight: [14, 16, 17, 18]}
+```angular-ts {highlight: [14, 16, 17, 18]}
 @Component({
   selector: 'custom-card-header',
   /* ... */
@@ -299,7 +301,7 @@ Angularは、アプリケーションの状態が変化するにつれて`@ViewC
 
 `@ViewChildren`デコレーターを使用して、複数の結果をクエリできます。
 
-```typescript {highlight: [17, 19, 20, 21, 22, 23]}
+```angular-ts {highlight: [17, 19, 20, 21, 22, 23]}
 @Component({
   selector: 'custom-card-action',
   /* ... */
@@ -332,7 +334,7 @@ export class CustomCard {
 
 `@ContentChild`デコレーターを使用して、単一の結果をクエリできます。
 
-```typescript {highlight: [14, 16, 17, 18, 25]}
+```angular-ts {highlight: [14, 16, 17, 18, 25]}
 @Component({
   selector: 'custom-toggle',
   /* ... */
@@ -373,7 +375,7 @@ Angularは、アプリケーションの状態が変化するにつれて`@Conte
 
 `@ContentChildren`デコレーターを使用して、複数の結果をクエリできます。
 
-```typescript {highlight: [15, 17, 18, 19, 20, 21]}
+```angular-ts {highlight: [15, 17, 18, 19, 20, 21]}
 @Component({
   selector: 'custom-menu-item',
   /* ... */

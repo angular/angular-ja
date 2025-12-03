@@ -6,17 +6,17 @@ TIP: このガイドは、[基本概念のガイド](essentials) を既にお読
 コンポーネントの使用方法を決定する
 [CSS セレクター](https://developer.mozilla.org/docs/Web/CSS/CSS_Selectors) を定義します。
 
-<docs-code language="angular-ts" highlight="[2]">
+```angular-ts {highlight: [2]}
 @Component({
   selector: 'profile-photo',
   ...
 })
 export class ProfilePhoto { }
-</docs-code>
+```
 
 コンポーネントを使用するには、*他の*コンポーネントのテンプレートに一致するHTML要素を作成します。
 
-<docs-code language="angular-ts" highlight="[3]">
+```angular-ts {highlight: [3]}
 @Component({
   template: `
     <profile-photo />
@@ -24,7 +24,7 @@ export class ProfilePhoto { }
   ...,
 })
 export class UserProfile { }
-</docs-code>
+```
 
 **Angularはコンパイル時にセレクターを静的にマッチングします。**
 AngularバインディングやDOM APIを介して実行時にDOMを変更しても、レンダリングされるコンポーネントには影響しません。
@@ -63,13 +63,13 @@ Angularは [`:not` 擬似クラス](https://developer.mozilla.org/docs/Web/CSS/:
 たとえば、`[dropzone]` 属性セレクターを定義して、
 `textarea` 要素のマッチングを防ぐことができます。
 
-<docs-code language="angular-ts" highlight="[2]">
+```angular-ts {highlight: [2]}
 @Component({
   selector: '[dropzone]:not(textarea)',
   ...
 })
 export class DropZone { }
-</docs-code>
+```
 
 Angularは、コンポーネント セレクターで他の擬似クラスまたは擬似要素をサポートしていません。
 
@@ -78,23 +78,23 @@ Angularは、コンポーネント セレクターで他の擬似クラスまた
 複数のセレクターを連結することで、組み合わせられます。
 たとえば、`type="reset"` を指定した `<button>` 要素をマッチングできます。
 
-<docs-code language="angular-ts" highlight="[2]">
+```angular-ts {highlight: [2]}
 @Component({
   selector: 'button[type="reset"]',
   ...
 })
 export class ResetButton { }
-</docs-code>
+```
 
 カンマ区切りのリストで、複数のセレクターを定義できます。
 
-<docs-code language="angular-ts" highlight="[2]">
+```angular-ts {highlight: [2]}
 @Component({
   selector: 'drop-zone, [dropzone]',
   ...
 })
 export class DropZone { }
-</docs-code>
+```
 
 Angularは、リスト内の_いずれか_のセレクターにマッチングする要素ごとにコンポーネントを作成します。
 

@@ -4,25 +4,25 @@ TIP: このガイドでは、すでに[基本概念のガイド](essentials)を�
 
 コンポーネントには、そのコンポーネントのDOMに適用されるCSSスタイルを含めることができます。
 
-<docs-code language="angular-ts" highlight="[4]">
+```angular-ts {highlight:[4]}
 @Component({
   selector: 'profile-photo',
   template: `<img src="profile-photo.jpg" alt="Your profile photo">`,
   styles: ` img { border-radius: 50%; } `,
 })
 export class ProfilePhoto { }
-</docs-code>
+```
 
 また、別のファイルにスタイルを記述できます。
 
-<docs-code language="angular-ts" highlight="[4]">
+```angular-ts {highlight:[4]}
 @Component({
   selector: 'profile-photo',
   templateUrl: 'profile-photo.html',
   styleUrl: 'profile-photo.css',
 })
 export class ProfilePhoto { }
-</docs-code>
+```
 
 Angularがコンポーネントをコンパイルすると、これらのスタイルはコンポーネントのJavaScript出力と共に発行されます。
 つまり、コンポーネントのスタイルはJavaScriptモジュールシステムに参加します。
@@ -39,13 +39,13 @@ CSSを出力するすべてのツールと連携します。
 ビューカプセル化モードには、`Emulated`、`ShadowDom`、`ExperimentalIsolatedShadowDom`、`None`の4つのモードがあります。
 モードは、`@Component`デコレーターで指定できます。
 
-<docs-code language="angular-ts" highlight="[3]">
+```angular-ts {highlight:[3]}
 @Component({
   ...,
   encapsulation: ViewEncapsulation.None,
 })
 export class ProfilePhoto { }
-</docs-code>
+```
 
 ### ViewEncapsulation.Emulated
 

@@ -321,7 +321,7 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-サーバー構成でサーバー実装をオーバーライドします。
+サーバー構成の中で、サーバー実装でオーバーライドします。
 
 ```ts
 // app.config.server.ts

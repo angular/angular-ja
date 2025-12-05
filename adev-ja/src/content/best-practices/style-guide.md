@@ -110,11 +110,11 @@ src/
 
 ### コンストラクターパラメーターインジェクションよりも`inject`関数を推奨 {#prefer-the-inject-function-over-constructor-parameter-injection}
 
-コンストラクターパラメーターインジェクションよりも`inject`関数を使用することを推奨します。`inject`関数はコンストラクターパラメーターインジェクションと同じように機能しますが、いくつかのスタイルの利点があります。
+コンストラクターパラメーターインジェクションよりも[`inject`](/api/core/inject)関数を使用することを推奨します。[`inject`](/api/core/inject)関数はコンストラクターパラメーターインジェクションと同じように機能しますが、いくつかのスタイルの利点があります。
 
-- `inject`は、特にクラスが多くの依存性を注入する場合に、一般的に読みやすくなります。
+- [`inject`](/api/core/inject)は、特にクラスが多くの依存性を注入する場合に、一般的に読みやすくなります。
 - 注入された依存性へのコメント追加が、構文的に見てより簡単です。
-- `inject`はより優れた型推論を提供します。
+- [`inject`](/api/core/inject)はより優れた型推論を提供します。
 - [`useDefineForClassFields`](https://www.typescriptlang.org/tsconfig/#useDefineForClassFields)を使用してES2022+をターゲットにする場合、注入された依存性でフィールドを読み取る際に、フィールド宣言と初期化を分離することを回避できます。
 
 [既存のコードを自動ツールで`inject`にリファクタリングできます](reference/migrations/inject-function)。

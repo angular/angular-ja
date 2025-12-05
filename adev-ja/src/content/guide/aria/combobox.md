@@ -51,7 +51,7 @@
 - 単一選択のドロップダウンが必要な場合 - 完全なドロップダウンの実装については、[Selectパターン](guide/aria/select)を参照してください
 - 複数選択のドロップダウンが必要な場合 - コンパクトな表示の複数選択については、[Multiselectパターン](guide/aria/multiselect)を参照してください
 
-Note: [Autocomplete](guide/aria/autocomplete)、[Select](guide/aria/select)、[Multiselect](guide/aria/multiselect)のガイドでは、このディレクティブを特定のユースケースのために[Listbox](guide/aria/listbox)と組み合わせた、ドキュメント化されたパターンが示されています。
+NOTE: [Autocomplete](guide/aria/autocomplete)、[Select](guide/aria/select)、[Multiselect](guide/aria/multiselect)のガイドでは、このディレクティブを特定のユースケースのために[Listbox](guide/aria/listbox)と組み合わせた、ドキュメント化されたパターンが示されています。
 
 ## 機能 {#features}
 

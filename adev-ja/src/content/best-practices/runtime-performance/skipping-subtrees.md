@@ -17,6 +17,7 @@ OnPush変更検知は、Angularにコンポーネントのサブツリーの変�
 
 ```ts
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

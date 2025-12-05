@@ -108,14 +108,19 @@ Angularのリストボックスは、以下の機能を備えた完全にアク�
 
 ### 選択モード {#selection-modes}
 
-リストボックスは、アイテムがいつ選択されるかを制御する2つの選択モードをサポートしています。インターフェースのインタラクションパターンに合ったモードを選択してください。
+リストボックスは、アイテムがいつ選択されるかを制御する2つの選択モードをサポートしています。
 
-<docs-code-multifile preview hideCode path="adev/src/content/examples/aria/listbox/src/modes/app/app.ts">
+<!-- <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/listbox/src/modes/app/app.ts">
   <docs-code header="app.ts" path="adev/src/content/examples/aria/listbox/src/modes/app/app.ts" />
   <docs-code header="app.html" path="adev/src/content/examples/aria/listbox/src/modes/app/app.html" />
-</docs-code-multifile>
+</docs-code-multifile> -->
 
-`'follow'`モードはフォーカスされたアイテムを自動的に選択し、選択が頻繁に変わる場合に、より速いインタラクションを提供します。`'explicit'`モードでは、選択を確定するためにSpaceキーまたはEnterキーが必要で、ナビゲーション中の意図しない変更を防ぎます。ドロップダウンパターンでは、通常、単一選択のために`'follow'`モードが使用されます。
+| モード       | 説明                                                                                   |
+| ------------ | -------------------------------------------------------------------------------------- |
+| `'follow'`   | フォーカスされたアイテムを自動的に選択し、選択が頻繁に変わる場合に、より速いインタラクションを提供します |
+| `'explicit'` | 選択を確定するためにSpaceキーまたはEnterキーが必要で、ナビゲーション中の意図しない変更を防ぎます       |
+
+TIP: ドロップダウンパターンでは、通常、単一選択のために`'follow'`モードが使用されます。
 
 ## API
 

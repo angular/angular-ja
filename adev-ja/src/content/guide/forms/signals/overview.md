@@ -47,7 +47,7 @@ import { form, Field, required, email } from '@angular/forms/signals'
 
 ## Next steps
 
-To learn more about how シグナルフォーム work, check out the following guides:
+シグナルフォームの仕組みについて詳しく知るには、以下のガイドを確認してください。
 
 <!-- TODO: UNCOMMENT SECTION BELOW WHEN AVAILABLE -->
 <docs-pill-row>

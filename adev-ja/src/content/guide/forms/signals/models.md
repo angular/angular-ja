@@ -108,22 +108,6 @@ const userModel = signal<UserData>({
 
 `undefined`に設定されたフィールドは、フィールドツリーから除外されます。`{value: undefined}`を持つモデルは`{}`と全く同じように動作し、そのフィールドにアクセスすると`FieldTree`ではなく`undefined`が返されます。
 
-### 動的なフィールドの追加 {#dynamic-field-addition}
-
-新しいプロパティでモデルを更新することで、動的にフィールドを追加できます。フィールドツリーは、モデルの値に新しいフィールドが現れると、それらを含むように自動的に更新されます。
-
-```ts
-// Start with just email
-const model = signal({ email: '' })
-const myForm = form(model)
-
-// Later, add a password field
-model.update(current => ({ ...current, password: '' }))
-// myForm.password is now available
-```
-
-このパターンは、ユーザーの選択やロードされたデータに基づいてフィールドが関連性を持つようになる場合に役立ちます。
-
 ## モデルの値を読み取る {#reading-model-values}
 
 フォームの値には、モデルのシグナルから直接アクセスする方法と、個々のフィールドを介してアクセスする方法の2つがあります。それぞれのアプローチは異なる目的を果たします。
@@ -176,12 +160,6 @@ TIP: フィールドの状態には、`value()`以外にも、バリデーショ
 
 ## フォームモデルをプログラム的に更新する {#updating-form-models-programmatically}
 
-フォームモデルは、プログラム的なメカニズムを通じて更新されます:
-
-1. `set()`で[フォームモデル全体を置き換える](#replacing-form-models-with-set)
-2. `update()`で[1つ以上のフィールドを更新する](#update-one-or-more-fields-with-update)
-3. フィールドの状態を通じて[単一のフィールドを直接更新する](#update-a-single-field-directly-with-set)
-
 ### `set()`でフォームモデルを置き換える {#replacing-form-models-with-set}
 
 フォームモデルで`set()`を使用して、値全体を置き換えます:
@@ -205,21 +183,6 @@ resetForm() {
 ```
 
 このアプローチは、APIからデータを読み込む場合や、フォーム全体をリセットする場合に適しています。
-
-### `update()`で1つ以上のフィールドを更新する {#update-one-or-more-fields-with-update}
-
-`update()`を使用して、他のフィールドを保持しながら特定のフィールドを変更します:
-
-```ts
-updateEmail(newEmail: string) {
-  this.userModel.update(current => ({
-    ...current,
-    email: newEmail,
-  }));
-}
-```
-
-このパターンは、現在のモデルの状態に基づいて1つ以上のフィールドを変更する必要がある場合に便利です。
 
 ### `set()`で単一のフィールドを直接更新する {#update-a-single-field-directly-with-set}
 
@@ -305,7 +268,7 @@ export class UserComponent {
   userForm = form(this.userModel)
 
   setName(name: string) {
-    this.userModel.update(current => ({ ...current, name }))
+    this.userForm.name().value.set(name);
     // Input automatically displays 'Bob'
   }
 }
@@ -526,11 +489,14 @@ async loadExistingUser() {
 
 常に既存のデータで始まるフォームの場合、空のフィールドが一瞬表示されるのを避けるために、データが読み込まれるまでフォームのレンダリングを待つことができます。
 
-<!-- TODO: UNCOMMENT WHEN THE GUIDES ARE AVAILABLE -->
-<!-- ## Next steps
+## 次のステップ {#next-steps}
 
+このガイドでは、モデルの作成と値の更新について説明しました。関連ガイドでは、シグナルフォームの他の側面について探求します:
+
+<!-- TODO: UNCOMMENT WHEN THE GUIDES ARE AVAILABLE -->
 <docs-pill-row>
-  <docs-pill href="guide/forms/signals/field-state-management" title="Field State Management" />
+  <docs-pill href="guide/forms/signals/field-state-management" title="Field state management" />
   <docs-pill href="guide/forms/signals/validation" title="Validation" />
-  <docs-pill href="guide/forms/signals/arrays" title="Working with Arrays" />
-</docs-pill-row> -->
+  <docs-pill href="guide/forms/signals/custom-controls" title="Custom controls" />
+  <!-- <docs-pill href="guide/forms/signals/arrays" title="Working with Arrays" /> -->
+</docs-pill-row>

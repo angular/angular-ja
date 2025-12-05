@@ -624,6 +624,10 @@ export class UsernameFormComponent {
 
 このガイドでは、バリデーションルールの作成と適用について説明しました。関連ガイドでは、シグナルフォームの他の側面について解説します:
 
-- [フォームモデルガイド](guide/forms/signals/models) - フォームモデルの作成と更新
-  <!-- TODO: Uncomment when Field State Management guide is published -->
-  <!-- - [Field State Management guide](guide/forms/signals/field-state-management) - Using validation state in templates and displaying errors -->
+<!-- TODO: UNCOMMENT WHEN THE GUIDES ARE AVAILABLE -->
+<docs-pill-row>
+  <docs-pill href="guide/forms/signals/field-state-management" title="Field state management" />
+  <docs-pill href="guide/forms/signals/models" title="Form models" />
+  <docs-pill href="guide/forms/signals/custom-controls" title="Custom controls" />
+  <!-- <docs-pill href="guide/forms/signals/arrays" title="Working with Arrays" /> -->
+</docs-pill-row>

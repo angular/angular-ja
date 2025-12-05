@@ -124,7 +124,7 @@ effect(() => {
 
 ### 注入コンテキスト
 
-デフォルトでは、[インジェクションコンテキスト](guide/di/dependency-injection-context)内（`inject`関数にアクセスできる場所）でのみ`effect()`を作成できます。この要件を満たす最も簡単な方法は、コンポーネント、ディレクティブ、またはサービスの`constructor`内で`effect`を呼び出すことです。
+デフォルトでは、[インジェクションコンテキスト](guide/di/dependency-injection-context)内（[`inject`](/api/core/inject)関数にアクセスできる場所）でのみ`effect()`を作成できます。この要件を満たす最も簡単な方法は、コンポーネント、ディレクティブ、またはサービスの`constructor`内で`effect`を呼び出すことです。
 
 ```ts
 @Component({...})

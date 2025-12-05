@@ -49,7 +49,7 @@ class LibCardComponent {
 }
 ```
 
-`<lib-header>` はオプションなので、要素はテンプレートに最小限の形式 `<lib-card></lib-card>` で表示できます。
+`<lib-header>` はオプションなので、要素はテンプレートに最小限の形式 `<lib-card />` で表示できます。
 この場合、 `<lib-header>` は使用されず、ツリーシェイクされることを期待しますが、実際にはそうなりません。
 これは、 `LibCardComponent` には `LibHeaderComponent` への参照が2つあるためです。
 

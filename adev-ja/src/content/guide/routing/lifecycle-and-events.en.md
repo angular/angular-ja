@@ -55,7 +55,7 @@ export class RouterEventsComponent {
 }
 ```
 
-Note: The [`Event`](api/router/Event) type from `@angular/router` is named the same as the regular global [`Event`](https://developer.mozilla.org/en-US/docs/Web/API/Event) type, but it is different from the [`RouterEvent`](api/router/RouterEvent) type.
+NOTE: The [`Event`](api/router/Event) type from `@angular/router` is named the same as the regular global [`Event`](https://developer.mozilla.org/en-US/docs/Web/API/Event) type, but it is different from the [`RouterEvent`](api/router/RouterEvent) type.
 
 ## How to debug routing events
 
@@ -117,7 +117,8 @@ export class AppComponent {
 Track page views for analytics:
 
 ```ts
-import { Component, inject, signal, effect } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { inject, Injectable, DestroyRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
@@ -131,7 +132,7 @@ export class AnalyticsService {
         // Track page views when URL changes
         if (event instanceof NavigationEnd) {
            // Send page view to analytics
-          this.analytics.trackPageView(url);
+          this.analytics.trackPageView(event.url);
         }
       });
   }

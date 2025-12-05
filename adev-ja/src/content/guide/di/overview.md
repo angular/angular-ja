@@ -93,7 +93,7 @@ export class NavbarComponent {
 
 ### `inject()` はどこで使用できるか {#where-can-inject-be-used}
 
-コンポーネント、ディレクティブ、またはサービスの構築中に依存関係を注入できます。`inject` の呼び出しは、`constructor` またはフィールドイニシャライザーのいずれかに配置できます。一般的な例をいくつか示します。
+コンポーネント、ディレクティブ、またはサービスの構築中に依存関係を注入できます。[`inject`](/api/core/inject) の呼び出しは、`constructor` またはフィールドイニシャライザーのいずれかに配置できます。一般的な例をいくつか示します。
 
 ```ts
 @Component({...})
@@ -137,7 +137,7 @@ export const authGuard = () => {
 }
 ```
 
-Angularは「注入コンテキスト」という用語を使用して、コード内で `inject` を呼び出せる場所を説明します。コンポーネント、ディレクティブ、サービスの構築が最も一般的ですが、詳細については[注入コンテキスト](/guide/di/dependency-injection-context)を参照してください。
+Angularは「注入コンテキスト」という用語を使用して、コード内で [`inject`](/api/core/inject) を呼び出せる場所を説明します。コンポーネント、ディレクティブ、サービスの構築が最も一般的ですが、詳細については[注入コンテキスト](/guide/di/dependency-injection-context)を参照してください。
 
 詳細については、[inject APIドキュメント](api/core/inject#usage-notes)を参照してください。
 

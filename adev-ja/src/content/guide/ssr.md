@@ -267,12 +267,83 @@ export class MyComponent {
 }
 ```
 
+NOTE: `isPlatformBrowser` や `isPlatformServer` を使用したランタイムチェックよりも、[プラットフォーム固有のプロバイダー](guide/ssr#providing-platform-specific-implementations)を推奨します。
+
+IMPORTANT: テンプレートで `isPlatformBrowser` を `@if` やその他の条件と共に使用して、サーバーとクライアントで異なるコンテンツをレンダリングすることは避けてください。これはハイドレーションの不一致やレイアウトシフトを引き起こし、ユーザー体験と[Core Web Vitals](https://web.dev/learn-core-web-vitals/)に悪影響を与えます。代わりに、ブラウザ固有の初期化には `afterNextRender` を使用し、レンダリングされるコンテンツをプラットフォーム間で一貫性のあるものに保ちます。
+
 ## サーバーでプロバイダーを設定する {#setting-providers-on-the-server}
 
 サーバー側では、トップレベルのプロバイダー値は、アプリケーションコードが最初に解析および評価されたときに一度設定されます。
 これは、`useValue` で設定されたプロバイダーは、サーバーアプリケーションが再起動されるまで、複数のリクエストにわたって値を保持することを意味します。
 
 リクエストごとに新しい値を生成したい場合は、`useFactory` を使用してファクトリープロバイダーを使用します。ファクトリー関数は、受信リクエストごとに実行され、毎回新しい値が作成されてトークンに割り当てられることを保証します。
+
+## プラットフォーム固有の実装を提供する {#providing-platform-specific-implementations}
+
+アプリケーションがブラウザとサーバーで異なる動作を必要とする場合、各プラットフォーム用に個別のサービス実装を提供します。このアプローチにより、プラットフォームロジックを専用のサービスに集中させることができます。
+
+```ts
+export abstract class AnalyticsService {
+  abstract trackEvent(name: string): void;
+}
+```
+
+ブラウザ実装を作成します。
+
+```ts
+@Injectable()
+export class BrowserAnalyticsService implements AnalyticsService {
+  trackEvent(name: string): void {
+    // ブラウザベースのサードパーティ分析プロバイダーにイベントを送信します
+  }
+}
+```
+
+サーバー実装を作成します。
+
+```ts
+@Injectable()
+export class ServerAnalyticsService implements AnalyticsService {
+  trackEvent(name: string): void {
+    // サーバーでイベントを記録します
+  }
+}
+```
+
+メインアプリケーション構成でブラウザ実装を登録します。
+
+```ts
+// app.config.ts
+export const appConfig: ApplicationConfig = {
+  providers: [
+    { provide: AnalyticsService, useClass: BrowserAnalyticsService },
+  ]
+};
+```
+
+サーバー構成の中で、サーバー実装でオーバーライドします。
+
+```ts
+// app.config.server.ts
+const serverConfig: ApplicationConfig = {
+  providers: [
+    { provide: AnalyticsService, useClass: ServerAnalyticsService },
+  ]
+};
+```
+
+コンポーネントでサービスを注入して使用します。
+
+```ts
+@Component({/* ... */})
+export class Checkout {
+  private analytics = inject(AnalyticsService);
+
+  onAction() {
+    this.analytics.trackEvent('action');
+  }
+}
+```
 
 ## DIを介したDocumentへのアクセス {#accessing-document-via-di}
 

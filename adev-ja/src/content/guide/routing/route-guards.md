@@ -26,7 +26,7 @@ TIP: Angularプロジェクトで個別のTypeScriptファイルを作成する�
 | `UrlTree` or `RedirectCommand`  | ブロックする代わりに別のルートにリダイレクトします                                    |
 | `Promise<T>` or `Observable<T>` | ルーターは最初に発行された値を使用し、その後購読を解除します                         |
 
-Note: `CanMatch` は異なる動作をします — `false` を返すと、Angularはナビゲーションを完全にブロックする代わりに、他のマッチするルートを試行します。
+NOTE: `CanMatch` は異なる動作をします — `false` を返すと、Angularはナビゲーションを完全にブロックする代わりに、他のマッチするルートを試行します。
 
 ## ルートガードの種類 {#types-of-route-guards}
 

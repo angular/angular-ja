@@ -11,13 +11,13 @@ TIP: このガイドでは、すでに[基本ガイド](essentials)を読んで�
 
 TypeScriptクラスの上部に `@Component` [デコレーター](https://www.typescriptlang.org/docs/handbook/decorators.html) を追加することで、コンポーネントにAngular固有の情報を与えます。
 
-<docs-code language="angular-ts" highlight="[1, 2, 3, 4]">
+```angular-ts {highlight: [1, 2, 3, 4]}
 @Component({
   selector: 'profile-photo',
   template: `<img src="profile-photo.jpg" alt="Your profile photo">`,
 })
 export class ProfilePhoto { }
-</docs-code>
+```
 
 データバインディング、イベント処理、制御フローなど、Angularテンプレート作成に関する詳細は、[テンプレートガイド](guide/templates)を参照してください。
 
@@ -25,27 +25,27 @@ export class ProfilePhoto { }
 
 コンポーネントには、オプションでそのコンポーネントのDOMに適用されるCSSスタイルのリストを含めることができます。
 
-<docs-code language="angular-ts" highlight="[4]">
+```angular-ts {highlight: [4]}
 @Component({
   selector: 'profile-photo',
   template: `<img src="profile-photo.jpg" alt="Your profile photo">`,
   styles: `img { border-radius: 50%; }`,
 })
 export class ProfilePhoto { }
-</docs-code>
+```
 
 デフォルトでは、コンポーネントのスタイルは、そのコンポーネントのテンプレートで定義された要素にのみ影響を与えます。Angularのスタイリングアプローチの詳細については、[コンポーネントのスタイリング](guide/components/styling)を参照してください。
 
 テンプレートとスタイルを別々のファイルにも記述できます。
 
-<docs-code language="angular-ts" highlight="[3, 4]">
+```ts {highlight: [3,4]}
 @Component({
   selector: 'profile-photo',
   templateUrl: 'profile-photo.html',
   styleUrl: 'profile-photo.css',
 })
 export class ProfilePhoto { }
-</docs-code>
+```
 
 これにより、プロジェクト内の_表示_と_動作_の懸念事項を分離できます。プロジェクト全体に対して1つのアプローチを選択するか、コンポーネントごとにどちらを使用するかを決定できます。
 
@@ -78,19 +78,19 @@ IMPORTANT: 19.0.0より前のAngularバージョンでは、`standalone`オプ�
 
 すべてのコンポーネントは[CSSセレクター](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Selectors)を定義します。
 
-<docs-code language="angular-ts" highlight="[2]">
+```angular-ts {highlight: [2]}
 @Component({
   selector: 'profile-photo',
   ...
 })
 export class ProfilePhoto { }
-</docs-code>
+```
 
 Angularがサポートするセレクターの種類と、セレクターの選択に関するガイダンスについては、[コンポーネントセレクター](guide/components/selectors)を参照してください。
 
 _他の_コンポーネントのテンプレートで一致するHTML要素を作成することで、コンポーネントを表示します。
 
-<docs-code language="angular-ts" highlight="[8]">
+```angular-ts {highlight: [8]}
 @Component({
   selector: 'profile-photo',
 })
@@ -101,7 +101,7 @@ imports: [ProfilePhoto],
 template: `<profile-photo />`
 })
 export class UserProfile { }
-</docs-code>
+```
 
 Angularは、遭遇する一致するHTML要素ごとにコンポーネントのインスタンスを作成します。コンポーネントのセレクターと一致するDOM要素は、そのコンポーネントの**ホスト要素**と呼ばれます。コンポーネントのテンプレートの内容はそのホスト要素内にレンダリングされます。
 

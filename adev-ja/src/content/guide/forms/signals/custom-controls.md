@@ -25,7 +25,7 @@ import { FormValueControl } from '@angular/forms/signals';
       <input
         type="text"
         [value]="value()"
-        (input)="value.set(($event.target as HTMLInputElement).value)"
+        (input)="value.set($event.target.value)"
         placeholder="Enter text..."
       />
     </div>
@@ -269,7 +269,7 @@ import type { ValidationError, DisabledReason } from '@angular/forms/signals';
         <input
           type="text"
           [value]="value()"
-          (input)="value.set(($event.target as HTMLInputElement).value)"
+          (input)="value.set($event.target.value)"
           [disabled]="disabled()"
           [readonly]="readonly()"
           [class.invalid]="invalid()"
@@ -365,7 +365,7 @@ import { FormValueControl } from '@angular/forms/signals';
     <input
       type="text"
       [value]="displayValue()"
-      (input)="handleInput(($event.target as HTMLInputElement).value)"
+      (input)="handleInput($event.target.value)"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -422,7 +422,9 @@ accountForm = form(this.accountModel, schemaPath => {
 
 このガイドでは、シグナルフォームと連携するカスタムコントロールの構築について説明しました。関連ガイドでは、シグナルフォームの他の側面について探求します:
 
-- [フォームモデルガイド](guide/forms/signals/models) - フォームモデルの作成と更新
-  <!-- TODO: ガイドが利用可能になったらコメントを解除してください -->
-  <!-- - [フィールド状態管理ガイド](guide/forms/signals/field-state-management) - フォーム状態シグナルの使用 -->
-  <!-- - [バリデーションガイド](guide/forms/signals/validation) - フォームへのバリデーションの追加 -->
+<docs-pill-row>
+  <docs-pill href="guide/forms/signals/models" title="Form models" />
+  <docs-pill href="guide/forms/signals/field-state-management" title="Field state management" />
+  <docs-pill href="guide/forms/signals/validation" title="Validation" />
+  <!-- <docs-pill href="guide/forms/signals/arrays" title="Working with Arrays" /> -->
+</docs-pill-row>

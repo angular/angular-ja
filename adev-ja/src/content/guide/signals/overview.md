@@ -89,92 +89,22 @@ const conditionalCount = computed(() => {
 
 依存関係は、派生中に追加されるだけでなく、削除されることもできます。後で`showCount`を再び偽に設定すると、`count`は`conditionalCount`の依存関係として扱われなくなります。
 
-## `OnPush`コンポーネントでのシグナルの読み取り
+## 高度な派生 {#advanced-derivations}
+
+`computed`はシンプルな読み取り専用の派生を処理しますが、他のシグナルに依存する書き込み可能な状態が必要な場合があります。
+詳細については、[linkedSignalによる依存状態](/guide/signals/linked-signal)ガイドを参照してください。
+
+すべてのシグナルAPIは同期的です—`signal`、`computed`、`input`など。しかし、アプリケーションは非同期に利用可能なデータを扱う必要があることがよくあります。`Resource`は、非同期データをアプリケーションのシグナルベースのコードに組み込み、そのデータに同期的にアクセスできるようにする方法を提供します。詳細については、[リソースによる非同期リアクティビティ](/guide/signals/resource)ガイドを参照してください。
+
+## 非リアクティブAPIでの副作用の実行 {#executing-side-effects-on-non-reactive-apis}
+
+状態の変更に反応したい場合、同期または非同期の派生が推奨されます。しかし、これがすべてのユースケースをカバーするわけではなく、非リアクティブAPIでシグナルの変更に反応する必要がある状況に遭遇することがあります。これらの特定のユースケースには、`effect`または`afterRenderEffect`を使用してください。詳細については、[非リアクティブAPIの副作用](/guide/effect)ガイドを参照してください。
+
+## `OnPush`コンポーネントでのシグナルの読み取り {#reading-signals-in-onpush-components}
 
 `OnPush`コンポーネントのテンプレート内でシグナルを読み取ると、Angularはシグナルをそのコンポーネントの依存関係として追跡します。そのシグナルの値が変更されると、Angularは自動的にコンポーネントを[マーク](api/core/ChangeDetectorRef#markforcheck)して、次に変更検知が実行されたとき更新されるようにします。`OnPush`コンポーネントの詳細については、[コンポーネントのサブツリーをスキップする](best-practices/skipping-subtrees)ガイドを参照してください。
 
-## エフェクト
-
-シグナルは、変更時に興味のあるコンシューマーへ通知するのに役立ちます。**エフェクト**は、1つ以上のシグナル値が変更されたときに実行される操作です。`effect`関数を使用してエフェクトを作成できます。
-
-```ts
-effect(() => {
-  console.log(`The current count is: ${count()}`);
-});
-```
-
-エフェクトは常に**少なくとも1回**実行されます。エフェクトが実行されると、シグナル値の読み取りをすべて追跡します。これらのシグナル値のいずれかが変更されると、エフェクトが再び実行されます。算出シグナルと同様に、エフェクトは依存関係を動的に追跡し、最新の処理で読み取られたシグナルのみを追跡します。
-
-エフェクトは常に変更検知プロセス中に**非同期**で実行されます。
-
-### エフェクトのユースケース
-
-エフェクトは、ほとんどのアプリケーションコードでは必要ありませんが、特定の状況では役立つ場合があります。以下は、`effect`が適切なソリューションとなる状況の例です。
-
-- 表示されているデータとその変更をログに記録する。これは、分析やデバッグツールの目的で行います。
-- データを`window.localStorage`と同期させる。
-- テンプレート構文では表現できないカスタムDOM動作を追加する。
-- `<canvas>`、チャートライブラリ、またはその他のサードパーティUIライブラリにカスタムレンダリングを実行する。
-
-<docs-callout critical title="エフェクトを使用しない場合">
-状態変更の伝播にエフェクトを使用することは避けてください。これは、`ExpressionChangedAfterItHasBeenChecked`エラー、無限の循環更新、または不要な変更検知サイクルが発生する可能性があります。
-
-代わりに、`computed` シグナルを使用して、他の状態に依存する状態をモデル化してください。
-</docs-callout>
-
-### 注入コンテキスト
-
-デフォルトでは、[インジェクションコンテキスト](guide/di/dependency-injection-context)内（[`inject`](/api/core/inject)関数にアクセスできる場所）でのみ`effect()`を作成できます。この要件を満たす最も簡単な方法は、コンポーネント、ディレクティブ、またはサービスの`constructor`内で`effect`を呼び出すことです。
-
-```ts
-@Component({...})
-export class EffectiveCounterComponent {
-  readonly count = signal(0);
-  constructor() {
-    // 新しいEffectを登録する。
-    effect(() => {
-      console.log(`The count is: ${this.count()}`);
-    });
-  }
-}
-```
-
-または、エフェクトをフィールドに割り当てることができます（これにより、説明的な名前も付けられます）。
-
-```ts
-@Component({...})
-export class EffectiveCounterComponent {
-  readonly count = signal(0);
-
-  private loggingEffect = effect(() => {
-    console.log(`The count is: ${this.count()}`);
-  });
-}
-```
-
-コンストラクターの外でエフェクトを作成するには、`Injector`を`effect`に渡すことができます。これは、`effect`のオプションを使用して行います。
-
-```ts
-@Component({...})
-export class EffectiveCounterComponent {
-  readonly count = signal(0);
-  private injector = inject(Injector);
-
-  initializeLogging(): void {
-    effect(() => {
-      console.log(`The count is: ${this.count()}`);
-    }, {injector: this.injector});
-  }
-}
-```
-
-### エフェクトの破棄
-
-エフェクトを作成すると、それが含まれているコンテキストが破棄されると、自動的に破棄されます。つまり、コンポーネント内で作成されたエフェクトは、コンポーネントが破棄されると破棄されます。ディレクティブ、サービスなどでも同じです。
-
-エフェクトは`EffectRef`を返し、これを用いて`destroy()`メソッドを呼び出して手動で破棄できます。これと`manualCleanup`オプションを組み合わせることで、手動で破棄されるまで続くエフェクトを作成できます。不要になったエフェクトは確実にクリーンアップしてください。
-
-## 詳細なトピック
+## 詳細なトピック {#advanced-topics}
 
 ### シグナルの等価関数
 
@@ -218,7 +148,7 @@ isWritableSignal(count); // true
 isWritableSignal(doubled); // false
 ```
 
-### 依存関係を追跡せずに読み取る
+### 依存関係を追跡せずに読み取る {#reading-without-tracking-dependencies}
 
 まれに、`computed`や`effect`などのリアクティブ関数内でシグナルを読み取るコードを実行する必要があり、依存関係を作成しない場合があります。
 
@@ -249,24 +179,6 @@ effect(() => {
     // `loggingService`がSignalを読み取っても、
     // このEffectの依存関係として扱われません。
     this.loggingService.log(`User set to ${user}`);
-  });
-});
-```
-
-### エフェクトのクリーンアップ関数
-
-エフェクトは長時間実行される操作を開始する可能性があります。これは、エフェクトが破棄された場合、または最初の操作が完了する前にエフェクトが再び実行された場合はキャンセルする必要があります。エフェクトを作成する際に、関数はオプションで最初の引数として`onCleanup`関数を許可できます。この`onCleanup`関数は、エフェクトの次回の実行が始まる前に、もしくはエフェクトが破棄されたときに呼び出されるコールバックを登録できます。
-
-```ts
-effect((onCleanup) => {
-  const user = currentUser();
-
-  const timer = setTimeout(() => {
-    console.log(`1 second ago, the user became ${user}`);
-  }, 1000);
-
-  onCleanup(() => {
-    clearTimeout(timer);
   });
 });
 ```

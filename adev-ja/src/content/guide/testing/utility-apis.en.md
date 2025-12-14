@@ -25,28 +25,28 @@ Read the early part of this guide first to get the basics before trying to absor
 
 The module definition passed to `configureTestingModule` is a subset of the `@NgModule` metadata properties.
 
-<docs-code language="javascript">
+```ts
 
 type TestModuleMetadata = {
-providers?: any[];
-declarations?: any[];
-imports?: any[];
-schemas?: Array<SchemaMetadata | any[]>;
+   providers?: any[];
+   declarations?: any[];
+   imports?: any[];
+   schemas?: Array<SchemaMetadata | any[]>;
 };
 
-</docs-code>
+```
 
 Each override method takes a `MetadataOverride<T>` where `T` is the kind of metadata appropriate to the method, that is, the parameter of an `@NgModule`, `@Component`, `@Directive`, or `@Pipe`.
 
-<docs-code language="javascript">
+```ts
 
 type MetadataOverride<T> = {
-add?: Partial<T>;
-remove?: Partial<T>;
-set?: Partial<T>;
+  add?: Partial<T>;
+  remove?: Partial<T>;
+  set?: Partial<T>;
 };
 
-</docs-code>
+```
 
 The `TestBed` API consists of static class methods that either update or reference a _global_ instance of the `TestBed`.
 
@@ -67,7 +67,7 @@ Here are the most important static methods, in order of likely utility.
 | `overridePipe`           | Replace metadata for the given pipe class, which could be nested deeply within an inner module.                                                                                                                                                                                                                                                                                                                                                                                           |
 
 |
-`inject` | Retrieve a service from the current `TestBed` injector. The `inject` function is often adequate for this purpose. But `inject` throws an error if it can't provide the service. <br /> What if the service is optional? <br /> The `TestBed.inject()` method takes an optional second parameter, the object to return if Angular can't find the provider \(`null` in this example\): <docs-code header="app/demo/demo.testbed.spec.ts" path="adev/src/content/examples/testing/src/app/demo/demo.testbed.spec.ts" visibleRegion="testbed-get-w-null"/> After calling `TestBed.inject`, the `TestBed` configuration is frozen for the duration of the current spec. |
+`inject` | Retrieve a service from the current `TestBed` injector. The `inject` function is often adequate for this purpose. But `inject` throws an error if it can't provide the service. <br /> What if the service is optional? <br /> The `TestBed.inject()` method takes an optional second parameter, the object to return if Angular can't find the provider \(`null` in this example\): <docs-code header="demo.testbed.spec.ts" path="adev/src/content/examples/testing/src/app/demo/demo.testbed.spec.ts" region="testbed-get-w-null"/> After calling `TestBed.inject`, the `TestBed` configuration is frozen for the duration of the current spec. |
 |
 `initTestEnvironment` | Initialize the testing environment for the entire test run. <br /> The testing shims call it for you so there is rarely a reason for you to call it yourself. <br /> Call this method _exactly once_. To change this default in the middle of a test run, call `resetTestEnvironment` first. <br /> Specify the Angular compiler factory, a `PlatformRef`, and a default Angular testing module. Alternatives for non-browser platforms are available in the general form `@angular/platform-<platform_name>/testing/<platform_name>`. |
 | `resetTestEnvironment` | Reset the initial test environment, including the default testing module. |
@@ -138,7 +138,7 @@ The `DebugElement.query(predicate)` and `DebugElement.queryAll(predicate)` metho
 The predicate is any method that takes a `DebugElement` and returns a _truthy_ value.
 The following example finds all `DebugElements` with a reference to a template local variable named "content":
 
-<docs-code header="demo.testbed.spec.ts" path="adev/src/content/examples/testing/src/app/demo/demo.testbed.spec.ts" visibleRegion="custom-predicate"/>
+<docs-code header="demo.testbed.spec.ts" path="adev/src/content/examples/testing/src/app/demo/demo.testbed.spec.ts" region="custom-predicate"/>
 
 The Angular `By` class has three static methods for common predicates:
 
@@ -148,4 +148,4 @@ The Angular `By` class has three static methods for common predicates:
 | `By.css(selector)`        | Return elements with matching CSS selectors                                |
 | `By.directive(directive)` | Return elements that Angular matched to an instance of the directive class |
 
-<docs-code header="hero-list.component.spec.ts" path="adev/src/content/examples/testing/src/app/hero/hero-list.component.spec.ts" visibleRegion="by"/>
+<docs-code header="hero-list.component.spec.ts" path="adev/src/content/examples/testing/src/app/hero/hero-list.component.spec.ts" region="by"/>

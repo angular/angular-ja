@@ -16,7 +16,7 @@ _属性ディレクティブ_は、要素、コンポーネント、または他
 
 `AboutComponent`内での`HighlightDirective`の特定の使用をテストするには、[Component testing scenarios](guide/testing/components-scenarios)セクションの["Nested component tests"](guide/testing/components-scenarios#nested-component-tests)で説明されているテクニックのみが必要です。
 
-<docs-code header="about.component.spec.ts" path="adev/src/content/examples/testing/src/app/about/about.component.spec.ts" visibleRegion="tests"/>
+<docs-code header="about.component.spec.ts" path="adev/src/content/examples/testing/src/app/about/about.component.spec.ts" region="tests"/>
 
 しかし、単一のユースケースをテストしても、ディレクティブの機能のすべてを調べられるとは限りません。
 ディレクティブを使用するすべてのコンポーネントを見つけてテストすることは、面倒で壊れやすく、完全なカバレッジを実現する可能性もほとんどありません。
@@ -26,7 +26,7 @@ _クラスのみのテスト_は役立つ場合がありますが、このディ
 
 より良い解決策は、ディレクティブのすべての適用方法を示す人工的なテストコンポーネントを作成することです。
 
-<docs-code header="highlight.directive.spec.ts (TestComponent)" path="adev/src/content/examples/testing/src/app/shared/highlight.directive.spec.ts" visibleRegion="test-component"/>
+<docs-code header="highlight.directive.spec.ts (TestComponent)" path="adev/src/content/examples/testing/src/app/shared/highlight.directive.spec.ts" region="test-component"/>
 
 <img alt="HighlightDirective spec in action" src="assets/images/guide/testing/highlight-directive-spec.png">
 
@@ -35,7 +35,7 @@ HELPFUL: `<input>`のケースでは、`HighlightDirective`を、入力ボック
 
 このコンポーネントのテストをいくつか紹介します。
 
-<docs-code header="highlight.directive.spec.ts (selected tests)" path="adev/src/content/examples/testing/src/app/shared/highlight.directive.spec.ts" visibleRegion="selected-tests"/>
+<docs-code header="highlight.directive.spec.ts (selected tests)" path="adev/src/content/examples/testing/src/app/shared/highlight.directive.spec.ts" region="selected-tests"/>
 
 いくつかのテクニックが注目に値します。
 

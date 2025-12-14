@@ -7,7 +7,7 @@ NOTE: このガイドはVitestに向けて更新中ですが、一部のコー�
 サービスは、多くの場合、ユニットテストを実行するのに最もスムーズなファイルです。
 以下は、Angularテストユーティリティの助けを借りずに記述された `ValueService` の同期および非同期のユニットテストです。
 
-<docs-code header="demo.spec.ts" path="adev/src/content/examples/testing/src/app/demo/demo.spec.ts" visibleRegion="ValueService"/>
+<docs-code header="demo.spec.ts" path="adev/src/content/examples/testing/src/app/demo/demo.spec.ts" region="ValueService"/>
 
 ## `TestBed` を使用したサービスのテスト {#testing-services-with-the-testbed}
 
@@ -29,28 +29,28 @@ NOTE: このガイドはVitestに向けて更新中ですが、一部のコー�
 
 サービスをテストするには、テストまたはモックするサービスの配列を `providers` メタデータプロパティに設定します。
 
-<docs-code header="demo.testbed.spec.ts (beforeEach で ValueService を提供)" path="adev/src/content/examples/testing/src/app/demo/demo.testbed.spec.ts" visibleRegion="value-service-before-each"/>
+<docs-code header="demo.testbed.spec.ts (beforeEach で ValueService を提供)" path="adev/src/content/examples/testing/src/app/demo/demo.testbed.spec.ts" region="value-service-before-each"/>
 
 次に、サービスクラスを引数として `TestBed.inject()` を呼び出して、テスト内でサービスを注入します。
 
 HELPFUL: `TestBed.get()` は、Angular バージョン 9 以降で非推奨になりました。
 重大な変更を最小限に抑えるため、Angular は `TestBed.inject()` という新しい関数を導入しました。これは、代わりに使用する必要があります。
 
-<docs-code path="adev/src/content/examples/testing/src/app/demo/demo.testbed.spec.ts" visibleRegion="value-service-inject-it"/>
+<docs-code path="adev/src/content/examples/testing/src/app/demo/demo.testbed.spec.ts" region="value-service-inject-it"/>
 
 または、セットアップの一部としてサービスを注入したい場合は、`beforeEach()` 内で行います。
 
-<docs-code path="adev/src/content/examples/testing/src/app/demo/demo.testbed.spec.ts" visibleRegion="value-service-inject-before-each"> </docs-code>
+<docs-code path="adev/src/content/examples/testing/src/app/demo/demo.testbed.spec.ts" region="value-service-inject-before-each"> </docs-code>
 
 依存関係のあるサービスをテストする場合は、`providers` 配列にモックを提供します。
 
 次の例では、モックはスパイオブジェクトです。
 
-<docs-code path="adev/src/content/examples/testing/src/app/demo/demo.testbed.spec.ts" visibleRegion="master-service-before-each"/>
+<docs-code path="adev/src/content/examples/testing/src/app/demo/demo.testbed.spec.ts" region="master-service-before-each"/>
 
 テストでは、以前と同じように、そのスパイを使用します。
 
-<docs-code path="adev/src/content/examples/testing/src/app/demo/demo.testbed.spec.ts" visibleRegion="master-service-it"/>
+<docs-code path="adev/src/content/examples/testing/src/app/demo/demo.testbed.spec.ts" region="master-service-it"/>
 
 ## `beforeEach()` を使用しないテスト {#testing-without-beforeeach}
 
@@ -62,18 +62,18 @@ HELPFUL: `TestBed.get()` は、Angular バージョン 9 以降で非推奨に�
 
 最初に、_セットアップ_ 関数に、再利用可能な準備コードを `beforeEach()` の代わりに配置します。
 
-<docs-code header="demo.spec.ts (setup)" path="adev/src/content/examples/testing/src/app/demo/demo.spec.ts" visibleRegion="no-before-each-setup"/>
+<docs-code header="demo.spec.ts (setup)" path="adev/src/content/examples/testing/src/app/demo/demo.spec.ts" region="no-before-each-setup"/>
 
 `setup()` 関数は、テストで参照できる可能性のある変数 `masterService` などの変数を、オブジェクトリテラルとして返します。
 `describe()` の本文には、_半グローバル_ 変数（例：`let masterService: MasterService`）は定義しません。
 
 次に、各テストは、テスト対象の操作や期待の主張を続行する前に、最初の行で `setup()` を呼び出します。
 
-<docs-code path="adev/src/content/examples/testing/src/app/demo/demo.spec.ts" visibleRegion="no-before-each-test"/>
+<docs-code path="adev/src/content/examples/testing/src/app/demo/demo.spec.ts" region="no-before-each-test"/>
 
 テストで [_デストラクチャリング代入_](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) を使用して、必要なセットアップ変数を抽出したことに注意してください。
 
-<docs-code path="adev/src/content/examples/testing/src/app/demo/demo.spec.ts" visibleRegion="no-before-each-setup-call"/>
+<docs-code path="adev/src/content/examples/testing/src/app/demo/demo.spec.ts" region="no-before-each-setup-call"/>
 
 多くの開発者は、このアプローチは従来の `beforeEach()` スタイルよりもクリーンで明示的だと感じるでしょう。
 
@@ -85,7 +85,7 @@ HELPFUL: `TestBed.get()` は、Angular バージョン 9 以降で非推奨に�
 
 依存関係が注入された `HttpClient` スパイを使用して、データサービスをテストできます。
 
-<docs-code header="hero.service.spec.ts (スパイを使用したテスト)" path="adev/src/content/examples/testing/src/app/model/hero.service.spec.ts" visibleRegion="test-with-spies"/>
+<docs-code header="hero.service.spec.ts (スパイを使用したテスト)" path="adev/src/content/examples/testing/src/app/model/hero.service.spec.ts" region="test-with-spies"/>
 
 IMPORTANT: `HeroService` メソッドは `Observable` を返します。
 Observableに _登録_ することで、(a) 実行させ、(b) メソッドが成功したか失敗したかをアサートする必要があります。

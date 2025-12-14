@@ -29,7 +29,7 @@ ng add @angular/cdk
 
 フィクスチャのルート要素にルートを持つハーネスローダーを作成するには、`loader()`メソッドを使用します。
 
-<docs-code language="typescript">
+```ts
 const fixture = TestBed.createComponent(MyComponent);
 
 // Create a harness loader from the fixture
@@ -38,7 +38,7 @@ const loader = TestbedHarnessEnvironment.loader(fixture);
 
 // Use the loader to get harness instances
 const myComponentHarness = await loader.getHarness(MyComponent);
-</docs-code>
+```
 
 フィクスチャの外部にある要素のハーネス用のハーネスローダーを作成するには、`documentRootLoader()`メソッドを使用します。たとえば、フローティング要素やポップアップを表示するコードは、AngularCDKの`Overlay`サービスのように、DOM要素をドキュメントボディに直接アタッチすることがよくあります。
 
@@ -50,12 +50,12 @@ WebDriverベースのエンドツーエンドテストでは、`SeleniumWebDrive
 
 現在のHTMLドキュメントのハーネスローダーインスタンスを、ドキュメントのルート要素にルートを持つ形で取得するには、`loader()`メソッドを使用します。この環境はWebDriverクライアントを使用します。
 
-<docs-code language="typescript">
+```ts
 let wd: webdriver.WebDriver = getMyWebDriverClient();
 const loader = SeleniumWebDriverHarnessEnvironment.loader(wd);
 ...
 const myComponentHarness = await loader.getHarness(MyComponent);
-</docs-code>
+```
 
 ## ハーネスローダーの使用 {#using-a-harness-loader}
 
@@ -63,13 +63,13 @@ const myComponentHarness = await loader.getHarness(MyComponent);
 
 要素の最初のインスタンスの`ComponentHarness`を取得するには、`getHarness()`メソッドを使用します。すべての`ComponentHarness`インスタンスを取得するには、`getAllHarnesses()`メソッドを使用します。
 
-<docs-code language="typescript">
+```ts
 // Get harness for first instance of the element
 const myComponentHarness = await loader.getHarness(MyComponent);
 
 // Get harnesses for all instances of the element
 const myComponentHarnesses = await loader.getHarnesses(MyComponent);
-</docs-code>
+```
 
 `getHarness`と`getAllHarnesses`に加えて、`HarnessLoader`にはハーネスを検索するためのその他の有用なメソッドがいくつかあります。
 
@@ -85,7 +85,7 @@ const myComponentHarnesses = await loader.getHarnesses(MyComponent);
 
 以下のテストは、これらの各コンポーネントのハーネスをロードします。
 
-<docs-code language="typescript">
+```ts
 let fixture: ComponentFixture<MyDialogButton>;
 let loader: HarnessLoader;
 let rootLoader: HarnessLoader;
@@ -113,7 +113,7 @@ const dialogHarness = await rootLoader.getHarness(MyDialogHarness);
 
 // ... make some assertions
 });
-</docs-code>
+```
 
 ### 異なる環境でのハーネスの動作 {#harness-behavior-in-different-environments}
 
@@ -123,7 +123,7 @@ const dialogHarness = await rootLoader.getHarness(MyDialogHarness);
 
 このハーネスローダーのルート要素より下位の要素とインタラクトするには、子要素の`HarnessLoader`インスタンスを使用します。子要素の最初のインスタンスには`getChildLoader()`メソッドを、すべての子要素のインスタンスには`getAllChildLoaders()`メソッドを使用します。
 
-<docs-code language="typescript">
+```ts
 const myComponentHarness = await loader.getHarness(MyComponent);
 
 // Get loader for first instance of child element with '.child' selector
@@ -131,7 +131,7 @@ const childLoader = await myComponentHarness.getLoader('.child');
 
 // Get loaders for all instances of child elements with '.child' selector
 const allChildLoaders = await myComponentHarness.getAllChildLoaders('.child');
-</docs-code>
+```
 
 ### ハーネスのフィルタリング {#filtering-harnesses}
 
@@ -144,18 +144,18 @@ const allChildLoaders = await myComponentHarness.getAllChildLoaders('.child');
 
 `HarnessPredicate`は、`ComponentHarness`を拡張するあらゆるものに機能するいくつかの基本フィルター（selector、ancestor）をサポートしています。
 
-<docs-code language="typescript">
+```ts
 // Example of loading a MyButtonComponentHarness with a harness predicate
 const disabledButtonPredicate = new HarnessPredicate(MyButtonComponentHarness, {selector: '[disabled]'});
 const disabledButton = await loader.getHarness(disabledButtonPredicate);
-</docs-code>
+```
 
 ただし、ハーネスがコンポーネント固有のフィルタリングオプションを受け入れ、`HarnessPredicate`を返す静的`with()`メソッドを実装することは一般的です。
 
-<docs-code language="typescript">
+```ts
 // Example of loading a MyButtonComponentHarness with a specific selector
 const button = await loader.getHarness(MyButtonComponentHarness.with({selector: 'btn'}))
-</docs-code>
+```
 
 追加のフィルタリングオプションは各ハーネスの実装に固有であるため、詳細については特定のハーネスのドキュメントを参照してください。
 
@@ -167,13 +167,13 @@ const button = await loader.getHarness(MyButtonComponentHarness.with({selector: 
 
 例として、[Angular Materialスライダーコンポーネントハーネス](https://material.angular.dev/components/slider/api#MatSliderHarness)を使用するコンポーネントのテストを以下に示します。
 
-<docs-code language="typescript">
+```ts
 it('should get value of slider thumb', async () => {
   const slider = await loader.getHarness(MatSliderHarness);
   const thumb = await slider.getEndThumb();
   expect(await thumb.getValue()).toBe(50);
 });
-</docs-code>
+```
 
 ## Angularの変更検知との連携 {#interop-with-angular-change-detection}
 
@@ -181,7 +181,7 @@ it('should get value of slider thumb', async () => {
 
 テストで変更検知をより細かく制御する必要がある場合があります。例えば、非同期操作が保留中の間にコンポーネントの状態を確認する場合などです。このような場合は、`manualChangeDetection`関数を使用して、コードブロックの変更検知の自動処理を無効にします。
 
-<docs-code language="typescript">
+```ts
 it('checks state while async action is in progress', async () => {
   const buttonHarness = loader.getHarness(MyButtonHarness);
   await manualChangeDetection(async () => {
@@ -194,7 +194,7 @@ it('checks state while async action is in progress', async () => {
     expect(isProgressSpinnerVisible()).toBe(false);
   });
 });
-</docs-code>
+```
 
 ほとんどすべてのハーネスメソッドは非同期であり、以下をサポートするために`Promise`を返します。
 
@@ -206,7 +206,7 @@ Angularチームは、テストの可読性を向上させるために[await](ht
 
 場合によっては、複数のアクションを同時に実行し、それぞれのアクションを順次実行するのではなく、すべてが完了するまで待機したい場合があります。例えば、単一コンポーネントの複数のプロパティを読み取る場合などです。このような状況では、`parallel`関数を使用して操作を並列化します。`parallel`関数は`Promise.all`と同様に機能し、変更検知チェックも最適化します。
 
-<docs-code language="typescript">
+```ts
 it('reads properties in parallel', async () => {
   const checkboxHarness = loader.getHarness(MyCheckboxHarness);
   // Read the checked and intermediate properties simultaneously.
@@ -217,4 +217,4 @@ it('reads properties in parallel', async () => {
   expect(checked).toBe(false);
   expect(indeterminate).toBe(true);
 });
-</docs-code>
+```

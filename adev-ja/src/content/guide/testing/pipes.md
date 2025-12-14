@@ -15,7 +15,7 @@ Angularのテストユーティリティを使わずに[パイプ](guide/templat
 
 正規表現を使用するものは、徹底的にテストする価値があります。標準的な単体テスト技法を使用して、期待されるケースとエッジケースを調べることができます。
 
-<docs-code header="title-case.pipe.spec.ts" path="adev/src/content/examples/testing/src/app/shared/title-case.pipe.spec.ts" visibleRegion="excerpt"/>
+<docs-code header="title-case.pipe.spec.ts" path="adev/src/content/examples/testing/src/app/shared/title-case.pipe.spec.ts" region="excerpt"/>
 
 ## パイプテストをサポートするDOMテストの作成
 
@@ -24,4 +24,4 @@ Angularのテストユーティリティを使わずに[パイプ](guide/templat
 
 このようなコンポーネントテストを追加することを考えてみましょう。
 
-<docs-code header="hero-detail.component.spec.ts (pipe test)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" visibleRegion="title-case-pipe"/>
+<docs-code header="hero-detail.component.spec.ts (pipe test)" path="adev/src/content/examples/testing/src/app/hero/hero-detail.component.spec.ts" region="title-case-pipe"/>

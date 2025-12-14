@@ -25,28 +25,28 @@ API全体を理解しようとする前に、このガイドの前半部分を�
 
 `configureTestingModule` に渡されるモジュール定義は、`@NgModule` メタデータプロパティのサブセットです。
 
-<docs-code language="javascript">
+```ts
 
 type TestModuleMetadata = {
-providers?: any[];
-declarations?: any[];
-imports?: any[];
-schemas?: Array<SchemaMetadata | any[]>;
+   providers?: any[];
+   declarations?: any[];
+   imports?: any[];
+   schemas?: Array<SchemaMetadata | any[]>;
 };
 
-</docs-code>
+```
 
 各オーバーライドメソッドは、`MetadataOverride<T>` を受け取ります。ここで `T` はメソッドに適したメタデータの種類、つまり `@NgModule`、`@Component`、`@Directive`、または `@Pipe` のパラメーターです。
 
-<docs-code language="javascript">
+```ts
 
 type MetadataOverride<T> = {
-add?: Partial<T>;
-remove?: Partial<T>;
-set?: Partial<T>;
+  add?: Partial<T>;
+  remove?: Partial<T>;
+  set?: Partial<T>;
 };
 
-</docs-code>
+```
 
 `TestBed` APIは、現在の `TestBed` の _グローバル_ インスタンスを更新または参照する静的クラスメソッドで構成されています。
 
@@ -67,7 +67,7 @@ set?: Partial<T>;
 | `overridePipe`           | 指定されたパイプクラスのメタデータを置き換えます。これは、内部モジュールの中に深くネストされている可能性があります。                                                                                                                                                                                                                                                                                                                                                                             |
 
 |
-`inject` | 現在の `TestBed` インジェクターからサービスを取得します。`inject` 関数は、この目的には多くの場合で十分です。ただし、`inject` は、サービスを提供できない場合にエラーをスローします。 <br /> サービスがオプションの場合どうすればよいですか？ <br /> `TestBed.inject()` メソッドは、オプションの第2パラメーターとして、Angularがプロバイダーを見つけられない場合に返すオブジェクト（この例では `null`）を取ります。 <docs-code header="app/demo/demo.testbed.spec.ts" path="adev/src/content/examples/testing/src/app/demo/demo.testbed.spec.ts" visibleRegion="testbed-get-w-null"/> `TestBed.inject` を呼び出すと、現在の仕様の期間中、`TestBed` の構成は固定されます。 |
+`inject` | 現在の `TestBed` インジェクターからサービスを取得します。`inject` 関数は、この目的には多くの場合で十分です。ただし、`inject` は、サービスを提供できない場合にエラーをスローします。 <br /> サービスがオプションの場合どうすればよいですか？ <br /> `TestBed.inject()` メソッドは、オプションの第2パラメーターとして、Angularがプロバイダーを見つけられない場合に返すオブジェクト（この例では `null`）を取ります。 <docs-code header="demo.testbed.spec.ts" path="adev/src/content/examples/testing/src/app/demo/demo.testbed.spec.ts" region="testbed-get-w-null"/> `TestBed.inject` を呼び出すと、現在の仕様の期間中、`TestBed` の構成は固定されます。 |
 |
 `initTestEnvironment` | テストの実行全体でテスト環境を初期化します。 <br /> テストシムはこれを実行するため、自分で呼び出す必要はほとんどありません。 <br /> このメソッドは _ちょうど 1 回_ 呼び出します。テストの実行中にこのデフォルトを変更するには、最初に `resetTestEnvironment` を呼び出します。 <br /> Angularコンパイラーファクトリ、`PlatformRef`、およびデフォルトのAngularテストモジュールを指定します。ブラウザ以外のプラットフォームの代替手段は、`@angular/platform-<platform_name>/testing/<platform_name>` という一般的な形式で利用できます。 |
 | `resetTestEnvironment` | デフォルトのテストモジュールを含む、初期テスト環境をリセットします。 |
@@ -138,7 +138,7 @@ set?: Partial<T>;
 述語は、`DebugElement` を受け取り、_真偽値_ を返す任意のメソッドです。
 次の例は、"content" という名前のテンプレートローカル変数への参照を持つすべての `DebugElements` を見つけます。
 
-<docs-code header="demo.testbed.spec.ts" path="adev/src/content/examples/testing/src/app/demo/demo.testbed.spec.ts" visibleRegion="custom-predicate"/>
+<docs-code header="demo.testbed.spec.ts" path="adev/src/content/examples/testing/src/app/demo/demo.testbed.spec.ts" region="custom-predicate"/>
 
 Angularの `By` クラスには、一般的な述語の3つの静的メソッドがあります。
 
@@ -148,4 +148,4 @@ Angularの `By` クラスには、一般的な述語の3つの静的メソッド
 | `By.css(selector)`        | 一致する CSS セレクターを持つ要素を返す                         |
 | `By.directive(directive)` | ディレクティブクラスのインスタンスに Angular が一致させた要素を返す |
 
-<docs-code header="hero-list.component.spec.ts" path="adev/src/content/examples/testing/src/app/hero/hero-list.component.spec.ts" visibleRegion="by"/>
+<docs-code header="hero-list.component.spec.ts" path="adev/src/content/examples/testing/src/app/hero/hero-list.component.spec.ts" region="by"/>

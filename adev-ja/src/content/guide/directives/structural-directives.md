@@ -128,11 +128,11 @@ export class SelectDirective {
 
 独自の構造ディレクティブを作成する際は、次の構文を使用します。
 
-<docs-code hideCopy language="typescript">
+```ts {hideCopy}
 
 _:prefix="( :let | :expression ) (';' | ',')? ( :let | :as | :keyExp )_"
 
-</docs-code>
+```
 
 次のパターンは、構造ディレクティブ文法の各部分を説明しています。
 

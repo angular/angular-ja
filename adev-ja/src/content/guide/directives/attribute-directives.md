@@ -29,13 +29,13 @@
 
 HELPFUL: ディレクティブは_ネームスペース_をサポートしていません。
 
-<docs-code header="app.component.avoid.html (unsupported)" path="adev/src/content/examples/attribute-directives/src/app/app.component.avoid.html" visibleRegion="unsupported"/>
+<docs-code header="app.component.avoid.html (unsupported)" path="adev/src/content/examples/attribute-directives/src/app/app.component.avoid.html" region="unsupported"/>
 
 ## 属性ディレクティブの適用
 
 `HighlightDirective`を使用するには、ディレクティブを属性として持つ`<p>`要素をHTMLテンプレートに追加します。
 
-<docs-code header="app.component.html" path="adev/src/content/examples/attribute-directives/src/app/app.component.1.html" visibleRegion="applied"/>
+<docs-code header="app.component.html" path="adev/src/content/examples/attribute-directives/src/app/app.component.1.html" region="applied"/>
 
 Angularは`HighlightDirective`クラスのインスタンスを作成し、`<p>`要素への参照をディレクティブのコンストラクターに注入します。これにより、`<p>`要素の背景スタイルが黄色に設定されます。
 
@@ -45,11 +45,11 @@ Angularは`HighlightDirective`クラスのインスタンスを作成し、`<p>`
 
 1. `@Directive()`デコレーターの`host`プロパティを使用してホストイベントバインディングを構成します。
 
-   <docs-code header="src/app/highlight.directive.ts (decorator)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.2.ts" visibleRegion="decorator"/>
+   <docs-code header="src/app/highlight.directive.ts (decorator)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.2.ts" region="decorator"/>
 
 1. 2つのイベントハンドラーメソッドを追加し、`host`プロパティを介してホスト要素イベントをそれらにマッピングします。
 
-   <docs-code header="highlight.directive.ts (mouse-methods)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.2.ts" visibleRegion="mouse-methods"/>
+   <docs-code header="highlight.directive.ts (mouse-methods)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.2.ts" region="mouse-methods"/>
 
 属性ディレクティブをホストするDOM要素（この場合は`<p>`）のイベントを購読するには、ディレクティブの[`host`プロパティ](guide/components/host-elements#binding-to-the-host-element)でイベントリスナーを構成します。
 
@@ -69,21 +69,21 @@ HELPFUL: ハンドラーは、ホストDOM要素`el`に色を設定するヘル�
 
 1. `highlight.directive.ts`で、`@angular/core`から`Input`をインポートします。
 
-   <docs-code header="highlight.directive.ts (imports)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.3.ts" visibleRegion="imports"/>
+   <docs-code header="highlight.directive.ts (imports)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.3.ts" region="imports"/>
 
 1. `appHighlight` `input`プロパティを追加します。
 
-   <docs-code header="highlight.directive.ts" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.3.ts" visibleRegion="input"/>
+   <docs-code header="highlight.directive.ts" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.3.ts" region="input"/>
 
    `input()`関数は、ディレクティブの`appHighlight`プロパティをバインディングで使用できるようにするメタデータをクラスに追加します。
 
 1. `app.component.ts`で、`AppComponent`に`color`プロパティを追加します。
 
-   <docs-code header="app.component.ts (class)" path="adev/src/content/examples/attribute-directives/src/app/app.component.1.ts" visibleRegion="class"/>
+   <docs-code header="app.component.ts (class)" path="adev/src/content/examples/attribute-directives/src/app/app.component.1.ts" region="class"/>
 
 1. ディレクティブと色を同時に適用するには、`appHighlight`ディレクティブセレクターを使用してプロパティバインディングを使用し、それを`color`に設定します。
 
-   <docs-code header="app.component.html (color)" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" visibleRegion="color"/>
+   <docs-code header="app.component.html (color)" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" region="color"/>
 
    `[appHighlight]`属性バインディングは次の2つのタスクを実行します。
    - `<p>`要素にハイライトディレクティブを適用する
@@ -95,15 +95,15 @@ HELPFUL: ハンドラーは、ホストDOM要素`el`に色を設定するヘル�
 
 1. 色を選択するためのマークアップを`app.component.html`に追加します。
 
-<docs-code header="app.component.html (v2)" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" visibleRegion="v2"/>
+<docs-code header="app.component.html (v2)" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" region="v2"/>
 
 1. `AppComponent.color`を修正して、初期値を持たないようにします。
 
-<docs-code header="app.component.ts (class)" path="adev/src/content/examples/attribute-directives/src/app/app.component.ts" visibleRegion="class"/>
+<docs-code header="app.component.ts (class)" path="adev/src/content/examples/attribute-directives/src/app/app.component.ts" region="class"/>
 
 1. `highlight.directive.ts`で、`onMouseEnter`メソッドを修正して、最初に`appHighlight`でハイライトしようとします。`appHighlight`が`undefined`の場合は`red`にフォールバックします。
 
-   <docs-code header="highlight.directive.ts (mouse-enter)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.3.ts" visibleRegion="mouse-enter"/>
+   <docs-code header="highlight.directive.ts (mouse-enter)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.3.ts" region="mouse-enter"/>
 
 4. アプリケーションを起動して、ユーザーがラジオボタンで色を選択できることを確認します。
 
@@ -115,16 +115,16 @@ HELPFUL: ハンドラーは、ホストDOM要素`el`に色を設定するヘル�
 
 1. `HighlightDirective`に`defaultColor`という名前の2番目の`input()`プロパティを追加します。
 
-   <docs-code header="highlight.directive.ts (defaultColor)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.ts" visibleRegion="defaultColor"/>
+   <docs-code header="highlight.directive.ts (defaultColor)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.ts" region="defaultColor"/>
 
 2. ディレクティブの`onMouseEnter`を修正して、最初に`appHighlight`でハイライトしようとします。次に`defaultColor`でハイライトしようとします。両方のプロパティが`undefined`の場合は`red`にフォールバックします。
 
-   <docs-code header="highlight.directive.ts (mouse-enter)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.ts" visibleRegion="mouse-enter"/>
+   <docs-code header="highlight.directive.ts (mouse-enter)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.ts" region="mouse-enter"/>
 
 3. `AppComponent.color`にバインドし、デフォルトカラーとして「violet」を使用するには、次のHTMLを追加します。
    この場合、`defaultColor`バインディングは、静的であるため、角括弧`[]`を使用しません。
 
-   <docs-code header="app.component.html (defaultColor)" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" visibleRegion="defaultColor"/>
+   <docs-code header="app.component.html (defaultColor)" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" region="defaultColor"/>
 
    コンポーネントと同様に、ホスト要素に複数のディレクティブプロパティバインディングを追加できます。
 
@@ -140,12 +140,12 @@ HELPFUL: ハンドラーは、ホストDOM要素`el`に色を設定するヘル�
 
 次の例では、式`{{ 1 + 1 }}`はコードエディタと同じようにレンダリングされ、`2`は表示されません。
 
-<docs-code header="app.component.html" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" visibleRegion="ngNonBindable"/>
+<docs-code header="app.component.html" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" region="ngNonBindable"/>
 
 `ngNonBindable`を要素に適用すると、その要素の子要素のバインディングが停止します。
 ただし、`ngNonBindable`は、`ngNonBindable`を適用した要素に対しては、ディレクティブを動作させます。
 次の例では、`appHighlight`ディレクティブはアクティブですが、Angularは式`{{ 1 + 1 }}`を評価しません。
 
-<docs-code header="app.component.html" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" visibleRegion="ngNonBindable-with-directive"/>
+<docs-code header="app.component.html" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" region="ngNonBindable-with-directive"/>
 
 `ngNonBindable`を親要素に適用すると、Angularは要素の子要素に対して、プロパティバインディングやイベントバインディングなどあらゆる種類の補間とバインディングを無効にします。

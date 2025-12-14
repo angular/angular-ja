@@ -293,6 +293,46 @@ export class PhoneFormComponent {
 | 英数字 | `/^[a-zA-Z0-9]+$/` | abc123 |
 | URLセーフ | `/^[a-zA-Z0-9_-]+$/` | my-url_123 |
 
+## 配列アイテムのバリデーション {#validation-of-array-items}
+
+フォームには、ネストされたオブジェクトの配列を含めることができます（例: 注文アイテムのリスト）。配列内の各アイテムにバリデーションルールを適用するには、スキーマ関数内で`applyEach()`を使用します。`applyEach()`は配列パスを反復処理し、各アイテムのパスを提供します。このパスでは、トップレベルのフィールドと同様にバリデーターを適用できます。
+
+```ts
+import { Component, signal } from '@angular/core'
+import { applyEach, Field, form, min, required, SchemaPathTree } from '@angular/forms/signals';
+
+type Item = { name: string; quantity: number }
+
+interface Order {
+  title: string;
+  description: string;
+  items: Item[];
+}
+
+function ItemSchema(item: SchemaPathTree<Item>) {
+  required(item.name, { message: 'Item name is required' })
+  min(item.quantity, 1, { message: 'Quantity must be at least 1' })
+}
+
+@Component(/* ... */)
+export class OrderComponent {
+  orderModel = signal<Order>({
+    title: '',
+    description: '',
+    items: [
+      { name: '', quantity: 0 },
+    ]
+  })
+
+  orderForm = form(this.orderModel, (schemaPath) => {
+    required(schemaPath.title)
+    required(schemaPath.description)
+
+    applyEach(schemaPath.items, ItemSchema)
+  })
+}
+```
+
 ## バリデーションエラー
 
 バリデーションルールが失敗すると、何が問題だったかを説明するエラーオブジェクトが生成されます。エラーの構造を理解することは、ユーザーに明確なフィードバックを提供するのに役立ちます。

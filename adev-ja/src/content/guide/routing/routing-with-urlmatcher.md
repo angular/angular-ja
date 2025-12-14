@@ -37,7 +37,7 @@ Angular CLIを使用して、新しいアプリケーション_angular-custom-ro
 
 1. コードエディタで`profile.component.html`ファイルを見つけ、プレースホルダーコンテンツを次のHTMLに置き換えます。
 
-   <docs-code header="profile/profile.component.html" path="adev/src/content/examples/routing-with-urlmatcher/src/app/profile/profile.component.html"/>
+   <docs-code header="profile.component.html" path="adev/src/content/examples/routing-with-urlmatcher/src/app/profile/profile.component.html"/>
 
 1. コードエディタで`app.component.html`ファイルを見つけ、プレースホルダーコンテンツを次のHTMLに置き換えます。
 
@@ -62,7 +62,7 @@ Angular CLIを使用して、新しいアプリケーション_angular-custom-ro
 
 1. アプリケーションルートに次のコードを追加して、カスタムルートマッチャーを定義します。
 
-   <docs-code header="app.routes.ts" path="adev/src/content/examples/routing-with-urlmatcher/src/app/app.routes.ts" visibleRegion="matcher"/>
+   <docs-code header="app.routes.ts" path="adev/src/content/examples/routing-with-urlmatcher/src/app/app.routes.ts" region="matcher"/>
 
 このカスタムマッチャーは、次のタスクを実行する関数です。
 

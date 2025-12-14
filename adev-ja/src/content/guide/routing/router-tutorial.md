@@ -61,7 +61,7 @@ ng generate component heroes-list
 
 1. コードエディターで、ファイル`app.component.html`を開き、その内容を以下のHTMLに置き換えます。
 
-<docs-code header="app.component.html" path="adev/src/content/examples/router-tutorial/src/app/app.component.html" visibleRegion="setup"/>
+<docs-code header="app.component.html" path="adev/src/content/examples/router-tutorial/src/app/app.component.html" region="setup"/>
 
 1. 新しいアプリケーションが期待どおりに動作することを確認するには、`ng serve`コマンドを実行します。
 
@@ -136,11 +136,11 @@ ng serve
 1. コードエディターで`app.component.html`ファイルを開きます。
 1. 以下の行を削除します。
 
-<docs-code header="app.component.html" path="adev/src/content/examples/router-tutorial/src/app/app.component.html" visibleRegion="components"/>
+<docs-code header="app.component.html" path="adev/src/content/examples/router-tutorial/src/app/app.component.html" region="components"/>
 
 1. `router-outlet`ディレクティブを追加します。
 
-<docs-code header="app.component.html" path="adev/src/content/examples/router-tutorial/src/app/app.component.html" visibleRegion="router-outlet"/>
+<docs-code header="app.component.html" path="adev/src/content/examples/router-tutorial/src/app/app.component.html" region="router-outlet"/>
 
 1. `app.component.ts`の`AppComponent`のインポートに`RouterOutlet`を追加します。
 
@@ -176,7 +176,7 @@ http://localhost:4200/heroes-list
 
 1. `app.component.html`ファイルを開き、タイトルの下に以下のHTMLを追加します。
 
-   <docs-code header="app.component.html" path="adev/src/content/examples/router-tutorial/src/app/app.component.html" visibleRegion="nav"/>
+   <docs-code header="app.component.html" path="adev/src/content/examples/router-tutorial/src/app/app.component.html" region="nav"/>
 
    このHTMLはAngularディレクティブである`routerLink`を使用しています。
    このディレクティブは、定義したルートをテンプレートファイルに接続します。
@@ -198,7 +198,7 @@ Angularの`routerLinkActive`ディレクティブを使用してこの機能を�
 1. コードエディターで、`app.component.html`ファイルを開きます。
 1. アンカータグを更新して、`routerLinkActive`ディレクティブを含めるようにします。
 
-<docs-code header="app.component.html" path="adev/src/content/examples/router-tutorial/src/app/app.component.html" visibleRegion="routeractivelink"/>
+<docs-code header="app.component.html" path="adev/src/content/examples/router-tutorial/src/app/app.component.html" region="routeractivelink"/>
 
 1. `app.component.ts`の`AppComponent`の`imports`リストに`RouterLinkActive`ディレクティブを追加します。
 
@@ -244,7 +244,7 @@ ng generate component page-not-found
 
 1. コードエディターで、`page-not-found.component.html`ファイルを開き、その内容を以下のHTMLに置き換えます。
 
-<docs-code header="page-not-found/page-not-found.component.html" path="adev/src/content/examples/router-tutorial/src/app/page-not-found/page-not-found.component.html"/>
+<docs-code header="page-not-found.component.html" path="adev/src/content/examples/router-tutorial/src/app/page-not-found/page-not-found.component.html"/>
 
 1. `app.routes.ts`ファイルを開き、以下のルートをルートリストに追加します。
 

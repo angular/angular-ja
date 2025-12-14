@@ -64,19 +64,19 @@ HELPFUL: HTML5スタイルのナビゲーションはルーターのデフォル
 `<base>`要素は`<head>`タグの直後に追加します。
 `app`フォルダがこのアプリケーションのアプリケーションルートである場合、`index.html`の`href`値をここに示されているように設定します。
 
-<docs-code header="index.html (base-href)" path="adev/src/content/examples/router/src/index.html" visibleRegion="base-href"/>
+<docs-code header="index.html (base-href)" path="adev/src/content/examples/router/src/index.html" region="base-href"/>
 
 ### HTML5 URLと`<base href>` {#html5-urls-and-the-base-href}
 
 以下のガイドラインでは、URLのさまざまな部分について言及します。
 この図は、それらの部分が何を参照しているかを示しています。
 
-<docs-code hideCopy language="text">
+```text {hideCopy}
 foo://example.com:8042/over/there?name=ferret#nose
 \_/   \______________/\_________/ \_________/ \__/
  |           |            |            |        |
 scheme    authority      path        query   fragment
-</docs-code>
+```
 
 ルーターはデフォルトで[HTML5 pushState](https://developer.mozilla.org/docs/Web/API/History_API#Adding_and_modifying_history_entries 'Browser history push-state')スタイルを使用しますが、その戦略を`<base href>`で設定する必要があります。
 

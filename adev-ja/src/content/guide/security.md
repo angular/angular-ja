@@ -80,7 +80,7 @@ HTMLを解釈するには、`innerHTML`などのHTMLプロパティにバイン�
 攻撃者が制御する可能性のある値を`innerHTML`にバインディングすると、通常はXSSの脆弱性が発生します。
 たとえば、次のようにJavaScriptを実行できます。
 
-<docs-code header="inner-html-binding.component.ts (class)" path="adev/src/content/examples/security/src/app/inner-html-binding.component.ts" visibleRegion="class"/>
+<docs-code header="inner-html-binding.component.ts (class)" path="adev/src/content/examples/security/src/app/inner-html-binding.component.ts" region="class"/>
 
 Angularは、値を安全ではないと認識し、自動的にサニタイズします。これにより、`script`要素は削除されますが、`<b>`要素などの安全なコンテンツは保持されます。
 
@@ -116,12 +116,12 @@ _注意してください_。
 覚えておいてください。値が安全かどうかはコンテキストに依存します。そのため、値の使用方法に適したコンテキストを選択してください。
 次のテンプレートは、`javascript:alert(...)`呼び出しへのURLを`href`にバインディングする必要があるとします。
 
-<docs-code header="bypass-security.component.html (URL)" path="adev/src/content/examples/security/src/app/bypass-security.component.html" visibleRegion="URL"/>
+<docs-code header="bypass-security.component.html (URL)" path="adev/src/content/examples/security/src/app/bypass-security.component.html" region="URL"/>
 
 通常、Angularは自動的にURLをサニタイズし、危険なコードを無効にし、開発モードではこの操作をコンソールにログ出力します。
 これを回避するには、`bypassSecurityTrustUrl`呼び出しを使用して、URL値を信頼済みURLとしてマークします。
 
-<docs-code header="bypass-security.component.ts (trust-url)" path="adev/src/content/examples/security/src/app/bypass-security.component.ts" visibleRegion="trust-url"/>
+<docs-code header="bypass-security.component.ts (trust-url)" path="adev/src/content/examples/security/src/app/bypass-security.component.ts" region="trust-url"/>
 
 <img alt="信頼済みURLから作成されたアラートボックスを示すスクリーンショット" src="assets/images/guide/security/bypass-security-component.png#medium">
 
@@ -130,9 +130,9 @@ _注意してください_。
 `<iframe src>`属性はリソースURLセキュリティコンテキストです。なぜなら、信頼されていないソースは、たとえば、うっかりしたユーザーが実行する可能性のあるファイルダウンロードを密かに送り込むことができるからです。
 これを防ぐために、コンポーネントのメソッドを呼び出して信頼済みビデオURLを作成すると、Angularは`<iframe src>`へのバインディングを許可します。
 
-<docs-code header="bypass-security.component.html (iframe)" path="adev/src/content/examples/security/src/app/bypass-security.component.html" visibleRegion="iframe"/>
+<docs-code header="bypass-security.component.html (iframe)" path="adev/src/content/examples/security/src/app/bypass-security.component.html" region="iframe"/>
 
-<docs-code header="bypass-security.component.ts (trust-video-url)" path="adev/src/content/examples/security/src/app/bypass-security.component.ts" visibleRegion="trust-video-url"/>
+<docs-code header="bypass-security.component.ts (trust-video-url)" path="adev/src/content/examples/security/src/app/bypass-security.component.ts" region="trust-video-url"/>
 
 ### コンテンツセキュリティポリシー {#content-security-policy}
 

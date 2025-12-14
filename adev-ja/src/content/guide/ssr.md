@@ -551,6 +551,8 @@ bootstrapApplication(AppComponent, {
 httpClient.get('/api/sensitive-data', { transferCache: false });
 ```
 
+NOTE: アプリケーションがサーバーとクライアントで異なるHTTPオリジンを使用してAPIコールを行う場合、`HTTP_TRANSFER_CACHE_ORIGIN_MAP`トークンを使用してそれらのオリジン間のマッピングを確立できます。これにより、`HttpTransferCache`機能がそれらのリクエストを同じものとして認識し、クライアントでのハイドレーション中にサーバーでキャッシュされたデータを再利用できます。
+
 ## サーバーの設定 {#configuring-a-server}
 
 ### Node.js {#node-js}

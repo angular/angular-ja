@@ -133,16 +133,16 @@ HELPFUL: Vitestの設定について詳しくは、[Vitestの公式ドキュメ�
 
 ブラウザでテストを実行するには、最初にブラウザプロバイダーをインストールする必要があります。Vitestのブラウザモードの詳細については、[公式ドキュメント](https://vitest.dev/guide/browser)を参照してください。
 
-プロバイダーがインストールされたら、`angular.json`で`browsers`オプションを設定するか、`--browsers` CLIフラグを使用して、ブラウザでテストを実行できます。テストは、デフォルトでヘッド付きブラウザで実行されます。`CI`環境変数が設定されている場合は、代わりにヘッドレスモードが使用されます。ヘッドレスモードを明示的に制御するには、ブラウザ名に`Headless`をサフィックスとして追加できます（例: `chromiumHeadless`）。
+プロバイダーがインストールされたら、`angular.json`の`browsers`オプションを設定するか、`--browsers` CLIフラグを使用してブラウザでテストを実行できます。テストは、デフォルトではヘッドフルブラウザが使用されます。`CI`環境変数が設定されている場合は、代わりにヘッドレスモードが使用されます。ヘッドレスモードを明示的に制御するには、ブラウザ名に`Headless`をサフィックスとして追加できます（例: `chromiumHeadless`）。
 
 ```bash
-# Playwrightの例（ヘッド付き）
+# Playwrightの例（ヘッドフル）
 ng test --browsers=chromium
 
 # Playwrightの例（ヘッドレス）
 ng test --browsers=chromiumHeadless
 
-# WebdriverIOの例（ヘッド付き）
+# WebdriverIOの例（ヘッドフル）
 ng test --browsers=chrome
 
 # WebdriverIOの例（ヘッドレス）

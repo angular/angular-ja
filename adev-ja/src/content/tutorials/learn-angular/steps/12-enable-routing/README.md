@@ -33,7 +33,7 @@ export const routes: Routes = [];
 1. `./app.routes.ts` から `routes` をインポートします。
 1. `providers` 配列で、`routes` を引数として `provideRouter` 関数を呼び出します。
 
-<docs-code language="ts" highlight="[2,3,6]">
+```ts {highlight:[2,3,6]}
 import {ApplicationConfig} from '@angular/core';
 import {provideRouter} from '@angular/router';
 import {routes} from './app.routes';
@@ -41,7 +41,7 @@ import {routes} from './app.routes';
 export const appConfig: ApplicationConfig = {
 providers: [provideRouter(routes)],
 };
-</docs-code>
+```
 
 </docs-step>
 
@@ -51,12 +51,13 @@ providers: [provideRouter(routes)],
 
 `App` のテンプレートを更新し、`<router-outlet />` を追加します。
 
-<docs-code language="angular-ts" highlight="[11]">
+```angular-ts {highlight:[11]}
 import {RouterOutlet} from '@angular/router';
 
 @Component({
 ...
-template: `     <nav>
+template: `
+    <nav>
       <a href="/">Home</a>
       |
       <a href="/user">User</a>
@@ -66,7 +67,7 @@ template: `     <nav>
 imports: [RouterOutlet],
 })
 export class App {}
-</docs-code>
+```
 
 </docs-step>
 

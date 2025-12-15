@@ -14,7 +14,7 @@ NOTE: 詳しくは、[フォームコントロールの追加方法について�
 
 テンプレートに入力値を表示するには、コンポーネントの他のクラスプロパティと同様に、補間構文 `{{}}` を使用できます。
 
-<docs-code language="angular-ts" highlight="[5]">
+```angular-ts {highlight:[5]}
 @Component({
   selector: 'app-user',
   template: `
@@ -29,7 +29,7 @@ NOTE: 詳しくは、[フォームコントロールの追加方法について�
 export class User {
   favoriteFramework = '';
 }
-</docs-code>
+```
 
 </docs-step>
 
@@ -37,7 +37,7 @@ export class User {
 
 コンポーネントクラスで入力フィールド値を参照する必要がある場合は、`this` 構文を使用してクラスプロパティにアクセスできます。
 
-<docs-code language="angular-ts" highlight="[15]">
+```angular-ts {highlight:[15]}
 ...
 @Component({
   selector: 'app-user',
@@ -51,11 +51,11 @@ export class User {
   favoriteFramework = '';
   ...
 
-showFramework() {
-alert(this.favoriteFramework);
+  showFramework() {
+    alert(this.favoriteFramework);
+  }
 }
-}
-</docs-code>
+```
 
 </docs-step>
 

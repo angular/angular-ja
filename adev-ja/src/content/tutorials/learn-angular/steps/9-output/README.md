@@ -12,25 +12,25 @@ NOTE: 詳しくは[アウトプットガイドのカスタムイベント](/guid
 
 子コンポーネントから親コンポーネントへの通信パスを作成するには、クラスプロパティに`output()` 関数を使用して初期化します。
 
-<docs-code header="child.ts" language="ts">
+```ts {header:"child.ts"}
 @Component({...})
 class Child {
   incrementCountEvent = output<number>();
 }
-</docs-code>
+```
 
 これで、コンポーネントは、親コンポーネントがリスンできるイベントを生成できます。`emit`メソッドを呼び出すことでイベントをトリガーします。
 
-<docs-code header="child.ts" language="ts">
+```ts {header:"child.ts"}
 class Child {
   ...
 
-onClick() {
-this.count++;
-this.incrementCountEvent.emit(this.count);
+  onClick() {
+    this.count++;
+    this.incrementCountEvent.emit(this.count);
+  }
 }
-}
-</docs-code>
+```
 
 emit関数は、`output`で定義した型と同じ型のイベントを発生させます。
 
@@ -45,11 +45,11 @@ emit関数は、`output`で定義した型と同じ型のイベントを発生�
 <docs-step title="`addItem`メソッドを完成させる">
 `child.ts`で`addItem`メソッドを更新します。次のコードをロジックとして使用してください。
 
-<docs-code header="child.ts" highlight="[2]" language="ts">
+```ts {header:"child.ts", highlight:[2]}
 addItem() {
   this.addItemEvent.emit('🐢');
 }
-</docs-code>
+```
 
 </docs-step>
 

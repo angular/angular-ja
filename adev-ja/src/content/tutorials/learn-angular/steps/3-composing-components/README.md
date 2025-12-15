@@ -17,7 +17,7 @@ NOTE: [エッセンシャルガイドのコンポーネントの使用方法](/e
 <docs-step title="`User`への参照を追加">
 `App` テンプレートを更新して、`app-user`セレクターを使用する `User` への参照を含めます。`App` のインポート配列に `User` を追加してください。これにより、`App` テンプレートで使用できるようになります。
 
-```ts
+```angular-html
 template: `<app-user />`,
 imports: [User]
 ```
@@ -28,7 +28,7 @@ imports: [User]
 <docs-step title="さらにマークアップを追加">
 テンプレートでは任意のHTMLマークアップを使用できるため、`App`のテンプレートを更新して、さらにHTML要素を含めてみてください。この例では、`<app-user>` 要素の親として `<section>` 要素を追加します。
 
-```ts
+```angular-html
 template: `<section><app-user /></section>`,
 ```
 

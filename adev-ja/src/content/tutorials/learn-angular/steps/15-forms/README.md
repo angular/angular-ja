@@ -31,7 +31,7 @@ NOTE: 詳しくは、[Angularのフォームに関する詳細ガイド](/guide/
 
 `@angular/forms`から`FormsModule`をインポートし、`User`の`imports`配列に追加します。
 
-<docs-code language="ts" highlight="[2, 7]">
+```ts {highlight:[2,7]}
 import {Component} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 
@@ -40,7 +40,7 @@ import {FormsModule} from '@angular/forms';
 imports: [FormsModule],
 })
 export class User {}
-</docs-code>
+```
 
 </docs-step>
 
@@ -50,12 +50,12 @@ export class User {}
 
 入力で`ngModel`ディレクティブを使用するように更新します。具体的には、`[(ngModel)]="favoriteFramework"`という構文を使用して、`favoriteFramework`プロパティにバインドします。
 
-<docs-code language="html" highlight="[3]">
+```html {highlight:[3]}
 <label for="framework">
   好きなフレームワーク:
   <input id="framework" type="text" [(ngModel)]="favoriteFramework" />
 </label>
-</docs-code>
+```
 
 変更を加えたら、入力フィールドに値を入力してみてください。画面上でどのように更新されるかを確認してください（はい、非常にクールです）。
 

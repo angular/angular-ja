@@ -48,7 +48,7 @@ export class StarPipe implements PipeTransform {
 
 これで、`ReversePipe` クラスはパイプになります。`transform` 関数を更新して、反転ロジックを追加します。
 
-<docs-code language="ts" highlight="[3,4,5,6,7,8,9]">
+```ts {highlight:[3,4,5,6,7,8,9]}
 export class ReversePipe implements PipeTransform {
   transform(value: string): string {
     let reverse = '';
@@ -59,22 +59,21 @@ export class ReversePipe implements PipeTransform {
 
     return reverse;
   }
-
 }
-</docs-code>
+```
 
 </docs-step>
 
 <docs-step title="テンプレートで `ReversePipe` を使用する"></docs-step>
 パイプロジックを実装したら、最後のステップとしてテンプレートで使用します。`app.ts` でテンプレートにパイプを含め、コンポーネントのインポートに追加します。
 
-<docs-code language="angular-ts" highlight="[3,4]">
+```angular-ts {highlight:[3,4]}
 @Component({
   ...
   template: `Reverse Machine: {{ word | reverse }}`
   imports: [ReversePipe]
 })
-</docs-code>
+```
 
 </docs-workflow>
 

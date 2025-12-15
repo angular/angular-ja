@@ -10,7 +10,7 @@ NOTE: 詳しくは、[パイプによるデータのフォーマットに関す�
 
 パイプにパラメーターを渡すには、`:`構文の後にパラメーター値を記述します。例を以下に示します。
 
-```ts
+```angular-html
 template: `{{ date | date:'medium' }}`;
 ```
 
@@ -24,12 +24,12 @@ template: `{{ date | date:'medium' }}`;
 
 `app.ts` のテンプレートを更新して、`decimal` パイプのパラメーターを含めます。
 
-<docs-code language="ts" highlight="[3]">
+```ts {highlight:[3]}
 template: `
   ...
   <li>Number with "decimal" {{ num | number:"3.2-2" }}</li>
 `
-</docs-code>
+```
 
 NOTE: このフォーマットは何でしょう？`DecimalPipe` のパラメーターは `digitsInfo` と呼ばれ、`{minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}` のフォーマットを使用します。
 
@@ -39,12 +39,12 @@ NOTE: このフォーマットは何でしょう？`DecimalPipe` のパラメー
 
 次に、テンプレートを更新して `date` パイプを使用します。
 
-<docs-code language="ts" highlight="[3]">
+```ts {highlight:[3]}
 template: `
   ...
   <li>Date with "date" {{ birthday | date: 'medium' }}</li>
 `
-</docs-code>
+```
 
 さらに楽しくするために、`date` に対してさまざまなパラメーターを試してみてください。詳細については、[Angular ドキュメント](guide/templates/pipes)を参照してください。
 
@@ -54,12 +54,12 @@ template: `
 
 最後の作業として、テンプレートを更新して `currency` パイプを使用します。
 
-<docs-code language="ts" highlight="[3]">
+```ts {highlight:[3]}
 template: `
   ...
   <li>Currency with "currency" {{ cost | currency }}</li>
 `
-</docs-code>
+```
 
 `currency` に対してさまざまなパラメーターを試すこともできます。詳細については、[Angular ドキュメント](guide/templates/pipes)を参照してください。
 

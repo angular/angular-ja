@@ -1,13 +1,13 @@
 diff --git a/adev/src/app/app.component.html b/adev/src/app/app.component.html
-index 5977c3aa81..3a61a9c28e 100644
+index dd6f824449..cfed514409 100644
 --- a/adev/src/app/app.component.html
 +++ b/adev/src/app/app.component.html
-@@ -2,7 +2,7 @@
- 
- @defer (when isBrowser) {
-   <adev-progress-bar />
--  <docs-top-level-banner expiry="2025-10-20" id="state-of-js-2025" link="https://survey.devographics.com/en-US/survey/state-of-js/2025?source=angular_homepage" text="Share your experience with Angular in The State of JavaScript 2025 survey"  />
-+  <docs-top-level-banner expiry="2025-10-20" id="state-of-js-2025" link="https://survey.devographics.com/en-US/survey/state-of-js/2025?source=angular_homepage" text="State of JavaScript 2025 アンケートであなたの経験を共有しましょう!"  />
+@@ -6,7 +6,7 @@
+     expiry="2025-10-20"
+     id="state-of-js-2025"
+     link="https://survey.devographics.com/en-US/survey/state-of-js/2025?source=angular_homepage"
+-    text="Share your experience with Angular in The State of JavaScript 2025 survey"
++    text="State of JavaScript 2025 アンケートであなたの経験を共有しましょう!"
+   />
  }
  
- <div class="adev-nav"></div>

@@ -12,24 +12,24 @@ Angularの_遅延可能ビュー_は`@defer`構文を使用して、すぐに表
 <docs-step title="`@defer`ブロックをテンプレートの一部分に追加する。">
 `app.ts`で、`@defer`ブロックで`article-comments`コンポーネントをラップして、ロードを遅延させます。
 
-<docs-code language="angular-html">
+```angular-html
 @defer {
   <article-comments />
 }
-</docs-code>
+```
 
 デフォルトでは、`@defer`はブラウザがアイドル状態のときに`article-comments`コンポーネントをロードします。
 
 ブラウザの開発者コンソールで、`article-comments-component`の遅延チャンクファイルが個別にロードされていることがわかります（ファイル名は実行ごとに変わる可能性があります）。
 
-<docs-code language="markdown">
+```markdown
 Initial chunk files | Names                      |  Raw size
 chunk-NNSQHFIE.js   | -                          | 769.00 kB |
 main.js             | main                       | 229.25 kB |
 
 Lazy chunk files | Names | Raw size
 chunk-T5UYXUSI.js | article-comments-component | 1.84 kB |
-</docs-code>
+```
 
 </docs-step>
 </docs-workflow>

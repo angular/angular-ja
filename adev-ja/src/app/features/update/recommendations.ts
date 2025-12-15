@@ -2604,7 +2604,8 @@ export const RECOMMENDATIONS: Step[] = [
       necessaryAsOf: 2000,
       level: ApplicationComplexity.Medium,
       step: '20.0.0_rename_rxResource_loader_to_stream',
-      action: 'rxResourcesで渡される`loader`プロパティを`stream`にリネームしてください。',
+      action:
+        'RxResourceで渡される`request`および`loader`プロパティを`params`および`stream`にリネームしてください。',
     },
     {
       possibleIn: 2000,

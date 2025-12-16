@@ -35,9 +35,9 @@ jobs:
           cache: pnpm
       - uses: bazel-contrib/setup-bazel@4fd964a13a440a8aeb0be47350db2fc640f19ca8 # 0.15.0
         with:
-          bazelisk-cache: false
-          disk-cache: false
-          repository-cache: false
+          bazelisk-cache: true
+          disk-cache: ${{ github.workflow }}
+          repository-cache: true
       - run: pnpm install
       - run: pnpm run build
   # build-windows:

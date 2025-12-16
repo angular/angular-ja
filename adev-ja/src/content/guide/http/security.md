@@ -18,10 +18,10 @@ XSSIを防ぐための一般的なテクニックは、JSONレスポンスを "�
 
 `HttpClient` は、XSRF攻撃を防ぐために使用される [一般的なメカニズム](https://en.wikipedia.org/wiki/Cross-site_request_forgery#Cookie-to-header_token) をサポートしています。HTTPリクエストを実行すると、インターセプターはデフォルトで `XSRF-TOKEN` という名前のCookieからトークンを読み取り、`X-XSRF-TOKEN` というHTTPヘッダーに設定します。ドメイン上で実行されるコードのみがCookieを読み取ることができるため、バックエンドはHTTPリクエストが攻撃者ではなくクライアントアプリケーションから来たものであると確信できます。
 
-デフォルトでは、インターセプターは、相対URLへのすべての変更要求 (例: `POST`) にこのヘッダーを送信しますが、GET/HEADリクエストまたは絶対URLを持つリクエストには送信しません。
+デフォルトでは、インターセプターは、相対URLおよび同一オリジンURLへのすべての変更要求 (例: `POST`) にこのヘッダーを送信しますが、`GET`または`HEAD`リクエストには送信しません。
 
 <docs-callout helpful title="なぜ GET リクエストは保護しないのですか?">
-CSRF 保護は、バックエンドの状態を変更できるリクエストでのみ必要です。本質的に、CSRF 攻撃はドメイン境界を超えて実行され、Web の [same-origin ポリシー](https://developer.mozilla.org/docs/Web/Security/Same-origin_policy) は、攻撃するページが認証された GET リクエストの結果を取得するのを防ぎます。
+CSRF 保護は、バックエンドの状態を変更できるリクエストでのみ必要です。本質的に、CSRF 攻撃はドメイン境界を超えて実行され、Web の [same-origin ポリシー](https://developer.mozilla.org/docs/Web/Security/Same-origin_policy) は、攻撃するページが認証された `GET` リクエストの結果を取得するのを防ぎます。
 </docs-callout>
 
 この機能を利用するには、サーバーはページの読み込み時または最初のGETリクエスト時に、`XSRF-TOKEN` というJavaScriptで読み取り可能なセッションCookieにトークンを設定する必要があります。その後のリクエストでは、サーバーはCookieが `X-XSRF-TOKEN` HTTPヘッダーと一致することを確認し、ドメイン上で実行されているコードのみがリクエストを送信できたことを確認できます。トークンはユーザーごとに一意である必要があり、サーバーで検証可能である必要があります。これにより、クライアントが独自のトークンを作成することが防止されます。セキュリティを高めるために、トークンをサイトの認証Cookieのダイジェストに設定し、塩で設定します。

@@ -39,25 +39,27 @@
 <docs-step title="`@placeholder`ブロックの追加">
 `app.ts`で、`@defer`ブロックに`@placeholder`ブロックを追加します。
 
-<docs-code language="angular-html" highlight="[3,4,5]">
+```angular-html {highlight:[3,4,5]}
 @defer {
   <article-comments />
 } @placeholder {
   <p>Placeholder for comments</p>
 }
-</docs-code>
+```
+
 </docs-step>
 
 <docs-step title="`@placeholder`ブロックの構成">
 `@placeholder`ブロックは、このプレースホルダーを表示する最小時間を指定するオプションのパラメーターを受け入れます。この`minimum`パラメーターは、ミリ秒(ms)または秒(s)の時間単位で指定されます。このパラメーターは、遅延した依存関係が迅速に取得された場合のプレースホルダーコンテンツの高速なちらつきを防ぐために存在します。
 
-<docs-code language="angular-html" highlight="[3,4,5]">
+```angular-html {highlight:[3,4,5]}
 @defer {
   <article-comments />
 } @placeholder (minimum 1s) {
   <p>Placeholder for comments</p>
 }
-</docs-code>
+```
+
 </docs-step>
 
 <docs-step title="`@loading`ブロックの追加">
@@ -72,7 +74,7 @@
 
 `@loading`ブロックに`minimum`パラメーターを`1s`、`after`パラメーターを`500ms`として含めるように`app.ts`を更新します。
 
-<docs-code language="angular-html" highlight="[5,6,7]">
+```angular-html {highlight:[5,6,7]}
 @defer {
   <article-comments />
 } @placeholder (minimum 1s) {
@@ -80,7 +82,7 @@
 } @loading (minimum 1s; after 500ms) {
   <p>Loading comments...</p>
 }
-</docs-code>
+```
 
 NOTE: この例では、;文字で区切られた2つのパラメーターを使用しています。
 
@@ -89,7 +91,7 @@ NOTE: この例では、;文字で区切られた2つのパラメーターを使
 <docs-step title="`@error`ブロックの追加">
 最後に、`@defer`ブロックに`@error`ブロックを追加します。
 
-<docs-code language="angular-html" highlight="[7,8,9]">
+```angular-html {highlight:[7,8,9]}
 @defer {
   <article-comments />
 } @placeholder (minimum 1s) {
@@ -99,7 +101,8 @@ NOTE: この例では、;文字で区切られた2つのパラメーターを使
 } @error {
   <p>Failed to load comments</p>
 }
-</docs-code>
+```
+
 </docs-step>
 </docs-workflow>
 

@@ -23,22 +23,24 @@ NOTE: 詳しくは、[エッセンシャルガイドの動的なプロパティ�
 <docs-step title="`isEditable`というプロパティを追加する" header="app.ts" language="ts">
 `app.ts`のコードを更新し、`App`クラスに`isEditable`というプロパティを追加します。初期値は`true`に設定します。
 
-<docs-code highlight="[2]">
+```ts {highlight:[2]}
 export class App {
   isEditable = true;
 }
-</docs-code>
+```
+
 </docs-step>
 
 <docs-step title="`contentEditable`にバインドする" header="app.ts" language="ts">
 次に、`div`の`contentEditable`属性を`isEditable`プロパティにバインドします。 <code aria-label="角括弧">[]</code>構文を使用します。
 
-<docs-code highlight="[3]" language="angular-ts">
+```angular-ts {highlight:[3]}
 @Component({
   ...
   template: `<div [contentEditable]="isEditable"></div>`,
 })
-</docs-code>
+```
+
 </docs-step>
 
 </docs-workflow>

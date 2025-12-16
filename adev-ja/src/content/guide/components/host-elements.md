@@ -150,7 +150,7 @@ export class MyComponent {
 
 この例では、`--my-background` CSSカスタムプロパティが`color`シグナルにバインドされています。カスタムプロパティの値は、`color`シグナルが変更されるたびに自動的に更新されます。これは現在のコンポーネントと、このカスタムプロパティに依存するすべての子コンポーネントに影響します。
 
-### 子コンポーネントでのカスタムプロパティの設定 {#setting-custom-properties-on-children-compoents}
+### 子コンポーネントでのカスタムプロパティの設定 {#setting-custom-properties-on-children-components}
 
 また、[スタイルバインディング](guide/templates/binding#css-style-properties)を使用して、子コンポーネントのホスト要素にCSSカスタムプロパティを設定できます。
 

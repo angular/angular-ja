@@ -27,6 +27,37 @@ export class HighlightDirective {
 
 ```
 
+## ホスト要素のタグ名を注入する {#inject-the-host-elements-tag-name}
+
+ホスト要素のタグ名が必要な場合は、`HOST_TAG_NAME`トークンを使用して注入します。
+
+```ts
+import {Directive, HOST_TAG_NAME, inject} from '@angular/core';
+
+@Directive({
+  selector: '[roleButton]',
+})
+export class RoleButtonDirective {
+  private tagName = inject(HOST_TAG_NAME);
+
+  onAction() {
+    switch (this.tagName) {
+      case 'button':
+        // ボタンアクションを処理
+        break;
+      case 'a':
+        // アンカーアクションを処理
+        break;
+      default:
+        // その他の要素を処理
+        break;
+    }
+  }
+}
+```
+
+NOTE: ホスト要素がタグ名を持たない可能性がある場合（例: `ng-container`または`ng-template`）、注入をオプションにしてください。
+
 ## 前方参照を使用して循環した依存関係を解決する {#resolve-circular-dependencies-with-a-forward-reference}
 
 TypeScriptでは、クラスの宣言順序が重要です。

@@ -36,19 +36,19 @@
 <docs-step title="Generate a new component and import the ReactiveFormsModule">
 Use the CLI command `ng generate component` to generate a component in your project and import `ReactiveFormsModule` from the `@angular/forms` package and add it to your Component's `imports` array.
 
-<docs-code header="name-editor.component.ts (excerpt)" path="adev/src/content/examples/reactive-forms/src/app/name-editor/name-editor.component.ts" visibleRegion="imports" />
+<docs-code header="name-editor.component.ts (excerpt)" path="adev/src/content/examples/reactive-forms/src/app/name-editor/name-editor.component.ts" region="imports" />
 </docs-step>
 
 <docs-step title="Declare a FormControl instance">
 Use the constructor of `FormControl` to set its initial value, which in this case is an empty string. By creating these controls in your component class, you get immediate access to listen for, update, and validate the state of the form input.
 
-<docs-code header="name-editor.component.ts" path="adev/src/content/examples/reactive-forms/src/app/name-editor/name-editor.component.ts" visibleRegion="create-control"/>
+<docs-code header="name-editor.component.ts" path="adev/src/content/examples/reactive-forms/src/app/name-editor/name-editor.component.ts" region="create-control"/>
 </docs-step>
 
 <docs-step title="テンプレートにコントロールを登録">
 コンポーネントクラスでコントロールを作成したら、テンプレートのフォームコントロール要素に関連付ける必要があります。`ReactiveFormsModule` にも含まれている `FormControlDirective` によって提供される `formControl` バインディングを使用して、フォームコントロールをテンプレートのフォームコントロールに関連付けます。
 
-<docs-code header="name-editor.component.html" path="adev/src/content/examples/reactive-forms/src/app/name-editor/name-editor.component.html" visibleRegion="control-binding" />
+<docs-code header="name-editor.component.html" path="adev/src/content/examples/reactive-forms/src/app/name-editor/name-editor.component.html" region="control-binding" />
 
 テンプレートバインディング構文を使用することで、フォームコントロールがテンプレートの `name` 入力要素に登録されました。フォームコントロールとDOM要素は相互に通信します。ビューはモデルの変更を反映し、モデルはビューの変更を反映します。
 </docs-step>
@@ -56,7 +56,7 @@ Use the constructor of `FormControl` to set its initial value, which in this cas
 <docs-step title="コンポーネントを表示">
 `name` プロパティに割り当てられた `FormControl` は、`<app-name-editor>` コンポーネントをテンプレートに追加すると表示されます。
 
-<docs-code header="app.component.html (name editor)" path="adev/src/content/examples/reactive-forms/src/app/app.component.1.html" visibleRegion="app-name-editor"/>
+<docs-code header="app.component.html (name editor)" path="adev/src/content/examples/reactive-forms/src/app/app.component.1.html" region="app-name-editor"/>
 </docs-step>
 </docs-workflow>
 
@@ -69,7 +69,7 @@ Use the constructor of `FormControl` to set its initial value, which in this cas
 
 次の例では、テンプレートの補間を使用して、現在の値を表示する方法を示します。
 
-<docs-code header="name-editor.component.html (control value)" path="adev/src/content/examples/reactive-forms/src/app/name-editor/name-editor.component.html" visibleRegion="display-value"/>
+<docs-code header="name-editor.component.html (control value)" path="adev/src/content/examples/reactive-forms/src/app/name-editor/name-editor.component.html" region="display-value"/>
 
 表示される値は、フォームコントロール要素を更新すると変更されます。
 
@@ -86,12 +86,12 @@ Use the constructor of `FormControl` to set its initial value, which in this cas
 
 次の例では、`setValue()` メソッドを使用してコントロールの値を _Nancy_ に更新するメソッドをコンポーネントクラスに追加します。
 
-<docs-code header="name-editor.component.ts (update value)" path="adev/src/content/examples/reactive-forms/src/app/name-editor/name-editor.component.ts" visibleRegion="update-value"/>
+<docs-code header="name-editor.component.ts (update value)" path="adev/src/content/examples/reactive-forms/src/app/name-editor/name-editor.component.ts" region="update-value"/>
 
 テンプレートに、名前の更新をシミュレートするボタンを追加します。
 **名前の更新** ボタンをクリックすると、フォームコントロール要素に入力された値は現在の値として反映されます。
 
-<docs-code header="name-editor.component.html (update value)" path="adev/src/content/examples/reactive-forms/src/app/name-editor/name-editor.component.html" visibleRegion="update-value"/>
+<docs-code header="name-editor.component.html (update value)" path="adev/src/content/examples/reactive-forms/src/app/name-editor/name-editor.component.html" region="update-value"/>
 
 フォームモデルはコントロールの真実の源であるため、ボタンをクリックすると、コンポーネントクラス内で入力の値が変更され、現在の値が上書きされます。
 
@@ -118,7 +118,7 @@ HELPFUL: この例では、単一のコントロールを使用しています�
 ng generate component ProfileEditor
 ```
 
-<docs-code header="profile-editor.component.ts (imports)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" visibleRegion="imports"/>
+<docs-code header="profile-editor.component.ts (imports)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" region="imports"/>
 
 このコンポーネントにフォームグループを追加するには、次の手順を実行します。
 
@@ -133,7 +133,7 @@ ng generate component ProfileEditor
 
 プロファイルフォームの場合、`firstName` と `lastName` という名前の2つのフォームコントロールインスタンスを追加します
 
-<docs-code header="profile-editor.component.ts (form group)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" visibleRegion="formgroup"/>
+<docs-code header="profile-editor.component.ts (form group)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" region="formgroup"/>
 
 個々のフォームコントロールは、グループ内に収集されました。`FormGroup` インスタンスは、グループの各コントロールの値から縮小されたオブジェクトとしてモデル値を提供します。フォームグループインスタンスには、フォームコントロールインスタンスと同じプロパティ（`value` や `untouched` など）とメソッド（`setValue()` など）があります。
 </docs-step>
@@ -141,7 +141,7 @@ ng generate component ProfileEditor
 <docs-step title="FormGroup モデルとビューの関連付け">
 フォームグループは、その各コントロールのステータスと変更を追跡するため、コントロールのいずれかが変更されると、親コントロールも新しいステータスまたは値の変更を発行します。グループのモデルは、そのメンバーから維持されます。モデルを定義したら、テンプレートを更新して、ビューにモデルを反映する必要があります。
 
-<docs-code header="profile-editor.component.html (template form group)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.1.html" visibleRegion="formgroup"/>
+<docs-code header="profile-editor.component.html (template form group)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.1.html" region="formgroup"/>
 
 Just as a form group contains a group of controls, the _profileForm_ `FormGroup` is bound to the `form` element with the `FormGroup` directive, creating a communication layer between the model and the form containing the inputs. The `formControlName` input provided by the `FormControlName` directive binds each individual input to the form control defined in `FormGroup`. The form controls communicate with their respective elements. They also communicate changes to the form group instance, which provides the source of truth for the model value.
 </docs-step>
@@ -149,17 +149,17 @@ Just as a form group contains a group of controls, the _profileForm_ `FormGroup`
 <docs-step title="フォームデータの保存">
 `ProfileEditor` コンポーネントはユーザーからの入力を受け付けますが、実際のシナリオでは、フォーム値をキャプチャして、コンポーネント外部でさらに処理できるようにする必要があります。`FormGroup` ディレクティブは、`form` 要素によって発行された `submit` イベントをリッスンし、`ngSubmit` イベントを発行します。このイベントは、コールバック関数にバインドできます。`onSubmit()` コールバックメソッドを使用して、`form` タグに `ngSubmit` イベントリスナーを追加します。
 
-<docs-code header="profile-editor.component.html (submit event)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.html" visibleRegion="ng-submit"/>
+<docs-code header="profile-editor.component.html (submit event)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.html" region="ng-submit"/>
 
 `ProfileEditor` コンポーネントの `onSubmit()` メソッドは、`profileForm` の現在の値をキャプチャします。`EventEmitter` を使用してフォームをカプセル化し、コンポーネント外部にフォーム値を提供します。次の例では、`console.warn` を使用して、ブラウザコンソールにメッセージをログ出力します。
 
-<docs-code header="profile-editor.component.ts (submit method)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.ts" visibleRegion="on-submit"/>
+<docs-code header="profile-editor.component.ts (submit method)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.ts" region="on-submit"/>
 
 `submit` イベントは、組み込みのDOMイベントを使用して `form` タグによって発行されます。`submit` タイプのボタンをクリックすることで、イベントをトリガーします。これにより、ユーザーは **Enter** キーを押して、完了したフォームを送信できます。
 
 `button` 要素を使用して、フォームの最下部にボタンを追加して、フォーム送信をトリガーします。
 
-<docs-code header="profile-editor.component.html (submit button)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.html" visibleRegion="submit-button"/>
+<docs-code header="profile-editor.component.html (submit button)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.html" region="submit-button"/>
 
 前述のスニペットのボタンにも、`disabled` バインディングが付けられています。これにより、`profileForm` が無効な場合、ボタンが無効になります。まだ検証していないため、ボタンは常に有効になっています。基本的なフォーム検証については、[フォーム入力の検証](#validating-form-input) セクションを参照してください。
 </docs-step>
@@ -167,7 +167,7 @@ Just as a form group contains a group of controls, the _profileForm_ `FormGroup`
 <docs-step title="コンポーネントを表示">
 フォームを含む `ProfileEditor` コンポーネントを表示するには、コンポーネントテンプレートに追加します。
 
-<docs-code header="app.component.html (profile editor)" path="adev/src/content/examples/reactive-forms/src/app/app.component.1.html" visibleRegion="app-profile-editor"/>
+<docs-code header="app.component.html (profile editor)" path="adev/src/content/examples/reactive-forms/src/app/app.component.1.html" region="app-profile-editor"/>
 
 `ProfileEditor` を使用して、フォームグループインスタンス内の `firstName` と `lastName` コントロールのフォームコントロールインスタンスを管理できます。
 
@@ -191,7 +191,7 @@ Just as a form group contains a group of controls, the _profileForm_ `FormGroup`
 <docs-step title="ネストされたグループの作成">
 `profileForm` にネストされたグループを作成するには、フォームグループインスタンスにネストされた `address` 要素を追加します。
 
-<docs-code header="profile-editor.component.ts (nested form group)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" visibleRegion="nested-formgroup"/>
+<docs-code header="profile-editor.component.ts (nested form group)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" region="nested-formgroup"/>
 
 この例では、`address group` は、現在の `firstName` と `lastName` コントロールを、新しい `street`、`city`、`state`、`zip` コントロールと組み合わせます。フォームグループの `address` 要素は、フォームグループの全体的な `profileForm` 要素の子ですが、ステータスと値の変更に関して同じルールが適用されます。ネストされたフォームグループからのステータスと値の変更は、親フォームグループに伝達され、全体的なモデルと整合性が保たれます。
 </docs-step>
@@ -199,7 +199,7 @@ Just as a form group contains a group of controls, the _profileForm_ `FormGroup`
 <docs-step title="テンプレートでネストされたフォームをグループ化">
 コンポーネントクラスでモデルを更新したら、テンプレートを更新して、フォームグループインスタンスとその入力要素を接続します。`ProfileEditor` テンプレートに、`street`、`city`、`state`、`zip` フィールドを含む `address` フォームグループを追加します。
 
-<docs-code header="profile-editor.component.html (template nested form group)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.1.html" visibleRegion="formgroupname"/>
+<docs-code header="profile-editor.component.html (template nested form group)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.1.html" region="formgroupname"/>
 
 `ProfileEditor` フォームは、1つのグループとして表示されますが、モデルはさらに分解されて、論理的なグループ化領域を表します。
 
@@ -223,11 +223,11 @@ Just as a form group contains a group of controls, the _profileForm_ `FormGroup`
 
 `ProfileEditorComponent` では、次の例を使用して、ユーザーの氏名と住所を更新する `updateProfile` メソッドを使用します。
 
-<docs-code header="profile-editor.component.ts (patch value)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" visibleRegion="patch-value"/>
+<docs-code header="profile-editor.component.ts (patch value)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" region="patch-value"/>
 
 テンプレートにボタンを追加して、オンデマンドでユーザープロファイルを更新することで、更新をシミュレートします。
 
-<docs-code header="profile-editor.component.html (update value)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.1.html" visibleRegion="patch-value"/>
+<docs-code header="profile-editor.component.html (update value)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.1.html" region="patch-value"/>
 
 ユーザーがボタンをクリックすると、`profileForm` モデルが、`firstName` と `street` の新しい値で更新されます。`street` は、`address` プロパティ内のオブジェクトで提供されることに注意してください。
 これは、`patchValue()` メソッドが、モデル構造に対して更新を適用するためです。
@@ -250,28 +250,28 @@ Just as a form group contains a group of controls, the _profileForm_ `FormGroup`
 <docs-step title="FormBuilder クラスのインポート">
 `@angular/forms` パッケージから `FormBuilder` クラスをインポートします。
 
-<docs-code header="profile-editor.component.ts (import)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" visibleRegion="form-builder-imports"/>
+<docs-code header="profile-editor.component.ts (import)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" region="form-builder-imports"/>
 
 </docs-step>
 
 <docs-step title="FormBuilder サービスの注入">
 `FormBuilder` サービスは、リアクティブフォームモジュールで提供される、注入可能なプロバイダーです。`inject()`関数を使ってこの依存関係を注入します。
 
-<docs-code header="profile-editor.component.ts (property init)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" visibleRegion="inject-form-builder"/>
+<docs-code header="profile-editor.component.ts (property init)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" region="inject-form-builder"/>
 
 </docs-step>
 <docs-step title="フォームコントロールの生成">
 `FormBuilder` サービスには、`control()`、`group()`、`array()` の3つのメソッドがあります。これらは、フォームコントロール、フォームグループ、フォーム配列を含む、コンポーネントクラスでインスタンスを生成するためのファクトリメソッドです。`group` メソッドを使用して、`profileForm` コントロールを作成します。
 
-<docs-code header="profile-editor.component.ts (form builder)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" visibleRegion="form-builder"/>
+<docs-code header="profile-editor.component.ts (form builder)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" region="form-builder"/>
 
 前の例では、モデルのプロパティを定義するために、同じオブジェクトを使用して `group()` メソッドを使用しています。各コントロール名の値は、配列に含まれ、初期値を配列の最初の項目として含みます。
 
 TIP: コントロールを初期値だけで定義できますが、コントロールに同期または非同期検証が必要な場合は、配列の2番目と3番目の項目として同期バリデーターと非同期バリデーターを追加します。フォームビルダーの使用を、手動でインスタンスを作成する方法と比較します。
 
   <docs-code-multifile>
-    <docs-code header="profile-editor.component.ts (instances)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" visibleRegion="formgroup-compare"/>
-    <docs-code header="profile-editor.component.ts (form builder)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" visibleRegion="formgroup-compare"/>
+    <docs-code header="profile-editor.component.ts (instances)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.1.ts" region="formgroup-compare"/>
+    <docs-code header="profile-editor.component.ts (form builder)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" region="formgroup-compare"/>
   </docs-code-multifile>
 </docs-step>
 
@@ -298,13 +298,13 @@ _フォーム検証_ は、ユーザー入力が完全で正しいことを確�
 
 `@angular/forms` パッケージから `Validators` クラスをインポートします。
 
-<docs-code header="profile-editor.component.ts (import)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.ts" visibleRegion="validator-imports"/>
+<docs-code header="profile-editor.component.ts (import)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.ts" region="validator-imports"/>
 </docs-step>
 
 <docs-step title="フィールドを必須にする">
 `ProfileEditor` コンポーネントで、`firstName` コントロールの配列の2番目の項目として、`Validators.required` 静的メソッドを追加します。
 
-<docs-code header="profile-editor.component.ts (required validator)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.ts" visibleRegion="required-validator"/>
+<docs-code header="profile-editor.component.ts (required validator)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.ts" region="required-validator"/>
 </docs-step>
 
 <docs-step title="フォームステータスの表示">
@@ -312,7 +312,7 @@ _フォーム検証_ は、ユーザー入力が完全で正しいことを確�
 
 `profileForm` の現在のステータスを補間を使用して表示します。
 
-<docs-code header="profile-editor.component.html (display status)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.html" visibleRegion="display-status"/>
+<docs-code header="profile-editor.component.html (display status)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.html" region="display-status"/>
 
 **Submit** ボタンは無効になっています。これは、必須の `firstName` フォームコントロールのため、`profileForm` が無効になっているためです。`firstName` 入力に値を入力すると、フォームは有効になり、**Submit** ボタンが有効になります。
 
@@ -339,7 +339,7 @@ _フォーム検証_ は、ユーザー入力が完全で正しいことを確�
 <docs-step title="`FormArray` クラスのインポート">
 `@angular/forms` から `FormArray` クラスをインポートして、タイプ情報に使用します。`FormBuilder` サービスは、`FormArray` インスタンスを作成する準備ができています。
 
-<docs-code header="profile-editor.component.ts (import)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" visibleRegion="form-array-imports"/>
+<docs-code header="profile-editor.component.ts (import)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.2.ts" region="form-array-imports"/>
 </docs-step>
 
 <docs-step title="`FormArray` コントロールの定義">
@@ -347,7 +347,7 @@ _フォーム検証_ は、ユーザー入力が完全で正しいことを確�
 
 `FormBuilder.array()` メソッドを使用して配列を定義し、`FormBuilder.control()` メソッドを使用して配列を初期コントロールで設定します。
 
-<docs-code header="profile-editor.component.ts (aliases form array)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.ts" visibleRegion="aliases"/>
+<docs-code header="profile-editor.component.ts (aliases form array)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.ts" region="aliases"/>
 
 フォームグループインスタンスのエイリアスコントロールは、動的にコントロールを追加するまで、単一のコントロールで設定されます。
 </docs-step>
@@ -357,11 +357,11 @@ _フォーム検証_ は、ユーザー入力が完全で正しいことを確�
 
 ゲッター構文を使用して、`aliases` クラスプロパティを作成し、親フォームグループからエイリアスのフォーム配列コントロールを取得します。
 
-<docs-code header="profile-editor.component.ts (aliases getter)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.ts" visibleRegion="aliases-getter"/>
+<docs-code header="profile-editor.component.ts (aliases getter)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.ts" region="aliases-getter"/>
 
 返されるコントロールは `AbstractControl` 型であるため、フォーム配列インスタンスのメソッド構文にアクセスするには、明示的な型を指定する必要があります。フォーム配列にエイリアスコントロールを動的に挿入するメソッドを定義します。`FormArray.push()` メソッドは、コントロールを配列の新しい項目として挿入します。また、コントロールの配列をFormArray.push()に渡すと、複数のコントロールを一度に登録できます。
 
-<docs-code header="profile-editor.component.ts (add alias)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.ts" visibleRegion="add-alias"/>
+<docs-code header="profile-editor.component.ts (add alias)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.ts" region="add-alias"/>
 
 テンプレートでは、各コントロールが個別の入力フィールドとして表示されます。
 
@@ -373,7 +373,7 @@ _フォーム検証_ は、ユーザー入力が完全で正しいことを確�
 
 次のテンプレートHTMLを、`formGroupName` 要素を閉じる `<div>` の後に追加します。
 
-<docs-code header="profile-editor.component.html (aliases form array template)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.html" visibleRegion="formarrayname"/>
+<docs-code header="profile-editor.component.html (aliases form array template)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.html" region="formarrayname"/>
 
 `@for` ブロックは、エイリアスのフォーム配列インスタンスによって提供される各フォームコントロールインスタンスを反復処理します。フォーム配列要素は名前がないため、インデックスを `i` 変数に割り当て、`formControlName` 入力に渡して、各コントロールをバインドします。
 

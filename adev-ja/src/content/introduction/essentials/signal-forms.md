@@ -189,7 +189,7 @@ Textareaはテキスト入力と同じように動作します:
 
 Select要素は、静的オプションと動的オプションの両方で動作します:
 
-```html
+```angular-html
 <!-- Static options -->
 <select [field]="form.country">
   <option value="">Select a country</option>

@@ -2,8 +2,6 @@
 
 Angularの依存性の注入（DI）は、フレームワークの最も強力な機能の1つです。依存性の注入は、Angularが実行時にアプリケーションが必要とするリソースを_提供_できる機能であると考えてください。依存性は、サービスやその他のリソースである可能性があります。
 
-[Angularドキュメントで依存性の注入](guide/di)について詳しく知ることができます。ここでは、`注入可能な`リソースの作成を練習します。
-
 NOTE: [エッセンシャルガイドの依存性の注入](/essentials/dependency-injection)で詳しく学ぶことができます。
 
 このアクティビティでは、注入可能なサービスを作成する方法を学びます。
@@ -14,14 +12,14 @@ NOTE: [エッセンシャルガイドの依存性の注入](/essentials/dependen
 
 サービスをDIシステムによって注入されるようにするには、`@Injectable`デコレーターを使用します。例えば:
 
-<docs-code language="ts" highlight="[1, 2, 3]">
+```ts {highlight:[1,2,3]}
 @Injectable({
   providedIn: 'root'
 })
 class UserService {
   // データを取得して返すためのメソッド
 }
-</docs-code>
+```
 
 `@Injectable`デコレーターは、DIシステムに`UserService`がクラス内で要求できることを教えます。`providedIn`は、このリソースが利用可能なスコープを設定します。現時点では、`providedIn: 'root'`は`UserService`がアプリケーション全体で利用可能であることを意味すると理解しておけば十分です。
 

@@ -31,7 +31,7 @@ import { NgOptimizedImage } from '@angular/common';
 
 `NgOptimizedImage` ディレクティブを有効にするには、`src` 属性を `ngSrc` に置き換えます。これは、静的画像ソース（`src`）と動的画像ソース（`[src]`）の両方で適用されます。
 
-<docs-code language="angular-ts" highlight="[[9], [13]]">
+```angular-ts {highlight:[[9], [13]]}
 import { NgOptimizedImage } from '@angular/common';
 
 @Component({
@@ -48,7 +48,7 @@ template: `     ...
   `,
 imports: [NgOptimizedImage],
 })
-</docs-code>
+```
 
 </docs-step>
 

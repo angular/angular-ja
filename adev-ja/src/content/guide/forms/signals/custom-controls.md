@@ -353,10 +353,10 @@ export class Login {
 
 コントロールは、フォームモデルに格納されている値とは異なる形式で値を表示することがあります。例えば、日付ピッカーは「2024-01-15」と格納しながら「January 15, 2024」と表示したり、通貨入力は1234.56と格納しながら「$1,234.56」と表示したりします。
 
-`@angular/core`の`computed()`シグナルを使用してモデルの値を表示用に変換し、入力イベントを処理してユーザー入力を格納形式にパースして戻します:
+`@angular/core`の`linkedSignal()`を使用してモデルの値を表示用に変換し、入力イベントを処理してユーザー入力を格納形式にパースして戻します:
 
 ```angular-ts
-import { Component, model, computed, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, linkedSignal, model } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
 
 @Component({
@@ -365,22 +365,33 @@ import { FormValueControl } from '@angular/forms/signals';
     <input
       type="text"
       [value]="displayValue()"
-      (input)="handleInput($event.target.value)"
+      (input)="displayValue.set($event.target.value)"
+      (blur)="updateModel()"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CurrencyInput implements FormValueControl<number> {
-  value = model<number>(0);  // 数値 (1234.56) を格納します
+  // 数値 (1234.56) を格納します
+  readonly value = model.required<number>();
 
-  displayValue = computed(() => {
-    return this.value().toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ','); // 「1,234.56」と表示します
-  });
+  // 表示値 (「1,234.56」) を格納します
+  readonly displayValue = linkedSignal(() => formatCurrency(this.value()));
 
-  handleInput(input: string) {
-    const num = parseFloat(input.replace(/[^0-9.]/g, ''));
-    if (!isNaN(num)) this.value.set(num);
+  // 表示値からモデルを更新します
+  updateModel() {
+    this.value.set(parseCurrency(this.displayValue()));
   }
+}
+
+// 数値を通貨文字列に変換します (例: 1234.56 -> 「1,234.56」)
+function formatCurrency(value: number) {
+  return value.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+// 通貨文字列を数値に変換します (例: 「1,234.56」 -> 1234.56)
+function parseCurrency(value: string) {
+  return parseFloat(value.replace(/,/g, ''));
 }
 ```
 

@@ -96,24 +96,25 @@ export class App {
 
 コンポーネントクラスに、フォームの送信を処理する`handleSubmit()`メソッドを追加します。
 
-<docs-code language="ts">
+```ts
 handleSubmit() {
   alert(
     this.profileForm.value.name + ' | ' + this.profileForm.value.email
   );
 }
-</docs-code>
+```
+
 </docs-step>
 
 <docs-step title="`ngSubmit`をフォームに追加">
 フォームの値にアクセスできるようになりました。次は、送信イベントを処理し、`handleSubmit`メソッドを使用します。
 Angularには、`ngSubmit`というこの特定の目的に合わせたイベントハンドラーがあります。フォーム要素を更新して、フォームが送信されたときに`handleSubmit`メソッドを呼び出します。
 
-<docs-code language="angular-html" highlight="[3]">
+```angular-html {highlight:[3]}
 <form
   [formGroup]="profileForm"
   (ngSubmit)="handleSubmit()">
-</docs-code>
+```
 
 </docs-step>
 

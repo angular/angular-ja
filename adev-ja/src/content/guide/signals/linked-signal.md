@@ -104,7 +104,7 @@ export class ShippingMethodPicker {
 
 `linkedSignal`を作成する際には、算出関数だけを提供する代わりに、個別の`source`プロパティと`computation`プロパティを持つオブジェクトを渡すことができます。
 
-`source`は、`computed`やコンポーネントの`input`などの任意のシグナルにできます。`source`の値が変更されると、`linkedSignal`は提供された`computation`の結果にその値を更新します。
+`source`は、`computed`やコンポーネントの`input`などの任意のシグナルにできます。`linkedSignal`は、`source`が変更されたとき、または`computation`内で参照されている任意のシグナルが変更されたときに、提供された`computation`の結果でその値を更新します。
 
 `computation`は、`source`の新しい値と`previous`オブジェクトを受け取る関数です。`previous`オブジェクトには、`previous.source`（`source`の以前の値）、`previous.value`（`linkedSignal`の以前の値）の2つのプロパティがあります。これらの以前の値を使用して、計算の新しい結果を決定できます。
 

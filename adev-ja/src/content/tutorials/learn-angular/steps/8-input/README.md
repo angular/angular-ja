@@ -12,30 +12,30 @@ NOTE: 詳しくは、[入力プロパティでデータを受け取る方法に�
 
 `Input` プロパティを作成するには、コンポーネントクラスのプロパティを `input()` 関数で初期化します。
 
-<docs-code header="user.ts" language="ts">
+```ts {header:"user.ts"}
 class User {
   occupation = input<string>();
 }
-</docs-code>
+```
 
 `input` を通じて値を渡す準備ができたら、属性構文を使用してテンプレートで値を設定できます。以下は例です。
 
-<docs-code header="app.ts" language="angular-ts" highlight="[3]">
+```angular-ts {header:"app.ts", highlight:[3]}
 @Component({
   ...
   template: `<app-user occupation="Angular Developer"></app-user>`
 })
 export class App {}
-</docs-code>
+```
 
 `input` 関数は `InputSignal` を返します。値を読み取るには、そのシグナルを関数として呼び出します。
 
-<docs-code header="user.ts" language="angular-ts">
+```angular-ts {header:"user.ts"}
 @Component({
   ...
   template: `<p>ユーザーの職業は {{occupation()}} です。</p>`
 })
-</docs-code>
+```
 
 <docs-workflow>
 

@@ -1,4 +1,4 @@
-/*!
+/**
  * @license
  * Copyright Google LLC All Rights Reserved.
  *
@@ -9,7 +9,7 @@
 import {isDevMode} from '@angular/core';
 import {NavigationItem} from '@angular/docs';
 
-// These 2 imports are expected to be red because they are generated a build time
+// These imports are expected to be red because they are generated a build time
 import FIRST_APP_TUTORIAL_NAV_DATA from '../../../src/assets/tutorials/first-app/routes.json';
 import LEARN_ANGULAR_TUTORIAL_NAV_DATA from '../../../src/assets/tutorials/learn-angular/routes.json';
 import DEFERRABLE_VIEWS_TUTORIAL_NAV_DATA from '../../../src/assets/tutorials/deferrable-views/routes.json';
@@ -94,6 +94,7 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
     children: [
       {
         label: 'シグナル',
+        status: 'updated',
         children: [
           {
             label: '概要',
@@ -109,6 +110,12 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             label: 'resourceによる非同期リアクティビティ',
             path: 'guide/signals/resource',
             contentPath: 'guide/signals/resource',
+          },
+          {
+            label: '非リアクティブAPIのための副作用',
+            path: 'guide/signals/effect',
+            contentPath: 'guide/signals/effect',
+            status: 'new',
           },
         ],
       },
@@ -442,6 +449,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
                 label: 'フォームモデル',
                 path: 'guide/forms/signals/models',
                 contentPath: 'guide/forms/signals/models',
+              },
+              {
+                label: 'フォームモデルの設計',
+                path: 'guide/forms/signals/model-design',
+                contentPath: 'guide/forms/signals/designing-your-form-model',
               },
               {
                 label: 'フィールド状態管理',

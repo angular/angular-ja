@@ -40,7 +40,7 @@ ng generate component banner --inline-template --inline-style --module app
 
 また、コンポーネントの初期テストファイル `banner-external.component.spec.ts` も生成し、次のようになります。
 
-<docs-code header="banner-external.component.spec.ts (初期)" path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" visibleRegion="v1"/>
+<docs-code header="banner-external.component.spec.ts (初期)" path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="v1"/>
 
 HELPFUL: `compileComponents` は非同期であるため、`@angular/core/testing` からインポートされた [`waitForAsync`](api/core/testing/waitForAsync) ユーティリティ関数を使用します。
 
@@ -55,11 +55,11 @@ HELPFUL: `compileComponents` は非同期であるため、`@angular/core/testin
 これらの高度なテスト機能については、次のセクションで説明します。
 今のところ、このテストファイルをより管理しやすいサイズに大幅に縮小できます。
 
-<docs-code header="banner-initial.component.spec.ts (最小限)" path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" visibleRegion="v2"/>
+<docs-code header="banner-initial.component.spec.ts (最小限)" path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="v2"/>
 
 この例では、`TestBed.configureTestingModule` に渡されるメタデータオブジェクトは、単にテスト対象のコンポーネントである `BannerComponent` を宣言します。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" visibleRegion="configureTestingModule"/>
+<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="configureTestingModule"/>
 
 HELPFUL: 他のものを宣言したりインポートする必要はありません。
 デフォルトのテストモジュールは、`@angular/platform-browser` の `BrowserModule` などのモジュールで事前に構成されています。
@@ -71,7 +71,7 @@ HELPFUL: 他のものを宣言したりインポートする必要はありま�
 
 `TestBed` を構成したら、その `createComponent()` メソッドを呼び出します。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" visibleRegion="createComponent"/>
+<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="createComponent"/>
 
 `TestBed.createComponent()` は `BannerComponent` のインスタンスを作成し、対応する要素をテストランナーのDOMに追加し、[`ComponentFixture`](#componentfixture) を返します。
 
@@ -88,18 +88,18 @@ IMPORTANT: `createComponent` を呼び出した後に `TestBed` を再構成し�
 
 fixtureを介してコンポーネントインスタンスにアクセスし、Jasmineの期待を使用して存在を確認します。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" visibleRegion="componentInstance"/>
+<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="componentInstance"/>
 
 ### `beforeEach()`
 
 このコンポーネントが進化するにつれて、さらに多くのテストを追加するでしょう。
 各テストのために `TestBed` 構成を複製するのではなく、セットアップをJasmineの `beforeEach()` といくつかのサポート変数にリファクタリングします。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" visibleRegion="v3"/>
+<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="v3"/>
 
 次に、fixture.nativeElementからコンポーネントの要素を取得し、期待されるテキストを探すテストを追加します。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" visibleRegion="v4-test-2"/>
+<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="v4-test-2"/>
 
 ### `nativeElement`
 
@@ -115,17 +115,17 @@ Angularは、コンパイル時に `nativeElement` がどのようなHTML要素�
 
 次に、`HTMLElement.querySelector` を呼び出して段落要素を取得し、バナーテキストを探すテストを示します。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" visibleRegion="v4-test-3"/>
+<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="v4-test-3"/>
 
 ### `DebugElement`
 
 Angularの _fixture_ は、`fixture.nativeElement` を介してコンポーネントの要素を直接提供します。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" visibleRegion="nativeElement"/>
+<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="nativeElement"/>
 
 これは実際には、`fixture.debugElement.nativeElement` として実装された便利なメソッドです。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" visibleRegion="debugElement-nativeElement"/>
+<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="debugElement-nativeElement"/>
 
 この回りくどい要素へのパスには、正当な理由があります。
 
@@ -140,13 +140,13 @@ AngularはHTML要素ツリーを作成するのではなく、実行時プラッ
 
 次に、`fixture.debugElement.nativeElement` を使用して再実装された前のテストを示します。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" visibleRegion="v4-test-4"/>
+<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="v4-test-4"/>
 
 `DebugElement` には、このガイドの他の場所で説明されているように、テストで役立つ他のメソッドとプロパティがあります。
 
 Angularコアライブラリから `DebugElement` シンボルをインポートします。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" visibleRegion="import-debug-element"/>
+<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="import-debug-element"/>
 
 ### `By.css()`
 
@@ -162,11 +162,11 @@ Angularコアライブラリから `DebugElement` シンボルをインポート
 実行時プラットフォームのライブラリからインポートされた `By` クラスの助けを借りて _述語_ を作成します。
 次に、ブラウザプラットフォームの `By` のインポートを示します。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" visibleRegion="import-by"/>
+<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="import-by"/>
 
 次の例は、`DebugElement.query()` とブラウザの `By.css` メソッドを使用して、前のテストを再実装したものです。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" visibleRegion="v4-test-5"/>
+<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="v4-test-5"/>
 
 注目すべき観察結果をいくつか紹介します。
 

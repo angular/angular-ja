@@ -269,7 +269,7 @@ NOTE: `NgModel` は、値の変更が入力バインディングから発生す�
 1. 入力の新しい値を _Red_ に設定し、フォーム入力要素で "input" イベントをディスパッチします。
 1. コンポーネントの `favoriteColorControl` 値が入力からの値と一致することをアサートします。
 
-<docs-code header="お気に入りの色のテスト - ビューからモデルへ" path="adev/src/content/examples/forms-overview/src/app/reactive/favorite-color/favorite-color.component.spec.ts" visibleRegion="view-to-model"/>
+<docs-code header="お気に入りの色のテスト - ビューからモデルへ" path="adev/src/content/examples/forms-overview/src/app/reactive/favorite-color/favorite-color.component.spec.ts" region="view-to-model"/>
 
 次の例は、モデルからビューへのデータフローを確認するために、次の手順を実行します。
 
@@ -277,7 +277,7 @@ NOTE: `NgModel` は、値の変更が入力バインディングから発生す�
 1. ビューからフォーム入力要素をクエリします。
 1. コントロールに設定された新しい値が入力内の値と一致することをアサートします。
 
-<docs-code header="お気に入りの色のテスト - モデルからビューへ" path="adev/src/content/examples/forms-overview/src/app/reactive/favorite-color/favorite-color.component.spec.ts" visibleRegion="model-to-view"/>
+<docs-code header="お気に入りの色のテスト - モデルからビューへ" path="adev/src/content/examples/forms-overview/src/app/reactive/favorite-color/favorite-color.component.spec.ts" region="model-to-view"/>
 
 ### テンプレート駆動フォームのテスト
 
@@ -287,7 +287,7 @@ NOTE: `NgModel` は、値の変更が入力バインディングから発生す�
 
 次のテストは、ビューからモデルへのデータフローを確認します。
 
-<docs-code header="お気に入りの色のテスト - ビューからモデルへ" path="adev/src/content/examples/forms-overview/src/app/template/favorite-color/favorite-color.component.spec.ts" visibleRegion="view-to-model"/>
+<docs-code header="お気に入りの色のテスト - ビューからモデルへ" path="adev/src/content/examples/forms-overview/src/app/template/favorite-color/favorite-color.component.spec.ts" region="view-to-model"/>
 
 ビューからモデルへのテストで実行される手順を以下に示します。
 
@@ -298,7 +298,7 @@ NOTE: `NgModel` は、値の変更が入力バインディングから発生す�
 
 次のテストは、モデルからビューへのデータフローを確認します。
 
-<docs-code header="お気に入りの色のテスト - モデルからビューへ" path="adev/src/content/examples/forms-overview/src/app/template/favorite-color/favorite-color.component.spec.ts" visibleRegion="model-to-view"/>
+<docs-code header="お気に入りの色のテスト - モデルからビューへ" path="adev/src/content/examples/forms-overview/src/app/template/favorite-color/favorite-color.component.spec.ts" region="model-to-view"/>
 
 モデルからビューへのテストで実行される手順を以下に示します。
 

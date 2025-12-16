@@ -10,12 +10,12 @@ NOTE: 注入コンテキストの詳細はこのチュートリアルの範囲�
 
 DIシステムから提供される値でクラスのプロパティを初期化すると、多くの場合役立ちます。例を以下に示します。
 
-<docs-code language="ts" highlight="[3]">
+```ts {highlight:[3]}
 @Component({...})
 class PetCareDashboard {
   petRosterService = inject(PetRosterService);
 }
-</docs-code>
+```
 
 <docs-workflow>
 

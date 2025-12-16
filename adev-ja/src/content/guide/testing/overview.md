@@ -2,15 +2,15 @@
 
 Angularアプリケーションをテストすると、期待どおりに動作していることを確認できます。ユニットテストは、バグを早期に発見し、コード品質を確保し、安全なリファクタリングを促進するために不可欠です。
 
-NOTE: このガイドでは、新しいAngular CLIプロジェクトのデフォルトテスト設定に焦点を当てています。既存のプロジェクトをKarmaからVitestに移行する場合は、[KarmaからVitestへの移行ガイド](guide/testing/migrating-to-vitest)を参照してください。Vitestはデフォルトのテストランナーですが、Karmaは引き続き完全にサポートされています。Karmaを使用したテストについては、[Karmaテストガイド](guide/testing/karma)を参照してください。
+NOTE: このガイドでは、Vitestを使用した新しいAngular CLIプロジェクトのデフォルトテスト設定について説明します。既存のプロジェクトをKarmaから移行する場合は、[KarmaからVitestへの移行ガイド](guide/testing/migrating-to-vitest)を参照してください。Karmaは引き続きサポートされています。詳細については、[Karmaテストガイド](guide/testing/karma)を参照してください。
 
 ## テストの設定 {#set-up-for-testing}
 
-Angular CLIは、[Vitestテストフレームワーク](https://vitest.dev)を使用してAngularアプリケーションをテストするために必要なものをすべてダウンロードしてインストールします。デフォルトでは、新しいプロジェクトには`vitest`と`jsdom`が含まれています。
+Angular CLIは、[Vitestテストフレームワーク](https://vitest.dev)を使用してAngularアプリケーションをテストするために必要なものをすべてダウンロードしてインストールします。新しいプロジェクトには、デフォルトで`vitest`と`jsdom`が含まれています。
 
-Vitestは、`jsdom`を使用してDOMをエミュレートするNode.js環境でユニットテストを実行します。これにより、ブラウザを起動するオーバーヘッドを回避して、テストの実行を高速化できます。`happy-dom`をインストールして`jsdom`を削除することで、代替として`happy-dom`を使用できます。CLIは`happy-dom`が存在する場合、自動的に検出して使用します。
+Vitestは、Node.js環境でユニットテストを実行します。ブラウザのDOMをシミュレートするために、Vitestは`jsdom`というライブラリを使用します。これにより、ブラウザを起動するオーバーヘッドを回避して、テストの実行を高速化できます。`happy-dom`のような代替手段に`jsdom`を置き換えることもできます。`happy-dom`をインストールして`jsdom`をアンインストールすれば、置き換えられます。現在、`jsdom`と`happy-dom`がサポートされているDOMエミュレーションライブラリです。
 
-CLIで作成したプロジェクトは、すぐにテストできます。[`ng test`](cli/test) CLIコマンドを実行するだけです:
+CLIで作成したプロジェクトは、すぐにテストできます。[`ng test`](cli/test)コマンドを実行します:
 
 ```shell
 ng test
@@ -31,26 +31,28 @@ ng test
    Duration  2.46s (transform 615ms, setup 2ms, collect 2.21s, tests 5ms)
 ```
 
-`ng test`コマンドは変更も監視します。これが実際にどのように機能するかを確認するには、`app.ts`を少し変更して保存します。テストが再び実行され、新しい結果がコンソールに表示されます。
+`ng test`コマンドは、ファイルの変更も監視します。ファイルを変更して保存すると、テストが再び実行されます。
 
 ## 設定 {#configuration}
 
-Angular CLIは、Vitestの設定のほとんどを処理します。多くの一般的なユースケースでは、`angular.json`ファイルのオプションを直接変更することで、テストの動作を調整できます。
+Angular CLIは、Vitestの設定のほとんどを処理します。`angular.json`ファイルの`test`ターゲットオプションを変更することで、テストの動作をカスタマイズできます。
 
-### 組み込み設定オプション {#built-in-configuration-options}
-
-`angular.json`ファイルの`test`ターゲットで次のオプションを変更できます:
+### Angular.jsonオプション {#angularjson-options}
 
 - `include`: テストに含めるファイルのGlobパターン。デフォルトは`['**/*.spec.ts', '**/*.test.ts']`です。
 - `exclude`: テストから除外するファイルのGlobパターン。
 - `setupFiles`: テストの前に実行されるグローバルセットアップファイル（ポリフィルやグローバルモックなど）へのパスのリスト。
 - `providersFile`: テスト環境用のAngularプロバイダーのデフォルト配列をエクスポートするファイルへのパス。これは、テストに注入されるグローバルテストプロバイダーをセットアップするのに役立ちます。
 - `coverage`: コードカバレッジレポートを有効または無効にするブール値。デフォルトは`false`です。
-- `browsers`: テストを実行するブラウザ名の配列（例: `["chromium"]`）。ブラウザプロバイダーのインストールが必要です。
+- `browsers`: 実際のブラウザでテストを実行するブラウザ名の配列（例: `["chromium"]`）。ブラウザプロバイダーのインストールが必要です。詳細については、[ブラウザでのテストの実行](#running-tests-in-a-browser)セクションを参照してください。
+
+### グローバルテスト設定とプロバイダー {#global-test-setup-and-providers}
+
+`setupFiles`と`providersFile`オプションは、グローバルテスト設定を管理するのに特に役立ちます。
 
 たとえば、`src/test-providers.ts`ファイルを作成して、すべてのテストに`provideHttpClientTesting`を提供できます:
 
-```typescript
+```typescript {header: "src/test-providers.ts"}
 import { Provider } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
@@ -73,11 +75,7 @@ export default testProviders;
         "test": {
           "builder": "@angular/build:unit-test",
           "options": {
-            "include": ["src/**/*.spec.ts"],
-            "setupFiles": ["src/test-setup.ts"],
-            "providersFile": "src/test-providers.ts",
-            "coverage": true,
-            "browsers": ["chromium"]
+            "providersFile": "src/test-providers.ts"
           }
         }
       }
@@ -86,13 +84,15 @@ export default testProviders;
 }
 ```
 
-### 高度: カスタムVitest設定 {#advanced-custom-vitest-configuration}
+HELPFUL: テスト設定やプロバイダー用に`src/test-providers.ts`のような新しいTypeScriptファイルを作成する場合は、プロジェクトのテスト用TypeScript設定ファイル（通常は`tsconfig.spec.json`）にそれらを含めるようにしてください。これにより、TypeScriptコンパイラがテスト中にこれらのファイルを適切に処理できるようになります。
 
-高度なユースケースでは、カスタムVitest設定ファイルを提供できます。
+### 高度なVitest設定 {#advanced-vitest-configuration}
 
-IMPORTANT: カスタム設定を使用すると高度なオプションが有効になりますが、Angularチームは設定ファイルの特定の内容やその中で使用されるサードパーティプラグインについて直接サポートを提供していません。CLIは、適切な動作を保証するために特定のプロパティ（`test.projects`、`test.include`）を上書きします。
+高度なユースケースでは、`angular.json`の`configFile`オプションを使用してカスタムVitest設定ファイルを提供できます。
 
-Vitest設定ファイル（例: `vitest-base.config.ts`）を作成し、`runnerConfig`オプションを使用して`angular.json`で参照できます。
+IMPORTANT: カスタム設定を使用すると高度なオプションが有効になりますが、Angularチームは設定ファイルの内容やサードパーティプラグインについてサポートを提供していません。また、CLIは適切な統合を保証するために特定のプロパティ（`test.projects`、`test.include`）を上書きします。
+
+Vitest設定ファイル（例: `vitest-base.config.ts`）を作成し、`angular.json`で参照できます:
 
 ```json
 {
@@ -119,24 +119,41 @@ ng generate config vitest
 
 これにより、カスタマイズ可能な`vitest-base.config.ts`ファイルが作成されます。
 
-HELPFUL: Vitestの設定について詳しくは、[Vitest設定ガイド](https://vitest.dev/config/)を参照してください。
+HELPFUL: Vitestの設定について詳しくは、[Vitestの公式ドキュメント](https://vitest.dev/config/)を参照してください。
 
 ## コードカバレッジ {#code-coverage}
 
 `ng test`コマンドに`--coverage`フラグを追加することで、コードカバレッジレポートを生成できます。レポートは`coverage/`ディレクトリに生成されます。
 
-前提条件、カバレッジしきい値の適用、高度な設定の詳細については、[コードカバレッジガイド](guide/testing/code-coverage)を参照してください。
+詳細については、[コードカバレッジガイド](guide/testing/code-coverage)を参照してください。
 
 ## ブラウザでのテストの実行 {#running-tests-in-a-browser}
 
 デフォルトのNode.js環境はほとんどのユニットテストで高速ですが、実際のブラウザでテストを実行できます。これは、ブラウザ固有のAPI（レンダリングなど）に依存するテストやデバッグに役立ちます。
 
-ブラウザでテストを実行するには、最初にブラウザプロバイダーをインストールする必要があります。
+ブラウザでテストを実行するには、最初にブラウザプロバイダーをインストールする必要があります。Vitestのブラウザモードの詳細については、[公式ドキュメント](https://vitest.dev/guide/browser)を参照してください。
+
+プロバイダーがインストールされたら、`angular.json`の`browsers`オプションを設定するか、`--browsers` CLIフラグを使用してブラウザでテストを実行できます。テストは、デフォルトではヘッドフルブラウザが使用されます。`CI`環境変数が設定されている場合は、代わりにヘッドレスモードが使用されます。ヘッドレスモードを明示的に制御するには、ブラウザ名に`Headless`をサフィックスとして追加できます（例: `chromiumHeadless`）。
+
+```bash
+# Playwrightの例（ヘッドフル）
+ng test --browsers=chromium
+
+# Playwrightの例（ヘッドレス）
+ng test --browsers=chromiumHeadless
+
+# WebdriverIOの例（ヘッドフル）
+ng test --browsers=chrome
+
+# WebdriverIOの例（ヘッドレス）
+ng test --browsers=chromeHeadless
+```
+
 ニーズに基づいて、次のブラウザプロバイダーのいずれかを選択してください:
 
-- **Playwright**: `@vitest/browser-playwright` (Chromium、Firefox、WebKit用)
-- **WebdriverIO**: `@vitest/browser-webdriverio` (Chrome、Firefox、Safari、Edge用)
-- **Preview**: `@vitest/browser-preview` (StackBlitzなどのWebcontainer環境用)
+### Playwright
+
+[Playwright](https://playwright.dev/)は、Chromium、Firefox、WebKitをサポートするブラウザ自動化ライブラリです。
 
 <docs-code-multifile>
   <docs-code header="npm" language="shell">
@@ -153,17 +170,45 @@ HELPFUL: Vitestの設定について詳しくは、[Vitest設定ガイド](https
   </docs-code>
 </docs-code-multifile>
 
-プロバイダーがインストールされたら、`--browsers`フラグを使用してブラウザでテストを実行できます:
+### WebdriverIO
 
-```bash
-# Playwrightの例
-ng test --browsers=chromium
+[WebdriverIO](https://webdriver.io/)は、Chrome、Firefox、Safari、Edgeをサポートするブラウザとモバイル自動化テストフレームワークです。
 
-# WebdriverIOの例
-ng test --browsers=chrome
-```
+<docs-code-multifile>
+  <docs-code header="npm" language="shell">
+    npm install --save-dev @vitest/browser-webdriverio webdriverio
+  </docs-code>
+  <docs-code header="yarn" language="shell">
+    yarn add --dev @vitest/browser-webdriverio webdriverio
+  </docs-code>
+  <docs-code header="pnpm" language="shell">
+    pnpm add -D @vitest/browser-webdriverio webdriverio
+  </docs-code>
+  <docs-code header="bun" language="shell">
+    bun add --dev @vitest/browser-webdriverio webdriverio
+  </docs-code>
+</docs-code-multifile>
 
-`CI`環境変数が設定されている場合、ヘッドレスモードが自動的に有効になります。それ以外の場合、テストはヘッド付きブラウザで実行されます。
+### Preview
+
+`@vitest/browser-preview`プロバイダーは、StackBlitzなどのWebcontainer環境向けに設計されており、CI/CDでの使用を目的としていません。
+
+<docs-code-multifile>
+  <docs-code header="npm" language="shell">
+    npm install --save-dev @vitest/browser-preview
+  </docs-code>
+  <docs-code header="yarn" language="shell">
+    yarn add --dev @vitest/browser-preview
+  </docs-code>
+  <docs-code header="pnpm" language="shell">
+    pnpm add -D @vitest/browser-preview
+  </docs-code>
+  <docs-code header="bun" language="shell">
+    bun add --dev @vitest/browser-preview
+  </docs-code>
+</docs-code-multifile>
+
+HELPFUL: より高度なブラウザ固有の設定については、[高度なVitest設定](#advanced-vitest-configuration)セクションを参照してください。
 
 ## その他のテストフレームワーク {#other-test-frameworks}
 
@@ -171,15 +216,15 @@ Angularアプリケーションは、他のテストライブラリとテスト�
 
 ## 継続的インテグレーションでのテスト {#testing-in-continuous-integration}
 
-堅牢なテストスイートは、継続的インテグレーション（CI）パイプラインの重要な部分です。CIサーバーを使用すると、プロジェクトリポジトリを設定して、すべてのコミットとプルリクエストでテストを実行できます。
+堅牢なテストスイートは、継続的インテグレーション（CI）パイプラインの重要な部分です。CIサーバーを使用すると、すべてのコミットとプルリクエストでテストを自動的に実行できます。
 
-継続的インテグレーション（CI）サーバーでAngularアプリケーションをテストするには、通常、標準のテストコマンドを実行します:
+CIサーバーでAngularアプリケーションをテストするには、標準のテストコマンドを実行します:
 
 ```shell
 ng test
 ```
 
-ほとんどのCIサーバーは`CI=true`環境変数を設定しており、`ng test`はこれを検出します。これにより、適切な非対話型のシングルランモードでテストが自動的に実行されます。
+ほとんどのCIサーバーは`CI=true`環境変数を設定しており、`ng test`はこれを検出します。これにより、非対話型のシングルランモードでテストが自動的に設定されます。
 
 CIサーバーがこの変数を設定しない場合、または手動でシングルランモードを強制する必要がある場合は、`--no-watch`および`--no-progress`フラグを使用できます:
 

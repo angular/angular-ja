@@ -119,8 +119,7 @@ Angularで作成されたカスタム要素は`NgElement`（これはさらに`H
 次のコンポーネントに基づいて`my-dialog`カスタム要素を作成すると仮定します。
 
 ```ts
-
-@Component(…)
+@Component(/* ... */)
 class MyDialog {
   content =  input(string);
 }

@@ -41,7 +41,7 @@
 <docs-step title="`on hover`トリガーを追加する">
 `app.ts`で、`@defer`ブロックに`on hover`トリガーを追加します。
 
-<docs-code language="angular-html" hightlight="[1]">
+```angular-html {highlight:[1]}
 @defer (on hover) {
   <article-comments />
 } @placeholder (minimum 1s) {
@@ -51,7 +51,7 @@
 } @error {
   <p>Failed to load comments</p>
 }
-</docs-code>
+```
 
 これで、プレースホルダーにホバーするまで、ページはコメントセクションをレンダリングしなくなります。
 </docs-step>
@@ -59,7 +59,7 @@
 <docs-step title="「すべてのコメントを表示」ボタンを追加する">
 次に、ラベルが「すべてのコメントを表示」のボタンを含むようにテンプレートを更新します。ボタンに`#showComments`というテンプレート変数を設定します。
 
-<docs-code language="angular-html" hightlight="[1]">
+```angular-html {highlight:[1]}
 <button type="button" #showComments>Show all comments</button>
 
 @defer (on hover) {
@@ -72,7 +72,7 @@
 } @error {
   <p>Failed to load comments</p>
 }
-</docs-code>
+```
 
 NOTE: [テンプレート変数に関する詳細については、ドキュメントを参照してください](https://angular.dev/guide/templates/reference-variables#)。
 
@@ -81,7 +81,7 @@ NOTE: [テンプレート変数に関する詳細については、ドキュメ�
 <docs-step title="`on interaction`トリガーを追加する">
 テンプレート内の`@defer`ブロックを更新して、`on interaction`トリガーを使用します。`interaction`にパラメーターとして`showComments`テンプレート変数を指定します。
 
-<docs-code language="angular-html" hightlight="[3]">
+```angular-html {highlight:[3]}
 <button type="button" #showComments>Show all comments</button>
 
 @defer (on hover; on interaction(showComments)) {
@@ -94,7 +94,7 @@ NOTE: [テンプレート変数に関する詳細については、ドキュメ�
 } @error {
   <p>Failed to load comments</p>
 }
-</docs-code>
+```
 
 これらの変更により、ページは次の条件のいずれかが満たされるまで、コメントセクションのレンダリングを待機します。
 

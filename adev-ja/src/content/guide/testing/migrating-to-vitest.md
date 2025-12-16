@@ -181,6 +181,7 @@ ng g @schematics/angular:refactor-jasmine-vitest
 | `--file-suffix <suffix>` | テストファイルに異なるファイルサフィックスを指定します。<br> 例: `--file-suffix=.test.ts`              |
 | `--add-imports`          | Vitestの設定でグローバルを無効にしている場合に、明示的な`vitest`のインポートを追加します。            |
 | `--verbose`              | 適用されたすべての変換の詳細なロギングを表示します。                                                |
+| `--browser-mode`         | ブラウザモードでテストを実行する予定がある場合に使用します。                                                     |
 
 ### 移行後 {#after-migrating}
 

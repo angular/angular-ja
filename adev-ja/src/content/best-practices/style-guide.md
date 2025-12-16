@@ -219,16 +219,15 @@ export class UserProfile {
 
 `class`および`style`バインディングを、[`NgClass`](/api/common/NgClass)および[`NgStyle`](/api/common/NgStyle)ディレクティブの使用よりも推奨します。
 
-```html
-<!-- PREFER -->
+```html {prefer}
 <div [class.admin]="isAdmin" [class.dense]="density === 'high'">
 <div [style.color]="textColor" [style.background-color]="backgroundColor">
 <!-- OR -->
 <div [class]="{admin: isAdmin, dense: density === 'high'}">
 <div [style]="{'color': textColor, 'background-color': backgroundColor}">
+```
 
-
-<!-- AVOID -->
+```html {avoid}
 <div [ngClass]="{admin: isAdmin, dense: density === 'high'}">
 <div [ngStyle]="{'color': textColor, 'background-color': backgroundColor}">
 ```
@@ -246,11 +245,11 @@ export class UserProfile {
 
 イベントハンドラーは、トリガーイベントではなく、実行するアクションで命名することを推奨します。
 
-```html
-<!-- PREFER -->
+```html {prefer}
 <button (click)="saveUserData()">Save</button>
+```
 
-<!-- AVOID -->
+```html {avoid}
 <button (click)="handleClick()">Save</button>
 ```
 
@@ -291,14 +290,14 @@ class RichText {
 ライフサイクルフック名は、それらが _いつ_ 実行されるかを記述するため、
 内部のコードには、そのコードが何をしているかを記述する意味のある名前がありません。
 
-```typescript
-// PREFER
+```ts {prefer}
 ngOnInit() {
   this.startLogging();
   this.runBackgroundTask();
 }
+```
 
-// AVOID
+```ts {avoid}
 ngOnInit() {
   this.logger.setMode('info');
   this.logger.monitorErrors();

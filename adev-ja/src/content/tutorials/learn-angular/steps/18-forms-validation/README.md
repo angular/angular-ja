@@ -14,12 +14,12 @@ NOTE: 詳しくは、[フォーム入力の検証についての詳細ガイド]
 
 Angularは、一連の検証ツールを提供しています。これらを使用するには、まずコンポーネントを更新して `@angular/forms` から `Validators` をインポートします。
 
-<docs-code language="ts" highlight="[1]">
+```ts {highlight:[1]}
 import {ReactiveFormsModule, Validators} from '@angular/forms';
 
 @Component({...})
 export class App {}
-</docs-code>
+```
 
 </docs-step>
 

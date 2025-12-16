@@ -70,7 +70,12 @@ export function watchLocalizedFiles() {
  * Modify adev build artifacts after build.
  */
 export async function modifyBuildOutput() {
-  await $`chmod -R +w ${buildOutputDir}`;
+  // Bazelの出力ファイルはシンボリックリンクであり、読み取り専用の可能性がある。
+  // findコマンドでシンボリックリンクを辿り、ファイルとディレクトリの両方に書き込み権限を付与する。
+  // -L オプションでシンボリックリンクを辿る。
+  const sh = $({ verbose: 'short' });
+  await sh`find -L ${buildOutputDir} -type f -exec chmod +w {} +`;
+  await sh`find -L ${buildOutputDir} -type d -exec chmod +w {} +`;
 
   consola.start('Copy static files...');
   await copyStaticFiles();

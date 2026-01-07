@@ -29,13 +29,13 @@ node_modules/@angular/core
 ├── README.md
 ├── package.json
 ├── fesm2022
-│   ├── core.mjs
-│   ├── core.mjs.map
-│   ├── testing.mjs
-│   └── testing.mjs.map
+│ ├── core.mjs
+│ ├── core.mjs.map
+│ ├── testing.mjs
+│ └── testing.mjs.map
 └── types
-│   ├── core.d.ts
-│   ├── testing.d.ts
+│ ├── core.d.ts
+│ ├── testing.d.ts
 ```
 
 This table describes the file layout under `node_modules/@angular/core` annotated to describe the purpose of files and directories:
@@ -169,14 +169,9 @@ The README file in the Markdown format that is used to display description of a 
 Example README content of @angular/core package:
 
 ```html
-
-Angular
-&equals;&equals;&equals;&equals;&equals;&equals;&equals;
-
-The sources for this package are in the main [Angular](https://github.com/angular/angular) repo.Please file issues and pull requests against that repo.
-
-License: MIT
-
+Angular &equals;&equals;&equals;&equals;&equals;&equals;&equals; The sources for this package are in
+the main [Angular](https://github.com/angular/angular) repo.Please file issues and pull requests
+against that repo. License: MIT
 ```
 
 ## Partial compilation
@@ -273,8 +268,8 @@ This is because the tslib version is tied to the TypeScript version used to comp
 ## Examples
 
 <docs-pill-row>
-  <docs-pill href="https://unpkg.com/browse/@angular/core@17.0.0/" title="@angular/core package"/>
-  <docs-pill href="https://unpkg.com/browse/@angular/material@17.0.0/" title="@angular/material package"/>
+  <docs-pill href="https://app.unpkg.com/@angular/core@21.0.6" title="@angular/core package"/>
+  <docs-pill href="https://app.unpkg.com/@angular/material@21.0.3" title="@angular/material package"/>
 </docs-pill-row>
 
 ## Definition of terms
@@ -368,4 +363,4 @@ The Ahead of Time Compiler for Angular.
 
 ### Flattened type definitions
 
-The bundled TypeScript definitions generated from [API Extractor](https://api-extractor.com).
+The bundled TypeScript definitions generated using tools like [API Extractor](https://api-extractor.com) or [rollup-plugin-dts](https://github.com/Swatinem/rollup-plugin-dts).

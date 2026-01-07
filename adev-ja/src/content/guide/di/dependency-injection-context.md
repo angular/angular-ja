@@ -23,10 +23,12 @@ NOTE: クラスコンストラクターとフィールドイニシャライザ�
 `CanActivateFn` の例を次に示します。
 
 ```ts {highlight: [3]}
-const canActivateTeam: CanActivateFn =
-  (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-    return inject(PermissionsService).canActivate(inject(UserToken), route.params.id);
-  };
+const canActivateTeam: CanActivateFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot,
+) => {
+  return inject(PermissionsService).canActivate(inject(UserToken), route.params.id);
+};
 ```
 
 ## 注入コンテキスト内で実行する
@@ -36,7 +38,7 @@ const canActivateTeam: CanActivateFn =
 
 ```ts {highlight: [9], header"hero.service.ts"}
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HeroService {
   private environmentInjector = inject(EnvironmentInjector);
@@ -56,21 +58,23 @@ export class HeroService {
 Angularは、現在のコンテキストが注入コンテキストであることをアサートし、そうでない場合は明確なエラーをスローするための `assertInInjectionContext` ヘルパー関数を提供します。呼び出し元の関数への参照を渡すと、エラーメッセージが正しいAPIエントリーポイントを指し示すようになります。これにより、デフォルトの汎用的な注入エラーよりも明確で実用的なメッセージが生成されます。
 
 ```ts
-import { ElementRef, assertInInjectionContext, inject } from '@angular/core';
+import {ElementRef, assertInInjectionContext, inject} from '@angular/core';
 
 export function injectNativeElement<T extends Element>(): T {
-    assertInInjectionContext(injectNativeElement);
-    return inject(ElementRef).nativeElement;
+  assertInInjectionContext(injectNativeElement);
+  return inject(ElementRef).nativeElement;
 }
 ```
 
 このヘルパーは、**注入コンテキスト内から**（コンストラクター、フィールドイニシャライザー、プロバイダーファクトリー、または `runInInjectionContext` 経由で実行されるコード）呼び出すことができます。
 
 ```ts
-import { Component, inject } from '@angular/core';
-import { injectNativeElement } from './dom-helpers';
+import {Component, inject} from '@angular/core';
+import {injectNativeElement} from './dom-helpers';
 
-@Component({ /* … */ })
+@Component({
+  /* … */
+})
 export class PreviewCard {
   readonly hostEl = injectNativeElement<HTMLElement>(); // フィールドイニシャライザーは注入コンテキスト内で実行されます。
 

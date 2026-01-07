@@ -18,18 +18,18 @@ TypeScriptクラスに`@Injectable()`デコレーターを追加して、手動�
 
 ```ts
 // 📄 src/app/basic-data-store.ts
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class BasicDataStore {
-  private data: string[] = []
+  private data: string[] = [];
 
   addData(item: string): void {
-   this.data.push(item)
+    this.data.push(item);
   }
 
   getData(): string[] {
-    return [...this.data]
+    return [...this.data];
   }
 }
 ```
@@ -73,8 +73,8 @@ export class ExampleComponent {
 ### 別のサービスへの注入 {#injecting-into-another-service}
 
 ```ts
-import { inject, Injectable } from '@angular/core';
-import { AdvancedDataStore } from './advanced-data-store';
+import {inject, Injectable} from '@angular/core';
+import {AdvancedDataStore} from './advanced-data-store';
 
 @Injectable({
   providedIn: 'root',

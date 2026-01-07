@@ -37,10 +37,10 @@ Angularには、次の2つのインジェクター階層があります。
 `providedIn` を使用して、次のように `@Injectable()` を使用してサービスを提供します。
 
 ```ts {highlight:[4]}
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
-  providedIn: 'root' // <--ルート EnvironmentInjector でこのサービスを提供します
+  providedIn: 'root', // <--ルート EnvironmentInjector でこのサービスを提供します
 })
 export class ItemService {
   name = 'telephone';
@@ -109,9 +109,7 @@ stateDiagram-v2
 コンポーネントルーターの構成にデフォルト以外の [ロケーション戦略](guide/routing#location-strategy) が含まれている場合、 `ApplicationConfig` の `providers` リストにそのプロバイダーをリストすることによって、その例を示します。
 
 ```ts
-providers: [
-  { provide: LocationStrategy, useClass: HashLocationStrategy }
-]
+providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}];
 ```
 
 `NgModule` ベースのアプリケーションの場合、アプリケーション全体のプロバイダーを `AppModule` の `providers` で構成します。
@@ -214,7 +212,7 @@ export class OptionalComponent {
 @Component({
   selector: 'app-self-no-data',
   templateUrl: './self-no-data.component.html',
-  styleUrls: ['./self-no-data.component.css']
+  styleUrls: ['./self-no-data.component.css'],
 })
 export class SelfNoDataComponent {
   public leaf = inject(LeafService, {optional: true, self: true});
@@ -261,7 +259,7 @@ export class LeafService {
   templateUrl: './skipself.component.html',
   styleUrls: ['./skipself.component.css'],
   // Angular はこの LeafService インスタンスを無視します
-  providers: [{ provide: LeafService, useValue: { emoji: '🍁' } }]
+  providers: [{provide: LeafService, useValue: {emoji: '🍁'}}],
 })
 export class SkipselfComponent {
   // Use skipSelf as inject option
@@ -280,7 +278,7 @@ export class SkipselfComponent {
 
 ```ts
 class Person {
-  parent = inject(Person, {optional: true, skipSelf: true})
+  parent = inject(Person, {optional: true, skipSelf: true});
 }
 ```
 
@@ -317,7 +315,7 @@ export class HostComponent {
 
 ```ts {header:"self-no-data.component.ts" highlight:[2]}
 export class SelfNoDataComponent {
-  constructor(@Self() @Optional() public leaf?: LeafService) { }
+  constructor(@Self() @Optional() public leaf?: LeafService) {}
 }
 ```
 
@@ -330,9 +328,7 @@ Angularテンプレートの基になる論理構造を理解すると、サー�
 コンポーネントは、次の例のようにテンプレートで使用されます。
 
 ```html
-<app-root>
-  <app-child />;
-</app-root>
+<app-root> <app-child />; </app-root>
 ```
 
 HELPFUL: 通常、コンポーネントとそのテンプレートは別々のファイルに宣言します。
@@ -387,7 +383,7 @@ HELPFUL: 通常、コンポーネントとそのテンプレートは別々の�
 
 ```ts {header:"lower.service.ts"}
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FlowerService {
   emoji = '🌺';
@@ -398,9 +394,9 @@ export class FlowerService {
 最も基本的なレンダリングされたビューは、次のようなネストされたHTML要素のように見えます。
 
 ```html
-<app-root> <!-- AppComponent selector -->
-<app-child> <!-- ChildComponent selector -->
-</app-child>
+<app-root>
+  <!-- AppComponent selector -->
+  <app-child> <!-- ChildComponent selector --> </app-child>
 </app-root>
 ```
 
@@ -425,7 +421,7 @@ export class FlowerService {
 次に、 `<app-root>` が `FlowerService` を注入しているとします。
 
 ```typescript
-export class AppComponent  {
+export class AppComponent {
   flower = inject(FlowerService);
 }
 ```
@@ -599,7 +595,8 @@ export class ChildComponent {
 さらに、 `AppComponent` テンプレートにも同じものを追加します。
 
 ```html
-<p>Emoji from AnimalService: {{animal.emoji}}</p>s
+<p>Emoji from AnimalService: {{animal.emoji}}</p>
+s
 ```
 
 これで、ブラウザに両方の値が表示されます。
@@ -757,7 +754,7 @@ Emoji from AnimalService: 🐶
 この呼び出しは、`child.component.ts` に示すように、`<app-child>` のプロパティ初期化子です。
 
 ```typescript
-  flower = inject(FlowerService, { skipSelf: true })
+flower = inject(FlowerService, {skipSelf: true});
 ```
 
 `skipSelf` を使用すると、`<app-child>` インジェクターは `FlowerService` を自分自身で探しません。
@@ -900,7 +897,7 @@ export class ChildComponent {
 
 ```typescript
 export class ChildComponent {
-  animal = inject(AnimalService, { host: true, skipSelf: true });
+  animal = inject(AnimalService, {host: true, skipSelf: true});
 }
 ```
 
@@ -1085,7 +1082,7 @@ _編集対象の税務申告_ は、 `input` プロパティを介して到着�
 これを防ぐために、コンポーネントレベルのインジェクター `HeroTaxReturnComponent` を構成して、コンポーネントメタデータの `providers` プロパティを使用してサービスを提供します。
 
 ```typescript
-  providers: [HeroTaxReturnService]
+providers: [HeroTaxReturnService];
 ```
 
 `HeroTaxReturnComponent` には、 `HeroTaxReturnService` の独自の提供者がいます。

@@ -86,7 +86,7 @@ TestBedは、テスト環境でアニメーションを有効または無効に�
 ブラウザテスト、例えばエンドツーエンドテストでアニメーションが動作していることをテストしたい場合は、テスト設定で`animationsEnabled: true`を指定することで、TestBedをアニメーションを有効にするように設定できます。
 
 ```typescript
-  TestBed.configureTestingModule({animationsEnabled: true});
+TestBed.configureTestingModule({animationsEnabled: true});
 ```
 
 これにより、テスト環境でのアニメーションが通常通りに動作するように設定されます。

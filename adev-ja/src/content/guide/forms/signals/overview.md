@@ -19,8 +19,7 @@ Webアプリケーションにおけるフォームの構築には、フィー�
 
 シグナルフォームは、シグナルを使用して構築された新しいアプリケーションで最適に機能します。リアクティブフォームを使用している既存のアプリケーションで作業している場合や、本番環境での安定性の保証が必要な場合は、リアクティブフォームが依然として確実な選択肢です。
 
-<!-- TODO: UNCOMMENT SECTION BELOW WHEN AVAILABLE -->
-<!-- NOTE: If you're coming from template or reactive forms, you may be interested in our [comparison guide](guide/forms/signals/comparison). -->
+NOTE: テンプレート駆動フォームやリアクティブフォームから移行する場合は、[比較ガイド](guide/forms/signals/comparison)をご覧ください。
 
 ## 前提条件 {#prerequisites}
 
@@ -33,7 +32,7 @@ Webアプリケーションにおけるフォームの構築には、フィー�
 シグナルフォームはすでに`@angular/forms`パッケージに含まれています。`@angular/forms/signals`から必要な関数とディレクティブをインポートします:
 
 ```ts
-import { form, Field, required, email } from '@angular/forms/signals'
+import {form, Field, required, email} from '@angular/forms/signals';
 ```
 
 `Field`ディレクティブは、フォームフィールドをHTML入力にバインドするすべてのコンポーネントにインポートする必要があります:
@@ -49,12 +48,12 @@ import { form, Field, required, email } from '@angular/forms/signals'
 
 シグナルフォームの仕組みについて詳しく知るには、以下のガイドを確認してください。
 
-<!-- TODO: UNCOMMENT SECTION BELOW WHEN AVAILABLE -->
 <docs-pill-row>
   <docs-pill href="essentials/signal-forms" title="Signal forms essentials" />
   <docs-pill href="guide/forms/signals/models" title="Form models" />
+  <docs-pill href="guide/forms/signals/designing-your-form-model" title="Designing your form model" />
   <docs-pill href="guide/forms/signals/field-state-management" title="Field state management" />
   <docs-pill href="guide/forms/signals/validation" title="Validation" />
   <docs-pill href="guide/forms/signals/custom-controls" title="Custom controls" />
-  <!-- <docs-pill href="guide/forms/signals/arrays" title="Working with Arrays" /> -->
+  <docs-pill href="guide/forms/signals/comparison" title="Comparison with other form systems" />
 </docs-pill-row>

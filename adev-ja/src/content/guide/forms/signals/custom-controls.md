@@ -419,14 +419,16 @@ IMPORTANT: コントロールにバリデーションロジックを実装しな
 ```typescript
 // 悪い例：コントロール内でのバリデーション
 export class BadControl implements FormValueControl<string> {
-  value = model<string>('')
-  isValid() { return this.value().length >= 8 } // これは行わないでください！
+  value = model<string>('');
+  isValid() {
+    return this.value().length >= 8;
+  } // これは行わないでください！
 }
 
 // 良い例：スキーマでバリデーションし、コントロールは結果を表示
-accountForm = form(this.accountModel, schemaPath => {
-  minLength(schemaPath.password, 8, { message: 'Password must be at least 8 characters' })
-})
+accountForm = form(this.accountModel, (schemaPath) => {
+  minLength(schemaPath.password, 8, {message: 'Password must be at least 8 characters'});
+});
 ```
 
 ## 次のステップ {#next-steps}

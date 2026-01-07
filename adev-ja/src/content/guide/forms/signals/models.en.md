@@ -46,17 +46,17 @@ While TypeScript infers types from object literals, defining explicit types impr
 
 ```ts
 interface LoginData {
-  email: string
-  password: string
+  email: string;
+  password: string;
 }
 
 export class LoginComponent {
   loginModel = signal<LoginData>({
     email: '',
-    password: ''
-  })
+    password: '',
+  });
 
-  loginForm = form(this.loginModel)
+  loginForm = form(this.loginModel);
 }
 ```
 
@@ -64,10 +64,10 @@ With explicit types, the field tree provides full type safety. Accessing `loginF
 
 ```ts
 // TypeScript knows this is FieldTree<string>
-const emailField = loginForm.email
+const emailField = loginForm.email;
 
 // TypeScript error: Property 'username' does not exist
-const usernameField = loginForm.username
+const usernameField = loginForm.username;
 ```
 
 ### Initializing all fields
@@ -79,31 +79,31 @@ Form models should provide initial values for all fields you want to include in 
 const userModel = signal({
   name: '',
   email: '',
-  age: 0
-})
+  age: 0,
+});
 
 // Avoid: Missing initial value
 const userModel = signal({
   name: '',
-  email: ''
+  email: '',
   // age field is not defined - cannot access userForm.age
-})
+});
 ```
 
 For optional fields, explicitly set them to `null` or an empty value:
 
 ```ts
 interface UserData {
-  name: string
-  email: string
-  phoneNumber: string | null
+  name: string;
+  email: string;
+  phoneNumber: string | null;
 }
 
 const userModel = signal<UserData>({
   name: '',
   email: '',
-  phoneNumber: null
-})
+  phoneNumber: null,
+});
 ```
 
 Fields set to `undefined` are excluded from the field tree. A model with `{value: undefined}` behaves identically to `{}` - accessing the field returns `undefined` rather than a `FieldTree`.
@@ -184,7 +184,7 @@ resetForm() {
 
 This approach works well when loading data from an API or resetting the entire form.
 
-### Update a single field directly with `set()`
+### Update a single field directly with `set()` or `update()`
 
 Use `set()` on individual field values to directly update the field state:
 
@@ -194,8 +194,7 @@ clearEmail() {
 }
 
 incrementAge() {
-  const currentAge = this.userForm.age().value();
-  this.userForm.age().value.set(currentAge + 1);
+  this.userForm.age().value.update(currentAge => currentAge + 1);
 }
 ```
 
@@ -210,19 +209,19 @@ export class UserProfileComponent {
   userModel = signal({
     name: '',
     email: '',
-    bio: ''
-  })
+    bio: '',
+  });
 
-  userForm = form(this.userModel)
-  private userService = inject(UserService)
+  userForm = form(this.userModel);
+  private userService = inject(UserService);
 
   ngOnInit() {
-    this.loadUserProfile()
+    this.loadUserProfile();
   }
 
   async loadUserProfile() {
-    const userData = await this.userService.getUserProfile()
-    this.userModel.set(userData)
+    const userData = await this.userService.getUserProfile();
+    this.userModel.set(userData);
   }
 }
 ```
@@ -292,8 +291,8 @@ const userModel = signal({
   street: '',
   city: '',
   state: '',
-  zip: ''
-})
+  zip: '',
+});
 ```
 
 Nested models group related fields:
@@ -307,9 +306,9 @@ const userModel = signal({
     street: '',
     city: '',
     state: '',
-    zip: ''
-  }
-})
+    zip: '',
+  },
+});
 ```
 
 **Use flat structures when:**
@@ -332,19 +331,19 @@ You can access nested fields by following the object path:
 const userModel = signal({
   profile: {
     firstName: '',
-    lastName: ''
+    lastName: '',
   },
   settings: {
     theme: 'light',
-    notifications: true
-  }
-})
+    notifications: true,
+  },
+});
 
-const userForm = form(userModel)
+const userForm = form(userModel);
 
 // Access nested fields
-userForm.profile.firstName // FieldTree<string>
-userForm.settings.theme // FieldTree<string>
+userForm.profile.firstName; // FieldTree<string>
+userForm.settings.theme; // FieldTree<string>
 ```
 
 In templates, you bind nested fields the same way as top-level fields:
@@ -370,14 +369,14 @@ Models can include arrays for collections of items:
 ```ts
 const orderModel = signal({
   customerName: '',
-  items: [{ product: '', quantity: 0, price: 0 }]
-})
+  items: [{product: '', quantity: 0, price: 0}],
+});
 
-const orderForm = form(orderModel)
+const orderForm = form(orderModel);
 
 // Access array items by index
-orderForm.items[0].product // FieldTree<string>
-orderForm.items[0].quantity // FieldTree<number>
+orderForm.items[0].product; // FieldTree<string>
+orderForm.items[0].quantity; // FieldTree<number>
 ```
 
 Array items containing objects automatically receive tracking identities, which helps maintain field state even when items change position in the array. This ensures validation state and user interactions persist correctly when arrays are reordered.

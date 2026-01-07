@@ -110,12 +110,12 @@ export class RegistrationComponent {
 registrationForm = form(this.registrationModel, (schemaPath) => {
   required(schemaPath.promoCode, {
     message: 'Promo code is required for discounts',
-    when: ({valueOf}) => valueOf(schemaPath.applyDiscount)
-  })
-})
+    when: ({valueOf}) => valueOf(schemaPath.applyDiscount),
+  });
+});
 ```
 
-このバリデーションルールは、`when`関数が`true`を返す場合にのみ実行されます。
+バリデーションルールは、`when`関数が`true`を返す場合にのみ実行されます。
 
 ### email() {#email}
 
@@ -194,9 +194,9 @@ export class AgeFormComponent {
 ```ts
 ageForm = form(this.ageModel, (schemaPath) => {
   min(schemaPath.participants, () => this.minimumRequired(), {
-    message: 'Not enough participants'
-  })
-})
+    message: 'Not enough participants',
+  });
+});
 ```
 
 ### minLength()とmaxLength() {#minlength-and-maxlength}
@@ -298,10 +298,10 @@ export class PhoneFormComponent {
 フォームには、ネストされたオブジェクトの配列を含めることができます（例: 注文アイテムのリスト）。配列内の各アイテムにバリデーションルールを適用するには、スキーマ関数内で`applyEach()`を使用します。`applyEach()`は配列パスを反復処理し、各アイテムのパスを提供します。このパスでは、トップレベルのフィールドと同様にバリデーターを適用できます。
 
 ```ts
-import { Component, signal } from '@angular/core'
-import { applyEach, Field, form, min, required, SchemaPathTree } from '@angular/forms/signals';
+import {Component, signal} from '@angular/core';
+import {applyEach, Field, form, min, required, SchemaPathTree} from '@angular/forms/signals';
 
-type Item = { name: string; quantity: number }
+type Item = {name: string; quantity: number};
 
 interface Order {
   title: string;
@@ -310,8 +310,8 @@ interface Order {
 }
 
 function ItemSchema(item: SchemaPathTree<Item>) {
-  required(item.name, { message: 'Item name is required' })
-  min(item.quantity, 1, { message: 'Quantity must be at least 1' })
+  required(item.name, {message: 'Item name is required'});
+  min(item.quantity, 1, {message: 'Quantity must be at least 1'});
 }
 
 @Component(/* ... */)
@@ -319,17 +319,15 @@ export class OrderComponent {
   orderModel = signal<Order>({
     title: '',
     description: '',
-    items: [
-      { name: '', quantity: 0 },
-    ]
-  })
+    items: [{name: '', quantity: 0}],
+  });
 
   orderForm = form(this.orderModel, (schemaPath) => {
-    required(schemaPath.title)
-    required(schemaPath.description)
+    required(schemaPath.title);
+    required(schemaPath.description);
 
-    applyEach(schemaPath.items, ItemSchema)
-  })
+    applyEach(schemaPath.items, ItemSchema);
+  });
 }
 ```
 
@@ -406,10 +404,10 @@ export class SignupComponent {
 
 ```ts
 signupForm = form(this.signupModel, (schemaPath) => {
-  required(schemaPath.email, { message: 'Email is required' })
-  email(schemaPath.email, { message: 'Enter a valid email address' })
-  minLength(schemaPath.email, 5, { message: 'Email is too short' })
-})
+  required(schemaPath.email, {message: 'Email is required'});
+  email(schemaPath.email, {message: 'Enter a valid email address'});
+  minLength(schemaPath.email, 5, {message: 'Email is too short'});
+});
 ```
 
 emailフィールドが空の場合、`required()`エラーのみが表示されます。ユーザーが"a@b"と入力すると、`email()`と`minLength()`の両方のエラーが表示されます。すべてのバリデーションルールが実行され、最初の失敗でバリデーションが停止することはありません。
@@ -484,33 +482,33 @@ NOTE: 子フィールドには`key`シグナルもあり、配列アイテムの
 `validate()`をラップして、再利用可能なバリデーションルール関数を作成します:
 
 ```ts
-function url(field: any, options?: { message?: string }) {
+function url(field: any, options?: {message?: string}) {
   validate(field, ({value}) => {
     try {
-      new URL(value())
-      return null
+      new URL(value());
+      return null;
     } catch {
       return {
         kind: 'url',
-        message: options?.message || 'Enter a valid URL'
-      }
+        message: options?.message || 'Enter a valid URL',
+      };
     }
-  })
+  });
 }
 
-function phoneNumber(field: any, options?: { message?: string }) {
+function phoneNumber(field: any, options?: {message?: string}) {
   validate(field, ({value}) => {
-    const phoneRegex = /^\d{3}-\d{3}-\d{4}$/
+    const phoneRegex = /^\d{3}-\d{3}-\d{4}$/;
 
     if (!phoneRegex.test(value())) {
       return {
         kind: 'phoneNumber',
-        message: options?.message || 'Phone must be in format: 555-123-4567'
-      }
+        message: options?.message || 'Phone must be in format: 555-123-4567',
+      };
     }
 
-    return null
-  })
+    return null;
+  });
 }
 ```
 
@@ -518,9 +516,9 @@ function phoneNumber(field: any, options?: { message?: string }) {
 
 ```ts
 urlForm = form(this.urlModel, (schemaPath) => {
-  url(schemaPath.website, { message: 'Please enter a valid website URL' })
-  phoneNumber(schemaPath.phone)
-})
+  url(schemaPath.website, {message: 'Please enter a valid website URL'});
+  phoneNumber(schemaPath.phone);
+});
 ```
 
 ## クロスフィールドバリデーション {#cross-field-validation}
@@ -652,13 +650,33 @@ export class UsernameFormComponent {
 
 非同期バリデーションの実行中、フィールドの`pending()`シグナルは`true`を返します。これを使用してローディングインジケーターを表示します:
 
-```ts
+```angular-html
 @if (form.username().pending()) {
   <span class="spinner">Checking...</span>
 }
 ```
 
 `valid()`シグナルは、まだエラーがない場合でも、バリデーションがペンディング中の間は`false`を返します。`invalid()`シグナルは、エラーが存在する場合にのみ`true`を返します。
+
+## スキーマバリデーションライブラリとの統合
+
+シグナルフォームは、[Zod](https://zod.dev/)や[Valibot](https://valibot.dev/)のような[Standard Schema](https://standardschema.dev/)に準拠したライブラリに対する組み込みサポートを提供しています。統合は`validateStandardSchema`関数によって提供されます。これにより、シグナルフォームのリアクティブなバリデーションの利点を維持しながら、既存のスキーマを使用できます。
+
+```ts
+import {form, validateStandardSchema} from '@angular/forms/signals';
+import * as z from 'zod';
+
+// スキーマを定義
+const userSchema = z.object({
+  email: z.email(),
+  password: z.string().min(8),
+});
+
+// シグナルフォームで使用
+const userForm = form(signal({email: '', password: ''}), (schemaPath) => {
+  validateStandardSchema(schemaPath, userSchema);
+});
+```
 
 ## 次のステップ {#next-steps}
 

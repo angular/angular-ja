@@ -30,7 +30,7 @@ NOTE: デフォルトでは、Angularはアプリケーション全体をプリ�
 
 ```typescript
 // app.routes.server.ts
-import { RenderMode, ServerRoute } from '@angular/ssr';
+import {RenderMode, ServerRoute} from '@angular/ssr';
 
 export const serverRoutes: ServerRoute[] = [
   {
@@ -55,32 +55,29 @@ export const serverRoutes: ServerRoute[] = [
 この設定は、[`withRoutes`](api/ssr/withRoutes 'API reference') 関数を使用して [`provideServerRendering`](api/ssr/provideServerRendering 'API reference') でアプリケーションに追加できます。
 
 ```typescript
-import { provideServerRendering, withRoutes } from '@angular/ssr';
-import { serverRoutes } from './app.routes.server';
+import {provideServerRendering, withRoutes} from '@angular/ssr';
+import {serverRoutes} from './app.routes.server';
 
 // app.config.server.ts
 const serverConfig: ApplicationConfig = {
   providers: [
     provideServerRendering(withRoutes(serverRoutes)),
     // ... その他のプロバイダー ...
-  ]
+  ],
 };
 ```
 
 [App shellパターン](ecosystem/service-workers/app-shell)を使用する場合、クライアントサイドレンダリングされたルートのApp shellとして使用するコンポーネントを指定する必要があります。これを行うには、[`withAppShell`](api/ssr/withAppShell 'API reference') 機能を使用します。
 
 ```typescript
-import { provideServerRendering, withRoutes, withAppShell } from '@angular/ssr';
-import { AppShellComponent } from './app-shell/app-shell.component';
+import {provideServerRendering, withRoutes, withAppShell} from '@angular/ssr';
+import {AppShellComponent} from './app-shell/app-shell.component';
 
 const serverConfig: ApplicationConfig = {
   providers: [
-    provideServerRendering(
-      withRoutes(serverRoutes),
-      withAppShell(AppShellComponent),
-    ),
+    provideServerRendering(withRoutes(serverRoutes), withAppShell(AppShellComponent)),
     // ... その他のプロバイダー ...
-  ]
+  ],
 };
 ```
 
@@ -142,7 +139,7 @@ NOTE: Angular Service Workerを使用する場合、最初のリクエストは�
 
 ```typescript
 // app.routes.server.ts
-import { RenderMode, ServerRoute } from '@angular/ssr';
+import {RenderMode, ServerRoute} from '@angular/ssr';
 
 export const serverRoutes: ServerRoute[] = [
   {
@@ -183,7 +180,7 @@ Angularは、ルート設定の [`redirectTo`](api/router/Route#redirectTo 'API 
 
 ```ts
 // app.routes.server.ts
-import { RenderMode, ServerRoute } from '@angular/ssr';
+import {RenderMode, ServerRoute} from '@angular/ssr';
 
 export const serverRoutes: ServerRoute[] = [
   {
@@ -193,7 +190,7 @@ export const serverRoutes: ServerRoute[] = [
       const dataService = inject(PostService);
       const ids = await dataService.getIds(); // これは ['1', '2', '3'] を返すと仮定します
 
-      return ids.map(id => ({ id })); // /post/1, /post/2, /post/3 のようなパスを生成します
+      return ids.map((id) => ({id})); // /post/1, /post/2, /post/3 のようなパスを生成します
     },
   },
   {
@@ -201,8 +198,8 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Prerender,
     async getPrerenderParams() {
       return [
-        { id: '1', '**': 'foo/3' },
-        { id: '2', '**': 'bar/4' },
+        {id: '1', '**': 'foo/3'},
+        {id: '2', '**': 'bar/4'},
       ]; // /post/1/foo/3, /post/2/bar/4 のようなパスを生成します
     },
   },
@@ -225,7 +222,7 @@ IMPORTANT: `getPrerenderParams` 内で [`inject`](api/core/inject 'API reference
 
 ```ts
 // app.routes.server.ts
-import { RenderMode, PrerenderFallback, ServerRoute } from '@angular/ssr';
+import {RenderMode, PrerenderFallback, ServerRoute} from '@angular/ssr';
 
 export const serverRoutes: ServerRoute[] = [
   {
@@ -236,7 +233,7 @@ export const serverRoutes: ServerRoute[] = [
       // この関数は、/post/1、/post/2、/post/3 のパスで
       // プリレンダリングされた投稿を表すオブジェクトの配列を返します。
       // /post/4 のパスがリクエストされた場合、フォールバック動作が利用されます。
-      return [{ id: 1 }, { id: 2 }, { id: 3 }];
+      return [{id: 1}, {id: 2}, {id: 3}];
     },
   },
 ];
@@ -315,9 +312,7 @@ export class ServerAnalyticsService implements AnalyticsService {
 ```ts
 // app.config.ts
 export const appConfig: ApplicationConfig = {
-  providers: [
-    { provide: AnalyticsService, useClass: BrowserAnalyticsService },
-  ]
+  providers: [{provide: AnalyticsService, useClass: BrowserAnalyticsService}],
 };
 ```
 
@@ -326,16 +321,16 @@ export const appConfig: ApplicationConfig = {
 ```ts
 // app.config.server.ts
 const serverConfig: ApplicationConfig = {
-  providers: [
-    { provide: AnalyticsService, useClass: ServerAnalyticsService },
-  ]
+  providers: [{provide: AnalyticsService, useClass: ServerAnalyticsService}],
 };
 ```
 
 コンポーネントでサービスを注入して使用します。
 
 ```ts
-@Component({/* ... */})
+@Component({
+  /* ... */
+})
 export class Checkout {
   private analytics = inject(AnalyticsService);
 
@@ -350,9 +345,9 @@ export class Checkout {
 サーバーサイドレンダリングを使用する場合、`document` のようなブラウザ固有のグローバルを直接参照することは避けるべきです。代わりに、[`DOCUMENT`](api/core/DOCUMENT) トークンを使用して、プラットフォームに依存しない方法でdocumentオブジェクトにアクセスします。
 
 ```ts
-import { Injectable, inject, DOCUMENT } from '@angular/core';
+import {Injectable, inject, DOCUMENT} from '@angular/core';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class CanonicalLinkService {
   private readonly document = inject(DOCUMENT);
 
@@ -365,7 +360,6 @@ export class CanonicalLinkService {
     this.document.head.appendChild(link);
   }
 }
-
 ```
 
 HELPFUL: メタタグの管理には、Angularは `Meta` サービスを提供しています。
@@ -436,8 +430,8 @@ IMPORTANT: 上記のトークンは、次のシナリオでは `null` になり�
 デフォルトでは、`HttpClient` は `Authorization` または `Proxy-Authorization` ヘッダーを含まないすべての `HEAD` および `GET` リクエストをキャッシュします。ハイドレーション設定に `withHttpTransferCacheOptions` を使用することで、これらの設定をオーバーライドできます。
 
 ```ts
-import { bootstrapApplication } from '@angular/platform-browser';
-import { provideClientHydration, withHttpTransferCacheOptions } from '@angular/platform-browser';
+import {bootstrapApplication} from '@angular/platform-browser';
+import {provideClientHydration, withHttpTransferCacheOptions} from '@angular/platform-browser';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -504,7 +498,7 @@ withHttpTransferCacheOptions({
 
 ```ts
 // このリクエストに特定のヘッダーを含める
-http.get('/api/profile', { transferCache: { includeHeaders: ['CustomHeader'] } });
+http.get('/api/profile', {transferCache: {includeHeaders: ['CustomHeader']}});
 ```
 
 ### キャッシュの無効化 {#disabling-caching}
@@ -516,12 +510,14 @@ http.get('/api/profile', { transferCache: { includeHeaders: ['CustomHeader'] } }
 アプリケーション内のすべてのリクエストのキャッシュを無効にするには、`withNoHttpTransferCache` 機能を使用します。
 
 ```ts
-import { bootstrapApplication, provideClientHydration, withNoHttpTransferCache } from '@angular/platform-browser';
+import {
+  bootstrapApplication,
+  provideClientHydration,
+  withNoHttpTransferCache,
+} from '@angular/platform-browser';
 
 bootstrapApplication(AppComponent, {
-  providers: [
-    provideClientHydration(withNoHttpTransferCache())
-  ]
+  providers: [provideClientHydration(withNoHttpTransferCache())],
 });
 ```
 
@@ -530,14 +526,20 @@ bootstrapApplication(AppComponent, {
 `withHttpTransferCacheOptions` の [`filter`](api/common/http/HttpTransferCacheOptions) オプションを使用して、特定のリクエストのキャッシュを選択的に無効にできます。たとえば、特定のAPIエンドポイントのキャッシュを無効にできます。
 
 ```ts
-import { bootstrapApplication, provideClientHydration, withHttpTransferCacheOptions } from '@angular/platform-browser';
+import {
+  bootstrapApplication,
+  provideClientHydration,
+  withHttpTransferCacheOptions,
+} from '@angular/platform-browser';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideClientHydration(withHttpTransferCacheOptions({
-      filter: (req) => !req.url.includes('/api/sensitive-data')
-    }))
-  ]
+    provideClientHydration(
+      withHttpTransferCacheOptions({
+        filter: (req) => !req.url.includes('/api/sensitive-data'),
+      }),
+    ),
+  ],
 });
 ```
 
@@ -548,7 +550,7 @@ bootstrapApplication(AppComponent, {
 個々のリクエストのキャッシュを無効にするには、`HttpRequest` で [`transferCache`](api/common/http/HttpRequest#transferCache) オプションを指定できます。
 
 ```ts
-httpClient.get('/api/sensitive-data', { transferCache: false });
+httpClient.get('/api/sensitive-data', {transferCache: false});
 ```
 
 NOTE: アプリケーションがサーバーとクライアントで異なるHTTPオリジンを使用してAPIコールを行う場合、`HTTP_TRANSFER_CACHE_ORIGIN_MAP`トークンを使用してそれらのオリジン間のマッピングを確立できます。これにより、`HttpTransferCache`機能がそれらのリクエストを同じものとして認識し、クライアントでのハイドレーション中にサーバーでキャッシュされたデータを再利用できます。
@@ -561,7 +563,11 @@ NOTE: アプリケーションがサーバーとクライアントで異なるHT
 
 ```ts
 // server.ts
-import { AngularNodeAppEngine, createNodeRequestHandler, writeResponseToNodeResponse } from '@angular/ssr/node';
+import {
+  AngularNodeAppEngine,
+  createNodeRequestHandler,
+  writeResponseToNodeResponse,
+} from '@angular/ssr/node';
 import express from 'express';
 
 const app = express();
@@ -570,7 +576,7 @@ const angularApp = new AngularNodeAppEngine();
 app.use('*', (req, res, next) => {
   angularApp
     .handle(req)
-    .then(response => {
+    .then((response) => {
       if (response) {
         writeResponseToNodeResponse(response, res);
       } else {
@@ -592,7 +598,7 @@ export const reqHandler = createNodeRequestHandler(app);
 
 ```ts
 // server.ts
-import { AngularAppEngine, createRequestHandler } from '@angular/ssr';
+import {AngularAppEngine, createRequestHandler} from '@angular/ssr';
 
 const angularApp = new AngularAppEngine();
 
@@ -600,7 +606,7 @@ const angularApp = new AngularAppEngine();
  * これは、Angular CLI (開発サーバーおよびビルド時) で使用されるリクエストハンドラーです。
  */
 export const reqHandler = createRequestHandler(async (req: Request) => {
-  const res: Response|null = await angularApp.render(req);
+  const res: Response | null = await angularApp.render(req);
 
   // ...
 });

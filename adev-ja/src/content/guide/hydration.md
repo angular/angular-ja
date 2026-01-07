@@ -69,9 +69,7 @@ HELPFUL: Angularの構成要素に切り替えるか、`ngSkipHydration` を使�
 import {provideClientHydration, withEventReplay} from '@angular/platform-browser';
 
 bootstrapApplication(App, {
-  providers: [
-    provideClientHydration(withEventReplay())
-  ]
+  providers: [provideClientHydration(withEventReplay())],
 });
 ```
 
@@ -175,6 +173,24 @@ HELPFUL: これによりレンダリングの問題は修正されますが、�
 ## ハイドレーションのタイミングとアプリケーションの安定性 {#hydration-timing-and-application-stability}
 
 アプリケーションの安定性は、ハイドレーションプロセスにおいて重要な部分です。ハイドレーションおよびハイドレーション後のプロセスは、アプリケーションが安定性を報告した後にのみ発生します。安定性が遅延する可能性のある方法はいくつかあります。例としては、タイムアウトとインターバルの設定、未解決のPromise、保留中のマイクロタスクなどがあります。これらの場合、アプリケーションが10秒後に安定状態に達していないことを示す [アプリケーションが不安定なままです](errors/NG0506) エラーに遭遇する可能性があります。アプリケーションがすぐにハイドレーションされない場合は、アプリケーションの安定性に影響を与えているものを見直し、これらの遅延を引き起こさないようにリファクタリングしてください。
+
+### アプリケーションの安定性のデバッグ {#debugging-application-stability}
+
+`provideStabilityDebugging` ユーティリティは、アプリケーションが安定化に失敗する理由を特定するのに役立ちます。このユーティリティは、`provideClientHydration` を使用する場合、devモードではデフォルトで提供されます。また、本番バンドルで使用したり、たとえばハイドレーションなしでSSRを使用する場合に、アプリケーションプロバイダーに手動で追加することもできます。この機能は、予想よりもアプリケーションの安定化に時間がかかる場合、コンソールに情報をログ出力します。
+
+```typescript
+import {provideStabilityDebugging} from '@angular/core';
+import {bootstrapApplication} from '@angular/platform-browser';
+import 'zone.js/plugins/task-tracking'; // `provideZoneChangeDetection` でZone.jsを使用している場合に使用
+
+bootstrapApplication(AppComponent, {
+  providers: [provideStabilityDebugging()],
+});
+```
+
+有効にすると、ユーティリティは保留中のタスク（`PendingTasks`）をコンソールにログ出力します。アプリケーションでZone.jsを使用している場合は、`zone.js/plugins/task-tracking` をインポートすることで、AngularゾーンがUnstableになる原因となっているマクロタスクを確認することもできます。このプラグインは、マクロタスク作成のスタックトレースを提供し、遅延の原因を効果的に特定するのに役立ちます。
+
+IMPORTANT: Angularは、zone.jsタスクトラッキングプラグインやこのユーティリティを本番バンドルから削除しません。これらは、最適化された本番ビルドを含む、開発中の安定性の問題を一時的にデバッグするためにのみ使用してください。
 
 ## I18N {#i18n}
 

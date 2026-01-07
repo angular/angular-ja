@@ -28,9 +28,7 @@ CSSで背景画像を使用している場合は、[こちらから開始して�
 `NgOptimizedImage`ディレクティブを`@angular/common`からインポートします。
 
 ```ts
-
-import { NgOptimizedImage } from '@angular/common'
-
+import {NgOptimizedImage} from '@angular/common';
 ```
 
 そして、スタンドアロンコンポーネントまたはNgModuleの`imports`配列に含めます。
@@ -42,7 +40,6 @@ imports: [
 ],
 ```
 
-</docs-code>
 </docs-step>
 <docs-step title="(オプション)ローダーの設定">
 NgOptimizedImageを使用するために画像ローダーは**必須ではありません**が、画像CDNと組み合わせて使用すると、画像の自動`srcset`を含む強力なパフォーマンス機能が有効になります。
@@ -53,9 +50,7 @@ NgOptimizedImageを使用するために画像ローダーは**必須ではあ�
 `NgOptimizedImage`ディレクティブを有効にするには、画像の`src`属性を`ngSrc`に置き換えます。
 
 ```html
-
-<img ngSrc="cat.jpg">
-
+<img ngSrc="cat.jpg" />
 ```
 
 [組み込みのサードパーティローダー](#built-in-loaders)を使用している場合は、`src`からベースURLパスを省略してください。これはローダーによって自動的に前置されます。
@@ -64,9 +59,7 @@ NgOptimizedImageを使用するために画像ローダーは**必須ではあ�
 ページの[LCP画像](https://web.dev/lcp/#what-elements-are-considered)は、その読み込みを優先するために常に`priority`としてマークしてください。
 
 ```html
-
-<img ngSrc="cat.jpg" width="400" height="200" priority>
-
+<img ngSrc="cat.jpg" width="400" height="200" priority />
 ```
 
 画像を`priority`としてマークすると、以下の最適化が適用されます。
@@ -81,9 +74,7 @@ LCP要素が`priority`属性を持たない画像である場合、Angularは開
 [画像関連のレイアウトシフト](https://web.dev/css-web-vitals/#images-and-layout-shifts)を防ぐため、NgOptimizedImageでは次のように画像の高さと幅を指定する必要があります。
 
 ```html
-
-<img ngSrc="cat.jpg" width="400" height="200">
-
+<img ngSrc="cat.jpg" width="400" height="200" />
 ```
 
 **レスポンシブ画像**（ビューポートに対して拡大縮小するようにスタイル設定された画像）の場合、`width`および`height`属性は画像ファイルの固有のサイズである必要があります。レスポンシブ画像の場合、[`sizes`の値を設定する](#responsive-images)ことも重要です。
@@ -101,9 +92,7 @@ NOTE: 画像のサイズが不明な場合は、以下で説明するように�
 画像に`fill`属性を追加する場合、以下の例のように`width`と`height`を含める必要はなく、含めるべきではありません。
 
 ```html
-
-<img ngSrc="cat.jpg" fill>
-
+<img ngSrc="cat.jpg" fill />
 ```
 
 [object-fit](https://developer.mozilla.org/docs/Web/CSS/object-fit)CSSプロパティを使用して、画像がコンテナをどのように埋めるかを変更できます。画像を`object-fit: "contain"`でスタイル設定すると、画像はアスペクト比を維持し、要素にフィットするように「レターボックス」されます。`object-fit: "cover"`を設定すると、要素はアスペクト比を維持し、要素を完全に埋めますが、一部のコンテンツは「切り取られる」場合があります。
@@ -133,9 +122,7 @@ IMPORTANT:「fill」画像が適切にレンダリングされるには、その
 NgOptimizedImageは、CDNまたは画像ホストが自動画像リサイズを提供している場合、画像の低解像度の自動プレースホルダーを表示できます。この機能を利用するには、画像に`placeholder`属性を追加します。
 
 ```html
-
-<img ngSrc="cat.jpg" width="400" height="200" placeholder>
-
+<img ngSrc="cat.jpg" width="400" height="200" placeholder />
 ```
 
 この属性を追加すると、指定された画像ローダーを使用して、画像の2番目の小さいバージョンが自動的にリクエストされます。この小さい画像は、画像が読み込まれる間、CSSのぼかしを伴う`background-image`スタイルとして適用されます。画像ローダーが提供されていない場合、プレースホルダー画像は生成されず、エラーがスローされます。
@@ -160,14 +147,7 @@ providers: [
 画像ローダーなしで、base64 [データURL](https://developer.mozilla.org/docs/Web/HTTP/Basics_of_HTTP/Data_URLs)を使用してプレースホルダーを指定できます。データURLの形式は`data:image/[imagetype];[data]`で、`[imagetype]`は`png`のような画像形式、`[data]`は画像のbase64エンコーディングです。このエンコーディングはコマンドラインまたはJavaScriptで行うことができます。具体的なコマンドについては、[MDNドキュメント](https://developer.mozilla.org/docs/Web/HTTP/Basics_of_HTTP/Data_URLs#encoding_data_into_base64_format)を参照してください。データが切り詰められたデータURLプレースホルダーの例を以下に示します。
 
 ```html
-
-<img
-  ngSrc="cat.jpg"
-  width="400"
-  height="200"
-  placeholder="data:image/png;base64,iVBORw0K..."
-/>
-
+<img ngSrc="cat.jpg" width="400" height="200" placeholder="data:image/png;base64,iVBORw0K..." />
 ```
 
 しかし、大きなデータURLはAngularバンドルのサイズを増やし、ページロードを遅くします。画像ローダーを使用できない場合、Angularチームはbase64プレースホルダー画像を4KB未満に保ち、重要な画像にのみ使用することを推奨しています。プレースホルダーの寸法を小さくすることに加えて、画像形式や画像を保存する際に使用するパラメーターの変更も検討してください。非常に低い解像度では、これらのパラメーターがファイルサイズに大きな影響を与える可能性があります。
@@ -177,13 +157,7 @@ providers: [
 デフォルトでは、NgOptimizedImageは画像プレースホルダーにCSSのぼかし効果を適用します。ぼかしなしでプレースホルダーをレンダリングするには、`blur`プロパティをfalseに設定したオブジェクトを含む`placeholderConfig`引数を指定します。例:
 
 ```html
-<img
-ngSrc="cat.jpg"
-width="400"
-height="200"
-placeholder
-[placeholderConfig]="{blur: false}"
-/>
+<img ngSrc="cat.jpg" width="400" height="200" placeholder [placeholderConfig]="{blur: false}" />
 ```
 
 ## 画像のスタイル調整 {#adjusting-image-styling}
@@ -205,9 +179,7 @@ NgOptimizedImageには、アプリケーションの読み込みパフォーマ�
 プリコネクトリンクは、[ローダー](#configuring-an-image-loader-for-ngoptimizedimage)への引数として提供されたドメインに対して自動的に生成されます。画像オリジンを自動的に識別できない場合、またはLCP画像に対してプリコネクトリンクが検出されない場合、`NgOptimizedImage`は開発中に警告を表示します。その場合、`index.html`にリソースヒントを手動で追加する必要があります。ドキュメントの`<head>`内に、以下に示すように`rel="preconnect"`を持つ`link`タグを追加します。
 
 ```html
-
 <link rel="preconnect" href="https://my.cdn.origin" />
-
 ```
 
 プリコネクト警告を無効にするには、`PRECONNECT_CHECK_BLOCKLIST`トークンをインジェクトします。
@@ -233,7 +205,7 @@ providers: [
 生成されるsrcsetの例:
 
 ```html
-<img ... srcset="image-400w.jpg 1x, image-800w.jpg 2x">
+<img ... srcset="image-400w.jpg 1x, image-800w.jpg 2x" />
 ```
 
 #### レスポンシブ画像 {#responsive-images}
@@ -266,17 +238,13 @@ providers: [
 `srcset`属性を手動で定義したい場合、`ngSrcset`属性を使用して独自のものを指定できます:
 
 ```html
-
-<img ngSrc="hero.jpg" ngSrcset="100w, 200w, 300w">
-
+<img ngSrc="hero.jpg" ngSrcset="100w, 200w, 300w" />
 ```
 
 `ngSrcset`属性が存在する場合、`NgOptimizedImage`は含まれるサイズに基づいて`srcset`を生成および設定します。`ngSrcset`に画像ファイル名を含めないでください。ディレクティブはこの情報を`ngSrc`から推測します。このディレクティブは、幅記述子（例: `100w`）と密度記述子（例: `1x`）の両方をサポートしています。
 
 ```html
-
-<img ngSrc="hero.jpg" ngSrcset="100w, 200w, 300w" sizes="50vw">
-
+<img ngSrc="hero.jpg" ngSrcset="100w, 200w, 300w" sizes="50vw" />
 ```
 
 ### 自動srcset生成の無効化 {#disabling-automatic-srcset-generation}
@@ -284,9 +252,7 @@ providers: [
 単一の画像に対してsrcset生成を無効にするには、画像に`disableOptimizedSrcset`属性を追加できます。
 
 ```html
-
-<img ngSrc="about.jpg" disableOptimizedSrcset>
-
+<img ngSrc="about.jpg" disableOptimizedSrcset />
 ```
 
 ### 画像の遅延読み込みの無効化 {#disabling-image-lazy-loading}
@@ -294,9 +260,7 @@ providers: [
 デフォルトでは、`NgOptimizedImage`は`priority`とマークされていないすべての画像に対して`loading=lazy`を設定します。優先度の低い画像に対してこの動作を無効にするには、`loading`属性を設定します。この属性は`eager`、`auto`、`lazy`の値をサポートします。詳細については、[標準の画像`loading`属性に関するドキュメントを参照してください](https://developer.mozilla.org/docs/Web/API/HTMLImageElement/loading#value)。
 
 ```html
-
-<img ngSrc="cat.jpg" width="400" height="200" loading="eager">
-
+<img ngSrc="cat.jpg" width="400" height="200" loading="eager" />
 ```
 
 ### 画像のデコード制御 {#controlling-image-decoding}
@@ -308,16 +272,16 @@ providers: [
 
 ```html
 <!-- デフォルト: decodingは'auto' -->
-<img ngSrc="gallery/landscape.jpg" width="1200" height="800">
+<img ngSrc="gallery/landscape.jpg" width="1200" height="800" />
 
 <!-- メインスレッドのブロックを避けるため、画像を非同期にデコードする -->
-<img ngSrc="gallery/preview.jpg" width="600" height="400" decoding="async">
+<img ngSrc="gallery/preview.jpg" width="600" height="400" decoding="async" />
 
 <!-- Priority画像は自動的にdecoding="sync"を使用する -->
-<img ngSrc="awesome.jpg" width="500" height="625" priority >
+<img ngSrc="awesome.jpg" width="500" height="625" priority />
 
 <!-- ピクセルが必要な場合は即座にデコードする（ブロックする可能性あり） -->
-<img ngSrc="hero.jpg" width="1600" height="900" decoding="sync">
+<img ngSrc="hero.jpg" width="1600" height="900" decoding="sync" />
 ```
 
 **許可される値**
@@ -331,9 +295,7 @@ providers: [
 異なるサイズの画面で画像を異なる幅で表示したい場合があります。このパターンの一般的な例は、モバイルデバイスでは単一の列を、より大きなデバイスでは2つの列をレンダリングするグリッドベースまたはカラムベースのレイアウトです。この動作は、以下のような「メディアクエリ」構文を使用して`sizes`属性で表現できます。
 
 ```html
-
-<img ngSrc="cat.jpg" width="400" height="200" sizes="(max-width: 768px) 100vw, 50vw">
-
+<img ngSrc="cat.jpg" width="400" height="200" sizes="(max-width: 768px) 100vw, 50vw" />
 ```
 
 上記の例の`sizes`属性は、「この画像は幅768px未満のデバイスでは画面幅の100%になることを想定しています。それ以外の場合は、画面幅の50%になることを想定しています。」という意味です。
@@ -428,9 +390,7 @@ const myCustomLoader = (config: ImageLoaderConfig) => {
 上記の例では、カスタムローダーの機能を制御するために「roundedCorners」というプロパティ名を考案したことに注意してください。この機能は、画像を生成する際に次のように使用できます。
 
 ```html
-
-<img ngSrc="profile.jpg" width="300" height="300" [loaderParams]="{roundedCorners: true}">
-
+<img ngSrc="profile.jpg" width="300" height="300" [loaderParams]="{roundedCorners: true}" />
 ```
 
 ## よくある質問 {#frequently-asked-questions}

@@ -51,7 +51,10 @@ Angularは、それぞれ異なる目的を持つ4種類のルートガードを
 [標準のガード戻り値の型](#route-guard-return-types)を返すことができます。
 
 ```ts
-export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+export const authGuard: CanActivateFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot,
+) => {
   const authService = inject(AuthService);
   return authService.isAuthenticated();
 };
@@ -73,7 +76,10 @@ Tip: ユーザーをリダイレクトする必要がある場合は、[`URLTree
 [標準のガード戻り値の型](#route-guard-return-types)を返すことができます。
 
 ```ts
-export const adminChildGuard: CanActivateChildFn = (childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+export const adminChildGuard: CanActivateChildFn = (
+  childRoute: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot,
+) => {
   const authService = inject(AuthService);
   return authService.hasRole('admin');
 };
@@ -95,7 +101,12 @@ export const adminChildGuard: CanActivateChildFn = (childRoute: ActivatedRouteSn
 [標準のガード戻り値の型](#route-guard-return-types)を返すことができます。
 
 ```ts
-export const unsavedChangesGuard: CanDeactivateFn<FormComponent> = (component: FormComponent, currentRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot, nextState: RouterStateSnapshot) => {
+export const unsavedChangesGuard: CanDeactivateFn<FormComponent> = (
+  component: FormComponent,
+  currentRoute: ActivatedRouteSnapshot,
+  currentState: RouterStateSnapshot,
+  nextState: RouterStateSnapshot,
+) => {
   return component.hasUnsavedChanges()
     ? confirm('You have unsaved changes. Are you sure you want to leave?')
     : true;
@@ -130,14 +141,14 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: AdminDashboard,
-    canMatch: [adminGuard]
+    canMatch: [adminGuard],
   },
   {
     path: 'dashboard',
     component: UserDashboard,
-    canMatch: [userGuard]
-  }
-]
+    canMatch: [userGuard],
+  },
+];
 ```
 
 この例では、ユーザーが`/dashboard`にアクセスすると、正しいガードにマッチする最初のものが使用されます。
@@ -151,25 +162,25 @@ const routes: Routes = [
 ガードは、単一のルートに複数のガードを適用できるように、ルート設定で配列として指定されます。それらは配列に現れる順序で実行されます。
 
 ```ts
-import { Routes } from '@angular/router';
-import { authGuard } from './guards/auth.guard';
-import { adminGuard } from './guards/admin.guard';
-import { canDeactivateGuard } from './guards/can-deactivate.guard';
-import { featureToggleGuard } from './guards/feature-toggle.guard';
+import {Routes} from '@angular/router';
+import {authGuard} from './guards/auth.guard';
+import {adminGuard} from './guards/admin.guard';
+import {canDeactivateGuard} from './guards/can-deactivate.guard';
+import {featureToggleGuard} from './guards/feature-toggle.guard';
 
 const routes: Routes = [
   // Basic CanActivate - 認証が必要
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
 
   // 複数のCanActivateガード - 認証と管理者ロールが必要
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [authGuard, adminGuard]
+    canActivate: [authGuard, adminGuard],
   },
 
   // CanActivate + CanDeactivate - 未保存の変更チェック付き保護ルート
@@ -177,7 +188,7 @@ const routes: Routes = [
     path: 'profile',
     component: ProfileComponent,
     canActivate: [authGuard],
-    canDeactivate: [canDeactivateGuard]
+    canDeactivate: [canDeactivateGuard],
   },
 
   // CanActivateChild - すべての子ルートを保護
@@ -186,23 +197,23 @@ const routes: Routes = [
     canActivateChild: [authGuard],
     children: [
       // /users/list - 保護されている
-      { path: 'list', component: UserListComponent },
+      {path: 'list', component: UserListComponent},
       // /users/detail/:id - 保護されている
-      { path: 'detail/:id', component: UserDetailComponent }
-    ]
+      {path: 'detail/:id', component: UserDetailComponent},
+    ],
   },
 
   // CanMatch - 機能フラグに基づいてルートを条件付きでマッチング
   {
     path: 'beta-feature',
     component: BetaFeatureComponent,
-    canMatch: [featureToggleGuard]
+    canMatch: [featureToggleGuard],
   },
 
   // ベータ機能が無効な場合のフォールバックルート
   {
     path: 'beta-feature',
-    component: ComingSoonComponent
-  }
+    component: ComingSoonComponent,
+  },
 ];
 ```

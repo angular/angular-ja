@@ -17,9 +17,9 @@ Angularの `TestBed` は、次のセクションで説明するように、こ�
 
 - `Lightswitch.clicked()` はユーザーが呼び出せるように何かとバインドされていますか？
 - `Lightswitch.message` は表示されますか？
-- ユーザーは `DashboardHeroComponent` によって表示されるヒーローを実際に選択できますか？
+- ユーザーは `DashboardHero` コンポーネントによって表示されるヒーローを実際に選択できますか？
 - ヒーローの名前は期待通り（たとえば、大文字）に表示されますか？
-- `WelcomeComponent` のテンプレートによってウェルカムメッセージは表示されますか？
+- `Welcome` コンポーネントのテンプレートによってウェルカムメッセージは表示されますか？
 
 これらの質問は、説明した前の簡単なコンポーネントにとっては問題ないかもしれません。
 しかし、多くのコンポーネントは、そのテンプレートで記述されているDOM要素との複雑な対話を持ち、コンポーネントの状態が変わるとHTMLが表示および非表示になります。
@@ -32,19 +32,37 @@ Angularの `TestBed` は、次のセクションで説明するように、こ�
 
 CLIは、新しいコンポーネントの生成を要求するときに、デフォルトで初期テストファイルを自動的に生成します。
 
-たとえば、次のCLIコマンドは `app/banner` フォルダーに `BannerComponent` を生成します（インラインテンプレートとスタイル付き）。
+たとえば、次のCLIコマンドは `app/banner` フォルダーに `Banner` コンポーネントを生成します（インラインテンプレートとスタイル付き）。
 
 ```shell
-ng generate component banner --inline-template --inline-style --module app
+ng generate component banner --inline-template --inline-style
 ```
 
-また、コンポーネントの初期テストファイル `banner-external.component.spec.ts` も生成し、次のようになります。
+また、コンポーネントの初期テストファイル `banner.spec.ts` も生成し、次のようになります。
 
-<docs-code header="banner-external.component.spec.ts (初期)" path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="v1"/>
+```ts
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {Banner} from './banner';
 
-HELPFUL: `compileComponents` は非同期であるため、`@angular/core/testing` からインポートされた [`waitForAsync`](api/core/testing/waitForAsync) ユーティリティ関数を使用します。
+describe('Banner', () => {
+  let component: Banner;
+  let fixture: ComponentFixture<Banner>;
 
-詳細については、[waitForAsync](guide/testing/components-scenarios#waitForAsync) セクションを参照してください。
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [Banner],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(Banner);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+```
 
 ### セットアップの削減
 
@@ -55,25 +73,30 @@ HELPFUL: `compileComponents` は非同期であるため、`@angular/core/testin
 これらの高度なテスト機能については、次のセクションで説明します。
 今のところ、このテストファイルをより管理しやすいサイズに大幅に縮小できます。
 
-<docs-code header="banner-initial.component.spec.ts (最小限)" path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="v2"/>
-
-この例では、`TestBed.configureTestingModule` に渡されるメタデータオブジェクトは、単にテスト対象のコンポーネントである `BannerComponent` を宣言します。
-
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="configureTestingModule"/>
-
-HELPFUL: 他のものを宣言したりインポートする必要はありません。
-デフォルトのテストモジュールは、`@angular/platform-browser` の `BrowserModule` などのモジュールで事前に構成されています。
+```ts
+describe('Banner (minimal)', () => {
+  it('should create', () => {
+    const fixture = TestBed.createComponent(Banner);
+    const component = fixture.componentInstance;
+    expect(component).toBeDefined();
+  });
+});
+```
 
 後で `TestBed.configureTestingModule()` を呼び出して、インポート、プロバイダー、その他の宣言を追加して、テストのニーズに合わせて構成します。
 オプションの `override` メソッドは、構成の側面をさらに微調整できます。
+
+NOTE: `TestBed.compileComponents` は、テストされるコンポーネントで `@defer` ブロックが使用されている場合にのみ必要です。
 
 ### `createComponent()`
 
 `TestBed` を構成したら、その `createComponent()` メソッドを呼び出します。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="createComponent"/>
+```ts
+const fixture = TestBed.createComponent(Banner);
+```
 
-`TestBed.createComponent()` は `BannerComponent` のインスタンスを作成し、対応する要素をテストランナーのDOMに追加し、[`ComponentFixture`](#componentfixture) を返します。
+`TestBed.createComponent()` は `Banner` コンポーネントのインスタンスを作成し、対応する要素をテストランナーのDOMに追加し、[`ComponentFixture`](#componentfixture) を返します。
 
 IMPORTANT: `createComponent` を呼び出した後に `TestBed` を再構成しないでください。
 
@@ -84,22 +107,62 @@ IMPORTANT: `createComponent` を呼び出した後に `TestBed` を再構成し�
 
 ### `ComponentFixture`
 
-[ComponentFixture](api/core/testing/ComponentFixture) は、作成されたコンポーネントとその対応する要素を操作するためのテストハーネスです。
+[`ComponentFixture`](api/core/testing/ComponentFixture) は、作成されたコンポーネントとその対応する要素を操作するためのテストハーネスです。
 
-fixtureを介してコンポーネントインスタンスにアクセスし、Jasmineの期待を使用して存在を確認します。
+fixtureを介してコンポーネントインスタンスにアクセスし、期待を使用して存在を確認します。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="componentInstance"/>
+```ts
+const component = fixture.componentInstance;
+expect(component).toBeDefined();
+```
 
 ### `beforeEach()`
 
 このコンポーネントが進化するにつれて、さらに多くのテストを追加するでしょう。
-各テストのために `TestBed` 構成を複製するのではなく、セットアップをJasmineの `beforeEach()` といくつかのサポート変数にリファクタリングします。
+各テストのために `TestBed` 構成を複製するのではなく、セットアップを `beforeEach()` といくつかのサポート変数にリファクタリングします。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="v3"/>
+```ts
+describe('Banner (with beforeEach)', () => {
+  let component: Banner;
+  let fixture: ComponentFixture<Banner>;
+
+  beforeEach(async () => {
+    fixture = TestBed.createComponent(Banner);
+    component = fixture.componentInstance;
+
+    await fixture.whenStable(); // necessary to wait for the initial rendering
+  });
+
+  it('should create', () => {
+    expect(component).toBeDefined();
+  });
+});
+```
+
+HELPFUL: `beforeEach` で `await fixture.whenStable` を使用して初期レンダリングを待機することで、個別のテストは同期的になります。
 
 次に、fixture.nativeElementからコンポーネントの要素を取得し、期待されるテキストを探すテストを追加します。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="v4-test-2"/>
+```ts
+it('should contain "banner works!"', () => {
+  const bannerElement: HTMLElement = fixture.nativeElement;
+  expect(bannerElement.textContent).toContain('banner works!');
+});
+```
+
+### `setup` 関数の作成
+
+`beforeEach` の代わりに、各テストで呼び出すsetup関数を作成することもできます。
+setup関数は、パラメーターを介してカスタマイズできるという利点があります。
+
+setup関数の例を次に示します。
+
+```ts
+function setup(providers?: StaticProviders[]): ComponentFixture<Banner> {
+  TestBed.configureTestingModule({providers});
+  return TestBed.createComponent(Banner);
+}
+```
 
 ### `nativeElement`
 
@@ -107,7 +170,7 @@ fixtureを介してコンポーネントインスタンスにアクセスし、J
 後で `DebugElement.nativeElement` に遭遇しますが、これも `any` 型です。
 
 Angularは、コンパイル時に `nativeElement` がどのようなHTML要素であるか、あるいはHTML要素であるかどうかすらを知ることができません。
-アプリケーションは、サーバーや [Web Worker](https://developer.mozilla.org/docs/Web/API/Web_Workers_API) などの _非ブラウザープラットフォーム_ で実行されている可能性があり、その場合、要素のAPIが制限されているか、存在しない可能性があります。
+アプリケーションは、サーバーやNode環境などの _非ブラウザープラットフォーム_ で実行されている可能性があり、その場合、要素のAPIが制限されているか、存在しない可能性があります。
 
 このガイドのテストはブラウザで実行されるように設計されているため、`nativeElement` の値は常に `HTMLElement` またはその派生クラスのいずれかになります。
 
@@ -115,17 +178,28 @@ Angularは、コンパイル時に `nativeElement` がどのようなHTML要素�
 
 次に、`HTMLElement.querySelector` を呼び出して段落要素を取得し、バナーテキストを探すテストを示します。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="v4-test-3"/>
+```ts
+it('should have <p> with "banner works!"', () => {
+  const bannerElement: HTMLElement = fixture.nativeElement;
+  const p = bannerElement.querySelector('p')!;
+  expect(p.textContent).toEqual('banner works!');
+});
+```
 
 ### `DebugElement`
 
 Angularの _fixture_ は、`fixture.nativeElement` を介してコンポーネントの要素を直接提供します。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="nativeElement"/>
+```ts
+const bannerElement: HTMLElement = fixture.nativeElement;
+```
 
 これは実際には、`fixture.debugElement.nativeElement` として実装された便利なメソッドです。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="debugElement-nativeElement"/>
+```ts
+const bannerDe: DebugElement = fixture.debugElement;
+const bannerEl: HTMLElement = bannerDe.nativeElement;
+```
 
 この回りくどい要素へのパスには、正当な理由があります。
 
@@ -140,13 +214,22 @@ AngularはHTML要素ツリーを作成するのではなく、実行時プラッ
 
 次に、`fixture.debugElement.nativeElement` を使用して再実装された前のテストを示します。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="v4-test-4"/>
+```ts
+it('should find the <p> with fixture.debugElement.nativeElement', () => {
+  const bannerDe: DebugElement = fixture.debugElement;
+  const bannerEl: HTMLElement = bannerDe.nativeElement;
+  const p = bannerEl.querySelector('p')!;
+  expect(p.textContent).toEqual('banner works!');
+});
+```
 
 `DebugElement` には、このガイドの他の場所で説明されているように、テストで役立つ他のメソッドとプロパティがあります。
 
 Angularコアライブラリから `DebugElement` シンボルをインポートします。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="import-debug-element"/>
+```ts
+import {DebugElement} from '@angular/core';
+```
 
 ### `By.css()`
 
@@ -162,11 +245,20 @@ Angularコアライブラリから `DebugElement` シンボルをインポート
 実行時プラットフォームのライブラリからインポートされた `By` クラスの助けを借りて _述語_ を作成します。
 次に、ブラウザプラットフォームの `By` のインポートを示します。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="import-by"/>
+```ts
+import {By} from '@angular/platform-browser';
+```
 
 次の例は、`DebugElement.query()` とブラウザの `By.css` メソッドを使用して、前のテストを再実装したものです。
 
-<docs-code path="adev/src/content/examples/testing/src/app/banner/banner-initial.component.spec.ts" region="v4-test-5"/>
+```ts
+it('should find the <p> with fixture.debugElement.query(By.css)', () => {
+  const bannerDe: DebugElement = fixture.debugElement;
+  const paragraphDe = bannerDe.query(By.css('p'));
+  const p: HTMLElement = paragraphDe.nativeElement;
+  expect(p.textContent).toEqual('banner works!');
+});
+```
 
 注目すべき観察結果をいくつか紹介します。
 

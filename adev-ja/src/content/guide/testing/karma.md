@@ -49,7 +49,7 @@ ng new my-karma-app --test-runner=karma
             "test": {
               "builder": "@angular/build:unit-test",
               "options": {
-                "runner": "karma",
+                "runner": "karma"
                 // ... other options
               }
             }
@@ -68,10 +68,8 @@ ng new my-karma-app --test-runner=karma
       // ...
       "compilerOptions": {
         // ...
-        "types": [
-          "jasmine"
-        ]
-      },
+        "types": ["jasmine"]
+      }
       // ...
     }
     ```
@@ -135,7 +133,7 @@ HELPFUL: Karmaの設定については、[Karma設定ガイド](http://karma-run
         "test": {
           "builder": "@angular/build:unit-test",
           "options": {
-            "runner": "karma",
+            "runner": "karma"
             // ... other options
           }
         }

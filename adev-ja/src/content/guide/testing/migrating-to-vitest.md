@@ -132,6 +132,8 @@ IMPORTANT: 既存のプロジェクトをVitestに移行することは実験的
 
 ヘッドレスモードは、`CI`環境変数が設定されている場合や、ブラウザ名に"Headless"が含まれている場合（例: `ChromeHeadless`）に自動的に有効になります。それ以外の場合、テストはヘッド付きブラウザで実行されます。
 
+NOTE: `ng test --debug`を使用したデバッグは、ブラウザモードではサポートされていません。
+
 ## schematicsによる自動テストリファクタリング {#automated-test-refactoring-with-schematics}
 
 IMPORTANT: `refactor-jasmine-vitest` schematicは実験的なものであり、すべての可能なテストパターンをカバーしているとは限りません。schematicによって行われた変更は必ずレビューしてください。
@@ -212,7 +214,7 @@ IMPORTANT: カスタム設定を使用すると高度なオプションが有効
       "architect": {
         "test": {
           "builder": "@angular/build:unit-test",
-          "options": { "runnerConfig": "vitest.config.ts" }
+          "options": {"runnerConfig": "vitest.config.ts"}
         }
       }
     }
@@ -222,6 +224,11 @@ IMPORTANT: カスタム設定を使用すると高度なオプションが有効
 
 **2. ベース設定の自動検索:**
 `runnerConfig`を`true`に設定すると、ビルダーはプロジェクトとワークスペースのルートで共有の`vitest-base.config.*`ファイルを自動的に検索します。
+
+## `zone.js`ベースのヘルパーはサポートされていません {#zonejs-based-helpers-are-not-supported}
+
+Vitestでテストを実行する場合、zone.jsのパッチは適用されないため、`fakeAsync`、`flush`、`waitForAsync`のような関数は使用できません。
+Vitestに移行するには、テストもネイティブasyncとVitestのフェイクタイマーに移行する必要があります。Vitestでのフェイクタイマーの使用例については、[こちらの例](/components-scenarios#async-test-with-a-vitest-fake-timers)を参照してください。
 
 ## バグレポート {#bug-reports}
 

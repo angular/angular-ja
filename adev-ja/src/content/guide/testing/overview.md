@@ -53,14 +53,11 @@ Angular CLIは、Vitestの設定のほとんどを処理します。`angular.jso
 たとえば、`src/test-providers.ts`ファイルを作成して、すべてのテストに`provideHttpClientTesting`を提供できます:
 
 ```typescript {header: "src/test-providers.ts"}
-import { Provider } from '@angular/core';
-import { provideHttpClient } from '@angular/common/http';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import {Provider} from '@angular/core';
+import {provideHttpClient} from '@angular/common/http';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
 
-const testProviders: Provider[] = [
-  provideHttpClient(),
-  provideHttpClientTesting(),
-];
+const testProviders: Provider[] = [provideHttpClient(), provideHttpClientTesting()];
 
 export default testProviders;
 ```

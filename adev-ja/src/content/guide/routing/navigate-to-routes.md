@@ -162,7 +162,7 @@ router.navigateByUrl('/products/123?view=details#reviews');
 router.navigateByUrl('/search?category=books&sortBy=price');
 
 // With matrix parameters
-router.navigateByUrl('/sales-awesome;isOffer=true;showModal=false')
+router.navigateByUrl('/sales-awesome;isOffer=true;showModal=false');
 ```
 
 履歴内の現在のURLを置き換える必要がある場合、`navigateByUrl`は`replaceUrl`オプションを持つ設定オブジェクトも受け入れます。
@@ -170,7 +170,7 @@ router.navigateByUrl('/sales-awesome;isOffer=true;showModal=false')
 ```ts
 // Replace current URL in history
 router.navigateByUrl('/checkout', {
-  replaceUrl: true
+  replaceUrl: true,
 });
 ```
 

@@ -7,18 +7,18 @@
 ルート設定で`redirectTo`プロパティを使用してリダイレクトを定義できます。このプロパティは文字列を受け入れます。
 
 ```ts
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 
 const routes: Routes = [
   // Simple redirect
-  { path: 'marketing', redirectTo: 'newsletter' },
+  {path: 'marketing', redirectTo: 'newsletter'},
 
   // Redirect with path parameters
-  { path: 'legacy-user/:id', redirectTo: 'users/:id' },
+  {path: 'legacy-user/:id', redirectTo: 'users/:id'},
 
-  // Redirect any other URLs that don’t match
+  // Redirect any other URLs that don't match
   // (also known as a "wildcard" redirect)
-  { path: '**', redirectTo: '/login' }
+  {path: '**', redirectTo: '/login'},
 ];
 ```
 
@@ -66,9 +66,7 @@ export const routes: Routes = [
 一方、`pathMatch: 'full'`は、Angular Routerに特定のパスのみをリダイレクトさせたい場合に役立ちます。
 
 ```ts
-export const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-];
+export const routes: Routes = [{path: '', redirectTo: '/dashboard', pathMatch: 'full'}];
 ```
 
 この例では、ユーザーがルートURL（つまり`''`）にアクセスするたびに、ルーターはそのユーザーを`'/dashboard'`ページにリダイレクトします。
@@ -80,9 +78,7 @@ TIP: ルートページ（つまり`"/"`または`""`）でリダイレクトを
 これをさらに説明するために、前のセクションの`news`の例で`pathMatch: 'full'`を使用した場合：
 
 ```ts
-export const routes: Routes = [
-  { path: 'news', redirectTo: '/blog', pathMatch: 'full' },
-];
+export const routes: Routes = [{path: 'news', redirectTo: '/blog', pathMatch: 'full'}];
 ```
 
 これは次のことを意味します。
@@ -101,8 +97,8 @@ export const routes: Routes = [
 以下は、時間帯に基づいてユーザーが異なるメニューにリダイレクトされる例です。
 
 ```ts
-import { Routes } from '@angular/router';
-import { MenuComponent } from './menu/menu.component';
+import {Routes} from '@angular/router';
+import {MenuComponent} from './menu/menu.component';
 
 export const routes: Routes = [
   {
@@ -124,16 +120,16 @@ export const routes: Routes = [
       } else {
         return `/restaurant/${location}/menu/dinner`;
       }
-    }
+    },
   },
 
   // Destination routes
-  { path: 'restaurant/:location/menu/breakfast', component: MenuComponent },
-  { path: 'restaurant/:location/menu/lunch', component: MenuComponent },
-  { path: 'restaurant/:location/menu/dinner', component: MenuComponent },
+  {path: 'restaurant/:location/menu/breakfast', component: MenuComponent},
+  {path: 'restaurant/:location/menu/lunch', component: MenuComponent},
+  {path: 'restaurant/:location/menu/dinner', component: MenuComponent},
 
   // Default redirect
-  { path: '', redirectTo: '/restaurant/downtown/menu', pathMatch: 'full' }
+  {path: '', redirectTo: '/restaurant/downtown/menu', pathMatch: 'full'},
 ];
 ```
 

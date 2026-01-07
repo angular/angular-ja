@@ -192,18 +192,18 @@ export class ProductListComponent implements OnInit {
 // 複数のパラメーター: /path;key1=value1;key2=value2
 
 // マトリックスパラメーターでナビゲート
-this.router.navigate(['/awesome-products', { view: 'grid', filter: 'new' }]);
+this.router.navigate(['/awesome-products', {view: 'grid', filter: 'new'}]);
 // 結果のURL: /awesome-products;view=grid;filter=new
 ```
 
 **ActivatedRouteの使用**
 
 ```ts
-import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, inject} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component(/* ... */)
-export class AwesomeProducts  {
+export class AwesomeProducts {
   private route = inject(ActivatedRoute);
 
   constructor() {

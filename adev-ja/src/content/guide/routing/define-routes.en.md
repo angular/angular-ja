@@ -9,12 +9,12 @@ In Angular, a **route** is an object that defines which component should render 
 Here is a basic example of a route:
 
 ```ts
-import { AdminPage } from './app-admin/app-admin.component';
+import {AdminPage} from './app-admin/app-admin.component';
 
 const adminPage = {
   path: 'admin',
-  component: AdminPage
-}
+  component: AdminPage,
+};
 ```
 
 For this route, when a user visits the `/admin` path, the app will display the `AdminPage` component.
@@ -26,9 +26,9 @@ Most projects define routes in a separate file that contains `routes` in the fil
 A collection of routes looks like this:
 
 ```ts
-import { Routes } from '@angular/router';
-import { HomePage } from './home-page/home-page.component';
-import { AdminPage } from './about-page/admin-page.component';
+import {Routes} from '@angular/router';
+import {HomePage} from './home-page/home-page.component';
+import {AdminPage} from './about-page/admin-page.component';
 
 export const routes: Routes = [
   {
@@ -51,16 +51,16 @@ When bootstrapping an Angular application without the Angular CLI, you can pass 
 Inside of the `providers` array, you can add the Angular router to your application by adding a `provideRouter` function call with your routes.
 
 ```ts
-import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import {ApplicationConfig} from '@angular/core';
+import {provideRouter} from '@angular/router';
 
-import { routes } from './app.routes';
+import {routes} from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     // ...
-  ]
+  ],
 };
 ```
 
@@ -88,12 +88,10 @@ Learn more about [query parameters in Angular in this guide](/guide/routing/read
 The following example displays a user profile component based on the user id passed in through the URL.
 
 ```ts
-import { Routes } from '@angular/router';
-import { UserProfile } from './user-profile/user-profile';
+import {Routes} from '@angular/router';
+import {UserProfile} from './user-profile/user-profile';
 
-const routes: Routes = [
-  { path: 'user/:id', component: UserProfile }
-];
+const routes: Routes = [{path: 'user/:id', component: UserProfile}];
 ```
 
 In this example, URLs such as `/user/leeroy` and `/user/jenkins` render the `UserProfile` component. This component can then read the `id` parameter and use it to perform additional work, such as fetching data. See [reading route state guide](/guide/routing/read-route-state) for details on reading route parameters.
@@ -108,13 +106,13 @@ Valid route parameter names must start with a letter (a-z, A-Z) and can only con
 You can also define paths with multiple parameters:
 
 ```ts
-import { Routes } from '@angular/router';
-import { UserProfile } from './user-profile/user-profile.component';
-import { SocialMediaFeed } from './user-profile/social–media-feed.component';
+import {Routes} from '@angular/router';
+import {UserProfile} from './user-profile/user-profile.component';
+import {SocialMediaFeed} from './user-profile/social–media-feed.component';
 
 const routes: Routes = [
-  { path: 'user/:id/:social-media', component: SocialMediaFeed },
-  { path: 'user/:id/', component: UserProfile },
+  {path: 'user/:id/:social-media', component: SocialMediaFeed},
+  {path: 'user/:id/', component: UserProfile},
 ];
 ```
 
@@ -129,14 +127,14 @@ When you need to catch all routes for a specific path, the solution is a wildcar
 A common example is defining a Page Not Found component.
 
 ```ts
-import { Home } from './home/home.component';
-import { UserProfile } from './user-profile/user-profile.component';
-import { NotFound } from './not-found/not-found.component';
+import {Home} from './home/home.component';
+import {UserProfile} from './user-profile/user-profile.component';
+import {NotFound} from './not-found/not-found.component';
 
 const routes: Routes = [
-  { path: 'home', component: Home },
-  { path: 'user/:id', component: UserProfile },
-  { path: '**', component: NotFound }
+  {path: 'home', component: Home},
+  {path: 'user/:id', component: UserProfile},
+  {path: '**', component: NotFound},
 ];
 ```
 
@@ -152,11 +150,11 @@ The following example shows routes defined from most-specific to least specific:
 
 ```ts
 const routes: Routes = [
-  { path: '', component: HomeComponent },              // Empty path
-  { path: 'users/new', component: NewUserComponent },  // Static, most specific
-  { path: 'users/:id', component: UserDetailComponent }, // Dynamic
-  { path: 'users', component: UsersComponent },        // Static, less specific
-  { path: '**', component: NotFoundComponent }         // Wildcard - always last
+  {path: '', component: HomeComponent}, // Empty path
+  {path: 'users/new', component: NewUserComponent}, // Static, most specific
+  {path: 'users/:id', component: UserDetailComponent}, // Dynamic
+  {path: 'users', component: UsersComponent}, // Static, less specific
+  {path: '**', component: NotFoundComponent}, // Wildcard - always last
 ];
 ```
 
@@ -168,12 +166,12 @@ If a user visits `/users/new`, Angular router would go through the following ste
 1. Never reaches `users`
 1. Never reaches `**`
 
-## Loading Route Component Strategies
+## Route Loading Strategies
 
-Understanding how and when components load in Angular routing is crucial for building responsive web applications. Angular offers two primary strategies to control component loading behavior:
+Understanding how and when routes and components load in Angular routing is crucial for building responsive web applications. Angular offers two primary strategies to control loading behavior:
 
-1. **Eagerly loaded**: Components that are loaded immediately
-2. **Lazily loaded**: Components loaded only when needed
+1. **Eagerly loaded**: Routes and components that are loaded immediately
+2. **Lazily loaded**: Routes and components loaded only when needed
 
 Each approach offers distinct advantages for different scenarios.
 
@@ -182,50 +180,51 @@ Each approach offers distinct advantages for different scenarios.
 When you define a route with the `component` property, the referenced component is eagerly loaded as part of the same JavaScript bundle as the route configuration.
 
 ```ts
-import { Routes } from "@angular/router";
-import { HomePage } from "./components/home/home-page"
-import { LoginPage } from "./components/auth/login-page"
+import {Routes} from '@angular/router';
+import {HomePage} from './components/home/home-page';
+import {LoginPage} from './components/auth/login-page';
 
 export const routes: Routes = [
   // HomePage and LoginPage are both directly referenced in this config,
   // so their code is eagerly included in the same JavaScript bundle as this file.
   {
-    path: "",
-    component: HomePage
+    path: '',
+    component: HomePage,
   },
   {
-    path: "login",
-    component: LoginPage
-  }
-]
+    path: 'login',
+    component: LoginPage,
+  },
+];
 ```
 
 Eagerly loading route components like this means that the browser has to download and parse all of the JavaScript for these components as part of your initial page load, but the components are available to Angular immediately.
 
 While including more JavaScript in your initial page load leads to slower initial load times, this can lead to more seamless transitions as the user navigates through an application.
 
-### Lazily loaded components
+### Lazily loaded components and routes
 
-You can use the `loadComponent` property to lazily load the JavaScript for a route only at the point at which that route would become active.
+You can use the `loadComponent` property to lazily load the JavaScript for a component at the point at which that route would become active. The `loadChildren` property lazily loads child routes during route matching.
 
 ```ts
-import { Routes } from "@angular/router";
+import {Routes} from '@angular/router';
 
 export const routes: Routes = [
-  // The HomePage and LoginPage components are loaded lazily at the point at which
-  // their corresponding routes become active.
   {
     path: 'login',
-    loadComponent: () => import('./components/auth/login-page').then(m => m.LoginPage)
+    loadComponent: () => import('./components/auth/login-page'),
   },
   {
-    path: '',
-    loadComponent: () => import('./components/home/home-page').then(m => m.HomePage)
-  }
-]
+    path: 'admin',
+    loadComponent: () => import('./admin/admin.component'),
+    loadChildren: () => import('./admin/admin.routes'),
+  },
+];
 ```
 
-The `loadComponent` property accepts a loader function that returns a Promise that resolves to an Angular component. In most cases, this function uses the standard [JavaScript dynamic import API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import). You can, however, use any arbitrary async loader function.
+The `loadComponent` and `loadChildren` properties accept a loader function that returns a Promise that resolves to an Angular component or a set of routes respectively. In most cases, this function uses the standard [JavaScript dynamic import API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import). You can, however, use any arbitrary async loader function.
+
+If the lazily loaded file uses a `default` export, you can return the `import()` promise directly without an additional `.then` call to select the exported class.
 
 Lazily loading routes can significantly improve the load speed of your Angular application by removing large portions of JavaScript from the initial bundle. These portions of your code compile into separate JavaScript "chunks" that the router requests only when the user visits the corresponding route.
 
@@ -234,9 +233,9 @@ Lazily loading routes can significantly improve the load speed of your Angular a
 The Router executes `loadComponent` and `loadChildren` within the **injection context of the current route**, allowing you to call [`inject`](/api/core/inject)inside these loader functions to access providers declared on that route, inherited from parent routes through hierarchical dependency injection, or available globally. This enables context-aware lazy loading.
 
 ```ts
-import { Routes } from '@angular/router';
-import { inject } from '@angular/core';
-import { FeatureFlags } from './feature-flags';
+import {Routes} from '@angular/router';
+import {inject} from '@angular/core';
+import {FeatureFlags} from './feature-flags';
 
 export const routes: Routes = [
   {
@@ -245,8 +244,8 @@ export const routes: Routes = [
     loadComponent: () => {
       const flags = inject(FeatureFlags);
       return flags.isPremium
-        ? import('./dashboard/premium-dashboard').then(m => m.PremiumDashboard)
-        : import('./dashboard/basic-dashboard').then(m => m.BasicDashboard);
+        ? import('./dashboard/premium-dashboard')
+        : import('./dashboard/basic-dashboard');
     },
   },
 ];
@@ -265,7 +264,7 @@ NOTE: While lazy routes have the upfront performance benefit of reducing the amo
 You can define a route that redirects to another route instead of rendering a component:
 
 ```ts
-import { BlogComponent } from './home/blog.component';
+import {BlogComponent} from './home/blog.component';
 
 const routes: Routes = [
   {
@@ -274,7 +273,7 @@ const routes: Routes = [
   },
   {
     path: 'blog',
-    component: BlogComponent
+    component: BlogComponent,
   },
 ];
 ```
@@ -286,21 +285,21 @@ If you modify or remove a route, some users may still click on out-of-date links
 You can associate a **title** with each route. Angular automatically updates the [page title](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title) when a route activates. Always define appropriate page titles for your application, as these titles are necessary to create an accessible experience.
 
 ```ts
-import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
-import { ProductsComponent } from './products/products.component';
+import {Routes} from '@angular/router';
+import {HomeComponent} from './home/home.component';
+import {AboutComponent} from './about/about.component';
+import {ProductsComponent} from './products/products.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    title: 'Home Page'
+    title: 'Home Page',
   },
   {
     path: 'about',
     component: AboutComponent,
-    title: 'About Us'
+    title: 'About Us',
   },
 ];
 ```
@@ -310,14 +309,12 @@ The page `title` property can be set dynamincally to a resolver function using [
 ```ts
 const titleResolver: ResolveFn<string> = (route) => route.queryParams['id'];
 const routes: Routes = [
-   ...
-  {
+  ...{
     path: 'products',
     component: ProductsComponent,
     title: titleResolver,
-  }
+  },
 ];
-
 ```
 
 Route titles can also be set via a service extending the [`TitleStrategy`](/api/router/TitleStrategy) abstract class. By default, Angular uses the [`DefaultTitleStrategy`](/api/router/DefaultTitleStrategy).
@@ -329,9 +326,9 @@ For advanced scenarios where you need centralized control over how the document 
 `TitleStrategy` is a token you can provide to override the default title strategy used by Angular. You can supply a custom `TitleStrategy` to implement conventions such as adding an application suffix, formatting titles from breadcrumbs, or generating titles dynamically from route data.
 
 ```ts
-import { Injectable } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { TitleStrategy, RouterStateSnapshot } from '@angular/router';
+import {inject, Injectable} from '@angular/core';
+import {Title} from '@angular/platform-browser';
+import {TitleStrategy, RouterStateSnapshot} from '@angular/router';
 
 @Injectable()
 export class AppTitleStrategy extends TitleStrategy {
@@ -349,14 +346,11 @@ export class AppTitleStrategy extends TitleStrategy {
 To use the custom strategy, provide it with the `TitleStrategy` token at the application level:
 
 ```ts
-import { provideRouter, TitleStrategy } from '@angular/router';
-import { AppTitleStrategy } from './app-title.strategy';
+import {provideRouter, TitleStrategy} from '@angular/router';
+import {AppTitleStrategy} from './app-title.strategy';
 
 export const appConfig = {
-  providers: [
-    provideRouter(routes),
-    { provide: TitleStrategy, useClass: AppTitleStrategy },
-  ],
+  providers: [provideRouter(routes), {provide: TitleStrategy, useClass: AppTitleStrategy}],
 };
 ```
 
@@ -370,10 +364,7 @@ Common scenarios where this can be helpful include applications that have differ
 export const ROUTES: Route[] = [
   {
     path: 'admin',
-    providers: [
-      AdminService,
-      {provide: ADMIN_API_KEY, useValue: '12345'},
-    ],
+    providers: [AdminService, {provide: ADMIN_API_KEY, useValue: '12345'}],
     children: [
       {path: 'users', component: AdminUsersComponent},
       {path: 'teams', component: AdminTeamsComponent},
@@ -399,22 +390,22 @@ There are two ways to work with route data: static data that remains constant, a
 You can associate arbitrary static data with a route via the `data` property in order to centralize things like route-specific metadata (e.g., analytics tracking, permissions, etc.):
 
 ```ts
-import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
-import { ProductsComponent } from './products/products.component';
+import {Routes} from '@angular/router';
+import {HomeComponent} from './home/home.component';
+import {AboutComponent} from './about/about.component';
+import {ProductsComponent} from './products/products.component';
 
 const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent,
-    data: { analyticsId: '456' }
+    data: {analyticsId: '456'},
   },
   {
     path: '',
     component: HomeComponent,
-    data: { analyticsId: '123' }
-  }
+    data: {analyticsId: '123'},
+  },
 ];
 ```
 
@@ -442,15 +433,15 @@ const routes: Routes = [
     children: [
       {
         path: 'info',
-        component: ProductInfoComponent
+        component: ProductInfoComponent,
       },
       {
         path: 'reviews',
-        component: ProductReviewsComponent
-      }
-    ]
-  }
-]
+        component: ProductReviewsComponent,
+      },
+    ],
+  },
+];
 ```
 
 The above example defines a route for a product page that allows a user to change whether the product info or reviews are displayed based on the url.

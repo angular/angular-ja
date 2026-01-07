@@ -9,12 +9,12 @@ Angularでは、**ルート**は特定のURLパスまたはパターンに対し
 次にルートの基本的な例を示します。
 
 ```ts
-import { AdminPage } from './app-admin/app-admin.component';
+import {AdminPage} from './app-admin/app-admin.component';
 
 const adminPage = {
   path: 'admin',
-  component: AdminPage
-}
+  component: AdminPage,
+};
 ```
 
 このルートの場合、ユーザーが`/admin`パスにアクセスすると、アプリケーションは`AdminPage`コンポーネントを表示します。
@@ -26,9 +26,9 @@ const adminPage = {
 ルートのコレクションは次のようになります。
 
 ```ts
-import { Routes } from '@angular/router';
-import { HomePage } from './home-page/home-page.component';
-import { AdminPage } from './about-page/admin-page.component';
+import {Routes} from '@angular/router';
+import {HomePage} from './home-page/home-page.component';
+import {AdminPage} from './about-page/admin-page.component';
 
 export const routes: Routes = [
   {
@@ -51,16 +51,16 @@ Angular CLIなしでAngularアプリケーションをブートストラップ�
 `providers`配列内で、`provideRouter`関数呼び出しとルートを追加することで、Angularルーターをアプリケーションに追加できます。
 
 ```ts
-import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import {ApplicationConfig} from '@angular/core';
+import {provideRouter} from '@angular/router';
 
-import { routes } from './app.routes';
+import {routes} from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     // ...
-  ]
+  ],
 };
 ```
 
@@ -88,12 +88,10 @@ IMPORTANT: パラメーターは、URLの[クエリ文字列](https://en.wikiped
 次の例は、URLを介して渡されたユーザーIDに基づいてユーザープロファイルコンポーネントを表示します。
 
 ```ts
-import { Routes } from '@angular/router';
-import { UserProfile } from './user-profile/user-profile';
+import {Routes} from '@angular/router';
+import {UserProfile} from './user-profile/user-profile';
 
-const routes: Routes = [
-  { path: 'user/:id', component: UserProfile }
-];
+const routes: Routes = [{path: 'user/:id', component: UserProfile}];
 ```
 
 この例では、`/user/leeroy`や`/user/jenkins`などのURLは`UserProfile`コンポーネントをレンダリングします。このコンポーネントは、`id`パラメーターを読み取り、それを使用してデータの取得などの追加作業を実行できます。[ルートパラメーターの読み取りの詳細については、ルート状態の読み取りガイドを参照してください](/guide/routing/read-route-state)。
@@ -108,13 +106,13 @@ const routes: Routes = [
 複数のパラメーターを持つパスを定義できます。
 
 ```ts
-import { Routes } from '@angular/router';
-import { UserProfile } from './user-profile/user-profile.component';
-import { SocialMediaFeed } from './user-profile/social–media-feed.component';
+import {Routes} from '@angular/router';
+import {UserProfile} from './user-profile/user-profile.component';
+import {SocialMediaFeed} from './user-profile/social–media-feed.component';
 
 const routes: Routes = [
-  { path: 'user/:id/:social-media', component: SocialMediaFeed },
-  { path: 'user/:id/', component: UserProfile },
+  {path: 'user/:id/:social-media', component: SocialMediaFeed},
+  {path: 'user/:id/', component: UserProfile},
 ];
 ```
 
@@ -129,14 +127,14 @@ const routes: Routes = [
 一般的な例は、ページが見つかりませんコンポーネントの定義です。
 
 ```ts
-import { Home } from './home/home.component';
-import { UserProfile } from './user-profile/user-profile.component';
-import { NotFound } from './not-found/not-found.component';
+import {Home} from './home/home.component';
+import {UserProfile} from './user-profile/user-profile.component';
+import {NotFound} from './not-found/not-found.component';
 
 const routes: Routes = [
-  { path: 'home', component: Home },
-  { path: 'user/:id', component: UserProfile },
-  { path: '**', component: NotFound }
+  {path: 'home', component: Home},
+  {path: 'user/:id', component: UserProfile},
+  {path: '**', component: NotFound},
 ];
 ```
 
@@ -152,11 +150,11 @@ Tip: ワイルドカードルートは通常、ルート配列の最後に配置
 
 ```ts
 const routes: Routes = [
-  { path: '', component: HomeComponent },              // 空のパス
-  { path: 'users/new', component: NewUserComponent },  // 静的、最も具体的
-  { path: 'users/:id', component: UserDetailComponent }, // 動的
-  { path: 'users', component: UsersComponent },        // 静的、具体的でない
-  { path: '**', component: NotFoundComponent }         // ワイルドカード - 常に最後
+  {path: '', component: HomeComponent}, // 空のパス
+  {path: 'users/new', component: NewUserComponent}, // 静的、最も具体的
+  {path: 'users/:id', component: UserDetailComponent}, // 動的
+  {path: 'users', component: UsersComponent}, // 静的、具体的でない
+  {path: '**', component: NotFoundComponent}, // ワイルドカード - 常に最後
 ];
 ```
 
@@ -168,12 +166,12 @@ const routes: Routes = [
 1. `users`には到達しません
 1. `**`には到達しません
 
-## ルートコンポーネントの読み込み戦略 {#loading-route-component-strategies}
+## ルートの読み込み戦略 {#route-loading-strategies}
 
-Angularルーティングでコンポーネントがどのように、いつ読み込まれるかを理解することは、応答性の高いWebアプリケーションを構築するために不可欠です。Angularは、コンポーネントの読み込み動作を制御するための2つの主要な戦略を提供します。
+Angularルーティングでルートとコンポーネントがどのように、いつ読み込まれるかを理解することは、応答性の高いWebアプリケーションを構築するために不可欠です。Angularは、読み込み動作を制御するための2つの主要な戦略を提供します。
 
-1. **即時読み込み (Eagerly loaded)**: すぐに読み込まれるコンポーネント
-2. **遅延読み込み (Lazily loaded)**: 必要になったときにのみ読み込まれるコンポーネント
+1. **即時読み込み (Eagerly loaded)**: すぐに読み込まれるルートとコンポーネント
+2. **遅延読み込み (Lazily loaded)**: 必要になったときにのみ読み込まれるルートとコンポーネント
 
 それぞれのアプローチは、異なるシナリオに対して明確な利点を提供します。
 
@@ -182,50 +180,51 @@ Angularルーティングでコンポーネントがどのように、いつ読�
 `component`プロパティでルートを定義すると、参照されるコンポーネントは、ルート構成と同じJavaScriptバンドルの一部として即時読み込みされます。
 
 ```ts
-import { Routes } from "@angular/router";
-import { HomePage } from "./components/home/home-page"
-import { LoginPage } from "./components/auth/login-page"
+import {Routes} from '@angular/router';
+import {HomePage} from './components/home/home-page';
+import {LoginPage} from './components/auth/login-page';
 
 export const routes: Routes = [
   // HomePageとLoginPageはどちらもこの設定で直接参照されているため、
   // そのコードはこのファイルと同じJavaScriptバンドルに即時含まれます。
   {
-    path: "",
-    component: HomePage
+    path: '',
+    component: HomePage,
   },
   {
-    path: "login",
-    component: LoginPage
-  }
-]
+    path: 'login',
+    component: LoginPage,
+  },
+];
 ```
 
 このようにルートコンポーネントを即時読み込みすることは、ブラウザが初期ページ読み込みの一部としてこれらのコンポーネントのすべてのJavaScriptをダウンロードして解析する必要があることを意味しますが、コンポーネントはAngularですぐに利用できます。
 
 初期ページ読み込みに多くのJavaScriptを含めると初期読み込み時間は遅くなりますが、ユーザーがアプリケーション内を移動する際のよりシームレスな遷移につながる可能性があります。
 
-### 遅延読み込みされるコンポーネント {#lazily-loaded-components}
+### 遅延読み込みされるコンポーネントとルート {#lazily-loaded-components-and-routes}
 
-`loadComponent`プロパティを使用すると、そのルートがアクティブになる時点でのみ、ルートのJavaScriptを遅延読み込みできます。
+`loadComponent`プロパティを使用すると、そのルートがアクティブになる時点でのみ、コンポーネントのJavaScriptを遅延読み込みできます。`loadChildren`プロパティは、ルートマッチング時に子ルートを遅延読み込みします。
 
 ```ts
-import { Routes } from "@angular/router";
+import {Routes} from '@angular/router';
 
 export const routes: Routes = [
-  // HomePageとLoginPageコンポーネントは、
-  // 対応するルートがアクティブになった時点で遅延読み込みされます。
   {
     path: 'login',
-    loadComponent: () => import('./components/auth/login-page').then(m => m.LoginPage)
+    loadComponent: () => import('./components/auth/login-page'),
   },
   {
-    path: '',
-    loadComponent: () => import('./components/home/home-page').then(m => m.HomePage)
-  }
-]
+    path: 'admin',
+    loadComponent: () => import('./admin/admin.component'),
+    loadChildren: () => import('./admin/admin.routes'),
+  },
+];
 ```
 
-`loadComponent`プロパティは、Angularコンポーネントに解決されるPromiseを返すローダー関数を受け入れます。ほとんどの場合、この関数は標準の[JavaScript動的インポートAPI](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import)を使用します。ただし、任意の非同期ローダー関数も使用できます。
+`loadComponent`と`loadChildren`プロパティは、それぞれAngularコンポーネントまたはルートのセットに解決されるPromiseを返すローダー関数を受け入れます。ほとんどの場合、この関数は標準の[JavaScript動的インポートAPI](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import)を使用します。ただし、任意の非同期ローダー関数も使用できます。
+
+遅延読み込みされるファイルが`default`エクスポートを使用している場合、エクスポートされたクラスを選択するための追加の`.then`呼び出しなしで、`import()`プロミスを直接返すことができます。
 
 遅延読み込みルートは、初期バンドルからJavaScriptの大部分を削除することで、Angularアプリケーションの読み込み速度を大幅に向上させることができます。これらのコード部分は、ユーザーが対応するルートにアクセスしたときにのみルーターが要求する個別のJavaScript「チャンク」にコンパイルされます。
 
@@ -234,9 +233,9 @@ export const routes: Routes = [
 ルーターは`loadComponent`と`loadChildren`を**現在のルートの注入コンテキスト**内で実行します。これにより、これらのローダー関数内で[`inject`](/api/core/inject)を呼び出して、そのルートで宣言されたプロバイダー、階層的な依存性の注入を介して親ルートから継承されたプロバイダー、またはグローバルに利用可能なプロバイダーにアクセスできます。これにより、コンテキストを認識した遅延読み込みが可能になります。
 
 ```ts
-import { Routes } from '@angular/router';
-import { inject } from '@angular/core';
-import { FeatureFlags } from './feature-flags';
+import {Routes} from '@angular/router';
+import {inject} from '@angular/core';
+import {FeatureFlags} from './feature-flags';
 
 export const routes: Routes = [
   {
@@ -245,8 +244,8 @@ export const routes: Routes = [
     loadComponent: () => {
       const flags = inject(FeatureFlags);
       return flags.isPremium
-        ? import('./dashboard/premium-dashboard').then(m => m.PremiumDashboard)
-        : import('./dashboard/basic-dashboard').then(m => m.BasicDashboard);
+        ? import('./dashboard/premium-dashboard')
+        : import('./dashboard/basic-dashboard');
     },
   },
 ];
@@ -265,7 +264,7 @@ NOTE: 遅延ルートは、ユーザーが要求する初期データの量を�
 コンポーネントをレンダリングする代わりに、別のルートにリダイレクトするルートを定義できます。
 
 ```ts
-import { BlogComponent } from './home/blog.component';
+import {BlogComponent} from './home/blog.component';
 
 const routes: Routes = [
   {
@@ -274,7 +273,7 @@ const routes: Routes = [
   },
   {
     path: 'blog',
-    component: BlogComponent
+    component: BlogComponent,
   },
 ];
 ```
@@ -286,20 +285,20 @@ const routes: Routes = [
 各ルートには**タイトル**を関連付けることができます。ルートがアクティブになると、Angularは[ページタイトル](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title)を自動的に更新します。アクセシブルな体験を作成するためにこれらのタイトルが必要となるため、アプリケーションに適切なページタイトルを常に定義してください。
 
 ```ts
-import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
+import {Routes} from '@angular/router';
+import {HomeComponent} from './home/home.component';
+import {AboutComponent} from './about/about.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    title: 'Home Page'
+    title: 'Home Page',
   },
   {
     path: 'about',
     component: AboutComponent,
-    title: 'About Us'
+    title: 'About Us',
   },
 ];
 ```
@@ -309,14 +308,12 @@ const routes: Routes = [
 ```ts
 const titleResolver: ResolveFn<string> = (route) => route.queryParams['id'];
 const routes: Routes = [
-   ...
-  {
+  ...{
     path: 'products',
     component: ProductsComponent,
     title: titleResolver,
-  }
+  },
 ];
-
 ```
 
 ルートタイトルは、[`TitleStrategy`](/api/router/TitleStrategy) 抽象クラスを継承するサービスを介しても設定できます。デフォルトでは、Angularは[`DefaultTitleStrategy`](/api/router/DefaultTitleStrategy)を使用します。
@@ -328,9 +325,9 @@ const routes: Routes = [
 `TitleStrategy`は、Angularが使用するデフォルトのタイトル戦略をオーバーライドするために提供できるトークンです。カスタムの`TitleStrategy`を提供して、アプリケーションのサフィックスの追加、パンくずリストからのタイトルのフォーマット、ルートデータからのタイトルの動的生成などの規約を実装できます。
 
 ```ts
-import { Injectable } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { TitleStrategy, RouterStateSnapshot } from '@angular/router';
+import {inject, Injectable} from '@angular/core';
+import {Title} from '@angular/platform-browser';
+import {TitleStrategy, RouterStateSnapshot} from '@angular/router';
 
 @Injectable()
 export class AppTitleStrategy extends TitleStrategy {
@@ -348,14 +345,11 @@ export class AppTitleStrategy extends TitleStrategy {
 カスタム戦略を使用するには、アプリケーションレベルで`TitleStrategy`トークンを使用してそれを提供します。
 
 ```ts
-import { provideRouter, TitleStrategy } from '@angular/router';
-import { AppTitleStrategy } from './app-title.strategy';
+import {provideRouter, TitleStrategy} from '@angular/router';
+import {AppTitleStrategy} from './app-title.strategy';
 
 export const appConfig = {
-  providers: [
-    provideRouter(routes),
-    { provide: TitleStrategy, useClass: AppTitleStrategy },
-  ],
+  providers: [provideRouter(routes), {provide: TitleStrategy, useClass: AppTitleStrategy}],
 };
 ```
 
@@ -369,10 +363,7 @@ export const appConfig = {
 export const ROUTES: Route[] = [
   {
     path: 'admin',
-    providers: [
-      AdminService,
-      {provide: ADMIN_API_KEY, useValue: '12345'},
-    ],
+    providers: [AdminService, {provide: ADMIN_API_KEY, useValue: '12345'}],
     children: [
       {path: 'users', component: AdminUsersComponent},
       {path: 'teams', component: AdminTeamsComponent},
@@ -398,22 +389,22 @@ Angularのプロバイダーと注入に関する詳細については、[依存
 `data`プロパティを介して任意の静的データをルートに関連付けることで、ルート固有のメタデータ（例: 分析トラッキング、権限など）を一元化できます。
 
 ```ts
-import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
-import { ProductsComponent } from './products/products.component';
+import {Routes} from '@angular/router';
+import {HomeComponent} from './home/home.component';
+import {AboutComponent} from './about/about.component';
+import {ProductsComponent} from './products/products.component';
 
 const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent,
-    data: { analyticsId: '456' }
+    data: {analyticsId: '456'},
   },
   {
     path: '',
     component: HomeComponent,
-    data: { analyticsId: '123' }
-  }
+    data: {analyticsId: '123'},
+  },
 ];
 ```
 
@@ -441,15 +432,15 @@ const routes: Routes = [
     children: [
       {
         path: 'info',
-        component: ProductInfoComponent
+        component: ProductInfoComponent,
       },
       {
         path: 'reviews',
-        component: ProductReviewsComponent
-      }
-    ]
-  }
-]
+        component: ProductReviewsComponent,
+      },
+    ],
+  },
+];
 ```
 
 上記の例では、ユーザーがURLに基づいて製品情報またはレビューのどちらを表示するかを変更できる製品ページのルートを定義しています。

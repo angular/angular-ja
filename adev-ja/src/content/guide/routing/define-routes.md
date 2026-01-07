@@ -224,7 +224,7 @@ export const routes: Routes = [
 
 `loadComponent`と`loadChildren`プロパティは、それぞれAngularコンポーネントまたはルートのセットに解決されるPromiseを返すローダー関数を受け入れます。ほとんどの場合、この関数は標準の[JavaScript動的インポートAPI](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import)を使用します。ただし、任意の非同期ローダー関数も使用できます。
 
-遅延読み込みされるファイルが`default`エクスポートを使用している場合、エクスポートされたクラスを選択するための追加の`.then`呼び出しなしで、`import()`プロミスを直接返すことができます。
+遅延読み込みされるファイルが`default`エクスポートを使用している場合、エクスポートされたクラスを選択するための追加の`.then`呼び出しなしで、`import()`Promiseを直接返すことができます。
 
 遅延読み込みルートは、初期バンドルからJavaScriptの大部分を削除することで、Angularアプリケーションの読み込み速度を大幅に向上させることができます。これらのコード部分は、ユーザーが対応するルートにアクセスしたときにのみルーターが要求する個別のJavaScript「チャンク」にコンパイルされます。
 

@@ -7,7 +7,7 @@ A component can define **queries** that find child elements and read values from
 Developers most commonly use queries to retrieve references to child components, directives, DOM elements, and more.
 
 All query functions return signals that reflect the most up-to-date results. You can read the
-result by calling the signal function, including in reactive contexts like `computed` and `effect`.
+result by calling the signal function, including in [reactive contexts](guide/signals#reactive-contexts) like `computed` and `effect`.
 
 There are two categories of query: **view queries** and **content queries.**
 
@@ -149,7 +149,9 @@ If a child query (`viewChild` or `contentChild`) does not find a result, its val
 In some cases, especially with `viewChild`, you know with certainty that a specific child is always available. In other cases, you may want to strictly enforce that a specific child is present. For these cases, you can use a _required query_.
 
 ```ts
-@Component({/* ... */})
+@Component({
+  /* ... */
+})
 export class CustomCard {
   header = viewChild.required(CustomCardHeader);
   body = contentChild.required(CustomCardBody);
@@ -216,8 +218,9 @@ All query functions accept an options object as a second parameter. These option
 By default, the query locator indicates both the element you're searching for and the value retrieved. You can alternatively specify the `read` option to retrieve a different value from the element matched by the locator.
 
 ```ts
-
-@Component({/*...*/})
+@Component({
+  /*...*/
+})
 export class CustomExpando {
   toggle = contentChild(ExpandoContent, {read: TemplateRef});
 }
@@ -267,7 +270,7 @@ original decorator-based query APIs remain fully supported.
 
 You can alternatively declare queries by adding the corresponding decorator to a property. Decorator-based queries behave the same way as signal-based queries except as described below.
 
-### View queries
+### View queries {#decorator-view-queries}
 
 You can query for a single result with the `@ViewChild` decorator.
 
@@ -330,11 +333,11 @@ export class CustomCard {
 
 `@ViewChildren` creates a `QueryList` object that contains the query results. You can subscribe to changes to the query results over time via the `changes` property.
 
-### Content queries
+### Content queries {#decorator-content-queries}
 
 You can query for a single result with the `@ContentChild` decorator.
 
-```angular-ts {highlight: [14, 16, 17, 18, 25]}
+```angular-ts {highlight: [15, 16, 17, 18, 19, 26]}
 @Component({
   selector: 'custom-toggle',
   /*...*/

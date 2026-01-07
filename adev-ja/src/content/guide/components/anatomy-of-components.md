@@ -44,7 +44,7 @@ export class ProfilePhoto { }
   templateUrl: 'profile-photo.html',
   styleUrl: 'profile-photo.css',
 })
-export class ProfilePhoto { }
+export class ProfilePhoto {}
 ```
 
 これにより、プロジェクト内の_表示_と_動作_の懸念事項を分離できます。プロジェクト全体に対して1つのアプローチを選択するか、コンポーネントごとにどちらを使用するかを決定できます。
@@ -67,7 +67,7 @@ import {ProfilePhoto} from './profile-photo';
   imports: [ProfilePhoto],
   /* ... */
 })
-export class UserProfile { }
+export class UserProfile {}
 ```
 
 デフォルトでは、Angularコンポーネントは*スタンドアロン*です。つまり、他のコンポーネントの`imports`配列に直接追加できます。以前のバージョンのAngularで作成されたコンポーネントは、代わりに`@Component`デコレーターで`standalone: false`を指定している場合があります。これらのコンポーネントの場合、代わりにコンポーネントが定義されている`NgModule`をインポートします。詳細は、完全な[`NgModule`ガイド](guide/ngmodules)を参照してください。

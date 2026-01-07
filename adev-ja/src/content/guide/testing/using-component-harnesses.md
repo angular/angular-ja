@@ -91,27 +91,29 @@ let loader: HarnessLoader;
 let rootLoader: HarnessLoader;
 
 beforeEach(() => {
-fixture = TestBed.createComponent(MyDialogButton);
-loader = TestbedHarnessEnvironment.loader(fixture);
-rootLoader = TestbedHarnessEnvironment.documentRootLoader(fixture);
+  fixture = TestBed.createComponent(MyDialogButton);
+  loader = TestbedHarnessEnvironment.loader(fixture);
+  rootLoader = TestbedHarnessEnvironment.documentRootLoader(fixture);
 });
 
 it('loads harnesses', async () => {
-// Load a harness for the bootstrapped component with `harnessForFixture`
-dialogButtonHarness =
-await TestbedHarnessEnvironment.harnessForFixture(fixture, MyDialogButtonHarness);
+  // Load a harness for the bootstrapped component with `harnessForFixture`
+  dialogButtonHarness = await TestbedHarnessEnvironment.harnessForFixture(
+    fixture,
+    MyDialogButtonHarness,
+  );
 
-// The button element is inside the fixture's root element, so we use `loader`.
-const buttonHarness = await loader.getHarness(MyButtonHarness);
+  // The button element is inside the fixture's root element, so we use `loader`.
+  const buttonHarness = await loader.getHarness(MyButtonHarness);
 
-// Click the button to open the dialog
-await buttonHarness.click();
+  // Click the button to open the dialog
+  await buttonHarness.click();
 
-// The dialog is appended to `document.body`, outside of the fixture's root element,
-// so we use `rootLoader` in this case.
-const dialogHarness = await rootLoader.getHarness(MyDialogHarness);
+  // The dialog is appended to `document.body`, outside of the fixture's root element,
+  // so we use `rootLoader` in this case.
+  const dialogHarness = await rootLoader.getHarness(MyDialogHarness);
 
-// ... make some assertions
+  // ... make some assertions
 });
 ```
 
@@ -146,7 +148,9 @@ const allChildLoaders = await myComponentHarness.getAllChildLoaders('.child');
 
 ```ts
 // Example of loading a MyButtonComponentHarness with a harness predicate
-const disabledButtonPredicate = new HarnessPredicate(MyButtonComponentHarness, {selector: '[disabled]'});
+const disabledButtonPredicate = new HarnessPredicate(MyButtonComponentHarness, {
+  selector: '[disabled]',
+});
 const disabledButton = await loader.getHarness(disabledButtonPredicate);
 ```
 
@@ -154,7 +158,7 @@ const disabledButton = await loader.getHarness(disabledButtonPredicate);
 
 ```ts
 // Example of loading a MyButtonComponentHarness with a specific selector
-const button = await loader.getHarness(MyButtonComponentHarness.with({selector: 'btn'}))
+const button = await loader.getHarness(MyButtonComponentHarness.with({selector: 'btn'}));
 ```
 
 追加のフィルタリングオプションは各ハーネスの実装に固有であるため、詳細については特定のハーネスのドキュメントを参照してください。
@@ -177,7 +181,7 @@ it('should get value of slider thumb', async () => {
 
 ## Angularの変更検知との連携 {#interop-with-angular-change-detection}
 
-デフォルトでは、テストハーネスはAngularの[変更検知](https://angular.dev/best-practices/runtime-performance)をDOM要素の状態を読み取る前と、DOM要素と対話した後に実行します。
+デフォルトでは、テストハーネスはAngularの[変更検知](/best-practices/runtime-performance)をDOM要素の状態を読み取る前と、DOM要素と対話した後に実行します。
 
 テストで変更検知をより細かく制御する必要がある場合があります。例えば、非同期操作が保留中の間にコンポーネントの状態を確認する場合などです。このような場合は、`manualChangeDetection`関数を使用して、コードブロックの変更検知の自動処理を無効にします。
 
@@ -212,7 +216,7 @@ it('reads properties in parallel', async () => {
   // Read the checked and intermediate properties simultaneously.
   const [checked, indeterminate] = await parallel(() => [
     checkboxHarness.isChecked(),
-    checkboxHarness.isIndeterminate()
+    checkboxHarness.isIndeterminate(),
   ]);
   expect(checked).toBe(false);
   expect(indeterminate).toBe(true);

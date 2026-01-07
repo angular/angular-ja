@@ -9,11 +9,10 @@ Angularテストユーティリティには、`TestBed`、`ComponentFixture`、�
 
 以下は、スタンドアロン関数の概要を、ユーティリティの利用頻度順に示します。
 
-| 関数                         | 詳細                                                                                                                                                                                                                                               |
-| :--------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `inject`                     | 現在の `TestBed` インジェクターから、1 つ以上のサービスをテスト関数に注入します。これは、コンポーネント自体によって提供されるサービスを注入することはできません。[debugElement.injector](guide/testing/components-scenarios#get-injected-services) の議論を参照してください。 |
-| `ComponentFixtureAutoDetect` | [自動的な変更検出](guide/testing/components-scenarios#automatic-change-detection) をオンにするサービスの提供トークン。                                                                                                                                 |
-| `getTestBed`                 | 現在の `TestBed` のインスタンスを取得します。通常、`TestBed` クラスの静的クラスメソッドが十分なため、これは不要です。`TestBed` インスタンスは、静的メソッドとして利用できない、まれに使用されるメンバーをいくつか公開します。                        |
+| 関数         | 詳細                                                                                                                                                                                                                                               |
+| :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`inject`]   | 現在の `TestBed` インジェクターから、1 つ以上のサービスをテスト関数に注入します。これは、コンポーネント自体によって提供されるサービスを注入することはできません。[debugElement.injector](guide/testing/components-scenarios#get-injected-services) の議論を参照してください。 |
+| `getTestBed` | 現在の `TestBed` のインスタンスを取得します。通常、`TestBed` クラスの静的クラスメソッドが十分なため、これは不要です。`TestBed` インスタンスは、静的メソッドとして利用できない、まれに使用されるメンバーをいくつか公開します。                        |
 
 複雑な非同期シナリオの処理やレガシーのZone.jsベースのアプリケーションのテストについては、[Zone.jsテストユーティリティ](guide/testing/zone-js-testing-utilities)ガイドを参照してください。
 
@@ -26,26 +25,22 @@ API全体を理解しようとする前に、このガイドの前半部分を�
 `configureTestingModule` に渡されるモジュール定義は、`@NgModule` メタデータプロパティのサブセットです。
 
 ```ts
-
 type TestModuleMetadata = {
-   providers?: any[];
-   declarations?: any[];
-   imports?: any[];
-   schemas?: Array<SchemaMetadata | any[]>;
+  providers?: any[];
+  declarations?: any[];
+  imports?: any[];
+  schemas?: Array<SchemaMetadata | any[]>;
 };
-
 ```
 
 各オーバーライドメソッドは、`MetadataOverride<T>` を受け取ります。ここで `T` はメソッドに適したメタデータの種類、つまり `@NgModule`、`@Component`、`@Directive`、または `@Pipe` のパラメーターです。
 
 ```ts
-
 type MetadataOverride<T> = {
   add?: Partial<T>;
   remove?: Partial<T>;
   set?: Partial<T>;
 };
-
 ```
 
 `TestBed` APIは、現在の `TestBed` の _グローバル_ インスタンスを更新または参照する静的クラスメソッドで構成されています。
@@ -56,18 +51,18 @@ type MetadataOverride<T> = {
 
 以下は、最も重要な静的メソッドを、ユーティリティの利用頻度順に示します。
 
-| メソッド                 | 詳細                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `configureTestingModule` | テストシムは、[初期テスト環境](guide/testing) とデフォルトのテストモジュールを確立します。デフォルトのテストモジュールは、基本的な宣言と、すべてのテスターに必要な、いくつかの Angular サービスの代替で構成されています。 <br /> `configureTestingModule` を呼び出して、インポート、宣言（コンポーネント、ディレクティブ、およびパイプ）、およびプロバイダーを追加および削除することで、特定のテストセットのテストモジュール構成を洗練します。                   |
-| `compileComponents`      | テストモジュールを構成し終えたら、非同期にコンパイルします。_いずれかの_ テストモジュールコンポーネントに `templateUrl` または `styleUrls` がある場合は、このメソッドを **必ず** 呼び出す必要があります。これは、コンポーネントテンプレートとスタイルファイルの取得が必ず非同期であるためです。[compileComponents](guide/testing/components-scenarios#calling-compilecomponents) を参照してください。 <br /> `compileComponents` を呼び出すと、現在の仕様の期間中、`TestBed` の構成は固定されます。 |
-| `createComponent<T>`     | 現在の `TestBed` の構成に基づいて、`T` 型のコンポーネントのインスタンスを作成します。`createComponent` を呼び出すと、現在の仕様の期間中、`TestBed` の構成は固定されます。                                                                                                                                                                                                                                                                                                                  |
-| `overrideModule`         | 指定された `NgModule` のメタデータを置き換えます。モジュールは他のモジュールをインポートできることに注意してください。`overrideModule` メソッドは、現在のテストモジュールを深く掘り下げて、これらの内部モジュールのいずれかを変更できます。                                                                                                                                                                                                                                               |
-| `overrideComponent`      | 指定されたコンポーネントクラスのメタデータを置き換えます。これは、内部モジュールの中に深くネストされている可能性があります。                                                                                                                                                                                                                                                                                                                                                                      |
-| `overrideDirective`      | 指定されたディレクティブクラスのメタデータを置き換えます。これは、内部モジュールの中に深くネストされている可能性があります。                                                                                                                                                                                                                                                                                                                                                                      |
-| `overridePipe`           | 指定されたパイプクラスのメタデータを置き換えます。これは、内部モジュールの中に深くネストされている可能性があります。                                                                                                                                                                                                                                                                                                                                                                             |
+| メソッド                 | 詳細                                                                                                                                                                                                                                                                                                                                                                    |
+| :----------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `configureTestingModule` | テストシムは、[初期テスト環境](guide/testing) とデフォルトのテストモジュールを確立します。デフォルトのテストモジュールは、基本的な宣言と、すべてのテスターに必要な、いくつかの Angular サービスの代替で構成されています。 <br /> `configureTestingModule` を呼び出して、インポート、宣言（コンポーネント、ディレクティブ、およびパイプ）、およびプロバイダーを追加および削除することで、特定のテストセットのテストモジュール構成を洗練します。 |
+| `compileComponents`      | テストモジュールを構成し終えたら、非同期にコンパイルします。_いずれかの_ テストモジュールコンポーネントが非同期に読み込まれるリソース（@deferブロックなど）を持つ場合は、このメソッドを **必ず** 呼び出す必要があります。 <br /> `compileComponents` を呼び出すと、現在の仕様の期間中、`TestBed` の構成は固定されます。                                                 |
+| `createComponent<T>`     | 現在の `TestBed` の構成に基づいて、`T` 型のコンポーネントのインスタンスを作成します。`createComponent` を呼び出すと、現在の仕様の期間中、`TestBed` の構成は固定されます。                                                                                                                                                                                               |
+| `overrideComponent`      | 指定されたコンポーネントクラスのメタデータを置き換えます。これは、内部モジュールの中に深くネストされている可能性があります。                                                                                                                                                                                                                                                   |
+| `overrideDirective`      | 指定されたディレクティブクラスのメタデータを置き換えます。これは、内部モジュールの中に深くネストされている可能性があります。                                                                                                                                                                                                                                                   |
+| `overridePipe`           | 指定されたパイプクラスのメタデータを置き換えます。これは、内部モジュールの中に深くネストされている可能性があります。                                                                                                                                                                                                                                                          |
+| `overrideModule`         | 指定された `NgModule` のメタデータを置き換えます。モジュールは他のモジュールをインポートできることに注意してください。`overrideModule` メソッドは、現在のテストモジュールを深く掘り下げて、これらの内部モジュールのいずれかを変更できます。                                                                                                                            |
 
 |
-`inject` | 現在の `TestBed` インジェクターからサービスを取得します。`inject` 関数は、この目的には多くの場合で十分です。ただし、`inject` は、サービスを提供できない場合にエラーをスローします。 <br /> サービスがオプションの場合どうすればよいですか？ <br /> `TestBed.inject()` メソッドは、オプションの第2パラメーターとして、Angularがプロバイダーを見つけられない場合に返すオブジェクト（この例では `null`）を取ります。 <docs-code header="demo.testbed.spec.ts" path="adev/src/content/examples/testing/src/app/demo/demo.testbed.spec.ts" region="testbed-get-w-null"/> `TestBed.inject` を呼び出すと、現在の仕様の期間中、`TestBed` の構成は固定されます。 |
+`inject` | 現在の `TestBed` インジェクターからサービスを取得します。`inject` 関数は、この目的には多くの場合で十分です。ただし、`inject` は、サービスを提供できない場合にエラーをスローします。 <br /> サービスがオプションの場合どうすればよいですか？ <br /> `TestBed.inject()` メソッドは、オプションの第2パラメーターとして、Angularがプロバイダーを見つけられない場合に返すオブジェクト（この例では `null`）を取ります。 `expect(TestBed.inject(NotProvided, null)).toBeNull();` `TestBed.inject` を呼び出すと、現在の仕様の期間中、`TestBed` の構成は固定されます。 |
 |
 `initTestEnvironment` | テストの実行全体でテスト環境を初期化します。 <br /> テストシムはこれを実行するため、自分で呼び出す必要はほとんどありません。 <br /> このメソッドは _ちょうど 1 回_ 呼び出します。テストの実行中にこのデフォルトを変更するには、最初に `resetTestEnvironment` を呼び出します。 <br /> Angularコンパイラーファクトリ、`PlatformRef`、およびデフォルトのAngularテストモジュールを指定します。ブラウザ以外のプラットフォームの代替手段は、`@angular/platform-<platform_name>/testing/<platform_name>` という一般的な形式で利用できます。 |
 | `resetTestEnvironment` | デフォルトのテストモジュールを含む、初期テスト環境をリセットします。 |
@@ -138,7 +133,10 @@ type MetadataOverride<T> = {
 述語は、`DebugElement` を受け取り、_真偽値_ を返す任意のメソッドです。
 次の例は、"content" という名前のテンプレートローカル変数への参照を持つすべての `DebugElements` を見つけます。
 
-<docs-code header="demo.testbed.spec.ts" path="adev/src/content/examples/testing/src/app/demo/demo.testbed.spec.ts" region="custom-predicate"/>
+```ts
+// Filter for DebugElements with a #content reference
+const contentRefs = el.queryAll((de) => de.references['content']);
+```
 
 Angularの `By` クラスには、一般的な述語の3つの静的メソッドがあります。
 
@@ -148,4 +146,8 @@ Angularの `By` クラスには、一般的な述語の3つの静的メソッド
 | `By.css(selector)`        | 一致する CSS セレクターを持つ要素を返す                         |
 | `By.directive(directive)` | ディレクティブクラスのインスタンスに Angular が一致させた要素を返す |
 
-<docs-code header="hero-list.component.spec.ts" path="adev/src/content/examples/testing/src/app/hero/hero-list.component.spec.ts" region="by"/>
+```ts
+// Can find DebugElement either by css selector or by directive
+const h2 = fixture.debugElement.query(By.css('h2'));
+const directive = fixture.debugElement.query(By.directive(Highlight));
+```

@@ -152,7 +152,7 @@ it('should contain "banner works!"', () => {
 
 ### `setup` 関数の作成
 
-`beforeEach` の代わりに、各テストで呼び出すsetup関数を作成することもできます。
+`beforeEach` の代わりに、各テストで呼び出すsetup関数を作成できます。
 setup関数は、パラメーターを介してカスタマイズできるという利点があります。
 
 setup関数の例を次に示します。

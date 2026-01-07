@@ -525,7 +525,7 @@ NOTE: 値の変更時、このコントロールの値が更新された直後�
 
 ## フォームコントロール状態の管理
 
-リアクティブフォームは、**touched/untouched** と **pristine/dirty** を通じてコントロールの状態を追跡します。Angularは、DOM操作中にこれらを自動的に更新しますが、プログラムで管理することもできます。
+リアクティブフォームは、**touched/untouched** と **pristine/dirty** を通じてコントロールの状態を追跡します。AngularはDOM操作中にこれらを自動的に更新しますが、プログラムで管理もできます。
 
 **[`markAsTouched`](api/forms/FormControl#markAsTouched)** — フォーカスとブラーイベントによってコントロールまたはフォームをtouchedとしてマークし、値は変更されません。デフォルトで親コントロールに伝播します。
 

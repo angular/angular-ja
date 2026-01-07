@@ -32,8 +32,8 @@ const loginModel = signal<LoginData>({
 const loginForm = form(loginModel);
 
 // Access fields directly by property name
-loginForm.email
-loginForm.password
+loginForm.email;
+loginForm.password;
 ```
 
 ### 3. `[field]`ディレクティブでHTML入力をバインドする {#3-bind-html-inputs-with-field-directive}
@@ -54,7 +54,7 @@ NOTE: `[field]`ディレクティブは、必要に応じて`required`、`disabl
 フィールドを関数として呼び出すことで、フィールドの状態にアクセスできます。これにより、フィールドの値、バリデーションステータス、インタラクションの状態に対するリアクティブなシグナルを含む`FieldState`オブジェクトが返されます:
 
 ```ts
-loginForm.email() // Returns FieldState with value(), valid(), touched(), etc.
+loginForm.email(); // Returns FieldState with value(), valid(), touched(), etc.
 ```
 
 フィールドの現在の値を読み取るには、`value()`シグナルにアクセスします:
@@ -233,8 +233,8 @@ const loginForm = form(loginModel, (schemaPath) => {
 バリデーターの第2引数にオプションオブジェクトを渡すことで、エラーメッセージをカスタマイズできます:
 
 ```ts
-required(schemaPath.email, { message: 'Email is required' });
-email(schemaPath.email, { message: 'Please enter a valid email address' });
+required(schemaPath.email, {message: 'Email is required'});
+email(schemaPath.email, {message: 'Please enter a valid email address'});
 ```
 
 各フォームフィールドは、シグナルを通じてそのバリデーション状態を公開します。たとえば、`field().valid()`をチェックしてバリデーションが成功したか、`field().touched()`をチェックしてユーザーが操作したかを確認し、`field().errors()`をチェックしてバリデーションエラーのリストを取得できます。

@@ -137,7 +137,7 @@ export class MyDirective {
 まず、`NgTemplateOutlet` をインポートします:
 
 ```typescript
-import { NgTemplateOutlet } from '@angular/common';
+import {NgTemplateOutlet} from '@angular/common';
 ```
 
 次の例では、テンプレートフラグメントを宣言し、そのフラグメントを `NgTemplateOutlet` を使用して `<ng-container>` 要素にレンダリングします。

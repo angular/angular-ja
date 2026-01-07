@@ -20,10 +20,9 @@
 
 - **[シグナルフォーム概要](guide/forms/signals/overview)** - シグナルフォームの紹介といつ使用するか
 - **[フォームモデルガイド](guide/forms/signals/models)** - フォームモデルとデータ管理の詳細
-  <!-- TODO: Uncomment when the guides are available -->
-  <!-- - **[Validation Guide](guide/forms/signals/validation)** - Comprehensive validation reference
-- **[Field State Management Guide](guide/forms/signals/field-state-management)** - Advanced state patterns
-- **[Custom Controls Guide](guide/forms/signals/custom-controls)** - Building reusable form components -->
+- **[バリデーションガイド](guide/forms/signals/validation)** - 包括的なバリデーションリファレンス
+- **[フィールド状態管理ガイド](guide/forms/signals/field-state-management)** - 高度な状態パターン
+- **[カスタムコントロールガイド](guide/forms/signals/custom-controls)** - 再利用可能なフォームコンポーネントの構築
 
 ## 学び続ける {#keep-learning}
 

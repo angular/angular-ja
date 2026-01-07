@@ -46,17 +46,17 @@ TypeScriptはオブジェクトリテラルから型を推論しますが、明�
 
 ```ts
 interface LoginData {
-  email: string
-  password: string
+  email: string;
+  password: string;
 }
 
 export class LoginComponent {
   loginModel = signal<LoginData>({
     email: '',
-    password: ''
-  })
+    password: '',
+  });
 
-  loginForm = form(this.loginModel)
+  loginForm = form(this.loginModel);
 }
 ```
 
@@ -64,10 +64,10 @@ export class LoginComponent {
 
 ```ts
 // TypeScript knows this is FieldTree<string>
-const emailField = loginForm.email
+const emailField = loginForm.email;
 
 // TypeScript error: Property 'username' does not exist
-const usernameField = loginForm.username
+const usernameField = loginForm.username;
 ```
 
 ### すべてのフィールドを初期化する {#initializing-all-fields}
@@ -79,31 +79,31 @@ const usernameField = loginForm.username
 const userModel = signal({
   name: '',
   email: '',
-  age: 0
-})
+  age: 0,
+});
 
 // Avoid: Missing initial value
 const userModel = signal({
   name: '',
-  email: ''
+  email: '',
   // age field is not defined - cannot access userForm.age
-})
+});
 ```
 
 オプショナルなフィールドについては、明示的に`null`または空の値を設定してください:
 
 ```ts
 interface UserData {
-  name: string
-  email: string
-  phoneNumber: string | null
+  name: string;
+  email: string;
+  phoneNumber: string | null;
 }
 
 const userModel = signal<UserData>({
   name: '',
   email: '',
-  phoneNumber: null
-})
+  phoneNumber: null,
+});
 ```
 
 `undefined`に設定されたフィールドは、フィールドツリーから除外されます。`{value: undefined}`を持つモデルは`{}`と全く同じように動作し、そのフィールドにアクセスすると`FieldTree`ではなく`undefined`が返されます。
@@ -142,12 +142,12 @@ onSubmit() {
   `
 })
 export class LoginComponent {
-  loginModel = signal({ email: '', password: '' })
-  loginForm = form(this.loginModel)
+  loginModel = signal({email: '', password: ''});
+  loginForm = form(this.loginModel);
 
   passwordLength = computed(() => {
-    return this.loginForm.password().value().length
-  })
+    return this.loginForm.password().value().length;
+  });
 }
 ```
 
@@ -184,7 +184,7 @@ resetForm() {
 
 このアプローチは、APIからデータを読み込む場合や、フォーム全体をリセットする場合に適しています。
 
-### `set()`で単一のフィールドを直接更新する {#update-a-single-field-directly-with-set}
+### `set()`または`update()`で単一のフィールドを直接更新する {#update-a-single-field-directly-with-set}
 
 個々のフィールドの値に`set()`を使用して、フィールドの状態を直接更新します:
 
@@ -194,8 +194,7 @@ clearEmail() {
 }
 
 incrementAge() {
-  const currentAge = this.userForm.age().value();
-  this.userForm.age().value.set(currentAge + 1);
+  this.userForm.age().value.update(currentAge => currentAge + 1);
 }
 ```
 
@@ -210,19 +209,19 @@ export class UserProfileComponent {
   userModel = signal({
     name: '',
     email: '',
-    bio: ''
-  })
+    bio: '',
+  });
 
-  userForm = form(this.userModel)
-  private userService = inject(UserService)
+  userForm = form(this.userModel);
+  private userService = inject(UserService);
 
   ngOnInit() {
-    this.loadUserProfile()
+    this.loadUserProfile();
   }
 
   async loadUserProfile() {
-    const userData = await this.userService.getUserProfile()
-    this.userModel.set(userData)
+    const userData = await this.userService.getUserProfile();
+    this.userModel.set(userData);
   }
 }
 ```
@@ -264,8 +263,8 @@ export class UserProfileComponent {
   `
 })
 export class UserComponent {
-  userModel = signal({ name: '' })
-  userForm = form(this.userModel)
+  userModel = signal({name: ''});
+  userForm = form(this.userModel);
 
   setName(name: string) {
     this.userForm.name().value.set(name);
@@ -292,8 +291,8 @@ const userModel = signal({
   street: '',
   city: '',
   state: '',
-  zip: ''
-})
+  zip: '',
+});
 ```
 
 ネストされたモデルは、関連するフィールドをグループ化します:
@@ -307,9 +306,9 @@ const userModel = signal({
     street: '',
     city: '',
     state: '',
-    zip: ''
-  }
-})
+    zip: '',
+  },
+});
 ```
 
 **次のような場合は、フラットな構造を使用します:**
@@ -332,19 +331,19 @@ const userModel = signal({
 const userModel = signal({
   profile: {
     firstName: '',
-    lastName: ''
+    lastName: '',
   },
   settings: {
     theme: 'light',
-    notifications: true
-  }
-})
+    notifications: true,
+  },
+});
 
-const userForm = form(userModel)
+const userForm = form(userModel);
 
 // Access nested fields
-userForm.profile.firstName // FieldTree<string>
-userForm.settings.theme // FieldTree<string>
+userForm.profile.firstName; // FieldTree<string>
+userForm.settings.theme; // FieldTree<string>
 ```
 
 テンプレートでは、トップレベルのフィールドと同じ方法でネストされたフィールドをバインドします:
@@ -370,14 +369,14 @@ userForm.settings.theme // FieldTree<string>
 ```ts
 const orderModel = signal({
   customerName: '',
-  items: [{ product: '', quantity: 0, price: 0 }]
-})
+  items: [{product: '', quantity: 0, price: 0}],
+});
 
-const orderForm = form(orderModel)
+const orderForm = form(orderModel);
 
 // Access array items by index
-orderForm.items[0].product // FieldTree<string>
-orderForm.items[0].quantity // FieldTree<number>
+orderForm.items[0].product; // FieldTree<string>
+orderForm.items[0].quantity; // FieldTree<number>
 ```
 
 オブジェクトを含む配列のアイテムは自動的に追跡IDを受け取ります。これにより、配列内でアイテムの位置が変わってもフィールドの状態を維持できます。これにより、配列が並べ替えられた場合でも、バリデーションの状態とユーザーインタラクションが正しく維持されることが保証されます。

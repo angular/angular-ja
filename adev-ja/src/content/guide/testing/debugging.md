@@ -15,16 +15,6 @@
 
 ## ブラウザでのデバッグ {#debugging-in-a-browser}
 
-ブラウザでのデバッグは、DOMやその他のブラウザ固有のAPIに依存するテストに推奨されます。このアプローチでは、ブラウザ独自の開発者ツールを使用できます。
+Vitestと[ブラウザモード](/guide/testing/migrating-to-vitest#5-configure-browser-mode-optional)を使用したデバッグは、現在サポートされていません。
 
-1.  ブラウザプロバイダーがインストールされていることを確認します。セットアップ手順については、[ブラウザでのテスト実行](guide/testing/overview#running-tests-in-a-browser)を参照してください。
-2.  `ng test`コマンドを`--browsers`と`--debug`の両方のフラグ付きで実行します:
-    ```shell
-    ng test --browsers=chromium --debug
-    ```
-3.  このコマンドは、ヘッド付きブラウザでテストを実行し、テスト終了後もブラウザを開いたままにして、出力を検査できるようにします。
-4.  ブラウザの**開発者ツール**を開きます。Windowsでは`Ctrl-Shift-I`、macOSでは`Command-Option-I`を押します。
-5.  **Sources**タブに移動します。
-6.  `Control/Command-P`を使用して、テストファイルを検索して開きます。
-7.  テストにブレークポイントを設定します。
-8.  ブラウザでテストランナーUIをリロードします。実行がブレークポイントで停止します。
+<!-- https://github.com/angular/angular-cli/issues/31652 が修正されたら、このセクションを更新してください>

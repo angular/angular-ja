@@ -58,7 +58,6 @@ cd my-project
 PostCSSの設定に`@tailwindcss/postcss`プラグインを追加します。
 
 ```json {header: '.postcssrc.json'}
-
 {
   "plugins": {
     "@tailwindcss/postcss": {}
@@ -70,15 +69,15 @@ PostCSSの設定に`@tailwindcss/postcss`プラグインを追加します。
 
 Tailwind CSSをインポートする`@import`を`./src/styles.css`に追加します。
 
-<docs-code language="css" header="src/styles.css">
-@import "tailwindcss";
-</docs-code>
+```css {header: "src/styles.css"}
+@import 'tailwindcss';
+```
 
 SCSSを使用している場合は、`@use`を`./src/styles.scss`に追加します。
 
-<docs-code language="scss" header="src/styles.scss">
-@use "tailwindcss";
-</docs-code>
+```scss {header: "src/styles.scss"}
+@use 'tailwindcss';
+```
 
 ### 5. プロジェクトでTailwindを使い始める {#start-using-tailwind-in-your-project}
 
@@ -87,9 +86,7 @@ SCSSを使用している場合は、`@use`を`./src/styles.scss`に追加しま
 たとえば、次の内容を`app.html`ファイルに追加できます:
 
 ```html
-<h1 class="text-3xl font-bold underline">
-  Hello world!
-</h1>
+<h1 class="text-3xl font-bold underline">Hello world!</h1>
 ```
 
 ## その他のリソース {#additional-resources}

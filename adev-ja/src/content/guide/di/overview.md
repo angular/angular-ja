@@ -46,16 +46,16 @@ Angular _サービス_ は `@Injectable` で装飾されたTypeScriptクラス�
 次の例は、`AnalyticsLogger` という名前のサービスを宣言しています。
 
 ```ts
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class AnalyticsLogger {
   trackEvent(category: string, value: string) {
     console.log('Analytics event logged:', {
       category,
       value,
-      timestamp: new Date().toISOString()
-    })
+      timestamp: new Date().toISOString(),
+    });
   }
 }
 ```
@@ -119,10 +119,10 @@ export class MyDirective {
 ```
 
 ```ts
-import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Injectable, inject} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class MyService {
   // ✅ サービス内
   private http = inject(HttpClient);
@@ -134,7 +134,7 @@ export const authGuard = () => {
   // ✅ ルートガード内
   const auth = inject(AuthService);
   return auth.isAuthenticated();
-}
+};
 ```
 
 Angularは「注入コンテキスト」という用語を使用して、コード内で [`inject`](/api/core/inject) を呼び出せる場所を説明します。コンポーネント、ディレクティブ、サービスの構築が最も一般的ですが、詳細については[注入コンテキスト](/guide/di/dependency-injection-context)を参照してください。

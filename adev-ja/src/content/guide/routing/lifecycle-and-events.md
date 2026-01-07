@@ -64,16 +64,12 @@ NOTE: `@angular/router`の[`Event`](api/router/Event)型は、通常のグロー
 ルーターイベントシーケンスを検査する必要がある場合、デバッグのために内部ナビゲーションイベントのログ記録を有効にできます。これは、すべてのルーティングイベントの詳細なコンソールログ記録を有効にする設定オプション（`withDebugTracing()`）を渡すことで設定できます。
 
 ```ts
-import { provideRouter, withDebugTracing } from '@angular/router';
+import {provideRouter, withDebugTracing} from '@angular/router';
 
 const appRoutes: Routes = [];
-bootstrapApplication(AppComponent,
-  {
-    providers: [
-      provideRouter(appRoutes, withDebugTracing())
-    ]
-  }
-);
+bootstrapApplication(AppComponent, {
+  providers: [provideRouter(appRoutes, withDebugTracing())],
+});
 ```
 
 詳細については、[`withDebugTracing`](api/router/withDebugTracing)に関する公式ドキュメントを参照してください。
@@ -89,26 +85,19 @@ bootstrapApplication(AppComponent,
 ```angular-ts
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-loading',
+  selector: 'app-root',
   template: `
-    @if (loading()) {
-      <div class="loading-spinner">Loading...</div>
+    @if (isNavigating()) {
+      <div class="loading-bar">Loading...</div>
     }
+    <router-outlet />
   `
 })
-export class AppComponent {
+export class App {
   private router = inject(Router);
-
-  readonly loading = toSignal(
-    this.router.events.pipe(
-      map(() => !!this.router.getCurrentNavigation())
-    ),
-    { initialValue: false }
-  );
+  isNavigating = computed(() => !!this.router.currentNavigation());
 }
 ```
 
@@ -117,30 +106,29 @@ export class AppComponent {
 アナリティクス用にページビューを追跡します。
 
 ```ts
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { inject, Injectable, DestroyRef } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {inject, Injectable, DestroyRef} from '@angular/core';
+import {Router, NavigationEnd} from '@angular/router';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class AnalyticsService {
   private router = inject(Router);
   private destroyRef = inject(DestroyRef);
 
   startTracking() {
-    this.router.events.pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(event => {
-        // Track page views when URL changes
-        if (event instanceof NavigationEnd) {
-           // Send page view to analytics
-          this.analytics.trackPageView(event.url);
-        }
-      });
+    this.router.events.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((event) => {
+      // Track page views when URL changes
+      if (event instanceof NavigationEnd) {
+        // Send page view to analytics
+        this.analytics.trackPageView(event.url);
+      }
+    });
   }
 
   private analytics = {
     trackPageView: (url: string) => {
       console.log('Page view tracked:', url);
-    }
+    },
   };
 }
 ```

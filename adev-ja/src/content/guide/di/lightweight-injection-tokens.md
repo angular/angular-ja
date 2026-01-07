@@ -29,45 +29,45 @@ Angularがインジェクショントークンを格納する方法により、�
 </lib-card>;
 ```
 
-一般的な実装では、 `<lib-card>` コンポーネントは、次の例のように `@ContentChild()` または `@ContentChildren()` を使用して `<lib-header>` と `<lib-body>` を取得します。
+一般的な実装では、 `<lib-card>` コンポーネントは、次の例のように `contentChild` または `contentChildren` を使用して `<lib-header>` と `<lib-body>` を取得します。
 
 ```ts {highlight: [14]}
-import {Component, ContentChild} from '@angular/core';
+import {Component, contentChild} from '@angular/core';
 
 @Component({
   selector: 'lib-header',
   …,
 })
-class LibHeaderComponent {}
+class LibHeader {}
 
 @Component({
   selector: 'lib-card',
   …,
 })
-class LibCardComponent {
-  @ContentChild(LibHeaderComponent) header: LibHeaderComponent | null = null;
+class LibCard {
+  readonly header = contentChild(LibHeader);
 }
 ```
 
 `<lib-header>` はオプションなので、要素はテンプレートに最小限の形式 `<lib-card />` で表示できます。
 この場合、 `<lib-header>` は使用されず、ツリーシェイクされることを期待しますが、実際にはそうなりません。
-これは、 `LibCardComponent` には `LibHeaderComponent` への参照が2つあるためです。
+これは、 `LibCard` には `LibHeader` への参照が2つあるためです。
 
 ```ts
-@ContentChild(LibHeaderComponent) header: LibHeaderComponent;
+readonly header = contentChild(LibHeader);
 ```
 
-- これらの参照の1つは _型の位置_ にあります。つまり、 `LibHeaderComponent` を型として指定します: `header: LibHeaderComponent;`。
-- もう1つの参照は _値の位置_ にあります。つまり、LibHeaderComponentは `@ContentChild()` パラメータデコレーターの値です: `@ContentChild(LibHeaderComponent)`。
+- これらの参照の1つは _型の位置_ にあります。つまり、 `LibHeader` を型として指定します: `readonly header: Signal<LibHeader|undefined>`。
+- もう1つの参照は _値の位置_ にあります。つまり、`LibHeader` は `contentChild` 関数に渡される値です: `contentChild(LibHeader)`。
 
 コンパイラはこれらの位置にあるトークン参照を異なる方法で処理します。
 
 - コンパイラは、TypeScriptから変換した後の _型の位置_ の参照を消去するため、ツリーシェイクには影響しません。
 - コンパイラは、_値の位置_ の参照をランタイムに保持する必要があり、これが**妨げます** コンポーネントがツリーシェイクされること。
 
-この例では、コンパイラは値位置にある `LibHeaderComponent` トークンを保持します。
+この例では、コンパイラは値位置にある `LibHeader` トークンを保持します。
 これにより、アプリケーションで実際に `<lib-header>` をどこでも使用していない場合でも、参照されるコンポーネントがツリーシェイクされることがなくなります。
-`LibHeaderComponent` のコード、テンプレート、スタイルを組み合わせると大きくなりすぎるため、不要に含めるとクライアントアプリケーションのサイズが大幅に増加する可能性があります。
+`LibHeader` のコード、テンプレート、スタイルを組み合わせると大きくなりすぎるため、不要に含めるとクライアントアプリケーションのサイズが大幅に増加する可能性があります。
 
 ## 軽量インジェクショントークンパターンを使用する場合
 

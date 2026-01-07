@@ -36,8 +36,8 @@ interface LoginData {
 `@angular/core` から `signal` 関数を、`@angular/forms/signals` から `form` 関数をインポートします:
 
 ```ts
-import { Component, signal } from '@angular/core';
-import { form } from '@angular/forms/signals';
+import {Component, signal} from '@angular/core';
+import {form} from '@angular/forms/signals';
 ```
 
 </docs-step>

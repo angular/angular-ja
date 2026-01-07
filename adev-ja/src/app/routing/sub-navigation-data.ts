@@ -475,6 +475,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
                 path: 'guide/forms/signals/comparison',
                 contentPath: 'guide/forms/signals/comparison',
               },
+              {
+                label: 'Migrating from Legacy Forms',
+                path: 'guide/forms/signals/migration',
+                contentPath: 'guide/forms/signals/migration',
+              },
             ],
           },
           {
@@ -619,11 +624,6 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/testing/utility-apis',
           },
           {
-            label: 'Zone.jsテストユーティリティ',
-            path: 'guide/testing/zone-js-testing-utilities',
-            contentPath: 'guide/testing/zone-js-testing-utilities',
-          },
-          {
             label: 'コンポーネントハーネスの概要',
             path: 'guide/testing/component-harnesses-overview',
             contentPath: 'guide/testing/component-harnesses-overview',
@@ -652,6 +652,11 @@ const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             label: 'KarmaとJasmineによるテスト',
             path: 'guide/testing/karma',
             contentPath: 'guide/testing/karma',
+          },
+          {
+            label: 'Zone.jsテストユーティリティ',
+            path: 'guide/testing/zone-js-testing-utilities',
+            contentPath: 'guide/testing/zone-js-testing-utilities',
           },
         ],
       },

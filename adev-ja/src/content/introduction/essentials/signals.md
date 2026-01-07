@@ -20,7 +20,7 @@ firstName.set('Jaime');
 
 // `update` メソッドを使用して、
 // 前の値に基づいて値を変更することもできます。
-firstName.update(name => name.toUpperCase()); 
+firstName.update((name) => name.toUpperCase()); 
 ```
 
 Angularは、シグナルがどこで読み取られ、いつ更新されたかを追跡します。フレームワークはこの情報を使用して、新しい状態をDOMに更新するなど、追加の作業をします。時間の経過とともに変化するシグナル値に応答するこの機能は、*リアクティビティ*として知られています。
@@ -56,7 +56,9 @@ console.log(firstNameCapitalized()); // JAIME
 `signal`と`computed`をコンポーネント内で使用して、状態を作成および管理します。
 
 ```typescript
-@Component({/* ... */})
+@Component({
+  /* ... */
+})
 export class UserProfile {
   isTrial = signal(false);
   isTrialExpired = signal(false);

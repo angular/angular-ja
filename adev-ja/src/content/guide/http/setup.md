@@ -8,9 +8,7 @@
 
 ```ts
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideHttpClient(),
-  ]
+  providers: [provideHttpClient()],
 };
 ```
 
@@ -18,9 +16,7 @@ export const appConfig: ApplicationConfig = {
 
 ```ts
 @NgModule({
-  providers: [
-    provideHttpClient(),
-  ],
+  providers: [provideHttpClient()],
   // ...その他のアプリケーション設定
 })
 export class AppModule {}
@@ -44,11 +40,7 @@ export class ConfigService {
 
 ```ts
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideHttpClient(
-      withFetch(),
-    ),
-  ]
+  providers: [provideHttpClient(withFetch())],
 };
 ```
 

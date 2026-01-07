@@ -31,7 +31,7 @@ import { NgOptimizedImage } from '@angular/common';
 
 `NgOptimizedImage` ディレクティブを有効にするには、`src` 属性を `ngSrc` に置き換えます。これは、静的画像ソース（`src`）と動的画像ソース（`[src]`）の両方で適用されます。
 
-```angular-ts {highlight:[[9], [13]]}
+```angular-ts {highlight:[[7],[11]]}
 import { NgOptimizedImage } from '@angular/common';
 
 @Component({
@@ -83,9 +83,7 @@ NOTE: `fill` 画像が正しくレンダリングされるためには、その�
 `NgOptimizedImage` では、[画像ローダー](guide/image-optimization#configuring-an-image-loader-for-ngoptimizedimage) を指定できます。これは、ディレクティブに画像のURLをどのようにフォーマットするかを指示します。ローダーを使用すると、画像を短く、相対的なURLで定義できます。
 
 ```ts
-providers: [
-  provideImgixLoader('https://my.base.url/'),
-]
+providers: [provideImgixLoader('https://my.base.url/')];
 ```
 
 最終的なURLは 'https://my.base.url/image.png' になります。

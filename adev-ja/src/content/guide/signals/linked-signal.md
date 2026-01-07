@@ -3,7 +3,9 @@
 `signal`関数は、Angularコードで状態を保持するために使用できます。この状態は、他の状態に依存することがあります。例えば、ユーザーが注文の配送方法を選択できるコンポーネントを考えてみましょう。
 
 ```typescript
-@Component({/* ... */})
+@Component({
+  /* ... */
+})
 export class ShippingMethodPicker {
   shippingOptions: Signal<ShippingMethod[]> = getShippingOptions();
 
@@ -21,7 +23,9 @@ export class ShippingMethodPicker {
 **`linkedSignal`関数は、本質的に他の状態に_リンク_された状態を保持するシグナルを作成できます。**上記の例を再考すると、`linkedSignal`は`signal`を置き換えることができます。
 
 ```typescript
-@Component({/* ... */})
+@Component({
+  /* ... */
+})
 export class ShippingMethodPicker {
   shippingOptions: Signal<ShippingMethod[]> = getShippingOptions();
 
@@ -62,7 +66,9 @@ interface ShippingMethod {
   name: string;
 }
 
-@Component({/* ... */})
+@Component({
+  /* ... */
+})
 export class ShippingMethodPicker {
   constructor() {
     this.changeShipping(2);
@@ -71,9 +77,9 @@ export class ShippingMethodPicker {
   }
 
   shippingOptions = signal<ShippingMethod[]>([
-    { id: 0, name: 'Ground' },
-    { id: 1, name: 'Air' },
-    { id: 2, name: 'Sea' },
+    {id: 0, name: 'Ground'},
+    {id: 1, name: 'Air'},
+    {id: 2, name: 'Sea'},
   ]);
 
   selectedOption = linkedSignal<ShippingMethod[], ShippingMethod>({
@@ -82,9 +88,7 @@ export class ShippingMethodPicker {
     computation: (newOptions, previous) => {
       // If the newOptions contain the previously selected option, preserve that selection.
       // Otherwise, default to the first option.
-      return (
-        newOptions.find((opt) => opt.id === previous?.value.id) ?? newOptions[0]
-      );
+      return newOptions.find((opt) => opt.id === previous?.value.id) ?? newOptions[0];
     },
   });
 
@@ -94,9 +98,9 @@ export class ShippingMethodPicker {
 
   changeShippingOptions() {
     this.shippingOptions.set([
-      { id: 0, name: 'Email' },
-      { id: 1, name: 'Sea' },
-      { id: 2, name: 'Postal Service' },
+      {id: 0, name: 'Email'},
+      {id: 1, name: 'Sea'},
+      {id: 2, name: 'Postal Service'},
     ]);
   }
 }
@@ -125,7 +129,7 @@ const activeUserEditCopy = linkedSignal(() => activeUser(), {
 // または、`source`と`computation`を分ける場合
 const activeUserEditCopy = linkedSignal({
   source: activeUser,
-  computation: user => user,
+  computation: (user) => user,
   equal: (a, b) => a.id === b.id,
 });
 ```

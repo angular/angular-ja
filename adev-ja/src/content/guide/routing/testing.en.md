@@ -6,8 +6,7 @@ Testing routing and navigation is essential to ensure your application behaves c
 
 This guide assumes you are familiar with the following tools and libraries:
 
-- **[Jasmine](https://jasmine.github.io/)** - JavaScript testing framework that provides the testing syntax (`describe`, `it`, `expect`)
-- **[Karma](https://karma-runner.github.io/)** - Test runner that executes tests in browsers
+- **[Vitest](https://vitest.dev/)** - JavaScript testing framework that provides the testing syntax (`describe`, `it`, `expect`)
 - **[Angular Testing Utilities](guide/testing)** - Angular's built-in testing tools ([`TestBed`](api/core/testing/TestBed), [`ComponentFixture`](api/core/testing/ComponentFixture))
 - **[`RouterTestingHarness`](api/router/testing/RouterTestingHarness)** - Test harness for testing routed components with built-in navigation and component testing capabilities
 
@@ -21,21 +20,17 @@ The following example shows how to test a `UserProfile` component that displays 
 
 ```ts
 // user-profile.component.spec.ts
-import { TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
-import { RouterTestingHarness } from '@angular/router/testing';
-import { provideRouter } from '@angular/router';
-import { UserProfile } from './user-profile';
+import {TestBed} from '@angular/core/testing';
+import {Router} from '@angular/router';
+import {RouterTestingHarness} from '@angular/router/testing';
+import {provideRouter} from '@angular/router';
+import {UserProfile} from './user-profile';
 
 describe('UserProfile', () => {
   it('should display user ID from route parameters', async () => {
     TestBed.configureTestingModule({
       imports: [UserProfile],
-      providers: [
-        provideRouter([
-          { path: 'user/:id', component: UserProfile }
-        ])
-      ]
+      providers: [provideRouter([{path: 'user/:id', component: UserProfile}])],
     });
 
     const harness = await RouterTestingHarness.create();
@@ -68,17 +63,17 @@ The following example tests an `authGuard` that allows navigation for authentica
 
 ```ts
 // auth.guard.spec.ts
-import { RouterTestingHarness } from '@angular/router/testing';
-import { provideRouter, Router } from '@angular/router';
-import { authGuard } from './auth.guard';
-import { AuthStore } from './auth-store';
-import { Component } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import {RouterTestingHarness} from '@angular/router/testing';
+import {provideRouter, Router} from '@angular/router';
+import {authGuard} from './auth.guard';
+import {AuthStore} from './auth-store';
+import {Component} from '@angular/core';
+import {TestBed} from '@angular/core/testing';
 
-@Component({ template: '<h1>Protected Page</h1>' })
+@Component({template: '<h1>Protected Page</h1>'})
 class ProtectedComponent {}
 
-@Component({ template: '<h1>Login Page</h1>' })
+@Component({template: '<h1>Login Page</h1>'})
 class LoginComponent {}
 
 describe('authGuard', () => {
@@ -91,10 +86,10 @@ describe('authGuard', () => {
 
     TestBed.configureTestingModule({
       providers: [
-        { provide: AuthStore, useValue: authStore },
+        {provide: AuthStore, useValue: authStore},
         provideRouter([
-          { path: 'protected', component: ProtectedComponent, canActivate: [authGuard] },
-          { path: 'login', component: LoginComponent },
+          {path: 'protected', component: ProtectedComponent, canActivate: [authGuard]},
+          {path: 'login', component: LoginComponent},
         ]),
       ],
     });
@@ -120,9 +115,9 @@ describe('authGuard', () => {
 
 ```ts
 // auth.guard.ts
-import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
-import { AuthStore } from './auth-store';
+import {inject} from '@angular/core';
+import {CanActivateFn, Router} from '@angular/router';
+import {AuthStore} from './auth-store';
 
 export const authGuard: CanActivateFn = () => {
   const authStore = inject(AuthStore);
@@ -139,19 +134,19 @@ Here's an example of how to set up a test that verifies different components are
 
 ```ts
 // app.component.spec.ts
-import { TestBed } from '@angular/core/testing';
-import { RouterTestingHarness } from '@angular/router/testing';
-import { provideRouter } from '@angular/router';
-import { Component } from '@angular/core';
-import { App } from './app';
+import {TestBed} from '@angular/core/testing';
+import {RouterTestingHarness} from '@angular/router/testing';
+import {provideRouter} from '@angular/router';
+import {Component} from '@angular/core';
+import {App} from './app';
 
 @Component({
-  template: '<h1>Home Page</h1>'
+  template: '<h1>Home Page</h1>',
 })
 class MockHome {}
 
 @Component({
-  template: '<h1>About Page</h1>'
+  template: '<h1>About Page</h1>',
 })
 class MockAbout {}
 
@@ -163,10 +158,10 @@ describe('App Router Outlet', () => {
       imports: [App],
       providers: [
         provideRouter([
-          { path: '', component: MockHome },
-          { path: 'about', component: MockAbout }
-        ])
-      ]
+          {path: '', component: MockHome},
+          {path: 'about', component: MockAbout},
+        ]),
+      ],
     });
 
     harness = await RouterTestingHarness.create();
@@ -218,10 +213,10 @@ Here's an example of testing a parent-child route structure:
 
 ```ts
 // nested-routes.spec.ts
-import { TestBed } from '@angular/core/testing';
-import { RouterTestingHarness } from '@angular/router/testing';
-import { provideRouter } from '@angular/router';
-import { Parent, Child } from './nested-components';
+import {TestBed} from '@angular/core/testing';
+import {RouterTestingHarness} from '@angular/router/testing';
+import {provideRouter} from '@angular/router';
+import {Parent, Child} from './nested-components';
 
 describe('Nested Routes', () => {
   let harness: RouterTestingHarness;
@@ -234,12 +229,10 @@ describe('Nested Routes', () => {
           {
             path: 'parent',
             component: Parent,
-            children: [
-              { path: 'child', component: Child }
-            ]
-          }
-        ])
-      ]
+            children: [{path: 'child', component: Child}],
+          },
+        ]),
+      ],
     });
 
     harness = await RouterTestingHarness.create();
@@ -284,10 +277,10 @@ Here's an example of how to test query parameters and fragments:
 
 ```ts
 // search.component.spec.ts
-import { TestBed } from '@angular/core/testing';
-import { Router, provideRouter } from '@angular/router';
-import { RouterTestingHarness } from '@angular/router/testing';
-import { Search } from './search';
+import {TestBed} from '@angular/core/testing';
+import {Router, provideRouter} from '@angular/router';
+import {RouterTestingHarness} from '@angular/router/testing';
+import {Search} from './search';
 
 describe('Search', () => {
   let component: Search;
@@ -296,11 +289,7 @@ describe('Search', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       imports: [Search],
-      providers: [
-        provideRouter([
-          { path: 'search', component: Search }
-        ])
-      ]
+      providers: [provideRouter([{path: 'search', component: Search}])],
     });
 
     harness = await RouterTestingHarness.create();
@@ -336,6 +325,6 @@ export class Search {
 1. **Use RouterTestingHarness** - For testing routed components, use [`RouterTestingHarness`](api/router/testing/RouterTestingHarness) which provides a cleaner API and eliminates the need for test host components. It offers direct component access, built-in navigation, and better type safety. However, it isn't as suitable for some scenarios, such as testing named outlets, where you may need to create custom host components.
 2. **Handle external dependencies thoughtfully** - Prefer real implementations when possible for more realistic tests. If real implementations aren't feasible (e.g., external APIs), use fakes that approximate the real behavior. Use mocks or stubs only as a last resort, as they can make tests brittle and less reliable.
 3. **Test navigation state** - Verify both the navigation action and the resulting application state, including URL changes and component rendering.
-4. **Handle asynchronous operations** - Router navigation is asynchronous. Use `async/await` or [`fakeAsync`](api/core/testing/fakeAsync) to properly handle timing in your tests.
+4. **Handle asynchronous operations** - Router navigation is asynchronous. Use `async/await` to properly handle timing in your tests.
 5. **Test error scenarios** - Include tests for invalid routes, failed navigation, and guard rejections to ensure your application handles edge cases gracefully.
 6. **Do not mock Angular Router** - Instead, provide real route configurations and use the harness to navigate. This makes your tests more robust and less likely to break on internal Angular updates, while also ensuring you catch real issues when the router updates since mocks can hide breaking changes.

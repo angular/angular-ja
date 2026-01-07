@@ -24,18 +24,24 @@
 以下は、[`inject`](api/core/inject)関数を使用してルートをレンダリングする前にユーザー情報を取得するリゾルバです。
 
 ```ts
-import { inject } from '@angular/core';
-import { UserStore, SettingsStore } from './user-store';
-import type { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
-import type { User, Settings } from './types';
+import {inject} from '@angular/core';
+import {UserStore, SettingsStore} from './user-store';
+import type {ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot} from '@angular/router';
+import type {User, Settings} from './types';
 
-export const userResolver: ResolveFn<User> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+export const userResolver: ResolveFn<User> = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot,
+) => {
   const userStore = inject(UserStore);
   const userId = route.paramMap.get('id')!;
   return userStore.getUser(userId);
 };
 
-export const settingsResolver: ResolveFn<Settings> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+export const settingsResolver: ResolveFn<Settings> = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot,
+) => {
   const settingsStore = inject(SettingsStore);
   const userId = route.paramMap.get('id')!;
   return settingsStore.getUserSettings(userId);
@@ -47,7 +53,7 @@ export const settingsResolver: ResolveFn<Settings> = (route: ActivatedRouteSnaps
 ルートに1つ以上のデータリゾルバーを追加したい場合は、ルート設定の`resolve`キーの下に追加できます。`Routes`型は、ルート設定の構造を定義します。
 
 ```ts
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 
 export const routes: Routes = [
   {
@@ -55,9 +61,9 @@ export const routes: Routes = [
     component: UserDetail,
     resolve: {
       user: userResolver,
-      settings: settingsResolver
-    }
-  }
+      settings: settingsResolver,
+    },
+  },
 ];
 ```
 
@@ -95,14 +101,12 @@ export class UserDetail {
 解決済みデータにアクセスする別のアプローチは、`provideRouter`でルーターを設定する際に`withComponentInputBinding()`を使用することです。これにより、解決済みデータをコンポーネントの入力として直接渡すことができます。
 
 ```ts
-import { bootstrapApplication } from '@angular/platform-browser';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { routes } from './app.routes';
+import {bootstrapApplication} from '@angular/platform-browser';
+import {provideRouter, withComponentInputBinding} from '@angular/router';
+import {routes} from './app.routes';
 
 bootstrapApplication(App, {
-  providers: [
-    provideRouter(routes, withComponentInputBinding())
-  ]
+  providers: [provideRouter(routes, withComponentInputBinding())],
 });
 ```
 
@@ -142,24 +146,27 @@ export class UserDetail {
 `withNavigationErrorHandler`機能は、失敗したデータリゾルバーからのエラーを含む、すべてのナビゲーションエラーを処理する一元的な方法を提供します。このアプローチにより、エラー処理ロジックが一箇所に保持され、リゾルバー間での重複したエラー処理コードが防止されます。
 
 ```ts
-import { bootstrapApplication } from '@angular/platform-browser';
-import { provideRouter, withNavigationErrorHandler } from '@angular/router';
-import { inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { routes } from './app.routes';
+import {bootstrapApplication} from '@angular/platform-browser';
+import {provideRouter, withNavigationErrorHandler} from '@angular/router';
+import {inject} from '@angular/core';
+import {Router} from '@angular/router';
+import {routes} from './app.routes';
 
 bootstrapApplication(App, {
   providers: [
-    provideRouter(routes, withNavigationErrorHandler((error) => {
-      const router = inject(Router);
+    provideRouter(
+      routes,
+      withNavigationErrorHandler((error) => {
+        const router = inject(Router);
 
-      if (error?.message) {
-        console.error('Navigation error occurred:', error.message)
-      }
+        if (error?.message) {
+          console.error('Navigation error occurred:', error.message);
+        }
 
-      router.navigate(['/error']);
-    }))
-  ]
+        router.navigate(['/error']);
+      }),
+    ),
+  ],
 });
 ```
 
@@ -239,11 +246,11 @@ export class App {
 以下は、エラーをログに記録し、`Router`サービスを使用して汎用の`/users`ページにナビゲートし直す`userResolver`の更新された例です。
 
 ```ts
-import { inject } from '@angular/core';
-import { ResolveFn, RedirectCommand, Router } from '@angular/router';
-import { catchError, of, EMPTY } from 'rxjs';
-import { UserStore } from './user-store';
-import type { User } from './types';
+import {inject} from '@angular/core';
+import {ResolveFn, RedirectCommand, Router} from '@angular/router';
+import {catchError, of, EMPTY} from 'rxjs';
+import {UserStore} from './user-store';
+import type {User} from './types';
 
 export const userResolver: ResolveFn<User | RedirectCommand> = (route) => {
   const userStore = inject(UserStore);
@@ -251,10 +258,10 @@ export const userResolver: ResolveFn<User | RedirectCommand> = (route) => {
   const userId = route.paramMap.get('id')!;
 
   return userStore.getUser(userId).pipe(
-    catchError(error => {
+    catchError((error) => {
       console.error('Failed to load user:', error);
       return of(new RedirectCommand(router.parseUrl('/users')));
-    })
+    }),
   );
 };
 ```
@@ -270,8 +277,6 @@ export const userResolver: ResolveFn<User | RedirectCommand> = (route) => {
 ```angular-ts
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -323,7 +328,7 @@ provideRouter([
         resolve: {
           posts: (route: ActivatedRouteSnapshot) => {
             const postService = inject(PostService);
-            const user = route.data['user'] as User; // parent data
+            const user = route.parent?.data['user'] as User; // parent data
             const userId = user.id;
             return postService.getPostByUser(userId);
           },

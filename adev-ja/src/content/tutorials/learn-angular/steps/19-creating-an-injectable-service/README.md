@@ -14,7 +14,7 @@ NOTE: [エッセンシャルガイドの依存性の注入](/essentials/dependen
 
 ```ts {highlight:[1,2,3]}
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 class UserService {
   // データを取得して返すためのメソッド

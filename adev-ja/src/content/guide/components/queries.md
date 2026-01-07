@@ -7,7 +7,7 @@ TIP: このガイドでは、[基本概念のガイド](essentials)を読んで�
 開発者は、クエリを使用して、子コンポーネント、ディレクティブ、DOM要素などの参照を取得することがほとんどです。
 
 すべてのクエリ関数は、最新の結果を反映するシグナルを返します。
-`computed`や`effect`などのリアクティブなコンテキストでも、シグナル関数を呼び出すことで結果を読み取れます。
+`computed`や`effect`などの[リアクティブなコンテキスト](guide/signals#reactive-contexts)でも、シグナル関数を呼び出すことで結果を読み取れます。
 
 クエリには、**ビュークエリ**と**コンテンツクエリ**の2つのカテゴリーがあります。
 
@@ -149,7 +149,9 @@ export class UserProfile { }
 場合によっては、特に`viewChild`を使用する場合、特定の子が常に利用可能であることが確実な場合があります。他の場合では、特定の子が存在することを厳格に適用したい場合があります。これらの場合、_必須クエリ_を使用できます。
 
 ```ts
-@Component({/* ... */})
+@Component({
+  /* ... */
+})
 export class CustomCard {
   header = viewChild.required(CustomCardHeader);
   body = contentChild.required(CustomCardBody);
@@ -216,8 +218,9 @@ export class CustomList {
 デフォルトでは、クエリロケーターは、検索対象の要素と取得される値の両方を示します。代わりに、`read`オプションを指定して、ロケーターによって一致した要素から別の値を取得できます。
 
 ```ts
-
-@Component({/*...*/})
+@Component({
+  /*...*/
+})
 export class CustomExpando {
   toggle = contentChild(ExpandoContent, {read: TemplateRef});
 }
@@ -267,7 +270,7 @@ TIP: Angularチームは新規プロジェクトにはシグナルベースの�
 
 代わりに、対応するデコレーターをプロパティに追加することでもクエリを宣言できます。デコレーターベースのクエリは、下記で説明する点を除いて、シグナルベースのクエリと同じように動作します。
 
-### ビュークエリ
+### ビュークエリ {#decorator-view-queries}
 
 `@ViewChild`デコレーターを使用して、単一の結果をクエリできます。
 
@@ -330,11 +333,11 @@ export class CustomCard {
 
 `@ViewChildren`は、クエリ結果を含む`QueryList`オブジェクトを作成します。`changes`プロパティを使用して、時間の経過とともにクエリ結果の変更を購読できます。
 
-### コンテンツクエリ
+### コンテンツクエリ {#decorator-content-queries}
 
 `@ContentChild`デコレーターを使用して、単一の結果をクエリできます。
 
-```angular-ts {highlight: [14, 16, 17, 18, 25]}
+```angular-ts {highlight: [15, 16, 17, 18, 19, 26]}
 @Component({
   selector: 'custom-toggle',
   /* ... */

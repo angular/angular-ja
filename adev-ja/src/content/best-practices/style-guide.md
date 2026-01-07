@@ -196,7 +196,9 @@ Angularによって初期化されるコンポーネントとディレクティ�
 readonlyアクセス修飾子は、Angularによって設定された値が上書きされないことを保証します。
 
 ```ts
-@Component({/* ... */})
+@Component({
+  /* ... */
+})
 export class UserProfile {
   readonly userId = input();
   readonly userSaved = output();
@@ -208,7 +210,9 @@ export class UserProfile {
 このアドバイスは出力プロパティとクエリに適用されますが、入力プロパティには適用されません。
 
 ```ts
-@Component({/* ... */})
+@Component({
+  /* ... */
+})
 export class UserProfile {
   @Output() readonly userSaved = new EventEmitter<void>();
   @ViewChildren(PaymentMethod) readonly paymentMethods?: QueryList<PaymentMethod>;
@@ -221,15 +225,19 @@ export class UserProfile {
 
 ```html {prefer}
 <div [class.admin]="isAdmin" [class.dense]="density === 'high'">
-<div [style.color]="textColor" [style.background-color]="backgroundColor">
-<!-- OR -->
-<div [class]="{admin: isAdmin, dense: density === 'high'}">
-<div [style]="{'color': textColor, 'background-color': backgroundColor}">
+  <div [style.color]="textColor" [style.background-color]="backgroundColor">
+    <!-- OR -->
+    <div [class]="{admin: isAdmin, dense: density === 'high'}">
+      <div [style]="{'color': textColor, 'background-color': backgroundColor}"></div>
+    </div>
+  </div>
+</div>
 ```
 
 ```html {avoid}
 <div [ngClass]="{admin: isAdmin, dense: density === 'high'}">
-<div [ngStyle]="{'color': textColor, 'background-color': backgroundColor}">
+  <div [ngStyle]="{'color': textColor, 'background-color': backgroundColor}"></div>
+</div>
 ```
 
 `class`および`style`バインディングはどちらも、
@@ -267,8 +275,9 @@ export class UserProfile {
 イベントの詳細に基づいてより具体的な動作に委譲しても問題ありません。
 
 ```ts
-
-@Component({/* ... */})
+@Component({
+  /* ... */
+})
 class RichText {
   handleKeydown(event: KeyboardEvent) {
     if (event.ctrlKey) {
@@ -277,7 +286,7 @@ class RichText {
       } else if (event.key === 'I') {
         this.activateItalic();
       }
-// ...
+      // ...
     }
   }
 }
@@ -313,10 +322,13 @@ Angularは、各ライフサイクルメソッドに対応するTypeScriptイン
 ```ts
 import {Component, OnInit} from '@angular/core';
 
-@Component({/* ... */})
+@Component({
+  /* ... */
+})
 export class UserProfile implements OnInit {
-
   // The `OnInit` interface ensures this method is named correctly.
-  ngOnInit() { /* ... */ }
+  ngOnInit() {
+    /* ... */
+  }
 }
 ```

@@ -16,7 +16,7 @@ OnPush変更検知は、Angularにコンポーネントのサブツリーの変�
 コンポーネントの変更検知戦略を`@Component`デコレーターで`OnPush`に設定できます。
 
 ```ts
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

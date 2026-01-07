@@ -437,7 +437,7 @@ Each item emitted by `events` is an instance of a specific event class:
 All event classes extend `ControlEvent` and include a `source` reference to the `AbstractControl` that originated the change, which is useful in large forms.
 
 ```ts
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {
   FormControl,
   ValueChangeEvent,
@@ -450,7 +450,9 @@ import {
   FormGroup,
 } from '@angular/forms';
 
-@Component({/* ... */ })
+@Component({
+  /* ... */
+})
 export class UnifiedEventsBasicComponent {
   form = new FormGroup({
     username: new FormControl(''),
@@ -491,8 +493,8 @@ export class UnifiedEventsBasicComponent {
 Prefer RxJS operators when you only need a subset of event types.
 
 ```ts
-import { filter } from 'rxjs/operators';
-import { StatusChangeEvent } from '@angular/forms';
+import {filter} from 'rxjs/operators';
+import {StatusChangeEvent} from '@angular/forms';
 
 control.events
   .pipe(filter((e) => e instanceof StatusChangeEvent))
@@ -504,10 +506,11 @@ control.events
 **Before**
 
 ```ts
-import { combineLatest } from 'rxjs/operators';
+import {combineLatest} from 'rxjs/operators';
 
-combineLatest([control.valueChanges, control.statusChanges])
-  .subscribe(([value, status]) => { /* ... */ });
+combineLatest([control.valueChanges, control.statusChanges]).subscribe(([value, status]) => {
+  /* ... */
+});
 ```
 
 **After**
@@ -519,6 +522,123 @@ control.events.subscribe((e) => {
 ```
 
 NOTE: On value change, the emit happens right after a value of this control is updated. The value of a parent control (for example if this FormControl is a part of a FormGroup) is updated later, so accessing a value of a parent control (using the `value` property) from the callback of this event might result in getting a value that has not been updated yet. Subscribe to the `events` of the parent control instead.
+
+## Managing form control state
+
+Reactive forms track control state through **touched/untouched** and **pristine/dirty**. Angular updates these automatically during DOM interactions, but you can also manage them programmatically.
+
+**[`markAsTouched`](api/forms/FormControl#markAsTouched)** — Marks a control or form as touched by focus and blur events that do not change the value. Propagates to parent controls by default.
+
+```ts
+// Show validation errors after user leaves a field
+onEmailBlur() {
+  const email = this.form.get('email');
+  email.markAsTouched();
+}
+```
+
+**[`markAsUntouched`](api/forms/FormControl#markAsUntouched)** — Marks a control or form as untouched. Cascades to all child controls and recalculates the touched status of all parent controls.
+
+```ts
+// Reset form state after successful submission
+onSubmitSuccess() {
+  this.form.markAsUntouched();
+  this.form.markAsPristine();
+}
+```
+
+**[`markAsDirty`](api/forms/FormControl#markAsDirty)** — Marks a control or form as dirty, meaning the value has been changed. Propagates to parent controls by default.
+
+```ts
+// Mark programmatically changed values as modified
+autofillAddress() {
+  const previousAddress = getAddress();
+  this.form.patchValue(previousAddress, { emitEvent: false });
+  this.form.markAsDirty();
+}
+```
+
+**[`markAsPristine`](api/forms/FormControl#markAsPristine)** — Marks a control or form as pristine. Marks all child controls as pristine and recalculates the pristine status of all parent controls.
+
+```ts
+// Reset pristine state after saving to track new changes
+saveForm() {
+  this.api.save(this.form.value).subscribe(() => {
+    this.form.markAsPristine();
+  });
+}
+```
+
+**[`markAllAsDirty`](api/forms/FormControl#markAllAsDirty)** — Marks the control or form and all its descendant controls as dirty.
+
+```ts
+// Mark imported data as dirty
+loadData(data: FormData) {
+  this.form.patchValue(data);
+  this.form.markAllAsDirty();
+}
+```
+
+**[`markAllAsTouched`](api/forms/FormControl#markAllAsTouched)** — Marks the control or form and all its descendant controls as touched. Useful for showing validation errors across the entire form.
+
+```ts
+// Show all validation errors before submission
+onSubmit() {
+  if (this.form.invalid) {
+    this.form.markAllAsTouched();
+    return;
+  }
+  this.saveForm();
+}
+```
+
+## Controlling event emission and propagation
+
+When updating form controls programmatically, you have precise control over how changes propagate through the form hierarchy and whether events are emitted.
+
+### Understanding event emission
+
+By default `emitEvent: true`, any change to a control emits events through the `valueChanges` and `statusChanges` observables. Setting `emitEvent: false` suppresses these emissions, which is useful when setting values programmatically without triggering reactive behavior like auto-save, avoiding circular updates between controls, or performing bulk updates where events should emit only once at the end.
+
+```ts
+@Component({/* ... */})
+export class BlogPostEditor {
+  postForm = new FormGroup({
+    title: new FormControl(''),
+    content: new FormControl(''),
+  });
+
+  constructor() {
+    // Auto-save draft every time user types
+    this.postForm.valueChanges.subscribe(formValue => {
+      this.autosaveDraft(formValue);
+    });
+  }
+
+  loadExistingDraft(savedDraft: {title: string; content: string}) {
+    // Restore draft without triggering auto-save
+    this.postForm.setValue(savedDraft, { emitEvent: false });
+  }
+
+}
+```
+
+### Understanding propagation control
+
+By default `onlySelf: false` , updates cascade to parent controls, recalculating their values and validation status. Setting `onlySelf: true` isolates the update to the current control, preventing parent notification. This is useful for batch operations where you want to manually trigger the parent update once.
+
+```ts
+updatePostalCodeValidator(country: string) {
+  const postal = this.addressForm.get('postalCode');
+
+  const validators = country === 'US'
+    ? [Validators.maxLength(5)]
+    : [Validators.maxLength(7)];
+
+  postal.setValidators(validators);
+  postal.updateValueAndValidity({ onlySelf: true, emitEvent: false });
+}
+```
 
 ## Utility functions for narrowing form control types
 
@@ -534,16 +654,16 @@ Angular provides four utility functions that help determine the concrete type of
 These helpers are particularly useful in **custom validators**, where the function signature receives an `AbstractControl`, but the logic is intended for a specific control kind.
 
 ```ts
-import { AbstractControl, isFormArray } from '@angular/forms';
+import {AbstractControl, isFormArray} from '@angular/forms';
 
 export function positiveValues(control: AbstractControl) {
-    if (!isFormArray(control)) {
-        return null; // Not a FormArray: validator is not applicable.
-    }
+  if (!isFormArray(control)) {
+    return null; // Not a FormArray: validator is not applicable.
+  }
 
-    // Safe to access FormArray-specific API after narrowing.
-    const hasNegative = control.controls.some(c => c.value < 0);
-    return hasNegative ? { positiveValues: true } : null;
+  // Safe to access FormArray-specific API after narrowing.
+  const hasNegative = control.controls.some((c) => c.value < 0);
+  return hasNegative ? {positiveValues: true} : null;
 }
 ```
 

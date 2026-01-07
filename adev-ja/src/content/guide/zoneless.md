@@ -13,14 +13,12 @@ ZoneJSを依存関係として削除する主な利点は次のとおりです�
 
 ```typescript
 // スタンドアロン ブートストラップ
-bootstrapApplication(MyApp, {providers: [
-  provideZonelessChangeDetection(),
-]});
+bootstrapApplication(MyApp, {providers: [provideZonelessChangeDetection()]});
 
 // NgModule ブートストラップ
 platformBrowser().bootstrapModule(AppModule);
 @NgModule({
-  providers: [provideZonelessChangeDetection()]
+  providers: [provideZonelessChangeDetection()],
 })
 export class AppModule {}
 ```
@@ -130,7 +128,7 @@ Zonelessプロバイダー関数は、`TestBed`でも使用して、
 
 ```typescript
 TestBed.configureTestingModule({
-  providers: [provideZonelessChangeDetection()]
+  providers: [provideZonelessChangeDetection()],
 });
 
 const fixture = TestBed.createComponent(MyComponent);

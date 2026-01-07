@@ -105,7 +105,6 @@ a `source` and a `destination`, each of which are a string.
 You can provide the following schema for type validation of these values.
 
 ```json {header: "schema.json"}
-
 {
   "$schema": "http://json-schema.org/schema",
   "type": "object",
@@ -128,7 +127,6 @@ To link our builder implementation with its schema and name, you need to create 
 Create a file named `builders.json` that looks like this:
 
 ```json {header: "builders.json"}
-
 {
   "builders": {
     "copy": {
@@ -302,27 +300,24 @@ This target tells the builder to copy the `package.json` file.
   - `source` - The existing file you are copying.
   - `destination` - The path you want to copy to.
 
-< header="angular.json" language="json">
-
+```json {header: "angular.json"}
 {
-"projects": {
-"builder-test": {
-"architect": {
-"copy-package": {
-"builder": "@example/copy-file:copy",
-"options": {
-"source": "package.json",
-"destination": "package-copy.json"
-}
-},
-
+  "projects": {
+    "builder-test": {
+      "architect": {
+        "copy-package": {
+          "builder": "@example/copy-file:copy",
+          "options": {
+            "source": "package.json",
+            "destination": "package-copy.json"
+          }
+        }
         // Existing targets...
       }
     }
-
+  }
 }
-}
-</docs-code>
+```
 
 ### Running the builder
 

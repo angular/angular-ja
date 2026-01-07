@@ -13,7 +13,7 @@ NOTE: `HttpClient` によって作成された `Observable` は、何度でも�
 たとえば、`HttpClient.get()` メソッドを使用して、仮説上のAPIから構成データを取得するには、次のようになります。
 
 ```ts
-http.get<Config>('/api/config').subscribe(config => {
+http.get<Config>('/api/config').subscribe((config) => {
   // 構成を処理します。
 });
 ```
@@ -38,7 +38,7 @@ CRITICAL: リクエストメソッドのジェネリック型は、サーバー�
 たとえば、`HttpClient` に `.jpeg` イメージの生のバイトを `ArrayBuffer` にダウンロードするように依頼できます。
 
 ```ts
-http.get('/images/dog.jpg', {responseType: 'arraybuffer'}).subscribe(buffer => {
+http.get('/images/dog.jpg', {responseType: 'arraybuffer'}).subscribe((buffer) => {
   console.log('画像は ' + buffer.byteLength + ' バイトです');
 });
 ```
@@ -56,7 +56,7 @@ http.get('/images/dog.jpg', {responseType: 'arraybuffer'}).subscribe(buffer => {
 [`HttpClient.post()`](api/common/http/HttpClient#post) メソッドは `get()` と同様に動作し、オプションの前に `body` 引数を追加で受け取ります。
 
 ```ts
-http.post<Config>('/api/config', newConfig).subscribe(config => {
+http.post<Config>('/api/config', newConfig).subscribe((config) => {
   console.log('更新された構成:', config);
 });
 ```
@@ -81,11 +81,13 @@ IMPORTANT: 変更リクエスト `Observable` を `.subscribe()` することを
 オブジェクトリテラルを渡すことは、URLパラメータを構成するための最も簡単な方法です。
 
 ```ts
-http.get('/api/config', {
-  params: {filter: 'all'},
-}).subscribe(config => {
-  // ...
-});
+http
+  .get('/api/config', {
+    params: {filter: 'all'},
+  })
+  .subscribe((config) => {
+    // ...
+  });
 ```
 
 あるいは、パラメータの構築やシリアル化をより細かく制御する必要がある場合は、`HttpParams` のインスタンスを渡します。
@@ -95,11 +97,13 @@ IMPORTANT: `HttpParams` のインスタンスは*変更不可能*であり、直
 ```ts
 const baseParams = new HttpParams().set('filter', 'all');
 
-http.get('/api/config', {
-  params: baseParams.set('details', 'enabled'),
-}).subscribe(config => {
-  // ...
-});
+http
+  .get('/api/config', {
+    params: baseParams.set('details', 'enabled'),
+  })
+  .subscribe((config) => {
+    // ...
+  });
 ```
 
 `HttpParams` を、`HttpClient` がパラメータをURLにエンコードする方法を決定するカスタム `HttpParameterCodec` でインスタンス化できます。
@@ -111,11 +115,11 @@ http.get('/api/config', {
 [`HttpParameterCodec`](api/common/http/HttpParameterCodec) の独自の実装を提供することで、エンコードとデコードの適用方法をカスタマイズできます。
 
 ```ts
-import { HttpClient, HttpParams, HttpParameterCodec } from '@angular/common/http';
-import { inject } from '@angular/core';
+import {HttpClient, HttpParams, HttpParameterCodec} from '@angular/common/http';
+import {inject} from '@angular/core';
 
-export class CustomHttpParamEncoder  implements HttpParameterCodec {
-  encodeKey(key: string): string   {
+export class CustomHttpParamEncoder implements HttpParameterCodec {
+  encodeKey(key: string): string {
     return encodeURIComponent(key);
   }
 
@@ -139,10 +143,10 @@ export class ApiService {
     const params = new HttpParams({
       encoder: new CustomHttpParamEncoder(),
     })
-    .set('email', 'dev+alerts@example.com')
-    .set('q', 'a & b? c/d = e');
+      .set('email', 'dev+alerts@example.com')
+      .set('q', 'a & b? c/d = e');
 
-    return this.http.get('/api/items', { params });
+    return this.http.get('/api/items', {params});
   }
 }
 ```
@@ -154,13 +158,15 @@ export class ApiService {
 オブジェクトリテラルを渡すことは、リクエストヘッダーを構成するための最も簡単な方法です。
 
 ```ts
-http.get('/api/config', {
-  headers: {
-    'X-Debug-Level': 'verbose',
-  }
-}).subscribe(config => {
-  // ...
-});
+http
+  .get('/api/config', {
+    headers: {
+      'X-Debug-Level': 'verbose',
+    },
+  })
+  .subscribe((config) => {
+    // ...
+  });
 ```
 
 あるいは、ヘッダーの構築をより細かく制御する必要がある場合は、`HttpHeaders` のインスタンスを渡します。
@@ -170,11 +176,13 @@ IMPORTANT: `HttpHeaders` のインスタンスは*変更不可能*であり、�
 ```ts
 const baseHeaders = new HttpHeaders().set('X-Debug-Level', 'minimal');
 
-http.get<Config>('/api/config', {
-  headers: baseHeaders.set('X-Debug-Level', 'verbose'),
-}).subscribe(config => {
-  // ...
-});
+http
+  .get<Config>('/api/config', {
+    headers: baseHeaders.set('X-Debug-Level', 'verbose'),
+  })
+  .subscribe((config) => {
+    // ...
+  });
 ```
 
 ## サーバーレスポンスイベントとの対話 {#interacting-with-the-server-response-events}
@@ -184,7 +192,7 @@ http.get<Config>('/api/config', {
 レスポンス全体にアクセスするには、`observe` オプションを `'response'` に設定します。
 
 ```ts
-http.get<Config>('/api/config', {observe: 'response'}).subscribe(res => {
+http.get<Config>('/api/config', {observe: 'response'}).subscribe((res) => {
   console.log('レスポンスステータス:', res.status);
   console.log('ボディ:', res.body);
 });
@@ -207,19 +215,21 @@ NOTE: `HttpClient` のオプションの `fetch` 実装は、*アップロード
 イベントストリームを観察するには、`observe` オプションを `'events'` に設定します。
 
 ```ts
-http.post('/api/upload', myData, {
-  reportProgress: true,
-  observe: 'events',
-}).subscribe(event => {
-  switch (event.type) {
-    case HttpEventType.UploadProgress:
-      console.log('Uploaded ' + event.loaded + ' out of ' + event.total + ' bytes');
-      break;
-    case HttpEventType.Response:
-      console.log('Finished uploading!');
-      break;
-  }
-});
+http
+  .post('/api/upload', myData, {
+    reportProgress: true,
+    observe: 'events',
+  })
+  .subscribe((event) => {
+    switch (event.type) {
+      case HttpEventType.UploadProgress:
+        console.log('Uploaded ' + event.loaded + ' out of ' + event.total + ' bytes');
+        break;
+      case HttpEventType.Response:
+        console.log('Finished uploading!');
+        break;
+    }
+  });
 ```
 
 <docs-callout important title="`observe` のリテラル値">
@@ -262,16 +272,18 @@ HTTPリクエストは、次の3つの方法で失敗する可能性がありま
 NOTE: タイムアウトは、バックエンドHTTPリクエスト自体にのみ適用されます。リクエスト処理チェーン全体のタイムアウトではありません。したがって、このオプションは、インターセプターによって導入される遅延の影響を受けません。
 
 ```ts
-http.get('/api/config', {
-  timeout: 3000,
-}).subscribe({
-  next: config => {
-    console.log('設定の取得に成功:', config);
-  },
-  error: err => {
-    // リクエストがタイムアウトした場合、エラーが発行されます。
-  }
-});
+http
+  .get('/api/config', {
+    timeout: 3000,
+  })
+  .subscribe({
+    next: (config) => {
+      console.log('設定の取得に成功:', config);
+    },
+    error: (err) => {
+      // リクエストがタイムアウトした場合、エラーが発行されます。
+    },
+  });
 ```
 
 ## 高度な fetch オプション {#advanced-fetch-options}
@@ -287,9 +299,11 @@ http.get('/api/config', {
 `keepalive` オプションにより、リクエストはそれを開始したページよりも長く存続できます。これは、ユーザーがページから移動した場合でも完了する必要がある分析やログリクエストに特に有用です。
 
 ```ts
-http.post('/api/analytics', analyticsData, {
-  keepalive: true
-}).subscribe();
+http
+  .post('/api/analytics', analyticsData, {
+    keepalive: true,
+  })
+  .subscribe();
 ```
 
 #### HTTP キャッシュ制御 {#http-caching-control}
@@ -298,25 +312,31 @@ http.post('/api/analytics', analyticsData, {
 
 ```ts
 //  新鮮度に関係なくキャッシュされたレスポンスを使用
-http.get('/api/config', {
-  cache: 'force-cache'
-}).subscribe(config => {
-  // ...
-});
+http
+  .get('/api/config', {
+    cache: 'force-cache',
+  })
+  .subscribe((config) => {
+    // ...
+  });
 
 // 常にネットワークから取得、キャッシュをバイパス
-http.get('/api/live-data', {
-  cache: 'no-cache'
-}).subscribe(data => {
-  // ...
-});
+http
+  .get('/api/live-data', {
+    cache: 'no-cache',
+  })
+  .subscribe((data) => {
+    // ...
+  });
 
 // キャッシュされたレスポンスのみを使用、キャッシュにない場合は失敗
-http.get('/api/static-data', {
-  cache: 'only-if-cached'
-}).subscribe(data => {
-  // ...
-});
+http
+  .get('/api/static-data', {
+    cache: 'only-if-cached',
+  })
+  .subscribe((data) => {
+    // ...
+  });
 ```
 
 #### Core Web Vitals のためのリクエスト優先度 {#request-priority-for-core-web-vitals}
@@ -325,25 +345,31 @@ http.get('/api/static-data', {
 
 ```ts
 // 重要なリソースの高優先度
-http.get('/api/user-profile', {
-  priority: 'high'
-}).subscribe(profile => {
-  // ...
-});
+http
+  .get('/api/user-profile', {
+    priority: 'high',
+  })
+  .subscribe((profile) => {
+    // ...
+  });
 
 // 重要でないリソースの低優先度
-http.get('/api/recommendations', {
-  priority: 'low'
-}).subscribe(recommendations => {
-  // ...
-});
+http
+  .get('/api/recommendations', {
+    priority: 'low',
+  })
+  .subscribe((recommendations) => {
+    // ...
+  });
 
 // 自動優先度 (デフォルト) はブラウザーが決定
-http.get('/api/settings', {
-  priority: 'auto'
-}).subscribe(settings => {
-  // ...
-});
+http
+  .get('/api/settings', {
+    priority: 'auto',
+  })
+  .subscribe((settings) => {
+    // ...
+  });
 ```
 
 利用可能な `priority` 値：
@@ -360,25 +386,31 @@ TIP: Largest Contentful Paint (LCP) に影響するリクエストには `priori
 
 ```ts
 // 同一オリジンリクエストのみ
-http.get('/api/local-data', {
-  mode: 'same-origin'
-}).subscribe(data => {
-  // ...
-});
+http
+  .get('/api/local-data', {
+    mode: 'same-origin',
+  })
+  .subscribe((data) => {
+    // ...
+  });
 
 // CORS が有効なクロスオリジンリクエスト
-http.get('https://api.external.com/data', {
-  mode: 'cors'
-}).subscribe(data => {
-  // ...
-});
+http
+  .get('https://api.external.com/data', {
+    mode: 'cors',
+  })
+  .subscribe((data) => {
+    // ...
+  });
 
 // シンプルなクロスオリジンリクエストの No-CORS モード
-http.get('https://external-api.com/public-data', {
-  mode: 'no-cors'
-}).subscribe(data => {
-  // ...
-});
+http
+  .get('https://external-api.com/public-data', {
+    mode: 'no-cors',
+  })
+  .subscribe((data) => {
+    // ...
+  });
 ```
 
 利用可能な `mode` 値：
@@ -395,30 +427,36 @@ TIP: クロスオリジンに行くべきでない機密リクエストには `m
 
 ```ts
 // リダイレクトを自動的に追跡（デフォルトの動作）
-http.get('/api/resource', {
-  redirect: 'follow'
-}).subscribe(data => {
-  // ...
-});
+http
+  .get('/api/resource', {
+    redirect: 'follow',
+  })
+  .subscribe((data) => {
+    // ...
+  });
 
 // 自動リダイレクトを防ぐ
-http.get('/api/resource', {
-  redirect: 'manual'
-}).subscribe(response => {
-  // リダイレクトを手動で処理
-});
+http
+  .get('/api/resource', {
+    redirect: 'manual',
+  })
+  .subscribe((response) => {
+    // リダイレクトを手動で処理
+  });
 
 // リダイレクトをエラーとして扱う
-http.get('/api/resource', {
-  redirect: 'error'
-}).subscribe({
-  next: data => {
-    // 成功レスポンス
-  },
-  error: err => {
-    // リダイレクトレスポンスはこのエラーハンドラーをトリガーします
-  }
-});
+http
+  .get('/api/resource', {
+    redirect: 'error',
+  })
+  .subscribe({
+    next: (data) => {
+      // 成功レスポンス
+    },
+    error: (err) => {
+      // リダイレクトレスポンスはこのエラーハンドラーをトリガーします
+    },
+  });
 ```
 
 利用可能な `redirect` 値：
@@ -435,40 +473,50 @@ TIP: カスタムロジックでリダイレクトを処理する必要がある
 
 ```ts
 // クロスオリジンリクエストに認証情報を含める
-http.get('https://api.example.com/protected-data', {
-  credentials: 'include'
-}).subscribe(data => {
-  // ...
-});
+http
+  .get('https://api.example.com/protected-data', {
+    credentials: 'include',
+  })
+  .subscribe((data) => {
+    // ...
+  });
 
 // 認証情報を送信しない（クロスオリジンのデフォルト）
-http.get('https://api.example.com/public-data', {
-  credentials: 'omit'
-}).subscribe(data => {
-  // ...
-});
+http
+  .get('https://api.example.com/public-data', {
+    credentials: 'omit',
+  })
+  .subscribe((data) => {
+    // ...
+  });
 
 // 同一オリジンリクエストのみに認証情報を送信
-http.get('/api/user-data', {
-  credentials: 'same-origin'
-}).subscribe(data => {
-  // ...
-});
+http
+  .get('/api/user-data', {
+    credentials: 'same-origin',
+  })
+  .subscribe((data) => {
+    // ...
+  });
 
 // withCredentials は credentials 設定を上書きします
-http.get('https://api.example.com/data', {
-  credentials: 'omit',        // これは無視されます
-  withCredentials: true       // これにより credentials: 'include' が強制されます
-}).subscribe(data => {
-  // credentials: 'omit' にもかかわらず、リクエストは認証情報を含みます
-});
+http
+  .get('https://api.example.com/data', {
+    credentials: 'omit', // これは無視されます
+    withCredentials: true, // これにより credentials: 'include' が強制されます
+  })
+  .subscribe((data) => {
+    // credentials: 'omit' にもかかわらず、リクエストは認証情報を含みます
+  });
 
 // レガシーアプローチ（まだサポートされています）
-http.get('https://api.example.com/data', {
-  withCredentials: true
-}).subscribe(data => {
-  // credentials: 'include' と同等
-});
+http
+  .get('https://api.example.com/data', {
+    withCredentials: true,
+  })
+  .subscribe((data) => {
+    // credentials: 'include' と同等
+  });
 ```
 
 IMPORTANT: `withCredentials` オプションは `credentials` オプションより優先されます。両方が指定されている場合、明示的な `credentials` 値に関係なく、`withCredentials: true` は常に `credentials: 'include'` になります。
@@ -487,18 +535,22 @@ TIP: CORSをサポートする異なるドメインに認証Cookieやヘッダ�
 
 ```ts
 // 特定のリファラーURLを送信
-http.get('/api/data', {
-  referrer: 'https://example.com/page'
-}).subscribe(data => {
-  // ...
-});
+http
+  .get('/api/data', {
+    referrer: 'https://example.com/page',
+  })
+  .subscribe((data) => {
+    // ...
+  });
 
 // 現在のページをリファラーとして使用（デフォルトの動作）
-http.get('/api/analytics', {
-  referrer: 'about:client'
-}).subscribe(data => {
-  // ...
-});
+http
+  .get('/api/analytics', {
+    referrer: 'about:client',
+  })
+  .subscribe((data) => {
+    // ...
+  });
 ```
 
 `referrer` オプションは以下を受け入れます。
@@ -515,14 +567,18 @@ TIP: 参照元ページのURLを漏らしたくない機密リクエストには
 
 ```ts
 // 現在のページに関係なくリファラー情報を送信しない
-http.get('/api/data', {
-  referrerPolicy: 'no-referrer'
-}).subscribe();
+http
+  .get('/api/data', {
+    referrerPolicy: 'no-referrer',
+  })
+  .subscribe();
 
 // オリジンのみを送信（例: https://example.com）
-http.get('/api/analytics', {
-  referrerPolicy: 'origin'
-}).subscribe();
+http
+  .get('/api/analytics', {
+    referrerPolicy: 'origin',
+  })
+  .subscribe();
 ```
 
 `referrerPolicy` オプションは以下を受け入れます。
@@ -544,12 +600,14 @@ TIP: プライバシーに配慮したリクエストには、`'no-referrer'`、
 
 ```ts
 // SHA-256ハッシュでレスポンスの整合性を検証
-http.get('/api/script.js', {
-  integrity: 'sha256-ABC123...',
-  responseType: 'text'
-}).subscribe(script => {
-  // スクリプトのコンテンツがハッシュに対して検証されます
-});
+http
+  .get('/api/script.js', {
+    integrity: 'sha256-ABC123...',
+    responseType: 'text',
+  })
+  .subscribe((script) => {
+    // スクリプトのコンテンツがハッシュに対して検証されます
+  });
 ```
 
 IMPORTANT: `integrity` オプションには、レスポンスコンテンツと提供されたハッシュとの厳密な一致が必要です。コンテンツが一致しない場合、リクエストはネットワークエラーで失敗します。

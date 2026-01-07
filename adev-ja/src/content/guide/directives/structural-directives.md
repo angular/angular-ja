@@ -85,7 +85,6 @@ export class SelectDirective {
   private templateRef = inject(TemplateRef);
   private viewContainerRef = inject(ViewContainerRef);
 }
-
 ```
 
 </docs-step>
@@ -95,7 +94,6 @@ export class SelectDirective {
 ```ts
 export class SelectDirective {
   // ...
-
   selectFrom = input.required<DataSource>();
 }
 ```
@@ -107,7 +105,6 @@ export class SelectDirective {
 ```ts
 export class SelectDirective {
   // ...
-
   async ngOnInit() {
     const data = await this.selectFrom.load();
     this.viewContainerRef.createEmbeddedView(this.templateRef, {
@@ -129,9 +126,7 @@ export class SelectDirective {
 独自の構造ディレクティブを作成する際は、次の構文を使用します。
 
 ```ts {hideCopy}
-
-_:prefix="( :let | :expression ) (';' | ',')? ( :let | :as | :keyExp )_"
-
+_: prefix = "( :let | :expression ) (';' | ',')? ( :let | :as | :keyExp )_";
 ```
 
 次のパターンは、構造ディレクティブ文法の各部分を説明しています。

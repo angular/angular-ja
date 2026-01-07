@@ -9,14 +9,14 @@
 ```
 
 ```ts
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {Component} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {}
 ```
@@ -24,21 +24,21 @@ export class AppComponent {}
 この例では、アプリケーションに次のルートが定義されている場合:
 
 ```ts
-import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { ProductsComponent } from './products/products.component';
+import {Routes} from '@angular/router';
+import {HomeComponent} from './home/home.component';
+import {ProductsComponent} from './products/products.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    title: 'Home Page'
+    title: 'Home Page',
   },
   {
     path: 'products',
     component: ProductsComponent,
-    title: 'Our Products'
-  }
+    title: 'Our Products',
+  },
 ];
 ```
 
@@ -170,8 +170,8 @@ Angularは、各ルートで定義された`outlet`プロパティにアウト�
 ルーティングされたコンポーネントにコンテキストデータを渡すには、多くの場合、グローバルステートや複雑なルート設定が必要です。これを簡単にするために、各`RouterOutlet`は`routerOutletData`入力をサポートしています。ルーティングされたコンポーネントとその子コンポーネントは、`ROUTER_OUTLET_DATA`インジェクショントークンを使用してこのデータをシグナルとして読み取ることができ、ルート定義を変更せずにアウトレット固有の設定が可能になります。
 
 ```angular-ts
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {Component} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -187,8 +187,8 @@ export class DashboardComponent {}
 ルーティングされたコンポーネントは、`ROUTER_OUTLET_DATA`を使用して提供されたアウトレットデータをインジェクトできます。
 
 ```angular-ts
-import { Component, inject } from '@angular/core';
-import { ROUTER_OUTLET_DATA } from '@angular/router';
+import {Component, inject} from '@angular/core';
+import {ROUTER_OUTLET_DATA} from '@angular/router';
 
 @Component({
   selector: 'app-stats',

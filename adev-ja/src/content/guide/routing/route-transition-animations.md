@@ -41,25 +41,23 @@ Routerのビュー遷移統合は[プログレッシブエンハンスメント]
 ### スタンドアロンブートストラップ {#standalone-bootstrap}
 
 ```ts
-import { bootstrapApplication } from '@angular/platform-browser';
-import { provideRouter, withViewTransitions } from '@angular/router';
-import { routes } from './app.routes';
+import {bootstrapApplication} from '@angular/platform-browser';
+import {provideRouter, withViewTransitions} from '@angular/router';
+import {routes} from './app.routes';
 
 bootstrapApplication(MyApp, {
-  providers: [
-    provideRouter(routes, withViewTransitions()),
-  ]
+  providers: [provideRouter(routes, withViewTransitions())],
 });
 ```
 
 ### NgModuleブートストラップ {#ngmodule-bootstrap}
 
 ```ts
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {enableViewTransitions: true})]
+  imports: [RouterModule.forRoot(routes, {enableViewTransitions: true})],
 })
 export class AppRouting {}
 ```
@@ -123,13 +121,13 @@ IMPORTANT: ビューのトランジションアニメーションは、コンポ
 このコールバックを使用して、ナビゲーションコンテキストに基づいてトランジション動作をカスタマイズできます。たとえば、特定のナビゲーションタイプではトランジションをスキップできます。
 
 ```ts
-import { inject } from '@angular/core';
-import { Router, withViewTransitions } from '@angular/router';
+import {inject} from '@angular/core';
+import {Router, withViewTransitions} from '@angular/router';
 
 withViewTransitions({
   onViewTransitionCreated: ({transition}) => {
     const router = inject(Router);
-    const targetUrl = router.getCurrentNavigation()!.finalUrl!;
+    const targetUrl = router.currentNavigation()!.finalUrl!;
 
     // Skip transition if only fragment or query params change
     const config = {
@@ -143,7 +141,7 @@ withViewTransitions({
       transition.skipTransition();
     }
   },
-})
+});
 ```
 
 この例では、ナビゲーションが[URLフラグメントまたはクエリパラメータ](/guide/routing/read-route-state#query-parameters)のみを変更する場合（同じページ内のアンカーリンクなど）にビュー遷移をスキップします。`skipTransition()`メソッドは、ナビゲーションの完了を許可しながらアニメーションを防止します。
@@ -201,4 +199,3 @@ NOTE: Angular Routerはビュー遷移を遅延させる方法を提供してい
 
 - [Chrome Explainer](https://developer.chrome.com/docs/web-platform/view-transitions/same-document#animating-with-javascript)
 - [Angular Example on StackBlitz](https://stackblitz.com/edit/stackblitz-starters-cklnkm)
-

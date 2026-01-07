@@ -74,7 +74,7 @@
 }
 ```
 
-NOTE: [テンプレート変数に関する詳細については、ドキュメントを参照してください](https://angular.dev/guide/templates/reference-variables#)。
+NOTE: [テンプレート変数に関する詳細については、ドキュメントを参照してください](/guide/templates/reference-variables)。
 
 </docs-step>
 
@@ -105,5 +105,5 @@ NOTE: [テンプレート変数に関する詳細については、ドキュメ�
 </docs-step>
 </docs-workflow>
 
-詳細については、[遅延可能ビュー](https://angular.dev/guide/defer)のドキュメントを参照してください。
+詳細については、[遅延可能ビュー](/guide/defer)のドキュメントを参照してください。
 Angularの優れた機能をさらに活用するために、学習を続けてください。

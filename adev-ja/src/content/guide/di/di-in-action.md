@@ -24,7 +24,6 @@ export class HighlightDirective {
     this.element.nativeElement.style.color = 'red';
   }
 }
-
 ```
 
 ## ホスト要素のタグ名を注入する {#inject-the-host-elements-tag-name}

@@ -23,9 +23,15 @@ Here's an example of a service class that logs to the browser console:
 
 ```ts {header: "logger.service.ts (class)"}
 export class Logger {
-  log(msg: unknown) { console.log(msg); }
-  error(msg: unknown) { console.error(msg); }
-  warn(msg: unknown) { console.warn(msg); }
+  log(msg: unknown) {
+    console.log(msg);
+  }
+  error(msg: unknown) {
+    console.error(msg);
+  }
+  warn(msg: unknown) {
+    console.warn(msg);
+  }
 }
 ```
 
@@ -33,25 +39,24 @@ Services can depend on other services.
 For example, here's a `HeroService` that depends on the `Logger` service, and also uses `BackendService` to get heroes.
 That service in turn might depend on the `HttpClient` service to fetch heroes asynchronously from a server:
 
-<docs-code header="hero.service.ts" language="typescript"
-           highlight="[7,8,12,13]">
-import { inject } from "@angular/core";
+```ts {header: "hero.service.ts", highlight="[7,8,12,13]"}
+import {inject} from '@angular/core';
 
 export class HeroService {
-private heroes: Hero[] = [];
+  private heroes: Hero[] = [];
 
-private backend = inject(BackendService);
-private logger = inject(Logger);
+  private backend = inject(BackendService);
+  private logger = inject(Logger);
 
-async getHeroes() {
-// Fetch
-this.heroes = await this.backend.getAll(Hero);
-// Log
-this.logger.log(`Fetched ${this.heroes.length} heroes.`);
-return this.heroes;
+  async getHeroes() {
+    // Fetch
+    this.heroes = await this.backend.getAll(Hero);
+    // Log
+    this.logger.log(`Fetched ${this.heroes.length} heroes.`);
+    return this.heroes;
+  }
 }
-}
-</docs-code>
+```
 
 ## Creating an injectable service with the CLI
 
@@ -61,9 +66,9 @@ To generate a new `HeroService` class in the `src/app/heroes` folder, follow the
 
 1. Run this [Angular CLI](/tools/cli) command:
 
-<docs-code language="sh">
+```sh
 ng generate service heroes/hero
-</docs-code>
+```
 
 This command creates the following default `HeroService`:
 

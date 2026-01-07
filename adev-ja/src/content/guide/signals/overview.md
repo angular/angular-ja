@@ -33,10 +33,45 @@ count.set(3);
 
 ```ts
 // カウントを1増やす。
-count.update(value => value + 1);
+count.update((value) => value + 1);
 ```
 
 書き込み可能なシグナルは、`WritableSignal`という型になります。
+
+#### 書き込み可能なシグナルを読み取り専用に変換する
+
+`WritableSignal`は、シグナルの読み取り専用バージョンを返す`asReadonly()`メソッドを提供します。これは、シグナルの値をコンシューマーに公開したいが、直接変更できないようにしたい場合に便利です。
+
+```ts
+@Injectable({providedIn: 'root'})
+export class CounterState {
+  // プライベートな書き込み可能な状態
+  private readonly _count = signal(0);
+
+  readonly count = this._count.asReadonly(); // パブリックな読み取り専用
+
+  increment() {
+    this._count.update((v) => v + 1);
+  }
+}
+
+@Component({
+  /* ... */
+})
+export class AwesomeCounter {
+  state = inject(CounterState);
+
+  count = this.state.count; // 読み取りはできるが変更はできない
+
+  increment() {
+    this.state.increment();
+  }
+}
+```
+
+読み取り専用のシグナルは、元の書き込み可能なシグナルへの変更を反映しますが、`set()`または`update()`メソッドを使用して変更できません。
+
+IMPORTANT: 読み取り専用のシグナルには、その値の深い変更を防ぐ組み込みのメカニズムは**ありません**。
 
 ### 算出シグナル
 
@@ -89,6 +124,68 @@ const conditionalCount = computed(() => {
 
 依存関係は、派生中に追加されるだけでなく、削除されることもできます。後で`showCount`を再び偽に設定すると、`count`は`conditionalCount`の依存関係として扱われなくなります。
 
+## リアクティブコンテキスト
+
+**リアクティブコンテキスト**は、Angularがシグナルの読み取りを監視して依存関係を確立する実行時の状態です。シグナルを読み取るコードは_コンシューマー_であり、読み取られるシグナルは_プロデューサー_です。
+
+Angularは次の場合に自動的にリアクティブコンテキストに入ります:
+
+- `effect`、`afterRenderEffect`のコールバックを実行する
+- `computed`シグナルを評価する
+- `linkedSignal`を評価する
+- `resource`のparamsまたはloader関数を評価する
+- コンポーネントテンプレートをレンダリングする([ホストプロパティ](guide/components/host-elements#binding-to-the-host-element)のバインディングを含む)
+
+これらの操作中、Angularは_ライブ_接続を作成します。追跡されたシグナルが変更されると、Angularは_最終的に_コンシューマーを再実行します。
+
+### リアクティブコンテキストをアサートする
+
+Angularは、コードがリアクティブコンテキスト内で実行されていないことをアサートするための`assertNotInReactiveContext`ヘルパー関数を提供します。呼び出し元の関数への参照を渡すことで、アサーションが失敗した場合、エラーメッセージが正しいAPIエントリポイントを指すようにします。これにより、一般的なリアクティブコンテキストエラーよりも明確でアクションにつながるエラーメッセージが生成されます。
+
+```ts
+import {assertNotInReactiveContext} from '@angular/core';
+
+function subscribeToEvents() {
+  assertNotInReactiveContext(subscribeToEvents);
+  // 安全に続行 - サブスクリプションロジックをここに
+}
+```
+
+### 依存関係を追跡せずに読み取る
+
+まれに、`computed`や`effect`などのリアクティブ関数内でシグナルを読み取るコードを実行する必要があり、依存関係を作成しない場合があります。
+
+たとえば、`currentUser`が変更されたときに、`counter`の値をログに記録する必要があるとします。両方のシグナルを読み取る`effect`を作成できます。
+
+```ts
+effect(() => {
+  console.log(`User set to ${currentUser()} and the counter is ${counter()}`);
+});
+```
+
+この例では、`currentUser`または`counter`のいずれかが変更されると、メッセージがログに記録されます。しかし、`currentUser`のみが変更されたときにエフェクトを実行する必要がある場合、`counter`の読み取りは単なる付随的なものであり、`counter`が変更されても新しいメッセージはログに記録されるべきではありません。
+
+シグナルのゲッターを`untracked`で呼び出すことで、シグナルの読み取りが追跡されないようにできます。
+
+```ts
+effect(() => {
+  console.log(`User set to ${currentUser()} and the counter is ${untracked(counter)}`);
+});
+```
+
+`untracked`は、エフェクトが、依存関係として扱われない外部のコードを呼び出す必要がある場合にも役立ちます。
+
+```ts
+effect(() => {
+  const user = currentUser();
+  untracked(() => {
+    // `loggingService`がSignalを読み取っても、
+    // このEffectの依存関係として扱われません。
+    this.loggingService.log(`User set to ${user}`);
+  });
+});
+```
+
 ## 高度な派生 {#advanced-derivations}
 
 `computed`はシンプルな読み取り専用の派生を処理しますが、他のシグナルに依存する書き込み可能な状態が必要な場合があります。
@@ -98,7 +195,7 @@ const conditionalCount = computed(() => {
 
 ## 非リアクティブAPIでの副作用の実行 {#executing-side-effects-on-non-reactive-apis}
 
-状態の変更に反応したい場合、同期または非同期の派生が推奨されます。しかし、これがすべてのユースケースをカバーするわけではなく、非リアクティブAPIでシグナルの変更に反応する必要がある状況に遭遇することがあります。これらの特定のユースケースには、`effect`または`afterRenderEffect`を使用してください。詳細については、[非リアクティブAPIの副作用](/guide/effect)ガイドを参照してください。
+状態の変更に反応したい場合、同期または非同期の派生が推奨されます。しかし、これがすべての可能なユースケースをカバーするわけではなく、非リアクティブAPIでシグナルの変更に反応する必要がある状況に遭遇することがあります。これらの特定のユースケースには、`effect`または`afterRenderEffect`を使用してください。詳細については、[非リアクティブAPIの副作用](/guide/signals/effect)ガイドを参照してください。
 
 ## `OnPush`コンポーネントでのシグナルの読み取り {#reading-signals-in-onpush-components}
 
@@ -146,41 +243,6 @@ const doubled = computed(() => count() * 2);
 
 isWritableSignal(count); // true
 isWritableSignal(doubled); // false
-```
-
-### 依存関係を追跡せずに読み取る {#reading-without-tracking-dependencies}
-
-まれに、`computed`や`effect`などのリアクティブ関数内でシグナルを読み取るコードを実行する必要があり、依存関係を作成しない場合があります。
-
-たとえば、`currentUser`が変更されたときに、`counter`の値をログに記録する必要があるとします。両方のシグナルを読み取る`effect`を作成できます。
-
-```ts
-effect(() => {
-  console.log(`User set to ${currentUser()} and the counter is ${counter()}`);
-});
-```
-
-この例では、`currentUser`または`counter`のいずれかが変更されると、メッセージがログに記録されます。しかし、`currentUser`のみが変更されたときにエフェクトを実行する必要がある場合、`counter`の読み取りは単なる付随的なものであり、`counter`が変更されても新しいメッセージはログに記録されるべきではありません。
-
-シグナルのゲッターを`untracked`で呼び出すことで、シグナルの読み取りが追跡されないようにできます。
-
-```ts
-effect(() => {
-  console.log(`User set to ${currentUser()} and the counter is ${untracked(counter)}`);
-});
-```
-
-`untracked`は、エフェクトが、依存関係として扱われない外部のコードを呼び出す必要がある場合にも役立ちます。
-
-```ts
-effect(() => {
-  const user = currentUser();
-  untracked(() => {
-    // `loggingService`がSignalを読み取っても、
-    // このEffectの依存関係として扱われません。
-    this.loggingService.log(`User set to ${user}`);
-  });
-});
 ```
 
 ## RxJSとシグナルを併用する

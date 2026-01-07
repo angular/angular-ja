@@ -39,9 +39,7 @@ _Angular elements_ はAngularコンポーネントを _カスタム要素_（Web
 設定したクラスをブラウザのカスタム要素レジストリに登録した後、新しい要素を、DOMに直接追加するコンテンツ内で組み込みのHTML要素と同じように使用します。
 
 ```html
-
 <my-popup message="Use Angular!"></my-popup>
-
 ```
 
 カスタム要素がページに配置されると、ブラウザは登録されたクラスのインスタンスを作成し、それをDOMに追加します。
@@ -121,21 +119,19 @@ Angularで作成されたカスタム要素は`NgElement`（これはさらに`H
 ```ts
 @Component(/* ... */)
 class MyDialog {
-  content =  input(string);
+  content = input(string);
 }
-
 ```
 
 正確な型定義を取得する最も簡単な方法は、関連するDOMメソッドの戻り値を正しい型にキャストすることです。
 そのためには、`NgElement`および`WithProperties`型（両方とも`@angular/elements`からエクスポートされています）を使用します。
 
 ```ts
-
-const aDialog = document.createElement('my-dialog') as NgElement & WithProperties<{content: string}>;
+const aDialog = document.createElement('my-dialog') as NgElement &
+  WithProperties<{content: string}>;
 aDialog.content = 'Hello, world!';
 aDialog.content = 123; // <-- ERROR: TypeScript knows this should be a string.
 aDialog.body = 'News'; // <-- ERROR: TypeScript knows there is no `body` property on `aDialog`.
-
 ```
 
 これは、カスタム要素に対して型チェックやオートコンプリートサポートなどのTypeScript機能を素早く利用するための良い方法です。
@@ -158,12 +154,10 @@ declare global {
 これで、TypeScriptは組み込み要素と同じように正しい型を推論できます。
 
 ```ts
-
-document.createElement('div')               //--> HTMLDivElement (built-in element)
-document.querySelector('foo')               //--> Element        (unknown element)
-document.createElement('my-dialog')         //--> NgElement & WithProperties<{content: string}> (custom element)
-document.querySelector('my-other-element')  //--> NgElement & WithProperties<{foo: 'bar'}>      (custom element)
-
+document.createElement('div'); //--> HTMLDivElement (built-in element)
+document.querySelector('foo'); //--> Element        (unknown element)
+document.createElement('my-dialog'); //--> NgElement & WithProperties<{content: string}> (custom element)
+document.querySelector('my-other-element'); //--> NgElement & WithProperties<{foo: 'bar'}>      (custom element)
 ```
 
 ## 制限事項 {#limitations}

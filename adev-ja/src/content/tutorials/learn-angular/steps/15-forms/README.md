@@ -31,7 +31,7 @@ NOTE: 詳しくは、[Angularのフォームに関する詳細ガイド](/guide/
 
 `@angular/forms`から`FormsModule`をインポートし、`User`の`imports`配列に追加します。
 
-```ts {highlight:[2,7]}
+```ts {highlight:[2,6]}
 import {Component} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 

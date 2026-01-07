@@ -50,8 +50,8 @@ export class Registration {
 最も一般的に使用されるシグナルは`value()`です。これはフィールドの現在の値へのアクセスを提供する[書き込み可能なシグナル](guide/forms/signals/models#updating-models)です:
 
 ```ts
-const emailValue = registrationForm.email().value()
-console.log(emailValue) // Current email string
+const emailValue = registrationForm.email().value();
+console.log(emailValue); // Current email string
 ```
 
 `value()`に加えて、フィールドの状態には、バリデーション、インタラクションの追跡、および可用性の制御のためのシグナルが含まれています:
@@ -410,18 +410,18 @@ export class Login {
 const userModel = signal({
   profile: {
     firstName: '',
-    lastName: ''
+    lastName: '',
   },
   address: {
     street: '',
-    city: ''
-  }
-})
+    city: '',
+  },
+});
 
-const userForm = form(userModel)
+const userForm = form(userModel);
 
 // firstNameが無効な場合、profileも無効になります
-userForm.profile.firstName().invalid() === true
+userForm.profile.firstName().invalid() === true;
 // → userForm.profile().invalid() === true
 // → userForm().invalid() === true
 ```
@@ -434,12 +434,12 @@ userForm.profile.firstName().invalid() === true
 const orderModel = signal({
   customerName: '',
   requiresShipping: false,
-  shippingAddress: ''
-})
+  shippingAddress: '',
+});
 
-const orderForm = form(orderModel, schemaPath => {
-  hidden(schemaPath.shippingAddress, ({valueOf}) => !valueOf(schemaPath.requiresShipping))
-})
+const orderForm = form(orderModel, (schemaPath) => {
+  hidden(schemaPath.shippingAddress, ({valueOf}) => !valueOf(schemaPath.requiresShipping));
+});
 ```
 
 この例では、`shippingAddress`が非表示の場合、フォームの有効性には影響しません。その結果、`shippingAddress`が空で必須であっても、フォームは有効になり得ます。
@@ -535,26 +535,26 @@ export class Registration {
   registrationModel = signal({
     username: '',
     email: '',
-    password: ''
-  })
+    password: '',
+  });
 
-  registrationForm = form(this.registrationModel)
+  registrationForm = form(this.registrationModel);
 
   async onSubmit() {
     // Wait for any pending async validation
     if (this.registrationForm().pending()) {
-      console.log('Waiting for validation...')
-      return
+      console.log('Waiting for validation...');
+      return;
     }
 
     // Guard against invalid submissions
     if (this.registrationForm().invalid()) {
-      console.error('Form is invalid')
-      return
+      console.error('Form is invalid');
+      return;
     }
 
-    const data = this.registrationModel()
-    await this.api.register(data)
+    const data = this.registrationModel();
+    await this.api.register(data);
   }
 }
 ```
@@ -567,24 +567,24 @@ export class Registration {
 
 ```ts
 export class Password {
-  passwordModel = signal({ password: '', confirmPassword: '' })
-  passwordForm = form(this.passwordModel)
+  passwordModel = signal({password: '', confirmPassword: ''});
+  passwordForm = form(this.passwordModel);
 
   // Compute password strength indicator
   passwordStrength = computed(() => {
-    const password = this.passwordForm.password().value()
-    if (password.length < 8) return 'weak'
-    if (password.length < 12) return 'medium'
-    return 'strong'
-  })
+    const password = this.passwordForm.password().value();
+    if (password.length < 8) return 'weak';
+    if (password.length < 12) return 'medium';
+    return 'strong';
+  });
 
   // Check if all required fields are filled
   allFieldsFilled = computed(() => {
     return (
       this.passwordForm.password().value().length > 0 &&
       this.passwordForm.confirmPassword().value().length > 0
-    )
-  })
+    );
+  });
 }
 ```
 
@@ -597,22 +597,22 @@ export class Password {
 ユーザーがフォームを送信するときは、`submit()`関数を使用してバリデーションを処理し、エラーを表示します:
 
 ```ts
-import { Component, signal } from '@angular/core'
-import { form, submit, required, email } from '@angular/forms/signals'
+import {Component, signal} from '@angular/core';
+import {form, submit, required, email} from '@angular/forms/signals';
 
 export class Registration {
-  registrationModel = signal({ username: '', email: '', password: '' })
+  registrationModel = signal({username: '', email: '', password: ''});
 
-  registrationForm = form(this.registrationModel, schemaPath => {
-    required(schemaPath.username)
-    email(schemaPath.email)
-    required(schemaPath.password)
-  })
+  registrationForm = form(this.registrationModel, (schemaPath) => {
+    required(schemaPath.username);
+    email(schemaPath.email);
+    required(schemaPath.password);
+  });
 
   onSubmit() {
     submit(this.registrationForm, async () => {
-      this.submitToServer()
-    })
+      this.submitToServer();
+    });
   }
 
   submitToServer() {
@@ -629,19 +629,19 @@ export class Registration {
 
 ```ts
 export class Contact {
-  contactModel = signal({ name: '', email: '', message: '' })
-  contactForm = form(this.contactModel)
+  contactModel = signal({name: '', email: '', message: ''});
+  contactForm = form(this.contactModel);
 
   async onSubmit() {
-    if (!this.contactForm().valid()) return
+    if (!this.contactForm().valid()) return;
 
-    await this.api.sendMessage(this.contactModel())
+    await this.api.sendMessage(this.contactModel());
 
     // Clear interaction state (touched, dirty)
-    this.contactForm().reset()
+    this.contactForm().reset();
 
     // Clear values
-    this.contactModel.set({ name: '', email: '', message: '' })
+    this.contactModel.set({name: '', email: '', message: ''});
   }
 }
 ```

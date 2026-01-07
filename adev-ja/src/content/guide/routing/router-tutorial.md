@@ -113,14 +113,14 @@ ng serve
 1. 次のインポートステートメントを追加します。
 
    ```ts
-   import { provideRouter } from '@angular/router';
-   import { routes } from './app.routes';
+   import {provideRouter} from '@angular/router';
+   import {routes} from './app.routes';
    ```
 
 1. `appConfig`のプロバイダーを更新します。
 
    ```ts
-   providers: [provideRouter(routes)]
+   providers: [provideRouter(routes)];
    ```
 
 `NgModule`ベースのアプリケーションの場合、`provideRouter`は`AppModule`の`providers`リスト、またはアプリケーションで`bootstrapModule`に渡されるモジュールに配置します。

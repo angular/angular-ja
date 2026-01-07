@@ -58,7 +58,6 @@ Next, add a `.postcssrc.json` file in the file root of the project.
 Add the `@tailwindcss/postcss` plugin into your PostCSS configuration.
 
 ```json {header: '.postcssrc.json'}
-
 {
   "plugins": {
     "@tailwindcss/postcss": {}
@@ -70,15 +69,15 @@ Add the `@tailwindcss/postcss` plugin into your PostCSS configuration.
 
 Add an `@import` to `./src/styles.css` that imports Tailwind CSS.
 
-<docs-code language="css" header="src/styles.css">
-@import "tailwindcss";
-</docs-code>
+```css {header: "src/styles.css"}
+@import 'tailwindcss';
+```
 
 If you're using SCSS, add `@use` to `./src/styles.scss`.
 
-<docs-code language="scss" header="src/styles.scss">
-@use "tailwindcss";
-</docs-code>
+```scss {header: "src/styles.scss"}
+@use 'tailwindcss';
+```
 
 ### 5. Start using Tailwind in your project
 
@@ -87,9 +86,7 @@ You can now start using Tailwind's utility classes in your component templates t
 For example, you can add the following to your `app.html` file:
 
 ```html
-<h1 class="text-3xl font-bold underline">
-  Hello world!
-</h1>
+<h1 class="text-3xl font-bold underline">Hello world!</h1>
 ```
 
 ## Additional Resources

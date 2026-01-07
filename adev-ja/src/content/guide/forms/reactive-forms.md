@@ -437,7 +437,7 @@ export class FormArrayExampleComponent {
 すべてのイベントクラスは `ControlEvent` を拡張し、変更を発生させた `AbstractControl` への `source` 参照が含まれます。これは大規模なフォームで便利です。
 
 ```ts
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {
   FormControl,
   ValueChangeEvent,
@@ -450,7 +450,9 @@ import {
   FormGroup,
 } from '@angular/forms';
 
-@Component({/* ... */ })
+@Component({
+  /* ... */
+})
 export class UnifiedEventsBasicComponent {
   form = new FormGroup({
     username: new FormControl(''),
@@ -491,8 +493,8 @@ export class UnifiedEventsBasicComponent {
 イベントタイプのサブセットのみが必要な場合は、RxJS演算子を使用します。
 
 ```ts
-import { filter } from 'rxjs/operators';
-import { StatusChangeEvent } from '@angular/forms';
+import {filter} from 'rxjs/operators';
+import {StatusChangeEvent} from '@angular/forms';
 
 control.events
   .pipe(filter((e) => e instanceof StatusChangeEvent))
@@ -504,10 +506,11 @@ control.events
 **Before**
 
 ```ts
-import { combineLatest } from 'rxjs/operators';
+import {combineLatest} from 'rxjs/operators';
 
-combineLatest([control.valueChanges, control.statusChanges])
-  .subscribe(([value, status]) => { /* ... */ });
+combineLatest([control.valueChanges, control.statusChanges]).subscribe(([value, status]) => {
+  /* ... */
+});
 ```
 
 **After**
@@ -519,6 +522,123 @@ control.events.subscribe((e) => {
 ```
 
 NOTE: 値の変更時、このコントロールの値が更新された直後に発行が発生します。親コントロールの値（たとえば、このFormControlがFormGroupの一部である場合）は後で更新されるため、このイベントのコールバックから親コントロールの値（`value` プロパティを使用）にアクセスすると、まだ更新されていない値を取得する可能性があります。代わりに親コントロールの `events` をサブスクライブしてください。
+
+## フォームコントロール状態の管理
+
+リアクティブフォームは、**touched/untouched** と **pristine/dirty** を通じてコントロールの状態を追跡します。AngularはDOM操作中にこれらを自動的に更新しますが、プログラムで管理もできます。
+
+**[`markAsTouched`](api/forms/FormControl#markAsTouched)** — フォーカスとブラーイベントによってコントロールまたはフォームをtouchedとしてマークし、値は変更されません。デフォルトで親コントロールに伝播します。
+
+```ts
+// ユーザーがフィールドから離れた後に検証エラーを表示
+onEmailBlur() {
+  const email = this.form.get('email');
+  email.markAsTouched();
+}
+```
+
+**[`markAsUntouched`](api/forms/FormControl#markAsUntouched)** — コントロールまたはフォームをuntouchedとしてマークします。すべての子コントロールにカスケードし、すべての親コントロールのtouchedステータスを再計算します。
+
+```ts
+// 正常な送信後にフォーム状態をリセット
+onSubmitSuccess() {
+  this.form.markAsUntouched();
+  this.form.markAsPristine();
+}
+```
+
+**[`markAsDirty`](api/forms/FormControl#markAsDirty)** — コントロールまたはフォームをdirty（値が変更された）としてマークします。デフォルトで親コントロールに伝播します。
+
+```ts
+// プログラムで変更された値を変更済みとしてマーク
+autofillAddress() {
+  const previousAddress = getAddress();
+  this.form.patchValue(previousAddress, { emitEvent: false });
+  this.form.markAsDirty();
+}
+```
+
+**[`markAsPristine`](api/forms/FormControl#markAsPristine)** — コントロールまたはフォームをpristineとしてマークします。すべての子コントロールをpristineとしてマークし、すべての親コントロールのpristineステータスを再計算します。
+
+```ts
+// 保存後にpristine状態をリセットして新しい変更を追跡
+saveForm() {
+  this.api.save(this.form.value).subscribe(() => {
+    this.form.markAsPristine();
+  });
+}
+```
+
+**[`markAllAsDirty`](api/forms/FormControl#markAllAsDirty)** — コントロールまたはフォームと、そのすべての子孫コントロールをdirtyとしてマークします。
+
+```ts
+// インポートされたデータをdirtyとしてマーク
+loadData(data: FormData) {
+  this.form.patchValue(data);
+  this.form.markAllAsDirty();
+}
+```
+
+**[`markAllAsTouched`](api/forms/FormControl#markAllAsTouched)** — コントロールまたはフォームと、そのすべての子孫コントロールをtouchedとしてマークします。フォーム全体に検証エラーを表示するのに便利です。
+
+```ts
+// 送信前にすべての検証エラーを表示
+onSubmit() {
+  if (this.form.invalid) {
+    this.form.markAllAsTouched();
+    return;
+  }
+  this.saveForm();
+}
+```
+
+## イベント発行と伝播の制御
+
+フォームコントロールをプログラムで更新する場合、フォーム階層を通じて変更を伝播する方法と、イベントを発行するかどうかを正確に制御できます。
+
+### イベント発行の理解
+
+デフォルトで `emitEvent: true` の場合、コントロールへの変更は `valueChanges` と `statusChanges` Observableを通じてイベントを発行します。`emitEvent: false` を設定すると、これらの発行が抑制されます。これは、自動保存のようなリアクティブな動作をトリガーせずにプログラムで値を設定する場合、コントロール間の循環更新を回避する場合、またはイベントが最後に一度だけ発行されるべき一括更新を実行する場合に便利です。
+
+```ts
+@Component({/* ... */})
+export class BlogPostEditor {
+  postForm = new FormGroup({
+    title: new FormControl(''),
+    content: new FormControl(''),
+  });
+
+  constructor() {
+    // ユーザーが入力するたびに下書きを自動保存
+    this.postForm.valueChanges.subscribe(formValue => {
+      this.autosaveDraft(formValue);
+    });
+  }
+
+  loadExistingDraft(savedDraft: {title: string; content: string}) {
+    // 自動保存をトリガーせずに下書きを復元
+    this.postForm.setValue(savedDraft, { emitEvent: false });
+  }
+
+}
+```
+
+### 伝播制御の理解
+
+デフォルトで `onlySelf: false` の場合、更新は親コントロールにカスケードし、値と検証ステータスを再計算します。`onlySelf: true` を設定すると、更新が現在のコントロールに分離され、親への通知が防止されます。これは、親の更新を一度だけ手動でトリガーしたいバッチ操作に便利です。
+
+```ts
+updatePostalCodeValidator(country: string) {
+  const postal = this.addressForm.get('postalCode');
+
+  const validators = country === 'US'
+    ? [Validators.maxLength(5)]
+    : [Validators.maxLength(7)];
+
+  postal.setValidators(validators);
+  postal.updateValueAndValidity({ onlySelf: true, emitEvent: false });
+}
+```
 
 ## フォームコントロールタイプを絞り込むユーティリティ関数 {#utility-functions-for-narrowing-form-control-types}
 
@@ -534,16 +654,16 @@ Angularは、`AbstractControl` の具体的な型を判定するのに役立つ4
 これらのヘルパーは、関数シグネチャが `AbstractControl` を受け取りますが、ロジックが特定のコントロールの種類を対象としている **カスタムバリデーター** で特に便利です。
 
 ```ts
-import { AbstractControl, isFormArray } from '@angular/forms';
+import {AbstractControl, isFormArray} from '@angular/forms';
 
 export function positiveValues(control: AbstractControl) {
-    if (!isFormArray(control)) {
-        return null; // Not a FormArray: validator is not applicable.
-    }
+  if (!isFormArray(control)) {
+    return null; // Not a FormArray: validator is not applicable.
+  }
 
-    // Safe to access FormArray-specific API after narrowing.
-    const hasNegative = control.controls.some(c => c.value < 0);
-    return hasNegative ? { positiveValues: true } : null;
+  // Safe to access FormArray-specific API after narrowing.
+  const hasNegative = control.controls.some((c) => c.value < 0);
+  return hasNegative ? {positiveValues: true} : null;
 }
 ```
 

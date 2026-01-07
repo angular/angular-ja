@@ -18,7 +18,7 @@
 <docs-step title="emailフィールドのエラー表示を追加">
 email入力の下に、条件付きエラー表示を追加します。これは、フィールドが無効でタッチ済みの両方である場合にのみエラーを表示します:
 
-```html
+```angular-html
 <label>
   Email
   <input type="email" [field]="loginForm.email" />
@@ -38,7 +38,7 @@ email入力の下に、条件付きエラー表示を追加します。これは
 <docs-step title="passwordフィールドのエラー表示を追加">
 password入力の下に、passwordエラーの同じパターンを追加します:
 
-```html
+```angular-html
 <label>
   Password
   <input type="password" [field]="loginForm.password" />

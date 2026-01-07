@@ -22,7 +22,7 @@ NOTE: シグナルフォームはAngular v21の時点では[experimental](refere
 違いを理解する最善の方法は、3つのアプローチすべてで実装された同じフォームを見ることです。
 
 <docs-code-multifile>
-  <docs-code header="シグナルフォーム" path="adev/src/content/examples/signal-forms/src/comparison/app/signal-forms.ts"/>
+  <docs-code language="angular-ts" header="シグナルフォーム" path="adev/src/content/examples/signal-forms/src/comparison/app/signal-forms.ts"/>
   <docs-code header="リアクティブフォーム" path="adev/src/content/examples/signal-forms/src/comparison/app/reactive-forms.ts"/>
   <docs-code header="テンプレート駆動フォーム" path="adev/src/content/examples/signal-forms/src/comparison/app/template-driven-forms.ts"/>
 </docs-code-multifile>
@@ -54,7 +54,7 @@ const credentials = this.loginForm.value; // { email: '...', password: '...' }
 テンプレート駆動フォームは、コンポーネントのプロパティにデータを保存します。値に直接アクセスします。
 
 ```ts
-const credentials = { email: this.email, password: this.password };
+const credentials = {email: this.email, password: this.password};
 ```
 
 これは最も直接的なアプローチですが、値が必要なときに手動で組み立てる必要があります。Angularは、テンプレート内のディレクティブを通じてフォームの状態を管理します。
@@ -67,8 +67,8 @@ const credentials = { email: this.email, password: this.password };
 
 ```ts
 loginForm = form(this.loginModel, (fieldPath) => {
-  required(fieldPath.email, { message: 'Email is required' });
-  email(fieldPath.email, { message: 'Enter a valid email address' });
+  required(fieldPath.email, {message: 'Email is required'});
+  email(fieldPath.email, {message: 'Enter a valid email address'});
 });
 ```
 
@@ -78,7 +78,7 @@ Reactive Formsは、コントロールを作成するときにバリデーター
 
 ```ts
 loginForm = new FormGroup({
-  email: new FormControl('', [Validators.required, Validators.email])
+  email: new FormControl('', [Validators.required, Validators.email]),
 });
 ```
 
@@ -99,7 +99,7 @@ TypeScriptの統合はアプローチによって大きく異なり、コンパ�
 シグナルフォームは、モデル構造から型を推論します。
 
 ```ts
-const loginModel = signal({ email: '', password: '' });
+const loginModel = signal({email: '', password: ''});
 const loginForm = form(loginModel);
 // TypeScript knows: loginForm.email exists and returns FieldState<string>
 ```
@@ -111,7 +111,7 @@ Reactive Formsは、型付きフォームで明示的な型アノテーション
 ```ts
 const loginForm = new FormGroup({
   email: new FormControl<string>(''),
-  password: new FormControl<string>('')
+  password: new FormControl<string>(''),
 });
 // TypeScript knows: loginForm.controls.email is FormControl<string>
 ```

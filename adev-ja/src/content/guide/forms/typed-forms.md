@@ -86,7 +86,7 @@ email.setValue('angularrox@gmail.com'); // エラー！
 これを防ぐために、型を `string|null` として明示的に指定します。
 
 ```ts
-const email = new FormControl<string|null>(null);
+const email = new FormControl<string | null>(null);
 email.setValue('angularrox@gmail.com');
 ```
 
@@ -128,8 +128,8 @@ Angularは、列挙されたキーセットを持つフォームに `FormGroup` 
 
 ```ts
 const login = new FormGroup({
-    email: new FormControl('', {nonNullable: true}),
-    password: new FormControl('', {nonNullable: true}),
+  email: new FormControl('', {nonNullable: true}),
+  password: new FormControl('', {nonNullable: true}),
 });
 ```
 
@@ -166,7 +166,7 @@ login.removeControl('password');
 一部の `FormGroup` の使用方法は、上記の例に当てはまりません。なぜなら、キーが事前にわからないからです。`FormRecord` クラスは、そのケース用に設計されています。
 
 ```ts
-const addresses = new FormRecord<FormControl<string|null>>({});
+const addresses = new FormRecord<FormControl<string | null>>({});
 addresses.addControl('Andrew', new FormControl('2340 Folsom St'));
 ```
 

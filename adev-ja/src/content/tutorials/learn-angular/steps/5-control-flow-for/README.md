@@ -37,7 +37,13 @@ export class App {
 `App` クラスで、ユーザーとその名前を含む `users` というプロパティを追加します。
 
 ```ts
-[{id: 0, name: 'Sarah'}, {id: 1, name: 'Amy'}, {id: 2, name: 'Rachel'}, {id: 3, name: 'Jessica'}, {id: 4, name: 'Poornima'}]
+[
+  {id: 0, name: 'Sarah'},
+  {id: 1, name: 'Amy'},
+  {id: 2, name: 'Rachel'},
+  {id: 3, name: 'Jessica'},
+  {id: 4, name: 'Poornima'},
+];
 ```
 
 </docs-step>

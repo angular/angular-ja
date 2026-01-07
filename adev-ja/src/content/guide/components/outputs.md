@@ -5,7 +5,9 @@ TIP: このガイドは、[基本概念のガイド](essentials) を既読して
 Angularコンポーネントは、`output`関数にプロパティを割り当てることでカスタムイベントを定義できます。
 
 ```ts {highlight:[3]}
-@Component({/*...*/})
+@Component({
+  /*...*/
+})
 export class ExpandablePanel {
   panelClosed = output<void>();
 }
@@ -18,7 +20,7 @@ export class ExpandablePanel {
 `output`関数は`OutputEmitterRef`を返します。`OutputEmitterRef`の`emit`メソッドを呼び出すことで、イベントを発生させることができます。
 
 ```ts
-  this.panelClosed.emit();
+this.panelClosed.emit();
 ```
 
 Angularでは、`output`関数で初期化されたプロパティを**出力**と呼びます。出力を使用すると、`click`などのネイティブブラウザイベントと同様に、カスタムイベントを発生させることができます。
@@ -43,7 +45,7 @@ this.valueChanged.emit(7);
 this.thumbDropped.emit({
   pointerX: 123,
   pointerY: 456,
-})
+});
 ```
 
 テンプレートでイベントリスナーを定義する場合、`$event`変数からイベントデータにアクセスできます。
@@ -71,7 +73,9 @@ export class App {
 `output`関数は、テンプレートでイベントに異なる名前を指定できるパラメーターを受け入れます。
 
 ```ts
-@Component({/*...*/})
+@Component({
+  /*...*/
+})
 export class CustomSlider {
   changed = output({alias: 'valueChanged'});
 }
@@ -93,7 +97,7 @@ export class CustomSlider {
 ```ts
 const someComponentRef: ComponentRef<SomeComponent> = viewContainerRef.createComponent(/*...*/);
 
-someComponentRef.instance.someEventProperty.subscribe(eventData => {
+someComponentRef.instance.someEventProperty.subscribe((eventData) => {
   console.log(eventData);
 });
 ```
@@ -101,7 +105,7 @@ someComponentRef.instance.someEventProperty.subscribe(eventData => {
 Angularは、サブスクライバーを持つコンポーネントを破棄するときに、イベントサブスクリプションを自動的にクリーンアップします。または、イベントから手動で購読解除できます。`subscribe`関数は、`unsubscribe`メソッドを持つ`OutputRefSubscription`を返します。
 
 ```ts
-const eventSubscription = someComponent.someEventProperty.subscribe(eventData => {
+const eventSubscription = someComponent.someEventProperty.subscribe((eventData) => {
   console.log(eventData);
 });
 
@@ -130,7 +134,9 @@ TIP: Angularチームは新規プロジェクトでは`output`関数の使用を
 代替として、新しい`EventEmitter`にプロパティを割り当て、`@Output`デコレーターを追加することで、カスタムイベントを定義できます。
 
 ```ts
-@Component({/*...*/})
+@Component({
+  /*...*/
+})
 export class ExpandablePanel {
   @Output() panelClosed = new EventEmitter<void>();
 }
@@ -143,7 +149,9 @@ export class ExpandablePanel {
 `@Output`デコレーターは、テンプレートでイベントに異なる名前を指定できるパラメーターを受け入れます。
 
 ```ts
-@Component({/*...*/})
+@Component({
+  /*...*/
+})
 export class CustomSlider {
   @Output('valueChanged') changed = new EventEmitter<number>();
 }

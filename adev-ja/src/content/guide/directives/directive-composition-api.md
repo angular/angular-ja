@@ -20,7 +20,7 @@ Angularディレクティブは、再利用可能な動作をカプセル化す�
   template: 'admin-menu.html',
   hostDirectives: [MenuBehavior],
 })
-export class AdminMenu { }
+export class AdminMenu {}
 ```
 
 フレームワークがコンポーネントをレンダリングすると、Angularは各ホストディレクティブのインスタンスも作成します。
@@ -45,13 +45,15 @@ export class AdminMenu { }
 @Component({
   selector: 'admin-menu',
   template: 'admin-menu.html',
-  hostDirectives: [{
-    directive: MenuBehavior,
-    inputs: ['menuId'],
-    outputs: ['menuClosed'],
-  }],
+  hostDirectives: [
+    {
+      directive: MenuBehavior,
+      inputs: ['menuId'],
+      outputs: ['menuClosed'],
+    },
+  ],
 })
-export class AdminMenu { }
+export class AdminMenu {}
 ```
 
 入力と出力を明示的に指定することで、`hostDirective` を持つコンポーネントのコンシューマーは
@@ -69,13 +71,15 @@ export class AdminMenu { }
 @Component({
   selector: 'admin-menu',
   template: 'admin-menu.html',
-  hostDirectives: [{
-    directive: MenuBehavior,
-    inputs: ['menuId: id'],
-    outputs: ['menuClosed: closed'],
-  }],
+  hostDirectives: [
+    {
+      directive: MenuBehavior,
+      inputs: ['menuId: id'],
+      outputs: ['menuClosed: closed'],
+    },
+  ],
 })
-export class AdminMenu { }
+export class AdminMenu {}
 ```
 
 ```angular-html
@@ -131,7 +135,7 @@ export class SpecializedMenuWithTooltip { }
   template: 'admin-menu.html',
   hostDirectives: [MenuBehavior],
 })
-export class AdminMenu { }
+export class AdminMenu {}
 ```
 
 ここでの実行順序は次のとおりです。

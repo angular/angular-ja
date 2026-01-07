@@ -37,10 +37,9 @@ export class GlobalErrorHandler implements ErrorHandler {
       description: `Screen: ${url} | ${errorMessage}`,
     });
 
-    console.error(GlobalErrorHandler.name, { error });
+    console.error(GlobalErrorHandler.name, {error});
   }
 }
-
 ```
 
 ### `TestBed`はデフォルトでエラーを再スローします {#testbed-rethrows-errors-by-default}

@@ -60,7 +60,9 @@ As of Angular v20.2, Zoneless Angular is now stable and includes improvements in
 フォーム、HTTP、ルーターなど、基本的なAngularパッケージとシグナルの統合を改善することに取り組んでいます。このプロジェクトの一環として、包括的な開発者エクスペリエンスを向上させるために、便利なシグナルベースのAPIまたはラッパーを導入する機会を探ります。
 </docs-card>
 <docs-card title="HMR（ホットモジュールリプレースメント）の改善" href="https://github.com/angular/angular/issues/39367#issuecomment-1439537306">
-In Angular v19 we shipped initial support for CSS and template HMR and in v20 we graduated template HMR to stable. We'll continue collecting feedback to make sure we're addressing developers' needs before we mark this project as complete.
+ホットモジュールリプレースメントを有効にすることで、編集/リフレッシュサイクルを高速化することに取り組んでいます。
+
+Angular v19では、CSSとテンプレートのHMRの初期サポートを提供し、v20ではテンプレートのHMRを安定版に卒業させました。このプロジェクトを完了としてマークする前に、開発者のニーズに対応していることを確認するために、フィードバックを収集し続けます。
 </docs-card>
 </docs-card-container>
 
@@ -147,7 +149,7 @@ To make it easier for developers to use modern Angular APIs, we enabled integrat
 As part of this initiative, the language service automatically imports components and pipes in standalone and NgModule-based apps. Additionally, we've added a template diagnostic to highlight unused imports in standalone components, which should help make application bundles smaller.
   </docs-card>
   <docs-card title="Local template variables" link="Completed in Q3 2024">
-We've released the support for local template variables in Angular, see [`@let` docs](https://angular.dev/api/core/@let) for additional information.
+We've released the support for local template variables in Angular, see [`@let` docs](/api/core/@let) for additional information.
   </docs-card>
   <docs-card title="Angular Materialのカスタマイズを拡張する" link="2024年第2四半期に完了" href="https://material.angular.dev/guide/theming">
 Angular Materialコンポーネントのカスタマイズを向上させ、Material 3機能を有効にするために、トークンベースのテーマAPIを定義するためにGoogleのMaterial Designチームと協力しています。
@@ -161,7 +163,7 @@ v17では、遅延コード読み込みのための使い慣れたAPIを提供�
 ページ内に埋め込まれたiframe内のAngularアプリケーションのデバッグとプロファイリングを有効にしました。
   </docs-card>
   <docs-card title="esbuildとviteへの既存のハイブリッドレンダリングプロジェクトの移行の自動化" link="2024年第2四半期に完了" href="tools/cli/build-system-migration">
-v17では、viteとesbuildベースのアプリケーションビルダーを提供し、新しいプロジェクトでデフォルトで有効にしました。これは、ハイブリッドレンダリングを使用するプロジェクトのビルド時間を最大87％向上させます。v18の一環として、ハイブリッドレンダリングを使用する既存のプロジェクトを新しいビルドパイプラインに移行するシェーマティックとガイドを提供しました。NgModuleは当面の間残りますが、新しいAPIの利点を活用して開発者エクスペリエンスを向上させ、構築した新機能を活用することをお勧めします。
+v17では、viteとesbuildベースのアプリケーションビルダーを提供し、新しいプロジェクトでデフォルトで有効にしました。これは、ハイブリッドレンダリングを使用するプロジェクトのビルド時間を最大87％向上させます。v18の一環として、ハイブリッドレンダリングを使用する既存のプロジェクトを新しいビルドパイプラインに移行するシェーマティックとガイドを提供しました。
   </docs-card>
   <docs-card title="Angular.devをAngular開発者の公式のホームにする" link="2024年第2四半期に完了" href="https://goo.gle/angular-dot-dev">
 Angular.devは、Angular開発のための新しいサイト、ドメイン、およびホームです。新しいサイトには、開発者がAngularの最新機能を使用して構築するのに役立つ、更新されたドキュメント、チュートリアル、およびガイダンスが含まれています。
@@ -170,7 +172,7 @@ Angular.devは、Angular開発のための新しいサイト、ドメイン、�
 v17では、新しい制御フローの開発者プレビューバージョンを提供しました。これは、テンプレートオーサリングのパフォーマンスを大幅に向上させ、使いやすさを向上させます。また、既存の`*ngIf`、`*ngFor`、`*ngSwitch`のマイグレーションを提供しており、これを実行してプロジェクトを新しい実装に移行できます。v18以降、組み込みの制御フローは安定しています。
   </docs-card>
   <docs-card title="入門チュートリアルを最新化する" link="2023年第4四半期に完了" href="">
-過去2四半期に、スタンドアロンコンポーネントに基づいた新しい[ビデオ](https://www.youtube.com/watch?v=xAT0lHYhHMY&list=PL1w1q3fL4pmj9k1FrJ3Pe91EPub2_h4jF)と[テキスト](https://angular.dev/tutorials/learn-angular)チュートリアルを開発しました。
+過去2四半期に、スタンドアロンコンポーネントに基づいた新しい[ビデオ](https://www.youtube.com/watch?v=xAT0lHYhHMY&list=PL1w1q3fL4pmj9k1FrJ3Pe91EPub2_h4jF)と[テキスト](/tutorials/learn-angular)チュートリアルを開発しました。
   </docs-card>
   <docs-card title="最新のバンドラーを調査する" link="2023年第4四半期に完了" href="guide/hydration">
 Angular v16では、`ng build`と`ng serve`をサポートするesbuildベースのビルダーの開発者プレビューをリリースしました。`ng serve`開発サーバーはViteとesbuildとAngularコンパイラーによる複数ファイルコンパイルを使用します。v17では、ビルドツールを開発者プレビューから卒業させ、新しいプロジェクトでデフォルトで有効にしました。これは、ハイブリッドレンダリングを使用するプロジェクトのビルド時間を最大87％向上させます。

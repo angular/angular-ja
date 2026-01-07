@@ -31,7 +31,7 @@ import { NgOptimizedImage } from '@angular/common';
 
 To enable the `NgOptimizedImage` directive, swap out the `src` attribute for `ngSrc`. This applies for both static image sources (i.e., `src`) and dynamic image sources (i.e., `[src]`).
 
-```angular-ts {highlight:[[9],[13]]}
+```angular-ts {highlight:[[7],[11]]}
 import { NgOptimizedImage } from '@angular/common';
 
 @Component({
@@ -83,9 +83,7 @@ One of the most important optimizations for loading performance is to prioritize
 `NgOptimizedImage` allows you to specify an [image loader](guide/image-optimization#configuring-an-image-loader-for-ngoptimizedimage), which tells the directive how to format URLs for your images. Using a loader allows you to define your images with short, relative URLs:
 
 ```ts
-providers: [
-  provideImgixLoader('https://my.base.url/'),
-]
+providers: [provideImgixLoader('https://my.base.url/')];
 ```
 
 Final URL will be 'https://my.base.url/image.png'

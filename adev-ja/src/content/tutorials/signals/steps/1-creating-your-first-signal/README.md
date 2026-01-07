@@ -42,7 +42,7 @@ export class App {
 1. `[class]="userStatus()"`を使用してシグナルをclass属性にバインドする
 2. `???`を`{{ userStatus() }}`に置き換えてステータステキストを表示する
 
-```html
+```angular-html
 <!-- Update from: -->
 <div class="status-indicator offline">
   <span class="status-dot"></span>
@@ -83,12 +83,8 @@ goOffline() {
 
 ```html
 <!-- Add bindings to the existing buttons: -->
-<button (click)="goOnline()" [disabled]="userStatus() === 'online'">
-  Go Online
-</button>
-<button (click)="goOffline()" [disabled]="userStatus() === 'offline'">
-  Go Offline
-</button>
+<button (click)="goOnline()" [disabled]="userStatus() === 'online'">Go Online</button>
+<button (click)="goOffline()" [disabled]="userStatus() === 'offline'">Go Offline</button>
 ```
 
 </docs-step>
@@ -110,9 +106,7 @@ toggleStatus() {
 トグルボタンはすでにテンプレートにあります。それを`toggleStatus()`メソッドに接続します。
 
 ```html
-<button (click)="toggleStatus()" class="toggle-btn">
-  Toggle Status
-</button>
+<button (click)="toggleStatus()" class="toggle-btn">Toggle Status</button>
 ```
 
 </docs-step>

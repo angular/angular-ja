@@ -37,10 +37,14 @@ notificationsEnabled = computed(() => this.userStatus() === 'online');
 statusMessage = computed(() => {
   const status = this.userStatus();
   switch (status) {
-    case 'online': return 'Available for meetings and messages';
-    case 'away': return 'Temporarily away, will respond soon';
-    case 'offline': return 'Not available, check back later';
-    default: return 'Status unknown';
+    case 'online':
+      return 'Available for meetings and messages';
+    case 'away':
+      return 'Temporarily away, will respond soon';
+    case 'offline':
+      return 'Not available, check back later';
+    default:
+      return 'Status unknown';
   }
 });
 ```
@@ -66,31 +70,31 @@ isWithinWorkingHours = computed(() => {
 <docs-step title="テンプレートに算出値を表示する">
 テンプレートにはすでに「Loading...」と表示されるプレースホルダーがあります。これらを算出シグナルに置き換えてください。
 
-1. 通知については、`Loading...`を@ifブロックに置き換えます。
+1. 通知については、`Loading...`を`@if`ブロックに置き換えます。
 
-```angular-html
-@if (notificationsEnabled()) {
-  Enabled
-} @else {
-  Disabled
-}
-```
+   ```angular-html
+   @if (notificationsEnabled()) {
+     Enabled
+   } @else {
+     Disabled
+   }
+   ```
 
-2. メッセージについては、`Loading...`を以下に置き換えます。
+1. メッセージについては、`Loading...`を以下に置き換えます。
 
-```angular-html
-{{ statusMessage() }}
-```
+   ```angular-html
+   {{ statusMessage() }}
+   ```
 
-3. 勤務時間については、`Loading...`を@ifブロックに置き換えます。
+1. 勤務時間については、`Loading...`を`@if`ブロックに置き換えます。
 
-```angular-html
-@if (isWithinWorkingHours()) {
-  Yes
-} @else {
-  No
-}
-```
+   ```angular-html
+   @if (isWithinWorkingHours()) {
+     Yes
+   } @else {
+     No
+   }
+   ```
 
 算出シグナルは、通常のシグナルと同様に括弧を付けて呼び出されることに注目してください！
 </docs-step>

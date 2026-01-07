@@ -31,7 +31,7 @@ export class App {
 まず、`@angular/common` から `LowerCasePipe` のファイルレベルのインポートを追加して、`app.ts` を更新します。
 
 ```ts
-import { LowerCasePipe } from '@angular/common';
+import {LowerCasePipe} from '@angular/common';
 ```
 
 </docs-step>

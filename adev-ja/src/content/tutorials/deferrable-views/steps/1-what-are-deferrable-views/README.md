@@ -23,9 +23,9 @@ Angularの_遅延可能ビュー_は`@defer`構文を使用して、すぐに表
 ブラウザの開発者コンソールで、`article-comments-component`の遅延チャンクファイルが個別にロードされていることがわかります（ファイル名は実行ごとに変わる可能性があります）。
 
 ```markdown
-Initial chunk files | Names                      |  Raw size
-chunk-NNSQHFIE.js   | -                          | 769.00 kB |
-main.js             | main                       | 229.25 kB |
+Initial chunk files | Names | Raw size
+chunk-NNSQHFIE.js | - | 769.00 kB |
+main.js | main | 229.25 kB |
 
 Lazy chunk files | Names | Raw size
 chunk-T5UYXUSI.js | article-comments-component | 1.84 kB |

@@ -49,18 +49,10 @@ available = input<boolean>(true);
 
 ```html
 <!-- Change from static values: -->
-<product-card
-  name="Static Product"
-  price="99"
-  available="true"
-/>
+<product-card name="Static Product" price="99" available="true" />
 
 <!-- To dynamic signals: -->
-<product-card
-  [name]="productName()"
-  [price]="productPrice()"
-  [available]="productAvailable()"
-/>
+<product-card [name]="productName()" [price]="productPrice()" [available]="productAvailable()" />
 ```
 
 角括弧`[]`は、現在のシグナル値を子に渡すプロパティバインディングを作成します。

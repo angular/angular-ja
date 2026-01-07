@@ -27,8 +27,8 @@ import {loadUser} from './user-api';
 userId = signal(1);
 
 userResource = resource({
-  params: () => ({ id: this.userId() }),
-  loader: (params) => loadUser(params.params.id)
+  params: () => ({id: this.userId()}),
+  loader: (params) => loadUser(params.params.id),
 });
 ```
 

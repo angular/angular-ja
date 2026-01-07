@@ -19,7 +19,7 @@
 `@angular/forms/signals` から `submit` 関数をインポートします:
 
 ```ts
-import { form, Field, required, email, submit } from '@angular/forms/signals';
+import {form, Field, required, email, submit} from '@angular/forms/signals';
 ```
 
 </docs-step>
@@ -45,7 +45,7 @@ onSubmit(event: Event) {
 テンプレートで、`onSubmit()` メソッドをフォームのsubmitイベントにバインドします:
 
 ```html
-<form (submit)="onSubmit($event)">
+<form (submit)="onSubmit($event)"></form>
 ```
 
 </docs-step>
@@ -54,9 +54,7 @@ onSubmit(event: Event) {
 フォームが無効なときに無効になるように送信ボタンを更新します:
 
 ```html
-<button type="submit" [disabled]="loginForm().invalid()">
-  Log in
-</button>
+<button type="submit" [disabled]="loginForm().invalid()">Log in</button>
 ```
 
 これにより、フォームにバリデーションエラーがあるときの送信を防ぎます。

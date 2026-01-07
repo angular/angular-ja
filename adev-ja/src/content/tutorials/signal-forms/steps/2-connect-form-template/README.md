@@ -63,7 +63,7 @@ checkbox入力に `[field]` ディレクティブを追加します:
 <docs-step title="フォーム値を表示">
 フォームの下に、現在のフォーム値を表示するデバッグセクションがあります。`.value()` を使用して各フィールド値を表示します:
 
-```html
+```angular-html
 <p>Email: {{ loginForm.email().value() }}</p>
 <p>Password: {{ loginForm.password().value() ? '••••••••' : '(empty)' }}</p>
 <p>Remember me: {{ loginForm.rememberMe().value() ? 'Yes' : 'No' }}</p>

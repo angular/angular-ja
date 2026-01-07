@@ -29,7 +29,10 @@ TLDR: インターセプターは、再試行、キャッシュ、ロギング�
 たとえば、この `loggingInterceptor` は、リクエストを転送する前に、送信されるリクエストのURLを `console.log` にログに記録します。
 
 ```ts
-export function loggingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
+export function loggingInterceptor(
+  req: HttpRequest<unknown>,
+  next: HttpHandlerFn,
+): Observable<HttpEvent<unknown>> {
   console.log(req.url);
   return next(req);
 }
@@ -42,11 +45,9 @@ export function loggingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerF
 `HttpClient` を構成するときに使用するインターセプターのセットは、`withInterceptors` 機能を使用して、依存性の注入によって宣言します。
 
 ```ts
-bootstrapApplication(AppComponent, {providers: [
-  provideHttpClient(
-    withInterceptors([loggingInterceptor, cachingInterceptor]),
-  )
-]});
+bootstrapApplication(AppComponent, {
+  providers: [provideHttpClient(withInterceptors([loggingInterceptor, cachingInterceptor]))],
+});
 ```
 
 構成したインターセプターは、プロバイダーにリストした順序でチェーンされます。上記の例では、`loggingInterceptor` がリクエストを処理し、`cachingInterceptor` に転送します。
@@ -56,12 +57,17 @@ bootstrapApplication(AppComponent, {providers: [
 インターセプターは、`next` から返される `HttpEvent` の `Observable` ストリームを変換して、レスポンスにアクセスしたり、レスポンスを操作したりできます。このストリームにはすべてのレスポンスイベントが含まれているため、最終的なレスポンスオブジェクトを識別するためには、各イベントの `.type` を調べる必要がある場合があります。
 
 ```ts
-export function loggingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
-  return next(req).pipe(tap(event => {
-    if (event.type === HttpEventType.Response) {
-      console.log(req.url, 'returned a response with status', event.status);
-    }
-  }));
+export function loggingInterceptor(
+  req: HttpRequest<unknown>,
+  next: HttpHandlerFn,
+): Observable<HttpEvent<unknown>> {
+  return next(req).pipe(
+    tap((event) => {
+      if (event.type === HttpEventType.Response) {
+        console.log(req.url, 'returned a response with status', event.status);
+      }
+    }),
+  );
 }
 ```
 
@@ -171,29 +177,39 @@ const resp = new HttpResponse({
 インターセプターは、リダイレクト情報にアクセスして作用できます。
 
 ```ts
-export function redirectTrackingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
-  return next(req).pipe(tap(event => {
-    if (event.type === HttpEventType.Response && event.redirected) {
-      console.log('Request to', req.url, 'was redirected to', event.url);
-      // リダイレクトロジックの処理 - 分析の更新、セキュリティチェックなど
-    }
-  }));
+export function redirectTrackingInterceptor(
+  req: HttpRequest<unknown>,
+  next: HttpHandlerFn,
+): Observable<HttpEvent<unknown>> {
+  return next(req).pipe(
+    tap((event) => {
+      if (event.type === HttpEventType.Response && event.redirected) {
+        console.log('Request to', req.url, 'was redirected to', event.url);
+        // リダイレクトロジックの処理 - 分析の更新、セキュリティチェックなど
+      }
+    }),
+  );
 }
 ```
 
 また、リダイレクト情報を使用してインターセプターで条件付きロジックを実装できます。
 
 ```ts
-export function authRedirectInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
-  return next(req).pipe(tap(event => {
-    if (event.type === HttpEventType.Response && event.redirected) {
-      // ログインページにリダイレクトされたかどうかを確認する
-      if (event.url?.includes('/login')) {
-        // 認証リダイレクトを処理する
-        handleAuthRedirect();
+export function authRedirectInterceptor(
+  req: HttpRequest<unknown>,
+  next: HttpHandlerFn,
+): Observable<HttpEvent<unknown>> {
+  return next(req).pipe(
+    tap((event) => {
+      if (event.type === HttpEventType.Response && event.redirected) {
+        // ログインページにリダイレクトされたかどうかを確認する
+        if (event.url?.includes('/login')) {
+          // 認証リダイレクトを処理する
+          handleAuthRedirect();
+        }
       }
-    }
-  }));
+    }),
+  );
 }
 ```
 
@@ -212,26 +228,31 @@ export function authRedirectInterceptor(req: HttpRequest<unknown>, next: HttpHan
 インターセプターは、CORSのデバッグとエラー処理のためにレスポンスタイプ情報を使用できます。
 
 ```ts
-export function responseTypeInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
-  return next(req).pipe(map(event => {
-    if (event.type === HttpEventType.Response) {
-      // さまざまなレスポンスタイプを適切に処理する
-      switch (event.responseType) {
-        case 'opaque':
-          // レスポンスデータへのアクセスが制限されている
-          console.warn('Limited response data due to CORS policy');
-          break;
-        case 'cors':
-        case 'basic':
-          // レスポンスデータへのフルアクセス
-          break;
-        case 'error':
-          // ネットワークエラーを処理する
-          console.error('Network error in response');
-          break;
+export function responseTypeInterceptor(
+  req: HttpRequest<unknown>,
+  next: HttpHandlerFn,
+): Observable<HttpEvent<unknown>> {
+  return next(req).pipe(
+    map((event) => {
+      if (event.type === HttpEventType.Response) {
+        // さまざまなレスポンスタイプを適切に処理する
+        switch (event.responseType) {
+          case 'opaque':
+            // レスポンスデータへのアクセスが制限されている
+            console.warn('Limited response data due to CORS policy');
+            break;
+          case 'cors':
+          case 'basic':
+            // レスポンスデータへのフルアクセス
+            break;
+          case 'error':
+            // ネットワークエラーを処理する
+            console.error('Network error in response');
+            break;
+        }
       }
-    }
-  }));
+    }),
+  );
 }
 ```
 
@@ -254,14 +275,16 @@ export class LoggingInterceptor implements HttpInterceptor {
 DIベースのインターセプターは、依存性の注入のマルチプロバイダーによって構成されます。
 
 ```ts
-bootstrapApplication(AppComponent, {providers: [
-  provideHttpClient(
-    // DI ベースのインターセプターは明示的に有効にする必要があります。
-    withInterceptorsFromDi(),
-  ),
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideHttpClient(
+      // DI ベースのインターセプターは明示的に有効にする必要があります。
+      withInterceptorsFromDi(),
+    ),
 
-  {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true},
-]});
+    {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true},
+  ],
+});
 ```
 
 DIベースのインターセプターは、プロバイダーが登録された順序で実行されます。DI構成が複雑で階層的なアプリケーションでは、この順序を予測することは非常に難しい場合があります。

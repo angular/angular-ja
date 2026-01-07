@@ -32,11 +32,7 @@ const httpTesting = TestBed.inject(HttpTestingController);
 
 ```ts
 TestBed.configureTestingModule({
-  providers: [
-    ConfigService,
-    provideHttpClient(),
-    provideHttpClientTesting(),
-  ],
+  providers: [ConfigService, provideHttpClient(), provideHttpClientTesting()],
 });
 
 const httpTesting = TestBed.inject(HttpTestingController);
@@ -71,10 +67,13 @@ NOTE: `expectOne` は、テストが指定された基準に一致するリク�
 `req.method` についてアサートする代わりに、`expectOne` の拡張形式を使用してリクエストメソッドも一致させることができます。
 
 ```ts
-const req = httpTesting.expectOne({
-  method: 'GET',
-  url: '/api/config',
-}, '構成をロードするリクエスト');
+const req = httpTesting.expectOne(
+  {
+    method: 'GET',
+    url: '/api/config',
+  },
+  '構成をロードするリクエスト',
+);
 ```
 
 HELPFUL: 期待APIは、クエリパラメータを含むリクエストの完全なURLと一致します。
@@ -105,14 +104,14 @@ for (const req of allGetRequests) {
 
 ```ts
 // リクエストボディを持つリクエストを 1 つ探します。
-const requestsWithBody = httpTesting.expectOne(req => req.body !== null);
+const requestsWithBody = httpTesting.expectOne((req) => req.body !== null);
 ```
 
 `expectNone` 関数は、指定された基準に一致するリクエストがないことをアサートします。
 
 ```ts
 // 突然変異リクエストが発行されていないことをアサートします。
-httpTesting.expectNone(req => req.method !== 'GET');
+httpTesting.expectNone((req) => req.method !== 'GET');
 ```
 
 ## エラー処理のテスト
@@ -149,7 +148,10 @@ req.error(new ProgressEvent('network error!'));
 この動作は、インターセプターの使用によって強制できます。
 
 ```ts
-export function authInterceptor(request: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
+export function authInterceptor(
+  request: HttpRequest<unknown>,
+  next: HttpHandlerFn,
+): Observable<HttpEvent<unknown>> {
   const authService = inject(AuthService);
 
   const clonedRequest = request.clone({
@@ -206,7 +208,7 @@ TestBed.configureTestingModule({
     provideHttpClient(withInterceptorsFromDi()),
     provideHttpClientTesting(),
     // HTTP_INTERCEPTORS トークンに依存して、AuthInterceptor を HttpInterceptor として登録します
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],
 });
 ```

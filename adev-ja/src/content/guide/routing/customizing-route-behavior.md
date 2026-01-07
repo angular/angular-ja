@@ -24,7 +24,7 @@ NOTE: カスタムストラテジーを実装する前に、デフォルトの�
 この設定は、アプリケーションが`urlUpdateStrategy: 'eager'`を使用している場合や、ガードがブラウザによって開始された`popstate`ナビゲーションを頻繁にキャンセルする場合に最も役立ちます。
 
 ```ts
-provideRouter(routes, withRouterConfig({ canceledNavigationResolution: 'computed' }));
+provideRouter(routes, withRouterConfig({canceledNavigationResolution: 'computed'}));
 ```
 
 ### 同じURLへのナビゲーションへの対応 {#react-to-same-url-navigations}
@@ -34,13 +34,13 @@ provideRouter(routes, withRouterConfig({ canceledNavigationResolution: 'computed
 これは、URLが変更されない場合でも、リストフィルター、左側のナビゲーション項目、または更新ボタンを繰り返しクリックして新しいデータ取得をトリガーしたい場合に便利です。
 
 ```ts
-provideRouter(routes, withRouterConfig({ onSameUrlNavigation: 'reload' }));
+provideRouter(routes, withRouterConfig({onSameUrlNavigation: 'reload'}));
 ```
 
 グローバルにではなく、個々のナビゲーションでこの動作を制御できます。これにより、特定のユースケースに対してリロード動作を選択的に有効にしながら、デフォルトの`'ignore'`を維持できます。
 
 ```ts
-router.navigate(['/some-path'], { onSameUrlNavigation: 'reload' });
+router.navigate(['/some-path'], {onSameUrlNavigation: 'reload'});
 ```
 
 ### パラメータ継承の制御 {#control-parameter-inheritance}
@@ -50,7 +50,7 @@ router.navigate(['/some-path'], { onSameUrlNavigation: 'reload' });
 デフォルトの`'emptyOnly'`では、子ルートはパスが空の場合、または親がコンポーネントを宣言していない場合にのみパラメータを継承します。
 
 ```ts
-provideRouter(routes, withRouterConfig({ paramsInheritanceStrategy: 'always' }));
+provideRouter(routes, withRouterConfig({paramsInheritanceStrategy: 'always'}));
 ```
 
 ```ts
@@ -65,17 +65,19 @@ export const routes: Routes = [
         children: [
           {
             path: 'customers/:customerId',
-            component: Customer
-          }
-        ]
-      }
-    ]
-  }
+            component: Customer,
+          },
+        ],
+      },
+    ],
+  },
 ];
 ```
 
 ```ts
-@Component({ /* ... */})
+@Component({
+  /* ... */
+})
 export class CustomerComponent {
   private route = inject(ActivatedRoute);
 
@@ -85,10 +87,16 @@ export class CustomerComponent {
 }
 ```
 
-`'always'`を使用すると、マトリックスパラメータ、ルートデータ、および解決された値がルートツリーのさらに下で利用可能になります。これは、`/org/:orgId/projects/:projectId/customers/:customerId`のような機能領域間でコンテキスト識別子を共有する場合に便利です。
+`'always'`を使用すると、マトリックスパラメータ、ルートデータ、および解決された値がルートツリーのさらに下で利用可能になります。これは、次のような機能領域間でコンテキスト識別子を共有する場合に便利です:
+
+```text {hideCopy}
+/org/:orgId/projects/:projectId/customers/:customerId
+```
 
 ```ts
-@Component({ /* ... */})
+@Component({
+  /* ... */
+})
 export class CustomerComponent {
   private route = inject(ActivatedRoute);
 
@@ -106,7 +114,7 @@ export class CustomerComponent {
 分析パイプラインが、ガードによってブロックされた場合でも試行されたルートを確認する必要がある場合にこれを検討してください。
 
 ```ts
-provideRouter(routes, withRouterConfig({ urlUpdateStrategy: 'eager' }));
+provideRouter(routes, withRouterConfig({urlUpdateStrategy: 'eager'}));
 ```
 
 ### デフォルトのクエリパラメータ処理の選択 {#choose-default-query-parameter-handling}
@@ -114,7 +122,7 @@ provideRouter(routes, withRouterConfig({ urlUpdateStrategy: 'eager' }));
 `defaultQueryParamsHandling`は、呼び出しが`queryParamsHandling`を指定しない場合の`Router.createUrlTree`のフォールバック動作を設定します。`'replace'`はデフォルトで、既存のクエリ文字列を置き換えます。`'merge'`は提供された値を現在の値と結合し、`'preserve'`は明示的に新しいクエリパラメータを指定しない限り、既存のクエリパラメータを保持します。
 
 ```ts
-provideRouter(routes, withRouterConfig({ defaultQueryParamsHandling: 'merge' }));
+provideRouter(routes, withRouterConfig({defaultQueryParamsHandling: 'merge'}));
 ```
 
 これは、追加のパラメータが提供されたときに既存のフィルターを自動的に保持するために、検索およびフィルターページで特に役立ちます。
@@ -147,21 +155,27 @@ Angularの`RouteReuseStrategy`クラスを使用すると、「デタッチさ�
 
 「デタッチされたルートハンドル」は、Angularがコンポーネントインスタンスとそのビュー階層全体を保存する方法です。ルートがデタッチされると、Angularはコンポーネントインスタンス、その子コンポーネント、および関連するすべての状態をメモリに保持します。この保持された状態は、後でそのルートに戻ったときに再アタッチできます。
 
-`RouteReuseStrategy`クラスは、ルートコンポーネントのライフサイクルを制御する5つのメソッドを提供します:
+`RouteReuseStrategy`クラスは、ルートコンポーネントのライフサイクルを制御する次のメソッドを提供します:
 
-| メソッド                                                               | 説明                                                                                                 |
-| -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| [`shouldDetach`](api/router/RouteReuseStrategy#shouldDetach)         | ルートから離れるときに、後で再利用するためにルートを保存すべきかどうかを決定します                                 |
-| [`store`](api/router/RouteReuseStrategy#store)                       | `shouldDetach`がtrueを返した場合に、デタッチされたルートハンドルを保存します                                           |
-| [`shouldAttach`](api/router/RouteReuseStrategy#shouldAttach)         | 保存されたルートにナビゲートするときに、それを再アタッチすべきかどうかを決定します                                     |
-| [`retrieve`](api/router/RouteReuseStrategy#retrieve)                 | 以前に保存されたルートハンドルを再アタッチのために返します                                                 |
-| [`shouldReuseRoute`](api/router/RouteReuseStrategy#shouldReuseRoute) | ナビゲーション中に現在のルートインスタンスを破棄する代わりに、ルーターが再利用すべきかどうかを決定します |
+| メソッド                                                                         | 説明                                                                                                         |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| [`shouldDetach`](api/router/RouteReuseStrategy#shouldDetach)                   | ルートから離れるときに、後で再利用するためにルートを保存すべきかどうかを決定します                                         |
+| [`store`](api/router/RouteReuseStrategy#store)                                 | `shouldDetach`がtrueを返した場合に、デタッチされたルートハンドルを保存します                                                   |
+| [`shouldAttach`](api/router/RouteReuseStrategy#shouldAttach)                   | 保存されたルートにナビゲートするときに、それを再アタッチすべきかどうかを決定します                                             |
+| [`retrieve`](api/router/RouteReuseStrategy#retrieve)                           | 以前に保存されたルートハンドルを再アタッチのために返します                                                         |
+| [`shouldReuseRoute`](api/router/RouteReuseStrategy#shouldReuseRoute)           | ナビゲーション中に現在のルートインスタンスを破棄する代わりに、ルーターが再利用すべきかどうかを決定します         |
+| [`shouldDestroyInjector`](api/router/RouteReuseStrategy#shouldDestroyInjector) | (実験的) ルーターが、保存されなくなったデタッチされたルートのインジェクターを破棄すべきかどうかを決定します |
 
 次の例は、ルートメタデータに基づいてコンポーネントの状態を選択的に保持するカスタムルート再利用戦略を示しています:
 
 ```ts
-import { RouteReuseStrategy, Route, ActivatedRouteSnapshot, DetachedRouteHandle } from '@angular/router';
-import { Injectable } from '@angular/core';
+import {
+  RouteReuseStrategy,
+  Route,
+  ActivatedRouteSnapshot,
+  DetachedRouteHandle,
+} from '@angular/router';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class CustomRouteReuseStrategy implements RouteReuseStrategy {
@@ -189,7 +203,7 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
   retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle | null {
     // Returns the stored route handle for reattachment
     const key = this.getRouteKey(route);
-    return route.data['reuse'] === true ? this.handlers.get(key) ?? null : null;
+    return route.data['reuse'] === true ? (this.handlers.get(key) ?? null) : null;
   }
 
   shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
@@ -203,7 +217,78 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
 }
 ```
 
+### デタッチされたルートハンドルを手動で破棄する {#manually-destroying-detached-route-handles}
+
+カスタム`RouteReuseStrategy`を実装する際、再アタッチせずにそれを破棄することにした場合、`DetachedRouteHandle`を手動で破棄する必要がある場合があります。たとえば、ストラテジーにキャッシュサイズの制限がある場合や、一定時間後にハンドルの有効期限が切れる場合、メモリリークを防ぐために、コンポーネントとその状態が適切に破棄されていることを確認する必要があります。
+
+`DetachedRouteHandle`は不透明な型であるため、それに対して直接破棄メソッドを呼び出すことはできません。代わりに、ルーターが提供する`destroyDetachedRouteHandle`関数を使用します。
+
+```ts
+import {destroyDetachedRouteHandle} from '@angular/router';
+
+// ... inside your strategy
+if (this.handles.size > MAX_CACHE_SIZE) {
+  const handle = this.handles.get(oldestKey);
+  if (handle) {
+    destroyDetachedRouteHandle(handle);
+    this.handles.delete(oldestKey);
+  }
+}
+```
+
 NOTE: `canMatch`ガードが関与している場合、重複したエントリにつながる可能性があるため、キーとしてルートパスを使用することは避けてください。
+
+### (実験的) 未使用のルートインジェクターの自動クリーンアップ {#experimental-automatic-cleanup-of-unused-route-injectors}
+
+デフォルトでは、Angularは、`RouteReuseStrategy`によって保存されなくなった場合でも、デタッチされたルートのインジェクターを破棄しません。これは主に、このレベルのメモリ管理がほとんどのアプリケーションで一般的に必要とされていないためです。
+
+未使用のルートインジェクターの自動クリーンアップを有効にするには、ルーター設定で`withExperimentalAutoCleanupInjectors`機能を使用できます。この機能は、ナビゲーション後に現在ストラテジーによって保存されているルートを確認し、現在再利用戦略によって保存されていないデタッチされたルートのインジェクターを破棄します。
+
+```ts
+import {provideRouter, withExperimentalAutoCleanupInjectors} from '@angular/router';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(routes, withExperimentalAutoCleanupInjectors())
+  ]
+};
+```
+
+カスタム`RouteReuseStrategy`を提供しない場合、またはカスタム戦略が`BaseRouteReuseStrategy`を拡張している場合、ルートが非アクティブになったときにインジェクターが破棄されるようになります。
+
+#### カスタム`RouteReuseStrategy`を使用したクリーンアップ {#cleanup-with-a-custom-routereusestrategy}
+
+アプリケーションがカスタム`RouteReuseStrategy`を使用しており、_かつ_そのストラテジーが`BaseRouteReuseStrategy`を拡張していない場合、どのルートがインジェクターを破棄すべきかをルーターに伝えるために`shouldDestroyInjector`を実装する必要があります:
+
+```ts
+@Injectable()
+export class CustomRouteReuseStrategy implements RouteReuseStrategy {
+  // ... other methods
+
+  shouldDestroyInjector(route: Route): boolean {
+    return !route.data['retainInjector'];
+  }
+}
+```
+
+ストラテジーが`DetachedRouteHandle`を保存する場合、そのデタッチされたハンドルが必要とするインジェクターをルーターが破棄しないように、これらについてもルーターに伝える必要があります:
+
+```ts
+@Injectable()
+export class CustomRouteReuseStrategy implements RouteReuseStrategy {
+  private readonly handles = new Map<Route, DetachedRouteHandle>();
+
+  store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle | null) {
+    this.handles.set(route.routeConfig!, handle);
+  }
+
+  retrieveStoredRouteHandles(): DetachedRouteHandle {
+    return Array.from(this.handles.values());
+  }
+
+  // ... other methods
+}
+```
 
 ### カスタムルート再利用戦略を使用するようにルートを設定する {#configuring-a-route-to-use-a-custom-route-reuse-strategy}
 
@@ -214,7 +299,7 @@ export const routes: Routes = [
   {
     path: 'products',
     component: ProductListComponent,
-    data: { reuse: true }  // Component state persists across navigations
+    data: {reuse: true}, // Component state persists across navigations
   },
   {
     path: 'products/:id',
@@ -224,8 +309,8 @@ export const routes: Routes = [
   {
     path: 'search',
     component: SearchComponent,
-    data: { reuse: true }  // Preserves search results and filter state
-  }
+    data: {reuse: true}, // Preserves search results and filter state
+  },
 ];
 ```
 
@@ -235,8 +320,8 @@ export const routes: Routes = [
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy }
-  ]
+    {provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy},
+  ],
 };
 ```
 
@@ -256,17 +341,12 @@ Angularは、標準で2つのプリロード戦略を提供しています:
 `PreloadAllModules`戦略は次のように設定できます:
 
 ```ts
-import { ApplicationConfig } from '@angular/core';
-import { provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
-import { routes } from './app.routes';
+import {ApplicationConfig} from '@angular/core';
+import {provideRouter, withPreloading, PreloadAllModules} from '@angular/router';
+import {routes} from './app.routes';
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideRouter(
-      routes,
-      withPreloading(PreloadAllModules)
-    )
-  ]
+  providers: [provideRouter(routes, withPreloading(PreloadAllModules))],
 };
 ```
 
@@ -277,10 +357,10 @@ export const appConfig: ApplicationConfig = {
 カスタムプリロード戦略は`PreloadingStrategy`インターフェースを実装します。これには単一の`preload`メソッドが必要です。このメソッドは、ルート設定と、実際のモジュール読み込みをトリガーする関数を受け取ります。この戦略は、プリロードが完了したときにemitするObservableか、プリロードをスキップするための空のObservableを返します:
 
 ```ts
-import { Injectable } from '@angular/core';
-import { PreloadingStrategy, Route } from '@angular/router';
-import { Observable, of, timer } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {PreloadingStrategy, Route} from '@angular/router';
+import {Observable, of, timer} from 'rxjs';
+import {mergeMap} from 'rxjs/operators';
 
 @Injectable()
 export class SelectivePreloadingStrategy implements PreloadingStrategy {
@@ -297,24 +377,24 @@ export class SelectivePreloadingStrategy implements PreloadingStrategy {
 この選択的戦略は、ルートメタデータをチェックしてプリロードの動作を決定します。ルートは、その設定を通じてプリロードをオプトインできます:
 
 ```ts
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 
 export const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.routes'),
-    data: { preload: true }  // Preload immediately after initial navigation
+    data: {preload: true}, // Preload immediately after initial navigation
   },
   {
     path: 'reports',
     loadChildren: () => import('./reports/reports.routes'),
-    data: { preload: false } // Only load when user navigates to reports
+    data: {preload: false}, // Only load when user navigates to reports
   },
   {
     path: 'admin',
-    loadChildren: () => import('./admin/admin.routes')
+    loadChildren: () => import('./admin/admin.routes'),
     // No preload flag - won't be preloaded
-  }
+  },
 ];
 ```
 
@@ -337,15 +417,14 @@ URLハンドリングストラテジーは、AngularルーターがどのURLを�
 カスタムURLハンドリングストラテジーは`UrlHandlingStrategy`クラスを拡張し、3つのメソッドを実装します。`shouldProcessUrl`メソッドはAngularが特定のURLを処理すべきかどうかを判断し、`extract`はAngularが処理すべきURLの部分を返し、`merge`はURLフラグメントをURLの残りの部分と結合します:
 
 ```ts
-import { Injectable } from '@angular/core';
-import { UrlHandlingStrategy, UrlTree } from '@angular/router';
+import {Injectable} from '@angular/core';
+import {UrlHandlingStrategy, UrlTree} from '@angular/router';
 
 @Injectable()
 export class CustomUrlHandlingStrategy implements UrlHandlingStrategy {
   shouldProcessUrl(url: UrlTree): boolean {
     // Only handle URLs that start with /app or /admin
-    return url.toString().startsWith('/app') ||
-           url.toString().startsWith('/admin');
+    return url.toString().startsWith('/app') || url.toString().startsWith('/admin');
   }
 
   extract(url: UrlTree): UrlTree {
@@ -367,15 +446,15 @@ export class CustomUrlHandlingStrategy implements UrlHandlingStrategy {
 Angularの依存性の注入システムを通じて、カスタムストラテジーを登録できます:
 
 ```ts
-import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { UrlHandlingStrategy } from '@angular/router';
+import {ApplicationConfig} from '@angular/core';
+import {provideRouter} from '@angular/router';
+import {UrlHandlingStrategy} from '@angular/router';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    { provide: UrlHandlingStrategy, useClass: CustomUrlHandlingStrategy }
-  ]
+    {provide: UrlHandlingStrategy, useClass: CustomUrlHandlingStrategy},
+  ],
 };
 ```
 
@@ -392,20 +471,20 @@ export const appConfig: ApplicationConfig = {
 カスタムマッチャーは、URLセグメントを受け取り、消費されたセグメントとパラメーターを含むマッチ結果、またはマッチしなかったことを示すnullを返す関数です。このマッチャー関数は、Angularがルートのpathプロパティを評価する前に実行されます:
 
 ```ts
-import { Route, UrlSegment, UrlSegmentGroup, UrlMatchResult } from '@angular/router';
+import {Route, UrlSegment, UrlSegmentGroup, UrlMatchResult} from '@angular/router';
 
 export function customMatcher(
   segments: UrlSegment[],
   group: UrlSegmentGroup,
-  route: Route
+  route: Route,
 ): UrlMatchResult | null {
   // Matching logic here
   if (matchSuccessful) {
     return {
       consumed: segments,
       posParams: {
-        paramName: new UrlSegment('paramValue', {})
-      }
+        paramName: new UrlSegment('paramValue', {}),
+      },
     };
   }
   return null;
@@ -417,17 +496,17 @@ export function customMatcher(
 URL内のバージョン番号に基づいてルーティングする必要があるAPIドキュメントサイトを考えてみましょう。バージョンが異なれば、コンポーネントの構造や機能セットも異なる場合があります:
 
 ```ts
-import { Routes, UrlSegment, UrlMatchResult } from '@angular/router';
+import {Routes, UrlSegment, UrlMatchResult} from '@angular/router';
 
 export function versionMatcher(segments: UrlSegment[]): UrlMatchResult | null {
   // Match patterns like /v1/docs, /v2.1/docs, /v3.0.1/docs
   if (segments.length >= 2 && segments[0].path.match(/^v\d+(\.\d+)*$/)) {
     return {
-      consumed: segments.slice(0, 2),  // Consume version and 'docs'
+      consumed: segments.slice(0, 2), // Consume version and 'docs'
       posParams: {
-        version: segments[0],  // Make version available as a parameter
-        section: segments[1]   // Make section available too
-      }
+        version: segments[0], // Make version available as a parameter
+        section: segments[1], // Make section available too
+      },
     };
   }
   return null;
@@ -437,12 +516,12 @@ export function versionMatcher(segments: UrlSegment[]): UrlMatchResult | null {
 export const routes: Routes = [
   {
     matcher: versionMatcher,
-    component: DocumentationComponent
+    component: DocumentationComponent,
   },
   {
     path: 'latest/docs',
-    redirectTo: 'v3/docs'
-  }
+    redirectTo: 'v3/docs',
+  },
 ];
 ```
 
@@ -505,16 +584,16 @@ export function localeMatcher(segments: UrlSegment[]): UrlMatchResult | null {
       return {
         consumed: [segments[0]],
         posParams: {
-          locale: segments[0]
-        }
+          locale: segments[0],
+        },
       };
     } else {
       // No locale prefix, use default locale
       return {
-        consumed: [],  // Don't consume any segments
+        consumed: [], // Don't consume any segments
         posParams: {
-          locale: new UrlSegment('en', {})
-        }
+          locale: new UrlSegment('en', {}),
+        },
       };
     }
   }
@@ -539,8 +618,8 @@ export function productMatcher(segments: UrlSegment[]): UrlMatchResult | null {
       consumed: [segments[0]],
       posParams: {
         productType: new UrlSegment('book', {}),
-        identifier: new UrlSegment(firstSegment.substring(5), {})
-      }
+        identifier: new UrlSegment(firstSegment.substring(5), {}),
+      },
     };
   }
 
@@ -550,8 +629,8 @@ export function productMatcher(segments: UrlSegment[]): UrlMatchResult | null {
       consumed: segments.slice(0, 2),
       posParams: {
         productType: new UrlSegment('electronics', {}),
-        identifier: segments[1]
-      }
+        identifier: segments[1],
+      },
     };
   }
 
@@ -562,8 +641,8 @@ export function productMatcher(segments: UrlSegment[]): UrlMatchResult | null {
       posParams: {
         productType: new UrlSegment('clothing', {}),
         brand: segments[1],
-        identifier: segments[2]
-      }
+        identifier: segments[2],
+      },
     };
   }
 

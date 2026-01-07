@@ -67,7 +67,7 @@ HELPFUL: ハンドラーは、ホストDOM要素`el`に色を設定するヘル�
 
 このセクションでは、`HighlightDirective`を適用するときにハイライトカラーを設定する方法について説明します。
 
-1. `highlight.directive.ts`で、`@angular/core`から`Input`をインポートします。
+1. `highlight.directive.ts`で、`@angular/core`から`input`をインポートします。
 
    <docs-code header="highlight.directive.ts (imports)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.3.ts" region="imports"/>
 

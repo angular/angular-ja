@@ -85,7 +85,6 @@ export class SelectDirective {
   private templateRef = inject(TemplateRef);
   private viewContainerRef = inject(ViewContainerRef);
 }
-
 ```
 
 </docs-step>
@@ -95,7 +94,6 @@ Add a `selectFrom` `input()` property.
 ```ts
 export class SelectDirective {
   // ...
-
   selectFrom = input.required<DataSource>();
 }
 ```
@@ -107,7 +105,6 @@ With `SelectDirective` now scaffolded as a structural directive with its input, 
 ```ts
 export class SelectDirective {
   // ...
-
   async ngOnInit() {
     const data = await this.selectFrom.load();
     this.viewContainerRef.createEmbeddedView(this.templateRef, {
@@ -129,9 +126,7 @@ That's it - `SelectDirective` is up and running. A follow-up step might be to [a
 When you write your own structural directives, use the following syntax:
 
 ```ts {hideCopy}
-
-_:prefix="( :let | :expression ) (';' | ',')? ( :let | :as | :keyExp )_"
-
+_: prefix = "( :let | :expression ) (';' | ',')? ( :let | :as | :keyExp )_";
 ```
 
 The following patterns describe each portion of the structural directive grammar:

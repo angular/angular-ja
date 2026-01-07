@@ -6,8 +6,7 @@
 
 このガイドは、以下のツールとライブラリに精通していることを前提としています。
 
-- **[Jasmine](https://jasmine.github.io/)** - テスト構文（`describe`、`it`、`expect`）を提供するJavaScriptテストフレームワーク
-- **[Karma](https://karma-runner.github.io/)** - ブラウザでテストを実行するテストランナー
+- **[Vitest](https://vitest.dev/)** - テスト構文（`describe`、`it`、`expect`）を提供するJavaScriptテストフレームワーク
 - **[Angular Testing Utilities](guide/testing)** - Angularに組み込まれているテストツール（[`TestBed`](api/core/testing/TestBed)、[`ComponentFixture`](api/core/testing/ComponentFixture)）
 - **[`RouterTestingHarness`](api/router/testing/RouterTestingHarness)** - 組み込みのナビゲーションとコンポーネントテスト機能を備えた、ルーティングされたコンポーネントをテストするためのテストハーネス
 
@@ -21,21 +20,17 @@
 
 ```ts
 // user-profile.component.spec.ts
-import { TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
-import { RouterTestingHarness } from '@angular/router/testing';
-import { provideRouter } from '@angular/router';
-import { UserProfile } from './user-profile';
+import {TestBed} from '@angular/core/testing';
+import {Router} from '@angular/router';
+import {RouterTestingHarness} from '@angular/router/testing';
+import {provideRouter} from '@angular/router';
+import {UserProfile} from './user-profile';
 
 describe('UserProfile', () => {
   it('should display user ID from route parameters', async () => {
     TestBed.configureTestingModule({
       imports: [UserProfile],
-      providers: [
-        provideRouter([
-          { path: 'user/:id', component: UserProfile }
-        ])
-      ]
+      providers: [provideRouter([{path: 'user/:id', component: UserProfile}])],
     });
 
     const harness = await RouterTestingHarness.create();
@@ -68,17 +63,17 @@ export class UserProfile {
 
 ```ts
 // auth.guard.spec.ts
-import { RouterTestingHarness } from '@angular/router/testing';
-import { provideRouter, Router } from '@angular/router';
-import { authGuard } from './auth.guard';
-import { AuthStore } from './auth-store';
-import { Component } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import {RouterTestingHarness} from '@angular/router/testing';
+import {provideRouter, Router} from '@angular/router';
+import {authGuard} from './auth.guard';
+import {AuthStore} from './auth-store';
+import {Component} from '@angular/core';
+import {TestBed} from '@angular/core/testing';
 
-@Component({ template: '<h1>Protected Page</h1>' })
+@Component({template: '<h1>Protected Page</h1>'})
 class ProtectedComponent {}
 
-@Component({ template: '<h1>Login Page</h1>' })
+@Component({template: '<h1>Login Page</h1>'})
 class LoginComponent {}
 
 describe('authGuard', () => {
@@ -91,10 +86,10 @@ describe('authGuard', () => {
 
     TestBed.configureTestingModule({
       providers: [
-        { provide: AuthStore, useValue: authStore },
+        {provide: AuthStore, useValue: authStore},
         provideRouter([
-          { path: 'protected', component: ProtectedComponent, canActivate: [authGuard] },
-          { path: 'login', component: LoginComponent },
+          {path: 'protected', component: ProtectedComponent, canActivate: [authGuard]},
+          {path: 'login', component: LoginComponent},
         ]),
       ],
     });
@@ -120,9 +115,9 @@ describe('authGuard', () => {
 
 ```ts
 // auth.guard.ts
-import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
-import { AuthStore } from './auth-store';
+import {inject} from '@angular/core';
+import {CanActivateFn, Router} from '@angular/router';
+import {AuthStore} from './auth-store';
 
 export const authGuard: CanActivateFn = () => {
   const authStore = inject(AuthStore);
@@ -139,19 +134,19 @@ export const authGuard: CanActivateFn = () => {
 
 ```ts
 // app.component.spec.ts
-import { TestBed } from '@angular/core/testing';
-import { RouterTestingHarness } from '@angular/router/testing';
-import { provideRouter } from '@angular/router';
-import { Component } from '@angular/core';
-import { App } from './app';
+import {TestBed} from '@angular/core/testing';
+import {RouterTestingHarness} from '@angular/router/testing';
+import {provideRouter} from '@angular/router';
+import {Component} from '@angular/core';
+import {App} from './app';
 
 @Component({
-  template: '<h1>Home Page</h1>'
+  template: '<h1>Home Page</h1>',
 })
 class MockHome {}
 
 @Component({
-  template: '<h1>About Page</h1>'
+  template: '<h1>About Page</h1>',
 })
 class MockAbout {}
 
@@ -163,10 +158,10 @@ describe('App Router Outlet', () => {
       imports: [App],
       providers: [
         provideRouter([
-          { path: '', component: MockHome },
-          { path: 'about', component: MockAbout }
-        ])
-      ]
+          {path: '', component: MockHome},
+          {path: 'about', component: MockAbout},
+        ]),
+      ],
     });
 
     harness = await RouterTestingHarness.create();
@@ -218,10 +213,10 @@ export class App {}
 
 ```ts
 // nested-routes.spec.ts
-import { TestBed } from '@angular/core/testing';
-import { RouterTestingHarness } from '@angular/router/testing';
-import { provideRouter } from '@angular/router';
-import { Parent, Child } from './nested-components';
+import {TestBed} from '@angular/core/testing';
+import {RouterTestingHarness} from '@angular/router/testing';
+import {provideRouter} from '@angular/router';
+import {Parent, Child} from './nested-components';
 
 describe('Nested Routes', () => {
   let harness: RouterTestingHarness;
@@ -234,12 +229,10 @@ describe('Nested Routes', () => {
           {
             path: 'parent',
             component: Parent,
-            children: [
-              { path: 'child', component: Child }
-            ]
-          }
-        ])
-      ]
+            children: [{path: 'child', component: Child}],
+          },
+        ]),
+      ],
     });
 
     harness = await RouterTestingHarness.create();
@@ -284,10 +277,10 @@ export class Child {}
 
 ```ts
 // search.component.spec.ts
-import { TestBed } from '@angular/core/testing';
-import { Router, provideRouter } from '@angular/router';
-import { RouterTestingHarness } from '@angular/router/testing';
-import { Search } from './search';
+import {TestBed} from '@angular/core/testing';
+import {Router, provideRouter} from '@angular/router';
+import {RouterTestingHarness} from '@angular/router/testing';
+import {Search} from './search';
 
 describe('Search', () => {
   let component: Search;
@@ -296,11 +289,7 @@ describe('Search', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       imports: [Search],
-      providers: [
-        provideRouter([
-          { path: 'search', component: Search }
-        ])
-      ]
+      providers: [provideRouter([{path: 'search', component: Search}])],
     });
 
     harness = await RouterTestingHarness.create();
@@ -333,9 +322,9 @@ export class Search {
 
 ## ルーターテストのベストプラクティス {#best-practices-for-router-testing}
 
-1.  **RouterTestingHarnessを使用する** - ルーティングされたコンポーネントをテストするには、よりクリーンなAPIを提供し、テストホストコンポーネントの必要性を排除する[`RouterTestingHarness`](api/router/testing/RouterTestingHarness)を使用してください。これは、直接的なコンポーネントアクセス、組み込みのナビゲーション、およびより優れた型安全性を提供します。ただし、名前付きアウトレットのテストなど、カスタムホストコンポーネントを作成する必要がある一部のシナリオには適していません。
-2.  **外部の依存関係を慎重に処理する** - より現実的なテストのために、可能な場合は実際の実装を優先してください。実際の実装が実現不可能な場合（例：外部API）は、実際の動作を近似するフェイクを使用してください。モックやスタブは、テストを脆弱にし、信頼性を低下させる可能性があるため、最後の手段としてのみ使用してください。
-3.  **ナビゲーション状態をテストする** - URLの変更やコンポーネントのレンダリングを含む、ナビゲーションアクションと結果として生じるアプリケーション状態の両方を検証してください。
-4.  **非同期操作を処理する** - ルーターのナビゲーションは非同期です。テストでのタイミングを適切に処理するために、`async/await` または [`fakeAsync`](api/core/testing/fakeAsync) を使用してください。
-5.  **エラーシナリオをテストする** - アプリケーションがエッジケースを適切に処理することを確認するために、無効なルート、失敗したナビゲーション、およびガードによる拒否のテストを含めてください。
-6.  **Angularルーターをモックしない** - 代わりに、実際のルート設定を提供し、ハーネスを使用してナビゲートしてください。これにより、テストがより堅牢になり、Angularの内部更新で壊れる可能性が低くなります。また、モックは破壊的変更を隠す可能性があるため、ルーターが更新されたときに実際の問題を確実に捕捉できます。
+1. **RouterTestingHarnessを使用する** - ルーティングされたコンポーネントをテストするには、よりクリーンなAPIを提供し、テストホストコンポーネントの必要性を排除する[`RouterTestingHarness`](api/router/testing/RouterTestingHarness)を使用してください。これは、直接的なコンポーネントアクセス、組み込みのナビゲーション、およびより優れた型安全性を提供します。ただし、名前付きアウトレットのテストなど、カスタムホストコンポーネントを作成する必要がある一部のシナリオには適していません。
+2. **外部の依存関係を慎重に処理する** - より現実的なテストのために、可能な場合は実際の実装を優先してください。実際の実装が実現不可能な場合（例：外部API）は、実際の動作を近似するフェイクを使用してください。モックやスタブは、テストを脆弱にし、信頼性を低下させる可能性があるため、最後の手段としてのみ使用してください。
+3. **ナビゲーション状態をテストする** - URLの変更やコンポーネントのレンダリングを含む、ナビゲーションアクションと結果として生じるアプリケーション状態の両方を検証してください。
+4. **非同期操作を処理する** - ルーターのナビゲーションは非同期です。テストでのタイミングを適切に処理するために、`async/await`を使用してください。
+5. **エラーシナリオをテストする** - アプリケーションがエッジケースを適切に処理することを確認するために、無効なルート、失敗したナビゲーション、およびガードによる拒否のテストを含めてください。
+6. **Angularルーターをモックしない** - 代わりに、実際のルート設定を提供し、ハーネスを使用してナビゲートしてください。これにより、テストがより堅牢になり、Angularの内部更新で壊れる可能性が低くなります。また、モックは破壊的変更を隠す可能性があるため、ルーターが更新されたときに実際の問題を確実に捕捉できます。

@@ -110,9 +110,7 @@ scheme    authority      path        query   fragment
 `AppModule`の`RouterModule.forRoot()`の2番目の引数として、オブジェクト内で`useHash: true`を提供することで`HashLocationStrategy`を使用します。
 
 ```ts
-providers: [
-  provideRouter(appRoutes, withHashLocation())
-]
+providers: [provideRouter(appRoutes, withHashLocation())];
 ```
 
 `RouterModule.forRoot`を使用する場合、これは2番目の引数`RouterModule.forRoot(routes, {useHash: true})`で`useHash: true`を使用して設定されます。

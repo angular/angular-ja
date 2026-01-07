@@ -159,10 +159,12 @@ import {bootstrapApplication, CSP_NONCE} from '@angular/core';
 import {AppComponent} from './app/app.component';
 
 bootstrapApplication(AppComponent, {
-  providers: [{
-    provide: CSP_NONCE,
-    useValue: globalThis.myRandomNonceValue
-  }]
+  providers: [
+    {
+      provide: CSP_NONCE,
+      useValue: globalThis.myRandomNonceValue,
+    },
+  ],
 });
 ```
 
@@ -225,13 +227,15 @@ Content-Security-Policy: trusted-types angular; require-trusted-types-for 'scrip
 Trusted TypesとAngularアプリケーション用に構成されたヘッダーの例で、Angularの[DomSanitizer](api/platform-browser/DomSanitizer)でセキュリティをバイパスするメソッドをいずれか使用しています。
 
 ```html
-Content-Security-Policy: trusted-types angular angular#unsafe-bypass; require-trusted-types-for 'script';
+Content-Security-Policy: trusted-types angular angular#unsafe-bypass; require-trusted-types-for
++'script';
 ```
 
 Trusted TypesとJITを使用するAngularアプリケーション用に構成されたヘッダーの例を以下に示します。
 
 ```html
-Content-Security-Policy: trusted-types angular angular#unsafe-jit; require-trusted-types-for 'script';
+Content-Security-Policy: trusted-types angular angular#unsafe-jit; require-trusted-types-for
++'script';
 ```
 
 遅延読み込みモジュールを使用するAngularアプリケーション用に構成されたヘッダーの例を以下に示します。
@@ -328,7 +332,7 @@ export const appConfig: ApplicationConfig = {
         headerName: 'X-Custom-Xsrf-Header',
       }),
     ),
-  ]
+  ],
 };
 ```
 
@@ -338,11 +342,7 @@ export const appConfig: ApplicationConfig = {
 
 ```ts
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideHttpClient(
-      withNoXsrfProtection(),
-    ),
-  ]
+  providers: [provideHttpClient(withNoXsrfProtection())],
 };
 ```
 

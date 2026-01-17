@@ -1,6 +1,6 @@
 import { consola } from 'consola';
 import { $ } from 'execa';
-import { mkdir } from 'node:fs/promises';
+import { appendFile, mkdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { cpRf, exists, rmrf } from './fsutils';
 import { applyPatches, copyLocalizedFiles } from './localize';
@@ -31,4 +31,10 @@ async function initBuildDir() {
   await mkdir(buildDir, { recursive: true });
   await cpRf(resolve(rootDir, 'origin'), buildDir);
   await cpRf(resolve(rootDir, '.bazelrc'), resolve(buildDir, '.bazelrc.user'));
+  // Append user's local bazelrc settings if exists
+  const userBazelrc = resolve(rootDir, '.bazelrc.user');
+  if (await exists(userBazelrc)) {
+    const content = await readFile(userBazelrc, 'utf-8');
+    await appendFile(resolve(buildDir, '.bazelrc.user'), '\n' + content);
+  }
 }

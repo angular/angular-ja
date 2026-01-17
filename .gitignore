@@ -1,5 +1,6 @@
 .tmp
 .env
 .textlintcache
+.bazelrc.user
 build
 node_modules

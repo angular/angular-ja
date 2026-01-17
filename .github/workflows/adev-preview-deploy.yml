@@ -29,7 +29,7 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-      - uses: angular/dev-infra/github-actions/previews/upload-artifacts-to-firebase@01c8c16f830d02110c28640aea16f145a7937080
+      - uses: angular/dev-infra/github-actions/previews/upload-artifacts-to-firebase@0512a5b9381ccff00c278d7b4b6ee38e5c09654d
         with:
           github-token: '${{secrets.GITHUB_TOKEN}}'
           workflow-artifact-name: 'adev-preview'

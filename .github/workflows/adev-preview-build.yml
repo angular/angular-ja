@@ -47,7 +47,7 @@ jobs:
             common --color=yes
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
-      - uses: angular/dev-infra/github-actions/previews/pack-and-upload-artifact@01c8c16f830d02110c28640aea16f145a7937080
+      - uses: angular/dev-infra/github-actions/previews/pack-and-upload-artifact@0512a5b9381ccff00c278d7b4b6ee38e5c09654d
         with:
           workflow-artifact-name: 'adev-preview'
           pull-number: '${{ github.event.pull_request.number }}'

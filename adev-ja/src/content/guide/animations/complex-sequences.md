@@ -1,4 +1,4 @@
-# 複雑なアニメーションシーケンス {#complex-animation-sequences}
+# 複雑なアニメーションシーケンス
 
 IMPORTANT: `@angular/animations` パッケージは現在非推奨です。Angularチームは、新しく書くコードのアニメーションには `animate.enter` と `animate.leave` を使ったネイティブCSSの利用を推奨します。詳しくは、新しい enter と leave の[アニメーションガイド](guide/animations/enter-and-leave)を参照してください。また、アプリで純粋なCSSアニメーションへの移行を始める方法については、[AngularのAnimationsパッケージからの移行](guide/animations/migration)も参照してください。
 

@@ -5,16 +5,14 @@ CSSには、アプリケーション内で美しく魅力的なアニメーシ�
 ## ネイティブCSSでアニメーションを書く方法 {#how-to-write-animations-in-native-css}
 
 ネイティブCSSでアニメーションを書いたことがない場合は、入門に役立つ優れたガイドがいくつもあります。以下にいくつか紹介します。
-
-- [MDNのCSSアニメーションガイド](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animations/Using_CSS_animations)
-- [W3SchoolsのCSS3アニメーションガイド](https://www.w3schools.com/css/css3_animations.asp)
-- [CSSアニメーションの完全チュートリアル](https://www.lambdatest.com/blog/css-animations-tutorial/)
-- [初心者向けCSSアニメーション](https://thoughtbot.com/blog/css-animation-for-beginners)
+[MDNのCSSアニメーションガイド](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animations/Using_CSS_animations)
+[W3SchoolsのCSS3アニメーションガイド](https://www.w3schools.com/css/css3_animations.asp)
+[CSSアニメーションの完全チュートリアル](https://www.lambdatest.com/blog/css-animations-tutorial/)
+[初心者向けCSSアニメーション](https://thoughtbot.com/blog/css-animation-for-beginners)
 
 また、次の動画も参考にしてください。
-
-- [9分でCSSアニメーションを学ぶ](https://www.youtube.com/watch?v=z2LQYsZhsFw)
-- [Net NinjaのCSSアニメーションチュートリアル再生リスト](https://www.youtube.com/watch?v=jgw82b5Y2MU&list=PL4cUxeGkcC9iGYgmEd2dm3zAKzyCGDtM5)
+[9分でCSSアニメーションを学ぶ](https://www.youtube.com/watch?v=z2LQYsZhsFw)
+[Net NinjaのCSSアニメーションチュートリアル再生リスト](https://www.youtube.com/watch?v=jgw82b5Y2MU&list=PL4cUxeGkcC9iGYgmEd2dm3zAKzyCGDtM5)
 
 まずはこれらのガイドやチュートリアルに目を通し、その後に本ガイドに戻ってきてください。
 

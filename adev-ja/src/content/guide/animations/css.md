@@ -92,7 +92,7 @@ CSS Gridを使用すると、`height: auto`へのアニメーションを実現�
     <docs-code header="remove.component.css" path="adev/src/content/examples/animations/src/app/native-css/remove.component.css"  />
 </docs-code-multifile>
 
-`animate.enter`と`animate.leave`について詳しくは、[EnterとLeaveのアニメーションガイド](guide/animations)を参照してください。
+`animate.enter`と`animate.leave`について詳しくは、[EnterとLeaveのアニメーションガイド](guide/animations/enter-and-leave)を参照してください。
 
 ### インクリメントとデクリメントをアニメーション化する {#animating-increment-and-decrement}
 

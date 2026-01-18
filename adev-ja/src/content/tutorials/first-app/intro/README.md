@@ -77,7 +77,6 @@ Angularでアプリをビルドする際に使用するツールはお好きな�
 
 </docs-workflow>
 
-For more information about the topics covered in this lesson, visit:
 このレッスンで扱う内容についてさらに知りたい場合は、以下をご覧ください。
 
 <docs-pill-row>

@@ -70,7 +70,7 @@ CSS Gridを使用すると、`height: auto`へのアニメーションを実現�
     <docs-code header="auto-height.component.css" path="adev/src/content/examples/animations/src/app/native-css/auto-height.component.css"  />
 </docs-code-multifile>
 
-すべてのブラウザをサポートする必要がない場合は、`height: auto`をアニメーション化するためのより本質的な解決策である`calc-size()`も確認してください。詳しくは、[MDNのドキュメント](https://developer.mozilla.org/en-US/docs/Web/CSS/calc-size)と[このチュートリアル](https://frontendmasters.com/blog/one-of-the-boss-battles-of-css-is-almost-won-transitioning-to-auto/)を参照してください。
+すべてのブラウザをサポートする必要がない場合は、`height: auto`をアニメーション化するためのより本質的な解決策である`calc-size()`も確認してください。詳しくは、[MDNのドキュメント](https://developer.mozilla.org/en-US/docs/Web/CSS/calc-size)とこの項目に関連する[チュートリアル](https://frontendmasters.com/blog/one-of-the-boss-battles-of-css-is-almost-won-transitioning-to-auto/)を参照してください。
 
 ### ビューへの出入りをアニメーション化する {#animate-entering-and-leaving-a-view}
 

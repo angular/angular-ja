@@ -4,7 +4,7 @@
 
 レッスンの数、順番ともに自由に選べます。
 
-補足: 動画の方が良いですか？このチュートリアルには、[YouTubeのフルコース](https://youtube.com/playlist?list=PL1w1q3fL4pmj9k1FrJ3Pe91EPub2_h4jF&si=1q9889ulHp8VZ0e7)を用意しています！
+HELPFUL: 動画の方が良いですか？このチュートリアルには、[YouTubeのフルコース](https://youtube.com/playlist?list=PL1w1q3fL4pmj9k1FrJ3Pe91EPub2_h4jF&si=1q9889ulHp8VZ0e7)を用意しています！
 
 <docs-video src="https://www.youtube.com/embed/xAT0lHYhHMY?si=cKUW_MGn3MesFT7o"/>
 

@@ -1,10 +1,10 @@
 # 複雑なアニメーションシーケンス
 
-IMPORTANT: `@angular/animations` パッケージは現在非推奨です。Angularチームは、新しく書くコードのアニメーションには `animate.enter` と `animate.leave` を使ったネイティブCSSの利用を推奨します。詳しくは、新しい enter と leave の[アニメーションガイド](guide/animations/enter-and-leave)を参照してください。また、アプリで純粋なCSSアニメーションへの移行を始める方法については、[AngularのAnimationsパッケージからの移行](guide/animations/migration)も参照してください。
+IMPORTANT: `@angular/animations`パッケージは現在非推奨です。Angularチームは、新しく書くコードのアニメーションには`animate.enter`と`animate.leave`を使ったネイティブCSSの利用を推奨します。詳しくは、新しい enter と leave の[アニメーションガイド](guide/animations/enter-and-leave)を参照してください。また、アプリケーションで純粋なCSSアニメーションへの移行を始める方法については、[AngularのAnimationsパッケージからの移行](guide/animations/migration)も参照してください。
 
 ここまで、単一のHTML要素のシンプルなアニメーションを学んできました。
 Angularでは、ページに出入りする要素のグリッド全体やリスト全体など、連携したシーケンスもアニメーション化できます。
-複数のアニメーションを並行して実行することも、個別のアニメーションを順番に実行することもできます。
+複数のアニメーションの同時実行と、個別アニメーションの順次実行の両方が可能です。
 
 複雑なアニメーションシーケンスを制御する関数は次のとおりです：
 

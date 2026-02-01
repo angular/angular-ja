@@ -1,6 +1,6 @@
 # 複雑なアニメーションシーケンス
 
-IMPORTANT: `@angular/animations`パッケージは現在非推奨です。Angularチームは、新しく書くコードのアニメーションには`animate.enter`と`animate.leave`を使ったネイティブCSSの利用を推奨します。詳しくは、新しい enter と leave の[アニメーションガイド](guide/animations/enter-and-leave)を参照してください。また、アプリケーションで純粋なCSSアニメーションへの移行を始める方法については、[AngularのAnimationsパッケージからの移行](guide/animations/migration)も参照してください。
+IMPORTANT: `@angular/animations`パッケージは現在非推奨です。Angularチームは、新しく書くコードのアニメーションには`animate.enter`と`animate.leave`を使ったネイティブCSSの利用を推奨します。詳しくは、新しいenterとleaveの[アニメーションガイド](guide/animations/enter-and-leave)を参照してください。また、アプリケーションで純粋なCSSアニメーションへの移行を始める方法については、[AngularのAnimationsパッケージからの移行](guide/animations/migration)も参照してください。
 
 ここまで、単一のHTML要素のシンプルなアニメーションを学んできました。
 Angularでは、ページに出入りする要素のグリッド全体やリスト全体など、連携したシーケンスもアニメーション化できます。
@@ -35,7 +35,7 @@ Angularでは、ページに出入りする要素のグリッド全体やリス�
 
 <docs-callout title="enter と leave する要素">
 
-すべての子要素が実際に enter/leaveする要素として扱われるわけではありません。これは直感に反して混乱しやすい場合があります。詳しくは[queryのAPIドキュメント](api/animations/query#entering-and-leaving-elements)を参照してください。
+すべての子要素が実際にenter/leaveする要素として扱われるわけではありません。これは直感に反して混乱しやすい場合があります。詳しくは[queryのAPIドキュメント](api/animations/query#entering-and-leaving-elements)を参照してください。
 
 また、アニメーションの例\(アニメーションの[導入セクション](guide/legacy-animations#about-this-guide)で紹介します\)のQueryingタブでも、この挙動を図で確認できます。
 

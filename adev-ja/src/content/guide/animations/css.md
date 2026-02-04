@@ -1,56 +1,56 @@
-# Animating your Application with CSS
+# CSSでアプリケーションをアニメーション化する
 
-CSS offers a robust set of tools for you to create beautiful and engaging animations within your application.
+CSSには、アプリケーション内で美しく魅力的なアニメーションを作成するための強力なツールが揃っています。
 
-## How to write animations in native CSS
+## ネイティブCSSでアニメーションを書く方法 {#how-to-write-animations-in-native-css}
 
-If you've never written any native CSS animations, there are a number of excellent guides to get you started. Here's a few of them:
-[MDN's CSS Animations guide](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animations/Using_CSS_animations)
-[W3Schools CSS3 Animations guide](https://www.w3schools.com/css/css3_animations.asp)
-[The Complete CSS Animations Tutorial](https://www.lambdatest.com/blog/css-animations-tutorial/)
-[CSS Animation for Beginners](https://thoughtbot.com/blog/css-animation-for-beginners)
+ネイティブCSSでアニメーションを書いたことがない場合は、入門に役立つ優れたガイドがいくつもあります。以下にいくつか紹介します。
+[MDNのCSSアニメーションガイド](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animations/Using_CSS_animations)
+[W3SchoolsのCSS3アニメーションガイド](https://www.w3schools.com/css/css3_animations.asp)
+[CSSアニメーションの完全チュートリアル](https://www.lambdatest.com/blog/css-animations-tutorial/)
+[初心者向けCSSアニメーション](https://thoughtbot.com/blog/css-animation-for-beginners)
 
-and a couple of videos:
-[Learn CSS Animation in 9 Minutes](https://www.youtube.com/watch?v=z2LQYsZhsFw)
-[Net Ninja CSS Animation Tutorial Playlist](https://www.youtube.com/watch?v=jgw82b5Y2MU&list=PL4cUxeGkcC9iGYgmEd2dm3zAKzyCGDtM5)
+また、次の動画も参考にしてください。
+[9分でCSSアニメーションを学ぶ](https://www.youtube.com/watch?v=z2LQYsZhsFw)
+[Net NinjaのCSSアニメーションチュートリアル再生リスト](https://www.youtube.com/watch?v=jgw82b5Y2MU&list=PL4cUxeGkcC9iGYgmEd2dm3zAKzyCGDtM5)
 
-Check some of these various guides and tutorials out, and then come back to this guide.
+まずはこれらのガイドやチュートリアルに目を通し、その後に本ガイドに戻ってきてください。
 
-## Creating Reusable Animations
+## 再利用可能なアニメーションを作成する {#creating-reusable-animations}
 
-You can create reusable animations that can be shared across your application using `@keyframes`. Define keyframe animations in a shared CSS file, and you'll be able to re-use those keyframe animations wherever you want within your application.
+`@keyframes`を使用すると、アプリケーション全体で共有できる再利用可能なアニメーションを作成できます。共通のCSSファイルにキーフレームアニメーションを定義しておけば、アプリケーション内の任意の場所で再利用できます。
 
 <docs-code header="animations.css" path="adev/src/content/examples/animations/src/app/animations.css" region="animation-shared"/>
 
-Adding the class `animated-class` to an element would trigger the animation on that element.
+要素に`animated-class`クラスを追加すると、その要素でアニメーションが開始されます。
 
-## Animating a Transition
+## トランジションをアニメーション化する {#animating-a-transition}
 
-### Animating State and Styles
+### 状態とスタイルをアニメーション化する {#animating-state-and-styles}
 
-You may want to animate between two different states, for example when an element is opened or closed. You can accomplish this by using CSS classes either using a keyframe animation or transition styling.
+要素を開いたり閉じたりするときなど、2つの異なる状態の間をアニメーションで遷移させたいことがあります。CSSクラスを切り替えることで、キーフレームアニメーションやトランジションを使って実現できます。
 
 <docs-code header="animations.css" path="adev/src/content/examples/animations/src/app/animations.css" region="animation-states"/>
 
-Triggering the `open` or `closed` state is done by toggling classes on the element in your component. You can find examples of how to do this in our [template guide](guide/templates/binding#css-class-and-style-property-bindings).
+`open`または`closed`状態のトリガーは、コンポーネント内で要素のクラスを切り替えて行います。例は、[テンプレートガイド](guide/templates/binding#css-class-and-style-property-bindings)で確認できます。
 
-You can see similar examples in the template guide for [animating styles directly](guide/templates/binding#css-style-properties).
+同様の例として、テンプレートガイドの[スタイルを直接アニメーション化する](guide/templates/binding#css-style-properties)も参照してください。
 
-### Transitions, Timing, and Easing
+### トランジション、タイミング、イージング {#transitions-timing-and-easing}
 
-Animating often requires adjusting timing, delays and easeing behaviors. This can be done using several css properties or shorthand properties.
+アニメーションでは、継続時間や遅延、イージングの挙動を調整することがよくあります。これは複数のCSSプロパティ（またはショートハンド）で指定できます。
 
-Specify `animation-duration`, `animation-delay`, and `animation-timing-function` for a keyframe animation in CSS, or alternatively use the `animation` shorthand property.
+キーフレームアニメーションでは、`animation-duration`、`animation-delay`、`animation-timing-function`を指定するか、`animation`ショートハンドプロパティを使用します。
 
 <docs-code header="animations.css" path="adev/src/content/examples/animations/src/app/animations.css" region="animation-timing"/>
 
-Similarly, you can use `transition-duration`, `transition-delay`, and `transition-timing-function` and the `transition` shorthand for animations that are not using `@keyframes`.
+同様に、`@keyframes`を使用しないアニメーションでは、`transition-duration`、`transition-delay`、`transition-timing-function`、および`transition`ショートハンドプロパティを使用できます。
 
 <docs-code header="animations.css" path="adev/src/content/examples/animations/src/app/animations.css" region="transition-timing"/>
 
-### Triggering an Animation
+### アニメーションをトリガーする {#triggering-an-animation}
 
-Animations can be triggered by toggling CSS styles or classes. Once a class is present on an element, the animation will occur. Removing the class will revert the element back to whatever CSS is defined for that element. Here's an example:
+アニメーションは、CSSのスタイルやクラスを切り替えることでトリガーできます。クラスが要素に追加されるとアニメーションが実行され、クラスを削除すると、その要素に定義されているCSSに戻ります。例を示します。
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/open-close.component.ts">
     <docs-code header="open-close.component.ts" path="adev/src/content/examples/animations/src/app/native-css/open-close.component.ts" />
@@ -58,11 +58,11 @@ Animations can be triggered by toggling CSS styles or classes. Once a class is p
     <docs-code header="open-close.component.css" path="adev/src/content/examples/animations/src/app/native-css/open-close.component.css"/>
 </docs-code-multifile>
 
-## Transition and Triggers
+## トランジションとトリガー {#transition-and-triggers}
 
-### Animating Auto Height
+### `height: auto` をアニメーション化する {#animating-auto-height}
 
-You can use css-grid to animate to auto height.
+CSS Gridを使用すると、`height: auto`へのアニメーションを実現できます。
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/auto-height.component.ts">
     <docs-code header="auto-height.component.ts" path="adev/src/content/examples/animations/src/app/native-css/auto-height.component.ts" />
@@ -70,11 +70,11 @@ You can use css-grid to animate to auto height.
     <docs-code header="auto-height.component.css" path="adev/src/content/examples/animations/src/app/native-css/auto-height.component.css"  />
 </docs-code-multifile>
 
-If you don't have to worry about supporting all browsers, you can also check out `calc-size()`, which is the true solution to animating auto height. See [MDN's docs](https://developer.mozilla.org/en-US/docs/Web/CSS/calc-size) and (this tutorial)[https://frontendmasters.com/blog/one-of-the-boss-battles-of-css-is-almost-won-transitioning-to-auto/] for more information.
+すべてのブラウザをサポートする必要がない場合は、`height: auto`をアニメーション化するためのより本質的な解決策である`calc-size()`も確認してください。詳しくは、[MDNのドキュメント](https://developer.mozilla.org/en-US/docs/Web/CSS/calc-size)とこの項目に関連する[チュートリアル](https://frontendmasters.com/blog/one-of-the-boss-battles-of-css-is-almost-won-transitioning-to-auto/)を参照してください。
 
-### Animate entering and leaving a view
+### ビューへの出入りをアニメーション化する {#animate-entering-and-leaving-a-view}
 
-You can create animations for when an item enters a view or leaves a view. Let's start by looking at how to animate an element entering a view. We'll do this with `animate.enter`, which will apply animation classes when an element enters the view.
+要素がビューに入るとき、またはビューから出るときのアニメーションを作成できます。まずは、ビューに入るときのアニメーションを見ていきましょう。`animate.enter`を使うと、要素がビューに入るときにアニメーション用のクラスが適用されます。
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/insert.component.ts">
     <docs-code header="insert.component.ts" path="adev/src/content/examples/animations/src/app/native-css/insert.component.ts" />
@@ -82,7 +82,7 @@ You can create animations for when an item enters a view or leaves a view. Let's
     <docs-code header="insert.component.css" path="adev/src/content/examples/animations/src/app/native-css/insert.component.css"  />
 </docs-code-multifile>
 
-Animating an element when it leaves the view is similar to animating when entering a view. Use `animate.leave` to specify which CSS classes to apply when the element leaves the view.
+ビューから出るときのアニメーションも、ビューに入るときと同様です。`animate.leave`で、要素がビューから出るときに適用するCSSクラスを指定します。
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/remove.component.ts">
     <docs-code header="remove.component.ts" path="adev/src/content/examples/animations/src/app/native-css/remove.component.ts" />
@@ -90,11 +90,11 @@ Animating an element when it leaves the view is similar to animating when enteri
     <docs-code header="remove.component.css" path="adev/src/content/examples/animations/src/app/native-css/remove.component.css"  />
 </docs-code-multifile>
 
-For more information on `animate.enter` and `animate.leave`, see the [Enter and Leave animations guide](guide/animations).
+`animate.enter`と`animate.leave`について詳しくは、[EnterとLeaveのアニメーションガイド](guide/animations/enter-and-leave)を参照してください。
 
-### Animating increment and decrement
+### インクリメントとデクリメントをアニメーション化する {#animating-increment-and-decrement}
 
-Animating on increment and decrement is a common pattern in applications. Here's an example of how you can accomplish that behavior.
+インクリメントとデクリメントに合わせてアニメーションするのは、アプリケーションでよくあるパターンです。以下はその例です。
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/increment-decrement.component.ts">
     <docs-code header="increment-decrement.component.ts" path="adev/src/content/examples/animations/src/app/native-css/increment-decrement.component.ts" />
@@ -102,11 +102,11 @@ Animating on increment and decrement is a common pattern in applications. Here's
     <docs-code header="increment-decrement.component.css" path="adev/src/content/examples/animations/src/app/native-css/increment-decrement.component.css" />
 </docs-code-multifile>
 
-### Disabling an animation or all animations
+### アニメーション（またはすべてのアニメーション）を無効にする {#disabling-an-animation-or-all-animations}
 
-If you'd like to disable the animations that you've specified, you have multiple options.
+指定したアニメーションを無効にする方法はいくつかあります。
 
-1. Create a custom class that forces animation and transition to `none`.
+1. `animation`と`transition`を`none`に強制するカスタムクラスを作成します。
 
 ```css
 .no-animation {
@@ -115,19 +115,19 @@ If you'd like to disable the animations that you've specified, you have multiple
 }
 ```
 
-Applying this class to an element prevents any animation from firing on that element. You could alternatively scope this to your entire DOM or section of your DOM to enforce this behavior. However, this prevents animation events from firing. If you are awaiting animation events for element removal, this solution won't work. A workaround is to set durations to 1 millisecond instead.
+このクラスを要素に適用すると、その要素ではアニメーションが一切実行されません。また、DOM全体またはDOMの一部にスコープすることで、この挙動を強制できます。ただし、この方法ではアニメーションイベントも発生しなくなります。要素の削除のためにアニメーションイベントを待っている場合、この方法は機能しません。回避策としては、継続時間を1ミリ秒に設定します。
 
-2. Use the [`prefers-reduced-motion`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion) media query to ensure no animations play for users that prefer less animation.
+2. [`prefers-reduced-motion`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)メディアクエリを使用して、アニメーションを控えたいユーザーにはアニメーションを再生しないようにします。
 
-3. Prevent adding animation classes programatically
+3. プログラムからアニメーションクラスを追加しないようにします。
 
-### Animation Callbacks
+### アニメーションのコールバック {#animation-callbacks}
 
-If you have actions you would like to execute at certain points during animations, there are a number of available events you can listen to. Here's a few of them.
+アニメーション中の特定のタイミングで処理を実行したい場合、リッスンできるイベントがいくつかあります。次はその一例です。
 
 [`OnAnimationStart`](https://developer.mozilla.org/en-US/docs/Web/API/Element/animationstart_event)  
 [`OnAnimationEnd`](https://developer.mozilla.org/en-US/docs/Web/API/Element/animationend_event)  
-[`OnAnimationIteration`](https://developer.mozilla.org/en-US/docs/Web/API/Element/animationitration_event)  
+[`OnAnimationIteration`](https://developer.mozilla.org/en-US/docs/Web/API/Element/animationiteration_event)  
 [`OnAnimationCancel`](https://developer.mozilla.org/en-US/docs/Web/API/Element/animationcancel_event)
 
 [`OnTransitionStart`](https://developer.mozilla.org/en-US/docs/Web/API/Element/transitionstart_event)  
@@ -135,17 +135,17 @@ If you have actions you would like to execute at certain points during animation
 [`OnTransitionEnd`](https://developer.mozilla.org/en-US/docs/Web/API/Element/transitionend_event)  
 [`OnTransitionCancel`](https://developer.mozilla.org/en-US/docs/Web/API/Element/transitioncancel_event)
 
-The Web Animations API has a lot of additional functionality. [Take a look at the documentation](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) to see all the available animation APIs.
+Web Animations APIには、他にも多くの機能があります。利用できるアニメーション関連APIについては、[ドキュメント](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API)を参照してください。
 
-NOTE: Be aware of bubbling issues with these callbacks. If you are animating children and parents, the events bubble up from children to parents. Consider stopping propagation or looking at more details within the event to determine if you're responding to the desired event target rather than an event bubbling up from a child node. You can examine the `animationname` property or the properties being transitioned to verify you have the right nodes.
+NOTE: これらのコールバックはバブリング（イベント伝播）します。子要素と親要素の両方をアニメーション化している場合、イベントは子要素から親要素へ伝播します。意図したイベントターゲットに応答しているかを判断するために、伝播を停止するか、イベントの詳細を確認してください。適切なノードを対象にしていることは、`animationname`プロパティやトランジション対象のプロパティを確認すると検証できます。
 
-## Complex Sequences
+## 複雑なシーケンス {#complex-sequences}
 
-Animations are often more complicated than just a simple fade in or fade out. You may have lots of complicated sequences of animations you may want to run. Let's take a look at some of those possible scenarios.
+アニメーションは、単純なフェードインやフェードアウトだけではありません。複数のアニメーションを組み合わせた複雑なシーケンスを実行したいこともあるでしょう。ここでは、そうしたシナリオをいくつか見ていきましょう。
 
-### Staggering animations in a list
+### リスト内のアニメーションに段階的な遅延を付ける {#staggering-animations-in-a-list}
 
-One common effect is to stagger the animations of each item in a list to create a cascade effect. This can be accomplished by utilizing `animation-delay` or `transition-delay`. Here is an example of what that CSS might look like.
+よくある効果の1つに、リスト内の各要素のアニメーションを段階的に遅らせてカスケード効果を作るものがあります。これは`animation-delay`または`transition-delay`を利用して実現できます。次はそのCSSの例です。
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/stagger.component.ts">
     <docs-code header="stagger.component.ts" path="adev/src/content/examples/animations/src/app/native-css/stagger.component.ts" />
@@ -153,9 +153,9 @@ One common effect is to stagger the animations of each item in a list to create 
     <docs-code header="stagger.component.css" path="adev/src/content/examples/animations/src/app/native-css/stagger.component.css" />
 </docs-code-multifile>
 
-### Parallel Animations
+### 並行アニメーション {#parallel-animations}
 
-You can apply multiple animations to an element at once using the `animation` shorthand property. Each can have their own durations and delays. This allows you to compose animations together and create complicated effects.
+`animation`ショートハンドプロパティを使用すると、1つの要素に複数のアニメーションを同時に適用できます。それぞれに継続時間や遅延を個別に設定できるため、アニメーションを合成して複雑な効果を作成できます。
 
 ```css
 .target-element {
@@ -165,11 +165,11 @@ You can apply multiple animations to an element at once using the `animation` sh
 }
 ```
 
-In this example, the `rotate` and `fade-in` animations fire at the same time, but have different durations.
+この例では、`rotate`と`fade-in`のアニメーションは同時に実行されますが、継続時間が異なります。
 
-### Animating the items of a reordering list
+### 並び替え可能なリストの要素をアニメーション化する {#animating-the-items-of-a-reordering-list}
 
-Items in a `@for` loop will be removed and re-added, which will fire off animations using `@starting-styles` for entry animations. Alternatively, you can use `animate.enter` for this same behavior. Use `animate.leave` to animate elements as they are removed, as seen in the example below.
+`@for`ループ内の要素は削除されて再追加されるため、enterアニメーションとして`@starting-styles`を使用したアニメーションが実行されます。同じ挙動は`animate.enter`でも実現できます。要素が削除されるときにアニメーションするには、以下の例のように`animate.leave`を使用します。
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/reorder.component.ts">
     <docs-code header="reorder.component.ts" path="adev/src/content/examples/animations/src/app/native-css/reorder.component.ts" />
@@ -177,15 +177,15 @@ Items in a `@for` loop will be removed and re-added, which will fire off animati
     <docs-code header="reorder.component.css" path="adev/src/content/examples/animations/src/app/native-css/reorder.component.css" />
 </docs-code-multifile>
 
-## Programmatic control of animations
+## アニメーションをプログラムで制御する {#programmatic-control-of-animations}
 
-You can retrieve animations off an element directly using [`Element.getAnimations()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAnimations). This returns an array of every [`Animation`](https://developer.mozilla.org/en-US/docs/Web/API/Animation) on that element. You can use the `Animation` API to do much more than you could with what the `AnimationPlayer` from the animations package offered. From here you can `cancel()`, `play()`, `pause()`, `reverse()` and much more. This native API should provide everything you need to control your animations.
+[`Element.getAnimations()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAnimations)を使用すると、要素に関連付けられたアニメーションを直接取得できます。これは、その要素上のすべての[`Animation`](https://developer.mozilla.org/en-US/docs/Web/API/Animation)を配列として返します。`Animation` APIを使えば、`@angular/animations`パッケージの`AnimationPlayer`よりも多くの操作が可能です。`cancel()`、`play()`、`pause()`、`reverse()`などを呼び出せます。このネイティブAPIだけで、アニメーションの制御に必要な機能が揃います。
 
-## More on Angular animations
+## Angularアニメーションについてさらに詳しく {#more-on-angular-animations}
 
-You might also be interested in the following:
+以下の項目にも興味があるかもしれません：
 
 <docs-pill-row>
-  <docs-pill href="guide/animations" title="Enter and Leave animations"/>
-  <docs-pill href="guide/routing/route-transition-animations" title="Route transition animations"/>
+  <docs-pill href="guide/animations" title="EnterとLeaveのアニメーション"/>
+  <docs-pill href="guide/routing/route-transition-animations" title="ルート遷移アニメーション"/>
 </docs-pill-row>

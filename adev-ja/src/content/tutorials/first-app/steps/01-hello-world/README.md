@@ -117,7 +117,6 @@ SUMMARY: このレッスンでは、Angularのデフォルトアプリケーシ�
 このレッスンで扱った内容の詳細については、次のページをご覧ください:
 
 <docs-pill-row>
-  <docs-pill href="/overview" title="Angularとは"/>
   <docs-pill href="guide/components" title="Angularコンポーネント"/>
   <docs-pill href="tools/cli" title="Angular CLIを使ったアプリケーションの作成"/>
 </docs-pill-row>

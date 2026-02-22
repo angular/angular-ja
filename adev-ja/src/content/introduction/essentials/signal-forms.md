@@ -36,18 +36,18 @@ loginForm.email;
 loginForm.password;
 ```
 
-### 3. `[field]`ディレクティブでHTML入力をバインドする {#3-bind-html-inputs-with-field-directive}
+### 3. `[formField]`ディレクティブでHTML入力をバインドする {#3-bind-html-inputs-with-field-directive}
 
-次に、`[field]`ディレクティブを使用してHTMLの入力をフォームにバインドします。これにより、それらの間に双方向バインディングが作成されます:
+次に、`[formField]`ディレクティブを使用してHTMLの入力をフォームにバインドします。これにより、それらの間に双方向バインディングが作成されます:
 
 ```html
-<input type="email" [field]="loginForm.email" />
-<input type="password" [field]="loginForm.password" />
+<input type="email" [formField]="loginForm.email" />
+<input type="password" [formField]="loginForm.password" />
 ```
 
 その結果、ユーザーによる変更（フィールドへの入力など）は自動的にフォームを更新します。
 
-NOTE: `[field]`ディレクティブは、必要に応じて`required`、`disabled`、`readonly`などの属性のフィールドの状態も同期します。
+NOTE: `[formField]`ディレクティブは、必要に応じて`required`、`disabled`、`readonly`などの属性のフィールドの状態も同期します。
 
 ### 4. `value()`でフィールドの値を読み取る {#4-read-field-values-with-value}
 
@@ -95,7 +95,7 @@ console.log(loginModel().email); // 'alice@wonderland.com'
 
 ## 基本的な使い方 {#basic-usage}
 
-`[field]`ディレクティブは、すべての標準的なHTMLのinputタイプで動作します。以下は、最も一般的なパターンです:
+`[formField]`ディレクティブは、すべての標準的なHTMLのinputタイプで動作します。以下は、最も一般的なパターンです:
 
 ### テキスト入力 {#text-inputs}
 
@@ -103,8 +103,8 @@ console.log(loginModel().email); // 'alice@wonderland.com'
 
 ```html
 <!-- Text and email -->
-<input type="text" [field]="form.name" />
-<input type="email" [field]="form.email" />
+<input type="text" [formField]="form.name" />
+<input type="email" [formField]="form.email" />
 ```
 
 #### 数値 {#numbers}
@@ -113,7 +113,7 @@ console.log(loginModel().email); // 'alice@wonderland.com'
 
 ```html
 <!-- Number - automatically converts to number type -->
-<input type="number" [field]="form.age" />
+<input type="number" [formField]="form.age" />
 ```
 
 #### 日付と時刻 {#date-and-time}
@@ -122,8 +122,8 @@ console.log(loginModel().email); // 'alice@wonderland.com'
 
 ```html
 <!-- Date and time - stores as ISO format strings -->
-<input type="date" [field]="form.eventDate" />
-<input type="time" [field]="form.eventTime" />
+<input type="date" [formField]="form.eventDate" />
+<input type="time" [formField]="form.eventTime" />
 ```
 
 日付文字列をDateオブジェクトに変換する必要がある場合は、フィールドの値を`Date()`に渡すことで変換できます:
@@ -138,7 +138,7 @@ Textareaはテキスト入力と同じように動作します:
 
 ```html
 <!-- Textarea -->
-<textarea [field]="form.message" rows="4"></textarea>
+<textarea [formField]="form.message" rows="4"></textarea>
 ```
 
 ### チェックボックス {#checkboxes}
@@ -148,42 +148,42 @@ Textareaはテキスト入力と同じように動作します:
 ```html
 <!-- Single checkbox -->
 <label>
-  <input type="checkbox" [field]="form.agreeToTerms" />
+  <input type="checkbox" [formField]="form.agreeToTerms" />
   I agree to the terms
 </label>
 ```
 
 #### 複数チェックボックス {#multiple-checkboxes}
 
-複数のオプションがある場合は、それぞれに個別のブール値の`field`を作成します:
+複数のオプションがある場合は、それぞれに個別のブール値の`formField`を作成します:
 
 ```html
 <label>
-  <input type="checkbox" [field]="form.emailNotifications" />
+  <input type="checkbox" [formField]="form.emailNotifications" />
   Email notifications
 </label>
 <label>
-  <input type="checkbox" [field]="form.smsNotifications" />
+  <input type="checkbox" [formField]="form.smsNotifications" />
   SMS notifications
 </label>
 ```
 
 ### ラジオボタン {#radio-buttons}
 
-ラジオボタンはチェックボックスと同様に動作します。ラジオボタンが同じ`[field]`値を使用している限り、シグナルフォームは自動的に同じ`name`属性をすべてのラジオボタンにバインドします:
+ラジオボタンはチェックボックスと同様に動作します。ラジオボタンが同じ`[formField]`値を使用している限り、シグナルフォームは自動的に同じ`name`属性をすべてのラジオボタンにバインドします:
 
 ```html
 <label>
-  <input type="radio" value="free" [field]="form.plan" />
+  <input type="radio" value="free" [formField]="form.plan" />
   Free
 </label>
 <label>
-  <input type="radio" value="premium" [field]="form.plan" />
+  <input type="radio" value="premium" [formField]="form.plan" />
   Premium
 </label>
 ```
 
-ユーザーがラジオボタンを選択すると、フォームの`field`にはそのラジオボタンの`value`属性の値が保存されます。例えば、「Premium」を選択すると、`form.plan().value()`は`"premium"`に設定されます。
+ユーザーがラジオボタンを選択すると、フォームの`formField`にはそのラジオボタンの`value`属性の値が保存されます。例えば、「Premium」を選択すると、`form.plan().value()`は`"premium"`に設定されます。
 
 ### selectドロップダウン {#select-dropdowns}
 
@@ -191,14 +191,14 @@ Select要素は、静的オプションと動的オプションの両方で動�
 
 ```angular-html
 <!-- Static options -->
-<select [field]="form.country">
+<select [formField]="form.country">
   <option value="">Select a country</option>
   <option value="us">United States</option>
   <option value="ca">Canada</option>
 </select>
 
 <!-- Dynamic options with @for -->
-<select [field]="form.productId">
+<select [formField]="form.productId">
   <option value="">Select a product</option>
   @for (product of products; track product.id) {
     <option [value]="product.id">{{ product.name }}</option>
@@ -206,7 +206,7 @@ Select要素は、静的オプションと動的オプションの両方で動�
 </select>
 ```
 
-NOTE: 複数選択(`<select multiple>`)は、現時点では`[field]`ディレクティブでサポートされていません。
+NOTE: 複数選択(`<select multiple>`)は、現時点では`[formField]`ディレクティブでサポートされていません。
 
 ## バリデーションと状態 {#validation-and-state}
 

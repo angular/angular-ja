@@ -25,7 +25,7 @@ Angularの主要なコンセプトに入門できました。学んだことを�
 興味のある詳細なガイドを以下に示します。
 
 <docs-pill-row>
-  <docs-pill title="コンポーネントの詳細ガイド" href="guide/components/importing" />
+  <docs-pill title="コンポーネントの詳細ガイド" href="guide/components" />
   <docs-pill title="テンプレートの詳細ガイド" href="guide/templates" />
   <docs-pill title="フォームの詳細ガイド" href="/guide/forms" />
 </docs-pill-row>

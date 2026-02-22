@@ -7,7 +7,7 @@
   Googleの専門チームによって管理されているAngularは、開発ワークフローを簡素化および効率化するための幅広いツール、API、
   ライブラリのスイートを提供します。Angularは、チームの規模とコードベースの規模の両方に合わせて拡張できる、
   高速で信頼性の高いアプリケーションを構築するための堅実なプラットフォームを
-  提供します。
+  提供します。Angular.devはAngularドキュメントの公式ホームです。
 </div>
 
 <docs-nav-card title="コードを見たいですか？" iconImgSrc="adev/src/assets/icons/star.svg">

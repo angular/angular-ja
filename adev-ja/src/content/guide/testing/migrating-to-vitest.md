@@ -228,7 +228,7 @@ IMPORTANT: カスタム設定を使用すると高度なオプションが有効
 ## `zone.js`ベースのヘルパーはサポートされていません {#zonejs-based-helpers-are-not-supported}
 
 Vitestでテストを実行する場合、zone.jsのパッチは適用されないため、`fakeAsync`、`flush`、`waitForAsync`のような関数は使用できません。
-Vitestに移行するには、テストもネイティブasyncとVitestのフェイクタイマーに移行する必要があります。Vitestでのフェイクタイマーの使用例については、[こちらの例](/components-scenarios#async-test-with-a-vitest-fake-timers)を参照してください。
+Vitestに移行するには、テストもネイティブasyncとVitestのフェイクタイマーに移行する必要があります。Vitestでのフェイクタイマーの使用例については、[こちらの例](/guide/testing/components-scenarios#async-test-with-a-vitest-fake-timers)を参照してください。
 
 ## バグレポート {#bug-reports}
 

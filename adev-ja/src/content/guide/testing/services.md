@@ -47,9 +47,9 @@ describe('ValueService', () => {
 ## Angular `TestBed` {#angular-testbed}
 
 `TestBed` は、Angularのテストユーティリティの中で最も重要なものです。
-`TestBed` は、Angularの [@NgModule](guide/ngmodules) をエミュレートする、動的に構築されたAngularの _テスト_ モジュールを作成します。
+`TestBed` は、Angularの [@NgModule](guide/ngmodules/overview) をエミュレートする、動的に構築されたAngularの _テスト_ モジュールを作成します。
 
-`TestBed.configureTestingModule()` メソッドは、[@NgModule](guide/ngmodules) のほとんどのプロパティを持つことができるメタデータオブジェクトを受け取ります。
+`TestBed.configureTestingModule()` メソッドは、[@NgModule](guide/ngmodules/overview) のほとんどのプロパティを持つことができるメタデータオブジェクトを受け取ります。
 
 サービスをテストするには、テストまたはモックするサービスの配列を `providers` メタデータプロパティに設定します。
 

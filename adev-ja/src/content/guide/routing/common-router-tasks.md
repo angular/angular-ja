@@ -62,18 +62,18 @@ NOTE: 静的なルートデータ、解決されたルートデータ、パス�
 
 ## 404 ページの表示 {#displaying-a-404-page}
 
-404ページを表示するには、[ワイルドカードルート](guide/routing/common-router-tasks#setting-up-wildcard-routes) を設定します。このルートの `component` プロパティは、404ページに使用したいコンポーネントに設定します。
+404ページを表示するには、[ワイルドカードルート](guide/routing/define-routes#wildcards) を設定します。このルートの `component` プロパティは、404ページに使用したいコンポーネントに設定します。
 
 ```ts
 const routes: Routes = [
-  {path: 'first-component', component: FirstComponent},
-  {path: 'second-component', component: SecondComponent},
-  {path: '**', component: PageNotFoundComponent}, // Wildcard route for a 404 page
+  {path: 'first-component', component: First},
+  {path: 'second-component', component: Second},
+  {path: '**', component: PageNotFound}, // Wildcard route for a 404 page
 ];
 ```
 
 `path` が `**` の最後のルートは、ワイルドカードルートです。
-ルーターは、要求されたURLがリストの先頭にあるパスと一致しない場合、このルートを選択し、ユーザーを `PageNotFoundComponent` にルーティングします。
+ルーターは、要求されたURLがリストの先頭にあるパスと一致しない場合、このルートを選択し、ユーザーを `PageNotFound` にルーティングします。
 
 ## リンクパラメータ配列 {#link-parameters-array}
 
@@ -92,14 +92,15 @@ const routes: Routes = [
 
 ```angular-html
 <a [routerLink]="['/hero', hero.id]">
-  <span class="badge">{{ hero.id }}</span>{{ hero.name }}
+  <span class="badge">{{ hero.id }}</span
+  >{{ hero.name }}
 </a>
 ```
 
 オプションのルートパラメータは、`{ foo: 'foo' }` のようにオブジェクトで指定します。
 
 ```angular-html
-<a [routerLink]="['/crisis-center', { foo: 'foo' }]">Crisis Center</a>
+<a [routerLink]="['/crisis-center', {foo: 'foo'}]">Crisis Center</a>
 ```
 
 この構文はマトリックスパラメータを渡します。これは、特定のURLセグメントに関連付けられたオプションのパラメータです。[マトリックスパラメータ](/guide/routing/read-route-state#matrix-parameters)の詳細をご覧ください。
@@ -118,9 +119,9 @@ const routes: Routes = [
 - 配列の最初の項目は、親ルート \(`/crisis-center`\) を識別します
 - この親ルートのパラメータはありません
 - 子ルートのデフォルトがないため、1つを選択する必要があります
-- `CrisisListComponent` にナビゲートしており、そのルートパスは `/` ですが、スラッシュを明示的に追加する必要はありません
+- `CrisisList` にナビゲートしており、そのルートパスは `/` ですが、スラッシュを明示的に追加する必要はありません
 
-危機センターのルートを排他的に使用して、`AppComponent` テンプレートを再定義できます。
+危機センターのルートを排他的に使用して、`App` テンプレートを再定義できます。
 
 ```angular-html
 <a [routerLink]="['/crisis-center', 1]">Dragon Crisis</a>
@@ -133,7 +134,7 @@ const routes: Routes = [
 - 配列の2番目の項目として、Dragon Crisisの `id` を追加しました。
 - 結果のパスは `/crisis-center/1` です。
 
-また、`AppComponent`テンプレートを危機センターのルート専用に再定義できます：
+また、`App`テンプレートを危機センターのルート専用に再定義できます：
 
 ```angular-ts
 @Component({
@@ -141,13 +142,13 @@ const routes: Routes = [
     <h1 class="title">Angular Router</h1>
     <nav>
       <a [routerLink]="['/crisis-center']">Crisis Center</a>
-      <a [routerLink]="['/crisis-center/1', { foo: 'foo' }]">Dragon Crisis</a>
+      <a [routerLink]="['/crisis-center/1', {foo: 'foo'}]">Dragon Crisis</a>
       <a [routerLink]="['/crisis-center/2']">Shark Crisis</a>
     </nav>
     <router-outlet />
-  `
+  `,
 })
-export class AppComponent {}
+export class App {}
 ```
 
 要約すると、ルーティングが1レベル、2レベル、または複数レベルのアプリケーションを作成できます。
@@ -184,4 +185,4 @@ localhost:3002/src/#/crisis-center
 `RouterModule.forRoot()` 関数は、`LocationStrategy` を `PathLocationStrategy` に設定します。これにより、デフォルトの戦略になります。
 ブートストラッププロセス中にオーバーライドを使用して、`HashLocationStrategy` に切り替えることもできます。
 
-HELPFUL: プロバイダーとブートストラッププロセスの詳細については、[依存性の注入](guide/di/dependency-injection-providers) を参照してください。
+HELPFUL: プロバイダーとブートストラッププロセスの詳細については、[依存性の注入](guide/di/defining-dependency-providers) を参照してください。

@@ -76,17 +76,17 @@ export const routes: Routes = [
 `signal`関数を使用して`ActivatedRoute`からスナップショットデータにアクセスすることで、コンポーネントで解決済みデータにアクセスできます。
 
 ```angular-ts
-import { Component, inject, computed } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
-import type { User, Settings } from './types';
+import {Component, inject, computed} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {toSignal} from '@angular/core/rxjs-interop';
+import type {User, Settings} from './types';
 
 @Component({
   template: `
     <h1>{{ user().name }}</h1>
     <p>{{ user().email }}</p>
     <div>Theme: {{ settings().theme }}</div>
-  `
+  `,
 })
 export class UserDetail {
   private route = inject(ActivatedRoute);
@@ -113,15 +113,15 @@ bootstrapApplication(App, {
 この設定により、`input`関数と、必須入力には`input.required`を使用して、リゾルバーキーと一致する入力をコンポーネントで定義できます。
 
 ```angular-ts
-import { Component, input } from '@angular/core';
-import type { User, Settings } from './types';
+import {Component, input} from '@angular/core';
+import type {User, Settings} from './types';
 
 @Component({
   template: `
     <h1>{{ user().name }}</h1>
     <p>{{ user().email }}</p>
     <div>Theme: {{ settings().theme }}</div>
-  `
+  `,
 })
 export class UserDetail {
   user = input.required<User>();
@@ -186,10 +186,10 @@ export const userResolver: ResolveFn<User> = (route) => {
 ルーターイベントをサブスクライブし、`NavigationError`イベントをリッスンすることで、リゾルバーのエラーを処理できます。このアプローチにより、エラー処理をよりきめ細かく制御でき、カスタムのエラー回復ロジックを実装できます。
 
 ```angular-ts
-import { Component, inject, signal } from '@angular/core';
-import { Router, NavigationError } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
+import {Component, inject, signal} from '@angular/core';
+import {Router, NavigationError} from '@angular/router';
+import {toSignal} from '@angular/core/rxjs-interop';
+import {map} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -201,7 +201,7 @@ import { map } from 'rxjs';
       </div>
     }
     <router-outlet />
-  `
+  `,
 })
 export class App {
   private router = inject(Router);
@@ -209,20 +209,20 @@ export class App {
 
   private navigationErrors = toSignal(
     this.router.events.pipe(
-      map(event => {
+      map((event) => {
         if (event instanceof NavigationError) {
           this.lastFailedUrl.set(event.url);
 
           if (event.error) {
-            console.error('Navigation error', event.error)
+            console.error('Navigation error', event.error);
           }
 
           return 'Navigation failed. Please try again.';
         }
         return '';
-      })
+      }),
     ),
-    { initialValue: '' }
+    {initialValue: ''},
   );
 
   errorMessage = this.navigationErrors;
@@ -275,8 +275,8 @@ export const userResolver: ResolveFn<User | RedirectCommand> = (route) => {
 リゾルバーの実行中のユーザー体験を向上させるには、ルーターイベントをリッスンして読み込みインジケーターを表示できます。
 
 ```angular-ts
-import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, inject} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -285,7 +285,7 @@ import { Router } from '@angular/router';
       <div class="loading-bar">Loading...</div>
     }
     <router-outlet />
-  `
+  `,
 })
 export class App {
   private router = inject(Router);

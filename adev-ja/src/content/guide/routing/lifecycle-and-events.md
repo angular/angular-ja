@@ -32,11 +32,13 @@ Angularルーターは、ナビゲーションライフサイクルを追跡す�
 
 ```ts
 // Example of subscribing to router events
-import { Component, inject, signal, effect } from '@angular/core';
-import { Event, Router, NavigationStart, NavigationEnd } from '@angular/router';
+import {Component, inject, signal, effect} from '@angular/core';
+import {Event, Router, NavigationStart, NavigationEnd} from '@angular/router';
 
-@Component({ ... })
-export class RouterEventsComponent {
+@Component({
+  /*...*/
+})
+export class RouterEvents {
   private readonly router = inject(Router);
 
   constructor() {
@@ -67,7 +69,7 @@ NOTE: `@angular/router`の[`Event`](api/router/Event)型は、通常のグロー
 import {provideRouter, withDebugTracing} from '@angular/router';
 
 const appRoutes: Routes = [];
-bootstrapApplication(AppComponent, {
+bootstrapApplication(App, {
   providers: [provideRouter(appRoutes, withDebugTracing())],
 });
 ```
@@ -83,8 +85,8 @@ bootstrapApplication(AppComponent, {
 ナビゲーション中にローディングインジケーターを表示します。
 
 ```angular-ts
-import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, inject} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -93,7 +95,7 @@ import { Router } from '@angular/router';
       <div class="loading-bar">Loading...</div>
     }
     <router-outlet />
-  `
+  `,
 })
 export class App {
   private router = inject(Router);
@@ -138,9 +140,15 @@ export class AnalyticsService {
 ナビゲーションエラーを適切に処理し、ユーザーフィードバックを提供します。
 
 ```angular-ts
-import { Component, inject, signal } from '@angular/core';
-import { Router, NavigationStart, NavigationError, NavigationCancel, NavigationCancellationCode } from '@angular/router';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {Component, inject, signal} from '@angular/core';
+import {
+  Router,
+  NavigationStart,
+  NavigationError,
+  NavigationCancel,
+  NavigationCancellationCode,
+} from '@angular/router';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-error-handler',
@@ -151,14 +159,14 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         <button (click)="dismissError()">Dismiss</button>
       </div>
     }
-  `
+  `,
 })
-export class ErrorHandlerComponent {
+export class ErrorHandler {
   private router = inject(Router);
   readonly errorMessage = signal('');
 
   constructor() {
-    this.router.events.pipe(takeUntilDestroyed()).subscribe(event => {
+    this.router.events.pipe(takeUntilDestroyed()).subscribe((event) => {
       if (event instanceof NavigationStart) {
         this.errorMessage.set('');
       } else if (event instanceof NavigationError) {

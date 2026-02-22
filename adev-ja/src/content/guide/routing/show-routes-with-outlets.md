@@ -2,9 +2,10 @@
 
 `RouterOutlet`ディレクティブは、ルーターが現在のURLに対応するコンポーネントをレンダリングする場所を示すプレースホルダーです。
 
-```angular-html
+```html
 <app-header />
-<router-outlet />  <!-- Angularはここにルートコンテンツを挿入します -->
+<!-- Angularはここにルートコンテンツを挿入します -->
+<router-outlet />
 <app-footer />
 ```
 
@@ -15,28 +16,28 @@ import {RouterOutlet} from '@angular/router';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  templateUrl: './app.html',
+  styleUrl: './app.css',
 })
-export class AppComponent {}
+export class App {}
 ```
 
 この例では、アプリケーションに次のルートが定義されている場合:
 
 ```ts
 import {Routes} from '@angular/router';
-import {HomeComponent} from './home/home.component';
-import {ProductsComponent} from './products/products.component';
+import {Home} from './home';
+import {Products} from './products';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    component: Home,
     title: 'Home Page',
   },
   {
     path: 'products',
-    component: ProductsComponent,
+    component: Products,
     title: 'Our Products',
   },
 ];
@@ -99,16 +100,16 @@ const routes: Routes = [
 ```ts
 const routes: Routes = [
   {
-    path: 'settings-component',
-    component: SettingsComponent, // これはテンプレートに<router-outlet>を持つコンポーネントです
+    path: 'settings',
+    component: Settings, // これはテンプレートに<router-outlet>を持つコンポーネントです
     children: [
       {
         path: 'profile', // 子ルートのパス
-        component: ProfileComponent, // ルーターがレンダリングする子ルートコンポーネント
+        component: Profile, // ルーターがレンダリングする子ルートコンポーネント
       },
       {
         path: 'security',
-        component: SecurityComponent, // ルーターがレンダリングする別の子ルートコンポーネント
+        component: Security, // ルーターがレンダリングする別の子ルートコンポーネント
       },
     ],
   },
@@ -124,8 +125,8 @@ const routes: Routes = [
 ```angular-html
 <app-header />
 <router-outlet />
-<router-outlet name='read-more' />
-<router-outlet name='additional-actions' />
+<router-outlet name="read-more" />
+<router-outlet name="additional-actions" />
 <app-footer />
 ```
 
@@ -156,10 +157,10 @@ Angularは、各ルートで定義された`outlet`プロパティにアウト�
 
 ```angular-html
 <router-outlet
-  (activate)='onActivate($event)'
-  (deactivate)='onDeactivate($event)'
-  (attach)='onAttach($event)'
-  (detach)='onDetach($event)'
+  (activate)="onActivate($event)"
+  (deactivate)="onDeactivate($event)"
+  (attach)="onAttach($event)"
+  (detach)="onDetach($event)"
 />
 ```
 
@@ -178,10 +179,10 @@ import {RouterOutlet} from '@angular/router';
   imports: [RouterOutlet],
   template: `
     <h2>Dashboard</h2>
-    <router-outlet [routerOutletData]="{ layout: 'sidebar' }" />
+    <router-outlet [routerOutletData]="{layout: 'sidebar'}" />
   `,
 })
-export class DashboardComponent {}
+export class Dashboard {}
 ```
 
 ルーティングされたコンポーネントは、`ROUTER_OUTLET_DATA`を使用して提供されたアウトレットデータをインジェクトできます。
@@ -194,12 +195,12 @@ import {ROUTER_OUTLET_DATA} from '@angular/router';
   selector: 'app-stats',
   template: `<p>Stats view (layout: {{ outletData().layout }})</p>`,
 })
-export class StatsComponent {
-  outletData = inject(ROUTER_OUTLET_DATA) as Signal<{ layout: string }>;
+export class Stats {
+  outletData = inject(ROUTER_OUTLET_DATA) as Signal<{layout: string}>;
 }
 ```
 
-Angularがそのアウトレット内で`StatsComponent`をアクティブ化すると、インジェクトされたデータとして`{ layout: 'sidebar' }`を受け取ります。
+Angularがそのアウトレット内で`Stats`をアクティブ化すると、インジェクトされたデータとして`{ layout: 'sidebar' }`を受け取ります。
 
 NOTE: `routerOutletData`入力が設定されていない場合、インジェクトされる値はデフォルトでnullです。
 

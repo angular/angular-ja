@@ -78,7 +78,7 @@ export const routes: Routes = [
 @Component({
   /* ... */
 })
-export class CustomerComponent {
+export class Customer {
   private route = inject(ActivatedRoute);
 
   orgId = this.route.parent?.parent?.snapshot.params['orgId'];
@@ -97,7 +97,7 @@ export class CustomerComponent {
 @Component({
   /* ... */
 })
-export class CustomerComponent {
+export class Customer {
   private route = inject(ActivatedRoute);
 
   // All parent parameters are available directly
@@ -248,9 +248,7 @@ NOTE: `canMatch`ガードが関与している場合、重複したエントリ�
 import {provideRouter, withExperimentalAutoCleanupInjectors} from '@angular/router';
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideRouter(routes, withExperimentalAutoCleanupInjectors())
-  ]
+  providers: [provideRouter(routes, withExperimentalAutoCleanupInjectors())],
 };
 ```
 
@@ -298,17 +296,17 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
 export const routes: Routes = [
   {
     path: 'products',
-    component: ProductListComponent,
+    component: ProductList,
     data: {reuse: true}, // Component state persists across navigations
   },
   {
     path: 'products/:id',
-    component: ProductDetailComponent,
+    component: ProductDetail,
     // No reuse flag - component recreates on each navigation
   },
   {
     path: 'search',
-    component: SearchComponent,
+    component: Search,
     data: {reuse: true}, // Preserves search results and filter state
   },
 ];
@@ -516,7 +514,7 @@ export function versionMatcher(segments: UrlSegment[]): UrlMatchResult | null {
 export const routes: Routes = [
   {
     matcher: versionMatcher,
-    component: DocumentationComponent,
+    component: Documentation,
   },
   {
     path: 'latest/docs',
@@ -528,8 +526,8 @@ export const routes: Routes = [
 コンポーネントは、ルート入力を介して抽出されたパラメーターを受け取ります:
 
 ```angular-ts
-import { Component, input, inject } from '@angular/core';
-import { resource } from '@angular/core';
+import {Component, input, inject} from '@angular/core';
+import {resource} from '@angular/core';
 
 @Component({
   selector: 'app-documentation',
@@ -541,12 +539,12 @@ import { resource } from '@angular/core';
     } @else if (documentation.value(); as docs) {
       <article>{{ docs.content }}</article>
     }
-  `
+  `,
 })
-export class DocumentationComponent {
+export class Documentation {
   // Route parameters are automatically bound to signal inputs
-  version = input.required<string>();  // Receives the version parameter
-  section = input.required<string>();  // Receives the section parameter
+  version = input.required<string>(); // Receives the version parameter
+  section = input.required<string>(); // Receives the section parameter
 
   private docsService = inject(DocumentationService);
 
@@ -557,13 +555,13 @@ export class DocumentationComponent {
 
       return {
         version: this.version(),
-        section: this.section()
-      }
+        section: this.section(),
+      };
     },
-    loader: ({ params }) => {
+    loader: ({params}) => {
       return this.docsService.loadDocumentation(params.version, params.section);
-    }
-  })
+    },
+  });
 }
 ```
 

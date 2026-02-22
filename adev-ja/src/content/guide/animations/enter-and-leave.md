@@ -55,6 +55,16 @@ NOTE: 要素に複数のキーフレームアニメーションまたはtransiti
     <docs-code header="leave-binding.css" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-binding.css"/>
 </docs-code-multifile>
 
+### 要素の削除順序が重要 {#element-removal-order-matters}
+
+`animate.leave`アニメーションの実行方法とアニメーションが発生するタイミングには、いくつかの微妙な点があります。`animate.leave`は、削除される要素に配置されている場合に機能します。ただし、`animate.leave`は、削除される要素の_子孫_の要素にある場合はアニメーション**しません**。これは、親ノードが削除されると、サブツリー全体が一緒に削除され、その親ノードにアニメーションがないため、即座に削除されるためです。これは、`animate.leave`でアニメーション化する要素がないことを意味します。`animate.leave`の使用においてこのことを考慮する必要があります。
+
+<docs-code-multifile preview path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-parent.ts">
+    <docs-code header="leave.ts" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-parent.ts" />
+    <docs-code header="leave.html" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-parent.html" />
+    <docs-code header="leave.css" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-parent.css"/>
+</docs-code-multifile>
+
 ## イベントバインディング、関数、およびサードパーティライブラリ {#event-bindings-functions-and-third-party-libraries}
 
 `animate.enter`と`animate.leave`はどちらも、関数呼び出しを可能にするイベントバインディング構文をサポートしています。この構文を使用して、コンポーネントコード内の関数を呼び出したり、[GSAP](https://gsap.com/)、[anime.js](https://animejs.com/)などのサードパーティのアニメーションライブラリ、またはその他のJavaScriptアニメーションライブラリを利用したり可能です。

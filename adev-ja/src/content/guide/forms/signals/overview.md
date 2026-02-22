@@ -32,15 +32,15 @@ NOTE: テンプレート駆動フォームやリアクティブフォームか�
 シグナルフォームはすでに`@angular/forms`パッケージに含まれています。`@angular/forms/signals`から必要な関数とディレクティブをインポートします:
 
 ```ts
-import {form, Field, required, email} from '@angular/forms/signals';
+import {form, FormField, required, email} from '@angular/forms/signals';
 ```
 
-`Field`ディレクティブは、フォームフィールドをHTML入力にバインドするすべてのコンポーネントにインポートする必要があります:
+`FormField`ディレクティブは、フォームフィールドをHTML入力にバインドするすべてのコンポーネントにインポートする必要があります:
 
 ```ts
 @Component({
   // ...
-  imports: [Field],
+  imports: [FormField],
 })
 ```
 
@@ -51,7 +51,7 @@ import {form, Field, required, email} from '@angular/forms/signals';
 <docs-pill-row>
   <docs-pill href="essentials/signal-forms" title="Signal forms essentials" />
   <docs-pill href="guide/forms/signals/models" title="Form models" />
-  <docs-pill href="guide/forms/signals/designing-your-form-model" title="Designing your form model" />
+  <docs-pill href="guide/forms/signals/model-design" title="Designing your form model" />
   <docs-pill href="guide/forms/signals/field-state-management" title="Field state management" />
   <docs-pill href="guide/forms/signals/validation" title="Validation" />
   <docs-pill href="guide/forms/signals/custom-controls" title="Custom controls" />

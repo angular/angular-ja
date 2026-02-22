@@ -22,7 +22,7 @@ import {
 } from '@angular/platform-browser';
 ...
 
-bootstrapApplication(AppComponent, {
+bootstrapApplication(App, {
   providers: [provideClientHydration(withIncrementalHydration())]
 });
 ```
@@ -31,7 +31,7 @@ bootstrapApplication(AppComponent, {
 
 ## インクリメンタルハイドレーションの動作方法
 
-インクリメンタルハイドレーションは、完全なアプリケーション[ハイドレーション](guide/hydration)、[遅延可能ビュー](guide/defer)、および[イベントリプレイ](guide/hydration#capturing-and-replaying-events)を基盤として構築されています。インクリメンタルハイドレーションを使用すると、インクリメンタルハイドレーションの境界を定義する`@defer`ブロックに追加のトリガーを追加できます。`defer`ブロックに`hydrate`トリガーを追加すると、Angularはサーバーサイドレンダリング中にその`defer`ブロックの依存関係をロードし、`@placeholder`ではなくメインテンプレートをレンダリングする必要があることを認識します。クライアントサイドレンダリングの場合、依存関係はまだ遅延され、`hydrate`トリガーが起動するまで`defer`ブロックのコンテンツは非ハイドレーション状態のままです。そのトリガーは、`defer`ブロックに依存関係を取得してコンテンツをハイドレーションするよう指示します。ハイドレーションの前にユーザーによってトリガーされたブラウザイベント、特にコンポーネントに登録されたリスナーと一致するイベントは、キューに入れられ、ハイドレーションプロセスが完了すると再生されます。
+インクリメンタルハイドレーションは、完全なアプリケーション[ハイドレーション](guide/hydration)、[遅延可能ビュー](/guide/templates/defer)、および[イベントリプレイ](guide/hydration#capturing-and-replaying-events)を基盤として構築されています。インクリメンタルハイドレーションを使用すると、インクリメンタルハイドレーションの境界を定義する`@defer`ブロックに追加のトリガーを追加できます。`defer`ブロックに`hydrate`トリガーを追加すると、Angularはサーバーサイドレンダリング中にその`defer`ブロックの依存関係をロードし、`@placeholder`ではなくメインテンプレートをレンダリングする必要があることを認識します。クライアントサイドレンダリングの場合、依存関係はまだ遅延され、`hydrate`トリガーが起動するまで`defer`ブロックのコンテンツは非ハイドレーション状態のままです。そのトリガーは、`defer`ブロックに依存関係を取得してコンテンツをハイドレーションするよう指示します。ハイドレーションの前にユーザーによってトリガーされたブラウザイベント、特にコンポーネントに登録されたリスナーと一致するイベントは、キューに入れられ、ハイドレーションプロセスが完了すると再生されます。
 
 ## トリガーによるコンテンツのハイドレーション制御
 
@@ -175,7 +175,7 @@ NOTE: `hydrate never`を使用すると、指定された`@defer`ブロックの
 ```angular-html
 @defer (on idle; hydrate on interaction) {
   <example-cmp />
-} @placeholder{
+} @placeholder {
   <div>Example Placeholder</div>
 }
 ```
@@ -194,7 +194,7 @@ Angularのコンポーネントと依存関係のシステムは階層的であ�
   } @placeholder {
     <div>Child placeholder</div>
   }
-} @placeholder{
+} @placeholder {
   <div>Parent Placeholder</div>
 }
 ```

@@ -32,7 +32,7 @@ HELPFUL: 組み込みディレクティブは、公開APIのみを使用しま�
 
 `ngClass` を使用して、複数のCSSクラスを同時に追加または削除します。
 
-HELPFUL: _単一の_ クラスを追加または削除するには、`NgClass` ではなく [クラスバインディング](guide/templates/class-binding) を使用します。
+HELPFUL: _単一の_ クラスを追加または削除するには、`NgClass` ではなく [クラスバインディング](/guide/templates/binding#css-class-and-style-property-bindings) を使用します。
 
 ### コンポーネントに `NgClass` をインポートする
 

@@ -122,7 +122,7 @@ HELPFUL: ハンドラーは、ホストDOM要素`el`に色を設定するヘル�
    <docs-code header="highlight.directive.ts (mouse-enter)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.ts" region="mouse-enter"/>
 
 3. `AppComponent.color`にバインドし、デフォルトカラーとして「violet」を使用するには、次のHTMLを追加します。
-   この場合、`defaultColor`バインディングは、静的であるため、角括弧`[]`を使用しません。
+   この場合、`defaultColor`バインディングは、動的な式ではなく静的な文字列であるため、角括弧`[]`を使用しません。
 
    <docs-code header="app.component.html (defaultColor)" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" region="defaultColor"/>
 

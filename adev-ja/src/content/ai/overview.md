@@ -38,7 +38,7 @@ GenkitとAngularで構築する方法の例を次に示します。
 
 - [GenkitとAngularのスターターキットを使用したエージェントアプリ](https://github.com/angular/examples/tree/main/genkit-angular-starter-kit)— AIでの構築は初めてですか？エージェントワークフローを備えた基本的なアプリケーションから始めましょう。初めてのAI構築体験に最適な場所です。
 
-- [AngularアプリでGenkitを使用する](https://genkit.dev/docs/angular/)— Genkit Flows、Angular、Gemini 2.5 Flashを使用する基本的なアプリケーションを構築します。このステップバイステップのウォークスルーは、AI機能を備えたフルスタックAngularアプリケーションの作成をガイドします。
+- [AngularアプリでGenkitを使用する](https://genkit.dev/docs/frameworks/angular/)— Genkit Flows、Angular、Gemini 2.5 Flashを使用する基本的なアプリケーションを構築します。このステップバイステップのウォークスルーは、AI機能を備えたフルスタックAngularアプリケーションの作成をガイドします。
 
 - [動的ストーリー生成アプリ](https://github.com/angular/examples/tree/main/genkit-angular-story-generator)— Genkit、Gemini、Imagen 3を搭載したエージェントAngularアプリケーションを構築し、ユーザーインタラクションに基づいてストーリーを動的に生成し、発生するイベントに付随する美しい画像パネルを特徴とする方法を学びます。より高度なユースケースを試したい場合は、ここから始めましょう。
 

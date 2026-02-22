@@ -35,13 +35,13 @@ Angular CLIを使用して、新しいアプリケーション_angular-custom-ro
    ng generate component profile
    ```
 
-1. コードエディタで`profile.component.html`ファイルを見つけ、プレースホルダーコンテンツを次のHTMLに置き換えます。
+1. コードエディタで`profile.html`ファイルを見つけ、プレースホルダーコンテンツを次のHTMLに置き換えます。
 
-   <docs-code header="profile.component.html" path="adev/src/content/examples/routing-with-urlmatcher/src/app/profile/profile.component.html"/>
+   <docs-code header="profile.html" path="adev/src/content/examples/routing-with-urlmatcher/src/app/profile/profile.html"/>
 
-1. コードエディタで`app.component.html`ファイルを見つけ、プレースホルダーコンテンツを次のHTMLに置き換えます。
+1. コードエディタで`app.html`ファイルを見つけ、プレースホルダーコンテンツを次のHTMLに置き換えます。
 
-   <docs-code header="app.component.html" path="adev/src/content/examples/routing-with-urlmatcher/src/app/app.component.html"/>
+   <docs-code header="app.html" path="adev/src/content/examples/routing-with-urlmatcher/src/app/app.html"/>
 
 ## アプリケーションのルートを構成する
 
@@ -77,7 +77,7 @@ HELPFUL: カスタムURLマッチャーは、他のルート定義と同じよ�
 
 カスタムマッチャーが設定されたので、`profile`コンポーネントでルートパラメーターをバインドできます。
 
-コードエディタで`profile.component.ts`ファイルを開き、`username`パラメーターと一致する`input`を作成します。
+コードエディタで`profile.ts`ファイルを開き、`username`パラメーターと一致する`input`を作成します。
 以前、`provideRouter`で`withComponentInputBinding`機能を追加しました。
 これにより、`Router`はルートコンポーネントに直接情報をバインドできます。
 

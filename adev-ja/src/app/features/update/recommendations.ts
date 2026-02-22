@@ -208,7 +208,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'Http',
     action:
-      'レガシーな`HttpModule`と`Http`サービスを使用している場合は、`HttpClientModule`と`HttpClient`サービスに切り替えてください。`HttpClient`はデフォルトの人間工学を簡素化し（JSONにマップする必要がなくなりました）、型付きの戻り値とインターセプターをサポートしています。詳細については、[angular.dev](https://angular.io/guide/http)を参照してください。',
+      'レガシーな`HttpModule`と`Http`サービスを使用している場合は、`HttpClientModule`と`HttpClient`サービスに切り替えてください。`HttpClient`はデフォルトの人間工学を簡素化し（JSONにマップする必要がなくなりました）、型付きの戻り値とインターセプターをサポートしています。詳細については、[angular.dev](https://angular.dev/guide/http)を参照してください。',
   },
   {
     possibleIn: 430,

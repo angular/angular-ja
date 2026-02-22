@@ -37,11 +37,11 @@ Angularの組み込みの `NgComponentOutlet` ディレクティブを使用し�
   template: `
     <h2>Your profile</h2>
     <ng-container [ngComponentOutlet]="profileComponent()" />
-  `
+  `,
 })
 export class UserProfile {
   isAdmin = input(false);
-  profileComponent = computed(() => this.isAdmin() ? AdminProfile : BasicUserProfile);
+  profileComponent = computed(() => (this.isAdmin() ? AdminProfile : BasicUserProfile));
 }
 ```
 
@@ -59,13 +59,13 @@ Angularの組み込みの `NgTemplateOutlet` ディレクティブを使用し�
 
     <ng-template #admin>This is the admin profile</ng-template>
     <ng-template #basic>This is the basic profile</ng-template>
-  `
+  `,
 })
 export class UserProfile {
   isAdmin = input(false);
   adminTemplate = viewChild('admin', {read: TemplateRef});
   basicTemplate = viewChild('basic', {read: TemplateRef});
-  profileTemplate = computed(() => this.isAdmin() ? this.adminTemplate() : this.basicTemplate());
+  profileTemplate = computed(() => (this.isAdmin() ? this.adminTemplate() : this.basicTemplate()));
 }
 ```
 

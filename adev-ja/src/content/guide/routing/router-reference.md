@@ -56,7 +56,7 @@
 最新のHTML5ブラウザが最初に`pushState`をサポートしたため、多くの人がこれらのURLを「HTML5スタイル」URLと呼んでいます。
 
 HELPFUL: HTML5スタイルのナビゲーションはルーターのデフォルトです。
-[LocationStrategyとブラウザURLスタイル](common-router-tasks#locationstrategy-and-browser-url-styles)のセクションで、HTML5スタイルが推奨される理由、その動作を調整する方法、必要に応じて古いハッシュ\(`#`\)スタイルに切り替える方法を学びましょう。
+[LocationStrategyとブラウザURLスタイル](guide/routing/common-router-tasks#locationstrategy-and-browser-url-styles)のセクションで、HTML5スタイルが推奨される理由、その動作を調整する方法、必要に応じて古いハッシュ\(`#`\)スタイルに切り替える方法を学びましょう。
 
 `pushState`ルーティングを機能させるには、アプリケーションの`index.html`に[`<base href>`要素](https://developer.mozilla.org/docs/Web/HTML/Element/base 'base href')を追加する必要があります。
 ブラウザは、CSSファイル、スクリプト、画像を相対URLで参照する際に、`<base href>`の値をプレフィックスとして使用します。
@@ -64,7 +64,9 @@ HELPFUL: HTML5スタイルのナビゲーションはルーターのデフォル
 `<base>`要素は`<head>`タグの直後に追加します。
 `app`フォルダがこのアプリケーションのアプリケーションルートである場合、`index.html`の`href`値をここに示されているように設定します。
 
-<docs-code header="index.html (base-href)" path="adev/src/content/examples/router/src/index.html" region="base-href"/>
+```html
+<base href="/" />
+```
 
 ### HTML5 URLと`<base href>` {#html5-urls-and-the-base-href}
 
@@ -83,7 +85,7 @@ scheme    authority      path        query   fragment
 この戦略を設定する推奨される方法は、`index.html`の`<head>`に[`<base href>`要素](https://developer.mozilla.org/docs/Web/HTML/Element/base 'base href')タグを追加することです。
 
 ```angular-html
-<base href="/">
+<base href="/" />
 ```
 
 そのタグがないと、アプリケーションに「ディープリンク」した場合、ブラウザがリソース（画像、CSS、スクリプト）をロードできない可能性があります。

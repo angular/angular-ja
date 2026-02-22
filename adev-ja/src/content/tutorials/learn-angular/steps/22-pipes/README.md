@@ -52,7 +52,7 @@ import {LowerCasePipe} from '@angular/common';
 最後に、`app.ts` のテンプレートを更新して、`lowercase` パイプを含めます。
 
 ```angular-html
-template: `{{username | lowercase }}`
+template: `{{ username | lowercase }}`
 ```
 
 </docs-step>

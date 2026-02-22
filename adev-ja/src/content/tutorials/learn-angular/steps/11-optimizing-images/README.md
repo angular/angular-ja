@@ -38,7 +38,7 @@ import { NgOptimizedImage } from '@angular/common';
 template: `     ...
     <li>
       静的画像:
-      <img ngSrc="/assets/logo.svg" alt="Angular ロゴ" width="32" height="32" />
+      <img ngSrc="/logo.svg" alt="Angular ロゴ" width="32" height="32" />
     </li>
     <li>
       動的画像:
@@ -59,7 +59,8 @@ imports: [NgOptimizedImage],
 画像に対して静的な `height` と `width` を指定できない場合、または指定したくない場合は、[fill 属性](https://web.dev/articles/cls)を使用します。画像を「背景画像」のように動作させ、そのコンテナ要素を塗りつぶすようにできます。
 
 ```angular-html
-<div class="image-container"> // コンテナ div は 'position: "relative"'
+// コンテナ div は 'position: "relative"'
+<div class="image-container">
   <img ngSrc="www.example.com/image.png" fill />
 </div>
 ```
@@ -83,7 +84,7 @@ NOTE: `fill` 画像が正しくレンダリングされるためには、その�
 `NgOptimizedImage` では、[画像ローダー](guide/image-optimization#configuring-an-image-loader-for-ngoptimizedimage) を指定できます。これは、ディレクティブに画像のURLをどのようにフォーマットするかを指示します。ローダーを使用すると、画像を短く、相対的なURLで定義できます。
 
 ```ts
-providers: [provideImgixLoader('https://my.base.url/')];
+providers: [provideImgixLoader('https://my.base.url/')],
 ```
 
 最終的なURLは 'https://my.base.url/image.png' になります。

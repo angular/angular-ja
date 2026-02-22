@@ -51,8 +51,11 @@ Angularは現在、`@else`構文を使用してelseケースを定義するた�
 
 ```angular-html
 template: `
-  @if (isServerRunning) { ... }
-  @else { ... }
+@if (isServerRunning) {
+  ...
+} @else {
+  ...
+}
 `;
 ```
 

@@ -7,10 +7,10 @@ The `@angular/core/rxjs-interop` package offers APIs that help you integrate RxJ
 Use the `toSignal` function to create a signal which tracks the value of an Observable. It behaves similarly to the `async` pipe in templates, but is more flexible and can be used anywhere in an application.
 
 ```angular-ts
-import { Component } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
-import { interval } from 'rxjs';
-import { toSignal } from '@angular/core/rxjs-interop';
+import {Component} from '@angular/core';
+import {AsyncPipe} from '@angular/common';
+import {interval} from 'rxjs';
+import {toSignal} from '@angular/core/rxjs-interop';
 
 @Component({
   template: `{{ counter() }}`,
@@ -47,7 +47,7 @@ If you don't provide an `initialValue`, the resulting signal will return `undefi
 
 Some Observables are guaranteed to emit synchronously, such as `BehaviorSubject`. In those cases, you can specify the `requireSync: true` option.
 
-When `requiredSync` is `true`, `toSignal` enforces that the Observable emits synchronously on subscription. This guarantees that the signal always has a value, and no `undefined` type or initial value is required.
+When `requireSync` is `true`, `toSignal` enforces that the Observable emits synchronously on subscription. This guarantees that the signal always has a value, and no `undefined` type or initial value is required.
 
 ### `manualCleanup`
 

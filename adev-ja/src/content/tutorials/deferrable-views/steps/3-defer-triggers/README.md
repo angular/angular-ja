@@ -63,9 +63,8 @@
 <button type="button" #showComments>Show all comments</button>
 
 @defer (on hover) {
-<article-comments />
+  <article-comments />
 } @placeholder (minimum 1s) {
-
   <p>Placeholder for comments</p>
 } @loading (minimum 1s; after 500ms) {
   <p>Loading comments...</p>
@@ -74,7 +73,7 @@
 }
 ```
 
-NOTE: [テンプレート変数に関する詳細については、ドキュメントを参照してください](/guide/templates/reference-variables)。
+NOTE: [テンプレート変数に関する詳細については、ドキュメントを参照してください](/guide/templates/variables#declaring-a-template-reference-variable)。
 
 </docs-step>
 
@@ -85,9 +84,8 @@ NOTE: [テンプレート変数に関する詳細については、ドキュメ�
 <button type="button" #showComments>Show all comments</button>
 
 @defer (on hover; on interaction(showComments)) {
-<article-comments />
+  <article-comments />
 } @placeholder (minimum 1s) {
-
   <p>Placeholder for comments</p>
 } @loading (minimum 1s; after 500ms) {
   <p>Loading comments...</p>
@@ -105,5 +103,5 @@ NOTE: [テンプレート変数に関する詳細については、ドキュメ�
 </docs-step>
 </docs-workflow>
 
-詳細については、[遅延可能ビュー](/guide/defer)のドキュメントを参照してください。
+詳細については、[遅延可能ビュー](/guide/templates/defer)のドキュメントを参照してください。
 Angularの優れた機能をさらに活用するために、学習を続けてください。

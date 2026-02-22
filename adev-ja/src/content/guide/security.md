@@ -148,7 +148,7 @@ default-src 'self'; style-src 'self' 'nonce-randomNonceGoesHere'; script-src 'se
 
 Angularアプリケーションを提供する際、サーバーは各リクエストのHTTPヘッダーに、ランダムに生成されたnonceを含める必要があります。
 このnonceをAngularに提供する必要があります。Angularは、`<style>`要素をレンダリングするためにnonceを使用します。
-Angularのnonceは、次の2つの方法のいずれかで設定できます。
+Angularのnonceは、次のいずれかの方法で設定できます。
 
 1. [ワークスペース構成](reference/configs/workspace-config#extra-build-and-test-options)で`autoCsp`オプションを`true`に設定します。
 1. ルートアプリケーション要素に`ngCspNonce`属性を設定します。`index.html`を作成するときに、ヘッダーと`index.html`の両方にnonceを追加できるサーバー側のテンプレートがある場合は、この方法を使用します。

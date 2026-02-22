@@ -69,17 +69,15 @@ Angularの `inject()` 関数を使用して依存関係を注入できます。
 次は、`AnalyticsLogger` とAngularの `Router` サービスを注入して、イベントを追跡しながらユーザーが別のページに移動できるようにするナビゲーションバーの例です。
 
 ```angular-ts
-import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { AnalyticsLogger } from './analytics-logger';
+import {Component, inject} from '@angular/core';
+import {Router} from '@angular/router';
+import {AnalyticsLogger} from './analytics-logger';
 
 @Component({
   selector: 'app-navbar',
-  template: `
-    <a href="#" (click)="navigateToDetail($event)">Detail Page</a>
-  `,
+  template: `<a href="#" (click)="navigateToDetail($event)">Detail Page</a>`,
 })
-export class NavbarComponent {
+export class Navbar {
   private router = inject(Router);
   private analytics = inject(AnalyticsLogger);
 
@@ -96,7 +94,9 @@ export class NavbarComponent {
 コンポーネント、ディレクティブ、またはサービスの構築中に依存関係を注入できます。[`inject`](/api/core/inject) の呼び出しは、`constructor` またはフィールドイニシャライザーのいずれかに配置できます。一般的な例をいくつか示します。
 
 ```ts
-@Component({...})
+@Component({
+  /*...*/
+})
 export class MyComponent {
   // ✅ クラスフィールドイニシャライザー内
   private service = inject(MyService);

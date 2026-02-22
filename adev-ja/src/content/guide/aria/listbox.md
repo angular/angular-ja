@@ -110,10 +110,21 @@ Angularのリストボックスは、以下の機能を備えた完全にアク�
 
 リストボックスは、アイテムがいつ選択されるかを制御する2つの選択モードをサポートしています。
 
-<!-- <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/listbox/src/modes/app/app.ts">
-  <docs-code header="app.ts" path="adev/src/content/examples/aria/listbox/src/modes/app/app.ts" />
-  <docs-code header="app.html" path="adev/src/content/examples/aria/listbox/src/modes/app/app.html" />
-</docs-code-multifile> -->
+`'follow'`モードはフォーカスされたアイテムを自動的に選択し、選択が頻繁に変わる場合により速いインタラクションを提供します。`'explicit'`モードは選択を確定するためにSpaceキーまたはEnterキーが必要で、ナビゲーション中の意図しない変更を防ぎます。ドロップダウンパターンでは、通常、単一選択のために`'follow'`モードが使用されます。
+
+#### Explicit
+
+<docs-code-multifile preview hideCode path="adev/src/content/examples/aria/listbox/src/modes/app/explicit/app.ts">
+  <docs-code header="app.ts" path="adev/src/content/examples/aria/listbox/src/modes/app/explicit/app.ts" />
+  <docs-code header="app.html" path="adev/src/content/examples/aria/listbox/src/modes/app/explicit/app.html" />
+</docs-code-multifile>
+
+#### Follow
+
+<docs-code-multifile preview hideCode path="adev/src/content/examples/aria/listbox/src/modes/app/follow/app.ts">
+  <docs-code header="app.ts" path="adev/src/content/examples/aria/listbox/src/modes/app/follow/app.ts" />
+  <docs-code header="app.html" path="adev/src/content/examples/aria/listbox/src/modes/app/follow/app.html" />
+</docs-code-multifile>
 
 | モード       | 説明                                                                                   |
 | ------------ | -------------------------------------------------------------------------------------- |

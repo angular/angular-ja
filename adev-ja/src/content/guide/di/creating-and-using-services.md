@@ -51,21 +51,19 @@ export class BasicDataStore {
 ### コンポーネントへの注入 {#injecting-into-a-component}
 
 ```angular-ts
-import { Component, inject } from '@angular/core';
-import { BasicDataStore } from './basic-data-store';
+import {Component, inject} from '@angular/core';
+import {BasicDataStore} from './basic-data-store';
 
 @Component({
   selector: 'app-example',
   template: `
     <div>
       <p>{{ dataStore.getData() }}</p>
-      <button (click)="dataStore.addData('More data')">
-        Add more data
-      </button>
+      <button (click)="dataStore.addData('More data')">Add more data</button>
     </div>
-  `
+  `,
 })
-export class ExampleComponent {
+export class Example {
   dataStore = inject(BasicDataStore);
 }
 ```

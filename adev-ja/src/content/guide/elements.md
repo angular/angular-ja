@@ -63,7 +63,7 @@ IMPORTANT: コンポーネントのセレクターをカスタム要素のタグ
 ### マッピング {#mapping}
 
 カスタム要素はAngularコンポーネントを_ホスト_し、コンポーネントで定義されたデータとロジック、および標準のDOM API間のブリッジを提供します。
-コンポーネントのプロパティとロジックは、HTML属性とブラウザのイベントシステムに直接マッピングされます。
+コンポーネントのプロパティとロジックは、HTML属性とブラウザのイベントシステムに直接マップされます。
 
 - 作成APIは、入力プロパティを探してコンポーネントを解析し、カスタム要素に対応する属性を定義します。
   プロパティ名をカスタム要素と互換性があるように変換します。カスタム要素は大文字と小文字の区別を認識しません。
@@ -72,9 +72,9 @@ IMPORTANT: コンポーネントのセレクターをカスタム要素のタグ
 
 - コンポーネントの出力はHTMLの[カスタムイベント](https://developer.mozilla.org/docs/Web/API/CustomEvent)としてディスパッチされ、カスタムイベントの名前は出力名と一致します。
   例えば、`valueChanged = output()`を持つコンポーネントの場合、対応するカスタム要素は"valueChanged"という名前のイベントをディスパッチし、出力されたデータはイベントの`detail`プロパティに格納されます。
-  エイリアスを提供した場合、その値が使用されます。`clicks = output<string>({alias: 'myClick'});`は"myClick"という名前のディスパッチイベントを生成します。
+  エイリアスを提供した場合、その値が使用されます。例えば、`clicks = output<string>({alias: 'myClick'});`は"myClick"という名前のディスパッチイベントを生成します。
 
-詳細については、Webコンポーネントのドキュメントの[カスタムイベントの作成](https://developer.mozilla.org/docs/Web/Guide/Events/Creating_and_triggering_events#Creating_custom_events)を参照してください。
+詳細については、Webコンポーネントのドキュメントの[カスタムイベントの作成](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Events#creating_custom_events)を参照してください。
 
 ## 例: Popupサービス {#example-a-popup-service}
 
@@ -85,20 +85,20 @@ Angularカスタム要素を使用すると、必要なインフラストラク�
 
 以下のPopupサービス例のアプリケーションは、動的にロードするかカスタム要素に変換できるコンポーネントを定義しています。
 
-| ファイル                 | 詳細                                                                                                                                                                                                                         |
-| :-------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `popup.component.ts`  | 入力メッセージを表示するシンプルなポップアップ要素を、アニメーションとスタイル付きで定義します。                                                                                                                             |
-| `popup.service.ts`    | `PopupComponent`を呼び出す2つの異なる方法を提供する注入可能サービスを作成します。動的コンポーネントとして、またはカスタム要素として。動的読み込み方式には、より多くのセットアップが必要であることに注目してください。        |
-| `app.component.ts`    | `PopupService`を使用して実行時にDOMにポップアップを追加する、アプリケーションのルートコンポーネントを定義します。アプリケーションの実行時、ルートコンポーネントのコンストラクターは`PopupComponent`をカスタム要素に変換します。 |
+| ファイル              | 詳細                                                                                                                                                                                                               |
+| :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `popup.ts`         | 入力メッセージを表示するシンプルなポップアップ要素を、アニメーションとスタイル付きで定義します。                                                                                                                    |
+| `popup.service.ts` | `Popup`を呼び出す2つの異なる方法を提供する注入可能サービスを作成します。動的コンポーネントとして、またはカスタム要素として。動的読み込み方式には、より多くのセットアップが必要であることに注目してください。        |
+| `app.ts`           | `PopupService`を使用して実行時にDOMにポップアップを追加する、アプリケーションのルートコンポーネントを定義します。アプリケーションの実行時、ルートコンポーネントのコンストラクターは`Popup`をカスタム要素に変換します。 |
 
 比較のため、デモでは両方の方法を示しています。
 一方のボタンは動的読み込み方式を使用してポップアップを追加し、もう一方はカスタム要素を使用します。
 結果は同じですが、準備が異なります。
 
 <docs-code-multifile>
-    <docs-code header="popup.component.ts" path="adev/src/content/examples/elements/src/app/popup.component.ts"/>
+    <docs-code language="angular-ts" header="popup.ts" path="adev/src/content/examples/elements/src/app/popup.ts"/>
     <docs-code header="popup.service.ts" path="adev/src/content/examples/elements/src/app/popup.service.ts"/>
-    <docs-code header="app.component.ts" path="adev/src/content/examples/elements/src/app/app.component.ts"/>
+    <docs-code header="app.ts" path="adev/src/content/examples/elements/src/app/app.ts"/>
 </docs-code-multifile>
 
 ## カスタム要素の型定義 {#typings-for-custom-elements}
@@ -119,7 +119,7 @@ Angularで作成されたカスタム要素は`NgElement`（これはさらに`H
 ```ts
 @Component(/* ... */)
 class MyDialog {
-  content = input(string);
+  content = input('');
 }
 ```
 

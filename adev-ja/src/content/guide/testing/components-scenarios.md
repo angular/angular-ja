@@ -357,7 +357,7 @@ TestBed.configureTestingModule({
 
 ### Vitestのフェイクタイマーを使用した非同期テスト {#async-test-with-a-vitest-fake-timers}
 
-`setTimeout`や`Promise`のような非同期関数をモックするには、Vitestのフェイクタイマーを活用して発火のタイミングを制御できます。
+`setTimeout`や`Promise`のような非同期関数をモックするには、Vitestのフェイクタイマーを活用して発火タイミングを制御できます。
 
 ```ts
 it('should display error when TwainQuotes service fails', async () => {
@@ -392,7 +392,7 @@ it('should display error when TwainQuotes service fails', async () => {
 
 ### その他の非同期テスト {#more-async-tests}
 
-スタブサービスが非同期Observableを返す場合、テストのほとんども非同期である必要があります。
+スタブされたサービスが非同期Observableを返す場合、テストのほとんども非同期である必要があります。
 
 ここに、実世界で想定されるデータフローを示すテストがあります。
 
@@ -419,7 +419,7 @@ it('should show quote after getQuote', async () => {
 
     const fixture = TestBed.createComponent(TwainComponent);
     const twainQuotes = TestBed.inject(TwainQuotes) as MockTwainQuotes;
-    await vi.runAllTimersAsync(); // render before the quote is recieved
+    await vi.runAllTimersAsync(); // render before the quote is received
 
     const quoteEl = fixture.nativeElement.querySelector('.twain');
     expect(quoteEl.textContent).toBe('...');
@@ -464,7 +464,7 @@ IMPORTANT: `fakeAsync`はVitestテストランナーでは使用できません�
 
 ```angular-html
 @for (hero of heroes; track hero) {
-  <dashboard-hero class="col-1-4" [hero]="hero" (selected)="gotoDetail($event)"/>
+  <dashboard-hero class="col-1-4" [hero]="hero" (selected)="gotoDetail($event)" />
 }
 ```
 
@@ -1176,8 +1176,8 @@ beforeEach(async () => {
 });
 ```
 
-これは2つの引数を取ります。オーバーライドするコンポーネント型（`HeroDetail`）と、オーバーライドメタデータオブジェクトです。
-[オーバーライドメタデータオブジェクト](guide/testing/utility-apis#metadata-override-object)は、次のように定義されたジェネリックです。
+これは2つの引数を取ります。オーバーライドするコンポーネント型\(`HeroDetail`\)と、オーバーライドメタデータオブジェクトです。
+[オーバーライドメタデータオブジェクト](/guide/testing/utility-apis#testbed-class-summary)は、次のように定義されたジェネリックです。
 
 ```ts
 type MetadataOverride<T> = {

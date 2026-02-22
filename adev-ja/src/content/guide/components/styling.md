@@ -7,10 +7,14 @@ TIP: このガイドでは、すでに[基本概念のガイド](essentials)を�
 ```angular-ts {highlight:[4]}
 @Component({
   selector: 'profile-photo',
-  template: `<img src="profile-photo.jpg" alt="Your profile photo">`,
-  styles: ` img { border-radius: 50%; } `,
+  template: `<img src="profile-photo.jpg" alt="Your profile photo" />`,
+  styles: `
+    img {
+      border-radius: 50%;
+    }
+  `,
 })
-export class ProfilePhoto { }
+export class ProfilePhoto {}
 ```
 
 また、別のファイルにスタイルを記述できます。
@@ -21,7 +25,7 @@ export class ProfilePhoto { }
   templateUrl: 'profile-photo.html',
   styleUrl: 'profile-photo.css',
 })
-export class ProfilePhoto { }
+export class ProfilePhoto {}
 ```
 
 Angularがコンポーネントをコンパイルすると、これらのスタイルはコンポーネントのJavaScript出力と共に発行されます。
@@ -44,7 +48,7 @@ CSSを出力するすべてのツールと連携します。
   ...,
   encapsulation: ViewEncapsulation.None,
 })
-export class ProfilePhoto { }
+export class ProfilePhoto {}
 ```
 
 ### ViewEncapsulation.Emulated

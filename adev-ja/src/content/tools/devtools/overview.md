@@ -1,47 +1,47 @@
-# DevTools Overview
+# DevToolsの概要 {#devtools-overview}
 
-Angular DevTools is a browser extension that provides debugging and profiling capabilities for Angular applications.
+Angular DevToolsは、Angularアプリケーションのデバッグとプロファイリング機能を提供するブラウザ拡張機能です。
 
 <docs-video src="https://www.youtube.com/embed/bavWOHZM6zE"/>
 
-Install Angular DevTools from the [Chrome Web Store](https://chrome.google.com/webstore/detail/angular-developer-tools/ienfalfjdbdpebioblfackkekamfmbnh) or from [Firefox Addons](https://addons.mozilla.org/firefox/addon/angular-devtools/).
+Angular DevToolsは、[Chrome Web Store](https://chrome.google.com/webstore/detail/angular-developer-tools/ienfalfjdbdpebioblfackkekamfmbnh)または[Firefox Addons](https://addons.mozilla.org/firefox/addon/angular-devtools/)からインストールできます。
 
-You can open Chrome or Firefox DevTools on any web page by pressing <kbd>F12</kbd> or <kbd><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>I</kbd></kbd> (Windows or Linux) and <kbd><kbd>Fn</kbd>+<kbd>F12</kbd></kbd> or <kbd><kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>I</kbd></kbd> (Mac).
-Once browser DevTools is open and Angular DevTools is installed, you can find it under the "Angular" tab.
+<kbd>F12</kbd>または<kbd><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>I</kbd></kbd>（WindowsまたはLinux）および<kbd><kbd>Fn</kbd>+<kbd>F12</kbd></kbd>または<kbd><kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>I</kbd></kbd>（Mac）を押して、任意のWebページでChromeまたはFirefoxのDevToolsを開くことができます。
+ブラウザのDevToolsが開いていてAngular DevToolsがインストールされている場合は、「Angular」タブで見つけることができます。
 
-HELPFUL: Chrome's new tab page does not run installed extensions, so the Angular tab will not appear in DevTools. Visit any other page to see it.
+HELPFUL: Chromeの新しいタブページではインストールされている拡張機能は実行されないため、DevToolsに「Angular」タブは表示されません。表示するには、他のページにアクセスしてください。
 
-<img src="assets/images/guide/devtools/devtools.png" alt="An overview of Angular DevTools showing a tree of components for an application.">
+<img src="assets/images/guide/devtools/devtools.png" alt="アプリケーションのコンポーネントツリーを示すAngular DevToolsの概要。">
 
-## Open your application
+## アプリケーションを開く {#open-your-application}
 
-When you open the extension, you'll see three additional tabs:
+拡張機能を開くと、次の3つの追加タブが表示されます。
 
-| Tabs                                      | Details                                                                                                                |
-| :---------------------------------------- | :--------------------------------------------------------------------------------------------------------------------- |
-| [Components](tools/devtools/component)    | Lets you explore the components and directives in your application and preview or edit their state.                    |
-| [Profiler](tools/devtools/profiler)       | Lets you profile your application and understand what the performance bottleneck is during change detection execution. |
-| [Injector Tree](tools/devtools/injectors) | Lets you visualize the Environment and Element Injector hierarchy                                                      |
+| タブ                                      | 詳細                                                                                                                 |
+| :---------------------------------------- | :------------------------------------------------------------------------------------------------------------------- |
+| [Components](tools/devtools/component)    | アプリケーション内のコンポーネントとディレクティブを探索し、それらの状態をプレビューまたは編集できます。                    |
+| [Profiler](tools/devtools/profiler)       | アプリケーションをプロファイルし、変更検知の実行中のパフォーマンスのボトルネックがどこにあるかを理解できます。 |
+| [Injector Tree](tools/devtools/injectors) | 環境インジェクターと要素インジェクターの階層を視覚化できます。                                                      |
 
-Other tabs like `Router Tree` or `Transfer State` are experimental and can be enabled via the devtools settings and are not documented yet.
+`Router Tree`や`Transfer State`などの他のタブは実験的であり、DevToolsの設定から有効にできますが、まだドキュメント化されていません。
 
-HELPFUL: For users of Chromium based browsers, you might be interested in the [Performance panel integration](/best-practices/profiling-with-chrome-devtools).
+HELPFUL: Chromiumベースのブラウザのユーザーには、[パフォーマンスパネル統合](/best-practices/profiling-with-chrome-devtools)が興味深いかもしれません。
 
-<img src="assets/images/guide/devtools/devtools-tabs.png" alt="A screenshot of the top of Angular DevTools illustrating two tabs in the upper-left corner, one labeled 'Components' and another labeled 'Profiler'.">
+<img src="assets/images/guide/devtools/devtools-tabs.png" alt="Angular DevToolsの上部を示すスクリーンショットで、左上の角に2つのタブが表示されています。1つは「Components」とラベル付けされ、もう1つは「Profiler」とラベル付けされています。">
 
-In the top-right corner of Angular DevTools you'll find the information button which open a popover.
-The information popover contains among others what version of Angular is running on the page as well as the devtools version.
+Angular DevToolsの右上隅には、ポップオーバーを開く情報ボタンがあります。
+情報ポップオーバーには、ページで実行されているAngularのバージョンとDevToolsのバージョンなどが含まれています。
 
-### Angular application not detected
+### Angularアプリケーションが検出されません {#angular-application-not-detected}
 
-If you see an error message "Angular application not detected" when opening Angular DevTools, this means it is not able to communicate with an Angular app on the page.
-The most common reason for this is because the web page you are inspecting does not contain an Angular application.
-Double check that you are inspecting the right web page and that the Angular app is running.
+Angular DevToolsを開くと、「Angularアプリケーションが検出されませんでした」というエラーメッセージが表示される場合、これはページ上のAngularアプリケーションと通信できないことを意味します。
+これは、検査しているWebページにAngularアプリケーションが含まれていないためです。
+適切なWebページを検査していること、およびAngularアプリケーションが実行されていることを確認してください。
 
-### We detected an application built with production configuration
+### プロダクション構成でビルドされたアプリケーションが検出されました {#we-detected-an-application-built-with-production-configuration}
 
-If you see an error message "We detected an application built with production configuration. Angular DevTools only supports development builds.", this means that an Angular application was found on the page, but it was compiled with production optimizations.
-When compiling for production, Angular CLI removes various debug features to minimize the amount of the JavaScript on the page to improve performance. This includes features needed to communicate with DevTools.
+「プロダクション構成でビルドされたアプリケーションが検出されました。Angular DevToolsは開発ビルドのみサポートしています。」というエラーメッセージが表示される場合、ページにAngularアプリケーションが見つかりましたが、プロダクション最適化でコンパイルされたことを意味します。
+プロダクション用にコンパイルすると、Angular CLIはパフォーマンスを向上させるために、ページ上のJavaScriptの量を最小限に抑えるために、さまざまなデバッグ機能を削除します。これには、DevToolsと通信するために必要な機能も含まれます。
 
-To run DevTools, you need to compile your application with optimizations disabled. `ng serve` does this by default.
-If you need to debug a deployed application, disable optimizations in your build with the [`optimization` configuration option](reference/configs/workspace-config#optimization-configuration) (`{"optimization": false}`).
+DevToolsを実行するには、最適化を無効にしてアプリケーションをコンパイルする必要があります。`ng serve`は、デフォルトでこれを実行します。
+デプロイされたアプリケーションをデバッグする必要がある場合は、[`optimization`構成オプション](reference/configs/workspace-config#optimization-configuration) (`{"optimization": false}`)を使用して、ビルドの最適化を無効にします。

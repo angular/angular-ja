@@ -1,23 +1,23 @@
-## Inspect your injectors
+## インジェクターの検査 {#inspect-your-injectors}
 
-NOTE: The Injector Tree is available for Angular Applications built with version 17 or higher.
+NOTE: インジェクターツリーは、バージョン17以降を使ってビルドされたAngularアプリケーションで使用できます。
 
-### View the injector hierarchy of your application
+### アプリケーションのインジェクター階層を表示 {#view-the-injector-hierarchy-of-your-application}
 
-The **Injector Tree** tab lets you explore the structure of the Injectors configured in your application. Here you will see two trees representing the [injector hierarchy](guide/di/hierarchical-dependency-injection) of your application. One tree is your environment hierarchy, the other is your element hierarchy.
+**Injector Tree**タブでは、アプリケーションに構成されたインジェクターの構造を探索できます。ここでは、アプリケーションの[インジェクタ階層](guide/di/hierarchical-dependency-injection)を表す2つのツリーが表示されます。1つのツリーは環境階層、もう1つのツリーは要素階層です。
 
-<img src="assets/images/guide/devtools/di-injector-tree.png" alt="A screenshot of the 'Profiler' tab displaying the injector tree tab in Angular Devtools visualizing the injector graph for an example application.">
+<img src="assets/images/guide/devtools/di-injector-tree.png" alt="例となるアプリケーションのインジェクタグラフを視覚化しているAngular Devtoolsの「Profiler」タブのスクリーンショットで、インジェクタツリータブが表示されています。">
 
-### Visualize resolution paths
+### 解決パスを視覚化する {#visualize-resolution-paths}
 
-When a specific injector is selected, the path that Angular's dependency injection algorithm traverses from that injector to the root is highlighted. For element injectors, this includes highlighting the environment injectors that the dependency injection algorithm jumps to when a dependency cannot be resolved in the element hierarchy.
+特定のインジェクターが選択されると、そのインジェクターからルートへのAngularの依存性の注入アルゴリズムがたどるパスが強調表示されます。要素インジェクターの場合、これには、依存関係が要素階層で解決できない場合に依存性の注入アルゴリズムがジャンプする環境インジェクターの強調表示も含まれます。
 
-See [resolution rules](guide/di/hierarchical-dependency-injection#resolution-rules) for more details about how Angular resolves resolution paths.
+Angularが解決パスをどのように解決するかについての詳細は、[解決ルール](guide/di/hierarchical-dependency-injection#resolution-rules)を参照してください。
 
-<img src="assets/images/guide/devtools/di-injector-tree-selected.png" alt="A screenshot of the 'Profiler' tab displaying how the injector tree visualize highlights resolution paths when an injector is selected.">
+<img src="assets/images/guide/devtools/di-injector-tree-selected.png" alt="インジェクタツリーがインジェクタが選択されたときに解決パスをどのように強調表示するかを示す「Profiler」タブのスクリーンショット。">
 
-### View injector providers
+### インジェクタープロバイダーを表示 {#view-injector-providers}
 
-Clicking an injector that has configured providers will display those providers in a list on the right of the injector tree view. Here you can view the provided token and it's type. The button on the right of each provider allows you to log the provider in the console.
+プロバイダーが構成されているインジェクターをクリックすると、右側にあるインジェクターツリービューにプロバイダーのリストが表示されます。ここでは、提供されたトークンとそのタイプを表示できます。各プロバイダーの右側のボタンを使用すると、コンソールにプロバイダーをログ出力できます。
 
-<img src="assets/images/guide/devtools/di-injector-tree-providers.png" alt="A screenshot of the 'Profiler' tab displaying how providers are made visible when an injector is selected.">
+<img src="assets/images/guide/devtools/di-injector-tree-providers.png" alt="インジェクタが選択されたときにプロバイダがどのように表示されるかを示す「Profiler」タブのスクリーンショット。">

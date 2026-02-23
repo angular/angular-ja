@@ -54,7 +54,7 @@ Angularでは、ページに出入りする要素のグリッド全体やリス�
 - `stagger()` を使って各アニメーションを30ミリ秒ずつ遅らせます。
 - カスタム定義のイージングカーブを使って各要素を0.5秒かけてアニメーションし、フェードインと`transform`の解除を同時に行います。
 
-<docs-code header="hero-list-page.component.ts" path="adev/src/content/examples/animations/src/app/hero-list-page.component.ts" region="page-animations"/>
+<docs-code header="hero-list-page.ts" path="adev/src/content/examples/animations/src/app/hero-list-page.ts" region="page-animations"/>
 
 ## group() 関数を使った並行アニメーション {#parallel-animation-using-group-function}
 
@@ -91,11 +91,11 @@ Filter/Staggerタブで、**Search Heroes** テキストボックスに `Magnet`
 
 HTMLテンプレートには `filterAnimation` というトリガーが含まれます。
 
-<docs-code header="hero-list-page.component.html" path="adev/src/content/examples/animations/src/app/hero-list-page.component.html" region="filter-animations" language="angular-html"/>
+<docs-code header="hero-list-page.html" path="adev/src/content/examples/animations/src/app/hero-list-page.html" region="filter-animations" language="angular-html"/>
 
 コンポーネントのデコレーターにある `filterAnimation` には3つのトランジションが含まれます。
 
-<docs-code header="hero-list-page.component.ts" path="adev/src/content/examples/animations/src/app/hero-list-page.component.ts" region="filter-animations"/>
+<docs-code header="hero-list-page.ts" path="adev/src/content/examples/animations/src/app/hero-list-page.ts" region="filter-animations"/>
 
 この例のコードは次のタスクを実行します：
 

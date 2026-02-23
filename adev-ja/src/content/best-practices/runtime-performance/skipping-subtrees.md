@@ -6,7 +6,7 @@ JavaScriptは、デフォルトでは、複数の異なるコンポーネント�
 
 アプリケーションの一部が状態変化の影響を受けないと確信できる場合は、[OnPush](/api/core/ChangeDetectionStrategy)を使用して、コンポーネントのサブツリー全体の変更検知をスキップできます。
 
-## `OnPush`の使用
+## `OnPush`の使用 {#using-onpush}
 
 OnPush変更検知は、Angularにコンポーネントのサブツリーの変更検知を次の場合**のみ**実行するように指示します。
 

@@ -36,7 +36,7 @@ Angularテンプレートは制御フローブロックをサポートしてお�
 
 これは、テンプレート内で読みやすく保守しやすいように長い式を参照するのに便利です。
 
-## `@for`ブロックでコンテンツを繰り返す
+## `@for`ブロックでコンテンツを繰り返す {#repeat-content-with-the-for-block}
 
 `@for` ブロックは、コレクションをループし、ブロックのコンテンツを繰り返しレンダリングします。 コレクションは、任意のJavaScriptの[反復可能オブジェクト](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Iteration_protocols)にできますが、Angularは `Array` 値に対して追加のパフォーマンス最適化を行っています。
 
@@ -50,7 +50,7 @@ Angularテンプレートは制御フローブロックをサポートしてお�
 
 Angularの `@for` ブロックは、JavaScriptの `continue` や `break` のようなフロー変更のステートメントをサポートしていません。
 
-### なぜ `@for` ブロックの `track` は重要なのか？
+### なぜ `@for` ブロックの `track` は重要なのか？ {#why-is-track-in-for-blocks-important}
 
 `track` 式を使用すると、Angularはデータとページ上のDOMノードの関係を維持できます。 これにより、Angularはデータが変更されたときに、必要なDOM操作を最小限に抑えてパフォーマンスを最適化できます。
 

@@ -166,7 +166,7 @@ By default, all pipes are considered `pure`, which means that it only executes w
 
 その結果、オブジェクトプロパティや配列項目の変更は、オブジェクトまたは配列参照の全体が別のインスタンスに置き換えられない限り検出されません。このレベルの変更検知が必要な場合は、[配列やオブジェクト内の変更の検出](#detecting-change-within-arrays-or-objects)を参照してください。
 
-## カスタムパイプの作成
+## カスタムパイプの作成 {#creating-custom-pipes}
 
 `@Pipe`デコレーターを使用してTypeScriptクラスを実装することで、カスタムパイプを定義できます。パイプには、次の2つの要素が必要です。
 

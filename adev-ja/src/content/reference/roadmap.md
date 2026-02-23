@@ -31,7 +31,7 @@
 - [Event replay with SSR](/api/platform-browser/withEventReplay)
 - [Route-level render mode](/guide/ssr)
 
-## Angular開発者体験の改善
+## Angular開発者体験の改善 {#improving-the-angular-developer-experience}
 
 ### 開発速度
 

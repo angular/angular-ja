@@ -1,0 +1,37 @@
+<div class="two-column-step">
+  <div class="step-description">
+    <div class="header">遅延可能ビュー</div>
+    <div class="description">
+      遅延可能ビュー（<code>&#64;defer</code>ブロックとも呼ばれます）は、ページの初期レンダリングに
+      厳密には必要でないコードの読み込みを遅延させることで、アプリケーションの初期バンドルサイズを削減します。
+    </div>
+
+    <button
+      class="docs-primary-btn"
+      [attr.text]="'遅延読み込みについて詳しく'"
+      routerLink="/guide/templates/defer"
+    >
+      遅延読み込みについて詳しく
+    </button>
+  </div>
+
+  <div class="step-code">
+    <div class="code-block">
+      <div class="code-header">
+        <span>data-visualization-page.html</span>
+        <span class="copy-icon"></span>
+      </div>
+
+      <adev-code-block [code]="exampleHtml" language="angular-html" />
+    </div>
+
+    <div class="code-block">
+      <div class="code-header">
+        <span>data-visualization-page.ts</span>
+        <span class="copy-icon"></span>
+      </div>
+
+      <adev-code-block [code]="exampleTs" />
+    </div>
+  </div>
+</div>

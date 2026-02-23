@@ -1,0 +1,216 @@
+<div class="header">ハイドレーション</div>
+<div class="description">
+  ハイドレーションは、サーバーサイドでレンダリングされたアプリケーションをクライアント上で復元するプロセスです
+
+  <p>
+    このデモでは、Angularのハイドレーション戦略を紹介します。ネットワーク遅延をシミュレートし、
+    設定されたトリガーに基づいて各コンポーネントがどのようにハイドレートされるかを観察できます。
+  </p>
+</div>
+
+<div class="demo-container">
+  <div class="max-width-wrapper">
+    <div class="main-layout">
+      <!-- Controls & Logs -->
+      <div class="sidebar">
+        <div class="card config-card">
+          <h3 class="sidebar-title font-mono">
+            <docs-icon>schedule</docs-icon>
+            シミュレーション設定
+          </h3>
+
+          <div class="config-controls">
+            <div class="control-group">
+              <div class="label-row">
+                <label>ネットワーク遅延</label>
+                <span class="latency-value font-mono">{{ latency() }}ms</span>
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="4000"
+                step="100"
+                [value]="latency()"
+                (input)="updateLatency($event)"
+                class="range-input"
+              />
+            </div>
+
+            <button
+              (click)="resetSimulation()"
+              [disabled]="isSimulationRunning()"
+              class="btn-reset"
+            >
+              <docs-icon>refresh</docs-icon>
+              ライフサイクルをリセット
+            </button>
+          </div>
+        </div>
+
+        <!-- Terminal Log -->
+        <div class="terminal">
+          <h3 class="terminal-title font-mono">ハイドレーションエンジンログ</h3>
+          <div class="terminal-body font-mono custom-scrollbar">
+            @for (evt of eventQueue(); track $index) {
+              <div class="log-entry animate-in">
+                <span class="log-index">0{{ $index + 1 }}</span>
+                <span class="log-tag">event:</span>
+                <span class="log-msg">{{ evt }}</span>
+              </div>
+            }
+            @if (eventQueue().length === 0) {
+              <div class="log-placeholder">アプリのブートストラップを待機中...</div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Simulator Stage -->
+      <div class="simulator-stage">
+        <div class="browser-window">
+          <!-- Browser UI -->
+          <div class="browser-header">
+            <div class="window-controls">
+              <div class="dot-win"></div>
+              <div class="dot-win"></div>
+              <div class="dot-win"></div>
+            </div>
+            <div class="address-bar font-mono">
+              <docs-icon>lock</docs-icon>
+              angular.dev/hydration-strategies
+            </div>
+          </div>
+
+          <!-- Viewport Content -->
+          <div class="viewport">
+            @if (currentState() === 'Server-Side Rendering...') {
+              <div class="ssr-overlay animate-fade">
+                <div class="ssr-spinner">
+                  <div class="spinner-outer"></div>
+                  <div class="spinner-inner"></div>
+                </div>
+                <p class="ssr-title">SSRマークアップを生成中...</p>
+              </div>
+            }
+
+            <div class="viewport-flex">
+              <div class="viewport-header">
+                <div class="header-text">
+                  <h4 class="viewport-title">コンポーネント戦略</h4>
+                  <p class="viewport-subtitle">即時ハイドレーションと遅延ハイドレーションの組み合わせ</p>
+                </div>
+                <div class="viewport-stats">
+                  <div class="stats-label">メインアプリ</div>
+                  <div class="stats-value font-tabular">{{ progress() }}%</div>
+                </div>
+              </div>
+
+              <div class="component-grid">
+                @for (card of [card1(), card2(), card3(), card4()]; track $index) {
+                  <div
+                    (click)="handleCardClick(card.id)"
+                    class="component-card transition-all"
+                    [class]="{
+                      'interactive': isInteractive() || card.strategy === 'on-interaction',
+                      'static': !isInteractive() && card.strategy !== 'on-interaction',
+                      'active-card': card.clickCount > 0,
+                      'dashed-border': !card.isHydrated,
+                    }"
+                  >
+                    <div class="card-top">
+                      <div
+                        class="icon-box transition-all"
+                        [class]="card.isHydrated ? 'icon-hydrated' : 'icon-static'"
+                      >
+                        @if (card.isHydrating) {
+                          <div class="loading-spinner"></div>
+                        } @else {
+                          <docs-icon>water_drop</docs-icon>
+                        }
+                      </div>
+                      @if (card.clickCount > 0) {
+                        <div class="click-badge font-tabular animate-zoom">
+                          <span class="badge-label">クリック:</span> {{ card.clickCount }}
+                        </div>
+                      }
+                    </div>
+
+                    <div class="card-body">
+                      <h5 class="card-title">{{ card.title }}</h5>
+                      <p class="card-desc">{{ card.description }}</p>
+                    </div>
+
+                    <div class="card-footer">
+                      @if (card.isHydrating) {
+                        <div class="tag tag-deferred animate-slide-in">
+                          <span class="tag-dot spin"></span>
+                          ハイドレート中...
+                        </div>
+                      } @else if (!card.isHydrated) {
+                        <div class="tag tag-deferred">
+                          <span class="tag-dot pulse"></span>
+                          静的
+                        </div>
+                      } @else {
+                        <div class="tag tag-hydrated animate-slide-in">
+                          <span class="tag-dot"></span>
+                          ハイドレート済み
+                        </div>
+                      }
+                    </div>
+
+                    @if (card.syntax) {
+                      <div
+                        class="syntax-badge font-mono"
+                        [class]="card.isHydrated ? 'syntax-inactive' : 'syntax-active'"
+                      >
+                        {{ card.syntax }}
+                      </div>
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Lifecycle Progress -->
+          <div class="lifecycle-progress-bar">
+            <div class="progress-fill transition-all" [style.width.%]="progress()"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Explanatory Feature Cards -->
+    <div class="explainer-grid">
+      <div class="explainer-item">
+        <h5 class="explainer-title"><span class="dot-red"></span> 即時ハイドレーション</h5>
+        <p class="explainer-text">
+          ナビゲーションやファーストビューのコンテンツなど、重要なコンポーネントは
+          メインアプリケーションバンドルの準備が完了するとすぐにハイドレートされます。
+        </p>
+      </div>
+      <div class="explainer-item">
+        <h5 class="explainer-title"><span class="dot-violet"></span> インクリメンタルハイドレーション</h5>
+        <p class="explainer-text">
+          <code>on interaction</code>や<code>on timer</code>などのハイドレーショントリガーを使用して、
+          重要度の低い要素のJS実行を遅延させます。
+        </p>
+      </div>
+      <div class="explainer-item">
+        <h5 class="explainer-title"><span class="dot-green"></span> イベントリプレイ</h5>
+        <p class="explainer-text">
+          ユーザーのクリックは失われません。Angularは「静的」フェーズ中のイベントを記録し、
+          ハイドレート後に再ディスパッチします。
+        </p>
+      </div>
+    </div>
+  </div>
+  <button
+    class="docs-primary-btn"
+    [attr.text]="'ハイドレーションについて詳しく'"
+    routerLink="/guide/hydration"
+  >
+    ハイドレーションについて詳しく
+  </button>
+</div>

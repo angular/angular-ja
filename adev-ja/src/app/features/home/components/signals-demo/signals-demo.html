@@ -1,0 +1,51 @@
+<div class="two-column-step">
+  <div class="step-description">
+    <div class="header">シグナル: きめ細やかなリアクティビティ</div>
+    <div class="description">
+      検索ボックスに入力してリストをフィルタリングしてみましょう。
+      <code>computed</code>シグナルは、<code>searchTerm</code>シグナルが変更されるたびに
+      <code>filteredItems</code>を自動的に再計算します。
+    </div>
+
+    <div class="demo-display">
+      <input
+        [value]="searchTerm()"
+        (input)="onSearch($event.target.value)"
+        placeholder="果物を検索..."
+        class="demo-input"
+      />
+      <div class="demo-list">
+        @for (item of filteredItems(); track item) {
+          <div class="demo-item">{{ item }}</div>
+        }
+      </div>
+    </div>
+
+    <button
+      class="docs-primary-btn"
+      [attr.text]="'シグナルについて詳しく'"
+      routerLink="/guide/signals"
+    >
+      シグナルについて詳しく
+    </button>
+  </div>
+
+  <div class="step-code">
+    <div class="code-block">
+      <div class="code-header">
+        <span>component.ts</span>
+        <span class="copy-icon"></span>
+      </div>
+
+      <adev-code-block [code]="tsExample" />
+    </div>
+
+    <div class="code-block">
+      <div class="code-header">
+        <span>component.html</span>
+        <span class="copy-icon"></span>
+      </div>
+      <adev-code-block [code]="htmlExample" language="angular-html" />
+    </div>
+  </div>
+</div>

@@ -67,7 +67,7 @@ HELPFUL: [`group()`](api/animations/group) 関数は、アニメーション化�
 
 次の例は、`:enter` と `:leave` の両方で [`group()`](api/animations/group) を使用し、2つの異なるタイミング設定を適用します。これにより、同じ要素に2つの独立したアニメーションを並行して適用できます。
 
-<docs-code header="hero-list-groups.component.ts (excerpt)" path="adev/src/content/examples/animations/src/app/hero-list-groups.component.ts" region="animationdef"/>
+<docs-code header="hero-list-groups.ts (excerpt)" path="adev/src/content/examples/animations/src/app/hero-list-groups.ts" region="animationdef"/>
 
 ## 順次アニメーションと並行アニメーション {#sequential-vs-parallel-animations}
 

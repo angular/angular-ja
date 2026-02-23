@@ -55,7 +55,7 @@ NgOptimizedImageを使用するために画像ローダーは**必須ではあ�
 
 [組み込みのサードパーティローダー](#built-in-loaders)を使用している場合は、`src`からベースURLパスを省略してください。これはローダーによって自動的に前置されます。
 </docs-step>
-<docs-step title="画像を`priority`としてマークする">
+<docs-step title="画像を`priority`としてマークする {#mark-images-as-priority}">
 ページの[LCP画像](https://web.dev/lcp/#what-elements-are-considered)は、その読み込みを優先するために常に`priority`としてマークしてください。
 
 ```html

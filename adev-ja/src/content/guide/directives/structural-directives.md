@@ -167,7 +167,7 @@ Angularは、構造ディレクティブの省略記法を次の通常のバイ�
 | `*ngComponentOutlet="componentClass; inputs: myInputs";`              | `<ng-template [ngComponentOutlet]="componentClass" [ngComponentOutletInputs]="myInputs">`                     |
 | `*myDir="exp as value"`                                               | `<ng-template [myDir]="exp" let-value="myDir">`                                                               |
 
-## カスタムディレクティブのテンプレートタイプチェックを改善する
+## カスタムディレクティブのテンプレートタイプチェックを改善する {#improving-template-type-checking-for-custom-directives}
 
 カスタムディレクティブのテンプレートタイプチェックを改善するには、ディレクティブ定義にテンプレートガードを追加します。
 これらのガードは、Angularテンプレートタイプチェッカーがコンパイル時にテンプレート内の間違いを見つけるのに役立ち、ランタイムエラーを回避できます。

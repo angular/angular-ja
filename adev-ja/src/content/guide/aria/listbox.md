@@ -133,7 +133,7 @@ Angularのリストボックスは、以下の機能を備えた完全にアク�
 
 TIP: ドロップダウンパターンでは、通常、単一選択のために`'follow'`モードが使用されます。
 
-## API
+## API {#apis}
 
 ### Listboxディレクティブ {#listbox-directive}
 

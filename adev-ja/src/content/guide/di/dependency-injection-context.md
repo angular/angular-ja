@@ -31,7 +31,7 @@ const canActivateTeam: CanActivateFn = (
 };
 ```
 
-## 注入コンテキスト内で実行する
+## 注入コンテキスト内で実行する {#run-within-an-injection-context}
 
 すでに注入コンテキスト内にいない状態で、特定の関数を注入コンテキスト内で実行したい場合は、`runInInjectionContext` を使用できます。
 これには、たとえば `EnvironmentInjector` のような特定のインジェクターへのアクセスが必要です。
@@ -53,7 +53,7 @@ export class HeroService {
 
 [`inject`](/api/core/inject) は、インジェクターが要求されたトークンを解決できる場合にのみインスタンスを返します。
 
-## コンテキストのアサート
+## コンテキストのアサート {#asserts-the-context}
 
 Angularは、現在のコンテキストが注入コンテキストであることをアサートし、そうでない場合は明確なエラーをスローするための `assertInInjectionContext` ヘルパー関数を提供します。呼び出し元の関数への参照を渡すと、エラーメッセージが正しいAPIエントリーポイントを指し示すようになります。これにより、デフォルトの汎用的な注入エラーよりも明確で実用的なメッセージが生成されます。
 

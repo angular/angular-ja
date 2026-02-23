@@ -129,7 +129,7 @@ readonly myObservableState = someObservable.pipe(pendingUntilEvent());
 
 `TestBed`は、`polyfills`経由で`zone.js`がロードされている場合、デフォルトでZoneベースの変更検知を使用します。
 
-`zone.js`が存在しない場合、`TestBed`はデフォルトでZonelessで実行されます。`zone.js`がロードされている場合にZonelessモードを強制するには、`provideZonelessChangeDetection()`を追加します:
+`zone.js`が存在しない場合、`TestBed`はデフォルトでZonelessとして実行されます。`zone.js`がロードされている場合にZonelessモードを強制するには、`provideZonelessChangeDetection()`を追加します:
 
 ```typescript
 TestBed.configureTestingModule({

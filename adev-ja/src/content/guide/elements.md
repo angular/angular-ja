@@ -72,7 +72,7 @@ IMPORTANT: コンポーネントのセレクターをカスタム要素のタグ
 
 - コンポーネントの出力はHTMLの[カスタムイベント](https://developer.mozilla.org/docs/Web/API/CustomEvent)としてディスパッチされ、カスタムイベントの名前は出力名と一致します。
   例えば、`valueChanged = output()`を持つコンポーネントの場合、対応するカスタム要素は"valueChanged"という名前のイベントをディスパッチし、出力されたデータはイベントの`detail`プロパティに格納されます。
-  エイリアスを提供した場合、その値が使用されます。例えば、`clicks = output<string>({alias: 'myClick'});`は"myClick"という名前のディスパッチイベントを生成します。
+  エイリアスを提供した場合、その値が使用されます。たとえば、`clicks = output<string>({alias: 'myClick'});`は"myClick"という名前のディスパッチイベントを生成します。
 
 詳細については、Webコンポーネントのドキュメントの[カスタムイベントの作成](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Events#creating_custom_events)を参照してください。
 

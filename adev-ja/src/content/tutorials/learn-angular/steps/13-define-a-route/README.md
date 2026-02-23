@@ -2,7 +2,7 @@
 
 Angular Routerを使用するようにアプリケーションを設定したので、次にルートを定義する必要があります。
 
-NOTE: [基本的なルートの定義方法についての詳細ガイド](/guide/routing/common-router-tasks#defining-a-basic-route)もご覧ください。
+NOTE: [基本的なルートの定義方法についての詳細ガイド](/guide/routing/define-routes)もご覧ください。
 
 このアクティビティでは、アプリケーションにルートを追加して構成する方法について学びます。
 

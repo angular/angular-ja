@@ -15,7 +15,7 @@ import {RouterLink} from '@angular/router';
       <a routerLink="/user-profile">User profile</a>
       <a routerLink="/settings">Settings</a>
     </nav>
-  `
+  `,
   imports: [RouterLink],
   ...
 })
@@ -36,7 +36,7 @@ Angularルーティングにおける**相対URL**は、現在のルートの場
 
 この例では、最初の例は、基本概念ページに対してプロトコル（つまり`https://`）とルートドメイン（つまり`angular.dev`）が明示的に定義された完全なパスを含んでいます。対照的に、2番目の例は、ユーザーがすでに`/essentials`の正しいルートドメインにいることを前提としています。
 
-一般的に、相対URLは、ルーティング階層内での絶対位置を知る必要がないため、アプリケーション全体で保守しやすいため、推奨されます。
+一般的に、相対URLは、ルーティング階層内での絶対位置を知る必要がないため、アプリケーション全体でより保守しやすく、推奨されます。
 
 ### 相対URLの仕組み {#how-relative-urls-work}
 
@@ -56,7 +56,7 @@ HELPFUL: 文字列を渡すのが、相対URLを定義する最も一般的な�
 <a [routerLink]="['user', currentUserId]">Current User</a>
 ```
 
-さらに、Angularルーティングでは、相対パスがスラッシュ（`/`）で始まるかどうかによって、パスを現在のURLに対する相対パスにするか、ルートドメインに対する相対パスにするかを指定できます。
+さらに、Angularルーティングでは、相対パスの先頭にスラッシュ（`/`）を付けるかどうかによって、パスを現在のURLに対する相対パスにするか、ルートドメインに対する相対パスにするかを指定できます。
 
 たとえば、ユーザーが`example.com/settings`にいる場合、さまざまなシナリオで異なる相対パスを定義する方法を次に示します。
 
@@ -67,7 +67,7 @@ HELPFUL: 文字列を渡すのが、相対URLを定義する最も一般的な�
 
 <!-- Navigates to /team/:teamId/user/:userId -->
 <a routerLink="/team/123/user/456">User 456</a>
-<a [routerLink]="['/team', teamId, 'user', userId]">Current User</a>”
+<a [routerLink]="['/team', teamId, 'user', userId]">Current User</a>
 ```
 
 ## ルートへのプログラムによるナビゲーション {#programmatic-navigation-to-routes}
@@ -79,13 +79,11 @@ HELPFUL: 文字列を渡すのが、相対URLを定義する最も一般的な�
 `router.navigate()`メソッドを使用して、URLパス配列を指定することで、ルート間をプログラムでナビゲートできます。
 
 ```angular-ts
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
-  template: `
-    <button (click)="navigateToProfile()">View Profile</button>
-  `
+  template: ` <button (click)="navigateToProfile()">View Profile</button> `,
 })
 export class AppDashboard {
   private router = inject(Router);
@@ -99,11 +97,11 @@ export class AppDashboard {
 
     // With query parameters
     this.router.navigate(['/search'], {
-      queryParams: { category: 'books', sort: 'price' }
+      queryParams: {category: 'books', sort: 'price'},
     });
 
     // With matrix parameters
-    this.router.navigate(['/products', { featured: true, onSale: true }]);
+    this.router.navigate(['/products', {featured: true, onSale: true}]);
   }
 }
 ```
@@ -113,33 +111,31 @@ export class AppDashboard {
 また、`relativeTo`オプションを使用して、ルーティングツリー内のコンポーネントの場所に対する動的なナビゲーションパスを構築できます。
 
 ```angular-ts
-import { Router, ActivatedRoute } from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-user-detail',
   template: `
     <button (click)="navigateToEdit()">Edit User</button>
     <button (click)="navigateToParent()">Back to List</button>
-  `
+  `,
 })
-export class UserDetailComponent {
+export class UserDetail {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
-
-  constructor() {}
 
   // Navigate to a sibling route
   navigateToEdit() {
     // From: /users/123
     // To:   /users/123/edit
-    this.router.navigate(['edit'], { relativeTo: this.route });
+    this.router.navigate(['edit'], {relativeTo: this.route});
   }
 
   // Navigate to parent
   navigateToParent() {
     // From: /users/123
     // To:   /users
-    this.router.navigate(['..'], { relativeTo: this.route });
+    this.router.navigate(['..'], {relativeTo: this.route});
   }
 }
 ```

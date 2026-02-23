@@ -4,7 +4,7 @@ NOTE: このガイドは、[Signal Formsの基本](essentials/signal-forms)に�
 
 ブラウザの組み込みフォームコントロール（`input`、`select`、`textarea`など）は一般的なケースを扱いますが、アプリケーションではしばしば特殊な入力が必要になります。カレンダーUIを持つ日付ピッカー、書式設定ツールバーを持つリッチテキストエディタ、オートコンプリート機能を持つタグセレクターなどは、すべてカスタム実装が必要です。
 
-シグナルフォームは、特定のインターフェースを実装するあらゆるコンポーネントと連携して動作します。**コントロールインターフェース**は、コンポーネントがフォームシステムと通信するためのプロパティとシグナルを定義します。コンポーネントがこれらのインターフェースのいずれかを実装すると、`[field]`ディレクティブが自動的にコントロールをフォームの状態、バリデーション、データバインディングに接続します。
+シグナルフォームは、特定のインターフェースを実装するあらゆるコンポーネントと連携して動作します。**コントロールインターフェース**は、コンポーネントがフォームシステムと通信するためのプロパティとシグナルを定義します。コンポーネントがこれらのインターフェースのいずれかを実装すると、`[formField]`ディレクティブが自動的にコントロールをフォームの状態、バリデーション、データバインディングに接続します。
 
 ## 基本的なカスタムコントロールの作成 {#creating-a-basic-custom-control}
 
@@ -15,8 +15,8 @@ NOTE: このガイドは、[Signal Formsの基本](essentials/signal-forms)に�
 基本的なカスタム入力は、`FormValueControl`インターフェースを実装し、必須の`value`モデルシグナルを定義するだけで済みます。
 
 ```angular-ts
-import { Component, model } from '@angular/core';
-import { FormValueControl } from '@angular/forms/signals';
+import {Component, model} from '@angular/core';
+import {FormValueControl} from '@angular/forms/signals';
 
 @Component({
   selector: 'app-basic-input',
@@ -41,21 +41,17 @@ export class BasicInput implements FormValueControl<string> {
 
 チェックボックス形式のコントロールには、次の2つが必要です:
 
-1. `Field`ディレクティブがフォームコントロールとして認識できるように、`FormCheckboxControl`インターフェースを実装する
+1. `FormField`ディレクティブがフォームコントロールとして認識できるように、`FormCheckboxControl`インターフェースを実装する
 2. `checked`モデルシグナルを提供する
 
 ```angular-ts
-import { Component, model, ChangeDetectionStrategy } from '@angular/core';
-import { FormCheckboxControl } from '@angular/forms/signals';
+import {Component, model, ChangeDetectionStrategy} from '@angular/core';
+import {FormCheckboxControl} from '@angular/forms/signals';
 
 @Component({
   selector: 'app-basic-toggle',
   template: `
-    <button
-      type="button"
-      [class.active]="checked()"
-      (click)="toggle()"
-    >
+    <button type="button" [class.active]="checked()" (click)="toggle()">
       <span class="toggle-slider"></span>
     </button>
   `,
@@ -66,41 +62,36 @@ export class BasicToggle implements FormCheckboxControl {
   checked = model<boolean>(false);
 
   toggle() {
-    this.checked.update(val => !val);
+    this.checked.update((val) => !val);
   }
 }
 ```
 
 ### カスタムコントロールの使用 {#using-your-custom-control}
 
-コントロールを作成したら、`Field`ディレクティブを追加することで、組み込みの入力を使用する場所ならどこでも使用できます:
+コントロールを作成したら、`FormField`ディレクティブを追加することで、組み込みの入力を使用する場所ならどこでも使用できます:
 
 ```angular-ts
-import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
-import { form, Field, required } from '@angular/forms/signals';
-import { BasicInput } from './basic-input';
-import { BasicToggle } from './basic-toggle';
+import {Component, signal, ChangeDetectionStrategy} from '@angular/core';
+import {form, FormField, required} from '@angular/forms/signals';
+import {BasicInput} from './basic-input';
+import {BasicToggle} from './basic-toggle';
 
 @Component({
-  imports: [Field, BasicInput, BasicToggle],
+  imports: [FormField, BasicInput, BasicToggle],
   template: `
-    <form>
+    <form novalidate>
       <label>
         Email
-        <app-basic-input [field]="registrationForm.email" />
+        <app-basic-input [formField]="registrationForm.email" />
       </label>
 
       <label>
         Accept terms
-        <app-basic-toggle [field]="registrationForm.acceptTerms" />
+        <app-basic-toggle [formField]="registrationForm.acceptTerms" />
       </label>
 
-      <button
-        type="submit"
-        [disabled]="registrationForm().invalid()"
-      >
-        Register
-      </button>
+      <button type="submit" [disabled]="registrationForm().invalid()">Register</button>
     </form>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -108,19 +99,19 @@ import { BasicToggle } from './basic-toggle';
 export class Registration {
   registrationModel = signal({
     email: '',
-    acceptTerms: false
+    acceptTerms: false,
   });
 
   registrationForm = form(this.registrationModel, (schemaPath) => {
-    required(schemaPath.email, { message: 'Email is required' });
-    required(schemaPath.acceptTerms, { message: 'You must accept the terms' });
+    required(schemaPath.email, {message: 'Email is required'});
+    required(schemaPath.acceptTerms, {message: 'You must accept the terms'});
   });
 }
 ```
 
 NOTE: スキーマのコールバックパラメータ（この例では`schemaPath`）は、フォーム内のすべてのフィールドへのパスを提供する`SchemaPathTree`オブジェクトです。このパラメータには好きな名前を付けることができます。
 
-`[field]`ディレクティブは、カスタムコントロールと組み込みの入力で同じように動作します。シグナルフォームはそれらを同じように扱います - バリデーションの実行、状態の更新、データバインディングが自動的に機能します。
+`[formField]`ディレクティブは、カスタムコントロールと組み込みの入力で同じように動作します。シグナルフォームはそれらを同じように扱います - バリデーションの実行、状態の更新、データバインディングが自動的に機能します。
 
 ## コントロールインターフェースの理解 {#understanding-control-interfaces}
 
@@ -135,7 +126,7 @@ NOTE: スキーマのコールバックパラメータ（この例では`schemaP
 `FormValueControl`は、テキスト入力、数値入力、日付ピッカー、セレクトドロップダウンなど、単一の値を編集するほとんどの入力タイプのためのインターフェースです。コンポーネントがこのインターフェースを実装する場合：
 
 - **必須プロパティ**: コンポーネントは`value`モデルシグナルを提供する必要があります
-- **Fieldディレクティブの役割**: フォームフィールドの値をコントロールの`value`シグナルにバインドします
+- **FormFieldディレクティブの役割**: フォームフィールドの値をコントロールの`value`シグナルにバインドします
 
 IMPORTANT: `FormValueControl`を実装するコントロールは`checked`プロパティを持ってはいけません
 
@@ -208,23 +199,23 @@ NOTE: `disabledReasons`は`DisabledReason`オブジェクトの配列です。�
 
 以下の「[状態シグナルの追加](#adding-state-signals)」セクションでは、これらのプロパティをコントロールに実装する方法を示します。
 
-### Fieldディレクティブの仕組み {#how-the-field-directive-works}
+### FormFieldディレクティブの仕組み {#how-the-formfield-directive-works}
 
 `[field]`ディレクティブは、コントロールがどのインターフェースを実装しているかを検出し、適切なシグナルを自動的にバインドします：
 
 ```angular-ts
-import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
-import { form, Field, required } from '@angular/forms/signals';
-import { CustomInput } from './custom-input';
-import { CustomToggle } from './custom-toggle';
+import {Component, signal, ChangeDetectionStrategy} from '@angular/core';
+import {form, FormField, required} from '@angular/forms/signals';
+import {CustomInput} from './custom-input';
+import {CustomToggle} from './custom-toggle';
 
 @Component({
   selector: 'app-my-form',
-  imports: [Field, CustomInput, CustomToggle],
+  imports: [FormField, CustomInput, CustomToggle],
   template: `
-    <form>
-      <app-custom-input [field]="userForm.username" />
-      <app-custom-toggle [field]="userForm.subscribe" />
+    <form novalidate>
+      <app-custom-input [formField]="userForm.username" />
+      <app-custom-toggle [formField]="userForm.subscribe" />
     </form>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -232,18 +223,18 @@ import { CustomToggle } from './custom-toggle';
 export class MyForm {
   formModel = signal({
     username: '',
-    subscribe: false
+    subscribe: false,
   });
 
   userForm = form(this.formModel, (schemaPath) => {
-    required(schemaPath.username, { message: 'Username is required' });
+    required(schemaPath.username, {message: 'Username is required'});
   });
 }
 ```
 
 TIP: フォームモデルの作成と管理に関する完全な情報については、[フォームモデルガイド](guide/forms/signals/models)を参照してください。
 
-`[field]="userForm.username"`をバインドすると、Fieldディレクティブは次のようになります：
+`[formField]="userForm.username"`をバインドすると、FormFieldディレクティブは次のようになります:
 
 1. コントロールが`FormValueControl`を実装していることを検出します
 2. 内部で`userForm.username().value()`にアクセスし、それをコントロールの`value`モデルシグナルにバインドします
@@ -257,9 +248,8 @@ TIP: フォームモデルの作成と管理に関する完全な情報につい
 以下は、一般的な状態プロパティを実装する包括的な例です:
 
 ```angular-ts
-import { Component, model, input, ChangeDetectionStrategy } from '@angular/core';
-import { FormValueControl } from '@angular/forms/signals';
-import type { ValidationError, DisabledReason } from '@angular/forms/signals';
+import {Component, model, input, ChangeDetectionStrategy} from '@angular/core';
+import {FormValueControl, WithOptionalFieldTree, ValidationError, DisabledReason} from '@angular/forms/signals';
 
 @Component({
   selector: 'app-stateful-input',
@@ -310,40 +300,40 @@ export class StatefulInput implements FormValueControl<string> {
   readonly = input<boolean>(false);
   hidden = input<boolean>(false);
   invalid = input<boolean>(false);
-  errors = input<readonly ValidationError.WithField[]>([]);
+  errors = input<readonly WithOptionalFieldTree<ValidationError>[]>([]);
 }
 ```
 
 その結果、バリデーションと状態管理を備えたコントロールを使用できます:
 
 ```angular-ts
-import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
-import { form, Field, required, email } from '@angular/forms/signals';
-import { StatefulInput } from './stateful-input';
+import {Component, signal, ChangeDetectionStrategy} from '@angular/core';
+import {form, FormField, required, email} from '@angular/forms/signals';
+import {StatefulInput} from './stateful-input';
 
 @Component({
-  imports: [Field, StatefulInput],
+  imports: [FormField, StatefulInput],
   template: `
-    <form>
+    <form novalidate>
       <label>
         Email
-        <app-stateful-input [field]="loginForm.email" />
+        <app-stateful-input [formField]="loginForm.email" />
       </label>
     </form>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Login {
-  loginModel = signal({ email: '' });
+  loginModel = signal({email: ''});
 
   loginForm = form(this.loginModel, (schemaPath) => {
-    required(schemaPath.email, { message: 'Email is required' });
-    email(schemaPath.email, { message: 'Enter a valid email address' });
+    required(schemaPath.email, {message: 'Email is required'});
+    email(schemaPath.email, {message: 'Enter a valid email address'});
   });
 }
 ```
 
-ユーザーが無効なメールアドレスを入力すると、`Field`ディレクティブが自動的に`invalid()`と`errors()`を更新します。あなたのコントロールは、そのバリデーションフィードバックを表示できます。
+ユーザーが無効なメールアドレスを入力すると、`FormField`ディレクティブが自動的に`invalid()`と`errors()`を更新します。あなたのコントロールは、そのバリデーションフィードバックを表示できます。
 
 ### 状態プロパティのシグナルタイプ {#signal-types-for-state-properties}
 
@@ -356,8 +346,9 @@ export class Login {
 `@angular/core`の`linkedSignal()`を使用してモデルの値を表示用に変換し、入力イベントを処理してユーザー入力を格納形式にパースして戻します:
 
 ```angular-ts
-import { ChangeDetectionStrategy, Component, linkedSignal, model } from '@angular/core';
-import { FormValueControl } from '@angular/forms/signals';
+import {formatCurrency} from '@angular/common';
+import {ChangeDetectionStrategy, Component, linkedSignal, model} from '@angular/core';
+import {FormValueControl} from '@angular/forms/signals';
 
 @Component({
   selector: 'app-currency-input',
@@ -376,7 +367,7 @@ export class CurrencyInput implements FormValueControl<number> {
   readonly value = model.required<number>();
 
   // 表示値 (「1,234.56」) を格納します
-  readonly displayValue = linkedSignal(() => formatCurrency(this.value()));
+  readonly displayValue = linkedSignal(() => formatCurrency(this.value(), 'en', 'USD'));
 
   // 表示値からモデルを更新します
   updateModel() {
@@ -384,22 +375,17 @@ export class CurrencyInput implements FormValueControl<number> {
   }
 }
 
-// 数値を通貨文字列に変換します (例: 1234.56 -> 「1,234.56」)
-function formatCurrency(value: number) {
-  return value.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}
-
-// 通貨文字列を数値に変換します (例: 「1,234.56」 -> 1234.56)
-function parseCurrency(value: string) {
-  return parseFloat(value.replace(/,/g, ''));
+// 通貨文字列を数値に変換します (例: 「USD1,234.56」 -> 1234.56)
+function parseCurrency(value: string): number {
+  return parseFloat(value.replace(/^[^\d-]+/, '').replace(/,/g, ''));
 }
 ```
 
 ## バリデーションの統合 {#validation-integration}
 
-コントロールはバリデーションの状態を表示しますが、バリデーションは実行しません。バリデーションはフォームスキーマで行われます。コントロールは`Field`ディレクティブから`invalid()`と`errors()`シグナルを受け取り、それらを表示します（上記の`StatefulInput`の例で示されているように）。
+コントロールはバリデーションの状態を表示しますが、バリデーションは実行しません。バリデーションはフォームスキーマで行われます。コントロールは`FormField`ディレクティブから`invalid()`と`errors()`シグナルを受け取り、それらを表示します（上記の`StatefulInput`の例で示されているように）。
 
-`Field`ディレクティブは、`required`、`min`、`max`、`minLength`、`maxLength`、`pattern`のようなバリデーション制約の値も渡します。コントロールはこれらを使用してUIを強化できます：
+`FormField`ディレクティブは、`required`、`min`、`max`、`minLength`、`maxLength`、`pattern`のようなバリデーション制約の値も渡します。コントロールはこれらを使用してUIを強化できます:
 
 ```ts
 export class NumberInput implements FormValueControl<number> {
@@ -412,11 +398,11 @@ export class NumberInput implements FormValueControl<number> {
 }
 ```
 
-スキーマに`min()`と`max()`のバリデーションルールを追加すると、`Field`ディレクティブはこれらの値をコントロールに渡します。これらを使用して、HTML5属性を適用したり、テンプレートに制約のヒントを表示したりします。
+スキーマに`min()`と`max()`のバリデーションルールを追加すると、`FormField`ディレクティブはこれらの値をコントロールに渡します。これらを使用して、HTML5属性を適用したり、テンプレートに制約のヒントを表示したりします。
 
-IMPORTANT: コントロールにバリデーションロジックを実装しないでください。バリデーションルールはフォームスキーマで定義し、コントロールにはその結果を表示させるようにしてください：
+IMPORTANT: コントロールにバリデーションロジックを実装しないでください。バリデーションルールはフォームスキーマで定義し、コントロールにはその結果を表示させるようにしてください:
 
-```typescript
+```ts {avoid}
 // 悪い例：コントロール内でのバリデーション
 export class BadControl implements FormValueControl<string> {
   value = model<string>('');
@@ -424,7 +410,9 @@ export class BadControl implements FormValueControl<string> {
     return this.value().length >= 8;
   } // これは行わないでください！
 }
+```
 
+```ts {prefer}
 // 良い例：スキーマでバリデーションし、コントロールは結果を表示
 accountForm = form(this.accountModel, (schemaPath) => {
   minLength(schemaPath.password, 8, {message: 'Password must be at least 8 characters'});

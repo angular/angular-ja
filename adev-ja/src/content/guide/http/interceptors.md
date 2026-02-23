@@ -45,7 +45,7 @@ export function loggingInterceptor(
 `HttpClient` を構成するときに使用するインターセプターのセットは、`withInterceptors` 機能を使用して、依存性の注入によって宣言します。
 
 ```ts
-bootstrapApplication(AppComponent, {
+bootstrapApplication(App, {
   providers: [provideHttpClient(withInterceptors([loggingInterceptor, cachingInterceptor]))],
 });
 ```
@@ -275,7 +275,7 @@ export class LoggingInterceptor implements HttpInterceptor {
 DIベースのインターセプターは、依存性の注入のマルチプロバイダーによって構成されます。
 
 ```ts
-bootstrapApplication(AppComponent, {
+bootstrapApplication(App, {
   providers: [
     provideHttpClient(
       // DI ベースのインターセプターは明示的に有効にする必要があります。

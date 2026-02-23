@@ -101,8 +101,8 @@ export const adminChildGuard: CanActivateChildFn = (
 [標準のガード戻り値の型](#route-guard-return-types)を返すことができます。
 
 ```ts
-export const unsavedChangesGuard: CanDeactivateFn<FormComponent> = (
-  component: FormComponent,
+export const unsavedChangesGuard: CanDeactivateFn<Form> = (
+  component: Form,
   currentRoute: ActivatedRouteSnapshot,
   currentState: RouterStateSnapshot,
   nextState: RouterStateSnapshot,
@@ -172,21 +172,21 @@ const routes: Routes = [
   // Basic CanActivate - 認証が必要
   {
     path: 'dashboard',
-    component: DashboardComponent,
+    component: Dashboard,
     canActivate: [authGuard],
   },
 
   // 複数のCanActivateガード - 認証と管理者ロールが必要
   {
     path: 'admin',
-    component: AdminComponent,
+    component: Admin,
     canActivate: [authGuard, adminGuard],
   },
 
   // CanActivate + CanDeactivate - 未保存の変更チェック付き保護ルート
   {
     path: 'profile',
-    component: ProfileComponent,
+    component: Profile,
     canActivate: [authGuard],
     canDeactivate: [canDeactivateGuard],
   },
@@ -197,23 +197,23 @@ const routes: Routes = [
     canActivateChild: [authGuard],
     children: [
       // /users/list - 保護されている
-      {path: 'list', component: UserListComponent},
+      {path: 'list', component: UserList},
       // /users/detail/:id - 保護されている
-      {path: 'detail/:id', component: UserDetailComponent},
+      {path: 'detail/:id', component: UserDetail},
     ],
   },
 
   // CanMatch - 機能フラグに基づいてルートを条件付きでマッチング
   {
     path: 'beta-feature',
-    component: BetaFeatureComponent,
+    component: BetaFeature,
     canMatch: [featureToggleGuard],
   },
 
   // ベータ機能が無効な場合のフォールバックルート
   {
     path: 'beta-feature',
-    component: ComingSoonComponent,
+    component: ComingSoon,
   },
 ];
 ```

@@ -18,7 +18,7 @@
 `@angular/forms/signals` から `required` と `email` バリデーターをインポートします:
 
 ```ts
-import {form, Field, required, email} from '@angular/forms/signals';
+import {form, FormField, required, email} from '@angular/forms/signals';
 ```
 
 </docs-step>

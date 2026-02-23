@@ -31,7 +31,7 @@ Angularは、構造ディレクティブの省略記法をサポートしてお�
 以下は、`SelectDirective`を使用した例です。
 
 ```angular-html
-<p *select="let data from source">The data is: {{data}}</p>
+<p *select="let data; from: source">The data is: {{ data }}</p>
 ```
 
 この例は、構造ディレクティブの省略記法の柔軟性を示しており、これはマイクロシンタックスと呼ばれることもあります。
@@ -40,11 +40,11 @@ Angularは、構造ディレクティブの省略記法をサポートしてお�
 
 ```angular-html
 <!-- 省略記法: -->
-<p class="data-view" *select="let data from source">The data is: {{data}}</p>
+<p class="data-view" *select="let data; from: source">The data is: {{ data }}</p>
 
 <!-- 長形式の記法: -->
 <ng-template select let-data [selectFrom]="source">
-  <p class="data-view">The data is: {{data}}</p>
+  <p class="data-view">The data is: {{ data }}</p>
 </ng-template>
 ```
 
@@ -167,7 +167,7 @@ Angularは、構造ディレクティブの省略記法を次の通常のバイ�
 | `*ngComponentOutlet="componentClass; inputs: myInputs";`              | `<ng-template [ngComponentOutlet]="componentClass" [ngComponentOutletInputs]="myInputs">`                     |
 | `*myDir="exp as value"`                                               | `<ng-template [myDir]="exp" let-value="myDir">`                                                               |
 
-## カスタムディレクティブのテンプレートタイプチェックを改善する
+## カスタムディレクティブのテンプレートタイプチェックを改善する {#improving-template-type-checking-for-custom-directives}
 
 カスタムディレクティブのテンプレートタイプチェックを改善するには、ディレクティブ定義にテンプレートガードを追加します。
 これらのガードは、Angularテンプレートタイプチェッカーがコンパイル時にテンプレート内の間違いを見つけるのに役立ち、ランタイムエラーを回避できます。

@@ -131,7 +131,7 @@ my-workspace/
 └── … (ライブラリ固有のコードと構成)
 ```
 
-## ライブラリプロジェクトファイル
+## ライブラリプロジェクトファイル {#library-project-files}
 
 CLIを使用してライブラリを生成する（`ng generate library my-lib` などのコマンド）と、生成されたファイルはワークスペースの `projects/` フォルダーに格納されます。
 独自のライブラリを作成する方法の詳細については、[ライブラリの作成](tools/libraries/creating-libraries) を参照してください。

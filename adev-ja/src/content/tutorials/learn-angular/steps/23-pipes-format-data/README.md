@@ -11,7 +11,7 @@ NOTE: 詳しくは、[パイプによるデータのフォーマットに関す�
 パイプにパラメーターを渡すには、`:`構文の後にパラメーター値を記述します。例を以下に示します。
 
 ```angular-html
-template: `{{ date | date:'medium' }}`;
+template: `{{ date | date: 'medium' }}`;
 ```
 
 出力は `Jun 15, 2015, 9:43:11 PM` となります。
@@ -25,9 +25,8 @@ template: `{{ date | date:'medium' }}`;
 `app.ts` のテンプレートを更新して、`decimal` パイプのパラメーターを含めます。
 
 ```ts {highlight:[3]}
-template: `
-  ...
-  <li>Number with "decimal" {{ num | number:"3.2-2" }}</li>
+template: ` ...
+<li>Number with "decimal" {{ num | number: '3.2-2' }}</li>
 `
 ```
 
@@ -40,9 +39,8 @@ NOTE: このフォーマットは何でしょう？`DecimalPipe` のパラメー
 次に、テンプレートを更新して `date` パイプを使用します。
 
 ```ts {highlight:[3]}
-template: `
-  ...
-  <li>Date with "date" {{ birthday | date: 'medium' }}</li>
+template: ` ...
+<li>Date with "date" {{ birthday | date: 'medium' }}</li>
 `
 ```
 
@@ -55,9 +53,8 @@ template: `
 最後の作業として、テンプレートを更新して `currency` パイプを使用します。
 
 ```ts {highlight:[3]}
-template: `
-  ...
-  <li>Currency with "currency" {{ cost | currency }}</li>
+template: ` ...
+<li>Currency with "currency" {{ cost | currency }}</li>
 `
 ```
 

@@ -35,7 +35,7 @@ By default, you can only create an `effect()` within an [injection context](guid
 
 ```ts
 @Component({
-  /* ... */
+  /*...*/
 })
 export class EffectiveCounter {
   readonly count = signal(0);
@@ -52,15 +52,20 @@ export class EffectiveCounter {
 To create an effect outside the constructor, you can pass an `Injector` to `effect` via its options:
 
 ```ts
-@Component({...})
-export class EffectiveCounterComponent {
+@Component({
+  /*...*/
+})
+export class EffectiveCounter {
   readonly count = signal(0);
   private injector = inject(Injector);
 
   initializeLogging(): void {
-    effect(() => {
-      console.log(`The count is: ${this.count()}`);
-    }, {injector: this.injector});
+    effect(
+      () => {
+        console.log(`The count is: ${this.count()}`);
+      },
+      {injector: this.injector},
+    );
   }
 }
 ```
@@ -77,7 +82,7 @@ The execution of both kinds of `effect` are tied to the change detection process
 - "View effects" are executed _before_ their corresponding component is checked by the change detection process.
 - "Root effects" are executed prior to all components being checked by the change detection process.
 
-In both cases, if at least one of the effect dependencies changed during the effect execution, the effect will re-run before moving ahead on the change detection process,
+In both cases, if at least one of the effect dependencies changed during the effect execution, the effect will re-run before moving ahead on the change detection process.
 
 ### Destroying effects
 
@@ -117,7 +122,7 @@ For these situations, you can use `afterRenderEffect`. It functions like `effect
 
 ```ts
 @Component({
-  /* ... */
+  /*...*/
 })
 export class MyFancyChart {
   chartData = input.required<ChartData>();
@@ -128,7 +133,7 @@ export class MyFancyChart {
     // Run a single time to create the chart instance
     afterNextRender({
       write: () => {
-        this.chart = initializeChart(this.canvas().nativeElement(), this.charData());
+        this.chart = initializeChart(this.canvas().nativeElement(), this.chartData());
       },
     });
 
@@ -146,7 +151,7 @@ TIP: You often don't need `afterRenderEffect` to check for DOM changes. APIs lik
 
 ### Render phases
 
-Accessing the DOM and mutating it can impact the performance of your application, for example by triggering to many unecesary [reflows](https://developer.mozilla.org/en-US/docs/Glossary/Reflow).
+Accessing the DOM and mutating it can impact the performance of your application, for example by triggering too many unnecessary [reflows](https://developer.mozilla.org/en-US/docs/Glossary/Reflow).
 
 To optimize those operations, `afterRenderEffect` offers four phases to group the callbacks and execute them in an optimized order.
 

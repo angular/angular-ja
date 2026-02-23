@@ -250,9 +250,9 @@ const actorForm = new FormGroup(
 次の例は、テンプレート駆動フォームでこれを実現する方法を示しています。
 
 ```angular-html
-<input [(ngModel)]="name" #model="ngModel" appSomeAsyncValidator>
+<input [(ngModel)]="name" #model="ngModel" appSomeAsyncValidator />
 
-@if(model.pending) {
+@if (model.pending) {
   <app-spinner />
 }
 ```
@@ -278,7 +278,7 @@ interface ActorsService {
 実際のアプリケーションでは、`ActorsService`は、アクターデータベースにHTTPリクエストを送信して役割が利用可能かどうかを確認する役割を担います。
 バリデーターの観点から、サービスの実際の実装は重要でないため、例では`ActorsService`インターフェースに対してのみコードを作成できます。
 
-検証が始まると、`UnambiguousRoleValidator`は、現在のコントロール値で`ActorsService`の`isRoleTaken()`メソッドに委任します。
+検証が始まると、`UniqueRoleValidator`は、現在のコントロール値で`ActorsService`の`isRoleTaken()`メソッドに委任します。
 この時点で、コントロールは`pending`としてマークされ、`validate()`メソッドから返されるObservableチェーンが完了するまで、この状態を維持します。
 
 `isRoleTaken()`メソッドは、役割が利用可能かどうかを確認するHTTPリクエストをディスパッチし、結果として`Observable<boolean>`を返します。
@@ -300,7 +300,7 @@ interface ActorsService {
 
 次に、バリデーター関数を`FormControl`に直接渡して、適用します。
 
-次の例では、`UnambiguousRoleValidator`の`validate`関数が、`roleControl`に適用されています。この関数をコントロールの`asyncValidators`オプションに渡し、`ActorFormReactiveComponent`に注入された`UnambiguousRoleValidator`のインスタンスにバインドしています。
+次の例では、`UniqueRoleValidator`の`validate`関数が、`roleControl`に適用されています。この関数をコントロールの`asyncValidators`オプションに渡し、`ActorFormReactiveComponent`に注入された`UniqueRoleValidator`のインスタンスにバインドしています。
 `asyncValidators`の値は、単一の非同期バリデーター関数、または関数の配列にできます。
 `FormControl`オプションの詳細については、[AbstractControlOptions](api/forms/AbstractControlOptions) APIリファレンスを参照してください。
 
@@ -330,7 +330,7 @@ interface ActorsService {
 テンプレート駆動フォームでは、テンプレートでプロパティを設定します。
 
 ```angular-html
-<input [(ngModel)]="name" [ngModelOptions]="{updateOn: 'blur'}">
+<input [(ngModel)]="name" [ngModelOptions]="{updateOn: 'blur'}" />
 ```
 
 リアクティブフォームでは、`FormControl`インスタンスでプロパティを設定します。

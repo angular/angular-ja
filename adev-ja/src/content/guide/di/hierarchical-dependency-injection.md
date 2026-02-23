@@ -68,7 +68,7 @@ export class ItemService {
 Angularが `main.ts` の次の内容でアプリケーションをブートストラップする方法を検討してください。
 
 ```ts
-bootstrapApplication(AppComponent, appConfig);
+bootstrapApplication(App, appConfig);
 ```
 
 `bootstrapApplication()` メソッドは、 `ApplicationConfig` インスタンスによって構成されたプラットフォームインジェクターの子インジェクターを作成します。
@@ -106,7 +106,7 @@ stateDiagram-v2
 `bootstrapApplication()` の `ApplicationConfig` でアプリケーション全体のプロバイダーを構成すると、 `@Injectable()` メタデータの `root` で構成されたプロバイダーがオーバーライドされます。
 これは、複数のアプリケーションで共有されるサービスのデフォルト以外のプロバイダーを構成する場合に行うことができます。
 
-コンポーネントルーターの構成にデフォルト以外の [ロケーション戦略](guide/routing#location-strategy) が含まれている場合、 `ApplicationConfig` の `providers` リストにそのプロバイダーをリストすることによって、その例を示します。
+コンポーネントルーターの構成にデフォルト以外の [ロケーション戦略](guide/routing/common-router-tasks#locationstrategy-and-browser-url-styles) が含まれている場合、 `ApplicationConfig` の `providers` リストにそのプロバイダーをリストすることによって、その例を示します。
 
 ```ts
 providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}];
@@ -193,8 +193,8 @@ Angularの解決動作は、`optional`、`self`、`skipSelf`、および `host` 
 そのため、実行時に解決できない場合、Angularはサービスをエラーをスローするのではなく、 `null` として解決します。
 次の例では、サービス `OptionalService` はサービス `ApplicationConfig`や`@NgModule()`、コンポーネントクラスで提供されていないため、アプリケーションのどこにも使用できません。
 
-```ts {header:"src/app/optional/optional.component.ts"}
-export class OptionalComponent {
+```ts {header:"src/app/optional/optional.ts"}
+export class Optional {
   public optional? = inject(OptionalService, {optional: true});
 }
 ```
@@ -206,15 +206,15 @@ export class OptionalComponent {
 `self` の適切なユースケースは、サービスを注入するが、現在のホスト要素で使用可能な場合のみにすることです。
 このような状況でエラーを回避するには、`self` を `optional` と組み合わせます。
 
-たとえば、次の `SelfNoDataComponent` では、プロパティとして注入された `LeafService` に注目してください。
+たとえば、次の `SelfNoData` では、プロパティとして注入された `LeafService` に注目してください。
 
-```ts {header: 'self-no-data.component.ts', highlight: [7]}
+```ts {header: 'self-no-data.ts', highlight: [7]}
 @Component({
   selector: 'app-self-no-data',
-  templateUrl: './self-no-data.component.html',
-  styleUrls: ['./self-no-data.component.css'],
+  templateUrl: './self-no-data.html',
+  styleUrls: ['./self-no-data.css'],
 })
-export class SelfNoDataComponent {
+export class SelfNoData {
   public leaf = inject(LeafService, {optional: true, self: true});
 }
 ```
@@ -224,14 +224,14 @@ export class SelfNoDataComponent {
 別の例では、 `FlowerService` のプロバイダーを備えたコンポーネントクラスを示しています。
 この場合、インジェクターは現在の `ElementInjector` より先を見ずに、 `FlowerService` を見つけて、チューリップ 🌷 を返します。
 
-```ts {header:"src/app/self/self.component.ts"}
+```ts {header:"src/app/self/self.ts"}
 @Component({
   selector: 'app-self',
-  templateUrl: './self.component.html',
-  styleUrls: ['./self.component.css'],
+  templateUrl: './self.html',
+  styleUrls: ['./self.css'],
   providers: [{provide: FlowerService, useValue: {emoji: '🌷'}}],
 })
-export class SelfComponent {
+export class Self {
   constructor(@Self() public flower: FlowerService) {}
 }
 ```
@@ -253,15 +253,15 @@ export class LeafService {
 子コンポーネントに、異なる値、カエデの葉 🍁 が含まれていると想像してください。ただし、親の値を使用したいとします。
 これが `skipSelf` を使用する場合です。
 
-```ts {header:"skipself.component.ts" highlight:[[6],[10]]}
+```ts {header:"skipself.ts" highlight:[[6],[10]]}
 @Component({
   selector: 'app-skipself',
-  templateUrl: './skipself.component.html',
-  styleUrls: ['./skipself.component.css'],
+  templateUrl: './skipself.html',
+  styleUrls: ['./skipself.css'],
   // Angular はこの LeafService インスタンスを無視します
   providers: [{provide: LeafService, useValue: {emoji: '🍁'}}],
 })
-export class SkipselfComponent {
+export class Skipself {
   // Use skipSelf as inject option
   public leaf = inject(LeafService, {skipSelf: true});
 }
@@ -291,21 +291,21 @@ class Person {
 ツリーのさらに上にサービスインスタンスがある場合でも、Angularは検索を続けません。
 `host` を次のように使用します。
 
-```ts {header:"host.component.ts" highlight:[[6],[9]]}
+```ts {header:"host.ts" highlight:[[6],[9]]}
 @Component({
   selector: 'app-host',
-  templateUrl: './host.component.html',
-  styleUrls: ['./host.component.css'],
+  templateUrl: './host.html',
+  styleUrls: ['./host.css'],
   // provide the service
   providers: [{provide: FlowerService, useValue: {emoji: '🌷'}}],
 })
-export class HostComponent {
+export class Host {
   // use host when injecting the service
   flower = inject(FlowerService, {host: true, optional: true});
 }
 ```
 
-`HostComponent`に`host`オプションがあるため、`HostComponent`の親が`flower.emoji`にどのような値を持っていても、`HostComponent`はチューリップ<code>🌷</code>を使用します。
+`Host`に`host`オプションがあるため、`Host`の親が`flower.emoji`にどのような値を持っていても、`Host`はチューリップ<code>🌷</code>を使用します。
 
 ### コンストラクター注入での修飾子 {#modifiers-with-constructor-injection}
 
@@ -313,8 +313,8 @@ export class HostComponent {
 
 `@angular/core` からそれぞれをインポートし、サービスを注入するときにコンポーネントクラスのコンストラクターでそれぞれを使用します。
 
-```ts {header:"self-no-data.component.ts" highlight:[2]}
-export class SelfNoDataComponent {
+```ts {header:"self-no-data.ts" highlight:[2]}
+export class SelfNoData {
   constructor(@Self() @Optional() public leaf?: LeafService) {}
 }
 ```
@@ -390,22 +390,22 @@ export class FlowerService {
 }
 ```
 
-`AppComponent` と `ChildComponent` のみが含まれるアプリケーションを検討してください。
+`App` と `Child` のみが含まれるアプリケーションを検討してください。
 最も基本的なレンダリングされたビューは、次のようなネストされたHTML要素のように見えます。
 
 ```html
 <app-root>
-  <!-- AppComponent selector -->
-  <app-child> <!-- ChildComponent selector --> </app-child>
+  <!-- App selector -->
+  <app-child> <!-- Child selector --> </app-child>
 </app-root>
 ```
 
 ただし、裏側では、Angularはインジェクションリクエストを解決するときに、次のような論理ビュー表現を使用します。
 
 ```html
-<app-root> <!-- AppComponent selector -->
+<app-root> <!-- App selector -->
   <#VIEW>
-    <app-child> <!-- ChildComponent selector -->
+    <app-child> <!-- Child selector -->
       <#VIEW>
       </#VIEW>
     </app-child>
@@ -421,7 +421,7 @@ export class FlowerService {
 次に、 `<app-root>` が `FlowerService` を注入しているとします。
 
 ```typescript
-export class AppComponent {
+export class App {
   flower = inject(FlowerService);
 }
 ```
@@ -434,7 +434,7 @@ export class AppComponent {
 
 ビューに出力されるのは次のとおりです。
 
-```shell
+```text {hideCopy}
 Emoji from FlowerService: 🌺
 ```
 
@@ -474,17 +474,17 @@ Emoji from FlowerService: 🌺
 
 ### `providers` 配列を使用する {#using-the-providers-array}
 
-次に、 `ChildComponent` クラスで、今後のセクションでより複雑な解決ルールを説明するために、 `FlowerService` のプロバイダーを追加します。
+次に、 `Child` クラスで、今後のセクションでより複雑な解決ルールを説明するために、 `FlowerService` のプロバイダーを追加します。
 
 ```ts
 @Component({
   selector: 'app-child',
-  templateUrl: './child.component.html',
-  styleUrls: ['./child.component.css'],
+  templateUrl: './child.html',
+  styleUrls: ['./child.css'],
   // use the providers array to provide a service
   providers: [{provide: FlowerService, useValue: {emoji: '🌻'}}],
 })
-export class ChildComponent {
+export class Child {
   // inject the service
   flower = inject(FlowerService);
 }
@@ -493,15 +493,15 @@ export class ChildComponent {
 `FlowerService` が `@Component()` デコレーターで提供されるようになったため、 `<app-child>` がサービスを要求すると、インジェクターは `<app-child>` の `ElementInjector` ほど遠くまでしか見なくてもよくなります。
 インジェクターは、インジェクターツリーをさらに検索する必要はありません。
 
-次のステップは、 `ChildComponent` テンプレートにバインディングを追加することです。
+次のステップは、 `Child` テンプレートにバインディングを追加することです。
 
 ```html
 <p>Emoji from FlowerService: {{flower.emoji}}</p>
 ```
 
-新しい値をレンダリングするために、ビューにひまわりも表示されるように、 `AppComponent` テンプレートの下部に `<app-child>` を追加します。
+新しい値をレンダリングするために、ビューにひまわりも表示されるように、 `App` テンプレートの下部に `<app-child>` を追加します。
 
-```shell
+```text {hideCopy}
 Child Component
 Emoji from FlowerService: 🌻
 ```
@@ -555,10 +555,10 @@ export class AnimalService {
 }
 ```
 
-`FlowerService` と同じパターンに従って、 `AppComponent` クラスに `AnimalService` を注入します。
+`FlowerService` と同じパターンに従って、 `App` クラスに `AnimalService` を注入します。
 
 ```ts
-export class AppComponent {
+export class App {
   public flower = inject(FlowerService);
   public animal = inject(AnimalService);
 }
@@ -572,37 +572,36 @@ HELPFUL: `FlowerService` に関連するコードはすべてそのままにし�
 ```typescript
 @Component({
   selector: 'app-child',
-  templateUrl: './child.component.html',
-  styleUrls: ['./child.component.css'],
+  templateUrl: './child.html',
+  styleUrls: ['./child.css'],
   // provide services
   providers: [{provide: FlowerService, useValue: {emoji: '🌻'}}],
   viewProviders: [{provide: AnimalService, useValue: {emoji: '🐶'}}],
 })
-export class ChildComponent {
+export class Child {
   // inject services
   flower = inject(FlowerService);
   animal = inject(AnimalService);
 }
 ```
 
-`ChildComponent` と `AppComponent` のテンプレートにバインディングを追加します。
-`ChildComponent` テンプレートに、次のバインディングを追加します。
+`Child` と `App` のテンプレートにバインディングを追加します。
+`Child` テンプレートに、次のバインディングを追加します。
 
 ```html
 <p>Emoji from AnimalService: {{animal.emoji}}</p>
 ```
 
-さらに、 `AppComponent` テンプレートにも同じものを追加します。
+さらに、 `App` テンプレートにも同じものを追加します。
 
 ```html
 <p>Emoji from AnimalService: {{animal.emoji}}</p>
-s
 ```
 
 これで、ブラウザに両方の値が表示されます。
 
-```shell
-AppComponent
+```text {hideCopy}
+App
 Emoji from AnimalService: 🐳
 
 Child Component
@@ -637,35 +636,35 @@ Emoji from AnimalService: 🐶
 `viewProviders` フィールドは、概念的には `providers` と似ていますが、1つの顕著な違いがあります。
 `viewProviders` で構成されたプロバイダーは、コンポーネントの論理的な子になる投影されたコンテンツには可視ではありません。
 
-`providers` と `viewProviders` の違いを確認するために、別のコンポーネントを例に追加して、 `InspectorComponent` と呼びます。
-`InspectorComponent` は、 `ChildComponent` の子になります。
-`inspector.component.ts` では、プロパティの初期化中に `FlowerService` と `AnimalService` を注入します。
+`providers` と `viewProviders` の違いを確認するために、別のコンポーネントを例に追加して、 `Inspector` と呼びます。
+`Inspector` は、 `Child` の子になります。
+`inspector.ts` では、プロパティの初期化中に `FlowerService` と `AnimalService` を注入します。
 
 ```typescript
-export class InspectorComponent {
+export class Inspector {
   flower = inject(FlowerService);
   animal = inject(AnimalService);
 }
 ```
 
 `providers` または `viewProviders` 配列は必要ありません。
-次に、 `inspector.component.html` に、以前のコンポーネントと同じマークアップを追加します。
+次に、 `inspector.html` に、以前のコンポーネントと同じマークアップを追加します。
 
 ```html
 <p>Emoji from FlowerService: {{flower.emoji}}</p>
 <p>Emoji from AnimalService: {{animal.emoji}}</p>
 ```
 
-`InspectorComponent` を `ChildComponent` の `imports` 配列に追加することを忘れないでください。
+`Inspector` を `Child` の `imports` 配列に追加することを忘れないでください。
 
 ```ts
 @Component({
   ...
-  imports: [InspectorComponent]
+  imports: [Inspector]
 })
 ```
 
-次に、 `child.component.html` に次を追加します。
+次に、 `child.html` に次を追加します。
 
 ```html
 ...
@@ -679,9 +678,9 @@ export class InspectorComponent {
 <app-inspector />
 ```
 
-`<ng-content>` を使用するとコンテンツを投影でき、 `ChildComponent` テンプレート内の `<app-inspector>` は、 `InspectorComponent` を `ChildComponent` の子コンポーネントにします。
+`<ng-content>` を使用するとコンテンツを投影でき、 `Child` テンプレート内の `<app-inspector>` は、 `Inspector` を `Child` の子コンポーネントにします。
 
-次に、コンテンツ投影を活用するために、 `app.component.html` に次を追加します。
+次に、コンテンツ投影を活用するために、 `app.html` に次を追加します。
 
 ```html
 <app-child>
@@ -691,7 +690,7 @@ export class InspectorComponent {
 
 これで、ブラウザには、以前の例は省略して、次のものがレンダリングされます。
 
-```shell
+```text {hideCopy}
 ...
 Content projection
 
@@ -703,10 +702,10 @@ Emoji from AnimalService: 🐶
 ```
 
 これらの4つのバインディングは、 `providers` と `viewProviders` の違いを示しています。
-犬の絵文字 <code>🐶</code> は、 `ChildComponent` の `<#VIEW>` 内に宣言され、投影されたコンテンツには可視ではないことを覚えておいてください。
+犬の絵文字 <code>🐶</code> は、 `Child` の `<#VIEW>` 内に宣言され、投影されたコンテンツには可視ではないことを覚えておいてください。
 代わりに、投影されたコンテンツには、クジラ <code>🐳</code> が表示されます。
 
-ただし、次の出力セクションでは `InspectorComponent` は `ChildComponent` の実際の子コンポーネントです。そして `InspectorComponent` は `<#VIEW>` の内側にあるため、 `AnimalService` を要求すると、犬 <code>🐶</code> が表示されます。
+ただし、次の出力セクションでは `Inspector` は `Child` の実際の子コンポーネントです。そして `Inspector` は `<#VIEW>` の内側にあるため、 `AnimalService` を要求すると、犬 <code>🐶</code> が表示されます。
 
 論理ツリー内の `AnimalService` は、次のようになります。
 
@@ -751,7 +750,7 @@ Emoji from AnimalService: 🐶
 これを行うには、宣言のポイントではなく、注入のポイント、つまり `inject()` を呼び出すときに可視性構成を配置します。
 
 インジェクターが `FlowerService` の検索を開始する場所を変更するには、`FlowerService` が注入される `<app-child>` の `inject()` 呼び出しに `skipSelf` を追加します。
-この呼び出しは、`child.component.ts` に示すように、`<app-child>` のプロパティ初期化子です。
+この呼び出しは、`child.ts` に示すように、`<app-child>` のプロパティ初期化子です。
 
 ```typescript
 flower = inject(FlowerService, {skipSelf: true});
@@ -762,7 +761,7 @@ flower = inject(FlowerService, {skipSelf: true});
 次に、 `<app-child>` の `ModuleInjector` に戻り、 `<app-child>` と `<app-root>` が同じ `ModuleInjector` を共有しているため、赤いハイビスカス <code>🌺</code> 値が見つかります。
 UIには次のように表示されます。
 
-```shell
+```text {hideCopy}
 Emoji from FlowerService: 🌺
 ```
 
@@ -847,7 +846,7 @@ Emoji from FlowerService: 🌺
 ### `host` と `viewProviders` {#host-and-viewproviders}
 
 `AnimalService`のインジェクションに`host`だけを使用する場合、インジェクターは`<app-child>`の`<#VIEW>`自体で`AnimalService`を見つけるため、結果は犬<code>🐶</code>になります。
-`ChildComponent`は`viewProviders`を設定し、犬の絵文字が`AnimalService`の値として提供されます。
+`Child`は`viewProviders`を設定し、犬の絵文字が`AnimalService`の値として提供されます。
 `inject()`では`host`も使用できます：
 
 ```typescript
@@ -858,7 +857,7 @@ Emoji from FlowerService: 🌺
     { provide: AnimalService, useValue: { emoji: '🐶' } },
   ]
 })
-export class ChildComponent {
+export class Child {
   animal = inject(AnimalService, { host: true })
 }
 ```
@@ -884,19 +883,19 @@ export class ChildComponent {
 ```typescript
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: [ './app.component.css' ],
+  templateUrl: './app.html',
+  styleUrls: [ './app.css' ],
   viewProviders: [
     { provide: AnimalService, useValue: { emoji: '🦔' } },
   ],
 })
 ```
 
-次に、`child.component.ts` の `AnimalService` 注入の `inject()` に `host` とともに `skipSelf` を追加します。
+次に、`child.ts` の `AnimalService` 注入の `inject()` に `host` とともに `skipSelf` を追加します。
 `animal` プロパティの初期化における `host` と `skipSelf` は次のとおりです。
 
 ```typescript
-export class ChildComponent {
+export class Child {
   animal = inject(AnimalService, {host: true, skipSelf: true});
 }
 ```
@@ -908,7 +907,7 @@ export class ChildComponent {
 `providers` 配列にある `FlowerService` に `host` と `skipSelf` を適用した場合、結果は `null` でした。これは、`skipSelf` が `<app-child>` インジェクターで検索を開始しますが、`host` は `<#VIEW>` で検索を停止するためです。そこには `FlowerService` がありません。
 論理ツリーでは、 `FlowerService` は `<app-child>` で可視であり、 `<#VIEW>` では可視ではないことがわかります。
 
-ただし、 `AppComponent` の `viewProviders` 配列で提供されている `AnimalService` は可視です。
+ただし、 `App` の `viewProviders` 配列で提供されている `AnimalService` は可視です。
 
 論理ツリーの表現は、これが理由を示しています。
 
@@ -940,34 +939,34 @@ export class ChildComponent {
 ### シナリオ：サービスの分離 {#scenario-service-isolation}
 
 アーキテクチャ上の理由から、サービスへのアクセスを属するアプリケーションドメインに制限する必要がある場合があります。
-たとえば、悪役のリストを表示する `VillainsListComponent` を構築するとします。
+たとえば、悪役のリストを表示する `VillainsList` を構築するとします。
 この悪役は、 `VillainsService` から取得されます。
 
 `VillainsService` をルートの `AppModule` で提供すると、 `VillainsService` がアプリケーションのすべての場所で可視になります。
 後で `VillainsService` を変更した場合、誤ってこのサービスに依存し始めた他のコンポーネントで何かが壊れる可能性があります。
 
-代わりに、次のように `VillainsListComponent` の `providers` メタデータで `VillainsService` を提供する必要があります。
+代わりに、次のように `VillainsList` の `providers` メタデータで `VillainsService` を提供する必要があります。
 
 ```typescript
 @Component({
   selector: 'app-villains-list',
-  templateUrl: './villains-list.component.html',
+  templateUrl: './villains-list.html',
   providers: [VillainsService],
 })
-export class VillainsListComponent {}
+export class VillainsList {}
 ```
 
-`VillainsService` を `VillainsListComponent` メタデータで提供し、他の場所では提供しないと、サービスは `VillainsListComponent` とそのサブコンポーネントツリーのみに使用可能になります。
+`VillainsService` を `VillainsList` メタデータで提供し、他の場所では提供しないと、サービスは `VillainsList` とそのサブコンポーネントツリーのみに使用可能になります。
 
-`VillainService` は、 `VillainsListComponent` に対してシングルトンです。なぜなら、それが宣言されている場所だからです。
-`VillainsListComponent` が破棄されない限り `VillainService` のインスタンスは同じです。ただし `VillainsListComponent` のインスタンスが複数ある場合、 `VillainsListComponent` の各インスタンスには、独自の `VillainService` インスタンスが1つずつあります。
+`VillainsService` は、 `VillainsList` に対してシングルトンです。なぜなら、それが宣言されている場所だからです。
+`VillainsList` が破棄されない限り `VillainsService` のインスタンスは同じです。ただし `VillainsList` のインスタンスが複数ある場合、 `VillainsList` の各インスタンスには、独自の `VillainsService` インスタンスが1つずつあります。
 
 ### シナリオ：複数の編集セッション {#scenario-multiple-edit-sessions}
 
 多くのアプリケーションでは、ユーザーは同時に複数のオープンタスクで作業できます。
 たとえば、税務申告の作成アプリケーションでは、作成者は複数の税務申告で作業し、1日を通してそれらを切り替えることができます。
 
-そのシナリオを示すために、スーパーヒーローのリストを表示する `HeroListComponent` を考えてみてください。
+そのシナリオを示すために、スーパーヒーローのリストを表示する `HeroList` を考えてみてください。
 
 ヒーローの税務申告を開くために、作成者はヒーローの名前をクリックすると、その申告を編集するためのコンポーネントが開きます。
 選択したヒーローの税務申告は、それぞれ独自のコンポーネントで開き、複数の申告を同時に開くことができます。
@@ -978,7 +977,7 @@ export class VillainsListComponent {}
 - 別のコンポーネントの申告に影響を与えずに税務申告を変更できます
 - 税務申告の変更を保存するか、キャンセルする機能があります
 
-`HeroTaxReturnComponent` に、変更を管理および復元するためのロジックがあるとします。
+`HeroTaxReturn` に、変更を管理および復元するためのロジックがあるとします。
 これは、ヒーローの税務申告にとっては簡単なタスクです。
 現実世界では、豊富な税務申告データモデルでは、変更管理が複雑になります。
 この例のように、この管理をヘルパーサービスに委任できます。
@@ -1018,7 +1017,7 @@ export class HeroTaxReturnService {
 }
 ```
 
-以下は、 `HeroTaxReturnService` を使用する `HeroTaxReturnComponent` です。
+以下は、 `HeroTaxReturnService` を使用する `HeroTaxReturn` です。
 
 ```typescript
 import {Component, input, output} from '@angular/core';
@@ -1027,11 +1026,11 @@ import {HeroTaxReturnService} from './hero-tax-return.service';
 
 @Component({
   selector: 'app-hero-tax-return',
-  templateUrl: './hero-tax-return.component.html',
-  styleUrls: ['./hero-tax-return.component.css'],
+  templateUrl: './hero-tax-return.html',
+  styleUrls: ['./hero-tax-return.css'],
   providers: [HeroTaxReturnService],
 })
-export class HeroTaxReturnComponent {
+export class HeroTaxReturn {
   message = '';
 
   close = output<void>();
@@ -1079,13 +1078,13 @@ _編集対象の税務申告_ は、 `input` プロパティを介して到着�
 これは、サービスがアプリケーション全体のシングルトンである場合に機能しません。
 すべてのコンポーネントは同じサービスインスタンスを共有し、各コンポーネントは別のヒーローに属する税務申告を上書きします。
 
-これを防ぐために、コンポーネントレベルのインジェクター `HeroTaxReturnComponent` を構成して、コンポーネントメタデータの `providers` プロパティを使用してサービスを提供します。
+これを防ぐために、コンポーネントレベルのインジェクター `HeroTaxReturn` を構成して、コンポーネントメタデータの `providers` プロパティを使用してサービスを提供します。
 
 ```typescript
 providers: [HeroTaxReturnService];
 ```
 
-`HeroTaxReturnComponent` には、 `HeroTaxReturnService` の独自の提供者がいます。
+`HeroTaxReturn` には、 `HeroTaxReturnService` の独自の提供者がいます。
 覚えておいてください。すべてのコンポーネントの _インスタンス_ には、独自のインジェクターがあります。
 コンポーネントレベルでサービスを提供すると、コンポーネントの _すべての_ インスタンスは、サービスのプライベートインスタンスを1つずつ取得することが保証されます。これにより、税務申告が上書きされないようにします。
 
@@ -1170,5 +1169,5 @@ style RootInjector fill:#BDD7EE,color:#000
 ## 依存性の注入の詳細 {#more-on-dependency-injection}
 
 <docs-pill-row>
-  <docs-pill href="/guide/di/dependency-injection-providers" title="DIプロバイダー"/>
+  <docs-pill href="/guide/di/defining-dependency-providers" title="DIプロバイダー"/>
 </docs-pill-row>

@@ -55,7 +55,7 @@ console.log(firstNameCapitalized()); // JAIME
 
 `signal`と`computed`をコンポーネント内で使用して、状態を作成および管理します。
 
-```typescript
+```ts
 @Component({
   /* ... */
 })

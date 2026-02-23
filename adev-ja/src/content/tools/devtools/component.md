@@ -1,59 +1,59 @@
-# Inspect the component tree
+# コンポーネントツリーの検査 {#inspect-the-component-tree}
 
-## Debug your application
+## アプリケーションのデバッグ {#debug-your-application}
 
-The **Components** tab lets you explore the structure of your application.
-You can visualize the component and directive instances in the DOM and inspect or modify their state.
+**Components**タブでは、アプリケーションの構造を探索できます。
+DOM内のコンポーネントとディレクティブのインスタンスを視覚化し、それらの状態を検査または変更できます。
 
-### Explore the application structure
+### アプリケーション構造の探索 {#explore-the-application-structure}
 
-The component tree displays a hierarchical relationship of the _components and directives_ within your application.
+コンポーネントツリーは、アプリケーション内の*コンポーネントとディレクティブ*の階層的な関係を表示します。
 
-<img src="assets/images/guide/devtools/component-explorer.png" alt="A screenshot of the 'Components' tab showing a tree of Angular components and directives starting the root of the application.">
+<img src="assets/images/guide/devtools/component-explorer.png" alt="アプリケーションのルートから始まるAngularコンポーネントとディレクティブのツリーを示す「Components」タブのスクリーンショット。">
 
-Click the individual components or directives in the component explorer to select them and preview their properties.
-Angular DevTools displays properties and metadata on the right side of the component tree.
+コンポーネントエクスプローラ内の個々のコンポーネントまたはディレクティブをクリックして選択し、それらのプロパティをプレビューします。
+Angular DevToolsは、コンポーネントツリーの右側で、プロパティとメタデータを表示します。
 
-To look up a component or directive by name use the search box above the component tree.
+コンポーネントツリーの上にある検索ボックスを使用して、名前でコンポーネントまたはディレクティブを検索します。
 
-<img src="assets/images/guide/devtools/search.png" alt="A screenshot of the 'Components' tab. The filter bar immediately underneath the tab is searching for 'todo' and all components with 'todo' in the name are highlighted in the tree. `app-todos` is currently selected and a sidebar to the right displays information about the component's properties. This includes a section of `@Output` fields and another section for other properties.">
+<img src="assets/images/guide/devtools/search.png" alt="「Components」タブのスクリーンショット。タブのすぐ下にあるフィルタバーは「todo」を検索しており、「todo」が名前にあるすべてのコンポーネントがツリー内で強調表示されています。`app-todos`が現在選択されており、右側のサイドバーにコンポーネントのプロパティに関する情報が表示されます。これには、`@Output`フィールドのセクションと、他のプロパティのセクションが含まれます。">
 
-### Navigate to the host node
+### ホストノードに移動 {#navigate-to-the-host-node}
 
-To go to the host element of a particular component or directive, double-click it in the component explorer.
-Angular DevTools will open the Elements tab in Chrome or the Inspector tab in Firefox, and select the associated DOM node.
+特定のコンポーネントやディレクティブのホスト要素に移動するには、コンポーネントエクスプローラでダブルクリックします。
+Angular DevToolsはChromeのElementsタブまたはFirefoxのInspectorタブを開き、関連するDOMノードを選択します。
 
-### Navigate to source
+### ソースに移動 {#navigate-to-source}
 
-For components, Angular DevTools lets you navigate to the component definition in the Sources tab (Chrome) and Debugger tab (Firefox).
-After you select a particular component, click the icon at the top-right of the properties view:
+コンポーネントの場合、Angular DevToolsはSourcesタブ（Chrome）とDebuggerタブ（Firefox）でコンポーネント定義に移動できます。
+特定のコンポーネントを選択したら、プロパティビューの右上にあるアイコンをクリックします。
 
-<img src="assets/images/guide/devtools/navigate-source.png" alt="A screenshot of the 'Components' tab. The properties view on the right is visible for a component and the mouse rests in the upper right corner of that view on top of a `<>` icon. An adjacent tooltip reads 'Open component source'.">
+<img src="assets/images/guide/devtools/navigate-source.png" alt="「Components」タブのスクリーンショット。右側にコンポーネントのプロパティビューが表示され、マウスがビューの右上隅にある`<>`アイコンの上にあります。隣接するツールチップには「Open component source」と表示されます。">
 
-### Update property value
+### プロパティ値の更新 {#update-property-value}
 
-Like browsers' DevTools, the properties view lets you edit the value of an input, output, or other properties.
-Right-click on the property value and if edit functionality is available for this value type, a text input will appear.
-Type the new value and press `Enter` to apply this value to the property.
+ブラウザのDevToolsと同様に、プロパティビューでは入力と出力、またはその他のプロパティの値を編集できます。
+プロパティ値を右クリックし、この値の種類で編集機能が利用可能な場合は、テキスト入力フィールドが表示されます。
+新しい値を入力して`Enter`キーを押すと、この値がプロパティに適用されます。
 
-<img src="assets/images/guide/devtools/update-property.png" alt="A screenshot of the 'Components' tab with the properties view open for a component. An `@Input` named `todo` contains a `label` property which is currently selected and has been manually updated to the value 'Buy milk'.">
+<img src="assets/images/guide/devtools/update-property.png" alt="コンポーネントのプロパティビューが開いている「Components」タブのスクリーンショット。`todo`という`@Input`には、現在選択されており、値が「牛乳を買う」に手動で更新されている`label`プロパティが含まれています。">
 
-### Access selected component or directive in console
+### コンソールで選択したコンポーネントまたはディレクティブにアクセス {#access-selected-component-or-directive-in-console}
 
-As a shortcut in the console, Angular DevTools provides access to instances of recently selected components or directives.
-Type `$ng0` to get a reference to the instance of the currently selected component or directive, and type `$ng1` for the previously selected instance, `$ng2` for the instance selected before that, and so on.
+コンソールのショートカットとして、Angular DevToolsは、最近選択したコンポーネントやディレクティブのインスタンスへのアクセスを提供します。
+現在選択されているコンポーネントやディレクティブのインスタンスを参照するには`$ng0`と入力し、以前に選択したインスタンスを参照するには`$ng1`と入力し、さらに前に選択したインスタンスを参照するには`$ng2`と入力するなどします。
 
-<img src="assets/images/guide/devtools/access-console.png" alt="A screenshot of the 'Components' tab with the browser console underneath. In the console, the user has typed three commands, `$ng0`, `$ng1`, and `$ng2` to view the three most recently selected elements. After each statement, the console prints a different component reference.">
+<img src="assets/images/guide/devtools/access-console.png" alt="ブラウザコンソールの下にある「Components」タブのスクリーンショット。コンソールで、ユーザーは3つのコマンド、`$ng0`、`$ng1`、`$ng2`を入力して、最近選択した3つの要素を表示しています。各ステートメントの後、コンソールは異なるコンポーネント参照を出力します。">
 
-### Select a directive or component
+### ディレクティブまたはコンポーネントの選択 {#select-a-directive-or-component}
 
-Similar to browsers' DevTools, you can inspect the page to select a particular component or directive.
-Click the **_Inspect element_** icon in the top left corner within Angular DevTools and hover over a DOM element on the page.
-The extension recognizes the associated directives and/or components and lets you select the corresponding element in the Component tree.
+ブラウザのDevToolsと同様にページを検査して、特定のコンポーネントやディレクティブを選択できます。
+Angular DevToolsの左上隅にある ***Inspect element*** アイコンをクリックし、ページ上のDOM要素の上にマウスを置きます。
+拡張機能は関連するディレクティブやコンポーネントを認識し、コンポーネントツリーで対応する要素を選択できます。
 
-<img src="assets/images/guide/devtools/inspect-element.png" alt="A screenshot of the 'Components' tab with an Angular todo application visible. In the very top-left corner of Angular DevTools, an icon of a screen with a mouse icon inside it is selected. The mouse rests on a todo element in the Angular application UI. The element is highlighted with a `<TodoComponent>` label displayed in an adjacent tooltip.">
+<img src="assets/images/guide/devtools/inspect-element.png" alt="Angular todoアプリケーションが表示されている「Components」タブのスクリーンショット。Angular DevToolsの左上隅にある画面にマウスアイコンが表示されたアイコンが選択されています。マウスはAngularアプリケーションのUIのtodo要素の上にあります。要素は`<TodoComponent>`ラベルで強調表示され、隣接するツールチップに表示されます。">
 
-### Inspect Deferrable views
+### Inspect Deferrable views {#inspect-deferrable-views}
 
 Alongside the directives, the directive tree also includes [`@defer` blocks](/guide/templates/defer).
 
@@ -61,7 +61,7 @@ Alongside the directives, the directive tree also includes [`@defer` blocks](/gu
 
 Clicking a defer block shows more details in the properties sidebar: the different optional blocks (for example `@loading`, `@placeholder`, and `@error`), the configured triggers (defer triggers, prefetch triggers, and hydrate triggers), and timing options such as the `minimum` and `after` values.
 
-### Hydration
+### Hydration {#hydration}
 
 When [hydration](/guide/hydration) is enabled on your SSR/SSG application, the directive tree shows the hydration status of each component.
 

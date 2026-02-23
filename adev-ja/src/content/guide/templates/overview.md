@@ -7,7 +7,7 @@ TIP: この包括的なガイドに進む前に、Angularの[基本概念](essen
 
 すべてのAngularコンポーネントには、コンポーネントがページにレンダリングする[DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)を定義する**テンプレート**があります。テンプレートを使用することで、Angularはデータが変化してもページを自動的に最新の状態に保つことができます。
 
-テンプレートは通常、`*.component.ts`ファイルの`template`プロパティまたは`*.component.html`ファイル内にあります。詳細については、[コンポーネントに関する詳細なガイド](/guide/components)をご覧ください。
+テンプレートは通常、`*.ts`ファイルの`template`プロパティまたは`*.html`ファイル内にあります。詳細については、[コンポーネントに関する詳細なガイド](/guide/components)をご覧ください。
 
 ## テンプレートはどのように動作しますか？
 

@@ -648,7 +648,7 @@ export class UserService {
 コンポーネント内で、`@if` を `async` パイプと組み合わせて、データの読み込みが完了した後にのみ、データのUIをレンダリングできます。
 
 ```angular-ts
-import { AsyncPipe } from '@angular/common';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
   imports: [AsyncPipe],
@@ -659,7 +659,7 @@ import { AsyncPipe } from '@angular/common';
     }
   `,
 })
-export class UserProfileComponent {
+export class UserProfile {
   userId = input.required<string>();
   user$!: Observable<User>;
 

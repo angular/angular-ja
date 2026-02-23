@@ -8,7 +8,7 @@ Angularの `@let` 構文を使用すると、ローカル変数を定義し、�
 
 ### `@let` の使用方法
 
-`@let` を使用して、テンプレート式の結果に基づいた値を持つ変数を宣言します。 Angularは、[バインディング](./templates/bindings)と同様に、指定された式を使用して変数の値を自動的に最新の状態に保ちます。
+`@let` を使用して、テンプレート式の結果に基づいた値を持つ変数を宣言します。 Angularは、[バインディング](/guide/templates/binding)と同様に、指定された式を使用して変数の値を自動的に最新の状態に保ちます。
 
 ```angular-html
 @let name = user.name;
@@ -16,9 +16,10 @@ Angularの `@let` 構文を使用すると、ローカル変数を定義し、�
 @let data = data$ | async;
 @let pi = 3.14159;
 @let coordinates = {x: 50, y: 100};
-@let longExpression = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ' +
-                      'sed do eiusmod tempor incididunt ut labore et dolore magna ' +
-                      'Ut enim ad minim veniam...';
+@let longExpression =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit ' +
+  'sed do eiusmod tempor incididunt ut labore et dolore magna ' +
+  'Ut enim ad minim veniam...';
 ```
 
 各`@let`ブロックでは、ちょうど1つの変数を宣言できます。コンマを使用して同じブロックに複数の変数の宣言はできません。
@@ -31,12 +32,12 @@ Angularの `@let` 構文を使用すると、ローカル変数を定義し、�
 @let user = user$ | async;
 
 @if (user) {
-  <h1>Hello, {{user.name}}</h1>
-  <user-avatar [photo]="user.photo"/>
+  <h1>Hello, {{ user.name }}</h1>
+  <user-avatar [photo]="user.photo" />
 
   <ul>
     @for (snack of user.favoriteSnacks; track snack.id) {
-      <li>{{snack.name}}</li>
+      <li>{{ snack.name }}</li>
     }
   </ul>
 
@@ -68,20 +69,25 @@ Angularの `@let` 構文を使用すると、ローカル変数を定義し、�
   @let insideDiv = value;
 </div>
 
-{{topLevel}} <!-- Valid -->
-{{insideDiv}} <!-- Valid -->
+<!-- Valid -->
+{{ topLevel }}
+<!-- Valid -->
+{{ insideDiv }}
 
 @if (condition) {
-  {{topLevel + insideDiv}} <!-- Valid -->
+  <!-- Valid -->
+  {{ topLevel + insideDiv }}
 
   @let nested = value;
 
   @if (condition) {
-    {{topLevel + insideDiv + nested}} <!-- Valid -->
+    <!-- Valid -->
+    {{ topLevel + insideDiv + nested }}
   }
 }
 
-{{nested}} <!-- Error, not hoisted from @if -->
+<!-- Error, not hoisted from @if -->
+{{ nested }}
 ```
 
 ### 構文全体
@@ -107,13 +113,13 @@ Angularの `@let` 構文を使用すると、ローカル変数を定義し、�
 
 テンプレート参照変数を使用すると、テンプレートの1つの部分から同じテンプレートの別の部分の情報を取得できます。
 
-### テンプレート参照変数を宣言する
+### テンプレート参照変数を宣言する {#declaring-a-template-reference-variable}
 
 テンプレート内の要素に、ハッシュ記号 (`#`) と変数名の後に続く属性を追加することで、変数を宣言できます。
 
 ```angular-html
 <!-- "taskInput" という名前のテンプレート参照変数を、HTMLInputElementに関連付ける -->
-<input #taskInput placeholder="Enter task name">
+<input #taskInput placeholder="Enter task name" />
 ```
 
 ### テンプレート参照変数に値を代入する
@@ -140,7 +146,7 @@ Angularは、変数が宣言されている要素に基づいて、テンプレ�
 
 ```angular-html
 <!-- "taskInput" 変数は、HTMLInputElement インスタンスを参照します。 -->
-<input #taskInput placeholder="Enter task name">
+<input #taskInput placeholder="Enter task name" />
 ```
 
 #### Angularディレクティブへの参照を代入する
@@ -152,14 +158,16 @@ Angularディレクティブには、テンプレートでディレクティブ�
   selector: '[dropZone]',
   exportAs: 'dropZone',
 })
-export class DropZone { /* ... */ }
+export class DropZone {
+  /* ... */
+}
 ```
 
 要素にテンプレート変数を宣言する場合、この `exportAs` 名を指定することで、変数にディレクティブインスタンスを代入できます。
 
 ```angular-html
 <!-- `firstZone` 変数は、`DropZone` ディレクティブインスタンスを参照します。 -->
-<section dropZone #firstZone="dropZone"> ... </section>
+<section dropZone #firstZone="dropZone">...</section>
 ```
 
 `exportAs` 名を指定していないディレクティブは参照できません。
@@ -171,7 +179,7 @@ export class DropZone { /* ... */ }
 テンプレート内の特定の要素をクエリする場合は、その要素にテンプレート変数を宣言し、変数名に基づいて要素をクエリできます。
 
 ```angular-html
- <input #description value="Original description">
+<input #description value="Original description" />
 ```
 
 ```angular-ts

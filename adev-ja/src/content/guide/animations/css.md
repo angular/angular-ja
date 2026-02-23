@@ -52,10 +52,10 @@ CSSには、アプリケーション内で美しく魅力的なアニメーシ�
 
 アニメーションは、CSSのスタイルやクラスを切り替えることでトリガーできます。クラスが要素に追加されるとアニメーションが実行され、クラスを削除すると、その要素に定義されているCSSに戻ります。例を示します。
 
-<docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/open-close.component.ts">
-    <docs-code header="open-close.component.ts" path="adev/src/content/examples/animations/src/app/native-css/open-close.component.ts" />
-    <docs-code header="open-close.component.html" path="adev/src/content/examples/animations/src/app/native-css/open-close.component.html" />
-    <docs-code header="open-close.component.css" path="adev/src/content/examples/animations/src/app/native-css/open-close.component.css"/>
+<docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/open-close.ts">
+    <docs-code header="open-close.ts" path="adev/src/content/examples/animations/src/app/native-css/open-close.ts" />
+    <docs-code header="open-close.html" path="adev/src/content/examples/animations/src/app/native-css/open-close.html" />
+    <docs-code header="open-close.css" path="adev/src/content/examples/animations/src/app/native-css/open-close.css"/>
 </docs-code-multifile>
 
 ## トランジションとトリガー {#transition-and-triggers}
@@ -64,10 +64,10 @@ CSSには、アプリケーション内で美しく魅力的なアニメーシ�
 
 CSS Gridを使用すると、`height: auto`へのアニメーションを実現できます。
 
-<docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/auto-height.component.ts">
-    <docs-code header="auto-height.component.ts" path="adev/src/content/examples/animations/src/app/native-css/auto-height.component.ts" />
-    <docs-code header="auto-height.component.html" path="adev/src/content/examples/animations/src/app/native-css/auto-height.component.html" />
-    <docs-code header="auto-height.component.css" path="adev/src/content/examples/animations/src/app/native-css/auto-height.component.css"  />
+<docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/auto-height.ts">
+    <docs-code header="auto-height.ts" path="adev/src/content/examples/animations/src/app/native-css/auto-height.ts" />
+    <docs-code header="auto-height.html" path="adev/src/content/examples/animations/src/app/native-css/auto-height.html" />
+    <docs-code header="auto-height.css" path="adev/src/content/examples/animations/src/app/native-css/auto-height.css"  />
 </docs-code-multifile>
 
 すべてのブラウザをサポートする必要がない場合は、`height: auto`をアニメーション化するためのより本質的な解決策である`calc-size()`も確認してください。詳しくは、[MDNのドキュメント](https://developer.mozilla.org/en-US/docs/Web/CSS/calc-size)とこの項目に関連する[チュートリアル](https://frontendmasters.com/blog/one-of-the-boss-battles-of-css-is-almost-won-transitioning-to-auto/)を参照してください。
@@ -76,30 +76,30 @@ CSS Gridを使用すると、`height: auto`へのアニメーションを実現�
 
 要素がビューに入るとき、またはビューから出るときのアニメーションを作成できます。まずは、ビューに入るときのアニメーションを見ていきましょう。`animate.enter`を使うと、要素がビューに入るときにアニメーション用のクラスが適用されます。
 
-<docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/insert.component.ts">
-    <docs-code header="insert.component.ts" path="adev/src/content/examples/animations/src/app/native-css/insert.component.ts" />
-    <docs-code header="insert.component.html" path="adev/src/content/examples/animations/src/app/native-css/insert.component.html" />
-    <docs-code header="insert.component.css" path="adev/src/content/examples/animations/src/app/native-css/insert.component.css"  />
+<docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/insert.ts">
+    <docs-code header="insert.ts" path="adev/src/content/examples/animations/src/app/native-css/insert.ts" />
+    <docs-code header="insert.html" path="adev/src/content/examples/animations/src/app/native-css/insert.html" />
+    <docs-code header="insert.css" path="adev/src/content/examples/animations/src/app/native-css/insert.css"  />
 </docs-code-multifile>
 
 ビューから出るときのアニメーションも、ビューに入るときと同様です。`animate.leave`で、要素がビューから出るときに適用するCSSクラスを指定します。
 
-<docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/remove.component.ts">
-    <docs-code header="remove.component.ts" path="adev/src/content/examples/animations/src/app/native-css/remove.component.ts" />
-    <docs-code header="remove.component.html" path="adev/src/content/examples/animations/src/app/native-css/remove.component.html" />
-    <docs-code header="remove.component.css" path="adev/src/content/examples/animations/src/app/native-css/remove.component.css"  />
+<docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/remove.ts">
+    <docs-code header="remove.ts" path="adev/src/content/examples/animations/src/app/native-css/remove.ts" />
+    <docs-code header="remove.html" path="adev/src/content/examples/animations/src/app/native-css/remove.html" />
+    <docs-code header="remove.css" path="adev/src/content/examples/animations/src/app/native-css/remove.css"  />
 </docs-code-multifile>
 
-`animate.enter`と`animate.leave`について詳しくは、[EnterとLeaveのアニメーションガイド](guide/animations/enter-and-leave)を参照してください。
+`animate.enter`と`animate.leave`について詳しくは、[EnterとLeaveのアニメーションガイド](guide/animations)を参照してください。
 
 ### インクリメントとデクリメントをアニメーション化する {#animating-increment-and-decrement}
 
 インクリメントとデクリメントに合わせてアニメーションするのは、アプリケーションでよくあるパターンです。以下はその例です。
 
-<docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/increment-decrement.component.ts">
-    <docs-code header="increment-decrement.component.ts" path="adev/src/content/examples/animations/src/app/native-css/increment-decrement.component.ts" />
-    <docs-code header="increment-decrement.component.html" path="adev/src/content/examples/animations/src/app/native-css/increment-decrement.component.html" />
-    <docs-code header="increment-decrement.component.css" path="adev/src/content/examples/animations/src/app/native-css/increment-decrement.component.css" />
+<docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/increment-decrement.ts">
+    <docs-code header="increment-decrement.ts" path="adev/src/content/examples/animations/src/app/native-css/increment-decrement.ts" />
+    <docs-code header="increment-decrement.html" path="adev/src/content/examples/animations/src/app/native-css/increment-decrement.html" />
+    <docs-code header="increment-decrement.css" path="adev/src/content/examples/animations/src/app/native-css/increment-decrement.css" />
 </docs-code-multifile>
 
 ### アニメーション（またはすべてのアニメーション）を無効にする {#disabling-an-animation-or-all-animations}
@@ -147,10 +147,10 @@ NOTE: これらのコールバックはバブリング（イベント伝播）�
 
 よくある効果の1つに、リスト内の各要素のアニメーションを段階的に遅らせてカスケード効果を作るものがあります。これは`animation-delay`または`transition-delay`を利用して実現できます。次はそのCSSの例です。
 
-<docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/stagger.component.ts">
-    <docs-code header="stagger.component.ts" path="adev/src/content/examples/animations/src/app/native-css/stagger.component.ts" />
-    <docs-code header="stagger.component.html" path="adev/src/content/examples/animations/src/app/native-css/stagger.component.html" />
-    <docs-code header="stagger.component.css" path="adev/src/content/examples/animations/src/app/native-css/stagger.component.css" />
+<docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/stagger.ts">
+    <docs-code header="stagger.ts" path="adev/src/content/examples/animations/src/app/native-css/stagger.ts" />
+    <docs-code header="stagger.html" path="adev/src/content/examples/animations/src/app/native-css/stagger.html" />
+    <docs-code header="stagger.css" path="adev/src/content/examples/animations/src/app/native-css/stagger.css" />
 </docs-code-multifile>
 
 ### 並行アニメーション {#parallel-animations}
@@ -171,10 +171,10 @@ NOTE: これらのコールバックはバブリング（イベント伝播）�
 
 `@for`ループ内の要素は削除されて再追加されるため、enterアニメーションとして`@starting-styles`を使用したアニメーションが実行されます。同じ挙動は`animate.enter`でも実現できます。要素が削除されるときにアニメーションするには、以下の例のように`animate.leave`を使用します。
 
-<docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/reorder.component.ts">
-    <docs-code header="reorder.component.ts" path="adev/src/content/examples/animations/src/app/native-css/reorder.component.ts" />
-    <docs-code header="reorder.component.html" path="adev/src/content/examples/animations/src/app/native-css/reorder.component.html" />
-    <docs-code header="reorder.component.css" path="adev/src/content/examples/animations/src/app/native-css/reorder.component.css" />
+<docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/reorder.ts">
+    <docs-code header="reorder.ts" path="adev/src/content/examples/animations/src/app/native-css/reorder.ts" />
+    <docs-code header="reorder.html" path="adev/src/content/examples/animations/src/app/native-css/reorder.html" />
+    <docs-code header="reorder.css" path="adev/src/content/examples/animations/src/app/native-css/reorder.css" />
 </docs-code-multifile>
 
 ## アニメーションをプログラムで制御する {#programmatic-control-of-animations}

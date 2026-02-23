@@ -18,7 +18,7 @@
 テンプレート駆動型フォームでは、テンプレート内の直接アクセスを使用してデータを変更できますが、リアクティブフォームほど明示的ではありません。これは、テンプレートに埋め込まれたディレクティブと、変更を非同期的に追跡するミュータブルデータに依存するためです。
 2つのパラダイムの詳細な比較については、[フォームの概要](guide/forms)を参照してください。
 
-## 基本的なフォームコントロールの追加
+## 基本的なフォームコントロールの追加 {#adding-a-basic-form-control}
 
 フォームコントロールを使用するには、次の3つの手順があります。
 
@@ -387,25 +387,21 @@ _フォーム検証_ は、ユーザー入力が完全で正しいことを確�
 これは、フォームがトップレベルの `FormGroup` を使用せず、配列自体が完全なフォームモデルを表す場合に便利です。
 
 ```angular-ts
-import { Component } from '@angular/core';
-import { FormArray, FormControl } from '@angular/forms';
+import {Component} from '@angular/core';
+import {FormArray, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'form-array-example',
   template: `
     <form [formArray]="form">
       @for (control of form.controls; track $index) {
-        <input [formControlName]="$index">
+        <input [formControlName]="$index" />
       }
     </form>
   `,
 })
 export class FormArrayExampleComponent {
-  controls = [
-    new FormControl('fish'),
-    new FormControl('cat'),
-    new FormControl('dog'),
-  ];
+  controls = [new FormControl('fish'), new FormControl('cat'), new FormControl('dog')];
 
   form = new FormArray(this.controls);
 }
@@ -451,7 +447,7 @@ import {
 } from '@angular/forms';
 
 @Component({
-  /* ... */
+  /*...*/
 })
 export class UnifiedEventsBasicComponent {
   form = new FormGroup({
@@ -601,7 +597,9 @@ onSubmit() {
 デフォルトで `emitEvent: true` の場合、コントロールへの変更は `valueChanges` と `statusChanges` Observableを通じてイベントを発行します。`emitEvent: false` を設定すると、これらの発行が抑制されます。これは、自動保存のようなリアクティブな動作をトリガーせずにプログラムで値を設定する場合、コントロール間の循環更新を回避する場合、またはイベントが最後に一度だけ発行されるべき一括更新を実行する場合に便利です。
 
 ```ts
-@Component({/* ... */})
+@Component({
+  /* ... */
+})
 export class BlogPostEditor {
   postForm = new FormGroup({
     title: new FormControl(''),
@@ -610,16 +608,15 @@ export class BlogPostEditor {
 
   constructor() {
     // ユーザーが入力するたびに下書きを自動保存
-    this.postForm.valueChanges.subscribe(formValue => {
+    this.postForm.valueChanges.subscribe((formValue) => {
       this.autosaveDraft(formValue);
     });
   }
 
   loadExistingDraft(savedDraft: {title: string; content: string}) {
     // 自動保存をトリガーせずに下書きを復元
-    this.postForm.setValue(savedDraft, { emitEvent: false });
+    this.postForm.setValue(savedDraft, {emitEvent: false});
   }
-
 }
 ```
 

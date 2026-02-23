@@ -1,6 +1,6 @@
 # 複雑なアニメーションシーケンス
 
-IMPORTANT: `@angular/animations`パッケージは現在非推奨です。Angularチームは、新しく書くコードのアニメーションには`animate.enter`と`animate.leave`を使ったネイティブCSSの利用を推奨します。詳しくは、新しいenterとleaveの[アニメーションガイド](guide/animations/enter-and-leave)を参照してください。また、アプリケーションで純粋なCSSアニメーションへの移行を始める方法については、[AngularのAnimationsパッケージからの移行](guide/animations/migration)も参照してください。
+IMPORTANT: `@angular/animations`パッケージは現在非推奨です。Angularチームは、新しく書くコードのアニメーションには`animate.enter`と`animate.leave`を使ったネイティブCSSの利用を推奨します。詳しくは、新しいenterとleaveの[アニメーションガイド](/guide/animations)を参照してください。また、アプリケーションで純粋なCSSアニメーションへの移行を始める方法については、[AngularのAnimationsパッケージからの移行](guide/animations/migration)も参照してください。
 
 ここまで、単一のHTML要素のシンプルなアニメーションを学んできました。
 Angularでは、ページに出入りする要素のグリッド全体やリスト全体など、連携したシーケンスもアニメーション化できます。
@@ -54,7 +54,7 @@ Angularでは、ページに出入りする要素のグリッド全体やリス�
 - `stagger()` を使って各アニメーションを30ミリ秒ずつ遅らせます。
 - カスタム定義のイージングカーブを使って各要素を0.5秒かけてアニメーションし、フェードインと`transform`の解除を同時に行います。
 
-<docs-code header="hero-list-page.component.ts" path="adev/src/content/examples/animations/src/app/hero-list-page.component.ts" region="page-animations"/>
+<docs-code header="hero-list-page.ts" path="adev/src/content/examples/animations/src/app/hero-list-page.ts" region="page-animations"/>
 
 ## group() 関数を使った並行アニメーション {#parallel-animation-using-group-function}
 
@@ -67,7 +67,7 @@ HELPFUL: [`group()`](api/animations/group) 関数は、アニメーション化�
 
 次の例は、`:enter` と `:leave` の両方で [`group()`](api/animations/group) を使用し、2つの異なるタイミング設定を適用します。これにより、同じ要素に2つの独立したアニメーションを並行して適用できます。
 
-<docs-code header="hero-list-groups.component.ts (excerpt)" path="adev/src/content/examples/animations/src/app/hero-list-groups.component.ts" region="animationdef"/>
+<docs-code header="hero-list-groups.ts (excerpt)" path="adev/src/content/examples/animations/src/app/hero-list-groups.ts" region="animationdef"/>
 
 ## 順次アニメーションと並行アニメーション {#sequential-vs-parallel-animations}
 
@@ -91,11 +91,11 @@ Filter/Staggerタブで、**Search Heroes** テキストボックスに `Magnet`
 
 HTMLテンプレートには `filterAnimation` というトリガーが含まれます。
 
-<docs-code header="hero-list-page.component.html" path="adev/src/content/examples/animations/src/app/hero-list-page.component.html" region="filter-animations" language="angular-html"/>
+<docs-code header="hero-list-page.html" path="adev/src/content/examples/animations/src/app/hero-list-page.html" region="filter-animations" language="angular-html"/>
 
 コンポーネントのデコレーターにある `filterAnimation` には3つのトランジションが含まれます。
 
-<docs-code header="hero-list-page.component.ts" path="adev/src/content/examples/animations/src/app/hero-list-page.component.ts" region="filter-animations"/>
+<docs-code header="hero-list-page.ts" path="adev/src/content/examples/animations/src/app/hero-list-page.ts" region="filter-animations"/>
 
 この例のコードは次のタスクを実行します：
 

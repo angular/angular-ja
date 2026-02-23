@@ -7,7 +7,7 @@ TIP: 他のウェブフレームワークに精通している場合は、入力
 コンポーネントを使用する際に、一般的にいくつかのデータを渡したいことがあります。
 コンポーネントは、**入力**を宣言することで、受け入れるデータを指定します。
 
-```ts {highlight:[5]}
+```ts {highlight:[8]}
 import {Component, input} from '@angular/core';
 
 @Component({
@@ -63,7 +63,7 @@ export class CustomSlider {
 
 `input`関数は`InputSignal`を返します。シグナルを呼び出すことで値を読み取ることができます。
 
-```ts {highlight:[5]}
+```ts {highlight:[11]}
 import {Component, input, computed} from '@angular/core';
 
 @Component({
@@ -84,7 +84,7 @@ export class CustomSlider {
 
 `input`の代わりに`input.required`を呼び出すことで、入力が`required`であることを宣言できます。
 
-```ts {highlight:[3]}
+```ts {highlight:[6]}
 @Component({
   /*...*/
 })
@@ -176,7 +176,7 @@ export class CustomSlider {
 
 `alias`オプションを指定して、テンプレートでの入力の名前を変更できます。
 
-```ts {highlight:[3]}
+```ts {highlight:[5]}
 @Component({
   /*...*/
 })
@@ -273,7 +273,7 @@ export class CustomCheckbox {
 
 ### モデル入力のカスタマイズ
 
-[通常の入力](guide/signals/inputs)と同様に、モデル入力を必須としてマークしたり、エイリアスを提供したりできます。
+[通常の入力](guide/components/inputs)と同様に、モデル入力を必須としてマークしたり、エイリアスを提供したりできます。
 
 モデル入力は入力変換をサポートしません。
 
@@ -281,24 +281,26 @@ export class CustomCheckbox {
 
 コンポーネントが双方向バインディングをサポートする場合に、モデル入力を使用します。これは通常、ユーザーの操作に基づいて値を変更するためにコンポーネントが存在する場合に適しています。最も一般的には、日付ピッカーやコンボボックスなどのカスタムフォームコントロールは、主要な値にモデル入力を使用する必要があります。
 
-# 入力名の選択
+## 入力名の選択 {#choosing-input-names}
 
 DOM要素のプロパティ（HTMLElementなど）と競合する入力名を選択することは避けてください。名前の競合は、バインドされたプロパティがコンポーネントのものであるか、DOM要素のものであるかについて混乱を招きます。
 
 コンポーネントセレクターのように、コンポーネント入力にプレフィックスを追加することは避けてください。特定の要素は1つのコンポーネントしかホストできないため、カスタムプロパティはすべてコンポーネントに属すると見なすことができます。
 
-# `@Input`デコレーターによる入力の宣言
+## `@Input`デコレーターによる入力の宣言 {#declaring-inputs-with-the-input-decorator}
 
 TIP: Angularチームは新しいプロジェクトにはシグナルベースの`input`関数の使用を推奨していますが、元のデコレーターベースの`@Input` APIは引き続き完全にサポートされています。
 
 コンポーネント入力を宣言する代わりに、プロパティに`@Input`デコレーターを追加できます。
 
-<docs-code language="ts" highlight="[3]">
-@Component({...})
+```ts {highlight:[5]}
+@Component({
+  /*...*/
+})
 export class CustomSlider {
   @Input() value = 0;
 }
-</docs-code>
+```
 
 入力へのバインディングは、シグナルベースの入力とデコレーターベースの入力の両方で同じです。
 
@@ -314,12 +316,14 @@ export class CustomSlider {
 
 `required`オプションを指定して、特定の入力が常に値を持つ必要があることを強制できます。
 
-<docs-code language="ts" highlight="[3]">
-@Component({...})
+```ts {highlight:[5]}
+@Component({
+  /*...*/
+})
 export class CustomSlider {
   @Input({required: true}) value = 0;
 }
-</docs-code>
+```
 
 すべての必須入力を指定せずにコンポーネントを使用しようとすると、Angularはビルド時にエラーを報告します。
 
@@ -345,8 +349,10 @@ function trimString(value: string | undefined) {
 
 `alias`オプションを指定して、テンプレートでの入力の名前を変更できます。
 
-```ts {highlight:[3]}
-@Component({...})
+```ts {highlight:[5]}
+@Component({
+  /*...*/
+})
 export class CustomSlider {
   @Input({alias: 'sliderValue'}) value = 0;
 }

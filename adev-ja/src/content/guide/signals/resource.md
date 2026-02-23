@@ -97,7 +97,7 @@ const userResource = resource({
 userResource.reload();
 ```
 
-## リソースの状態
+## リソースの状態 {#resource-status}
 
 リソースオブジェクトには、非同期ローダーの状態を読み取るためのいくつかのシグナルプロパティがあります。
 
@@ -122,6 +122,6 @@ userResource.reload();
 
 この状態情報を使用して、ローディングインジケーターやエラーメッセージなどのユーザーインターフェース要素を条件付きで表示できます。
 
-## `httpResource` を使用したリアクティブデータ取得
+## `httpResource` を使用したリアクティブデータ取得 {#reactive-data-fetching-with-httpresource}
 
 [`httpResource`](/guide/http/http-resource) は `HttpClient` のラッパーで、リクエストの状態とレスポンスをシグナルとして提供します。これはインターセプターを含むAngular HTTPスタックを通してHTTPリクエストを行います。

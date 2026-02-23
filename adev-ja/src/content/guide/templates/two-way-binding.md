@@ -13,8 +13,8 @@
 次の例では、ページの`firstName`属性が動的に更新されます。
 
 ```angular-ts
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {Component} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   imports: [FormsModule],
@@ -23,9 +23,9 @@ import { FormsModule } from '@angular/forms';
       <h2>Hello {{ firstName }}!</h2>
       <input type="text" [(ngModel)]="firstName" />
     </main>
-  `
+  `,
 })
-export class AppComponent {
+export class App {
   firstName = 'Ada';
 }
 ```
@@ -38,22 +38,22 @@ export class AppComponent {
 
 これらが設定されると、Angularはテキスト入力の更新がコンポーネントの状態に正しく反映されるようにします。
 
-[`NgModel`](guide/directives#displaying-and-updating-properties-with-ngmodel)の詳細については、公式ドキュメントを参照してください。
+[`NgModel`](/api/forms/NgModel)の詳細については、公式ドキュメントを参照してください。
 
 ## コンポーネント間の双方向バインディング
 
 親コンポーネントと子コンポーネント間の双方向バインディングを活用するには、フォーム要素と比較して、より多くの設定が必要です。
 
-ここでは、`AppComponent`が初期カウント状態を設定しますが、カウンターのUIを更新およびレンダリングするためのロジックは、主にその子である`CounterComponent`にある例を示します。
+ここでは、`App`が初期カウント状態を設定しますが、カウンターのUIを更新およびレンダリングするためのロジックは、主にその子である`Counter`にある例を示します。
 
 ```angular-ts
-// ./app.component.ts
-import { Component } from '@angular/core';
-import { CounterComponent } from './counter/counter.component';
+// ./app.ts
+import {Component} from '@angular/core';
+import {Counter} from './counter';
 
 @Component({
   selector: 'app-root',
-  imports: [CounterComponent],
+  imports: [Counter],
   template: `
     <main>
       <h1>Counter: {{ initialCount }}</h1>
@@ -61,14 +61,14 @@ import { CounterComponent } from './counter/counter.component';
     </main>
   `,
 })
-export class AppComponent {
+export class App {
   initialCount = 18;
 }
 ```
 
 ```angular-ts
-// './counter/counter.component.ts';
-import { Component, model } from '@angular/core';
+// './counter.ts';
+import {Component, model} from '@angular/core';
 
 @Component({
   selector: 'app-counter',
@@ -78,11 +78,11 @@ import { Component, model } from '@angular/core';
     <button (click)="updateCount(+1)">+</button>
   `,
 })
-export class CounterComponent {
+export class Counter {
   count = model<number>(0);
 
   updateCount(amount: number): void {
-    this.count.update(currentCount => currentCount + amount);
+    this.count.update((currentCount) => currentCount + amount);
   }
 }
 ```
@@ -96,15 +96,17 @@ export class CounterComponent {
 これは簡略化された例です。
 
 ```angular-ts
-// './counter/counter.component.ts';
-import { Component, model } from '@angular/core';
+// './counter.ts';
+import {Component, model} from '@angular/core';
 
-@Component({ /* Omitted for brevity */ })
-export class CounterComponent {
+@Component({
+  /* Omitted for brevity */
+})
+export class Counter {
   count = model<number>(0);
 
   updateCount(amount: number): void {
-    this.count.update(currentCount => currentCount + amount);
+    this.count.update((currentCount) => currentCount + amount);
   }
 }
 ```
@@ -117,20 +119,20 @@ export class CounterComponent {
 これは簡略化された例です。
 
 ```angular-ts
-// ./app.component.ts
-import { Component } from '@angular/core';
-import { CounterComponent } from './counter/counter.component';
+// ./app.ts
+import {Component} from '@angular/core';
+import {Counter} from './counter';
 
 @Component({
   selector: 'app-root',
-  imports: [CounterComponent],
+  imports: [Counter],
   template: `
     <main>
       <app-counter [(count)]="initialCount"></app-counter>
     </main>
   `,
 })
-export class AppComponent {
+export class App {
   initialCount = 18;
 }
 ```

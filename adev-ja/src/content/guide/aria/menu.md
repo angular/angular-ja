@@ -190,10 +190,9 @@
 
 #### メソッド {#methods}
 
-| Method           | Parameters | Description                        |
-| ---------------- | ---------- | ---------------------------------- |
-| `close`          | none       | メニューを閉じます |
-| `focusFirstItem` | none       | 最初のメニューアイテムにフォーカスを移動します |
+| Method  | Parameters | Description     |
+| ------- | ---------- | --------------- |
+| `close` | none       | メニューを閉じます |
 
 ### MenuBar {#menubar}
 

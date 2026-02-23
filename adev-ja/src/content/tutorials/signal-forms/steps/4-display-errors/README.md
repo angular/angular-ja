@@ -21,7 +21,7 @@ email入力の下に、条件付きエラー表示を追加します。これは
 ```angular-html
 <label>
   Email
-  <input type="email" [field]="loginForm.email" />
+  <input type="email" [formField]="loginForm.email" />
 </label>
 @if (loginForm.email().invalid() && loginForm.email().touched()) {
   <div class="error">
@@ -41,7 +41,7 @@ password入力の下に、passwordエラーの同じパターンを追加しま�
 ```angular-html
 <label>
   Password
-  <input type="password" [field]="loginForm.password" />
+  <input type="password" [formField]="loginForm.password" />
 </label>
 @if (loginForm.password().invalid() && loginForm.password().touched()) {
   <div class="error">

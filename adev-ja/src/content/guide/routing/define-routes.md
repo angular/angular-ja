@@ -9,7 +9,7 @@ Angularでは、**ルート**は特定のURLパスまたはパターンに対し
 次にルートの基本的な例を示します。
 
 ```ts
-import {AdminPage} from './app-admin/app-admin.component';
+import {AdminPage} from './app-admin';
 
 const adminPage = {
   path: 'admin',
@@ -27,8 +27,8 @@ const adminPage = {
 
 ```ts
 import {Routes} from '@angular/router';
-import {HomePage} from './home-page/home-page.component';
-import {AdminPage} from './about-page/admin-page.component';
+import {HomePage} from './home-page';
+import {AdminPage} from './about-page';
 
 export const routes: Routes = [
   {
@@ -107,8 +107,8 @@ const routes: Routes = [{path: 'user/:id', component: UserProfile}];
 
 ```ts
 import {Routes} from '@angular/router';
-import {UserProfile} from './user-profile/user-profile.component';
-import {SocialMediaFeed} from './user-profile/social–media-feed.component';
+import {UserProfile} from './user-profile';
+import {SocialMediaFeed} from './social-media-feed';
 
 const routes: Routes = [
   {path: 'user/:id/:social-media', component: SocialMediaFeed},
@@ -127,9 +127,9 @@ const routes: Routes = [
 一般的な例は、ページが見つかりませんコンポーネントの定義です。
 
 ```ts
-import {Home} from './home/home.component';
-import {UserProfile} from './user-profile/user-profile.component';
-import {NotFound} from './not-found/not-found.component';
+import {Home} from './home/home';
+import {UserProfile} from './user-profile';
+import {NotFound} from './not-found';
 
 const routes: Routes = [
   {path: 'home', component: Home},
@@ -150,11 +150,11 @@ Tip: ワイルドカードルートは通常、ルート配列の最後に配置
 
 ```ts
 const routes: Routes = [
-  {path: '', component: HomeComponent}, // 空のパス
-  {path: 'users/new', component: NewUserComponent}, // 静的、最も具体的
-  {path: 'users/:id', component: UserDetailComponent}, // 動的
-  {path: 'users', component: UsersComponent}, // 静的、具体的でない
-  {path: '**', component: NotFoundComponent}, // ワイルドカード - 常に最後
+  {path: '', component: Home}, // 空のパス
+  {path: 'users/new', component: NewUser}, // 静的、最も具体的
+  {path: 'users/:id', component: UserDetail}, // 動的
+  {path: 'users', component: Users}, // 静的、具体的でない
+  {path: '**', component: NotFound}, // ワイルドカード - 常に最後
 ];
 ```
 
@@ -264,7 +264,7 @@ NOTE: 遅延ルートは、ユーザーが要求する初期データの量を�
 コンポーネントをレンダリングする代わりに、別のルートにリダイレクトするルートを定義できます。
 
 ```ts
-import {BlogComponent} from './home/blog.component';
+import {Blog} from './home/blog';
 
 const routes: Routes = [
   {
@@ -273,7 +273,7 @@ const routes: Routes = [
   },
   {
     path: 'blog',
-    component: BlogComponent,
+    component: Blog,
   },
 ];
 ```
@@ -286,18 +286,19 @@ const routes: Routes = [
 
 ```ts
 import {Routes} from '@angular/router';
-import {HomeComponent} from './home/home.component';
-import {AboutComponent} from './about/about.component';
+import {Home} from './home';
+import {About} from './about';
+import {Products} from './products';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    component: Home,
     title: 'Home Page',
   },
   {
     path: 'about',
-    component: AboutComponent,
+    component: About,
     title: 'About Us',
   },
 ];
@@ -310,7 +311,7 @@ const titleResolver: ResolveFn<string> = (route) => route.queryParams['id'];
 const routes: Routes = [
   ...{
     path: 'products',
-    component: ProductsComponent,
+    component: Products,
     title: titleResolver,
   },
 ];
@@ -365,8 +366,8 @@ export const ROUTES: Route[] = [
     path: 'admin',
     providers: [AdminService, {provide: ADMIN_API_KEY, useValue: '12345'}],
     children: [
-      {path: 'users', component: AdminUsersComponent},
-      {path: 'teams', component: AdminTeamsComponent},
+      {path: 'users', component: AdminUsers},
+      {path: 'teams', component: AdminTeams},
     ],
   },
   // ... other application routes that don't
@@ -390,19 +391,19 @@ Angularのプロバイダーと注入に関する詳細については、[依存
 
 ```ts
 import {Routes} from '@angular/router';
-import {HomeComponent} from './home/home.component';
-import {AboutComponent} from './about/about.component';
-import {ProductsComponent} from './products/products.component';
+import {Home} from './home';
+import {About} from './about';
+import {Products} from './products';
 
 const routes: Routes = [
   {
     path: 'about',
-    component: AboutComponent,
+    component: About,
     data: {analyticsId: '456'},
   },
   {
     path: '',
-    component: HomeComponent,
+    component: Home,
     data: {analyticsId: '123'},
   },
 ];
@@ -428,15 +429,15 @@ const routes: Routes = [
 const routes: Routes = [
   {
     path: 'product/:id',
-    component: ProductComponent,
+    component: Product,
     children: [
       {
         path: 'info',
-        component: ProductInfoComponent,
+        component: ProductInfo,
       },
       {
         path: 'reviews',
-        component: ProductReviewsComponent,
+        component: ProductReviews,
       },
     ],
   },
@@ -447,10 +448,10 @@ const routes: Routes = [
 
 `children`プロパティは`Route`オブジェクトの配列を受け入れます。
 
-子ルートを表示するには、親コンポーネント（上記の例では`ProductComponent`）に独自の`<router-outlet>`を含めます。
+子ルートを表示するには、親コンポーネント（上記の例では`Product`）に独自の`<router-outlet>`を含めます。
 
 ```angular-html
-<!-- ProductComponent -->
+<!-- Product -->
 <article>
   <h1>Product {{ id }}</h1>
   <router-outlet />
@@ -462,4 +463,3 @@ const routes: Routes = [
 ## 次のステップ {#next-steps}
 
 [アウトレットでルートのコンテンツを表示する方法](/guide/routing/show-routes-with-outlets)を学びましょう。
-

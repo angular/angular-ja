@@ -78,7 +78,7 @@ export const routes: Routes = [
 @Component({
   /* ... */
 })
-export class CustomerComponent {
+export class Customer {
   private route = inject(ActivatedRoute);
 
   orgId = this.route.parent?.parent?.snapshot.params['orgId'];
@@ -97,7 +97,7 @@ Using `'always'` ensures matrix parameters, route data, and resolved values are 
 @Component({
   /* ... */
 })
-export class CustomerComponent {
+export class Customer {
   private route = inject(ActivatedRoute);
 
   // All parent parameters are available directly
@@ -224,7 +224,7 @@ When implementing a custom `RouteReuseStrategy`, you may need to manually destro
 Since `DetachedRouteHandle` is an opaque type, you cannot call a destroy method directly on it. Instead, use the `destroyDetachedRouteHandle` function provided by the Router.
 
 ```ts
-import { destroyDetachedRouteHandle } from '@angular/router';
+import {destroyDetachedRouteHandle} from '@angular/router';
 
 // ... inside your strategy
 if (this.handles.size > MAX_CACHE_SIZE) {
@@ -245,12 +245,10 @@ By default, Angular does not destroy the injectors of detached routes, even if t
 To enable automatic cleanup of unused route injectors, you can use the `withExperimentalAutoCleanupInjectors` feature in your router configuration. This feature checks which routes are currently stored by the strategy after navigations and destroys the injectors of any detached routes that are not currently stored by the reuse strategy.
 
 ```ts
-import { provideRouter, withExperimentalAutoCleanupInjectors } from '@angular/router';
+import {provideRouter, withExperimentalAutoCleanupInjectors} from '@angular/router';
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideRouter(routes, withExperimentalAutoCleanupInjectors())
-  ]
+  providers: [provideRouter(routes, withExperimentalAutoCleanupInjectors())],
 };
 ```
 
@@ -298,17 +296,17 @@ Routes can opt into reuse behavior through route configuration metadata. This ap
 export const routes: Routes = [
   {
     path: 'products',
-    component: ProductListComponent,
+    component: ProductList,
     data: {reuse: true}, // Component state persists across navigations
   },
   {
     path: 'products/:id',
-    component: ProductDetailComponent,
+    component: ProductDetail,
     // No reuse flag - component recreates on each navigation
   },
   {
     path: 'search',
-    component: SearchComponent,
+    component: Search,
     data: {reuse: true}, // Preserves search results and filter state
   },
 ];
@@ -516,7 +514,7 @@ export function versionMatcher(segments: UrlSegment[]): UrlMatchResult | null {
 export const routes: Routes = [
   {
     matcher: versionMatcher,
-    component: DocumentationComponent,
+    component: Documentation,
   },
   {
     path: 'latest/docs',
@@ -528,8 +526,8 @@ export const routes: Routes = [
 The component receives the extracted parameters through route inputs:
 
 ```angular-ts
-import { Component, input, inject } from '@angular/core';
-import { resource } from '@angular/core';
+import {Component, input, inject} from '@angular/core';
+import {resource} from '@angular/core';
 
 @Component({
   selector: 'app-documentation',
@@ -541,12 +539,12 @@ import { resource } from '@angular/core';
     } @else if (documentation.value(); as docs) {
       <article>{{ docs.content }}</article>
     }
-  `
+  `,
 })
-export class DocumentationComponent {
+export class Documentation {
   // Route parameters are automatically bound to signal inputs
-  version = input.required<string>();  // Receives the version parameter
-  section = input.required<string>();  // Receives the section parameter
+  version = input.required<string>(); // Receives the version parameter
+  section = input.required<string>(); // Receives the section parameter
 
   private docsService = inject(DocumentationService);
 
@@ -557,13 +555,13 @@ export class DocumentationComponent {
 
       return {
         version: this.version(),
-        section: this.section()
-      }
+        section: this.section(),
+      };
     },
-    loader: ({ params }) => {
+    loader: ({params}) => {
       return this.docsService.loadDocumentation(params.version, params.section);
-    }
-  })
+    },
+  });
 }
 ```
 

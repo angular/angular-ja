@@ -5,33 +5,27 @@
 以下は、親からマークアップを受け取る `BaseButton` コンポーネントの例です。
 
 ```angular-ts
-// ./base-button/base-button.component.ts
-import { Component } from '@angular/core';
+// ./base-button/base-button.ts
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'button[baseButton]',
-  template: `
-      <ng-content />
-  `,
+  template: `<ng-content />`,
 })
 export class BaseButton {}
 ```
 
 ```angular-ts
-// ./app.component.ts
-import { Component } from '@angular/core';
-import { BaseButton } from './base-button/base-button.component';
+// ./app.ts
+import {Component} from '@angular/core';
+import {BaseButton} from './base-button';
 
 @Component({
   selector: 'app-root',
   imports: [BaseButton],
-  template: `
-    <button baseButton>
-      Next <span class="icon arrow-right"></span>
-    </button>
-  `,
+  template: `<button baseButton>Next <span class="icon arrow-right"></span></button>`,
 })
-export class AppComponent {}
+export class App {}
 ```
 
 詳細については、[`<ng-content>` の詳細ガイド](/guide/components/content-projection) で、このパターンを活用する他の方法を確認してください。

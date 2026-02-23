@@ -10,7 +10,9 @@ TIP: このガイドは、すでに [基本ガイド](essentials) を読んだ�
   selector: 'custom-card',
   template: '<div class="card-shadow"> <!-- card content goes here --> </div>',
 })
-export class CustomCard {/* ... */}
+export class CustomCard {
+  /* ... */
+}
 ```
 
 **`<ng-content>`要素は、コンテンツを配置する場所を示すプレースホルダーとして使用できます**:
@@ -20,7 +22,9 @@ export class CustomCard {/* ... */}
   selector: 'custom-card',
   template: '<div class="card-shadow"> <ng-content/> </div>',
 })
-export class CustomCard {/* ... */}
+export class CustomCard {
+  /* ... */
+}
 ```
 
 TIP: `<ng-content>`は、
@@ -40,7 +44,9 @@ Angular固有の機能も備えています。
     </div>
   `,
 })
-export class CustomCard {/* ... */}
+export class CustomCard {
+  /* ... */
+}
 ```
 
 ```angular-html

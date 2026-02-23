@@ -6,20 +6,21 @@
 
 ほとんどの開発者は、テンプレートを読みやすくするために、改行とインデントでテンプレートをフォーマットすることを好みます。
 
-```angular-html
+```html
 <section>
   <h3>User profile</h3>
   <label>
     User name
-    <input>
+    <input />
   </label>
 </section>
 ```
 
 このテンプレートには、すべての要素間に空白が含まれています。次のスニペットは、同じHTMLで、存在する空白をすべてハッシュ（`#`）文字に置き換えたもので、どのくらいの空白が存在するかを示しています。
 
-```angular-html
-<!-- 全体の空白: 20 -->
+<!-- prettier-ignore>
+```html
+<!-- Total Whitespace: 20 -->
 <section>###<h3>User profile</h3>###<label>#####User name#####<input>###</label>#</section>
 ```
 
@@ -29,8 +30,9 @@
 
 WebブラウザがページにHTMLをレンダリングする場合、連続する複数の空白文字を1つの文字に折り畳みます。
 
-```angular-html
-<!-- テンプレートでの表示 -->
+<!-- prettier-ignore -->
+```html
+<!-- What it looks like in the template -->
 <p>Hello         world</p>
 ```
 

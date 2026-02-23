@@ -10,9 +10,7 @@ Angularは、コンポーネントのセレクターに一致するすべてのH
 // コンポーネントソース
 @Component({
   selector: 'profile-photo',
-  template: `
-    <img src="profile-photo.jpg" alt="Your profile photo" />
-  `,
+  template: `<img src="profile-photo.jpg" alt="Your profile photo" />`,
 })
 export class ProfilePhoto {}
 ```
@@ -63,6 +61,8 @@ export class CustomSlider {
   /* ... */
 }
 ```
+
+NOTE: イベント名にプレフィックスとして使用できるグローバルターゲット名は `document:`、`window:`、`body:` です。
 
 ## `@HostBinding`および`@HostListener`デコレーター {#the-hostbinding-and-hostlistener-decorators}
 
@@ -141,7 +141,7 @@ export class ProfilePhoto { /* ... */ }
   /* ... */
   host: {
     '[style.--my-background]': 'color()',
-  }
+  },
 })
 export class MyComponent {
   color = signal('lightgreen');
@@ -157,7 +157,7 @@ export class MyComponent {
 ```angular-ts
 @Component({
   selector: 'my-component',
-  template: `<my-child [style.--my-background]="color()">`,
+  template: `<my-child [style.--my-background]="color()" />`,
 })
 export class MyComponent {
   color = signal('lightgreen');

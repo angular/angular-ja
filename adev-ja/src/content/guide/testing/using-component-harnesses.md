@@ -12,7 +12,7 @@ TIP: このガイドは、すでに[コンポーネントハーネスの概要�
 ng add @angular/cdk
 ```
 
-## テストハーネス環境とローダー
+## テストハーネス環境とローダー {#test-harness-environments-and-loaders}
 
 コンポーネントテストハーネスはさまざまなテスト環境で使用できます。AngularCDKは2つの組み込み環境をサポートしています。
 

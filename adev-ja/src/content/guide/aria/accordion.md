@@ -145,13 +145,11 @@ NOTE: `multiExpandable`入力はデフォルトで`true`です。単一展開の
 ```angular-html
 <div ngAccordionGroup>
   <div>
-    <button ngAccordionTrigger panelId="item-1">
-      Trigger Text
-    </button>
+    <button ngAccordionTrigger panelId="item-1">Trigger Text</button>
     <div ngAccordionPanel panelId="item-1">
       <ng-template ngAccordionContent>
         <!-- このコンテンツは、パネルが最初に開かれたときにのみレンダリングされます -->
-        <img src="large-image.jpg" alt="Description">
+        <img src="large-image.jpg" alt="Description" />
         <app-expensive-component />
       </ng-template>
     </div>

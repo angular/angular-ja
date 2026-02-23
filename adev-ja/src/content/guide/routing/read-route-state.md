@@ -7,13 +7,13 @@ Angularルーターを使用すると、ルートに関連付けられた情報�
 `ActivatedRoute`は、現在のルートに関連付けられたすべての情報を提供する`@angular/router`からのサービスです。
 
 ```angular-ts
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-product',
 })
-export class ProductComponent {
+export class Product {
   private activatedRoute = inject(ActivatedRoute);
 
   constructor() {
@@ -42,10 +42,12 @@ export class ProductComponent {
 ルートスナップショットにアクセスする方法の例を次に示します。
 
 ```angular-ts
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import {ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
 
-@Component({ ... })
-export class UserProfileComponent {
+@Component({
+  /*...*/
+})
+export class UserProfile {
   readonly userId: string;
   private route = inject(ActivatedRoute);
 
@@ -58,11 +60,11 @@ export class UserProfileComponent {
     // 複数のルート要素にアクセス
     const snapshot = this.route.snapshot;
     console.log({
-      url: snapshot.url,           // https://www.angular.dev
+      url: snapshot.url, // https://www.angular.dev
       // ルートパラメーターオブジェクト: {id: '123'}
       params: snapshot.params,
       // クエリパラメーターオブジェクト: {role: 'admin', status: 'active'}
-      queryParams: snapshot.queryParams,  // クエリパラメーター
+      queryParams: snapshot.queryParams, // クエリパラメーター
     });
   }
 }
@@ -81,25 +83,23 @@ export class UserProfileComponent {
 パラメーター名の前にコロン (`:`) を付けることで、[ルートパラメーターを定義](/guide/routing/define-routes#define-url-paths-with-route-parameters)できます。
 
 ```angular-ts
-import { Routes } from '@angular/router';
-import { ProductComponent } from './product/product.component';
+import {Routes} from '@angular/router';
+import {Product} from './product';
 
-const routes: Routes = [
-  { path: 'product/:id', component: ProductComponent }
-];
+const routes: Routes = [{path: 'product/:id', component: Product}];
 ```
 
 `route.params`を購読することでパラメーターにアクセスできます。
 
 ```angular-ts
-import { Component, inject, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, inject, signal} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-product-detail',
   template: `<h1>Product Details: {{ productId() }}</h1>`,
 })
-export class ProductDetailComponent {
+export class ProductDetail {
   productId = signal('');
   private activatedRoute = inject(ActivatedRoute);
 
@@ -120,7 +120,7 @@ export class ProductDetailComponent {
 // 単一パラメーターの構造
 // /products?category=electronics
 router.navigate(['/products'], {
-  queryParams: { category: 'electronics' }
+  queryParams: {category: 'electronics'},
 });
 
 // 複数パラメーター
@@ -129,17 +129,17 @@ router.navigate(['/products'], {
   queryParams: {
     category: 'electronics',
     sort: 'price',
-    page: 1
-  }
+    page: 1,
+  },
 });
 ```
 
 `route.queryParams`でクエリパラメーターにアクセスできます。
 
-次に、製品リストの表示方法に影響を与えるクエリパラメーターを更新する`ProductListComponent`の例を示します。
+次に、製品リストの表示方法に影響を与えるクエリパラメーターを更新する`ProductList`の例を示します。
 
 ```angular-ts
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -151,15 +151,15 @@ import { ActivatedRoute, Router } from '@angular/router';
       </select>
       <!-- Products list -->
     </div>
-  `
+  `,
 })
-export class ProductListComponent implements OnInit {
+export class ProductList {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
 
   constructor() {
     // クエリパラメーターにリアクティブにアクセス
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       const sort = params['sort'] || 'price';
       const page = Number(params['page']) || 1;
       this.loadProducts(sort, page);
@@ -170,8 +170,8 @@ export class ProductListComponent implements OnInit {
     const sort = (event.target as HTMLSelectElement).value;
     // 新しいクエリパラメーターでURLを更新
     this.router.navigate([], {
-      queryParams: { sort },
-      queryParamsHandling: 'merge' // 他のクエリパラメーターを保持
+      queryParams: {sort},
+      queryParamsHandling: 'merge', // 他のクエリパラメーターを保持
     });
   }
 }
@@ -224,16 +224,21 @@ NOTE: `ActivatedRoute`を使用する代わりに、`withComponentInputBinding`�
 
 ```angular-html
 <nav>
-  <a class="button"
-     routerLink="/about"
-     routerLinkActive="active-button"
-     ariaCurrentWhenActive="page">
+  <a
+    class="button"
+    routerLink="/about"
+    routerLinkActive="active-button"
+    ariaCurrentWhenActive="page"
+  >
     About
-  </a> |
-  <a class="button"
-     routerLink="/settings"
-     routerLinkActive="active-button"
-     ariaCurrentWhenActive="page">
+  </a>
+  |
+  <a
+    class="button"
+    routerLink="/settings"
+    routerLinkActive="active-button"
+    ariaCurrentWhenActive="page"
+  >
     Settings
   </a>
 </nav>
@@ -260,12 +265,8 @@ ariaに異なる値を定義したい場合は、`ariaCurrentWhenActive`ディ�
 デフォルトでは、`RouterLinkActive`はルート内のすべての祖先を一致と見なします。
 
 ```angular-html
-<a [routerLink]="['/user/jane']" routerLinkActive="active-link">
-  User
-</a>
-<a [routerLink]="['/user/jane/role/admin']" routerLinkActive="active-link">
-  Role
-</a>
+<a [routerLink]="['/user/jane']" routerLinkActive="active-link"> User </a>
+<a [routerLink]="['/user/jane/role/admin']" routerLinkActive="active-link"> Role </a>
 ```
 
 ユーザーが`/user/jane/role/admin`にアクセスすると、両方のリンクに`active-link`クラスが適用されます。
@@ -275,13 +276,15 @@ ariaに異なる値を定義したい場合は、`ariaCurrentWhenActive`ディ�
 厳密な一致の場合にのみクラスを適用したい場合は、`routerLinkActiveOptions`ディレクティブに`exact: true`という値を含む設定オブジェクトを提供する必要があります。
 
 ```angular-html
-<a [routerLink]="['/user/jane']"
+<a
+  [routerLink]="['/user/jane']"
   routerLinkActive="active-link"
   [routerLinkActiveOptions]="{exact: true}"
 >
   User
 </a>
-<a [routerLink]="['/user/jane/role/admin']"
+<a
+  [routerLink]="['/user/jane/role/admin']"
   routerLinkActive="active-link"
   [routerLinkActiveOptions]="{exact: true}"
 >
@@ -323,3 +326,30 @@ ariaに異なる値を定義したい場合は、`ariaCurrentWhenActive`ディ�
 ```
 
 詳細については、[RouterLinkActiveのAPIドキュメント](/api/router/RouterLinkActive)を参照してください。
+
+## URLがアクティブかどうかを確認する {#check-if-a-url-is-active}
+
+`isActive`関数は、指定されたURLがルーターで現在アクティブかどうかを追跡するcomputedシグナルを返します。シグナルはルーターの状態が変化すると自動的に更新されます。
+
+```angular-ts
+import {Component, inject} from '@angular/core';
+import {isActive, Router} from '@angular/router';
+
+@Component({
+  template: `
+    <div [class.active]="isSettingsActive()">
+      <h2>Settings</h2>
+    </div>
+  `,
+})
+export class Panel {
+  private router = inject(Router);
+
+  isSettingsActive = isActive('/settings', this.router, {
+    paths: 'subset',
+    queryParams: 'ignored',
+    fragment: 'ignored',
+    matrixParams: 'ignored',
+  });
+}
+```

@@ -186,7 +186,7 @@ NOTE: CI環境において、Karmaでテストを一度だけ実行して正常�
 
 Karmaテストランナーでアプリケーションをデバッグするには:
 
-1.  Karmaブラウザウィンドウを表示します。このステップでヘルプが必要な場合は、[テストのセットアップ](guide/testing/overview#set-up-for-testing)を参照してください。
+1.  Karmaブラウザウィンドウを表示します。このステップでヘルプが必要な場合は、[テストのセットアップ](guide/testing#set-up-for-testing)を参照してください。
 2.  **DEBUG**ボタンをクリックして新しいブラウザタブを開き、テストを再実行します。
 3.  ブラウザの**開発者ツール**を開きます。Windowsでは、`Ctrl-Shift-I`を押します。macOSでは、`Command-Option-I`を押します。
 4.  **Sources**セクションを選択します。

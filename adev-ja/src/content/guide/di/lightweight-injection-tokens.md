@@ -22,11 +22,10 @@ Angularがインジェクショントークンを格納する方法により、�
 トークン保持が発生する状況をより明確に説明するために、ライブラリカードコンポーネントを提供するライブラリを検討してください。
 このコンポーネントには本体が含まれており、オプションでヘッダーを含めることができます。
 
-```angular-html
-
-<lib-card>;
-<lib-header>…</lib-header>;
-</lib-card>;
+```html
+<lib-card>
+  <lib-header>…</lib-header>
+</lib-card>
 ```
 
 一般的な実装では、 `<lib-card>` コンポーネントは、次の例のように `contentChild` または `contentChildren` を使用して `<lib-header>` と `<lib-body>` を取得します。
@@ -91,7 +90,7 @@ class MyComponent {
 これらは実質的に `constructor(@Optional() other: OtherComponent)` を `constructor(@Optional() @Inject(OtherComponent) other)` に変更されます。
 トークンはこれで値位置にあるため、ツリーシェーカーは参照を保持します。
 
-HELPFUL: ライブラリは、[ツリーシェイク可能なプロバイダー](guide/di/dependency-injection#providing-dependency) をすべてのサービスに使用し、コンポーネントやモジュールではなく、ルートレベルで依存関係を提供する必要があります。
+HELPFUL: ライブラリは、[ツリーシェイク可能なプロバイダー](guide/di/defining-dependency-providers) をすべてのサービスに使用し、コンポーネントやモジュールではなく、ルートレベルで依存関係を提供する必要があります。
 
 ## 軽量インジェクショントークンの使用
 
@@ -144,7 +143,7 @@ class LibCardComponent {
 たとえば、 `LibCardComponent` はこれで `LibHeaderComponent` ではなく `LibHeaderToken` をクエリします。
 次の例は、パターンにより `LibCardComponent` が `LibHeaderComponent` を実際に参照せずに `LibHeaderComponent` と通信する方法を示しています。
 
-```ts {highlight: [[2],[9],[11],[19]]}
+```ts {highlight: [[2],[7],[11],[19]]}
 abstract class LibHeaderToken {
   abstract doSomething(): void;
 }

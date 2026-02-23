@@ -33,7 +33,7 @@ Angularのコンパイラは、`@defer`ブロックで使用される各コン�
 
 ### `@defer`
 
-これは、遅延読み込みされるコンテンツのセクションを定義するプライマリブロックです。これは最初はレンダリングされません。遅延コンテンツは、指定された[トリガー](/guide/templates/defer#triggers)が発生するか、`when`条件が満たされたときに読み込まれてレンダリングされます。
+これは、遅延読み込みされるコンテンツのセクションを定義するプライマリブロックです。これは最初はレンダリングされません。遅延コンテンツは、指定された[トリガー](#controlling-deferred-content-loading-with-triggers)が発生するか、`when`条件が満たされたときに読み込まれてレンダリングされます。
 
 デフォルトでは、`@defer`ブロックはブラウザの状態が[アイドル](/guide/templates/defer#idle)になるとトリガーされます。
 
@@ -57,7 +57,7 @@ Angularのコンパイラは、`@defer`ブロックで使用される各コン�
 }
 ```
 
-オプションですが、特定のトリガーでは、`@placeholder`または[テンプレート参照変数](/guide/templates/variables#template-reference-variables)のいずれかの存在が必要になる場合があります。詳細については、[トリガー](/guide/templates/defer#triggers)セクションを参照してください。
+オプションですが、特定のトリガーでは、`@placeholder`または[テンプレート参照変数](/guide/templates/variables#template-reference-variables)のいずれかの存在が必要になる場合があります。詳細については、[トリガー](#controlling-deferred-content-loading-with-triggers)セクションを参照してください。
 
 Angularは、読み込みが完了すると、プレースホルダーコンテンツをメインコンテンツに置き換えます。プレースホルダーセクションには、プレーンHTML、コンポーネント、ディレクティブ、パイプなど、あらゆるコンテンツを使用できます。_プレースホルダーブロックの依存関係は先に読み込まれます_。
 
@@ -116,7 +116,7 @@ Angularは、読み込みが完了すると、プレースホルダーコンテ�
 }
 ```
 
-## トリガーを使用した遅延コンテンツ読み込みの制御
+## トリガーを使用した遅延コンテンツ読み込みの制御 {#controlling-deferred-content-loading-with-triggers}
 
 遅延コンテンツがいつ読み込まれて表示されるかを制御する**トリガー**を指定できます。
 
@@ -315,13 +315,13 @@ it('さまざまな状態で`@defer`ブロックをレンダリングする', as
       } @placeholder {
         プレースホルダー
       } @loading {
-        読み込み中...
+        Loading...
       }
-    `
+    `,
   })
-  class ComponentA {}
+  class ExampleA {}
   // コンポーネントのfixtureを作成します。
-  const componentFixture = TestBed.createComponent(ComponentA);
+  const componentFixture = TestBed.createComponent(ExampleA);
   // すべての`@defer`ブロックのfixtureを取得し、最初のブロックを取得します。
   const deferBlockFixture = (await componentFixture.getDeferBlocks())[0];
   // デフォルトでプレースホルダー状態をレンダリングします。

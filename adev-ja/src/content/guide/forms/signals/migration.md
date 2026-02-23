@@ -1,7 +1,7 @@
 # Migrating existing forms to Signal Forms
 
 This guide provides strategies for migrating existing codebases to Signal Forms, focusing on interoperability with
-legacy Reactive Forms.
+existing Reactive Forms.
 
 ## Top-down migration using `compatForm`
 
@@ -10,7 +10,7 @@ controls that involve:
 
 - Complex asynchronous logic.
 - Intricate RxJS operators that are not yet ported.
-- Integration with legacy third-party libraries.
+- Integration with existing third-party libraries.
 
 ### Integrating a `FormControl` into a signal form
 
@@ -24,7 +24,7 @@ import {signal} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {compatForm} from '@angular/forms/signals/compat';
 
-// 1. Existing legacy control with a specialized validator
+// 1. Existing control with a specialized validator
 const passwordControl = new FormControl('', {
   validators: [Validators.required, enterprisePasswordValidator()],
   nonNullable: true,
@@ -33,7 +33,7 @@ const passwordControl = new FormControl('', {
 // 2. Wrap it inside your form state signal
 const user = signal({
   email: '',
-  password: passwordControl, // Nest the legacy control directly
+  password: passwordControl, // Nest the existing control directly
 });
 
 // 3. Create the form
@@ -45,24 +45,24 @@ console.log(f.password().value()); // Current value of passwordControl
 
 // Reactive state is proxied automatically
 const isPasswordValid = f.password().valid();
-const passwordErrors = f.password().errors(); // Returns CompatValidationError if the legacy validator fails
+const passwordErrors = f.password().errors(); // Returns CompatValidationError if the existing validator fails
 ```
 
 In the template, use standard reactive syntax by binding the underlying control:
 
 ```angular-html
-<form>
+<form novalidate>
   <div>
     <label>
       Email:
-      <input [field]="f.email">
+      <input [formField]="f.email" />
     </label>
   </div>
 
   <div>
     <label>
       Password:
-      <input [field]="f.password" type="password">
+      <input [formField]="f.password" type="password" />
     </label>
 
     @if (f.password().touched() && f.password().invalid()) {
@@ -83,14 +83,15 @@ In the template, use standard reactive syntax by binding the underlying control:
 
 ### Integrating a `FormGroup` into a signal form
 
-You can also wrap an entire `FormGroup`. This is common when a reusable sub-section of a form—such as an **Address Block**—is still managed by legacy Reactive Forms.
+You can also wrap an entire `FormGroup`. This is common when a reusable sub-section of a form—such as an
+**Address Block**—is still managed by existing Reactive Forms.
 
 ```typescript
 import {signal} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {compatForm} from '@angular/forms/signals/compat';
 
-// 1. A legacy address group with its own validation logic
+// 1. An existing address group with its own validation logic
 const addressGroup = new FormGroup({
   street: new FormControl('123 Angular Way', Validators.required),
   city: new FormControl('Mountain View', Validators.required),
@@ -109,16 +110,16 @@ const f = compatForm(checkoutModel, (p) => {
 ```
 
 The `shippingAddress` field acts as a branch in your Signal Form tree. You can bind these nested controls in your
-template by accessing the underlying legacy controls via `.control()`:
+template by accessing the underlying existing controls via `.control()`:
 
 ```angular-html
-<form>
+<form novalidate>
   <h3>Shipping Details</h3>
 
   <div>
     <label>
       Customer Name:
-      <input [field]="f.customerName">
+      <input [formField]="f.customerName" />
     </label>
 
     @if (f.customerName().touched() && f.customerName().invalid()) {
@@ -135,7 +136,7 @@ template by accessing the underlying legacy controls via `.control()`:
     <div>
       <label>
         Street:
-        <input [formControl]="street">
+        <input [formControl]="street" />
       </label>
       @if (street.touched && street.invalid) {
         <div class="error-list">
@@ -148,7 +149,7 @@ template by accessing the underlying legacy controls via `.control()`:
     <div>
       <label>
         City:
-        <input [formControl]="city">
+        <input [formControl]="city" />
       </label>
       @if (city.touched && city.invalid) {
         <div class="error-list">
@@ -161,7 +162,7 @@ template by accessing the underlying legacy controls via `.control()`:
     <div>
       <label>
         Zip Code:
-        <input [formControl]="zip">
+        <input [formControl]="zip" />
       </label>
       @if (zip.touched && zip.invalid) {
         <div class="error-list">
@@ -187,7 +188,7 @@ const passwordControl = new FormControl('password' /** ... */);
 
 const user = signal({
   email: '',
-  password: passwordControl, // Nest the legacy control directly
+  password: passwordControl, // Nest the existing control directly
 });
 
 const form = compatForm(user);

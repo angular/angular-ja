@@ -357,7 +357,7 @@ Unlike the real `getQuote()` method, this spy bypasses the server and returns a 
 
 ### Async test with a Vitest fake timers
 
-To mock async functions like `setTimeout` or `Promise`s, you can leverage Vitest fake timers to controle whenever the fire.
+To mock async functions like `setTimeout` or `Promise`s, you can leverage Vitest fake timers to control whenever they fire.
 
 ```ts
 it('should display error when TwainQuotes service fails', async () => {
@@ -392,7 +392,7 @@ it('should display error when TwainQuotes service fails', async () => {
 
 ### More async tests
 
-With the stubbe service returning async observables, most of your tests will have to be async as well.
+With the stubbed service returning async observables, most of your tests will have to be async as well.
 
 Here's a test that demonstrates the data flow you'd expect in the real world.
 
@@ -419,7 +419,7 @@ it('should show quote after getQuote', async () => {
 
     const fixture = TestBed.createComponent(TwainComponent);
     const twainQuotes = TestBed.inject(TwainQuotes) as MockTwainQuotes;
-    await vi.runAllTimersAsync(); // render before the quote is recieved
+    await vi.runAllTimersAsync(); // render before the quote is received
 
     const quoteEl = fixture.nativeElement.querySelector('.twain');
     expect(quoteEl.textContent).toBe('...');
@@ -464,7 +464,7 @@ The `DashboardHero` component is embedded in the `Dashboard` component template 
 
 ```angular-html
 @for (hero of heroes; track hero) {
-  <dashboard-hero class="col-1-4" [hero]="hero" (selected)="gotoDetail($event)"/>
+  <dashboard-hero class="col-1-4" [hero]="hero" (selected)="gotoDetail($event)" />
 }
 ```
 
@@ -1176,8 +1176,8 @@ Focus on the `overrideComponent` method.
 });
 ```
 
-It takes two arguments: the component type to override (`HeroDetail`) and an override metadata object.
-The [override metadata object](guide/testing/utility-apis#metadata-override-object) is a generic defined as follows:
+It takes two arguments: the component type to override \(`HeroDetail`\) and an override metadata object.
+The [override metadata object](/guide/testing/utility-apis#testbed-class-summary) is a generic defined as follows:
 
 ```ts
 type MetadataOverride<T> = {

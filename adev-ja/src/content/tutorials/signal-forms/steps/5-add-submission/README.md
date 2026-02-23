@@ -19,7 +19,7 @@
 `@angular/forms/signals` から `submit` 関数をインポートします:
 
 ```ts
-import {form, Field, required, email, submit} from '@angular/forms/signals';
+import {form, FormField, required, email, submit} from '@angular/forms/signals';
 ```
 
 </docs-step>

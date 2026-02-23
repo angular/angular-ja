@@ -1,0 +1,17 @@
+# Workaround until this issue has been resolved: https://github.com/angular/angular/pull/67201
+diff --git a/adev/scripts/routes/generate-routes.mts b/adev/scripts/routes/generate-routes.mts
+index 605262d172..8ef9d7ead2 100644
+--- a/adev/scripts/routes/generate-routes.mts
++++ b/adev/scripts/routes/generate-routes.mts
+@@ -75,6 +75,11 @@ main();
+ 
+ // TODO: refactor so this function is shared with the generation pipeline (adev/shared-docs/pipeline/shared/marked/transformations/heading.mts)
+ function getIdFromHeading(heading: string): string {
++  // Check for explicit ID in {#id} format (used in translations)
++  const explicitIdMatch = heading.match(/\{#([^}]+)\}/);
++  if (explicitIdMatch) {
++    return explicitIdMatch[1];
++  }
+   return heading
+     .toLowerCase()
+     .replace(/\s|\//g, '-') // replace spaces and slashes with dashes

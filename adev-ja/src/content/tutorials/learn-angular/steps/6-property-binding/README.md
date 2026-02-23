@@ -13,7 +13,7 @@ NOTE: 詳しくは、[エッセンシャルガイドの動的なプロパティ�
 要素の属性にバインドするには、属性名を角括弧で囲みます。例を以下に示します。
 
 ```angular-html
-<img alt="photo" [src]="imageURL">
+<img alt="photo" [src]="imageURL" />
 ```
 
 この例では、`src`属性の値はクラスプロパティ`imageURL`にバインドされます。`imageURL`が持つ値は、`img`タグの`src`属性として設定されます。
@@ -47,4 +47,4 @@ export class App {
 
 これで、divは編集可能になりました。すばらしいですね👍
 
-プロパティバインディングは、Angularの強力な機能の1つです。詳細については、[Angularドキュメント](guide/templates/property-binding)をご覧ください。
+プロパティバインディングは、Angularの強力な機能の1つです。詳細については、[Angularドキュメント](guide/templates/binding#css-class-and-style-property-bindings)をご覧ください。

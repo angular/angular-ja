@@ -11,12 +11,17 @@ ZoneJSを依存関係として削除する主な利点は次のとおりです�
 
 ## アプリケーションでZonelessを有効にする
 
-```typescript
-// スタンドアロン ブートストラップ
-bootstrapApplication(MyApp, {providers: [provideZonelessChangeDetection()]});
+Angular v21以降、Zonelessがデフォルトなので、有効にするための特別な操作は不要です。デフォルト設定を上書きする`provideZoneChangeDetection`がどこでも使用されていないことを確認してください。
 
-// NgModule ブートストラップ
+Angular v20を使用している場合は、ブートストラップ時に`provideZonelessChangeDetection()`を追加してZoneless変更検知を有効にします:
+
+```ts {header: 'スタンドアロン ブートストラップ'}
+bootstrapApplication(MyApp, {providers: [provideZonelessChangeDetection()]});
+```
+
+```ts {header: 'NgModule ブートストラップ'}
 platformBrowser().bootstrapModule(AppModule);
+
 @NgModule({
   providers: [provideZonelessChangeDetection()],
 })
@@ -122,12 +127,14 @@ readonly myObservableState = someObservable.pipe(pendingUntilEvent());
 
 ### `TestBed`でZonelessを使用する
 
-Zonelessプロバイダー関数は、`TestBed`でも使用して、
-テスト対象のコンポーネントがZoneless Angularアプリケーションと
-互換性があることを確認できます。
+`TestBed`は、`polyfills`経由で`zone.js`がロードされている場合、デフォルトでZoneベースの変更検知を使用します。
+
+`zone.js`が存在しない場合、`TestBed`はデフォルトでZonelessとして実行されます。`zone.js`がロードされている場合にZonelessモードを強制するには、`provideZonelessChangeDetection()`を追加します:
 
 ```typescript
 TestBed.configureTestingModule({
+  // オプション: テスト環境がZonelessアプリケーションと
+  // 同じZoneless動作を使用することを強制するプロバイダーを含めます。
   providers: [provideZonelessChangeDetection()],
 });
 

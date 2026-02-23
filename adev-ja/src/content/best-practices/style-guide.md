@@ -197,7 +197,7 @@ readonlyアクセス修飾子は、Angularによって設定された値が上�
 
 ```ts
 @Component({
-  /* ... */
+  /*...*/
 })
 export class UserProfile {
   readonly userId = input();
@@ -211,7 +211,7 @@ export class UserProfile {
 
 ```ts
 @Component({
-  /* ... */
+  /*...*/
 })
 export class UserProfile {
   @Output() readonly userSaved = new EventEmitter<void>();
@@ -276,7 +276,7 @@ export class UserProfile {
 
 ```ts
 @Component({
-  /* ... */
+  /*...*/
 })
 class RichText {
   handleKeydown(event: KeyboardEvent) {
@@ -323,7 +323,7 @@ Angularは、各ライフサイクルメソッドに対応するTypeScriptイン
 import {Component, OnInit} from '@angular/core';
 
 @Component({
-  /* ... */
+  /*...*/
 })
 export class UserProfile implements OnInit {
   // The `OnInit` interface ensures this method is named correctly.

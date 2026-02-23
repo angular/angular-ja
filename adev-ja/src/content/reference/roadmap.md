@@ -31,7 +31,7 @@
 - [Event replay with SSR](/api/platform-browser/withEventReplay)
 - [Route-level render mode](/guide/ssr)
 
-## Angular開発者体験の改善
+## Angular開発者体験の改善 {#improving-the-angular-developer-experience}
 
 ### 開発速度
 
@@ -156,7 +156,7 @@ Angular Materialコンポーネントのカスタマイズを向上させ、Mate
 
 v17.2では、Angular Material 3の実験的なサポートを共有し、v18では安定版に卒業しました。
   </docs-card>
-  <docs-card title="遅延読み込みを導入する" link="2024年第2四半期に完了" href="https://next.angular.dev/guide/defer">
+  <docs-card title="遅延読み込みを導入する" link="2024年第2四半期に完了" href="https://next.angular.dev/guide/templates/defer">
 v17では、遅延コード読み込みのための使い慣れたAPIを提供する、開発者プレビューで遅延表示を提供しました。v18では、ライブラリ開発者向けの遅延表示を有効にし、APIを安定版に卒業させました。
   </docs-card>
   <docs-card title="Angular DevToolsのiframeサポート" link="2024年第2四半期に完了" href="">

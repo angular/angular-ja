@@ -20,6 +20,10 @@ const localizedFilePatterns: Array<string | readonly string[]> = [
   'src/content/tutorials/**/config.json',
   // Update home files
   'src/app/features/home/home.component.html',
+  'src/app/features/home/components/signals-demo/signals-demo.html',
+  'src/app/features/home/components/control-flow/control-flow-example.html',
+  'src/app/features/home/components/deferrable-views-example/deferrable-views-example.html',
+  'src/app/features/home/components/hydration-example/hydration-example.html',
   // Update guide files
   'src/app/features/update/recommendations.ts',
   'src/app/features/update/update.component.ts',
@@ -28,6 +32,7 @@ const localizedFilePatterns: Array<string | readonly string[]> = [
   'src/index.html',
   'src/app/core/services/a-dev-title-strategy.ts',
   'src/app/routing/sub-navigation-data.ts',
+  'src/app/routing/navigation-entries/index.ts',
   'shared-docs/components/table-of-contents/table-of-contents.component.html',
   'shared-docs/components/cookie-popup/cookie-popup.component.html',
 ];

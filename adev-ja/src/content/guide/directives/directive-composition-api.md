@@ -60,8 +60,7 @@ export class AdminMenu {}
 テンプレートでそれらにバインドできます。
 
 ```angular-html
-
-<admin-menu menuId="top-menu" (menuClosed)="logMenuClosed()">
+<admin-menu menuId="top-menu" (menuClosed)="logMenuClosed()"></admin-menu>
 ```
 
 さらに、`hostDirective` から入力と出力をエイリアスして、
@@ -83,8 +82,7 @@ export class AdminMenu {}
 ```
 
 ```angular-html
-
-<admin-menu id="top-menu" (closed)="logMenuClosed()">
+<admin-menu id="top-menu" (closed)="logMenuClosed()"></admin-menu>
 ```
 
 ## 別のディレクティブにディレクティブを追加する

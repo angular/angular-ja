@@ -24,7 +24,9 @@ Angularアプリケーションを作成するための基本的な構成要素
     <p>This is the user profile page</p>
   `,
 })
-export class UserProfile { /* Your component code goes here */ }
+export class UserProfile {
+  /* Your component code goes here */
+}
 ```
 
 `@Component`デコレーターは、テンプレートに適用するCSSを指定するために、オプションで`styles`プロパティも受け付けます。
@@ -37,9 +39,15 @@ export class UserProfile { /* Your component code goes here */ }
     <h1>User profile</h1>
     <p>This is the user profile page</p>
   `,
-  styles: `h1 { font-size: 3em; } `,
+  styles: `
+    h1 {
+      font-size: 3em;
+    }
+  `,
 })
-export class UserProfile { /* Your component code goes here */ }
+export class UserProfile {
+  /* Your component code goes here */
+}
 ```
 
 ### HTMLとCSSを別々のファイルに分離する {#separating-html-and-css-into-separate-files}

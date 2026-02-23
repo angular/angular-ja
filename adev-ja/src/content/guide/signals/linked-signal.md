@@ -2,7 +2,7 @@
 
 `signal`関数は、Angularコードで状態を保持するために使用できます。この状態は、他の状態に依存することがあります。例えば、ユーザーが注文の配送方法を選択できるコンポーネントを考えてみましょう。
 
-```typescript
+```ts
 @Component({
   /* ... */
 })
@@ -22,7 +22,7 @@ export class ShippingMethodPicker {
 
 **`linkedSignal`関数は、本質的に他の状態に_リンク_された状態を保持するシグナルを作成できます。**上記の例を再考すると、`linkedSignal`は`signal`を置き換えることができます。
 
-```typescript
+```ts
 @Component({
   /* ... */
 })
@@ -42,7 +42,7 @@ export class ShippingMethodPicker {
 
 次の例は、`linkedSignal`の値がリンクされた状態に基づいてどのように変化するかを示しています。
 
-```typescript
+```ts
 const shippingOptions = signal(['Ground', 'Air', 'Sea']);
 const selectedOption = linkedSignal(() => shippingOptions()[0]);
 console.log(selectedOption()); // 'Ground'
@@ -54,13 +54,13 @@ shippingOptions.set(['Email', 'Will Call', 'Postal service']);
 console.log(selectedOption()); // 'Email'
 ```
 
-## 以前の状態を考慮する
+## 以前の状態を考慮する {#accounting-for-previous-state}
 
 場合によっては、`linkedSignal`の計算で`linkedSignal`の以前の値を考慮する必要があります。
 
 上記の例では、`shippingOptions`が変更されると、`selectedOption`は常に最初のオプションに戻って更新されます。しかし、選択したオプションがリスト内にまだ存在する場合は、ユーザーの選択を維持したい場合があります。これを実現するには、別々の*ソース*と*算出*を使用して`linkedSignal`を作成できます。
 
-```typescript
+```ts
 interface ShippingMethod {
   id: number;
   name: string;
@@ -114,11 +114,11 @@ export class ShippingMethodPicker {
 
 HELPFUL: `previous`パラメーターを使用する場合、`linkedSignal`のジェネリック型引数を明示的に指定する必要があります。最初のジェネリック型は`source`の型に対応し、2番目のジェネリック型は`computation`の出力型を決定します。
 
-## カスタムの等価比較
+## カスタムの等価比較 {#custom-equality-comparison}
 
 `linkedSignal`は他のシグナルと同様に、カスタムの等価比較関数を設定できます。この関数は、下流の依存関係によって`linkedSignal`の値（計算結果）が変更されたかどうかを判断するために使用されます。
 
-```typescript
+```ts
 const activeUser = signal({id: 123, name: 'Morgan', isAdmin: true});
 
 const activeUserEditCopy = linkedSignal(() => activeUser(), {

@@ -1,76 +1,76 @@
-# Profile your application
+# アプリケーションのプロファイリング {#profile-your-application}
 
-The **Profiler** tab lets you visualize the execution of Angular's change detection.
-This is useful for determining when and how change detection impacts your application's performance.
+**Profiler**タブでは、Angularの変更検知の実行を視覚化できます。
+これは、変更検知がいつどのようにアプリケーションのパフォーマンスに影響を与えるかを判断するのに役立ちます。
 
-<img src="assets/images/guide/devtools/profiler.png" alt="A screenshot of the 'Profiler' tab which reads 'Click the play button to start a new recording, or upload a json file containing profiler data.' Next to this is a record button to begin recording a new profile as well as a file picker to select an existing profile.">
+<img src="assets/images/guide/devtools/profiler.png" alt="「Profiler」タブのスクリーンショットで、「再生ボタンをクリックして新しい記録を開始するか、プロファイラデータを含むjsonファイルをアップロードします。」と表示されています。その横に、新しいプロファイルを記録を開始する記録ボタンと、既存のプロファイルを選択するファイルピッカーがあります。">
 
-The Profiler tab lets you start profiling the current application or import an existing profile from a previous run.
-To start profiling your application, hover over the circle in the top-left corner within the **Profiler** tab and click **Start recording**.
+プロファイラタブでは、現在のアプリケーションのプロファイリングを開始したり、以前の実行からの既存のプロファイルをインポートしたりできます。
+アプリケーションのプロファイリングを開始するには、**Profiler**タブの左上隅にある丸の上にマウスを置いて、**Start recording**をクリックします。
 
-During profiling, Angular DevTools captures execution events, such as change detection and lifecycle hook execution.
-Interact with your application to trigger change detection and generate data Angular DevTools can use.
-To finish recording, click the circle again to **Stop recording**.
+プロファイリング中は、Angular DevToolsは、変更検知やライフサイクルフックの実行などの実行イベントをキャプチャします。
+変更検知をトリガーしてAngular DevToolsが使用できるデータを作成するために、アプリケーションと対話してください。
+記録を終了するには、丸を再びクリックして**Stop recording**します。
 
-You can also import an existing recording.
-Read more about this feature in the [Import recording](tools/devtools#import-and-export-recordings) section.
+既存の記録のインポートもできます。
+この機能の詳細については、[記録のインポート](tools/devtools/profiler#import-and-export-recordings)セクションをご覧ください。
 
-## Understand your application's execution
+## アプリケーションの実行の理解 {#understand-your-applications-execution}
 
-After recording or importing a profile, Angular DevTools displays a visualization of change detection cycles.
+プロファイルを記録またはインポートした後、Angular DevToolsは変更検知サイクルの視覚化を表示します。
 
-<img src="assets/images/guide/devtools/default-profiler-view.png" alt="A screenshot of the 'Profiler' tab after a profile has been recorded or uploaded. It displays a bar chart illustrating various change detection cycles with some text which reads 'Select a bar to preview a particular change detection cycle'.">
+<img src="assets/images/guide/devtools/default-profiler-view.png" alt="記録またはアップロードされたプロファイル後の「Profiler」タブのスクリーンショット。いくつかのテキストが表示され、「特定の変更検出サイクルをプレビューするには、バーを選択します」と表示されています。">
 
-Each bar in the sequence represents a change detection cycle in your app.
-The taller a bar is, the longer the application spent running change detection in this cycle.
-When you select a bar, DevTools displays useful information about it including:
+シーケンスの各バーは、アプリケーションの変更検知サイクルを表しています。
+バーが高いほど、アプリケーションは変更検知をこのサイクルで実行するのに時間がかかっています。
+バーを選択すると、DevToolsは次のような役立つ情報を表示します。
 
-- A bar chart with all the components and directives that it captured during this cycle
-- How much time Angular spent running change detection in this cycle.
-- An estimated frame rate as experienced by the user (if below 60fps)
+- このサイクルでキャプチャされたすべてのコンポーネントとディレクティブを含むバーチャート
+- Angularが変更検知をこのサイクルで実行するのにかかった時間。
+- ユーザーが経験した推定フレームレート（60fps未満の場合）
 
-<img src="assets/images/guide/devtools/profiler-selected-bar.png" alt="A screenshot of the 'Profiler' tab. A single bar has been selected by the user and a nearby dropdown menu displays 'Bar chart`, showing a second bar chart underneath it. The new chart has two bars which take up the majority of the space, one labeled `TodosComponent` and the other labeled `NgForOf`. The other bars are small enough to be negligible in comparison.">
+<img src="assets/images/guide/devtools/profiler-selected-bar.png" alt="「Profiler」タブのスクリーンショット。ユーザーによって単一のバーが選択されており、近くのドロップダウンメニューに「バーチャート」が表示され、その下に2番目のバーチャートが表示されています。新しいチャートには、大部分のスペースを占める2つのバーがあり、1つは「TodosComponent」とラベル付けされ、もう1つは「NgForOf」とラベル付けされています。他のバーは、これらに比べて小さいため、無視できます。">
 
-## Understand component execution
+## コンポーネント実行の理解 {#understand-component-execution}
 
-The bar chart displayed after clicking on a change detection cycle displays a detailed view about how much time your application spent running change detection in that particular component or directive.
+変更検知サイクルをクリックすると表示されるバーチャートは、アプリケーションがその特定のコンポーネントまたはディレクティブで変更検知を実行するのにどれだけ時間がかかったかを示す詳細ビューを表示します。
 
-This example shows the total time spent by the `NgForOf` directive and which method was called on it.
+この例では、`NgForOf`ディレクティブでかかった合計時間と、そのディレクティブで呼び出されたメソッドが表示されています。
 
-<img src="assets/images/guide/devtools/directive-details.png" alt="A screenshot of the 'Profiler' tab where the `NgForOf` bar is selected. A detailed view of `NgForOf` is visible to the right where it lists 'Total time spent: 1.76 ms'. It includes a with exactly one row, listing `NgForOf` as a directives with an `ngDoCheck` method which took 1.76 ms. It also includes a list labeled 'Parent Hierarchy' containing the parent components of this directive.">
+<img src="assets/images/guide/devtools/directive-details.png" alt="「Profiler」タブのスクリーンショットで、`NgForOf`バーが選択されています。右側に`NgForOf`の詳細ビューが表示され、「かかった合計時間: 1.76 ms」と表示されています。`NgForOf`を1.76 msかかった`ngDoCheck`メソッドを持つディレクティブとしてリストした行が1つだけ含まれています。また、「親階層」というラベルの付いたリストも含まれており、このディレクティブの親コンポーネントが含まれています。">
 
-## Hierarchical views
+## 階層ビュー {#hierarchical-views}
 
-<img src="assets/images/guide/devtools/flame-graph-view.png" alt="A screenshot of the 'Profiler' tab. A single bar has been selected by the user and a nearby dropdown menu now displays 'Flame graph', showing a flame graph underneath it. The flame graph starts with a row called 'Entire application' and another row called 'AppComponent'. Beneath those, the rows start to break up into multiple items, starting with `[RouterOutlet]` and `DemoAppComponent` on the third row. A few layers deep, one cell is highlighted red.">
+<img src="assets/images/guide/devtools/flame-graph-view.png" alt="「Profiler」タブのスクリーンショット。ユーザーによって単一のバーが選択されており、近くのドロップダウンメニューに「フレームグラフ」が表示され、その下にフレームグラフが表示されています。フレームグラフは、「Entire application」という行と「AppComponent」という行から始まります。その下は、3行目で「[RouterOutlet]」と「DemoAppComponent」から始まり、複数のアイテムに分割され始めます。数層深く、1つのセルが赤で強調表示されています。">
 
-You can also visualize the change detection execution in a flame graph-like view.
+変更検知の実行をフレームグラフのようなビューで視覚化できます。
 
-Each tile in the graph represents an element on the screen at a specific position in the render tree.
-For example, consider a change detection cycle where a `LoggedOutUserComponent` is removed and in its place Angular rendered a `LoggedInUserComponent`. In this scenario both components will be displayed in the same tile.
+グラフの各タイルは、レンダリングツリーの特定の位置にある画面上の要素を表します。
+たとえば、`LoggedOutUserComponent`が削除され、その代わりにAngularが`LoggedInUserComponent`をレンダリングした変更検知サイクルを考えます。このシナリオでは、両方のコンポーネントは同じタイルに表示されます。
 
-The x-axis represents the full time it took to render this change detection cycle.
-The y-axis represents the element hierarchy. Running change detection for an element requires rendering its directives and child components.
-Together, this graph visualizes which components are taking the longest time to render and where that time is going.
+X軸は、この変更検知サイクルのレンダリングにかかった合計時間を表します。
+Y軸は要素階層を表します。要素の変更検知を実行するには、そのディレクティブと子コンポーネントをレンダリングする必要があります。
+これらを組み合わせると、どのコンポーネントのレンダリングに時間がかかっているのか、その時間がどこに使われているのかが視覚化されます。
 
-Each tile is colored depending on how much time Angular spent there.
-Angular DevTools determines the intensity of the color by the time spent relative to the tile where rendering took the most time.
+各タイルは、Angularがそこでかかった時間に依存して色が付けられます。
+Angular DevToolsは、レンダリングに最も時間がかかったタイルに対するかかった時間によって、色の濃淡を決定します。
 
-When you click on a certain tile, you'll see details about it in the panel on the right.
-Double-clicking the tile zooms it in so you can more easily view its nested children.
+特定のタイルをクリックすると、右側のパネルにそのタイルに関する詳細が表示されます。
+タイルをダブルクリックすると、タイルが拡大され、ネストされた子要素をより簡単に表示できます。
 
-## Debug change detection and `OnPush` components
+## 変更検知と`OnPush`コンポーネントのデバッグ {#debug-change-detection-and-onpush-components}
 
-Normally, the graph visualizes the time it takes to _render_ an application, for any given change detection frame. However some components such as `OnPush` components will only re-render if their input properties change. It can be useful to visualize the flame graph without these components for particular frames.
+通常、グラフは、特定の変更検知フレームの、アプリケーションの*レンダリング*にかかる時間を視覚化します。しかし、`OnPush`コンポーネントなど、入力プロパティが変更された場合にのみ再レンダリングされるコンポーネントもあります。特定のフレームのこれらのコンポーネントなしでフレームグラフを視覚化すると役立つ場合があります。
 
-To visualize only the components in a change detection frame that went through the change detection process, select the **Change detection** checkbox at the top, above the flame graph.
+変更検知フレーム内で変更検知プロセスを経たコンポーネントのみを視覚化するには、フレームグラフの上部にある**変更検知**チェックボックスをオンにします。
 
-This view highlights all the components that went through change detection and displays those that did not in gray, such as `OnPush` components that did not re-render.
+このビューでは、変更検知を経たすべてのコンポーネントが強調表示され、再レンダリングされなかった`OnPush`コンポーネントなど、変更検知を経なかったコンポーネントが灰色で表示されます。
 
-<img src="assets/images/guide/devtools/debugging-onpush.png" alt="A screenshot of the 'Profiler' tab displaying a flame chart visualization of a change detection cycle. A checkbox labeled 'Show only change detection' is now checked. The flame graph looks very similar to before, however the color of components has changed from orange to blue. Several tiles labeled `[RouterOutlet]` are no longer highlighted with any color.">
+<img src="assets/images/guide/devtools/debugging-onpush.png" alt="変更検出サイクルのフレームチャート視覚化を表示する「Profiler」タブのスクリーンショット。「Show only change detection」というラベルの付いたチェックボックスがオンになっています。フレームグラフは以前と非常によく似ていますが、コンポーネントの色がオレンジから青に変わっています。`[RouterOutlet]`というラベルの付いたいくつかのタイルは、もうどの色でも強調表示されていません。">
 
-## Import and export recordings
+## 記録のインポートとエクスポート {#import-and-export-recordings}
 
-Click the **Save Profile** button at the top-right of a recorded profiling session to export it as a JSON file and save it to the disk.
-Later, import the file in the initial view of the profiler by clicking the **Choose file** input.
+記録されたプロファイリングセッションの右上にある**Save Profile**ボタンをクリックして、JSONファイルとしてエクスポートし、ディスクに保存します。
+後で、プロファイラの初期ビューで、**Choose file**入力をクリックしてファイルをインポートします。
 
-<img src="assets/images/guide/devtools/save-profile.png" alt="A screenshot of the 'Profiler' tab displaying change detection cycles. On the right side a 'Save Profile' button is visible.">
+<img src="assets/images/guide/devtools/save-profile.png" alt="変更検出サイクルを表示する「Profiler」タブのスクリーンショット。右側に「プロファイルの保存」ボタンが表示されています。">

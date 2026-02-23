@@ -13,7 +13,7 @@ HTML要素にイベントリスナーを追加する場合は、イベントを�
   `,
   ...
 })
-export class AppComponent{
+export class App{
   updateField(): void {
     console.log('Field is updated!');
   }
@@ -35,7 +35,7 @@ Angularは、すべてのテンプレートイベントリスナーで、イベ�
   `,
   ...
 })
-export class AppComponent {
+export class App {
   updateField(event: KeyboardEvent): void {
     console.log(`The user pressed: ${event.key}`);
   }
@@ -53,7 +53,7 @@ export class AppComponent {
   `,
   ...
 })
-export class AppComponent {
+export class App {
   updateField(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
       console.log('The user pressed enter in the text field.');
@@ -71,7 +71,7 @@ export class AppComponent {
   `,
   ...
 })
-export class AppComponent{
+export class App{
   updateField(event: KeyboardEvent): void {
     console.log('The user pressed enter in the text field.');
   }
@@ -98,6 +98,22 @@ Angularでは、組み込みの `code` サフィックスを提供すること�
 
 これは、異なるオペレーティングシステム間でキーボードイベントを一貫して処理する場合に役立ちます。たとえば、MacOSデバイスでAltキーを使用する場合、`key` プロパティはAltキーで既に修飾された文字に基づいてキーを報告します。これは、Alt + Sのような組み合わせが `'ß'` の `key` 値を報告することを意味します。ただし、`code` プロパティは、生成された文字ではなく、押された物理的なまたは仮想的なボタンに対応します。
 
+## グローバルターゲットのリスニング {#listening-on-global-targets}
+
+グローバルターゲット名を使用してイベントのプレフィックスを付けることができます。サポートされている3つのグローバルターゲットは、`window`、`document`、`body`です。
+
+```angular-ts
+@Component({
+  /* ... */
+  host: {
+    'window:click': 'onWindowClick()',
+    'document:click': 'onDocumentClick()',
+    'body:click': 'onBodyClick()',
+  },
+})
+export class MyView {}
+```
+
 ## イベントのデフォルト動作の防止 {#preventing-event-default-behavior}
 
 イベントハンドラーがネイティブのブラウザ動作を置き換える必要がある場合は、イベントオブジェクトの [`preventDefault` メソッド](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault)を使用できます。
@@ -109,7 +125,7 @@ Angularでは、組み込みの `code` サフィックスを提供すること�
   `,
   ...
 })
-export class AppComponent{
+export class App{
   showOverlay(event: PointerEvent): void {
     event.preventDefault();
     console.log('Show overlay without updating the URL!');
@@ -173,10 +189,10 @@ export class DebounceEventPlugin extends EventManagerPlugin {
 ```ts
 import {bootstrapApplication} from '@angular/platform-browser';
 import {EVENT_MANAGER_PLUGINS} from '@angular/platform-browser';
-import {AppComponent} from './app/app.component';
+import {App} from './app';
 import {DebounceEventPlugin} from './debounce-event-plugin';
 
-bootstrapApplication(AppComponent, {
+bootstrapApplication(App, {
   providers: [
     {
       provide: EVENT_MANAGER_PLUGINS,

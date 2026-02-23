@@ -114,7 +114,7 @@ const eventSubscription = someComponent.someEventProperty.subscribe((eventData) 
 eventSubscription.unsubscribe();
 ```
 
-## イベント名の選択
+## イベント名の選択 {#choosing-event-names}
 
 HTMLElementなどのDOM要素のイベントと衝突する出力名を選択することは避けてください。名前の衝突は、バインドされたプロパティがコンポーネントのものであるか、DOM要素のものであるかについて混乱を招きます。
 

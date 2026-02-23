@@ -111,9 +111,7 @@ handleSubmit() {
 Angularには、`ngSubmit`というこの特定の目的に合わせたイベントハンドラーがあります。フォーム要素を更新して、フォームが送信されたときに`handleSubmit`メソッドを呼び出します。
 
 ```angular-html {highlight:[3]}
-<form
-  [formGroup]="profileForm"
-  (ngSubmit)="handleSubmit()">
+<form [formGroup]="profileForm" (ngSubmit)="handleSubmit()"></form>
 ```
 
 </docs-step>

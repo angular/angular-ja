@@ -52,7 +52,7 @@ export class GlobalErrorHandler implements ErrorHandler {
 
 ### クライアントサイドレンダリング {#client-side-rendering}
 
-[ApplicationConfig](guide/di/dependency-injection#at-the-application-root-level-using-applicationconfig)に[`provideBrowserGlobalErrorListeners()`](/api/core/provideBrowserGlobalErrorListeners)を追加すると、ブラウザウィンドウに`'error'`と`'unhandledrejection'`リスナーが追加され、それらのエラーが`ErrorHandler`に転送されます。Angular CLIは、デフォルトでこのプロバイダーを使用して新しいアプリケーションを生成します。Angularチームは、ほとんどのアプリケーションで、フレームワークの組み込みリスナーまたは独自のカスタムリスナーのいずれかを使用して、これらのグローバルエラーを処理することを推奨しています。カスタムリスナーを提供する場合は、`provideBrowserGlobalErrorListeners`を削除できます。
+[ApplicationConfig](guide/di/defining-dependency-providers#application-bootstrap)に[`provideBrowserGlobalErrorListeners()`](/api/core/provideBrowserGlobalErrorListeners)を追加すると、ブラウザウィンドウに`'error'`と`'unhandledrejection'`リスナーが追加され、それらのエラーが`ErrorHandler`に転送されます。Angular CLIは、デフォルトでこのプロバイダーを使用して新しいアプリケーションを生成します。Angularチームは、ほとんどのアプリケーションで、フレームワークの組み込みリスナーまたは独自のカスタムリスナーのいずれかを使用して、これらのグローバルエラーを処理することを推奨しています。カスタムリスナーを提供する場合は、`provideBrowserGlobalErrorListeners`を削除できます。
 
 ### サーバーサイドおよびハイブリッドレンダリング {#server-side-and-hybrid-rendering}
 

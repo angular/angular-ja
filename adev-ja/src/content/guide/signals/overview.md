@@ -73,7 +73,7 @@ export class AwesomeCounter {
 
 IMPORTANT: 読み取り専用のシグナルには、その値の深い変更を防ぐ組み込みのメカニズムは**ありません**。
 
-### 算出シグナル
+### 算出シグナル {#computed-signals}
 
 **算出シグナル**は、他のシグナルから値を派生させる読み取り専用のシグナルです。算出シグナルは、`computed`関数を使用して、派生を指定することで定義します。
 
@@ -124,7 +124,7 @@ const conditionalCount = computed(() => {
 
 依存関係は、派生中に追加されるだけでなく、削除されることもできます。後で`showCount`を再び偽に設定すると、`count`は`conditionalCount`の依存関係として扱われなくなります。
 
-## リアクティブコンテキスト
+## リアクティブコンテキスト {#reactive-contexts}
 
 **リアクティブコンテキスト**は、Angularがシグナルの読み取りを監視して依存関係を確立する実行時の状態です。シグナルを読み取るコードは_コンシューマー_であり、読み取られるシグナルは_プロデューサー_です。
 
@@ -183,6 +183,35 @@ effect(() => {
     // このEffectの依存関係として扱われません。
     this.loggingService.log(`User set to ${user}`);
   });
+});
+```
+
+### リアクティブコンテキストと非同期操作 {#reactive-context-and-async-operations}
+
+リアクティブコンテキストは同期コードに対してのみアクティブです。非同期境界の後に発生するシグナルの読み取りは、依存関係として追跡されません。
+
+```ts {avoid}
+effect(async () => {
+  const data = await fetchUserData();
+  // ここではリアクティブコンテキストが失われています - theme()は追跡されません
+  console.log(`User: ${data.name}, Theme: ${theme()}`);
+});
+```
+
+すべてのシグナル読み取りが追跡されるようにするには、`await`の前にシグナルを読み取ります。これには、引数は同期的に評価されるため、awaitされる関数に引数として渡すことも含まれます：
+
+```ts {prefer}
+effect(async () => {
+  const currentTheme = theme(); // awaitの前に読み取る
+  const data = await fetchUserData();
+  console.log(`User: ${data.name}, Theme: ${currentTheme}`);
+});
+```
+
+```ts {prefer}
+effect(async () => {
+  // これも動作します：シグナルはawaitの前に読み取られます（関数引数として）
+  await renderContent(docContent());
 });
 ```
 

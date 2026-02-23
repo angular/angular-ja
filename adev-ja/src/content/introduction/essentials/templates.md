@@ -13,7 +13,7 @@ Angularでは、*バインディング*によって、コンポーネントの�
 ```angular-ts
 @Component({
   selector: 'user-profile',
-  template: `<h1>Profile for {{userName()}}</h1>`,
+  template: `<h1>Profile for {{ userName() }}</h1>`,
 })
 export class UserProfile {
   userName = signal('pro_programmer_123');
@@ -58,7 +58,7 @@ export class UserProfile {
 
 ```angular-html
 <!-- `<ul>`要素の`role`属性を`listRole`の値にバインドします。 -->
-<ul [attr.role]="listRole()">
+<ul [attr.role]="listRole()"></ul>
 ```
 
 バインドされた値が変更されると、AngularはDOMプロパティと属性を自動的に更新します。
@@ -76,7 +76,9 @@ Angularを使用すると、括弧を使用してテンプレート内の要素�
 export class UserProfile {
   /* ... */
 
-  cancelSubscription() { /* イベント処理コードをここに記述します。 */  }
+  cancelSubscription() {
+    /* イベント処理コードをここに記述します。 */
+  }
 }
 ```
 
@@ -91,7 +93,9 @@ export class UserProfile {
 export class UserProfile {
   /* ... */
 
-  cancelSubscription(event: Event) { /* イベント処理コードをここに記述します。 */  }
+  cancelSubscription(event: Event) {
+    /* イベント処理コードをここに記述します。 */
+  }
 }
 ```
 
@@ -129,7 +133,7 @@ Angularの`@for`ブロックを使用して、テンプレートの一部を複�
 
 <ul class="user-badge-list">
   @for (badge of badges(); track badge.id) {
-    <li class="user-badge">{{badge.name}}</li>
+    <li class="user-badge">{{ badge.name }}</li>
   }
 </ul>
 ```

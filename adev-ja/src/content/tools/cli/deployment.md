@@ -4,7 +4,7 @@ Angularアプリケーションをリモートサーバーにデプロイする�
 
 ## CLIによる自動デプロイ
 
-AngularのCLIコマンドである`ng deploy`はあなたのプロジェクトに紐づいた`deploy` [CLI builder](guide/cli-builder)を実行します。
+AngularのCLIコマンドである`ng deploy`はあなたのプロジェクトに紐づいた`deploy` [CLI builder](tools/cli/cli-builder)を実行します。
 多数のサードパーティのビルダーが異なるプラットフォームで機能するよう実装しています。
 `ng add`によって、それらのいずれかをあなたのプロジェクトに追加できます。
 
@@ -88,7 +88,7 @@ Angularのルーターを迂回して、ブラウザは`/users/42`に対する�
 _サーバー_はアプリケーションのリクエストを受け付けるよう設定されていなければなりません。
 特定のサーバーでCORSを有効にする方法は[enable-cors.org](https://enable-cors.org/server.html 'CORSサーバーの有効化')を読んでください。
 
-## プロダクションの最適化
+## プロダクションの最適化 {#production-optimizations}
 
 `ng build`は特に設定しない限り`production`設定を使います。この設定はビルド最適化機能を有効にします。
 
@@ -103,7 +103,7 @@ _サーバー_はアプリケーションのリクエストを受け付けるよ
 
 CLIのビルドオプションとそれらの効果についてより多く知るために[`ng build`](cli/build)を参照してください。
 
-### 開発時のみの機能
+### 開発時のみの機能 {#development-only-features}
 
 `ng serve`を使ってローカルでアプリケーションを起動するとき、Angularは開発用の設定を使用することで、
 実行時に以下が使用可能になります:

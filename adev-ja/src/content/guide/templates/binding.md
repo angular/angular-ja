@@ -13,7 +13,7 @@ Angularでは、**バインディング**によってコンポーネントのテ
   `,
   ...
 })
-export class AppComponent {
+export class App {
   theme = 'dark';
 }
 ```
@@ -33,11 +33,11 @@ export class AppComponent {
     <!-- `welcomeMessage`が変更されても必ずしも更新されるわけではありません。 -->
     <p>{{ welcomeMessage }}</p>
 
-    <p>Your color preference is {{ theme() }}.</p> <!-- `name`シグナルの値が変更されたとき、常に更新されます。 -->
+    <p>Your color preference is {{ theme() }}.</p> <!-- `theme`シグナルの値が変更されたとき、常に更新されます。 -->
   `
   ...
 })
-export class AppComponent {
+export class App {
   welcomeMessage = "Welcome, enjoy this app that we built for you";
   theme = signal('dark');
 }
@@ -88,13 +88,14 @@ HTML要素のDOMインスタンス、[コンポーネント](guide/components)�
 
 ```angular-html
 <!-- `NgOptimizedImage`ディレクティブの`ngSrc`プロパティにバインドします  -->
-<img [ngSrc]="profilePhotoUrl()" alt="The current user's profile photo">
+<img [ngSrc]="profilePhotoUrl()" alt="The current user's profile photo" />
 ```
 
 ### 属性 {#attributes}
 
 対応するDOMプロパティを持たないHTML属性(SVG属性など)を設定する必要がある場合は、テンプレート内の要素に属性をバインドするために`attr.`プレフィックスを使用できます。
 
+<!-- prettier-ignore -->
 ```angular-html
 <!-- `<ul>`要素の`role`属性をコンポーネントの`listRole`プロパティにバインドします。 -->
 <ul [attr.role]="listRole()">
@@ -110,7 +111,7 @@ HTML要素のDOMインスタンス、[コンポーネント](guide/components)�
 
 ```angular-html
 <!-- 画像要素のDOMオブジェクトの`alt`プロパティに値をバインドします。 -->
-<img src="profile-photo.jpg" alt="Profile photo of {{ firstName() }}" >
+<img src="profile-photo.jpg" alt="Profile photo of {{ firstName() }}" />
 ```
 
 ## CSSクラスとスタイルプロパティのバインディング {#css-class-and-style-property-bindings}
@@ -121,6 +122,7 @@ Angularは、要素にCSSクラスとCSSスタイルプロパティをバイン�
 
 CSSクラスバインディングを作成して、バインドされた値が[真偽値](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)かどうかによって、要素にCSSクラスを追加または削除できます。
 
+<!-- prettier-ignore -->
 ```angular-html
 <!-- `isExpanded`が真偽値の場合、`expanded`CSSクラスを追加します。 -->
 <ul [class.expanded]="isExpanded()">
@@ -155,6 +157,7 @@ export class UserProfile {
 
 上記の例は、以下のDOMをレンダリングします。
 
+<!-- prettier-ignore -->
 ```angular-html
 <ul class="full-width outlined"> ... </ul>
 <section class="expandable elevated"> ... </section>
@@ -178,6 +181,7 @@ export class Listbox {
 
 上記の例では、Angularは`ul`要素を3つのCSSクラスすべてでレンダリングします。
 
+<!-- prettier-ignore -->
 ```angular-html
 <ul class="list box expanded">
 ```
@@ -194,6 +198,7 @@ NOTE: クラスバインディングは、単一のキーでスペース区切�
 
 要素に直接CSSスタイルプロパティをバインドできます。
 
+<!-- prettier-ignore -->
 ```angular-html
 <!-- `isExpanded`プロパティに基づいてCSSの`display`プロパティを設定します。 -->
 <section [style.display]="isExpanded() ? 'block' : 'none'">
@@ -201,6 +206,7 @@ NOTE: クラスバインディングは、単一のキーでスペース区切�
 
 単位を受け付けるCSSプロパティについては、さらに単位を指定できます。
 
+<!-- prettier-ignore -->
 ```angular-html
 <!-- `sectionHeightInPixels`プロパティに基づいてCSSの`height`プロパティをピクセル値に設定します。 -->
 <section [style.height.px]="sectionHeightInPixels()">
@@ -232,6 +238,7 @@ export class UserProfile {
 
 上記の例は、以下のDOMをレンダリングします。
 
+<!-- prettier-ignore -->
 ```angular-html
 <ul style="display: flex; padding: 8px"> ... </ul>
 <section style="border: 1px solid black; font-weight: bold"> ... </section>

@@ -8,7 +8,7 @@ Angularテンプレートは制御フローブロックをサポートしてお�
 
 ```angular-html
 @if (a > b) {
-  <p>{{a}} is greater than {{b}}</p>
+  <p>{{ a }} is greater than {{ b }}</p>
 }
 ```
 
@@ -16,11 +16,11 @@ Angularテンプレートは制御フローブロックをサポートしてお�
 
 ```angular-html
 @if (a > b) {
-  {{a}} is greater than {{b}}
+  {{ a }} is greater than {{ b }}
 } @else if (b > a) {
-  {{a}} is less than {{b}}
+  {{ a }} is less than {{ b }}
 } @else {
-  {{a}} is equal to {{b}}
+  {{ a }} is equal to {{ b }}
 }
 ```
 
@@ -60,7 +60,15 @@ Angularの `@for` ブロックは、JavaScriptの `continue` や `break` のよ�
 
 変更されない静的なコレクションの場合、`$index` を使用して、コレクション内のインデックスで各アイテムを追跡するようにAngularに指示できます。
 
-他のオプションが利用できない場合は、`identity` を指定できます。 これは、Angularに三重等号演算子 (`===`) を使用して参照の同一性でアイテムを追跡するように指示します。 AngularはどのデータアイテムがどのDOMノードに対応するかをマップする方法がないため、可能な限りこのオプションを避けてください。レンダリングの更新が大幅に遅くなる可能性があります。
+他のオプションが利用できない場合は、アイテム自体をトラッキングキーとして使用できます。 これは、Angularに三重等号演算子 (`===`) を使用して参照の同一性でアイテムを追跡するように指示します。 AngularはどのデータアイテムがどのDOMノードに対応するかをマップする方法がないため、可能な限りこのオプションを避けてください。レンダリングの更新が大幅に遅くなる可能性があります。
+
+```angular-html
+@for (item of items; track item) {
+  {{ item.name }}
+}
+```
+
+NOTE: `*ngFor`とは異なり、`@for`ブロックはビューの再利用を優先します。トラッキングされたプロパティが変更されても、オブジェクト参照が同じままである場合、Angularは要素全体を破棄して再作成するのではなく、ビューのバインディング（コンポーネント入力を含む）を更新します。
 
 ### `@for` ブロックのコンテキスト変数
 
@@ -91,9 +99,9 @@ Angularの `@for` ブロックは、JavaScriptの `continue` や `break` のよ�
 
 ```angular-html
 @for (item of items; track item.name) {
-  <li> {{ item.name }}</li>
+  <li>{{ item.name }}</li>
 } @empty {
-  <li> There are no items. </li>
+  <li>There are no items.</li>
 }
 ```
 
@@ -106,9 +114,7 @@ Angularの `@for` ブロックは、JavaScriptの `continue` や `break` のよ�
   @case ('admin') {
     <app-admin-dashboard />
   }
-  @case ('reviewer') {
-    <app-reviewer-dashboard />
-  }
+  @case ('reviewer')
   @case ('editor') {
     <app-editor-dashboard />
   }
@@ -121,6 +127,8 @@ Angularの `@for` ブロックは、JavaScriptの `continue` や `break` のよ�
 条件式値は、三重等号 (`===`) 演算子を使用してケース式と比較されます。
 
 **`@switch` にはフォールスルーはありません**。そのため、ブロックに `break` や `return` ステートメントに相当するものは必要ありません。
+
+連続した`@case`ステートメントを使用することで、単一のブロックに複数の条件を指定できます。
 
 オプションで `@default` ブロックを含めることができます。 `@default` ブロックのコンテンツは、前のケース式のいずれもスイッチ値と一致しない場合に表示されます。
 

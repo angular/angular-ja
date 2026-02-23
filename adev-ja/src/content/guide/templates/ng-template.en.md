@@ -111,7 +111,7 @@ A directive can inject a `TemplateRef` if that directive is applied directly to 
 
 ```angular-ts
 @Directive({
-  selector: '[myDirective]'
+  selector: '[myDirective]',
 })
 export class MyDirective {
   private fragment = inject(TemplateRef);
@@ -218,31 +218,98 @@ Each parameter is written as an attribute prefixed with `let-` with a value matc
 
 ```angular-html
 <ng-template let-pizzaTopping="topping">
-  <p>You selected: {{pizzaTopping}}</p>
+  <p>You selected: {{ pizzaTopping }}</p>
 </ng-template>
 ```
 
-### Using `NgTemplateOutlet`
+### Using `NgTemplateOutlet` {#using-ngtemplateoutlet-with-parameters}
 
 You can bind a context object to the `ngTemplateOutletContext` input:
 
 ```angular-html
 <ng-template #myFragment let-pizzaTopping="topping">
-  <p>You selected: {{pizzaTopping}}</p>
+  <p>You selected: {{ pizzaTopping }}</p>
 </ng-template>
 
-<ng-container
-  [ngTemplateOutlet]="myFragment"
-  [ngTemplateOutletContext]="{topping: 'onion'}"
-/>
+<ng-container [ngTemplateOutlet]="myFragment" [ngTemplateOutletContext]="{topping: 'onion'}" />
 ```
 
-### Using `ViewContainerRef`
+### Using `ViewContainerRef` {#using-viewcontainerref-with-parameters}
 
 You can pass a context object as the second argument to `createEmbeddedView`:
 
-```angular-ts
+```ts
 this.viewContainer.createEmbeddedView(this.myFragment, {topping: 'onion'});
+```
+
+## Providing injectors to template fragments
+
+When you render a template fragment, its injector context comes from the **template declaration's location**, not from where it is rendered. You can override this behavior by providing a custom injector.
+
+### Using `NgTemplateOutlet` {#using-ngtemplateoutlet-with-injectors}
+
+You can pass a custom `Injector` to the `ngTemplateOutletInjector` input:
+
+```angular-ts
+export const THEME_DATA = new InjectionToken<string>('THEME_DATA', {
+  factory: () => 'light',
+});
+
+@Component({
+  selector: 'themed-panel',
+  template: `<div [class]="theme">...</div>`,
+})
+export class ThemedPanel {
+  theme = inject(THEME_DATA);
+}
+
+@Component({
+  selector: 'root',
+  imports: [NgTemplateOutlet, ThemedPanel],
+  template: `
+    <ng-template #myFragment>
+      <themed-panel />
+    </ng-template>
+    <ng-container *ngTemplateOutlet="myFragment; injector: customInjector" />
+  `,
+})
+export class Root {
+  customInjector = Injector.create({
+    providers: [{provide: THEME_DATA, useValue: 'dark'}],
+  });
+}
+```
+
+#### Inheriting the outlet's injector
+
+You can set `ngTemplateOutletInjector` to the string `'outlet'` to make the embedded view inherit its injector from the outlet's location in the DOM instead of from where the template was declared.
+
+```angular-html
+<ng-template #node let-items>
+  <item-component>
+    @for (child of items; track $index) {
+      <ng-container
+        *ngTemplateOutlet="node; context: {$implicit: child.children}; injector: 'outlet'"
+      />
+    }
+  </item-component>
+</ng-template>
+
+<ng-container *ngTemplateOutlet="node; context: {$implicit: topLevelItems}" />
+```
+
+Each recursive rendering of the `node` template inherits the injector from the surrounding `<item-component>`, allowing each nested level to access providers scoped to its parent component.
+
+NOTE: This is useful for building recursive structures or any situation where the rendered template needs access to providers from the component tree at the outlet site.
+
+### Using `ViewContainerRef` {#using-viewcontainerref-with-injectors}
+
+You can pass a custom injector as part of the options object in `createEmbeddedView`:
+
+```ts
+this.viewContainer.createEmbeddedView(this.myFragment, context, {
+  injector: myCustomInjector,
+});
 ```
 
 ## Structural directives

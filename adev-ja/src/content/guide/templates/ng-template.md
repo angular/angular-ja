@@ -111,7 +111,7 @@ export class ComponentWithFragment {
 
 ```angular-ts
 @Directive({
-  selector: '[myDirective]'
+  selector: '[myDirective]',
 })
 export class MyDirective {
   private fragment = inject(TemplateRef);
@@ -218,31 +218,98 @@ export class MyOutlet {
 
 ```angular-html
 <ng-template let-pizzaTopping="topping">
-  <p>選択したのは: {{pizzaTopping}}</p>
+  <p>選択したのは: {{ pizzaTopping }}</p>
 </ng-template>
 ```
 
-### `NgTemplateOutlet` の使用
+### `NgTemplateOutlet` の使用 {#using-ngtemplateoutlet-with-parameters}
 
 `ngTemplateOutletContext` 入力にコンテキストオブジェクトを結合できます。
 
 ```angular-html
 <ng-template #myFragment let-pizzaTopping="topping">
-  <p>選択したのは: {{pizzaTopping}}</p>
+  <p>選択したのは: {{ pizzaTopping }}</p>
 </ng-template>
 
-<ng-container
-  [ngTemplateOutlet]="myFragment"
-  [ngTemplateOutletContext]="{topping: '玉ねぎ'}"
-/>
+<ng-container [ngTemplateOutlet]="myFragment" [ngTemplateOutletContext]="{topping: '玉ねぎ'}" />
 ```
 
-### `ViewContainerRef` の使用
+### `ViewContainerRef` の使用 {#using-viewcontainerref-with-parameters}
 
 `createEmbeddedView` に対する2番目の引数として、コンテキストオブジェクトを渡すことができます。
 
-```angular-ts
+```ts
 this.viewContainer.createEmbeddedView(this.myFragment, {topping: '玉ねぎ'});
+```
+
+## テンプレートフラグメントへのインジェクターの提供
+
+テンプレートフラグメントをレンダリングする際、そのインジェクターコンテキストは、レンダリング場所からではなく、**テンプレート宣言の場所**から取得されます。カスタムインジェクターを提供することで、この動作をオーバーライドできます。
+
+### `NgTemplateOutlet` の使用 {#using-ngtemplateoutlet-with-injectors}
+
+カスタム `Injector` を `ngTemplateOutletInjector` 入力に渡すことができます。
+
+```angular-ts
+export const THEME_DATA = new InjectionToken<string>('THEME_DATA', {
+  factory: () => 'light',
+});
+
+@Component({
+  selector: 'themed-panel',
+  template: `<div [class]="theme">...</div>`,
+})
+export class ThemedPanel {
+  theme = inject(THEME_DATA);
+}
+
+@Component({
+  selector: 'root',
+  imports: [NgTemplateOutlet, ThemedPanel],
+  template: `
+    <ng-template #myFragment>
+      <themed-panel />
+    </ng-template>
+    <ng-container *ngTemplateOutlet="myFragment; injector: customInjector" />
+  `,
+})
+export class Root {
+  customInjector = Injector.create({
+    providers: [{provide: THEME_DATA, useValue: 'dark'}],
+  });
+}
+```
+
+#### アウトレットのインジェクターの継承
+
+`ngTemplateOutletInjector` を文字列 `'outlet'` に設定することで、埋め込まれたビューがテンプレートが宣言された場所からではなく、DOM内のアウトレットの場所からインジェクターを継承するようにできます。
+
+```angular-html
+<ng-template #node let-items>
+  <item-component>
+    @for (child of items; track $index) {
+      <ng-container
+        *ngTemplateOutlet="node; context: {$implicit: child.children}; injector: 'outlet'"
+      />
+    }
+  </item-component>
+</ng-template>
+
+<ng-container *ngTemplateOutlet="node; context: {$implicit: topLevelItems}" />
+```
+
+`node` テンプレートの再帰的なレンダリングはそれぞれ、周囲の `<item-component>` からインジェクターを継承するため、各ネストされたレベルは親コンポーネントにスコープされたプロバイダーにアクセスできます。
+
+NOTE: これは、再帰的な構造を構築する場合や、レンダリングされたテンプレートがアウトレットサイトのコンポーネントツリーからのプロバイダーにアクセスする必要がある場合に役立ちます。
+
+### `ViewContainerRef` の使用 {#using-viewcontainerref-with-injectors}
+
+カスタムインジェクターを `createEmbeddedView` のオプションオブジェクトの一部として渡すことができます。
+
+```ts
+this.viewContainer.createEmbeddedView(this.myFragment, context, {
+  injector: myCustomInjector,
+});
 ```
 
 ## 構造ディレクティブ

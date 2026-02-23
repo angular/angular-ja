@@ -8,16 +8,17 @@ Angularは、[リテラル値](https://developer.mozilla.org/en-US/docs/Glossary
 
 ### サポートされる値リテラル
 
-| Literal type    | Example values                  |
-| --------------- | ------------------------------- |
-| String          | `'Hello'`, `"World"`            |
-| Boolean         | `true`, `false`                 |
-| Number          | `123`, `3.14`                   |
-| Object          | `{name: 'Alice'}`               |
-| Array           | `['Onion', 'Cheese', 'Garlic']` |
-| null            | `null`                          |
-| Template string | `` `Hello ${name}` ``           |
-| RegExp          | `/\d+/`                         |
+| Literal type           | Example values                  |
+| ---------------------- | ------------------------------- |
+| String                 | `'Hello'`, `"World"`            |
+| Boolean                | `true`, `false`                 |
+| Number                 | `123`, `3.14`                   |
+| Object                 | `{name: 'Alice'}`               |
+| Array                  | `['Onion', 'Cheese', 'Garlic']` |
+| null                   | `null`                          |
+| RegExp                 | `/\d+/`                         |
+| Template string        | `` `Hello ${name}` ``           |
+| Tagged template string | `` tag`Hello ${name}` ``        |
 
 ### サポートされていない値リテラル
 
@@ -64,6 +65,9 @@ Angularは、標準JavaScriptの次の演算子をサポートしています。
 | Unary Negation              | `-x`                                           |
 | Unary Plus                  | `+y`                                           |
 | Property Accessor           | `person['name']`                               |
+| typeof                      | `typeof 42`                                    |
+| void                        | `void 1`                                       |
+| in                          | `'model' in car`                               |
 | 代入                        | `a = b`                                        |
 | 加算代入                    | `a += b`                                       |
 | 減算代入                    | `a -= b`                                       |
@@ -74,6 +78,9 @@ Angularは、標準JavaScriptの次の演算子をサポートしています。
 | 論理積代入                  | `a &&= b`                                      |
 | 論理和代入                  | `a \|\|= b`                                    |
 | Nullish Coalescing Assignment | `a ??= b`                                      |
+| Spread in object literals   | `{...obj, foo: 'bar'}`                         |
+| Spread in array literals    | `[...arr, 1, 2, 3]`                            |
+| Rest in function calls      | `fn(...args)`                                  |
 
 Angular式は、さらに次の非標準の演算子もサポートしています。
 

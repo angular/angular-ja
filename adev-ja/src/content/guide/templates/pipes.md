@@ -9,24 +9,24 @@ NOTE: Angularのパイプ構文は、縦棒文字を[ビット単位のOR演算�
 Angularが提供するいくつかの組み込みパイプを使用した例を以下に示します。
 
 ```angular-ts
-import { Component } from '@angular/core';
-import { CurrencyPipe, DatePipe, TitleCasePipe } from '@angular/common';
+import {Component} from '@angular/core';
+import {CurrencyPipe, DatePipe, TitleCasePipe} from '@angular/common';
 
 @Component({
   selector: 'app-root',
   imports: [CurrencyPipe, DatePipe, TitleCasePipe],
   template: `
     <main>
-       <!-- Transform the company name to title-case and
+      <!-- Transform the company name to title-case and
        transform the purchasedOn date to a locale-formatted string -->
-<h1>Purchases from {{ company | titlecase }} on {{ purchasedOn | date }}</h1>
+      <h1>Purchases from {{ company | titlecase }} on {{ purchasedOn | date }}</h1>
 
-	    <!-- Transform the amount to a currency-formatted string -->
+      <!-- Transform the amount to a currency-formatted string -->
       <p>Total: {{ amount | currency }}</p>
     </main>
   `,
 })
-export class ShoppingCartComponent {
+export class ShoppingCart {
   amount = 123.45;
   company = 'acme corporation';
   purchasedOn = '2024-07-08';
@@ -91,7 +91,7 @@ Angularのパイプ演算子は、テンプレート式内で縦棒文字(`|`)�
 たとえば、`DatePipe`は、日付を特定の方法でフォーマットするためのパラメータを受け取ることができます。
 
 ```angular-html
-<p>The event will occur at {{ scheduledOn | date:'hh:mm' }}.</p>
+<p>The event will occur at {{ scheduledOn | date: 'hh:mm' }}.</p>
 ```
 
 一部のパイプは、複数のパラメータを受け入れる場合があります。追加のパラメータ値は、コロン文字(`:`)で区切って指定できます。
@@ -99,7 +99,7 @@ Angularのパイプ演算子は、テンプレート式内で縦棒文字(`|`)�
 たとえば、タイムゾーンを制御するために、2番目のオプションのパラメータを渡すこともできます。
 
 ```angular-html
-<p>The event will occur at {{ scheduledOn | date:'hh:mm':'UTC' }}.</p>
+<p>The event will occur at {{ scheduledOn | date: 'hh:mm' : 'UTC' }}.</p>
 ```
 
 ## パイプの動作
@@ -107,8 +107,8 @@ Angularのパイプ演算子は、テンプレート式内で縦棒文字(`|`)�
 概念的には、パイプは入力値を受け取り、変換された値を返す関数です。
 
 ```angular-ts
-import { Component } from '@angular/core';
-import { CurrencyPipe} from '@angular/common';
+import {Component} from '@angular/core';
+import {CurrencyPipe} from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -147,6 +147,7 @@ export class AppComponent {
 
 同じ式を括弧なしで記述した場合:
 
+<!-- prettier-ignore -->
 ```angular-html
 {{ isAdmin ? 'Access granted' : 'Access denied' | uppercase }}
 ```
@@ -178,7 +179,7 @@ TypeScriptクラスは、さらに`PipeTransform`インターフェースを実�
 
 ```angular-ts
 // kebab-case.pipe.ts
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
   name: 'kebabCase',
@@ -195,7 +196,7 @@ export class KebabCasePipe implements PipeTransform {
 カスタムパイプを作成する際は、`@angular/core`パッケージから`Pipe`をインポートし、TypeScriptクラスのデコレーターとして使用します。
 
 ```angular-ts
-import { Pipe } from '@angular/core';
+import {Pipe} from '@angular/core';
 
 @Pipe({
   name: 'myCustomTransformation',
@@ -217,7 +218,7 @@ export class MyCustomTransformationPipe {}
 `@Pipe`デコレーターに加えて、カスタムパイプは常に`@angular/core`の`PipeTransform`インターフェースを実装する必要があります。
 
 ```angular-ts
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
   name: 'myCustomTransformation',
@@ -232,14 +233,14 @@ export class MyCustomTransformationPipe implements PipeTransform {}
 すべての変換は、最初の引数が渡される値で、戻り値が変換された値である`transform`メソッドによって呼び出されます。
 
 ```angular-ts
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
   name: 'myCustomTransformation',
 })
 export class MyCustomTransformationPipe implements PipeTransform {
   transform(value: string): string {
-    return `My custom transformation of ${value}.`
+    return `My custom transformation of ${value}.`;
   }
 }
 ```
@@ -249,19 +250,19 @@ export class MyCustomTransformationPipe implements PipeTransform {
 `transform`メソッドにadditional parametersを追加することで、変換にパラメータを追加できます。
 
 ```angular-ts
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
   name: 'myCustomTransformation',
 })
 export class MyCustomTransformationPipe implements PipeTransform {
   transform(value: string, format: string): string {
-    let msg = `My custom transformation of ${value}.`
+    let msg = `My custom transformation of ${value}.`;
 
     if (format === 'uppercase') {
-      return msg.toUpperCase()
+      return msg.toUpperCase();
     } else {
-      return msg
+      return msg;
     }
   }
 }
@@ -271,10 +272,10 @@ export class MyCustomTransformationPipe implements PipeTransform {
 
 パイプで配列またはオブジェクト内の変更を検出する必要がある場合は、`pure`フラグを`false`の値で渡すことで、パイプを不純な関数としてマークする必要があります。
 
-不純なパイプは、本当に必要な場合にのみ作成してください。不純なパイプは、注意深く使用しないと、パフォーマンスに大きな影響を与える可能性があります。
+IMPORTANT: 不純なパイプは、本当に必要な場合にのみ作成してください。不純なパイプは、注意深く使用しないと、パフォーマンスに大きな影響を与える可能性があります。
 
 ```angular-ts
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
   name: 'joinNamesImpure',

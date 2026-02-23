@@ -15,30 +15,30 @@ NOTE: フォームモデルは、コンポーネントの双方向バインデ�
 フォームモデルは、Angularの`signal()`関数で作成される書き込み可能なシグナルです。このシグナルは、フォームのデータ構造を表すオブジェクトを保持します。
 
 ```angular-ts
-import { Component, signal } from '@angular/core'
-import { form, Field } from '@angular/forms/signals'
+import {Component, signal} from '@angular/core';
+import {form, FormField} from '@angular/forms/signals';
 
 @Component({
   selector: 'app-login',
-  imports: [Field],
+  imports: [FormField],
   template: `
-    <input type="email" [field]="loginForm.email" />
-    <input type="password" [field]="loginForm.password" />
-  `
+    <input type="email" [formField]="loginForm.email" />
+    <input type="password" [formField]="loginForm.password" />
+  `,
 })
 export class LoginComponent {
   loginModel = signal({
     email: '',
-    password: ''
-  })
+    password: '',
+  });
 
-  loginForm = form(this.loginModel)
+  loginForm = form(this.loginModel);
 }
 ```
 
-`form()`関数はモデルのシグナルを受け取り、モデルの形状を反映した特別なオブジェクト構造である**フィールドツリー**を作成します。フィールドツリーは、ナビゲート可能（`loginForm.email`のようにドット記法で子フィールドにアクセス）であり、呼び出し可能（フィールドを関数として呼び出してその状態にアクセス）でもあります。
+[`form()`](api/forms/signals/form)関数はモデルのシグナルを受け取り、モデルの形状を反映した特別なオブジェクト構造である**フィールドツリー**を作成します。フィールドツリーは、ナビゲート可能（`loginForm.email`のようにドット記法で子フィールドにアクセス）であり、呼び出し可能（フィールドを関数として呼び出してその状態にアクセス）でもあります。
 
-`[field]`ディレクティブは、各入力要素をフィールドツリー内の対応するフィールドにバインドし、UIとモデル間の自動的な双方向同期を可能にします。
+`[formField]`ディレクティブは、各入力要素をフィールドツリー内の対応するフィールドにバインドし、UIとモデル間の自動的な双方向同期を可能にします。
 
 ### TypeScriptの型を使用する {#using-typescript-types}
 
@@ -74,14 +74,16 @@ const usernameField = loginForm.username;
 
 フォームモデルは、フィールドツリーに含めたいすべてのフィールドに初期値を提供する必要があります。
 
-```ts
+```ts {prefer}
 // Good: All fields initialized
 const userModel = signal({
   name: '',
   email: '',
   age: 0,
 });
+```
 
+```ts {avoid}
 // Avoid: Missing initial value
 const userModel = signal({
   name: '',
@@ -90,7 +92,7 @@ const userModel = signal({
 });
 ```
 
-オプショナルなフィールドについては、明示的に`null`または空の値を設定してください:
+オプショナルなフィールドについては、明示的に空の値または`null`を設定してください:
 
 ```ts
 interface UserData {
@@ -106,6 +108,8 @@ const userModel = signal<UserData>({
 });
 ```
 
+HELPFUL: `<input type=text>`や`<textarea>`のようなネイティブテキストコントロールは`null`をサポートしていないため、空の値を表すには`''`を使用してください。
+
 `undefined`に設定されたフィールドは、フィールドツリーから除外されます。`{value: undefined}`を持つモデルは`{}`と全く同じように動作し、そのフィールドにアクセスすると`FieldTree`ではなく`undefined`が返されます。
 
 ## モデルの値を読み取る {#reading-model-values}
@@ -117,7 +121,7 @@ const userModel = signal<UserData>({
 フォームの送信時など、完全なフォームデータが必要な場合は、モデルのシグナルにアクセスします:
 
 ```ts
-onSubmit() {
+async onSubmit() {
   const formData = this.loginModel();
   console.log(formData.email, formData.password);
 
@@ -139,7 +143,7 @@ onSubmit() {
   template: `
     <p>Current email: {{ loginForm.email().value() }}</p>
     <p>Password length: {{ passwordLength() }}</p>
-  `
+  `,
 })
 export class LoginComponent {
   loginModel = signal({email: '', password: ''});
@@ -230,7 +234,7 @@ export class UserProfileComponent {
 
 ## 双方向データバインディング {#two-way-data-binding}
 
-`[field]`ディレクティブは、モデル、フォームの状態、UIの間で自動的な双方向の同期を作成します。
+`[formField]`ディレクティブは、モデル、フォームの状態、UIの間で自動的な双方向の同期を作成します。
 
 ### データフローの仕組み {#how-data-flows}
 
@@ -239,7 +243,7 @@ export class UserProfileComponent {
 **ユーザー入力 → モデル:**
 
 1. ユーザーが入力要素に入力する
-2. `[field]`ディレクティブが変更を検知する
+2. `[formField]`ディレクティブが変更を検知する
 3. フィールドの状態が更新される
 4. モデルのシグナルが更新される
 
@@ -248,7 +252,7 @@ export class UserProfileComponent {
 1. コードが`set()`または`update()`でモデルを更新する
 2. モデルのシグナルがサブスクライバーに通知する
 3. フィールドの状態が更新される
-4. `[field]`ディレクティブが入力要素を更新する
+4. `[formField]`ディレクティブが入力要素を更新する
 
 この同期は自動的に行われます。モデルとUIを同期させるために、サブスクリプションやイベントハンドラーを記述する必要はありません。
 
@@ -257,10 +261,10 @@ export class UserProfileComponent {
 ```angular-ts
 @Component({
   template: `
-    <input type="text" [field]="userForm.name" />
+    <input type="text" [formField]="userForm.name" />
     <button (click)="setName('Bob')">Set Name to Bob</button>
     <p>Current name: {{ userModel().name }}</p>
-  `
+  `,
 })
 export class UserComponent {
   userModel = signal({name: ''});
@@ -351,10 +355,10 @@ userForm.settings.theme; // FieldTree<string>
 ```angular-ts
 @Component({
   template: `
-    <input [field]="userForm.profile.firstName" />
-    <input [field]="userForm.profile.lastName" />
+    <input [formField]="userForm.profile.firstName" />
+    <input [formField]="userForm.profile.lastName" />
 
-    <select [field]="userForm.settings.theme">
+    <select [formField]="userForm.settings.theme">
       <option value="light">Light</option>
       <option value="dark">Dark</option>
     </select>

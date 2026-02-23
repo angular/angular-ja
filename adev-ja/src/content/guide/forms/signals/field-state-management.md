@@ -4,21 +4,21 @@
 
 ## フィールドの状態を理解する
 
-`form()`関数でフォームを作成すると、**フィールドツリー**が返されます。これはフォームモデルを反映したオブジェクト構造です。ツリー内の各フィールドには、ドット記法（`form.email`など）でアクセスできます。
+[`form()`](api/forms/signals/form)関数でフォームを作成すると、**フィールドツリー**が返されます。これはフォームモデルを反映したオブジェクト構造です。ツリー内の各フィールドには、ドット記法（[`form.email`](api/forms/signals/form#email)など）でアクセスできます。
 
 ### フィールドの状態へのアクセス {#accessing-field-state}
 
-フィールドツリー内の任意のフィールドを関数として（`form.email()`のように）呼び出すと、`FieldState`オブジェクトが返されます。これには、フィールドのバリデーション、インタラクション、および可用性の状態を追跡するリアクティブなシグナルが含まれています。たとえば、`invalid()`シグナルは、フィールドにバリデーションエラーがあるかどうかを示します:
+フィールドツリー内の任意のフィールドを関数として（[`form.email()`](api/forms/signals/form#email)のように）呼び出すと、`FieldState`オブジェクトが返されます。これには、フィールドのバリデーション、インタラクション、および可用性の状態を追跡するリアクティブなシグナルが含まれています。たとえば、`invalid()`シグナルは、フィールドにバリデーションエラーがあるかどうかを示します:
 
 ```angular-ts
-import { Component, signal } from '@angular/core'
-import { form, Field, required, email } from '@angular/forms/signals'
+import {Component, signal} from '@angular/core';
+import {form, FormField, required, email} from '@angular/forms/signals';
 
 @Component({
   selector: 'app-registration',
-  imports: [Field],
+  imports: [FormField],
   template: `
-    <input type="email" [field]="registrationForm.email" />
+    <input type="email" [formField]="registrationForm.email" />
 
     @if (registrationForm.email().invalid()) {
       <p class="error">Email has validation errors:</p>
@@ -28,18 +28,18 @@ import { form, Field, required, email } from '@angular/forms/signals'
         }
       </ul>
     }
-  `
+  `,
 })
 export class Registration {
   registrationModel = signal({
     email: '',
-    password: ''
-  })
+    password: '',
+  });
 
   registrationForm = form(this.registrationModel, (schemaPath) => {
-    required(schemaPath.email, { message: 'Email is required' })
-    email(schemaPath.email, { message: 'Enter a valid email address' })
-  })
+    required(schemaPath.email, {message: 'Email is required'});
+    email(schemaPath.email, {message: 'Enter a valid email address'});
+  });
 }
 ```
 
@@ -47,7 +47,7 @@ export class Registration {
 
 ### フィールドの状態シグナル {#field-state-signals}
 
-最も一般的に使用されるシグナルは`value()`です。これはフィールドの現在の値へのアクセスを提供する[書き込み可能なシグナル](guide/forms/signals/models#updating-models)です:
+最も一般的に使用されるシグナルは`value()`です。これはフィールドの現在の値へのアクセスを提供する`WritableSignal`です:
 
 ```ts
 const emailValue = registrationForm.email().value();
@@ -83,18 +83,19 @@ NOTE: このガイドでは、テンプレートやロジックでバリデー�
 ```angular-ts
 @Component({
   template: `
-    <input type="email" [field]="loginForm.email" />
+    <input type="email" [formField]="loginForm.email" />
 
     @if (loginForm.email().invalid()) {
       <p class="error">Email is invalid</p>
-    } @if (loginForm.email().valid()) {
+    }
+    @if (loginForm.email().valid()) {
       <p class="success">Email looks good</p>
     }
-  `
+  `,
 })
 export class Login {
-  loginModel = signal({ email: '', password: '' })
-  loginForm = form(this.loginModel)
+  loginModel = signal({email: '', password: ''});
+  loginForm = form(this.loginModel);
 }
 ```
 
@@ -109,11 +110,11 @@ export class Login {
 
 `errors()`でバリデーションエラーの配列にアクセスします。各エラーオブジェクトには以下が含まれます:
 
-| プロパティ | 説明                                                            |
-| --------- | --------------------------------------------------------------- |
-| `kind`    | 失敗したバリデーションルール（"required"や"email"など）           |
-| `message` | オプションの人間が読める形式のエラーメッセージ                  |
-| `field`   | エラーが発生した`FieldTree`への参照                           |
+| プロパティ    | 説明                                                            |
+| ----------- | --------------------------------------------------------------- |
+| `kind`      | 失敗したバリデーションルール（"required"や"email"など）           |
+| `message`   | オプションの人間が読める形式のエラーメッセージ                  |
+| `fieldTree` | エラーが発生した`FieldTree`への参照                           |
 
 NOTE: `message`プロパティはオプションです。バリデーターはカスタムエラーメッセージを提供できますが、指定されていない場合は、エラーの`kind`値を独自メッセージにマッピングする必要があるかもしれません。
 
@@ -122,7 +123,7 @@ NOTE: `message`プロパティはオプションです。バリデーターは�
 ```angular-ts
 @Component({
   template: `
-    <input type="email" [field]="loginForm.email" />
+    <input type="email" [formField]="loginForm.email" />
 
     @if (loginForm.email().errors().length > 0) {
       <div class="errors">
@@ -144,7 +145,7 @@ NOTE: `message`プロパティはオプションです。バリデーターは�
 ```angular-ts
 @Component({
   template: `
-    <input type="email" [field]="signupForm.email" />
+    <input type="email" [formField]="signupForm.email" />
 
     @if (signupForm.email().pending()) {
       <p>Checking if email is available...</p>
@@ -176,19 +177,19 @@ NOTE: `message`プロパティはオプションです。バリデーターは�
 ```angular-ts
 @Component({
   template: `
-    <form>
-      <input [field]="profileForm.name" />
-      <input [field]="profileForm.bio" />
+    <form novalidate>
+      <input [formField]="profileForm.name" />
+      <input [formField]="profileForm.bio" />
 
       @if (profileForm().dirty()) {
         <p class="warning">You have unsaved changes</p>
       }
     </form>
-  `
+  `,
 })
 export class Profile {
-  profileModel = signal({ name: 'Alice', bio: 'Developer' })
-  profileForm = form(this.profileModel)
+  profileModel = signal({name: 'Alice', bio: 'Developer'});
+  profileForm = form(this.profileModel);
 }
 ```
 
@@ -222,14 +223,14 @@ NOTE: 非表示、無効、読み取り専用のフィールドは非インタ�
 
 ```angular-ts
 import { Component, signal } from '@angular/core'
-import { form, Field, disabled } from '@angular/forms/signals'
+import { form, FormField, disabled } from '@angular/forms/signals'
 
 @Component({
   selector: 'app-order',
-  imports: [Field],
+  imports: [FormField],
   template: `
-    <!-- TIP: `[field]`ディレクティブは、フィールドの`disabled()`状態に基づいて`disabled`属性を自動的にバインドするため、手動で`[disabled]="field().disabled()"`を追加する必要はありません -->
-    <input [field]="orderForm.couponCode" />
+    <!-- TIP: `[formField]`ディレクティブは、フィールドの`disabled()`状態に基づいて`disabled`属性を自動的にバインドするため、手動で`[disabled]="field().disabled()"`を追加する必要はありません -->
+    <input [formField]="orderForm.couponCode" />
 
     @if (orderForm.couponCode().disabled()) {
       <p class="info">クーポンコードは50ドルを超える注文でのみ利用可能です</p>
@@ -264,35 +265,35 @@ NOTE: スキーマのコールバックパラメータ（この例では`schemaP
 `hidden()`シグナルは、フィールドが条件付きで非表示になるかどうかを示します。条件に基づいてフィールドを表示または非表示にするには、`@if`と共に`hidden()`を使用します:
 
 ```angular-ts
-import { Component, signal } from '@angular/core'
-import { form, Field, hidden } from '@angular/forms/signals'
+import {Component, signal} from '@angular/core';
+import {form, FormField, hidden} from '@angular/forms/signals';
 
 @Component({
   selector: 'app-profile',
-  imports: [Field],
+  imports: [FormField],
   template: `
     <label>
-      <input type="checkbox" [field]="profileForm.isPublic" />
+      <input type="checkbox" [formField]="profileForm.isPublic" />
       プロフィールを公開する
     </label>
 
     @if (!profileForm.publicUrl().hidden()) {
       <label>
         公開URL
-        <input [field]="profileForm.publicUrl" />
+        <input [formField]="profileForm.publicUrl" />
       </label>
     }
-  `
+  `,
 })
 export class Profile {
   profileModel = signal({
     isPublic: false,
-    publicUrl: ''
-  })
+    publicUrl: '',
+  });
 
-  profileForm = form(this.profileModel, schemaPath => {
-    hidden(schemaPath.publicUrl, ({valueOf}) => !valueOf(schemaPath.isPublic))
-  })
+  profileForm = form(this.profileModel, (schemaPath) => {
+    hidden(schemaPath.publicUrl, ({valueOf}) => !valueOf(schemaPath.isPublic));
+  });
 }
 ```
 
@@ -303,37 +304,37 @@ export class Profile {
 `readonly()`シグナルは、フィールドが読み取り専用かどうかを示します。読み取り専用フィールドは値を表示しますが、ユーザーは編集できません:
 
 ```angular-ts
-import { Component, signal } from '@angular/core'
-import { form, Field, readonly } from '@angular/forms/signals'
+import {Component, signal} from '@angular/core';
+import {form, FormField, readonly} from '@angular/forms/signals';
 
 @Component({
   selector: 'app-account',
-  imports: [Field],
+  imports: [FormField],
   template: `
     <label>
       ユーザー名（変更不可）
-      <input [field]="accountForm.username" />
+      <input [formField]="accountForm.username" />
     </label>
 
     <label>
       メールアドレス
-      <input [field]="accountForm.email" />
+      <input [formField]="accountForm.email" />
     </label>
-  `
+  `,
 })
 export class Account {
   accountModel = signal({
     username: 'johndoe',
-    email: 'john@example.com'
-  })
+    email: 'john@example.com',
+  });
 
-  accountForm = form(this.accountModel, schemaPath => {
-    readonly(schemaPath.username)
-  })
+  accountForm = form(this.accountModel, (schemaPath) => {
+    readonly(schemaPath.username);
+  });
 }
 ```
 
-NOTE: `[field]`ディレクティブは、フィールドの`readonly()`状態に基づいて`readonly`属性を自動的にバインドするため、手動で`[readonly]="field().readonly()"`を追加する必要はありません。
+NOTE: `[formField]`ディレクティブは、フィールドの`readonly()`状態に基づいて`readonly`属性を自動的にバインドするため、手動で`[readonly]="field().readonly()"`を追加する必要はありません。
 
 無効フィールドや非表示フィールドと同様に、読み取り専用フィールドは非インタラクティブであり、親フォームの状態に影響を与えません。`readonly()`状態は編集可能性とバリデーションに影響しますが、フィールドの値は変更しません。
 
@@ -354,17 +355,17 @@ NOTE: `[field]`ディレクティブは、フィールドの`readonly()`状態�
 ```angular-ts
 @Component({
   template: `
-    <form>
-      <input [field]="loginForm.email" />
-      <input [field]="loginForm.password" />
+    <form novalidate>
+      <input [formField]="loginForm.email" />
+      <input [formField]="loginForm.password" />
 
       <button [disabled]="!loginForm().valid()">Sign In</button>
     </form>
-  `
+  `,
 })
 export class Login {
-  loginModel = signal({ email: '', password: '' })
-  loginForm = form(this.loginModel)
+  loginModel = signal({email: '', password: ''});
+  loginForm = form(this.loginModel);
 }
 ```
 
@@ -455,29 +456,29 @@ const orderForm = form(orderModel, (schemaPath) => {
 ユーザーがフィールドを操作した後にのみエラーを表示します:
 
 ```angular-ts
-import { Component, signal } from '@angular/core'
-import { form, Field, email } from '@angular/forms/signals'
+import {Component, signal} from '@angular/core';
+import {form, FormField, email} from '@angular/forms/signals';
 
 @Component({
   selector: 'app-signup',
-  imports: [Field],
+  imports: [FormField],
   template: `
     <label>
       Email
-      <input type="email" [field]="signupForm.email" />
+      <input type="email" [formField]="signupForm.email" />
     </label>
 
     @if (signupForm.email().touched() && signupForm.email().invalid()) {
       <p class="error">{{ signupForm.email().errors()[0].message }}</p>
     }
-  `
+  `,
 })
 export class Signup {
-  signupModel = signal({ email: '', password: '' })
+  signupModel = signal({email: '', password: ''});
 
-  signupForm = form(this.signupModel, schemaPath => {
-    email(schemaPath.email)
-  })
+  signupForm = form(this.signupModel, (schemaPath) => {
+    email(schemaPath.email);
+  });
 }
 ```
 
@@ -488,35 +489,35 @@ export class Signup {
 `hidden()`シグナルを`@if`とともに使用して、条件付きでフィールドを表示または非表示にします:
 
 ```angular-ts
-import { Component, signal } from '@angular/core'
-import { form, Field, hidden } from '@angular/forms/signals'
+import {Component, signal} from '@angular/core';
+import {form, FormField, hidden} from '@angular/forms/signals';
 
 @Component({
   selector: 'app-order',
-  imports: [Field],
+  imports: [FormField],
   template: `
     <label>
-      <input type="checkbox" [field]="orderForm.requiresShipping" />
+      <input type="checkbox" [formField]="orderForm.requiresShipping" />
       Requires shipping
     </label>
 
     @if (!orderForm.shippingAddress().hidden()) {
       <label>
         Shipping Address
-        <input [field]="orderForm.shippingAddress" />
+        <input [formField]="orderForm.shippingAddress" />
       </label>
     }
-  `
+  `,
 })
 export class Order {
   orderModel = signal({
     requiresShipping: false,
-    shippingAddress: ''
-  })
+    shippingAddress: '',
+  });
 
-  orderForm = form(this.orderModel, schemaPath => {
-    hidden(schemaPath.shippingAddress, ({valueOf}) => !valueOf(schemaPath.requiresShipping))
-  })
+  orderForm = form(this.orderModel, (schemaPath) => {
+    hidden(schemaPath.shippingAddress, ({valueOf}) => !valueOf(schemaPath.requiresShipping));
+  });
 }
 ```
 
@@ -594,12 +595,22 @@ export class Password {
 
 #### フォームの送信 {#form-submission}
 
-ユーザーがフォームを送信するときは、`submit()`関数を使用してバリデーションを処理し、エラーを表示します:
+ユーザーがフォームを送信するときは、`submit()`関数を使用してバリデーションを処理し、エラーを表示します。
 
-```ts
-import {Component, signal} from '@angular/core';
-import {form, submit, required, email} from '@angular/forms/signals';
+シグナルフォームは独自のバリデーションシステムでバリデーションを処理するため、ブラウザのデフォルトのフォーム動作を防ぐ必要があります。`<form>`要素に`novalidate`を追加してネイティブHTMLバリデーション（`required`や`type="email"`フィールドに対するブラウザのツールチップポップアップなど）を無効にし、送信ハンドラーで`$event.preventDefault()`を呼び出してブラウザがページをリロードするのを防ぎます:
 
+```angular-ts
+@Component({
+  template: `
+    <form novalidate (submit)="onSubmit($event)">
+      <input [formField]="registrationForm.username" />
+      <input type="email" [formField]="registrationForm.email" />
+      <input type="password" [formField]="registrationForm.password" />
+
+      <button type="submit">Register</button>
+    </form>
+  `,
+})
 export class Registration {
   registrationModel = signal({username: '', email: '', password: ''});
 
@@ -609,13 +620,14 @@ export class Registration {
     required(schemaPath.password);
   });
 
-  onSubmit() {
+  onSubmit(event: Event) {
+    event.preventDefault();
     submit(this.registrationForm, async () => {
       this.submitToServer();
     });
   }
 
-  submitToServer() {
+  private submitToServer() {
     // Send data to server
   }
 }
@@ -653,14 +665,14 @@ export class Contact {
 バリデーション状態に基づいてCSSクラスをバインドすることで、フォームにカスタムスタイルを適用できます:
 
 ```angular-ts
-import { Component, signal } from '@angular/core'
-import { form, Field, email } from '@angular/forms/signals'
+import {Component, signal} from '@angular/core';
+import {form, FormField, email} from '@angular/forms/signals';
 
 @Component({
   template: `
     <input
       type="email"
-      [field]="form.email"
+      [formField]="form.email"
       [class.is-invalid]="form.email().touched() && form.email().invalid()"
       [class.is-valid]="form.email().touched() && form.email().valid()"
     />
@@ -674,14 +686,14 @@ import { form, Field, email } from '@angular/forms/signals'
     input.is-valid {
       border: 2px solid green;
     }
-  `
+  `,
 })
 export class StyleExample {
-  model = signal({ email: '' })
+  model = signal({email: ''});
 
-  form = form(this.model, schemaPath => {
-    email(schemaPath.email)
-  })
+  form = form(this.model, (schemaPath) => {
+    email(schemaPath.email);
+  });
 }
 ```
 

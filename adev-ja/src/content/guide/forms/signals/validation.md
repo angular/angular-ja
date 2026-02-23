@@ -61,48 +61,47 @@ NOTE: スキーマのコールバックパラメータ（この例では`schemaP
 `required()`バリデーションルールは、フィールドに値があることを保証します:
 
 ```angular-ts
-import { Component, signal } from '@angular/core'
-import { form, Field, required } from '@angular/forms/signals'
+import {Component, signal} from '@angular/core';
+import {form, FormField, required} from '@angular/forms/signals';
 
 @Component({
   selector: 'app-registration',
-  imports: [Field],
+  imports: [FormField],
   template: `
-    <form>
+    <form novalidate>
       <label>
         Username
-        <input [field]="registrationForm.username" />
+        <input [formField]="registrationForm.username" />
       </label>
 
       <label>
         Email
-        <input type="email" [field]="registrationForm.email" />
+        <input type="email" [formField]="registrationForm.email" />
       </label>
 
       <button type="submit">Register</button>
     </form>
-  `
+  `,
 })
 export class RegistrationComponent {
   registrationModel = signal({
     username: '',
-    email: ''
-  })
+    email: '',
+  });
 
   registrationForm = form(this.registrationModel, (schemaPath) => {
-    required(schemaPath.username, { message: 'Username is required' })
-    required(schemaPath.email, { message: 'Email is required' })
-  })
+    required(schemaPath.username, {message: 'Username is required'});
+    required(schemaPath.email, {message: 'Email is required'});
+  });
 }
 ```
 
 フィールドは次の場合に「空」と見なされます:
 
-| 条件 | 例 |
+| 条件                     | 例      |
 | ------------------------ | ------- |
-| 値が`null`である | `null` |
-| 値が空文字列である | `''` |
-| 値が空の配列である | `[]` |
+| 値が`null`である         | `null`, |
+| 値が空文字列である       | `''`    |
 
 条件付きの要件には、`when`オプションを使用します:
 
@@ -117,32 +116,34 @@ registrationForm = form(this.registrationModel, (schemaPath) => {
 
 バリデーションルールは、`when`関数が`true`を返す場合にのみ実行されます。
 
+NOTE: `required`は空の配列に対して`true`を返します。配列のバリデーションには[`minLength()`](#minlength-and-maxlength)を使用してください。
+
 ### email() {#email}
 
 `email()`バリデーションルールは、有効なメール形式をチェックします:
 
 ```angular-ts
-import { Component, signal } from '@angular/core'
-import { form, Field, email } from '@angular/forms/signals'
+import {Component, signal} from '@angular/core';
+import {form, FormField, email} from '@angular/forms/signals';
 
 @Component({
   selector: 'app-contact',
-  imports: [Field],
+  imports: [FormField],
   template: `
-    <form>
+    <form novalidate>
       <label>
         Your Email
-        <input type="email" [field]="contactForm.email" />
+        <input type="email" [formField]="contactForm.email" />
       </label>
     </form>
-  `
+  `,
 })
 export class ContactComponent {
-  contactModel = signal({ email: '' })
+  contactModel = signal({email: ''});
 
   contactForm = form(this.contactModel, (schemaPath) => {
-    email(schemaPath.email, { message: 'Please enter a valid email address' })
-  })
+    email(schemaPath.email, {message: 'Please enter a valid email address'});
+  });
 }
 ```
 
@@ -153,39 +154,39 @@ export class ContactComponent {
 `min()`と`max()`バリデーションルールは、数値に対して機能します:
 
 ```angular-ts
-import { Component, signal } from '@angular/core'
-import { form, Field, min, max } from '@angular/forms/signals'
+import {Component, signal} from '@angular/core';
+import {form, FormField, min, max} from '@angular/forms/signals';
 
 @Component({
   selector: 'app-age-form',
-  imports: [Field],
+  imports: [FormField],
   template: `
-    <form>
+    <form novalidate>
       <label>
         Age
-        <input type="number" [field]="ageForm.age" />
+        <input type="number" [formField]="ageForm.age" />
       </label>
 
       <label>
         Rating (1-5)
-        <input type="number" [field]="ageForm.rating" />
+        <input type="number" [formField]="ageForm.rating" />
       </label>
     </form>
-  `
+  `,
 })
 export class AgeFormComponent {
   ageModel = signal({
     age: 0,
-    rating: 0
-  })
+    rating: 0,
+  });
 
   ageForm = form(this.ageModel, (schemaPath) => {
-    min(schemaPath.age, 18, { message: 'You must be at least 18 years old' })
-    max(schemaPath.age, 120, { message: 'Please enter a valid age' })
+    min(schemaPath.age, 18, {message: 'You must be at least 18 years old'});
+    max(schemaPath.age, 120, {message: 'Please enter a valid age'});
 
-    min(schemaPath.rating, 1, { message: 'Rating must be at least 1' })
-    max(schemaPath.rating, 5, { message: 'Rating cannot exceed 5' })
-  })
+    min(schemaPath.rating, 1, {message: 'Rating must be at least 1'});
+    max(schemaPath.rating, 5, {message: 'Rating cannot exceed 5'});
+  });
 }
 ```
 
@@ -204,38 +205,38 @@ ageForm = form(this.ageModel, (schemaPath) => {
 `minLength()`と`maxLength()`バリデーションルールは、文字列と配列に対して機能します:
 
 ```angular-ts
-import { Component, signal } from '@angular/core'
-import { form, Field, minLength, maxLength } from '@angular/forms/signals'
+import {Component, signal} from '@angular/core';
+import {form, FormField, minLength, maxLength} from '@angular/forms/signals';
 
 @Component({
   selector: 'app-password-form',
-  imports: [Field],
+  imports: [FormField],
   template: `
-    <form>
+    <form novalidate>
       <label>
         Password
-        <input type="password" [field]="passwordForm.password" />
+        <input type="password" [formField]="passwordForm.password" />
       </label>
 
       <label>
         Bio
-        <textarea [field]="passwordForm.bio"></textarea>
+        <textarea [formField]="passwordForm.bio"></textarea>
       </label>
     </form>
-  `
+  `,
 })
 export class PasswordFormComponent {
   passwordModel = signal({
     password: '',
-    bio: ''
-  })
+    bio: '',
+  });
 
   passwordForm = form(this.passwordModel, (schemaPath) => {
-    minLength(schemaPath.password, 8, { message: 'Password must be at least 8 characters' })
-    maxLength(schemaPath.password, 100, { message: 'Password is too long' })
+    minLength(schemaPath.password, 8, {message: 'Password must be at least 8 characters'});
+    maxLength(schemaPath.password, 100, {message: 'Password is too long'});
 
-    maxLength(schemaPath.bio, 500, { message: 'Bio cannot exceed 500 characters' })
-  })
+    maxLength(schemaPath.bio, 500, {message: 'Bio cannot exceed 500 characters'});
+  });
 }
 ```
 
@@ -246,41 +247,41 @@ export class PasswordFormComponent {
 `pattern()`バリデーションルールは、正規表現に対してバリデーションを行います:
 
 ```angular-ts
-import { Component, signal } from '@angular/core'
-import { form, Field, pattern } from '@angular/forms/signals'
+import {Component, signal} from '@angular/core';
+import {form, FormField, pattern} from '@angular/forms/signals';
 
 @Component({
   selector: 'app-phone-form',
-  imports: [Field],
+  imports: [FormField],
   template: `
-    <form>
+    <form novalidate>
       <label>
         Phone Number
-        <input [field]="phoneForm.phone" placeholder="555-123-4567" />
+        <input [formField]="phoneForm.phone" placeholder="555-123-4567" />
       </label>
 
       <label>
         Postal Code
-        <input [field]="phoneForm.postalCode" placeholder="12345" />
+        <input [formField]="phoneForm.postalCode" placeholder="12345" />
       </label>
     </form>
-  `
+  `,
 })
 export class PhoneFormComponent {
   phoneModel = signal({
     phone: '',
-    postalCode: ''
-  })
+    postalCode: '',
+  });
 
   phoneForm = form(this.phoneModel, (schemaPath) => {
     pattern(schemaPath.phone, /^\d{3}-\d{3}-\d{4}$/, {
-      message: 'Phone must be in format: 555-123-4567'
-    })
+      message: 'Phone must be in format: 555-123-4567',
+    });
 
     pattern(schemaPath.postalCode, /^\d{5}$/, {
-      message: 'Postal code must be 5 digits'
-    })
-  })
+      message: 'Postal code must be 5 digits',
+    });
+  });
 }
 ```
 
@@ -299,7 +300,7 @@ export class PhoneFormComponent {
 
 ```ts
 import {Component, signal} from '@angular/core';
-import {applyEach, Field, form, min, required, SchemaPathTree} from '@angular/forms/signals';
+import {applyEach, FormField, form, min, required, SchemaPathTree} from '@angular/forms/signals';
 
 type Item = {name: string; quantity: number};
 
@@ -355,44 +356,44 @@ NOTE: このセクションでは、バリデーションルールが生成す�
 すべての組み込みバリデーションルールは、カスタムエラーテキストのために`message`オプションを受け入れます:
 
 ```angular-ts
-import { Component, signal } from '@angular/core'
-import { form, Field, required, minLength } from '@angular/forms/signals'
+import {Component, signal} from '@angular/core';
+import {form, FormField, required, minLength} from '@angular/forms/signals';
 
 @Component({
   selector: 'app-signup',
-  imports: [Field],
+  imports: [FormField],
   template: `
-    <form>
+    <form novalidate>
       <label>
         Username
-        <input [field]="signupForm.username" />
+        <input [formField]="signupForm.username" />
       </label>
 
       <label>
         Password
-        <input type="password" [field]="signupForm.password" />
+        <input type="password" [formField]="signupForm.password" />
       </label>
     </form>
-  `
+  `,
 })
 export class SignupComponent {
   signupModel = signal({
     username: '',
-    password: ''
-  })
+    password: '',
+  });
 
   signupForm = form(this.signupModel, (schemaPath) => {
     required(schemaPath.username, {
-      message: 'Please choose a username'
-    })
+      message: 'Please choose a username',
+    });
 
     required(schemaPath.password, {
-      message: 'Password cannot be empty'
-    })
+      message: 'Password cannot be empty',
+    });
     minLength(schemaPath.password, 12, {
-      message: 'Password must be at least 12 characters for security'
-    })
-  })
+      message: 'Password must be at least 12 characters for security',
+    });
+  });
 }
 ```
 
@@ -428,36 +429,36 @@ TIP: テンプレートで`touched() && invalid()`パターンを使用すると
 | `null` または `undefined` | 値は有効です     |
 
 ```angular-ts
-import { Component, signal } from '@angular/core'
-import { form, Field, validate } from '@angular/forms/signals'
+import {Component, signal} from '@angular/core';
+import {form, FormField, validate} from '@angular/forms/signals';
 
 @Component({
   selector: 'app-url-form',
-  imports: [Field],
+  imports: [FormField],
   template: `
-    <form>
+    <form novalidate>
       <label>
         Website URL
-        <input [field]="urlForm.website" />
+        <input [formField]="urlForm.website" />
       </label>
     </form>
-  `
+  `,
 })
 export class UrlFormComponent {
-  urlModel = signal({ website: '' })
+  urlModel = signal({website: ''});
 
   urlForm = form(this.urlModel, (schemaPath) => {
     validate(schemaPath.website, ({value}) => {
       if (!value().startsWith('https://')) {
         return {
           kind: 'https',
-          message: 'URL must start with https://'
-        }
+          message: 'URL must start with https://',
+        };
       }
 
-      return null
-    })
-  })
+      return null;
+    });
+  });
 }
 ```
 
@@ -477,13 +478,53 @@ NOTE: 子フィールドには`key`シグナルもあり、配列アイテムの
 
 バリデーションが失敗した場合は`kind`と`message`を持つエラーオブジェクトを返します。バリデーションが成功した場合は`null`または`undefined`を返します。
 
+### validateTree()の使用 {#using-validatetree}
+
+`validateTree()`関数は、複数のフィールドをターゲットにしたり、サブツリー全体に複雑なバリデーションロジックを提供したりできるカスタムバリデーションルールを作成します。
+
+```angular-ts
+import {Component, model} from '@angular/core';
+import {form, FormField, validateTree} from '@angular/forms/signals';
+
+interface User {
+  firstName: string;
+  lastName: string;
+}
+
+@Component({
+  /* ... */
+})
+export class UserFormComponent {
+  readonly userModel = model<DTO>({
+    firstName: '',
+    lastName: '',
+  });
+
+  userForm = form(this.userModel, (path) => {
+    validateTree(path, (ctx) => {
+      if (ctx.valueOf(path.firstName).length < 5) {
+        return {
+          kind: 'minLength5',
+          message: 'First name must be at least 5 characters',
+          fieldTree: ctx.fieldTree.lastName,
+        };
+      }
+
+      return null;
+    });
+  });
+}
+```
+
+`validateTree()`バリデーター関数は、`validate()`と同じ`FieldContext`オブジェクトを受け取ります。
+
 ### 再利用可能なバリデーションルール {#reusable-validation-rules}
 
 `validate()`をラップして、再利用可能なバリデーションルール関数を作成します:
 
 ```ts
-function url(field: any, options?: {message?: string}) {
-  validate(field, ({value}) => {
+function url(path: SchemaPath<string>, options?: {message?: string}) {
+  validate(path, ({value}) => {
     try {
       new URL(value());
       return null;
@@ -496,8 +537,8 @@ function url(field: any, options?: {message?: string}) {
   });
 }
 
-function phoneNumber(field: any, options?: {message?: string}) {
-  validate(field, ({value}) => {
+function phoneNumber(path: SchemaPath<string>, options?: {message?: string}) {
+  validate(path, ({value}) => {
     const phoneRegex = /^\d{3}-\d{3}-\d{4}$/;
 
     if (!phoneRegex.test(value())) {
@@ -528,54 +569,54 @@ urlForm = form(this.urlModel, (schemaPath) => {
 クロスフィールドバリデーションの一般的なシナリオは、パスワードの確認です:
 
 ```angular-ts
-import { Component, signal } from '@angular/core'
-import { form, Field, required, minLength, validate } from '@angular/forms/signals'
+import {Component, signal} from '@angular/core';
+import {form, FormField, required, minLength, validate} from '@angular/forms/signals';
 
 @Component({
   selector: 'app-password-change',
-  imports: [Field],
+  imports: [FormField],
   template: `
-    <form>
+    <form novalidate>
       <label>
         New Password
-        <input type="password" [field]="passwordForm.password" />
+        <input type="password" [formField]="passwordForm.password" />
       </label>
 
       <label>
         Confirm Password
-        <input type="password" [field]="passwordForm.confirmPassword" />
+        <input type="password" [formField]="passwordForm.confirmPassword" />
       </label>
 
       <button type="submit">Change Password</button>
     </form>
-  `
+  `,
 })
 export class PasswordChangeComponent {
   passwordModel = signal({
     password: '',
-    confirmPassword: ''
-  })
+    confirmPassword: '',
+  });
 
   passwordForm = form(this.passwordModel, (schemaPath) => {
-    required(schemaPath.password, { message: 'Password is required' })
-    minLength(schemaPath.password, 8, { message: 'Password must be at least 8 characters' })
+    required(schemaPath.password, {message: 'Password is required'});
+    minLength(schemaPath.password, 8, {message: 'Password must be at least 8 characters'});
 
-    required(schemaPath.confirmPassword, { message: 'Please confirm your password' })
+    required(schemaPath.confirmPassword, {message: 'Please confirm your password'});
 
     validate(schemaPath.confirmPassword, ({value, valueOf}) => {
-      const confirmPassword = value()
-      const password = valueOf(schemaPath.password)
+      const confirmPassword = value();
+      const password = valueOf(schemaPath.password);
 
       if (confirmPassword !== password) {
         return {
           kind: 'passwordMismatch',
-          message: 'Passwords do not match'
-        }
+          message: 'Passwords do not match',
+        };
       }
 
-      return null
-    })
-  })
+      return null;
+    });
+  });
 }
 ```
 
@@ -590,33 +631,30 @@ export class PasswordChangeComponent {
 `validateHttp()`関数は、HTTPベースのバリデーションを実行します:
 
 ```angular-ts
-import { Component, signal, inject } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
-import { form, Field, required, validateHttp } from '@angular/forms/signals'
+import {Component, signal} from '@angular/core';
+import {form, FormField, required, validateHttp} from '@angular/forms/signals';
 
 @Component({
-  selector: 'app-username-form',
-  imports: [Field],
+  selector: 'app-username-form',|
+  imports: [FormField],
   template: `
-    <form>
+    <form novalidate>
       <label>
         Username
-        <input [field]="usernameForm.username" />
+        <input [formField]="usernameForm.username" />
 
         @if (usernameForm.username().pending()) {
           <span class="checking">Checking availability...</span>
         }
       </label>
     </form>
-  `
+  `,
 })
 export class UsernameFormComponent {
-  http = inject(HttpClient)
-
-  usernameModel = signal({ username: '' })
+  usernameModel = signal({username: ''});
 
   usernameForm = form(this.usernameModel, (schemaPath) => {
-    required(schemaPath.username, { message: 'Username is required' })
+    required(schemaPath.username, {message: 'Username is required'});
 
     validateHttp(schemaPath.username, {
       request: ({value}) => `/api/check-username?username=${value()}`,
@@ -624,17 +662,17 @@ export class UsernameFormComponent {
         if (response.taken) {
           return {
             kind: 'usernameTaken',
-            message: 'Username is already taken'
-          }
+            message: 'Username is already taken',
+          };
         }
-        return null
+        return null;
       },
       onError: (error) => ({
         kind: 'networkError',
-        message: 'Could not verify username availability'
-      })
-    })
-  })
+        message: 'Could not verify username availability',
+      }),
+    });
+  });
 }
 ```
 

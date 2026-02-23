@@ -54,7 +54,7 @@ shippingOptions.set(['Email', 'Will Call', 'Postal service']);
 console.log(selectedOption()); // 'Email'
 ```
 
-## 以前の状態を考慮する
+## 以前の状態を考慮する {#accounting-for-previous-state}
 
 場合によっては、`linkedSignal`の計算で`linkedSignal`の以前の値を考慮する必要があります。
 
@@ -114,7 +114,7 @@ export class ShippingMethodPicker {
 
 HELPFUL: `previous`パラメーターを使用する場合、`linkedSignal`のジェネリック型引数を明示的に指定する必要があります。最初のジェネリック型は`source`の型に対応し、2番目のジェネリック型は`computation`の出力型を決定します。
 
-## カスタムの等価比較
+## カスタムの等価比較 {#custom-equality-comparison}
 
 `linkedSignal`は他のシグナルと同様に、カスタムの等価比較関数を設定できます。この関数は、下流の依存関係によって`linkedSignal`の値（計算結果）が変更されたかどうかを判断するために使用されます。
 

@@ -58,7 +58,7 @@ export class CustomCardAction {
 })
 export class CustomCard {
   actions = viewChildren(CustomCardAction);
-  actionsTexts = computed(() => this.actions().map(action => action.text));
+  actionsTexts = computed(() => this.actions().map((action) => action.text));
 }
 ```
 
@@ -89,16 +89,15 @@ export class CustomExpando {
 }
 
 @Component({
-/* ... */
-// CustomToggle is used inside CustomExpando as content.
-template: `
+  /* ... */
+  // CustomToggle is used inside CustomExpando as content.
+  template: `
     <custom-expando>
       <custom-toggle>Show</custom-toggle>
     </custom-expando>
-  `
+  `,
 })
-
-export class UserProfile { }
+export class UserProfile {}
 ```
 
 クエリが結果を見つけられない場合、その値は`undefined`になります。これは、ターゲット要素が存在しないか、`@if`によって非表示になっている場合に発生する可能性があります。Angularは、アプリケーションの状態が変化するにつれて`contentChild`の結果を最新の状態に保ちます。
@@ -107,7 +106,7 @@ export class UserProfile { }
 
 `contentChildren`関数を使用して、複数結果をクエリできます。
 
-```angular-ts {highlight: [14, 16, 17, 18, 19, 20]}
+```angular-ts {highlight: [14, 15]}
 @Component({
   selector: 'custom-menu-item',
   /* ... */
@@ -120,10 +119,9 @@ export class CustomMenuItem {
   selector: 'custom-menu',
   /* ... */
 })
-
 export class CustomMenu {
   items = contentChildren(CustomMenuItem);
-  itemTexts = computed(() => this.items().map(item => item.text));
+  itemTexts = computed(() => this.items().map((item) => item.text));
 }
 
 @Component({
@@ -133,9 +131,9 @@ export class CustomMenu {
       <custom-menu-item>Cheese</custom-menu-item>
       <custom-menu-item>Tomato</custom-menu-item>
     </custom-menu>
-  `
+  `,
 })
-export class UserProfile { }
+export class UserProfile {}
 ```
 
 `contentChildren`は、クエリ結果の`Array`を含むシグナルを作成します。
@@ -150,7 +148,7 @@ export class UserProfile { }
 
 ```ts
 @Component({
-  /* ... */
+  /*...*/
 })
 export class CustomCard {
   header = viewChild.required(CustomCardHeader);
@@ -175,7 +173,7 @@ export class CustomCard {
   template: `
     <button #save>Save</button>
     <button #cancel>Cancel</button>
-  `
+  `,
 })
 export class ActionBar {
   saveButton = viewChild<ElementRef<HTMLButtonElement>>('save');
@@ -199,7 +197,7 @@ const SUB_ITEM = new InjectionToken<string>('sub-item');
   /*...*/
   providers: [{provide: SUB_ITEM, useValue: 'special-item'}],
 })
-export class SpecialItem { }
+export class SpecialItem {}
 
 @Component({/*...*/})
 export class CustomList {
@@ -287,7 +285,7 @@ export class CustomCardHeader {
   selector: 'custom-card',
   template: '<custom-card-header>Visit sunny California!</custom-card-header>',
 })
-export class CustomCard {
+export class CustomCard implements AfterViewInit {
   @ViewChild(CustomCardHeader) header: CustomCardHeader;
 
   ngAfterViewInit() {

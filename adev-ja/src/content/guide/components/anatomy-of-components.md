@@ -14,9 +14,9 @@ TypeScriptクラスの上部に `@Component` [デコレーター](https://www.ty
 ```angular-ts {highlight: [1, 2, 3, 4]}
 @Component({
   selector: 'profile-photo',
-  template: `<img src="profile-photo.jpg" alt="Your profile photo">`,
+  template: `<img src="profile-photo.jpg" alt="Your profile photo" />`,
 })
-export class ProfilePhoto { }
+export class ProfilePhoto {}
 ```
 
 データバインディング、イベント処理、制御フローなど、Angularテンプレート作成に関する詳細は、[テンプレートガイド](guide/templates)を参照してください。
@@ -28,10 +28,14 @@ export class ProfilePhoto { }
 ```angular-ts {highlight: [4]}
 @Component({
   selector: 'profile-photo',
-  template: `<img src="profile-photo.jpg" alt="Your profile photo">`,
-  styles: `img { border-radius: 50%; }`,
+  template: `<img src="profile-photo.jpg" alt="Your profile photo" />`,
+  styles: `
+    img {
+      border-radius: 50%;
+    }
+  `,
 })
-export class ProfilePhoto { }
+export class ProfilePhoto {}
 ```
 
 デフォルトでは、コンポーネントのスタイルは、そのコンポーネントのテンプレートで定義された要素にのみ影響を与えます。Angularのスタイリングアプローチの詳細については、[コンポーネントのスタイリング](guide/components/styling)を参照してください。
@@ -70,7 +74,7 @@ import {ProfilePhoto} from './profile-photo';
 export class UserProfile {}
 ```
 
-デフォルトでは、Angularコンポーネントは*スタンドアロン*です。つまり、他のコンポーネントの`imports`配列に直接追加できます。以前のバージョンのAngularで作成されたコンポーネントは、代わりに`@Component`デコレーターで`standalone: false`を指定している場合があります。これらのコンポーネントの場合、代わりにコンポーネントが定義されている`NgModule`をインポートします。詳細は、完全な[`NgModule`ガイド](guide/ngmodules)を参照してください。
+デフォルトでは、Angularコンポーネントは*スタンドアロン*です。つまり、他のコンポーネントの`imports`配列に直接追加できます。以前のバージョンのAngularで作成されたコンポーネントは、代わりに`@Component`デコレーターで`standalone: false`を指定している場合があります。これらのコンポーネントの場合、代わりにコンポーネントが定義されている`NgModule`をインポートします。詳細は、完全な[`NgModule`ガイド](guide/ngmodules/overview)を参照してください。
 
 IMPORTANT: 19.0.0より前のAngularバージョンでは、`standalone`オプションはデフォルトで`false`です。
 
@@ -83,7 +87,7 @@ IMPORTANT: 19.0.0より前のAngularバージョンでは、`standalone`オプ�
   selector: 'profile-photo',
   ...
 })
-export class ProfilePhoto { }
+export class ProfilePhoto {}
 ```
 
 Angularがサポートするセレクターの種類と、セレクターの選択に関するガイダンスについては、[コンポーネントセレクター](guide/components/selectors)を参照してください。
@@ -94,13 +98,13 @@ _他の_コンポーネントのテンプレートで一致するHTML要素を�
 @Component({
   selector: 'profile-photo',
 })
-export class ProfilePhoto { }
+export class ProfilePhoto {}
 
 @Component({
-imports: [ProfilePhoto],
-template: `<profile-photo />`
+  imports: [ProfilePhoto],
+  template: `<profile-photo />`,
 })
-export class UserProfile { }
+export class UserProfile {}
 ```
 
 Angularは、遭遇する一致するHTML要素ごとにコンポーネントのインスタンスを作成します。コンポーネントのセレクターと一致するDOM要素は、そのコンポーネントの**ホスト要素**と呼ばれます。コンポーネントのテンプレートの内容はそのホスト要素内にレンダリングされます。

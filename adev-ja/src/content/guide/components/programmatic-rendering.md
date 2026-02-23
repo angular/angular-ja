@@ -20,10 +20,10 @@ HELPFUL: 遅延読み込みのユースケース(たとえば、重いコンポ�
 構造ディレクティブです。
 
 ```angular-ts
-@Component({ ... })
+@Component({/*...*/})
 export class AdminBio { /* ... */ }
 
-@Component({ ... })
+@Component({/*...*/})
 export class StandardBio { /* ... */ }
 
 @Component({
@@ -41,6 +41,144 @@ export class CustomDialog {
 }
 ```
 
+### 動的にレンダリングされたコンポーネントへのインプットの渡し方
+
+`ngComponentOutletInputs`プロパティを使用して、動的にレンダリングされたコンポーネントにインプットを渡すことができます。このプロパティは、キーがインプット名で値がインプット値であるオブジェクトを受け入れます。
+
+```angular-ts
+@Component({
+  selector: 'user-greeting',
+  template: `
+    <div>
+      <p>User: {{ username() }}</p>
+      <p>Role: {{ role() }}</p>
+    </div>
+  `,
+})
+export class UserGreeting {
+  username = input.required<string>();
+  role = input('guest');
+}
+
+@Component({
+  selector: 'profile-view',
+  imports: [NgComponentOutlet],
+  template: `<ng-container *ngComponentOutlet="greetingComponent; inputs: greetingInputs()" />`,
+})
+export class ProfileView {
+  greetingComponent = UserGreeting;
+  greetingInputs = signal({username: 'ngAwesome', role: 'admin'});
+}
+```
+
+インプットは`greetingInputs`シグナルが変更されるたびに更新され、動的コンポーネントを親の状態と同期させます。
+
+### コンテンツプロジェクションの提供
+
+`ngComponentOutletContent`を使用して、動的にレンダリングされたコンポーネントにプロジェクトされたコンテンツを渡すことができます。これは、動的コンポーネントが`<ng-content>`を使用してコンテンツを表示する場合に便利です。
+
+```angular-ts
+@Component({
+  selector: 'card-wrapper',
+  template: `
+    <div class="card">
+      <ng-content />
+    </div>
+  `,
+})
+export class CardWrapper {}
+
+@Component({
+  imports: [NgComponentOutlet],
+  template: `
+    <ng-container *ngComponentOutlet="cardComponent; content: cardContent()" />
+
+    <ng-template #contentTemplate>
+      <h3>Dynamic Content</h3>
+      <p>This content is projected into the card.</p>
+    </ng-template>
+  `,
+})
+export class DynamicCard {
+  private vcr = inject(ViewContainerRef);
+  cardComponent = CardWrapper;
+
+  private contentTemplate = viewChild<TemplateRef<unknown>>('contentTemplate');
+
+  cardContent = computed(() => {
+    const template = this.contentTemplate();
+    if (!template) return [];
+    // Returns an array of projection slots. Each element represents one <ng-content> slot.
+    // CardWrapper has one <ng-content>, so we return an array with one element.
+    return [this.vcr.createEmbeddedView(template).rootNodes];
+  });
+}
+```
+
+NOTE: Hydrationは、ネイティブDOM APIで作成されたDOMノードのプロジェクションをサポートしていません。これにより[NG0503エラー](/errors/NG0503)が発生します。Angular APIを使用してプロジェクトされたコンテンツを作成するか、コンポーネントに`ngSkipHydration`を追加してください。
+
+### インジェクターの提供
+
+`ngComponentOutletInjector`を使用して、動的に作成されたコンポーネントにカスタムインジェクターを提供できます。これは、コンポーネント固有のサービスや設定を提供する場合に便利です。
+
+```angular-ts
+export const THEME_DATA = new InjectionToken<string>('THEME_DATA', {
+  factory: () => 'light',
+});
+
+@Component({
+  selector: 'themed-panel',
+  template: `<div [class]="theme">...</div>`,
+})
+export class ThemedPanel {
+  theme = inject(THEME_DATA);
+}
+
+@Component({
+  selector: 'dynamic-panel',
+  imports: [NgComponentOutlet],
+  template: `<ng-container *ngComponentOutlet="panelComponent; injector: customInjector" />`,
+})
+export class DynamicPanel {
+  panelComponent = ThemedPanel;
+
+  customInjector = Injector.create({
+    providers: [{provide: THEME_DATA, useValue: 'dark'}],
+  });
+}
+```
+
+### コンポーネントインスタンスへのアクセス
+
+ディレクティブの`exportAs`機能を使用して、動的に作成されたコンポーネントのインスタンスにアクセスできます。
+
+```angular-ts
+@Component({
+  selector: 'counter',
+  template: `<p>Count: {{ count() }}</p>`,
+})
+export class Counter {
+  count = signal(0);
+  increment() {
+    this.count.update((c) => c + 1);
+  }
+}
+
+@Component({
+  imports: [NgComponentOutlet],
+  template: `
+    <ng-container [ngComponentOutlet]="counterComponent" #outlet="ngComponentOutlet" />
+
+    <button (click)="outlet.componentInstance?.increment()">Increment</button>
+  `,
+})
+export class CounterHost {
+  counterComponent = Counter;
+}
+```
+
+NOTE: `componentInstance`プロパティは、コンポーネントがレンダリングされる前は`null`です。
+
 ディレクティブの機能の詳細については、[NgComponentOutlet APIリファレンス](api/common/NgComponentOutlet)を
 参照してください。
 
@@ -57,9 +195,7 @@ export class CustomDialog {
 ```angular-ts
 @Component({
   selector: 'leaf-content',
-  template: `
-    This is the leaf content
-  `,
+  template: `This is the leaf content`,
 })
 export class LeafContent {}
 
@@ -75,9 +211,7 @@ export class OuterContainer {}
 
 @Component({
   selector: 'inner-item',
-  template: `
-    <button (click)="loadContent()">Load content</button>
-  `,
+  template: `<button (click)="loadContent()">Load content</button>`,
 })
 export class InnerItem {
   private viewContainer = inject(ViewContainerRef);
@@ -153,20 +287,20 @@ export class AdminSettings {
 コンポーネントのホスト要素を配置する場所を明示的に制御できます。
 
 ```angular-ts
-import { Component, input, model, output } from "@angular/core";
+import {Component, input, model, output} from '@angular/core';
 
 @Component({
   selector: 'app-warning',
   template: `
-      @if(isExpanded()) {
-        <section>
-            <p>Warning: Action needed!</p>
-            <button (click)="close.emit(true)">Close</button>
-        </section>
-      }
-  `
+    @if (isExpanded()) {
+      <section>
+        <p>Warning: Action needed!</p>
+        <button (click)="close.emit(true)">Close</button>
+      </section>
+    }
+  `,
 })
-export class AppWarningComponent {
+export class AppWarning {
   readonly canClose = input.required<boolean>();
   readonly isExpanded = model<boolean>();
   readonly close = output<boolean>();
@@ -189,13 +323,13 @@ import {ThemeDirective} from '../theme.directive';
 @Component({
   template: `<ng-container #container />`,
 })
-export class HostComponent {
+export class Host {
   private vcr = inject(ViewContainerRef);
   readonly canClose = signal(true);
   readonly isExpanded = signal(true);
 
   showWarning() {
-    const compRef = this.vcr.createComponent(AppWarningComponent, {
+    const compRef = this.vcr.createComponent(AppWarning, {
       bindings: [
         inputBinding('canClose', this.canClose),
         twoWayBinding('isExpanded', this.isExpanded),
@@ -212,7 +346,7 @@ export class HostComponent {
 }
 ```
 
-上記の例では、動的な**AppWarningComponent**は、`canClose`インプットがリアクティブシグナルにバインドされ、`isExpanded`状態で双方向バインディングが行われ、`close`のアウトプットリスナーが設定されて作成されます。`FocusTrap`と`ThemeDirective`は、`directives`を介してホスト要素にアタッチされます。
+上記の例では、動的な**AppWarning**は、`canClose`インプットがリアクティブシグナルにバインドされ、`isExpanded`状態で双方向バインディングが行われ、`close`のアウトプットリスナーが設定されて作成されます。`FocusTrap`と`ThemeDirective`は、`directives`を介してホスト要素にアタッチされます。
 
 ### `createComponent` + `hostElement`で`document.body`にアタッチされたポップアップ
 
@@ -228,7 +362,7 @@ import {
   inputBinding,
   outputBinding,
 } from '@angular/core';
-import {PopupComponent} from './popup.component';
+import {Popup} from './popup';
 
 @Injectable({providedIn: 'root'})
 export class PopupService {
@@ -240,7 +374,7 @@ export class PopupService {
     const host = document.createElement('popup-host');
 
     // コンポーネントを作成し、1回の呼び出しでバインド
-    const ref = createComponent(PopupComponent, {
+    const ref = createComponent(Popup, {
       environmentInjector: this.injector,
       hostElement: host,
       bindings: [

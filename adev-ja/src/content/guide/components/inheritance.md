@@ -12,7 +12,9 @@ export class ListboxBase {
   value: string;
 }
 
-@Component({ ... })
+@Component({
+  /*...*/
+})
 export class CustomListbox extends ListboxBase {
   // CustomListboxは`value`プロパティを継承します。
 }
@@ -27,9 +29,7 @@ export class CustomListbox extends ListboxBase {
 ```angular-ts
 @Component({
   selector: 'base-listbox',
-  template: `
-    ...
-  `,
+  template: ` ... `,
   host: {
     '(keydown)': 'handleKey($event)',
   },
@@ -43,9 +43,7 @@ export class ListboxBase {
 
 @Component({
   selector: 'custom-listbox',
-  template: `
-    ...
-  `,
+  template: ` ... `,
   host: {
     '(click)': 'focusActiveOption()',
   },
@@ -70,12 +68,16 @@ export class CustomListbox extends ListboxBase {
 もし基底クラスがコンストラクターのパラメーターとして依存性を注入している場合、子クラスではその依存性を明示的にsuper()に渡す必要があります。
 
 ```ts
-@Component({ ... })
+@Component({
+  /*...*/
+})
 export class ListboxBase {
-  constructor(private element: ElementRef) { }
+  constructor(private element: ElementRef) {}
 }
 
-@Component({ ... })
+@Component({
+  /*...*/
+})
 export class CustomListbox extends ListboxBase {
   constructor(element: ElementRef) {
     super(element);
@@ -90,7 +92,9 @@ export class CustomListbox extends ListboxBase {
 基底クラスのライフサイクルメソッドを保持したい場合は、`super`で明示的にメソッドを呼び出します。
 
 ```ts
-@Component({ ... })
+@Component({
+  /*...*/
+})
 export class ListboxBase {
   protected isInitialized = false;
   ngOnInit() {
@@ -98,7 +102,9 @@ export class ListboxBase {
   }
 }
 
-@Component({ ... })
+@Component({
+  /*...*/
+})
 export class CustomListbox extends ListboxBase {
   override ngOnInit() {
     super.ngOnInit();

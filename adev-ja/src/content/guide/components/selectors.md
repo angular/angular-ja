@@ -98,7 +98,7 @@ export class DropZone { }
 
 Angularは、リスト内の_いずれか_のセレクターにマッチングする要素ごとにコンポーネントを作成します。
 
-## セレクターの選択
+## セレクターの選択 {#choosing-a-selector}
 
 ほとんどのコンポーネントは、カスタム要素名をセレクターとして使用する必要があります。
 すべてのカスタム要素名は、
@@ -110,7 +110,7 @@ Angularテンプレートで
 [ネイティブ カスタム要素](https://developer.mozilla.org/docs/Web/Web_Components) を使用する方法の詳細については、
 [コンポーネントの高度な設定](guide/components/advanced-configuration) を参照してください。
 
-### セレクターのプレフィックス
+### セレクターのプレフィックス {#selector-prefixes}
 
 Angularチームは、プロジェクト内で定義されているすべてのカスタムコンポーネントに
 短い一貫性のあるプレフィックスを使用することをお勧めします。

@@ -37,7 +37,7 @@ Angularは、[Sass](https://sass-lang.com)、
 [less](https://lesscss.org)、[stylus](https://stylus-lang.com)など、
 CSSを出力するすべてのツールと連携します。
 
-## スタイルのスコープ
+## スタイルのスコープ {#style-scoping}
 
 各コンポーネントには、**ビューカプセル化**設定があり、フレームワークがコンポーネントのスタイルをどのようにスコープするかを決定します。
 ビューカプセル化モードには、`Emulated`、`ShadowDom`、`ExperimentalIsolatedShadowDom`、`None`の4つのモードがあります。

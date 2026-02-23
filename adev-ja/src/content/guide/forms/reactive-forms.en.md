@@ -387,25 +387,21 @@ You can bind a `FormArray` directly to a `<form>` element by using the `FormArra
 This is useful when the form does not use a top-level `FormGroup`, and the array itself represents the full form model.
 
 ```angular-ts
-import { Component } from '@angular/core';
-import { FormArray, FormControl } from '@angular/forms';
+import {Component} from '@angular/core';
+import {FormArray, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'form-array-example',
   template: `
     <form [formArray]="form">
       @for (control of form.controls; track $index) {
-        <input [formControlName]="$index">
+        <input [formControlName]="$index" />
       }
     </form>
   `,
 })
 export class FormArrayExampleComponent {
-  controls = [
-    new FormControl('fish'),
-    new FormControl('cat'),
-    new FormControl('dog'),
-  ];
+  controls = [new FormControl('fish'), new FormControl('cat'), new FormControl('dog')];
 
   form = new FormArray(this.controls);
 }
@@ -451,7 +447,7 @@ import {
 } from '@angular/forms';
 
 @Component({
-  /* ... */
+  /*...*/
 })
 export class UnifiedEventsBasicComponent {
   form = new FormGroup({
@@ -601,7 +597,9 @@ When updating form controls programmatically, you have precise control over how 
 By default `emitEvent: true`, any change to a control emits events through the `valueChanges` and `statusChanges` observables. Setting `emitEvent: false` suppresses these emissions, which is useful when setting values programmatically without triggering reactive behavior like auto-save, avoiding circular updates between controls, or performing bulk updates where events should emit only once at the end.
 
 ```ts
-@Component({/* ... */})
+@Component({
+  /* ... */
+})
 export class BlogPostEditor {
   postForm = new FormGroup({
     title: new FormControl(''),
@@ -610,16 +608,15 @@ export class BlogPostEditor {
 
   constructor() {
     // Auto-save draft every time user types
-    this.postForm.valueChanges.subscribe(formValue => {
+    this.postForm.valueChanges.subscribe((formValue) => {
       this.autosaveDraft(formValue);
     });
   }
 
   loadExistingDraft(savedDraft: {title: string; content: string}) {
     // Restore draft without triggering auto-save
-    this.postForm.setValue(savedDraft, { emitEvent: false });
+    this.postForm.setValue(savedDraft, {emitEvent: false});
   }
-
 }
 ```
 

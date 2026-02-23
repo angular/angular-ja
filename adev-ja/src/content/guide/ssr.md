@@ -71,11 +71,11 @@ const serverConfig: ApplicationConfig = {
 
 ```typescript
 import {provideServerRendering, withRoutes, withAppShell} from '@angular/ssr';
-import {AppShellComponent} from './app-shell/app-shell.component';
+import {AppShell} from './app-shell';
 
 const serverConfig: ApplicationConfig = {
   providers: [
-    provideServerRendering(withRoutes(serverRoutes), withAppShell(AppShellComponent)),
+    provideServerRendering(withRoutes(serverRoutes), withAppShell(AppShell)),
     // ... その他のプロバイダー ...
   ],
 };
@@ -246,7 +246,7 @@ export const serverRoutes: ServerRoute[] = [
 一般に、ブラウザ固有のシンボルに依存するコードは、サーバーではなくブラウザでのみ実行されるべきです。これは、`afterEveryRender` および `afterNextRender` ライフサイクルフックによって強制できます。これらはブラウザでのみ実行され、サーバーではスキップされます。
 
 ```angular-ts
-import { Component, viewChild, afterNextRender } from '@angular/core';
+import {Component, viewChild, afterNextRender} from '@angular/core';
 
 @Component({
   selector: 'my-cmp',
@@ -329,7 +329,7 @@ const serverConfig: ApplicationConfig = {
 
 ```ts
 @Component({
-  /* ... */
+  /*...*/
 })
 export class Checkout {
   private analytics = inject(AnalyticsService);
@@ -373,7 +373,7 @@ HELPFUL: メタタグの管理には、Angularは `Meta` サービスを提供�
 -   **[`REQUEST_CONTEXT`](api/core/REQUEST_CONTEXT 'API reference'):** 現在のリクエストに関連する追加のコンテキストへのアクセスを提供します。このコンテキストは、[`handle`](api/ssr/AngularAppEngine#handle 'API reference') 関数の2番目のパラメーターとして渡すことができます。通常、これは標準のWeb APIの一部ではない追加のリクエスト関連情報を提供するために使用されます。
 
 ```angular-ts
-import { inject, REQUEST } from '@angular/core';
+import {inject, REQUEST} from '@angular/core';
 
 @Component({
   selector: 'app-my-component',
@@ -433,7 +433,7 @@ IMPORTANT: 上記のトークンは、次のシナリオでは `null` になり�
 import {bootstrapApplication} from '@angular/platform-browser';
 import {provideClientHydration, withHttpTransferCacheOptions} from '@angular/platform-browser';
 
-bootstrapApplication(AppComponent, {
+bootstrapApplication(App, {
   providers: [
     provideClientHydration(
       withHttpTransferCacheOptions({
@@ -516,7 +516,7 @@ import {
   withNoHttpTransferCache,
 } from '@angular/platform-browser';
 
-bootstrapApplication(AppComponent, {
+bootstrapApplication(App, {
   providers: [provideClientHydration(withNoHttpTransferCache())],
 });
 ```
@@ -532,7 +532,7 @@ import {
   withHttpTransferCacheOptions,
 } from '@angular/platform-browser';
 
-bootstrapApplication(AppComponent, {
+bootstrapApplication(App, {
   providers: [
     provideClientHydration(
       withHttpTransferCacheOptions({

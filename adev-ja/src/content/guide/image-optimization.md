@@ -369,6 +369,40 @@ NOTE: `width`プロパティが常に存在するとは限りませんが、`ngS
 
 `loaderParams`の一般的な用途は、高度な画像CDN機能を制御することです。
 
+### 組み込みローダーでの`transform`プロパティの使用 {#using-the-transform-property-with-built-in-loaders}
+
+Cloudinary、Cloudflare、ImageKit、Imgix用の組み込みローダーは、`loaderParams`内で特別な`transform`プロパティをサポートしています。このプロパティを使用すると、CDNによって提供されるカスタム画像変換を適用できます。
+
+`transform`プロパティは2つの形式を受け入れます。
+
+#### 文字列形式 {#string-format}
+
+CDNの変換構文を使用して、カンマ区切りの文字列として変換を提供します。
+
+```html
+<img
+  ngSrc="my-image.jpg"
+  width="400"
+  height="300"
+  [loaderParams]="{transform: 'e_grayscale,r_10'}"
+/>
+```
+
+#### オブジェクト形式 {#object-format}
+
+キーと値のペアを持つオブジェクトとして変換を提供します。
+
+```html
+<img
+  ngSrc="my-image.jpg"
+  width="400"
+  height="300"
+  [loaderParams]="{transform: {e: 'grayscale', r: 10}}"
+/>
+```
+
+NOTE: `transform`プロパティは、Netlifyのローダーではサポートされていません。Netlifyの画像CDNはカスタム変換パラメーターを提供していないためです。
+
 ### カスタムローダーの例 {#example-custom-loader}
 
 以下にカスタムローダー関数の例を示します。この例の関数は`src`と`width`を連結し、`loaderParams`を使用して角丸のためのカスタムCDN機能を制御します。

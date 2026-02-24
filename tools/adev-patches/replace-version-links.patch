@@ -1,18 +1,5 @@
-diff --git a/adev/src/assets/others/versions.json b/adev/src/assets/others/versions.json
-index 44dad0e1ef..610fdab042 100644
---- a/adev/src/assets/others/versions.json
-+++ b/adev/src/assets/others/versions.json
-@@ -5,7 +5,7 @@
-   },
-   {
-     "version": "v20",
--    "url": "https://v20.angular.dev/overview"
-+    "url": "https://angular.jp/overview"
-   },
-   {
-     "version": "v19",
 diff --git a/adev/src/app/core/services/version-manager.service.ts b/adev/src/app/core/services/version-manager.service.ts
-index d4e9fb86ea..eaf7969333 100644
+index bf0af31c22..56890e8586 100644
 --- a/adev/src/app/core/services/version-manager.service.ts
 +++ b/adev/src/app/core/services/version-manager.service.ts
 @@ -62,7 +62,7 @@ export class VersionManager {
@@ -24,3 +11,31 @@ index d4e9fb86ea..eaf7969333 100644
        transferCache: false,
        cache: 'no-cache',
      }),
+@@ -94,8 +94,12 @@ export class VersionManager {
+   );
+ 
+   readonly currentDocsVersion = computed(() => {
+-    // In devmode the version is 0, so we'll target next (which is first on the list)
+-    if (VERSION.major === '0' || VERSION.patch.includes('next')) {
++    // For Angular.jp, always target the stable version (v21)
++    if (VERSION.major === '0') {
++      return this.versions().find((v) => v.displayName === 'v21') ?? this.versions()[0];
++    }
++
++    if (VERSION.patch.includes('next')) {
+       return this.versions()[0];
+     }
+ 
+diff --git a/adev/src/assets/others/versions.json b/adev/src/assets/others/versions.json
+index 52ec12a661..07e1c78a5b 100644
+--- a/adev/src/assets/others/versions.json
++++ b/adev/src/assets/others/versions.json
+@@ -5,7 +5,7 @@
+   },
+   {
+     "version": "v21",
+-    "url": "https://v21.angular.dev/overview"
++    "url": "https://angular.jp/overview"
+   },
+   {
+     "version": "v20",

@@ -1,6 +1,7 @@
 import { consola } from 'consola';
 import { $ } from 'execa';
-import { buildDir } from './workspace';
+import { existsSync } from 'node:fs';
+import { buildDir, buildOutputDir } from './workspace';
 
 const $$ = $({
   stdin: 'inherit',
@@ -13,6 +14,14 @@ export async function buildAdev() {
   const sh = $$({ cwd: buildDir });
   await sh`pnpm install --frozen-lockfile`;
   await sh`pnpm bazel build //adev:build.production --config=release`;
+
+  // Verify build output exists - Bazel may exit with code 0 even when interrupted
+  if (!existsSync(buildOutputDir)) {
+    throw new Error(
+      `Build output directory not found: ${buildOutputDir}\n` +
+        'Bazel build may have been interrupted or failed silently.'
+    );
+  }
 }
 
 export function serveAdev() {

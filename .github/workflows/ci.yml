@@ -38,8 +38,19 @@ jobs:
           bazelisk-cache: true
           disk-cache: ${{ github.workflow }}
           repository-cache: true
+          bazelrc: |
+            # Limit resources for CI runners (ubuntu-latest: 7GB RAM, 2 CPUs)
+            build --local_ram_resources=4096
+            build --local_cpu_resources=2
+            build --jobs=2
+            build --discard_analysis_cache
+            build --nokeep_state_after_build
       - run: pnpm install
-      - run: pnpm run build
+      - name: Build
+        run: pnpm run build
+        env:
+          _JAVA_OPTIONS: -Xms512m -Xmx2g
+          NODE_OPTIONS: --max-old-space-size=4096
   # build-windows:
   #   runs-on: windows-latest
   #   steps:

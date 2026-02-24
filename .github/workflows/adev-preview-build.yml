@@ -35,18 +35,18 @@ jobs:
           disk-cache: ${{ github.workflow }}
           repository-cache: true
           bazelrc: |
-            # Print all the options that apply to the build.
-            # This helps us diagnose which options override others
-            # (e.g. /etc/bazel.bazelrc vs. tools/bazel.rc)
-            build --announce_rc
-
-            # More details on failures
-            build --verbose_failures=true
-
-            # CI supports colors but Bazel does not detect it.
-            common --color=yes
+            # Limit resources for CI runners (ubuntu-latest: 7GB RAM, 2 CPUs)
+            build --local_ram_resources=4096
+            build --local_cpu_resources=2
+            build --jobs=2
+            build --discard_analysis_cache
+            build --nokeep_state_after_build
       - run: pnpm install --frozen-lockfile
-      - run: pnpm run build
+      - name: Build
+        run: pnpm run build
+        env:
+          _JAVA_OPTIONS: -Xms512m -Xmx2g
+          NODE_OPTIONS: --max-old-space-size=4096
       - uses: angular/dev-infra/github-actions/previews/pack-and-upload-artifact@0512a5b9381ccff00c278d7b4b6ee38e5c09654d
         with:
           workflow-artifact-name: 'adev-preview'

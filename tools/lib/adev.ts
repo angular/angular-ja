@@ -24,8 +24,10 @@ export async function buildAdev() {
   }
 }
 
-export function serveAdev() {
+export async function serveAdev() {
   const sh = $$({ cwd: buildDir, reject: false });
+  // Ensure dependencies are installed before running ibazel
+  await $$({ cwd: buildDir })`pnpm install --frozen-lockfile`;
   const p = sh`pnpm ibazel run //adev:build.serve`;
   const pid = p.pid!;
   consola.log(`adev process started: ${pid}`);

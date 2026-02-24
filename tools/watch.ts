@@ -35,7 +35,7 @@ async function watch() {
   const fileWatcher = watchLocalizedFiles();
 
   consola.start('Start adev server...');
-  const adevServer = serveAdev();
+  const adevServer = await serveAdev();
 
   const shutdown = () => {
     consola.info('Shutting down...');

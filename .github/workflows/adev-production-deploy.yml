@@ -28,15 +28,17 @@ jobs:
           repository-cache: true
           bazelrc: |
             # Limit resources for CI runners (ubuntu-latest: 7GB RAM, 2 CPUs)
-            build --local_ram_resources=6144
+            build --local_ram_resources=4096
             build --local_cpu_resources=2
-            build --jobs=4
-            startup --host_jvm_args=-Xms512m
-            startup --host_jvm_args=-Xmx2g
+            build --jobs=2
             build --discard_analysis_cache
             build --nokeep_state_after_build
       - run: pnpm install --frozen-lockfile
-      - run: pnpm run build
+      - name: Build
+        run: pnpm run build
+        env:
+          _JAVA_OPTIONS: -Xms512m -Xmx2g
+          NODE_OPTIONS: --max-old-space-size=4096
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@0cbcac4740c2bfb00d632f0b863b57713124eb5a # v0.9.0
         with:

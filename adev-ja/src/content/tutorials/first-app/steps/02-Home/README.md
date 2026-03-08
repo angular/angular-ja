@@ -1,102 +1,102 @@
-# Create Home component
+# homeコンポーネントを作成する
 
-This tutorial lesson demonstrates how to create a new [component](guide/components) for your Angular app.
+このチュートリアルはAngularアプリケーションの新しい[コンポーネント](guide/components)を作成する方法を紹介します。
 
 <docs-video src="https://www.youtube.com/embed/R0nRX8jD2D0?si=OMVaw71EIa44yIOJ"/>
 
-## What you'll learn
+## 何を学ぶか
 
-Your app has a new component: `Home`.
+アプリケーションに新しいコンポーネント`Home`が追加されます。
 
-## Conceptual preview of Angular components
+## Angularコンポーネントの概念的な概要
 
-Angular apps are built around components, which are Angular's building blocks.
-Components contain the code, HTML layout, and CSS style information that provide the function and appearance of an element in the app.
-In Angular, components can contain other components. An app's functions and appearance can be divided and partitioned into components.
+Angularアプリケーションはコンポーネントを中心に構築されており、Angularの基本的な構成要素です。
+コンポーネントはアプリケーション内の要素の機能や見た目を提供するコード、HTMLレイアウト、CSSスタイルが含まれます。
+Angularではコンポーネントの中にさらに別のコンポーネントを含めることができます。アプリケーションの機能や見た目はコンポーネン単位に分割して構成できます。
 
-In Angular, components have metadata that define its properties.
-When you create your `Home`, you use these properties:
+Angularでは、コンポーネントにはプロパティを定義するためのメタデータがあります。
+`Home`コンポーネントを作成するときには、これらのプロパティを使用します。
 
-- `selector`: to describe how Angular refers to the component in templates.
-- `standalone`: to describe whether the component requires a `NgModule`.
-- `imports`: to describe the component's dependencies.
-- `template`: to describe the component's HTML markup and layout.
-- `styleUrls`: to list the URLs of the CSS files that the component uses in an array.
+- `selector`: テンプレートでAngularがコンポーネントを参照する方法を示します。
+- `standalone`: コンポーネントが`NgModule`を必要とするかを示します。
+- `imports`: コンポーネントの依存関係を示します。
+- `template`: コンポーネントのHTMLマークアップとレイアウトを示します。
+- `styleUrls`: コンポーネントが使用するCSSファイルのURLを配列で指定します。
 
 <docs-pill-row>
-  <docs-pill href="api/core/Component" title="Learn more about Components"/>
+  <docs-pill href="api/core/Component" title="コンポーネントについて詳しく学ぶ"/>
 </docs-pill-row>
 
 <docs-workflow>
 
 <docs-step title="Create the `Home`">
-In this step, you create a new component for your app.
+このステップでは、アプリケーション用の新しいコンポーネントを作成します。
 
-In the **Terminal** pane of your IDE:
+IDEの**ターミナル**ペインで、
 
-1. In your project directory, navigate to the `first-app` directory.
-1. Run this command to create a new `Home`
+1. プロジェクトディレクトリの中の、`first-app`ディレクトリを開きます。
+1. 新しい`Home`コンポーネントを作成するために、次のコマンドを実行します。
 
    ```shell
    ng generate component home
    ```
 
-1. Run this command to build and serve your app.
+1. アプリケーションをビルドし、開発サーバーを起動するために、次のコマンドを実行します。
 
-   NOTE: This step is only for your local environment!
+   NOTE: このステップはローカル環境でのみ実施します！
 
    ```shell
    ng serve
    ```
 
-1. Open a browser and navigate to `http://localhost:4200` to find the application.
+1. ブラウザを開き、`http://localhost:4200`にアクセスしてアプリケーションを確認します。
 
-1. Confirm that the app builds without error.
+1. アプリケーションがエラーなくビルドされていることを確認します。
 
-   HELPFUL: It should render the same as it did in the previous lesson because even though you added a new component, you haven't included it in any of the app's templates, yet.
+   HELPFUL: 新しいコンポーネントを追加しましたが、まだアプリケーションのどのテンプレートにも組み込んでいませんので、前のレッスンと同様の表示になります。
 
-1. Leave `ng serve` running as you complete the next steps.
+1. 次のステップに進む間も、`ng serve`はそのまま実行し続けておきます。
    </docs-step>
 
-<docs-step title="Add the new component to your app's layout">
-In this step, you add the new component, `Home` to your app's root component, `App`, so that it displays in your app's layout.
+<docs-step title="アプリケーションのレイアウトに新しいコンポーネントを追加する">
+このステップでは、新しいコンポーネント`Home`をアプリのルートコンポーネントである`App`に追加し、アプリケーションのレイアウトに表示されるようにします。
 
-In the **Edit** pane of your IDE:
+IDEの**編集**ペインで、
 
-1.  Open `app.ts` in the editor.
-1.  In `app.ts`, import `Home` by adding this line to the file level imports.
+1.  エディタで`app.ts`を開きます。
+1.  `app.ts`でファイルレベルのインポートに、次の行を追加して`Home`をインポートします。
 
-      <docs-code header="Import Home in src/app/app.ts" path="adev/src/content/tutorials/first-app/steps/03-HousingLocation/src/app/app.ts" visibleLines="[2]"/>
+      <docs-code header="src/app/app.tsでHomeをインポートする" path="adev/src/content/tutorials/first-app/steps/03-HousingLocation/src/app/app.ts" visibleLines="[2]"/>
 
-1.  In `app.ts`, in `@Component`, update the `imports` array property and add `Home`.
+1.  `app.ts`の`@Component`内で、`imports`配列プロパティに`Home`を追加します。
 
-      <docs-code header="Replace in src/app/app.ts" path="adev/src/content/tutorials/first-app/steps/03-HousingLocation/src/app/app.ts" visibleLines="[6]"/>
+      <docs-code header="src/app/app.tsで置き換える" path="adev/src/content/tutorials/first-app/steps/03-HousingLocation/src/app/app.ts" visibleLines="[6]"/>
 
-1.  In `app.ts`, in `@Component`, update the `template` property to include the following HTML code.
+1.  `app.ts`の`@Component`内で、次のHTMLコードを含むように`template`プロパティを更新します。
 
-      <docs-code language="angular-ts" header="Replace in src/app/app.ts" path="adev/src/content/tutorials/first-app/steps/03-HousingLocation/src/app/app.ts" visibleLines="[7,16]"/>
+      <docs-code language="angular-ts" header="src/app/app.tsで置き換える" path="adev/src/content/tutorials/first-app/steps/03-HousingLocation/src/app/app.ts" visibleLines="[7,16]"/>
 
-1.  Save your changes to `app.ts`.
-1.  If `ng serve` is running, the app should update.
-    If `ng serve` is not running, start it again.
-    _Hello world_ in your app should change to _home works!_ from the `Home`.
-1.  Check the running app in the browser and confirm that the app has been updated.
+1.  変更を`app.ts`に保存します。
+1.  `ng serve`が実行中の場合、アプリケーションは自動的に更新されます。
+    実行中でない場合、再度`ng serve`を開始してください。
+    `Home`コンポーネントによって、*Hello world*が*home works!*に変わるはずです。
+1.  ブラウザで実行中のアプリケーションをチェックし、アプリケーションが更新されていることを確認します。
 
-  <img alt="browser frame of page displaying the text 'home works!'" src="assets/images/tutorials/first-app/homes-app-lesson-02-step-2.png">
+  <img alt="テキスト'home works!'を表示するページのブラウザのフレーム" src="assets/images/tutorials/first-app/homes-app-lesson-02-step-2.png">
 
 </docs-step>
 
-<docs-step title="Add features to `Home`">
+<docs-step title="`Home`コンポーネントに機能を追加する">
 
-In this step you add features to `Home`.
+このステップでは、`Home`コンポーネントに機能を追加します。
 
-In the previous step, you added the default `Home` to your app's template so its default HTML appeared in the app.
-In this step, you add a search filter and button that is used in a later lesson.
-For now, that's all that `Home` has.
-Note that, this step just adds the search elements to the layout without any functionality, yet.
+前のステップでは、`Home`のデフォルトのHTMLがアプリケーションで表示されるよう、`Home`をアプリケーションのテンプレートに追加しました。
+このステップでは、後のレッスンで使用する検索フィルターとボタンを追加します。
+現時点で`Home`が持つのはこれだけです。
+なお、このステップでは検索用の要素をレイアウトに追加するだけで、まだ機能はありません。
 
-If you started from a fresh Angular project instead of downloading the starter
-(ng new): add these globals to `src/styles.css` so the search button and input border are visible:
+(ng newで)スターターを使わずに、新しいAngularプロジェクトを作成した場合、
+検索ボタンと入力欄の枠線が表示されるよう`src/styles.css`に次のグローバルスタイルを追加します。
 
 ```
 :root {
@@ -115,32 +115,32 @@ button.primary {
 }
 ```
 
-In the **Edit** pane of your IDE:
+IDEの**編集**ペインで、
 
-1.  In the `first-app` directory, open `home.ts` in the editor.
-1.  In `home.ts`, in `@Component`, update the `template` property with this code.
+1.  `first-app`ディレクトリで、`home.ts`をエディタで開きます。
+1.  `home.ts`の`@Component`で、`template`プロパティを次のコードで更新します。
 
-      <docs-code language="angular-ts" header="Replace in src/app/home/home.ts" path="adev/src/content/tutorials/first-app/steps/03-HousingLocation/src/app/home/home.ts" visibleLines="[5,12]"/>
+      <docs-code language="angular-ts" header="src/app/home/home.tsを置き換える" path="adev/src/content/tutorials/first-app/steps/03-HousingLocation/src/app/home/home.ts" visibleLines="[5,12]"/>
 
-1.  Next, open `home.css` in the editor and update the content with these styles.
+1.  次に、エディタで`home.css`を開き、次のスタイルで内容を更新します。`
 
-    NOTE: In the browser, these can go in `src/app/home/home.ts` in the `styles` array.
+    NOTE: ブラウザでは、`src/app/home/home.ts`の`styles`配列にこれらのスタイルを記述可能です。
 
-       <docs-code header="Replace in src/app/home/home.css" path="adev/src/content/tutorials/first-app/steps/03-HousingLocation/src/app/home/home.css"/>
+       <docs-code header="src/app/home/home.cssを置き換える" path="adev/src/content/tutorials/first-app/steps/03-HousingLocation/src/app/home/home.css"/>
 
-1.  Confirm that the app builds without error. You should find the filter query box and button in your app and they should be styled. Correct any errors before you continue to the next step.
+1.  アプリケーションがエラーなくビルドされていることを確認してください。フィルター用の入力ボックスとボタンが表示され、スタイルが反映されているはずです。次のステップに進む前に、エラーがあれば修正してください。
 
-   <img alt="browser frame of homes-app displaying logo, filter text input box and search button" src="assets/images/tutorials/first-app/homes-app-lesson-02-step-3.png">
+   <img alt="homesアプリケーションのロゴ、フィルター入力欄、検索ボタンが表示されたブラウザ画面" src="assets/images/tutorials/first-app/homes-app-lesson-02-step-3.png">
 </docs-step>
 
 </docs-workflow>
 
-SUMMARY: In this lesson, you created a new component for your app and gave it a filter edit control and button.
+SUMMARY: このレッスンでは、アプリケーションに新しいコンポーネントを作成し、フィルター用の入力欄とボタンを追加しました。
 
-For more information about the topics covered in this lesson, visit:
+このレッスンで扱った内容の詳細については、次のページをご覧ください:
 
 <docs-pill-row>
   <docs-pill href="cli/generate/component" title="`ng generate component`"/>
-  <docs-pill href="api/core/Component" title="`Component` reference"/>
-  <docs-pill href="guide/components" title="Angular components overview"/>
+  <docs-pill href="api/core/Component" title="`Component`リファレンス"/>
+  <docs-pill href="guide/components" title="Angularコンポーネントの概要"/>
 </docs-pill-row>

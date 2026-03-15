@@ -1,38 +1,38 @@
-# Reusable animations
+# 再利用可能なアニメーション
 
-IMPORTANT: The `@angular/animations` package is now deprecated. The Angular team recommends using native CSS with `animate.enter` and `animate.leave` for animations for all new code. Learn more at the new enter and leave [animation guide](guide/animations). Also see [Migrating away from Angular's Animations package](guide/animations/migration) to learn how you can start migrating to pure CSS animations in your apps.
+IMPORTANT: `@angular/animations`パッケージは現在非推奨です。Angularチームは、新しく書くコードのアニメーションには`animate.enter`と`animate.leave`を使ったネイティブCSSの利用を推奨します。詳しくは、新しいenterとleaveの[アニメーションガイド](guide/animations)を参照してください。また、アプリケーションで純粋なCSSアニメーションへの移行を始める方法については、[AngularのAnimationsパッケージからの移行](guide/animations/migration)も参照してください。
 
-This topic provides some examples of how to create reusable animations.
+このトピックでは、再利用可能なアニメーションを作成する方法の例をいくつか紹介します。
 
-## Create reusable animations
+## 再利用可能なアニメーションを作成する {#create-reusable-animations}
 
-To create a reusable animation, use the [`animation()`](api/animations/animation) function to define an animation in a separate `.ts` file and declare this animation definition as a `const` export variable.
-You can then import and reuse this animation in any of your application components using the [`useAnimation()`](api/animations/useAnimation) function.
+再利用可能なアニメーションを作成するには、[`animation()`](api/animations/animation)関数を使って別の`.ts`ファイルにアニメーションを定義し、そのアニメーション定義を`const`のエクスポート変数として宣言します。
+その後、[`useAnimation()`](api/animations/useAnimation)関数を使って、このアニメーションをアプリケーション内の任意のコンポーネントにインポートして再利用できます。
 
 <docs-code header="animations.ts" path="adev/src/content/examples/animations/src/app/animations.1.ts" region="animation-const"/>
 
-In the preceding code snippet, `transitionAnimation` is made reusable by declaring it as an export variable.
+前のコードスニペットでは、`transitionAnimation`をエクスポート変数として宣言することで再利用可能にしています。
 
-HELPFUL: The `height`, `opacity`, `backgroundColor`, and `time` inputs are replaced during runtime.
+HELPFUL: `height`、`opacity`、`backgroundColor`、`time`の入力値は実行時に置き換えられます。
 
-You can also export a part of an animation.
-For example, the following snippet exports the animation `trigger`.
+アニメーションの一部もエクスポートできます。
+たとえば、次のスニペットではアニメーションの`trigger`をエクスポートしています。
 
 <docs-code header="animations.1.ts" path="adev/src/content/examples/animations/src/app/animations.1.ts" region="trigger-const"/>
 
-From this point, you can import reusable animation variables in your component class.
-For example, the following code snippet imports the `transitionAnimation` variable and uses it via the `useAnimation()` function.
+ここから先は、再利用可能なアニメーション変数をコンポーネントクラスにインポートできます。
+たとえば、次のコードスニペットでは`transitionAnimation`変数をインポートし、`useAnimation()`関数を通して使用しています。
 
 <docs-code header="open-close.ts" path="adev/src/content/examples/animations/src/app/open-close.3.ts" region="reusable"/>
 
-## More on Angular animations
+## Angularアニメーションについてさらに詳しく {#more-on-angular-animations}
 
-You might also be interested in the following:
+次のトピックも参考にしてください。
 
 <docs-pill-row>
-  <docs-pill href="guide/legacy-animations" title="Introduction to Angular animations"/>
-  <docs-pill href="guide/legacy-animations/transition-and-triggers" title="Transition and triggers"/>
-  <docs-pill href="guide/legacy-animations/complex-sequences" title="Complex animation sequences"/>
-  <docs-pill href="guide/routing/route-transition-animations" title="Route transition animations"/>
-  <docs-pill href="guide/animations/migration" title="Migrating to Native CSS Animations"/>
+  <docs-pill href="guide/animations/overview" title="Angularアニメーションの概要"/>
+  <docs-pill href="guide/animations/transition-and-triggers" title="トランジションとトリガー"/>
+  <docs-pill href="guide/animations/complex-sequences" title="複雑なアニメーションシーケンス"/>
+  <docs-pill href="guide/routing/route-transition-animations" title="ルート遷移アニメーション"/>
+  <docs-pill href="guide/animations/migration" title="ネイティブCSSアニメーションへの移行"/>
 </docs-pill-row>

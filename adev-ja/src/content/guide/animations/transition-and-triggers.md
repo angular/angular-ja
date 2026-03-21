@@ -1,89 +1,89 @@
-# Animation transitions and triggers
+# アニメーションのトランジションとトリガー
 
-IMPORTANT: The `@angular/animations` package is now deprecated. The Angular team recommends using native CSS with `animate.enter` and `animate.leave` for animations for all new code. Learn more at the new enter and leave [animation guide](guide/animations). Also see [Migrating away from Angular's Animations package](guide/animations/migration) to learn how you can start migrating to pure CSS animations in your apps.
+IMPORTANT: `@angular/animations`パッケージは現在非推奨です。Angularチームは、新しく書くコードのアニメーションには`animate.enter`と`animate.leave`を使ったネイティブCSSの利用を推奨します。詳しくは、新しいenterとleaveの[アニメーションガイド](guide/animations)を参照してください。また、アプリケーションで純粋なCSSアニメーションへの移行を始める方法については、[AngularのAnimationsパッケージからの移行](guide/animations/migration)も参照してください。
 
-This guide goes into depth on special transition states such as the `*` wildcard and `void`. It shows how these special states are used for elements entering and leaving a view.
-This section also explores multiple animation triggers, animation callbacks, and sequence-based animation using keyframes.
+このガイドでは、`*` ワイルドカードや `void` などの特殊なトランジション状態を詳しく説明します。これらの特殊な状態が、ビューに入る要素やビューから離れる要素でどのように使われるかを示します。
+このセクションでは、複数のアニメーショントリガー、アニメーションコールバック、キーフレームを使ったシーケンスベースのアニメーションも扱います。
 
-## Predefined states and wildcard matching
+## 事前定義された状態とワイルドカードマッチング {#predefined-states-and-wildcard-matching}
 
-In Angular, transition states can be defined explicitly through the [`state()`](api/animations/state) function, or using the predefined `*` wildcard and `void` states.
+Angularでは、トランジション状態を[`state()`](api/animations/state)関数で明示的に定義するか、あらかじめ定義された `*` ワイルドカードと `void` 状態を使って定義できます。
 
-### Wildcard state
+### ワイルドカード状態 {#wildcard-state}
 
-An asterisk `*` or _wildcard_ matches any animation state.
-This is useful for defining transitions that apply regardless of the HTML element's start or end state.
+アスタリスク `*`、つまり _ワイルドカード_ は、任意のアニメーション状態に一致します。
+これは、HTML要素の開始状態や終了状態に関係なく適用されるトランジションを定義するときに便利です。
 
-For example, a transition of `open => *` applies when the element's state changes from open to anything else.
+たとえば、`open => *` のトランジションは、要素の状態がopenから何らかの別の状態に変わるときに適用されます。
 
 <img alt="wildcard state expressions" src="assets/images/guide/animations/wildcard-state-500.png">
 
-The following is another code sample using the wildcard state together with the previous example using the `open` and `closed` states.
-Instead of defining each state-to-state transition pair, any transition to `closed` takes 1 second, and any transition to `open` takes 0.5 seconds.
+次のコードサンプルは、前の `open` と `closed` の状態の例にワイルドカード状態を組み合わせたものです。
+状態間の各トランジションの組み合わせを個別に定義する代わりに、`closed` へのトランジションはすべて1秒、`open` へのトランジションはすべて0.5秒になります。
 
-This allows the addition of new states without having to include separate transitions for each one.
+これにより、新しい状態を追加しても、それぞれに個別のトランジションを用意する必要がなくなります。
 
 <docs-code header="open-close.ts" path="adev/src/content/examples/animations/src/app/open-close.ts" region="trigger-wildcard1"/>
 
-Use a double arrow syntax to specify state-to-state transitions in both directions.
+状態間のトランジションを双方向で指定するには、ダブルアロー構文を使います。
 
 <docs-code header="open-close.ts" path="adev/src/content/examples/animations/src/app/open-close.ts" region="trigger-wildcard2"/>
 
-### Use wildcard state with multiple transition states
+### 複数のトランジション状態でワイルドカード状態を使う {#use-wildcard-state-with-multiple-transition-states}
 
-In the two-state button example, the wildcard isn't that useful because there are only two possible states, `open` and `closed`.
-In general, use wildcard states when an element has multiple potential states that it can change to.
-If the button can change from `open` to either `closed` or something like `inProgress`, using a wildcard state could reduce the amount of coding needed.
+2状態のボタン例では、`open` と `closed` の2つしか状態がないため、ワイルドカードはそれほど役に立ちません。
+一般的には、要素が変化できる複数の候補状態を持つときにワイルドカード状態を使います。
+ボタンが `open` から `closed` または `inProgress` のような別の状態に変わる場合、ワイルドカード状態を使うと必要なコード量を減らせます。
 
 <img alt="wildcard state with 3 states" src="assets/images/guide/animations/wildcard-3-states.png">
 
 <docs-code header="open-close.ts" path="adev/src/content/examples/animations/src/app/open-close.ts" region="trigger-transition"/>
 
-The `* => *` transition applies when any change between two states takes place.
+`* => *` トランジションは、2つの状態の間で何らかの変化が起きたときに適用されます。
 
-Transitions are matched in the order in which they are defined.
-Thus, you can apply other transitions on top of the `* => *` transition.
-For example, define style changes or animations that would apply just to `open => closed`, then use `* => *` as a fallback for state pairings that aren't otherwise called out.
+トランジションは、定義された順序でマッチします。
+そのため、`* => *` トランジションの上に別のトランジションを適用できます。
+たとえば、`open => closed` にだけ適用されるスタイル変更やアニメーションを定義し、`* => *` はそれ以外の状態の組み合わせに対するフォールバックとして使えます。
 
-To do this, list the more specific transitions _before_ `* => *`.
+これを行うには、より具体的なトランジションを `* => *` より _前_ に並べます。
 
-### Use wildcards with styles
+### スタイルでワイルドカードを使う {#use-wildcards-with-styles}
 
-Use the wildcard `*` with a style to tell the animation to use whatever the current style value is, and animate with that.
-Wildcard is a fallback value that's used if the state being animated isn't declared within the trigger.
+スタイルでワイルドカード `*` を使うと、現在のスタイル値をそのまま使ってアニメーションするよう指示できます。
+ワイルドカードは、アニメーション対象の状態がトリガー内で宣言されていない場合に使われるフォールバック値です。
 
 <docs-code header="open-close.ts" path="adev/src/content/examples/animations/src/app/open-close.ts" region="transition4"/>
 
-### Void state
+### void 状態 {#void-state}
 
-Use the `void` state to configure transitions for an element that is entering or leaving a page.
-See [Animating entering and leaving a view](guide/legacy-animations/transition-and-triggers#aliases-enter-and-leave).
+ページに入る要素やページから離れる要素のトランジションを設定するには、`void` 状態を使います。
+詳しくは、[ビューへの出入りをアニメーション化する](guide/legacy-animations/transition-and-triggers#aliases-enter-and-leave)を参照してください。
 
-### Combine wildcard and void states
+### ワイルドカード状態と void 状態を組み合わせる {#combine-wildcard-and-void-states}
 
-Combine wildcard and void states in a transition to trigger animations that enter and leave the page:
+ページへの出入りをアニメーション化するには、トランジションでワイルドカード状態とvoid状態を組み合わせます:
 
-- A transition of `* => void` applies when the element leaves a view, regardless of what state it was in before it left
-- A transition of `void => *` applies when the element enters a view, regardless of what state it assumes when entering
-- The wildcard state `*` matches to _any_ state, including `void`
+- `* => void` のトランジションは、要素がビューから離れるときに、その前の状態に関係なく適用されます
+- `void => *` のトランジションは、要素がビューに入るときに、そのときにどの状態を取るかに関係なく適用されます
+- ワイルドカード状態 `*` は、`void` を含む _すべて_ の状態に一致します
 
-## Animate entering and leaving a view
+## ビューへの出入りをアニメーション化する {#animate-entering-and-leaving-a-view}
 
-This section shows how to animate elements entering or leaving a page.
+このセクションでは、ページに入る要素やページから離れる要素をアニメーション化する方法を示します。
 
-Add a new behavior:
+次の振る舞いを追加します:
 
-- When you add a hero to the list of heroes, it appears to fly onto the page from the left
-- When you remove a hero from the list, it appears to fly out to the right
+- ヒーローをヒーロー一覧に追加すると、左からページに飛び込んでくるように見えます
+- ヒーローを一覧から削除すると、右へ飛び出していくように見えます
 
 <docs-code header="hero-list-enter-leave.ts" path="adev/src/content/examples/animations/src/app/hero-list-enter-leave.ts" region="animationdef"/>
 
-In the preceding code, you applied the `void` state when the HTML element isn't attached to a view.
+前のコードでは、HTML要素がビューにアタッチされていないときに `void` 状態を適用しています。
 
-## Aliases :enter and :leave
+## :enter と :leave のエイリアス {#aliases-enter-and-leave}
 
-`:enter` and `:leave` are aliases for the `void => *` and `* => void` transitions.
-These aliases are used by several animation functions.
+`:enter` と `:leave` は、`void => *` と `* => void` のトランジションのエイリアスです。
+これらのエイリアスは、いくつかのアニメーション関数で使われます。
 
 ```ts {hideCopy}
 
@@ -92,213 +92,213 @@ transition ( ':leave', [ … ] ); // alias for _ => void
 
 ```
 
-It's harder to target an element that is entering a view because it isn't in the DOM yet.
-Use the aliases `:enter` and `:leave` to target HTML elements that are inserted or removed from a view.
+ビューに入る要素はまだDOMに存在しないため、対象にするのは少し難しくなります。
+挿入されたりビューから削除されたりするHTML要素を対象にするには、`:enter` と `:leave` のエイリアスを使います。
 
-### Use `*ngIf` and `*ngFor` with :enter and :leave
+### :enter と :leave を `*ngIf` と `*ngFor` で使う {#use-ngif-and-ngfor-with-enter-and-leave}
 
-The `:enter` transition runs when any `*ngIf` or `*ngFor` views are placed on the page, and `:leave` runs when those views are removed from the page.
+`:enter` トランジションは、`*ngIf` や `*ngFor` のビューがページに配置されるときに実行され、`:leave` はそれらのビューがページから削除されるときに実行されます。
 
-IMPORTANT: Entering/leaving behaviors can sometime be confusing.
-As a rule of thumb consider that any element being added to the DOM by Angular passes via the `:enter` transition. Only elements being directly removed from the DOM by Angular pass via the `:leave` transition. For example, an element's view is removed from the DOM because its parent is being removed from the DOM.
+IMPORTANT: enterとleaveの動作は、時に紛らわしいことがあります。
+目安として、AngularによってDOMに追加される要素はすべて `:enter` トランジションを通ると考えてください。AngularによってDOMから直接削除される要素だけが `:leave` トランジションを通ります。たとえば、親がDOMから削除されるために、その要素のビューがDOMから削除される場合があります。
 
-This example has a special trigger for the enter and leave animation called `myInsertRemoveTrigger`.
-The HTML template contains the following code.
+この例には、enterとleaveのアニメーション用の特別なトリガー `myInsertRemoveTrigger` があります。
+HTMLテンプレートには次のコードが含まれています。
 
 <docs-code header="insert-remove.html" path="adev/src/content/examples/animations/src/app/insert-remove.html" region="insert-remove"/>
 
-In the component file, the `:enter` transition sets an initial opacity of 0. It then animates it to change that opacity to 1 as the element is inserted into the view.
+コンポーネントファイルでは、`:enter` トランジションが初期の不透明度0を設定し、要素がビューに挿入されるにつれてその不透明度を1に変化させるようにアニメーションします。
 
 <docs-code header="insert-remove.ts" path="adev/src/content/examples/animations/src/app/insert-remove.ts" region="enter-leave-trigger"/>
 
-Note that this example doesn't need to use [`state()`](api/animations/state).
+この例では [`state()`](api/animations/state) を使う必要がないことに注意してください。
 
-## Transition :increment and :decrement
+## :increment と :decrement のトランジション {#transition-increment-and-decrement}
 
-The `transition()` function takes other selector values, `:increment` and `:decrement`.
-Use these to kick off a transition when a numeric value has increased or decreased in value.
+`transition()` 関数は、他のセレクター値である `:increment` と `:decrement` も受け取ります。
+数値が増加または減少したときにトランジションを開始するために使います。
 
-HELPFUL: The following example uses `query()` and `stagger()` methods.
-For more information on these methods, see the [complex sequences](guide/legacy-animations/complex-sequences) page.
+HELPFUL: 次の例では `query()` と `stagger()` メソッドを使用しています。
+これらのメソッドの詳細は、[複雑なシーケンス](guide/legacy-animations/complex-sequences) ページを参照してください。
 
 <docs-code header="hero-list-page.ts" path="adev/src/content/examples/animations/src/app/hero-list-page.ts" region="increment"/>
 
-## Boolean values in transitions
+## トランジションにおける真偽値 {#boolean-values-in-transitions}
 
-If a trigger contains a Boolean value as a binding value, then this value can be matched using a `transition()` expression that compares `true` and `false`, or `1` and `0`.
+トリガーにバインド値として真偽値が含まれている場合、この値は `true` と `false`、または `1` と `0` を比較する `transition()` 式でマッチできます。
 
 <docs-code header="open-close.html" path="adev/src/content/examples/animations/src/app/open-close.2.html" region="trigger-boolean"/>
 
-In the code snippet above, the HTML template binds a `<div>` element to a trigger named `openClose` with a status expression of `isOpen`, and with possible values of `true` and `false`.
-This pattern is an alternative to the practice of creating two named states like `open` and `close`.
+上のコードスニペットでは、HTMLテンプレートが `<div>` 要素を `openClose` というトリガーにバインドし、状態式として `isOpen` を使っています。取りうる値は `true` と `false` です。
+このパターンは、`open` と `close` のように名前付き状態を2つ作る方法の代わりになります。
 
-Inside the `@Component` metadata under the `animations:` property, when the state evaluates to `true`, the associated HTML element's height is a wildcard style or default.
-In this case, the animation uses whatever height the element already had before the animation started.
-When the element is `closed`, the element gets animated to a height of 0, which makes it invisible.
+`@Component` メタデータの `animations:` プロパティ内では、状態が `true` と評価されたとき、対応するHTML要素の高さはワイルドカードのスタイル、つまり既定値になります。
+この場合、アニメーションは要素がアニメーション開始前にもっていた高さをそのまま使います。
+要素が `closed` のときは、高さが0にアニメーションされ、見えなくなります。
 
 <docs-code header="open-close.ts" path="adev/src/content/examples/animations/src/app/open-close.2.ts" region="trigger-boolean"/>
 
-## Multiple animation triggers
+## 複数のアニメーショントリガー {#multiple-animation-triggers}
 
-You can define more than one animation trigger for a component.
-Attach animation triggers to different elements, and the parent-child relationships among the elements affect how and when the animations run.
+コンポーネントには、2つ以上のアニメーショントリガーを定義できます。
+異なる要素にアニメーショントリガーを付けると、要素間の親子関係がアニメーションの実行方法とタイミングに影響します。
 
-### Parent-child animations
+### 親子アニメーション {#parent-child-animations}
 
-Each time an animation is triggered in Angular, the parent animation always gets priority and child animations are blocked.
-For a child animation to run, the parent animation must query each of the elements containing child animations. It then lets the animations run using the [`animateChild()`](api/animations/animateChild) function.
+Angularでアニメーションがトリガーされるたびに、親のアニメーションが常に優先され、子アニメーションはブロックされます。
+子アニメーションを実行するには、親アニメーションが子アニメーションを含む各要素をqueryで検索し、その後 [`animateChild()`](api/animations/animateChild) 関数を使ってアニメーションを実行させます。
 
-#### Disable an animation on an HTML element
+#### HTML要素でアニメーションを無効にする {#disable-an-animation-on-an-html-element}
 
-A special animation control binding called `@.disabled` can be placed on an HTML element to turn off animations on that element, as well as any nested elements.
-When true, the `@.disabled` binding prevents all animations from rendering.
+`@.disabled` という特別なアニメーション制御バインディングをHTML要素に配置すると、その要素とネストされた要素のアニメーションを無効にできます。
+trueのとき、`@.disabled` バインディングはすべてのアニメーションの描画を防ぎます。
 
-The following code sample shows how to use this feature.
+次のコードサンプルは、この機能の使い方を示します。
 
 <docs-code-multifile>
     <docs-code header="open-close.html" path="adev/src/content/examples/animations/src/app/open-close.4.html" region="toggle-animation"/>
     <docs-code header="open-close.ts" path="adev/src/content/examples/animations/src/app/open-close.4.ts" region="toggle-animation" language="typescript"/>
 </docs-code-multifile>
 
-When the `@.disabled` binding is true, the `@childAnimation` trigger doesn't kick off.
+`@.disabled` バインディングがtrueのとき、`@childAnimation` トリガーは起動しません。
 
-When an element within an HTML template has animations turned off using the `@.disabled` host binding, animations are turned off on all inner elements as well.
-You can't selectively turn off multiple animations on a single element.<!-- vale off -->
+HTMLテンプレート内の要素で `@.disabled` ホストバインディングを使ってアニメーションをオフにすると、内側のすべての要素でもアニメーションはオフになります。
+1つの要素で複数のアニメーションを個別に無効化できません。<!-- vale off -->
 
-A selective child animations can still be run on a disabled parent in one of the following ways:
-
-- A parent animation can use the [`query()`](api/animations/query) function to collect inner elements located in disabled areas of the HTML template.
-Those elements can still animate.
+無効化された親の下でも、次のいずれかの方法で個別の子アニメーションを実行できます:
+- 親アニメーションは、`query()` 関数を使ってHTMLテンプレートの無効化された領域にある内側の要素を収集できます。
+  それらの要素は引き続きアニメーションできます。
 <!-- vale on -->
 
-- A child animation can be queried by a parent and then later animated with the `animateChild()` function
+- 子アニメーションは、親がそれをqueryで見つけたあと、`animateChild()` 関数で後からアニメーションできます
 
-#### Disable all animations
+#### すべてのアニメーションを無効にする {#disable-all-animations}
 
-To turn off all animations for an Angular application, place the `@.disabled` host binding on the topmost Angular component.
+Angularアプリケーションのすべてのアニメーションを無効にするには、最上位のAngularコンポーネントに `@.disabled` ホストバインディングを配置します。
 
 <docs-code header="app.ts" path="adev/src/content/examples/animations/src/app/app.ts" region="toggle-app-animations"/>
 
-HELPFUL: Disabling animations application-wide is useful during end-to-end \(E2E\) testing.
+HELPFUL: アプリケーション全体でアニメーションを無効にするのは、エンドツーエンド（E2E）テストで便利です。
 
-## Animation callbacks
+## アニメーションのコールバック {#animation-callbacks}
 
-The animation `trigger()` function emits _callbacks_ when it starts and when it finishes.
-The following example features a component that contains an `openClose` trigger.
+アニメーションの `trigger()` 関数は、開始時と終了時に _コールバック_ を発行します。
+次の例では、`openClose` トリガーを含むコンポーネントを示します。
 
 <docs-code header="open-close.ts" path="adev/src/content/examples/animations/src/app/open-close.ts" region="events1"/>
 
-In the HTML template, the animation event is passed back via `$event`, as `@triggerName.start` and `@triggerName.done`, where `triggerName` is the name of the trigger being used.
-In this example, the trigger `openClose` appears as follows.
+HTMLテンプレートでは、アニメーションイベントは `$event` を通じて `@triggerName.start` と `@triggerName.done` として返されます。
+ここで `triggerName` は使用中のトリガー名です。
+この例では、`openClose` トリガーは次のようになります。
 
 <docs-code header="open-close.html" path="adev/src/content/examples/animations/src/app/open-close.3.html" region="callbacks"/>
 
-A potential use for animation callbacks could be to cover for a slow API call, such as a database lookup.
-For example, an **InProgress** button can be set up to have its own looping animation while the backend system operation finishes.
+アニメーションコールバックの用途としては、データベース検索のような遅いAPI呼び出しを補うことが考えられます。
+たとえば、バックエンドの処理が終わるまで、**InProgress** ボタンに独自のループアニメーションを設定できます。
 
-Another animation can be called when the current animation finishes.
-For example, the button goes from the `inProgress` state to the `closed` state when the API call is completed.
+別のアニメーションを、現在のアニメーションが終了したときに呼び出せます。
+たとえば、API呼び出しが完了すると、ボタンは `inProgress` 状態から `closed` 状態に移ります。
 
-An animation can influence an end user to _perceive_ the operation as faster, even when it is not.
+アニメーションによって、実際にはそうでなくても、操作がより速いとエンドユーザーに _感じさせる_ ことができます。
 
-Callbacks can serve as a debugging tool, for example in conjunction with `console.warn()` to view the application's progress in a browser's Developer JavaScript Console.
-The following code snippet creates console log output for the original example, a button with the two states of `open` and `closed`.
+コールバックはデバッグツールとしても使えます。たとえば `console.warn()` と組み合わせて、ブラウザの開発者向けJavaScriptコンソールでアプリケーションの進行状況を確認できます。
+次のコードスニペットは、元の例である `open` と `closed` の2つの状態を持つボタンのコンソール出力を作成します。
 
 <docs-code header="open-close.ts" path="adev/src/content/examples/animations/src/app/open-close.ts" region="events"/>
 
-## Keyframes
+## キーフレーム {#keyframes}
 
-To create an animation with multiple steps run in sequence, use _keyframes_.
+複数のステップを順番に実行するアニメーションを作成するには、_キーフレーム_ を使います。
 
-Angular's `keyframe()` function allows several style changes within a single timing segment.
-For example, the button, instead of fading, could change color several times over a single 2-second time span.
+Angularの `keyframe()` 関数を使うと、1つのタイミング区間内に複数のスタイル変更を指定できます。
+たとえば、ボタンはフェードする代わりに、2秒間のうちに何度か色を変えられます。
 
 <img alt="keyframes" src="assets/images/guide/animations/keyframes-500.png">
 
-The code for this color change might look like this.
+この色変更のコードは、次のようになるかもしれません。
 
 <docs-code header="status-slider.ts" path="adev/src/content/examples/animations/src/app/status-slider.ts" region="keyframes"/>
 
-### Offset
+### オフセット {#offset}
 
-Keyframes include an `offset` that defines the point in the animation where each style change occurs.
-Offsets are relative measures from zero to one, marking the beginning and end of the animation. They should be applied to each of the keyframe steps if used at least once.
+キーフレームには、各スタイル変更がアニメーションのどの地点で発生するかを定義する `offset` が含まれます。
+オフセットは0から1までの相対値で、アニメーションの開始と終了を示します。
+オフセットを1回でも使う場合は、各キーフレームのステップに適用する必要があります。
 
-Defining offsets for keyframes is optional.
-If you omit them, evenly spaced offsets are automatically assigned.
-For example, three keyframes without predefined offsets receive offsets of 0, 0.5, and 1.
-Specifying an offset of 0.8 for the middle transition in the preceding example might look like this.
+キーフレームのオフセット定義は省略できます。
+省略すると、等間隔のオフセットが自動的に割り当てられます。
+たとえば、オフセットを定義していない3つのキーフレームには、0、0.5、1のオフセットが割り当てられます。
+前の例の中央のトランジションに0.8のオフセットを指定すると、次のようになります。
 
 <img alt="keyframes with offset" src="assets/images/guide/animations/keyframes-offset-500.png">
 
-The code with offsets specified would be as follows.
-
+オフセットを指定したコードは次のようになります。
 <docs-code header="status-slider.ts" path="adev/src/content/examples/animations/src/app/status-slider.ts" region="keyframesWithOffsets"/>
 
-You can combine keyframes with `duration`, `delay`, and `easing` within a single animation.
+単一のアニメーション内で、キーフレームに `duration`、`delay`、`easing` を組み合わせることができます。
 
-### Keyframes with a pulsation
+### パルス効果のあるキーフレーム {#keyframes-with-a-pulsation}
 
-Use keyframes to create a pulse effect in your animations by defining styles at specific offset throughout the animation.
+アニメーション全体の特定のオフセットでスタイルを定義することで、キーフレームを使ってアニメーションにパルス効果を作成できます。
 
-Here's an example of using keyframes to create a pulse effect:
+キーフレームでパルス効果を作る例を示します:
 
-- The original `open` and `closed` states, with the original changes in height, color, and opacity, occurring over a timeframe of 1 second
-- A keyframes sequence inserted in the middle that causes the button to appear to pulsate irregularly over the course of that same 1 second timeframe
+- 元の `open` と `closed` の状態で、高さ、色、不透明度の変化が1秒間にわたって発生します
+- 同じ1秒間の途中にキーフレームシーケンスを挿入し、ボタンがその間に不規則に脈動しているように見せます
 
 <img alt="keyframes with irregular pulsation" src="assets/images/guide/animations/keyframes-pulsation.png">
 
-The code snippet for this animation might look like this.
+このアニメーションのコードスニペットは次のようになります。
 
 <docs-code header="open-close.ts" path="adev/src/content/examples/animations/src/app/open-close.1.ts" region="trigger"/>
 
-### Animatable properties and units
+### アニメーション可能なプロパティと単位 {#animatable-properties-and-units}
 
-Angular animations support builds on top of web animations, so you can animate any property that the browser considers animatable.
-This includes positions, sizes, transforms, colors, borders, and more.
-The W3C maintains a list of animatable properties on its [CSS Transitions](https://www.w3.org/TR/css-transitions-1) page.
+AngularのアニメーションはWeb Animationsを土台にしているため、ブラウザがアニメーション可能と見なすすべてのプロパティをアニメーションできます。
+これには、位置、サイズ、transform、色、境界線などが含まれます。
+W3Cは、アニメーション可能なプロパティの一覧を [CSS Transitions](https://www.w3.org/TR/css-transitions-1) ページで管理しています。
 
-For properties with a numeric value, define a unit by providing the value as a string, in quotes, with the appropriate suffix:
+数値を持つプロパティでは、適切なサフィックスを付けた文字列として値を引用符付きで指定して、単位を定義します:
 
-- 50 pixels:
+- 50ピクセル:
   `'50px'`
 
-- Relative font size:
+- 相対フォントサイズ:
   `'3em'`
 
-- Percentage:
+- パーセンテージ:
   `'100%'`
 
-You can also provide the value as a number. In such cases Angular assumes a default unit of pixels, or `px`.
-Expressing 50 pixels as `50` is the same as saying `'50px'`.
+値は数値でも指定できます。その場合、Angularはデフォルト単位としてピクセル、つまり `px` を仮定します。
+50ピクセルを `50` と書くのは `'50px'` と書くのと同じです。
 
-HELPFUL: The string `"50"` would instead not be considered valid\).
+HELPFUL: 文字列 `"50"` は有効とは見なされません。
 
-### Automatic property calculation with wildcards
+### ワイルドカードを使った自動プロパティ計算 {#automatic-property-calculation-with-wildcards}
 
-Sometimes, the value of a dimensional style property isn't known until runtime.
-For example, elements often have widths and heights that depend on their content or the screen size.
-These properties are often challenging to animate using CSS.
+このような場合は、寸法を持つスタイルプロパティの値が実行時まで分からないことがあります。
+たとえば、要素の幅や高さは、その内容や画面サイズに依存することがよくあります。
+これらのプロパティは、CSSではアニメーション化が難しいことがよくあります。
 
-In these cases, you can use a special wildcard `*` property value under `style()`. The value of that particular style property is computed at runtime and then plugged into the animation.
+このような場合は、`style()` の中で特別なワイルドカード `*` のプロパティ値を使えます。その特定のスタイルプロパティの値は実行時に計算され、アニメーションに差し込まれます。
 
-The following example has a trigger called `shrinkOut`, used when an HTML element leaves the page.
-The animation takes whatever height the element has before it leaves, and animates from that height to zero.
+次の例には、HTML要素がページから離れるときに使われる `shrinkOut` というトリガーがあります。
+アニメーションは、要素がページを離れる前の高さをそのまま使い、その高さから0へアニメーションします。
 
 <docs-code header="hero-list-auto.ts" path="adev/src/content/examples/animations/src/app/hero-list-auto.ts" region="auto-calc"/>
 
-### Keyframes summary
+### キーフレームのまとめ {#keyframes-summary}
 
-The `keyframes()` function in Angular allows you to specify multiple interim styles within a single transition. An optional `offset` can be used to define the point in the animation where each style change should occur.
+Angularの `keyframes()` 関数を使うと、1つのトランジション内で複数の中間スタイルを指定できます。任意の `offset` を使うと、各スタイル変更がアニメーションのどの地点で発生するかを定義できます。
 
-## More on Angular animations
+## Angularアニメーションについてさらに詳しく {#more-on-angular-animations}
 
-You might also be interested in the following:
+以下の項目にも興味があるかもしれません:
 
 <docs-pill-row>
-  <docs-pill href="guide/legacy-animations" title="Introduction to Angular animations"/>
-  <docs-pill href="guide/legacy-animations/complex-sequences" title="Complex animation sequences"/>
-  <docs-pill href="guide/legacy-animations/reusable-animations" title="Reusable animations"/>
-  <docs-pill href="guide/routing/route-transition-animations" title="Route transition animations"/>
-  <docs-pill href="guide/animations/migration" title="Migrating to Native CSS Animations"/>
+  <docs-pill href="guide/legacy-animations" title="Angularアニメーションの概要"/>
+  <docs-pill href="guide/legacy-animations/complex-sequences" title="複雑なアニメーションシーケンス"/>
+  <docs-pill href="guide/legacy-animations/reusable-animations" title="再利用可能なアニメーション"/>
+  <docs-pill href="guide/routing/route-transition-animations" title="ルート遷移アニメーション"/>
+  <docs-pill href="guide/animations/migration" title="ネイティブCSSアニメーションへの移行"/>
 </docs-pill-row>

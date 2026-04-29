@@ -109,7 +109,6 @@ export class AppComponent {}
 これを行うために、完全な例では、`ngOnInit()` を使用して最初に `setCurrentStyles()` を呼び出し、依存プロパティがボタンクリックを通じて変更されたときに呼び出します。
 ただし、これらの手順は、`ngStyle` 自体を実装するために必要ではありません。
 
-
 ## DOM 要素のないディレクティブをホストする
 
 Angularの `<ng-container>` は、AngularがDOMに配置しないため、スタイルやレイアウトに影響を与えないグループ化要素です。

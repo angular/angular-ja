@@ -237,9 +237,9 @@ effect(async () => {
 シグナルを作成する際には、オプションで等価関数を指定できます。これは、新しい値が前の値と実際に異なるかどうかを確認するために使用されます。
 
 ```ts
-import _ from 'lodash';
+import isEqual from 'lodash/isEqual';
 
-const data = signal(['test'], {equal: _.isEqual});
+const data = signal(['test'], {equal: isEqual});
 
 // これは別の配列インスタンスですが、
 // 深い等価関数を使用することで値は等しいと判断され、

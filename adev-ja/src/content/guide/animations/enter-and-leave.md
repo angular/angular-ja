@@ -55,9 +55,9 @@ NOTE: 要素に複数のキーフレームアニメーションまたはtransiti
     <docs-code header="leave-binding.css" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-binding.css"/>
 </docs-code-multifile>
 
-### 要素の削除順序が重要 {#element-removal-order-matters}
+### 要素の削除順序 {#element-removal-order}
 
-`animate.leave`アニメーションの実行方法とアニメーションが発生するタイミングには、いくつかの微妙な点があります。`animate.leave`は、削除される要素に配置されている場合に機能します。ただし、`animate.leave`は、削除される要素の_子孫_の要素にある場合はアニメーション**しません**。これは、親ノードが削除されると、サブツリー全体が一緒に削除され、その親ノードにアニメーションがないため、即座に削除されるためです。これは、`animate.leave`でアニメーション化する要素がないことを意味します。`animate.leave`の使用においてこのことを考慮する必要があります。
+`animate.leave`アニメーションの実行方法とアニメーションが発生するタイミングには、いくつかの微妙な点があります。`animate.leave`は、削除される要素に配置されている場合に機能します。また、`animate.leave`が削除される要素の_子孫_要素に配置されている場合、それらの子アニメーションは親ノードがDOMから削除される_前に_実行されます。これにより、親ノードが早期に消えることなく、子要素を確実にアニメーションで退場させることができます。
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-parent.ts">
     <docs-code header="leave.ts" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-parent.ts" />

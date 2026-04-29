@@ -387,12 +387,17 @@ export class MyComponent {
 }
 ```
 
-IMPORTANT: 上記のトークンは、次のシナリオでは `null` になります。
+<!-- UL is used below as otherwise the list will not be include as part of the note. -->
+<!-- prettier-ignore-start -->
 
--   ビルドプロセス中。
--   アプリケーションがブラウザでレンダリングされるとき (CSR)。
--   静的サイト生成 (SSG) を実行するとき。
--   開発中のルート抽出時 (リクエスト時)。
+IMPORTANT: 上記のトークンは、次のシナリオでは `null` になります。<ul class="docs-list">
+  <li>ビルドプロセス中。</li>
+  <li>アプリケーションがブラウザでレンダリングされるとき (CSR)。</li>
+  <li>静的サイト生成 (SSG) を実行するとき。</li>
+  <li>開発中のルート抽出時 (リクエスト時)。</li>
+</ul>
+
+<!-- prettier-ignore-end -->
 
 ## 完全に静的なアプリケーションを生成する {#generate-a-fully-static-application}
 
@@ -521,7 +526,7 @@ bootstrapApplication(App, {
 });
 ```
 
-#### `filter` {#filter}
+#### フィルタリング {#filtering}
 
 `withHttpTransferCacheOptions` の [`filter`](api/common/http/HttpTransferCacheOptions) オプションを使用して、特定のリクエストのキャッシュを選択的に無効にできます。たとえば、特定のAPIエンドポイントのキャッシュを無効にできます。
 
@@ -545,7 +550,7 @@ bootstrapApplication(App, {
 
 このオプションを使用して、ユーザー固有または動的なデータ(例: `/api/profile`)を持つエンドポイントを除外します。
 
-#### 個別 {#individually}
+#### リクエストごと {#per-request}
 
 個々のリクエストのキャッシュを無効にするには、`HttpRequest` で [`transferCache`](api/common/http/HttpRequest#transferCache) オプションを指定できます。
 
@@ -611,3 +616,7 @@ export const reqHandler = createRequestHandler(async (req: Request) => {
   // ...
 });
 ```
+
+## セキュリティ {#security}
+
+サーバーサイドリクエストフォージェリ (SSRF) の防止と許可ホストの設定に関する詳細については、[サーバーサイドセキュリティ](best-practices/security#preventing-server-side-request-forgery-ssrf)ガイドを参照してください。

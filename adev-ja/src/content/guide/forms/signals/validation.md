@@ -716,6 +716,35 @@ const userForm = form(signal({email: '', password: ''}), (schemaPath) => {
 });
 ```
 
+### ダイナミックスキーマ {#dynamic-schemas}
+
+依存関係が変更されたときにバリデーションスキーマが自動的に更新されるように、静的なスキーマの代わりにシグナルを渡すことができます。
+
+```angular-ts
+import {Component, computed, signal} from '@angular/core';
+import {form, FormField, validateStandardSchema} from '@angular/forms/signals';
+import z from 'zod';
+
+@Component({
+  /* ... */
+})
+export class DynamicSchema {
+  model = signal({document: '', type: 'dni'});
+
+  // Schema reacts automatically to type changes
+  schema = computed(() =>
+    z.object({
+      document:
+        this.model().type === 'dni'
+          ? z.string().length(8, 'DNI must be 8 digits')
+          : z.string().min(12, 'Passport must be at least 12 characters'),
+    }),
+  );
+
+  f = form(this.model, (p) => validateStandardSchema(p, () => this.schema()));
+}
+```
+
 ## 次のステップ {#next-steps}
 
 このガイドでは、バリデーションルールの作成と適用について説明しました。関連ガイドでは、シグナルフォームの他の側面について解説します:

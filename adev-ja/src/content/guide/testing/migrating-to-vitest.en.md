@@ -69,16 +69,16 @@ You can now delete `karma.conf.js` and `src/test.ts` from your project and unins
 
 <docs-code-multifile>
   <docs-code header="npm" language="shell">
-    npm uninstall karma karma-chrome-launcher karma-coverage karma-jasmine karma-jasmine-html-reporter
+    npm uninstall karma karma-chrome-launcher karma-coverage karma-jasmine karma-jasmine-html-reporter jasmine-core
   </docs-code>
   <docs-code header="yarn" language="shell">
-    yarn remove karma karma-chrome-launcher karma-coverage karma-jasmine karma-jasmine-html-reporter
+    yarn remove karma karma-chrome-launcher karma-coverage karma-jasmine karma-jasmine-html-reporter jasmine-core
   </docs-code>
   <docs-code header="pnpm" language="shell">
-    pnpm remove karma karma-chrome-launcher karma-coverage karma-jasmine karma-jasmine-html-reporter
+    pnpm remove karma karma-chrome-launcher karma-coverage karma-jasmine karma-jasmine-html-reporter jasmine-core
   </docs-code>
   <docs-code header="bun" language="shell">
-    bun remove karma karma-chrome-launcher karma-coverage karma-jasmine karma-jasmine-html-reporter
+    bun remove karma karma-chrome-launcher karma-coverage karma-jasmine karma-jasmine-html-reporter jasmine-core
   </docs-code>
 </docs-code-multifile>
 
@@ -227,7 +227,7 @@ If you set `runnerConfig` to `true`, the builder will automatically search for a
 
 ## `zone.js` based helpers are not supported
 
-The zone.js patches are not applied when running tests with Vitest, there for you won't be able use functions like `fakeAsync`, `flush` or `waitForAsync`.
+The zone.js patches are not applied when running tests with Vitest, therefore you won't be able to use functions like `fakeAsync`, `flush` or `waitForAsync`.
 To migrate to Vitest you will also need to migrate your tests to native async and Vitest fake timers. See [an example here](/guide/testing/components-scenarios#async-test-with-a-vitest-fake-timers) for fake timers usages with Vitest.
 
 ## Bug reports

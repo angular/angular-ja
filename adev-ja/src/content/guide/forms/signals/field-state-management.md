@@ -618,7 +618,7 @@ export class Password {
 
 #### フォームの送信 {#form-submission}
 
-Signal Forms provides a `FormRoot` directive that simplifies form submission. It automatically prevents the default browser form submission behavior and sets the `novalidate` attribute on the `<form>` element.
+シグナルフォームprovides a `FormRoot` directive that simplifies form submission. It automatically prevents the default browser form submission behavior and sets the `novalidate` attribute on the `<form>` element.
 
 ```angular-ts
 @Component({

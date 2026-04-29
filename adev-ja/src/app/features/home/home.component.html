@@ -50,35 +50,35 @@
 
       <div class="sliding-window">
         <div ngTabPanel [preserveContent]="true" value="signals">
-          @defer (on idle) {
-            <ng-template ngTabContent>
+          <ng-template ngTabContent>
+            @defer (on idle) {
               <adev-signals-demo />
-            </ng-template>
-          }
+            }
+          </ng-template>
         </div>
 
         <div ngTabPanel [preserveContent]="true" value="control-flow">
-          @defer (on idle) {
-            <ng-template ngTabContent>
+          <ng-template ngTabContent>
+            @defer (on idle) {
               <adev-control-flow-example />
-            </ng-template>
-          }
+            }
+          </ng-template>
         </div>
 
         <div ngTabPanel [preserveContent]="true" value="deferrable-views">
-          @defer (on idle) {
-            <ng-template ngTabContent>
+          <ng-template ngTabContent>
+            @defer {
               <adev-defer-example />
-            </ng-template>
-          }
+            }
+          </ng-template>
         </div>
 
         <div ngTabPanel [preserveContent]="true" value="hydration">
-          @defer (on idle) {
-            <ng-template ngTabContent>
+          <ng-template ngTabContent>
+            @defer {
               <adev-hydration-example />
-            </ng-template>
-          }
+            }
+          </ng-template>
         </div>
       </div>
     </div>
@@ -160,7 +160,7 @@
 
   <section class="explore-section" id="learn-more">
     <div class="title">
-      <h2>Angularの何を学ぶ？</h2>
+      <h2>Angularについてもっと学びたいですか？</h2>
       <div class="pattern"></div>
     </div>
 

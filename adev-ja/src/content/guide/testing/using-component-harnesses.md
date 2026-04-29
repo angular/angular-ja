@@ -25,7 +25,7 @@ ng add @angular/cdk
 
 ### 単体テストでの`TestbedHarnessEnvironment`からのローダーの使用 {#using-the-loader-from-testbedharnessenvironment-for-unit-tests}
 
-単体テストでは、[TestbedHarnessEnvironment](/api/cdk/testing/TestbedHarnessEnvironment)からハーネスローダーを作成できます。この環境は、Angularの`TestBed`によって作成された[コンポーネントフィクスチャ](api/core/testing/ComponentFixture)を使用します。
+単体テストでは、[TestbedHarnessEnvironment](/api/cdk/testing/testbed/TestbedHarnessEnvironment)からハーネスローダーを作成できます。この環境は、Angularの`TestBed`によって作成された[コンポーネントフィクスチャ](api/core/testing/ComponentFixture)を使用します。
 
 フィクスチャのルート要素にルートを持つハーネスローダーを作成するには、`loader()`メソッドを使用します。
 
@@ -68,7 +68,7 @@ const myComponentHarness = await loader.getHarness(MyComponent);
 const myComponentHarness = await loader.getHarness(MyComponent);
 
 // Get harnesses for all instances of the element
-const myComponentHarnesses = await loader.getHarnesses(MyComponent);
+const myComponentHarnesses = await loader.getAllHarnesses(MyComponent);
 ```
 
 `getHarness`と`getAllHarnesses`に加えて、`HarnessLoader`にはハーネスを検索するためのその他の有用なメソッドがいくつかあります。

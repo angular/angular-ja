@@ -328,14 +328,14 @@ export class Registration {
 
   private createUsernameResource = (usernameSignal: Signal<string | undefined>) => {
     return rxResource({
-      request: () => usernameSignal(),
-      stream: ({request: username}) => this.usernameService.checkUsername(username),
+      params: () => usernameSignal(),
+      stream: ({params: username}) => this.usernameService.checkUsername(username),
     });
   };
 
   registrationForm = form(this.registrationModel, (schemaPath) => {
     validateAsync(schemaPath.username, {
-      params: ({value}) => value() || undefined,
+      params: ({value}) => value(),
       factory: this.createUsernameResource,
       onSuccess: (result) =>
         result?.available ? null : {kind: 'usernameTaken', message: 'Username taken'},

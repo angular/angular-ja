@@ -1,117 +1,172 @@
-# サービスのテスト
+# Testing services
 
-サービスが意図通りに動作していることを確認するには、サービス専用のテストを作成できます。
+Services typically contain your application's business logic that components rely on. Testing services verifies that the logic works correctly in isolation, independent of any component or template.
 
-サービスは、多くの場合、ユニットテストを実行するのに最もスムーズなファイルです。
-以下は、Angularテストユーティリティの助けを借りずに記述された `ValueService` の同期および非同期のユニットテストです。
+This guide uses [Vitest](https://vitest.dev/), which Angular CLI projects include by default. For more on testing setup, see the [testing overview guide](guide/testing#set-up-for-testing).
 
-```ts
-describe('ValueService', () => {
-  let service: ValueService;
+## Testing a service
+
+Consider a `Calculator` service that performs basic arithmetic:
+
+```ts { header: 'calculator.ts' }
+import {Injectable} from '@angular/core';
+
+@Injectable({providedIn: 'root'})
+export class Calculator {
+  add(a: number, b: number): number {
+    return a + b;
+  }
+
+  subtract(a: number, b: number): number {
+    return a - b;
+  }
+}
+```
+
+To test this service, configure a `TestBed`, which is Angular's testing utility for creating an isolated testing environment for each test. It sets up dependency injection and lets you retrieve service instances — simulating how Angular wires things together in a real application.
+
+```ts { header: 'calculator.spec.ts' }
+import {TestBed} from '@angular/core/testing';
+import {beforeEach, describe, expect, it} from 'vitest';
+import {Calculator} from './calculator';
+
+describe('Calculator', () => {
+  let service: Calculator;
 
   beforeEach(() => {
-    // Only works if the service doesn't rely on Angular inject()
-    service = new ValueService();
+    // Injects the Calculator service which is available to Angular
+    // because the service uses `providedIn: 'root'`
+    service = TestBed.inject(Calculator);
   });
 
-  it('getValue should return real value', () => {
-    expect(service.getValue()).toBe('real value');
+  it('adds two numbers', () => {
+    expect(service.add(1, 2)).toBe(3);
   });
 
-  it('getObservableValue should return value from observable', async () => {
-    const value = await new Promise<string>((resolve) => {
-      service.getObservableValue().subscribe(resolve);
+  it('subtracts two numbers', () => {
+    expect(service.subtract(5, 3)).toBe(2);
+  });
+});
+```
+
+In the example above, the `beforeEach` block injects a fresh instance of the service before every test. This ensures each test runs in isolation with no leaked state from previous tests.
+
+## Testing services with dependencies
+
+Most services depend on other services to run properly. By default, `TestBed` provides the real implementations of these dependencies, which means your tests exercise the actual code paths your application uses. Sometimes, however, a dependency may be complex, slow, or unpredictable. In those cases, you can substitute it with a controlled replacement.
+
+Consider an `OrderTotal` service that relies on a `TaxCalculator` to compute the final price of an order:
+
+```ts { header: 'tax-calculator.ts' }
+import {Injectable} from '@angular/core';
+
+@Injectable({providedIn: 'root'})
+export class TaxCalculator {
+  calculate(subtotal: number): number {
+    return subtotal * 0.05;
+  }
+}
+```
+
+```ts { header: 'order-total.ts' }
+import {inject, Injectable} from '@angular/core';
+import {TaxCalculator} from './tax-calculator';
+
+@Injectable({providedIn: 'root'})
+export class OrderTotal {
+  private taxCalculator = inject(TaxCalculator);
+
+  total(subtotal: number): number {
+    return subtotal + this.taxCalculator.calculate(subtotal);
+  }
+}
+```
+
+In this example, `OrderTotal` uses `inject()` to request `TaxCalculator` from Angular's dependency injection system. By default, `TestBed` provides the real `TaxCalculator` which is perfect for simple calculations like this. However, if `TaxCalculator` involved complex logic, network requests, or unpredictable results, you might want to substitute it with a controlled replacement.
+
+### Replacing a dependency with a stub
+
+A stub is a way to replace a dependency or method with one that returns predictable values, which can make test results easier to verify.
+
+To test `OrderTotal` without relying on the real `TaxCalculator`, you can provide a stub in the `TestBed` configuration.
+
+```ts { header: 'order-total.spec.ts' }
+import {TestBed} from '@angular/core/testing';
+import {beforeEach, describe, expect, it, vi, type Mocked} from 'vitest';
+import {OrderTotal} from './order-total';
+import {TaxCalculator} from './tax-calculator';
+
+// Vitest's `Mocked` utility type ensures the stub is type-safe,
+// while `vi.fn()` creates a mock function for each method
+const taxCalculatorStub: Mocked<TaxCalculator> = {
+  calculate: vi.fn(),
+};
+
+describe('OrderTotal', () => {
+  let service: OrderTotal;
+
+  beforeEach(() => {
+    // `mockReturnValue` sets a controlled return value for the stub
+    taxCalculatorStub.calculate.mockReturnValue(5);
+
+    TestBed.configureTestingModule({
+      // The `providers` array accepts a provider object where `provide`
+      // specifies the dependency to replace and `useValue` defines the stub
+      providers: [{provide: TaxCalculator, useValue: taxCalculatorStub}],
     });
-
-    expect(value).toBe('observable value');
+    service = TestBed.inject(OrderTotal);
   });
 
-  it('getPromiseValue should return value from a promise', async () => {
-    const value = await service.getPromiseValue();
-    expect(value).toBe('promise value');
+  it('adds tax to the subtotal', () => {
+    expect(service.total(100)).toBe(105);
   });
 });
 ```
 
-## `TestBed` を使用したサービスのテスト {#testing-services-with-the-testbed}
+With this stub, whenever `OrderTotal` requests `TaxCalculator`, the `TestBed` knows to use the `taxCalculatorStub` instead. Because the stub always returns 5, the test verifies that `OrderTotal` correctly adds the tax value to the subtotal regardless of whether the tax rate changes in `TaxCalculator`.
 
-アプリケーションは、Angularの [依存関係注入 (DI)](guide/di) に依存してサービスを作成します。
-サービスが依存サービスを持っている場合、DIはその依存サービスを見つけたり、作成します。
-さらに、その依存サービスに独自の依存関係がある場合、DIはそれらも探し出して作成します。
+### Verifying interactions with spies
 
-サービスの _消費者_ として、あなたはこれらについて心配する必要はありません。
-コンストラクター引数の順序や、それらがどのように作成されるかについて心配する必要はありません。
+A stub controls what a dependency returns, but sometimes you also need to verify that a service called its dependency with the correct arguments. This can be accomplished with spies, which track how a function is called. With Vitest, this functionality is built into `vi.fn()` and lets you assert on interactions between services.
 
-サービスの _テスター_ として、少なくともサービス依存関係の最初のレベルについて考える必要はありますが、`TestBed` テストユーティリティを使用してサービスを提供して作成し、コンストラクター引数の順序を処理するときは、Angular DIにサービスの作成を任せることができます。
+```ts { header: 'order-total.spec.ts' }
+import {TestBed} from '@angular/core/testing';
+import {beforeEach, describe, expect, it, vi, type Mocked} from 'vitest';
+import {OrderTotal} from './order-total';
+import {TaxCalculator} from './tax-calculator';
 
-## Angular `TestBed` {#angular-testbed}
+const taxCalculatorStub: Mocked<TaxCalculator> = {
+  calculate: vi.fn(),
+};
 
-`TestBed` は、Angularのテストユーティリティの中で最も重要なものです。
-`TestBed` は、Angularの [@NgModule](guide/ngmodules/overview) をエミュレートする、動的に構築されたAngularの _テスト_ モジュールを作成します。
+describe('OrderTotal', () => {
+  let service: OrderTotal;
 
-`TestBed.configureTestingModule()` メソッドは、[@NgModule](guide/ngmodules/overview) のほとんどのプロパティを持つことができるメタデータオブジェクトを受け取ります。
+  beforeEach(() => {
+    taxCalculatorStub.calculate.mockReturnValue(5);
 
-サービスをテストするには、テストまたはモックするサービスの配列を `providers` メタデータプロパティに設定します。
-
-```ts
-let service: ValueService;
-beforeEach(() => {
-  TestBed.configureTestingModule({providers: [ValueService]});
-});
-```
-
-次に、サービスクラスを引数として `TestBed.inject()` を呼び出して、テスト内でサービスを注入します。
-
-```ts
-it('should use ValueService', () => {
-  service = TestBed.inject(ValueService);
-  expect(service.getValue()).toBe('real value');
-});
-```
-
-または、セットアップの一部としてサービスを注入したい場合は、`beforeEach()` 内で行います。
-
-```ts
-beforeEach(() => {
-  TestBed.configureTestingModule({providers: [ValueService]});
-  service = TestBed.inject(ValueService);
-});
-```
-
-依存関係のあるサービスをテストする場合は、`providers` 配列にモックを提供します。
-
-次の例では、モックはスパイオブジェクトです。
-
-```ts
-let masterService: MainService;
-let valueServiceSpy: Mocked<ValueService>;
-
-beforeEach(() => {
-  const spy: Mocked<ValueService> = {getValue: vi.fn()};
-
-  TestBed.configureTestingModule({
-    providers: [MainService, {provide: ValueService, useValue: spy}],
+    TestBed.configureTestingModule({
+      providers: [{provide: TaxCalculator, useValue: taxCalculatorStub}],
+    });
+    service = TestBed.inject(OrderTotal);
   });
 
-  masterService = TestBed.inject(MainService);
-  valueServiceSpy = TestBed.inject(ValueService) as Mocked<ValueService>;
+  it('adds tax to the subtotal', () => {
+    expect(service.total(100)).toBe(105);
+  });
+
+  // Verify the interaction with a spy
+  it('calls the tax calculator', () => {
+    service.total(100);
+    expect(taxCalculatorStub.calculate).toHaveBeenCalledExactlyOnce();
+  });
 });
 ```
 
-テストでは、以前と同じように、そのスパイを使用します。
+The new test verifies that `OrderTotal` called `TaxCalculator.calculate` when computing the total. This is useful when verifying that the interaction between services happened correctly.
 
-```ts
-it('getValue should return stubbed value from a spy', () => {
-  const stubValue = 'stub value';
+## Testing HTTP services
 
-  valueServiceSpy.getValue.mockReturnValue(stubValue);
+Many services use Angular's `HttpClient` to fetch data from a server. Angular provides dedicated testing utilities for `HttpClient` that let you control HTTP responses without making real network requests.
 
-  expect(masterService.getValue(), 'service returned stub value').toBe(stubValue);
-  expect(valueServiceSpy.getValue, 'spy method was called once').toHaveBeenCalledTimes(1);
-  expect(valueServiceSpy.getValue.mock.results.at(-1)?.value).toBe(stubValue);
-});
-```
-
-## HTTP サービスのテスト {#testing-http-services}
-
-`HttpClient`に依存するサービスのテストについては、[専用ガイド](/guide/http/testing)を参照してください。
+For details on testing services that use `HttpClient`, see the [HTTP testing guide](guide/http/testing).

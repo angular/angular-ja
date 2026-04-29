@@ -1,28 +1,28 @@
 # Reactive forms
 
 Reactive forms provide a model-driven approach to handling form inputs whose values change over time.
-This guide shows you how to create and update a basic form control, progress to using multiple controls in a group, validate form values, and create dynamic forms where you can add or remove controls at run time.
+This guide shows you how to create and update a basic form control, use multiple controls in a group, validate form values, and create dynamic forms where you can add or remove controls at runtime.
 
 ## Overview of reactive forms
 
 Reactive forms use an explicit and immutable approach to managing the state of a form at a given point in time.
 Each change to the form state returns a new state, which maintains the integrity of the model between changes.
-Reactive forms are built around observable streams, where form inputs and values are provided as streams of input values, which can be accessed synchronously.
+Reactive forms are built around observable streams, where form inputs and values are provided as streams that can be accessed synchronously.
 
 Reactive forms also provide a straightforward path to testing because you are assured that your data is consistent and predictable when requested.
-Any consumers of the streams have access to manipulate that data safely.
+Any consumers of these streams can safely manipulate the data.
 
 Reactive forms differ from [template-driven forms](guide/forms/template-driven-forms) in distinct ways.
 Reactive forms provide synchronous access to the data model, immutability with observable operators, and change tracking through observable streams.
 
-Template-driven forms let direct access modify data in your template, but are less explicit than reactive forms because they rely on directives embedded in the template, along with mutable data to track changes asynchronously.
+Template-driven forms allow direct access to modify data in your template, but are less explicit than reactive forms because they rely on directives embedded in the template, along with mutable data to track changes asynchronously.
 See the [Forms Overview](guide/forms) for detailed comparisons between the two paradigms.
 
 ## Adding a basic form control
 
 There are three steps to using form controls.
 
-1. Generate a new component and register the reactive forms module. This module declares the reactive-form directives that you need to use reactive forms.
+1. Generate a new component and register the reactive forms module. This module declares the reactive-form directives required to use reactive forms.
 1. Instantiate a new `FormControl`.
 1. Register the `FormControl` in the template.
 
@@ -62,7 +62,7 @@ The `FormControl` assigned to the `name` property is displayed when the `<app-na
 
 ### Displaying a form control value
 
-You can display the value in the following ways.
+You can display the value in the following ways:
 
 - Through the `valueChanges` observable where you can listen for changes in the form's value in the template using `AsyncPipe` or in the component class using the `subscribe()` method
 - With the `value` property, which gives you a snapshot of the current value
@@ -231,7 +231,7 @@ Simulate an update by adding a button to the template to update the user profile
 
 When a user clicks the button, the `profileForm` model is updated with new values for `firstName` and `street`. Notice that `street` is provided in an object inside the `address` property.
 This is necessary because the `patchValue()` method applies the update against the model structure.
-`PatchValue()` only updates properties that the form model defines.
+`patchValue()` only updates properties that the form model defines.
 
 ## Using the FormBuilder service to generate controls
 
@@ -379,6 +379,26 @@ The `@for` block iterates over each form control instance provided by the aliase
 
 Each time a new alias instance is added, the new form array instance is provided its control based on the index. This lets you track each individual control when calculating the status and value of the root control.
 
+NOTE: In zoneless applications, mutating a reactive forms model (for example calling `FormArray.push()`) does not automatically schedule component change detection. If your template depends on structural model changes such as `aliases.controls`, make sure the component notifies Angular to run change detection, for example by bridging a forms observable to `ChangeDetectorRef.markForCheck()`:
+
+```ts
+import {ChangeDetectorRef, Component, inject} from '@angular/core';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+
+@Component({
+  /* ... */
+})
+export class ProfileEditor {
+  private readonly cdr = inject(ChangeDetectorRef);
+
+  constructor() {
+    this.profileForm.valueChanges
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => this.cdr.markForCheck());
+  }
+}
+```
+
 </docs-step>
 
 ### Using `FormArrayDirective` for top-level form arrays
@@ -417,7 +437,7 @@ Initially, the form contains one `Alias` field. To add another field, click the 
 ## Unified control state change events
 
 All form controls expose a single unified stream of **control state change events** through the `events` observable on `AbstractControl` (`FormControl`, `FormGroup`, `FormArray`, and `FormRecord`).
-This unified stream lets you react to **value**, **status**, **pristine**, **touched** and **reset** state changes and also for **form-level actions** such as **submit** , allowing you to handle all updates with a one subscription instead of wiring multiple observables.
+This unified stream lets you react to **value**, **status**, **pristine**, **touched**, and **reset** state changes, as well as **form-level actions** such as **submit**, allowing you to handle all updates with a single subscription instead of wiring multiple observables.
 
 ### Event types
 
@@ -636,6 +656,8 @@ updatePostalCodeValidator(country: string) {
   postal.updateValueAndValidity({ onlySelf: true, emitEvent: false });
 }
 ```
+
+HELPFUL: For dynamically managing validators at runtime, see the [Managing validators dynamically in reactive forms](guide/forms/form-validation#managing-validators-dynamically-in-reactive-forms) section in the Form Validation guide.
 
 ## Utility functions for narrowing form control types
 

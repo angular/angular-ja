@@ -166,99 +166,6 @@ const routes: Routes = [
 1. `users`には到達しません
 1. `**`には到達しません
 
-## ルートの読み込み戦略 {#route-loading-strategies}
-
-Angularルーティングでルートとコンポーネントがどのように、いつ読み込まれるかを理解することは、応答性の高いWebアプリケーションを構築するために不可欠です。Angularは、読み込み動作を制御するための2つの主要な戦略を提供します。
-
-1. **即時読み込み (Eagerly loaded)**: すぐに読み込まれるルートとコンポーネント
-2. **遅延読み込み (Lazily loaded)**: 必要になったときにのみ読み込まれるルートとコンポーネント
-
-それぞれのアプローチは、異なるシナリオに対して明確な利点を提供します。
-
-### 即時読み込みされるコンポーネント {#eagerly-loaded-components}
-
-`component`プロパティでルートを定義すると、参照されるコンポーネントは、ルート構成と同じJavaScriptバンドルの一部として即時読み込みされます。
-
-```ts
-import {Routes} from '@angular/router';
-import {HomePage} from './components/home/home-page';
-import {LoginPage} from './components/auth/login-page';
-
-export const routes: Routes = [
-  // HomePageとLoginPageはどちらもこの設定で直接参照されているため、
-  // そのコードはこのファイルと同じJavaScriptバンドルに即時含まれます。
-  {
-    path: '',
-    component: HomePage,
-  },
-  {
-    path: 'login',
-    component: LoginPage,
-  },
-];
-```
-
-このようにルートコンポーネントを即時読み込みすることは、ブラウザが初期ページ読み込みの一部としてこれらのコンポーネントのすべてのJavaScriptをダウンロードして解析する必要があることを意味しますが、コンポーネントはAngularですぐに利用できます。
-
-初期ページ読み込みに多くのJavaScriptを含めると初期読み込み時間は遅くなりますが、ユーザーがアプリケーション内を移動する際のよりシームレスな遷移につながる可能性があります。
-
-### 遅延読み込みされるコンポーネントとルート {#lazily-loaded-components-and-routes}
-
-`loadComponent`プロパティを使用すると、そのルートがアクティブになる時点でのみ、コンポーネントのJavaScriptを遅延読み込みできます。`loadChildren`プロパティは、ルートマッチング時に子ルートを遅延読み込みします。
-
-```ts
-import {Routes} from '@angular/router';
-
-export const routes: Routes = [
-  {
-    path: 'login',
-    loadComponent: () => import('./components/auth/login-page'),
-  },
-  {
-    path: 'admin',
-    loadComponent: () => import('./admin/admin.component'),
-    loadChildren: () => import('./admin/admin.routes'),
-  },
-];
-```
-
-`loadComponent`と`loadChildren`プロパティは、それぞれAngularコンポーネントまたはルートのセットに解決されるPromiseを返すローダー関数を受け入れます。ほとんどの場合、この関数は標準の[JavaScript動的インポートAPI](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import)を使用します。ただし、任意の非同期ローダー関数も使用できます。
-
-遅延読み込みされるファイルが`default`エクスポートを使用している場合、エクスポートされたクラスを選択するための追加の`.then`呼び出しなしで、`import()`Promiseを直接返すことができます。
-
-遅延読み込みルートは、初期バンドルからJavaScriptの大部分を削除することで、Angularアプリケーションの読み込み速度を大幅に向上させることができます。これらのコード部分は、ユーザーが対応するルートにアクセスしたときにのみルーターが要求する個別のJavaScript「チャンク」にコンパイルされます。
-
-### 注入コンテキストでの遅延読み込み {#injection-context-lazy-loading}
-
-ルーターは`loadComponent`と`loadChildren`を**現在のルートの注入コンテキスト**内で実行します。これにより、これらのローダー関数内で[`inject`](/api/core/inject)を呼び出して、そのルートで宣言されたプロバイダー、階層的な依存性の注入を介して親ルートから継承されたプロバイダー、またはグローバルに利用可能なプロバイダーにアクセスできます。これにより、コンテキストを認識した遅延読み込みが可能になります。
-
-```ts
-import {Routes} from '@angular/router';
-import {inject} from '@angular/core';
-import {FeatureFlags} from './feature-flags';
-
-export const routes: Routes = [
-  {
-    path: 'dashboard',
-    // ルートのインジェクションコンテキスト内で実行されます
-    loadComponent: () => {
-      const flags = inject(FeatureFlags);
-      return flags.isPremium
-        ? import('./dashboard/premium-dashboard')
-        : import('./dashboard/basic-dashboard');
-    },
-  },
-];
-```
-
-### 即時ルートと遅延ルートのどちらを使用すべきか {#should-i-use-an-eager-or-a-lazy-route}
-
-ルートが即時読み込みか遅延読み込みかを決定する際には、多くの要素を考慮する必要があります。
-
-一般的に、プライマリランディングページには即時読み込みが推奨され、他のページは遅延読み込みされます。
-
-NOTE: 遅延ルートは、ユーザーが要求する初期データの量を減らすという先行的なパフォーマンス上の利点がありますが、望ましくない可能性のある将来のデータ要求を追加します。これは、複数のレベルでのネストされた遅延読み込みを扱う場合に特に当てはまり、パフォーマンスに大きな影響を与える可能性があります。
-
 ## リダイレクト {#redirects}
 
 コンポーネントをレンダリングする代わりに、別のルートにリダイレクトするルートを定義できます。
@@ -462,4 +369,7 @@ const routes: Routes = [
 
 ## 次のステップ {#next-steps}
 
-[アウトレットでルートのコンテンツを表示する方法](/guide/routing/show-routes-with-outlets)を学びましょう。
+<docs-pill-row>
+  <docs-pill href="/guide/routing/loading-strategies" title="Route Loading Strategies"/>
+  <docs-pill href="/guide/routing/show-routes-with-outlets" title="Display the contents of your routes with Outlets"/>
+</docs-pill-row>

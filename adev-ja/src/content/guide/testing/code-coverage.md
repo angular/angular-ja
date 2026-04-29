@@ -86,6 +86,7 @@ ng test --coverage
 `angular.json` ファイルで、他にもいくつかのカバレッジオプションを設定できます。
 
 - `coverageInclude`: カバレッジレポートに含めるファイルのglobパターン。
+- `coverageExclude`: カバレッジレポートから除外するファイルのglobパターン。
 - `coverageReporters`: 使用するレポーターの配列（例: `html`、`lcov`、`json`）。
 - `coverageWatermarks`: HTMLレポーターの `[low, high]` ウォーターマークを指定するオブジェクト。レポートの色分けに影響を与える可能性があります。
 

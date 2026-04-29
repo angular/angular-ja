@@ -52,7 +52,7 @@ const login = new UntypedFormGroup({
 const email = new FormControl('angularrox@gmail.com');
 ```
 
-このコントロールは、自動的に `FormControl<string|null>` 型であると推測されます。TypeScriptは、`email.value`、`email.valueChanges`、`email.setValue(...)` など、[`FormControl` API](api/forms/FormControl) 全体にわたってこの型を自動的に強制します。
+このコントロールは、自動的に `FormControl<string|null>` 型であると推測されます。TypeScriptは、`email.value`、`email.valueChanges`、および `email.setValue(...)` のような [`FormControl` API](api/forms/FormControl) 全体にわたってこの型を自動的に強制します。
 
 ### ヌラビリティ
 

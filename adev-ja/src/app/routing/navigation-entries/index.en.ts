@@ -364,6 +364,11 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/routing/define-routes',
           },
           {
+            label: 'Route Loading Strategies',
+            path: 'guide/routing/loading-strategies',
+            contentPath: 'guide/routing/loading-strategies',
+          },
+          {
             label: 'Show routes with Outlets',
             path: 'guide/routing/show-routes-with-outlets',
             contentPath: 'guide/routing/show-routes-with-outlets',
@@ -488,6 +493,27 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             label: 'Form logic',
             path: 'guide/forms/signals/form-logic',
             contentPath: 'guide/forms/signals/form-logic',
+            category: 'Signal Forms',
+            status: 'new',
+          },
+          {
+            label: 'Cross-field logic',
+            path: 'guide/forms/signals/cross-field-logic',
+            contentPath: 'guide/forms/signals/cross-field-logic',
+            category: 'Signal Forms',
+            status: 'new',
+          },
+          {
+            label: 'Form submission',
+            path: 'guide/forms/signals/form-submission',
+            contentPath: 'guide/forms/signals/form-submission',
+            category: 'Signal Forms',
+            status: 'new',
+          },
+          {
+            label: 'Schemas',
+            path: 'guide/forms/signals/schemas',
+            contentPath: 'guide/forms/signals/schemas',
             category: 'Signal Forms',
             status: 'new',
           },
@@ -655,6 +681,7 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             path: 'guide/routing/testing',
             contentPath: 'guide/routing/testing',
             status: 'new',
+            isCrossReferenced: true,
           },
           {
             label: 'Debugging tests',
@@ -858,6 +885,7 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             label: 'Route transition animations',
             path: 'guide/routing/route-transition-animations',
             contentPath: 'guide/routing/route-transition-animations',
+            isCrossReferenced: true,
           },
         ],
       },
@@ -870,7 +898,6 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
   },
   {
     label: 'Build with AI',
-    status: 'new',
     children: [
       {
         label: 'Get Started',
@@ -883,9 +910,10 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         contentPath: 'ai/develop-with-ai',
       },
       {
-        label: 'Design Patterns',
-        path: 'ai/design-patterns',
-        contentPath: 'ai/design-patterns',
+        label: 'Agent Skills',
+        path: 'ai/agent-skills',
+        contentPath: 'ai/agent-skills',
+        status: 'new',
       },
       {
         label: 'Angular CLI MCP Server setup',
@@ -896,6 +924,11 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         label: 'Angular AI Tutor',
         path: 'ai/ai-tutor',
         contentPath: 'ai/ai-tutor',
+      },
+      {
+        label: 'Design Patterns',
+        path: 'ai/design-patterns',
+        contentPath: 'ai/design-patterns',
       },
     ],
   },
@@ -1032,16 +1065,15 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
           },
           // TODO: create those guides
           // The signal debugging docs should also be added to the signal section
-          // {
           //   label: 'Signals',
           //   path: 'tools/devtools/signals',
           //   contentPath: 'tools/devtools/signals',
           // },
-          // {
-          //   label: 'Router',
-          //   path: 'tools/devtools/router',
-          //   contentPath: 'tools/devtools/router',
-          // }
+          {
+            label: 'Router Tree',
+            path: 'tools/devtools/router',
+            contentPath: 'tools/devtools/router',
+          },
         ],
       },
       {
@@ -1086,6 +1118,12 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
           },
 
           // Loading Performance
+          {
+            label: 'Lazy-loaded routes',
+            path: 'best-practices/performance/lazy-loaded-routes',
+            contentPath: 'guide/routing/loading-strategies',
+            category: 'Loading Performance',
+          },
           {
             label: 'Deferred loading with @defer',
             path: 'best-practices/performance/defer',

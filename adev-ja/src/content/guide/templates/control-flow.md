@@ -133,3 +133,30 @@ NOTE: `*ngFor`とは異なり、`@for`ブロックはビューの再利用を優
 オプションで `@default` ブロックを含めることができます。 `@default` ブロックのコンテンツは、前のケース式のいずれもスイッチ値と一致しない場合に表示されます。
 
 `@case` が式と一致せず、`@default` ブロックがない場合は、何も表示されません。
+
+### 網羅的な型チェック {#exhaustive-type-checking}
+
+`@switch` は網羅的な型チェックをサポートしており、Angularはコンパイル時にユニオン型のすべての可能な値が処理されていることを検証できます。
+
+`@default never;` を使用することで、残りのケースが存在しないことを明示的に宣言します。ユニオン型が後で拡張され、新しいケースが `@case` でカバーされていない場合、Angularのテンプレート型チェッカーはエラーを報告し、見落としたブランチを早期に検出できます。
+
+```angular-html
+@Component({
+  template: `
+    @switch (state) {
+      @case ('loggedOut') {
+        <button>Login</button>
+      }
+
+      @case ('loggedIn') {
+        <p>Welcome back!</p>
+      }
+
+      @default never; // throws because `@case ('loading')` is missing
+    }
+  `,
+})
+export class AppComponent {
+  state: 'loggedOut' | 'loading' | 'loggedIn' = 'loggedOut';
+}
+```

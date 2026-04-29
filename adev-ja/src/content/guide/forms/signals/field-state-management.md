@@ -523,6 +523,29 @@ export class Order {
 
 非表示のフィールドはバリデーションに参加しないため、たとえ非表示のフィールドがそうでなければ無効であってもフォームを送信できます。
 
+### Tracking values for array fields
+
+In signal forms, a `@for` block over a set of fields should be tracked by field identity.
+
+```angular-ts
+@Component({
+  imports: [FormField],
+  template: `
+    @for (field of form.emails; track field) {
+      <input [formField]="field" />
+    }
+  `,
+})
+export class App {
+  formModel = signal({emails: ['john.doe@mail.com', 'max.musterman@mail.com']});
+  form = form(this.formModel);
+}
+```
+
+The forms system is already tracking the model values within the array and maintaining a stable identity of the fields it creates automatically.
+
+When an item changes, it may represent a new logical entity even if some of its properties look the same. Tracking by identity ensures the framework treats it as a distinct item rather than reusing existing UI elements. This prevents stateful elements, like form inputs, from being incorrectly shared and keeps bindings aligned with the correct part of the model.
+
 ## コンポーネントロジックでのフィールド状態の使用 {#using-field-state-in-component-logic}
 
 フィールド状態のシグナルは、Angularのリアクティブプリミティブである`computed()`や`effect()`と連携して、高度なフォームロジックを実現します。
@@ -595,14 +618,13 @@ export class Password {
 
 #### フォームの送信 {#form-submission}
 
-ユーザーがフォームを送信するときは、`submit()`関数を使用してバリデーションを処理し、エラーを表示します。
-
-シグナルフォームは独自のバリデーションシステムでバリデーションを処理するため、ブラウザのデフォルトのフォーム動作を防ぐ必要があります。`<form>`要素に`novalidate`を追加してネイティブHTMLバリデーション（`required`や`type="email"`フィールドに対するブラウザのツールチップポップアップなど）を無効にし、送信ハンドラーで`$event.preventDefault()`を呼び出してブラウザがページをリロードするのを防ぎます:
+シグナルフォームprovides a `FormRoot` directive that simplifies form submission. It automatically prevents the default browser form submission behavior and sets the `novalidate` attribute on the `<form>` element.
 
 ```angular-ts
 @Component({
+  imports: [FormRoot, FormField],
   template: `
-    <form novalidate (submit)="onSubmit($event)">
+    <form [formRoot]="registrationForm">
       <input [formField]="registrationForm.username" />
       <input type="email" [formField]="registrationForm.email" />
       <input type="password" [formField]="registrationForm.password" />
@@ -614,18 +636,19 @@ export class Password {
 export class Registration {
   registrationModel = signal({username: '', email: '', password: ''});
 
-  registrationForm = form(this.registrationModel, (schemaPath) => {
-    required(schemaPath.username);
-    email(schemaPath.email);
-    required(schemaPath.password);
-  });
-
-  onSubmit(event: Event) {
-    event.preventDefault();
-    submit(this.registrationForm, async () => {
-      this.submitToServer();
-    });
-  }
+  registrationForm = form(
+    this.registrationModel,
+    (schemaPath) => {
+      required(schemaPath.username);
+      email(schemaPath.email);
+      required(schemaPath.password);
+    },
+    {
+      submission: {
+        action: async () => this.submitToServer(),
+      },
+    },
+  );
 
   private submitToServer() {
     // Send data to server
@@ -633,32 +656,31 @@ export class Registration {
 }
 ```
 
-`submit()`関数は、すべてのフィールドを自動的にtouchedとしてマークし（バリデーションエラーを表示）、フォームが有効な場合にのみコールバックを実行します。
+When you use `FormRoot`, submitting the form automatically calls the `submit()` function, which marks all fields as touched (revealing validation errors) and executes your `action` callback if the form is valid.
+
+You can also submit a form manually, without using the directive, by calling `submit(this.registrationForm)`. When explicitly calling the `submit` function like this, you can pass a `FormSubmitOptions` to override the default `submission` logic for the form: `submit(this.registrationForm, {action: () => /* ... */ })`.
 
 #### 送信後のフォームのリセット {#resetting-forms-after-submission}
 
-フォームを正常に送信した後、ユーザーインタラクションの履歴とフィールドの値の両方をクリアして、初期状態に戻したい場合があります。`reset()`メソッドはtouchedフラグとdirtyフラグをクリアしますが、フィールドの値は変更しないため、モデルを別途更新する必要があります:
+After successfully submitting a form, you may want to return it to its initial state - clearing both user interaction history and field values. The `reset()` method clears the touched and dirty flags. You can also pass an optional value to `reset()` to update the model data:
 
 ```ts
 export class Contact {
-  contactModel = signal({name: '', email: '', message: ''});
-  contactForm = form(this.contactModel);
-
-  async onSubmit() {
-    if (!this.contactForm().valid()) return;
-
-    await this.api.sendMessage(this.contactModel());
-
-    // Clear interaction state (touched, dirty)
-    this.contactForm().reset();
-
-    // Clear values
-    this.contactModel.set({name: '', email: '', message: ''});
-  }
+  private readonly INITIAL_MODEL = {name: '', email: '', message: ''};
+  contactModel = signal({...this.INITIAL_MODEL});
+  contactForm = form(this.contactModel, {
+    submission: {
+      action: async (f) => {
+        await this.api.sendMessage(this.contactModel());
+        // Clear interaction state (touched, dirty) and reset to initial values
+        f().reset({...this.INITIAL_MODEL});
+      },
+    },
+  });
 }
 ```
 
-この2段階のリセットにより、古いエラーメッセージやdirty状態のインジケーターを表示することなく、フォームが新しい入力に対応できるようになります。
+This ensures the form is ready for new input without showing stale error messages or dirty state indicators.
 
 ## バリデーション状態に基づいたスタイリング {#styling-based-on-validation-state}
 

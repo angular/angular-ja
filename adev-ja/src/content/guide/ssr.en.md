@@ -387,12 +387,17 @@ export class MyComponent {
 }
 ```
 
-IMPORTANT: The above tokens will be `null` in the following scenarios:
+<!-- UL is used below as otherwise the list will not be include as part of the note. -->
+<!-- prettier-ignore-start -->
 
-- During the build processes.
-- When the application is rendered in the browser (CSR).
-- When performing static site generation (SSG).
-- During route extraction in development (at the time of the request).
+IMPORTANT: The above tokens will be `null` in the following scenarios:<ul class="docs-list">
+  <li>During the build processes.</li>
+  <li>When the application is rendered in the browser (CSR).</li>
+  <li>When performing static site generation (SSG).</li>
+  <li>During route extraction in development (at the time of the request).</li>
+</ul>
+
+<!-- prettier-ignore-end -->
 
 ## Generate a fully static application
 
@@ -521,7 +526,7 @@ bootstrapApplication(App, {
 });
 ```
 
-#### `filter`
+#### Filtering
 
 You can also selectively disable caching for certain requests using the [`filter`](api/common/http/HttpTransferCacheOptions) option in `withHttpTransferCacheOptions`. For example, you can disable caching for a specific API endpoint:
 
@@ -545,7 +550,7 @@ bootstrapApplication(App, {
 
 Use this option to exclude endpoints with user‑specific or dynamic data (for example `/api/profile`).
 
-#### Individually
+#### Per-request
 
 To disable caching for an individual request, you can specify the [`transferCache`](api/common/http/HttpRequest#transferCache) option in an `HttpRequest`.
 
@@ -611,3 +616,7 @@ export const reqHandler = createRequestHandler(async (req: Request) => {
   // ...
 });
 ```
+
+## Security
+
+For detailed information on preventing Server-Side Request Forgery (SSRF) and configuring allowed hosts, see the [Server-side security](best-practices/security#preventing-server-side-request-forgery-ssrf) guide.

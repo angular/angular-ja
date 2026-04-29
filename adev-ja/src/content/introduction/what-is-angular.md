@@ -81,7 +81,8 @@
     数十万行のコードを含むプロジェクトを1分未満でビルドしていると報告しています。
   </docs-card>
   <docs-card title="Googleの最大級のWebアプリで実証済み" titleIconName="sensors">
-    大規模なGoogle製品はAngularのアーキテクチャの上に構築されており、Angularのスケーラビリティをさらに向上させる新機能の開発に役立っています。[Google Fonts](https://fonts.google.com/)から[Google Cloud](https://console.cloud.google.com)まで対応しています。
+    大規模なGoogle製品はAngularのアーキテクチャの上に構築されており、Angularのスケーラビリティをさらに向上させる新機能の開発に役立っています。
+    [Google Fonts](https://fonts.google.com/)から[Google Cloud](https://console.cloud.google.com)まで対応しています。
   </docs-card>
 </docs-card-container>
 
@@ -90,8 +91,7 @@
     私たちが何に取り組んでいるのか興味がありますか？すべてのPRとコミットはGitHubで利用できます。問題やバグに遭遇しましたか？私たちはGitHubのissueを定期的にトリアージし、コミュニティに対して応答し関与し、あなたが直面している現実世界の問題を解決できるようにしています。
   </docs-card>
   <docs-card title="透明性を持って構築" href="roadmap" link="公開ロードマップを読む" titleIconName="sensors">
-    私たちのチームは、現在および将来の作業の公開ロードマップを公開し、あなたのフィードバックを重視しています。大規模な機能変更に関するフィードバックを収集し、
-    Angularの将来の方向性を形作る際にコミュニティの声が確実に聞かれるようにするために、Request for Comments (RFC) を公開しています。
+    私たちのチームは、現在および将来の作業の公開ロードマップを公開し、あなたのフィードバックを重視しています。大規模な機能変更に関するフィードバックを収集し、Angularの将来の方向性を形作る際にコミュニティの声が確実に聞かれるようにするために、Request for Comments (RFC) を公開しています。
   </docs-card>
 </docs-card-container>
 
@@ -100,8 +100,7 @@
     私たちのコミュニティは、才能ある開発者、ライター、インストラクター、ポッドキャスターなどで構成されています。Google for Developersライブラリは、新しい開発者と経験豊富な開発者が開発を続けるために利用できる高品質のリソースのほんの一例です。
   </docs-card>
   <docs-card title="オープンソース" href="https://github.com/angular/angular/blob/main/CONTRIBUTING.md" link="Angularに貢献" titleIconName="sensors">
-    私たちは、Angularをすべての人にとってより良いフレームワークにするオープンソースコントリビューターに感謝しています。ドキュメントのタイプミスの修正から主要な機能の追加まで、
-    興味のある方は誰でもGitHubで始めることをお勧めします。
+    私たちは、Angularをすべての人にとってより良いフレームワークにするオープンソースコントリビューターに感謝しています。ドキュメントのタイプミスの修正から主要な機能の追加まで、興味のある方は誰でもGitHubで始めることをお勧めします。
   </docs-card>
   <docs-card title="コミュニティパートナーシップ" href="https://developers.google.com/community/experts/directory?specialization=angular" link="Angular GDEに会う" titleIconName="sensors">
     私たちのチームは、個人、教育者、企業と提携して、開発者を一貫してサポートできるようにしています。Angular Google Developer Experts (GDE) は、世界中のコミュニティリーダーを代表し、Angularを使用した教育、組織化、開発を行っています。エンタープライズパートナーシップは、Angularがテクノロジー業界のリーダーにとって優れたスケーラビリティを実現することを保証します。

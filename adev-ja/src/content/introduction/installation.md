@@ -7,11 +7,9 @@
 
 プロジェクトを設定せずに、ブラウザでAngularを試したい場合は、オンラインサンドボックスを使うことができます。
 
-<docs-card-container>
-  <docs-card title="" href="/playground" link="Playgroundを開く">
-  Angularアプリを試す最速の方法です。設定は不要です。
-  </docs-card>
-</docs-card-container>
+<docs-card title="Playground" href="/playground" link="Playgroundを開く" iconImgSrc="adev/src/assets/icons/playground.svg" titleInline>
+Angularアプリを試す最速の方法です。設定は不要です。
+</docs-card>
 
 ## ローカルに新しいプロジェクトを設定する {#set-up-a-new-project-locally}
 
@@ -21,7 +19,7 @@
 
 - **Node.js** - [v20.19.0以降](/reference/versions)
 - **テキストエディタ** - [Visual Studio Code](https://code.visualstudio.com/)を推奨
-- **ターミナル** - Angular CLIコマンドを実行するために必要
+- **ターミナル** - [Angular CLI](/tools/cli)コマンドを実行するために必要
 - **開発ツール** - 開発ワークフローを改善するために、[Angular Language Service](/tools/language-service) をおすすめします
 
 ### 手順 {#instructions}

@@ -44,7 +44,7 @@ To manually deploy your application, create a production build and copy the outp
 By default, `ng build` uses the `production` configuration.
 If you have customized your build configurations, you may want to confirm [production optimizations](tools/cli/deployment#production-optimizations) are being applied before deploying.
 
-`ng build` outputs the built artifacts to `dist/my-app/` by default, however this path can be configured with the `outputPath` option in the `@angular-devkit/build-angular:browser` builder.
+`ng build` outputs the built artifacts to `dist/my-app/` by default, however this path can be configured with the `outputPath` option in the `@angular/build:application` builder.
 Copy this directory to the server and configure it to serve the directory.
 
 While this is a minimal deployment solution, there are a few requirements for the server to serve your Angular application correctly.
@@ -128,7 +128,7 @@ ng build --deploy-url /my/assets
 
 ```
 
-The effect and purpose of `--deploy-url` overlaps with [`<base href>`](guide/routing/common-router-tasks). Both can be used for initial scripts, stylesheets, lazy scripts, and css resources.
+The effect and purpose of `--deploy-url` overlaps with [`<base href>`](guide/routing/router-reference#base-href). Both can be used for initial scripts, stylesheets, lazy scripts, and css resources.
 
 Unlike `<base href>` which can be defined in a single place at runtime, the `--deploy-url` needs to be hard-coded into an application at build time.
 Prefer `<base href>` where possible.

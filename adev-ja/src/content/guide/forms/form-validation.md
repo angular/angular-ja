@@ -339,6 +339,70 @@ interface ActorsService {
 new FormControl('', {updateOn: 'blur'});
 ```
 
+## Managing validators dynamically in reactive forms
+
+In complex reactive forms, you may need to add, remove, or modify validators based on user input or application state.
+Angular provides several methods on `AbstractControl` to manage validators at runtime without recreating form controls.
+
+### Adding and removing validators
+
+The [`addValidators`](api/forms/AbstractControl#addValidators) and [`removeValidators`](api/forms/AbstractControl#removeValidators) methods allow you to modify a control's validators after initialization.
+
+```ts
+onCountryChange(country: string) {
+    const postalCodeControl = this.profileForm.get('postalCode');
+
+    if (country === 'US') {
+      // Add validators for US postal codes
+      postalCodeControl.addValidators([Validators.required, Validators.pattern(/^\d{5}$/)]);
+    } else {
+      // Remove validators when not US
+      postalCodeControl.removeValidators([Validators.required]);
+    }
+
+    postalCodeControl.updateValueAndValidity();
+}
+```
+
+### Replacing all validators
+
+Use [`setValidators`](api/forms/AbstractControl#setValidators) to replace all existing synchronous validators on a control, or [`clearValidators`](api/forms/AbstractControl#clearValidators) to remove all validators.
+
+```ts
+toggleStrictNameValidation(isStrict: boolean) {
+  const nameControl = this.profileForm.get('name');
+
+  if (enable) {
+    // Set strict validation rules
+    nameControl.setValidators([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.pattern(/^[a-zA-Z]+$/),
+    ]);
+  } else {
+    // Clear all validators
+    nameControl.clearValidators();
+  }
+
+  nameControl.updateValueAndValidity();
+}
+```
+
+The same pattern applies to async validators using [`addAsyncValidators`](api/forms/AbstractControl#addAsyncValidators), [`removeAsyncValidators`](api/forms/AbstractControl#removeAsyncValidators), [`setAsyncValidators`](api/forms/AbstractControl#setAsyncValidators), and [`clearAsyncValidators`](api/forms/AbstractControl#clearAsyncValidators).
+
+### Triggering validation updates
+
+After modifying validators, call [`updateValueAndValidity`](api/forms/AbstractControl#updateValueAndValidity) to recalculate the control's validation status.
+This method accepts options to control update behavior.
+
+```ts
+// Update control and notify parent
+control.updateValueAndValidity();
+
+// Update control only, don't notify parent or emit events
+control.updateValueAndValidity({onlySelf: true, emitEvent: false});
+```
+
 ## ネイティブHTMLフォーム検証との相互作用 {#interaction-with-native-html-form-validation}
 
 デフォルトでは、Angularは囲んでいる`<form>`に`novalidate`属性を追加することで[ネイティブHTMLフォーム検証](https://developer.mozilla.org/docs/Web/Guide/HTML/Constraint_validation)を無効にし、これらの属性をフレームワーク内のバリデーター関数と一致させるためにディレクティブを使用します。

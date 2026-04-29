@@ -15,6 +15,6 @@
 
 ## ブラウザでのデバッグ {#debugging-in-a-browser}
 
-Vitestと[ブラウザモード](/guide/testing/migrating-to-vitest#5-configure-browser-mode-optional)を使用したデバッグは、現在サポートされていません。
+Node.jsでデバッグセッションを開始するのと同じように、`ng test`コマンドに`--debug`フラグを付けてVitestの[ブラウザモード](/guide/testing/migrating-to-vitest#5-configure-browser-mode-optional)でも使用できます。
 
-<!-- https://github.com/angular/angular-cli/issues/31652 が修正されたら、このセクションを更新してください>
+テストランナーはデバッグモードで起動し、ブラウザのデベロッパーツールを開いてテストをデバッグするのを待ちます。

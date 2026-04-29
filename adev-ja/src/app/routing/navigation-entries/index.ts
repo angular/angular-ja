@@ -364,6 +364,11 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/routing/define-routes',
           },
           {
+            label: 'ルートの読み込み戦略',
+            path: 'guide/routing/loading-strategies',
+            contentPath: 'guide/routing/loading-strategies',
+          },
+          {
             label: 'アウトレットにルートを表示する',
             path: 'guide/routing/show-routes-with-outlets',
             contentPath: 'guide/routing/show-routes-with-outlets',
@@ -485,14 +490,35 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             status: 'new',
           },
           {
-            label: 'Form logic',
+            label: 'フォームロジック',
             path: 'guide/forms/signals/form-logic',
             contentPath: 'guide/forms/signals/form-logic',
             category: 'Signal Forms',
             status: 'new',
           },
           {
-            label: 'Async operations',
+            label: 'フィールド間ロジック',
+            path: 'guide/forms/signals/cross-field-logic',
+            contentPath: 'guide/forms/signals/cross-field-logic',
+            category: 'Signal Forms',
+            status: 'new',
+          },
+          {
+            label: 'フォームの送信',
+            path: 'guide/forms/signals/form-submission',
+            contentPath: 'guide/forms/signals/form-submission',
+            category: 'Signal Forms',
+            status: 'new',
+          },
+          {
+            label: 'スキーマ',
+            path: 'guide/forms/signals/schemas',
+            contentPath: 'guide/forms/signals/schemas',
+            category: 'Signal Forms',
+            status: 'new',
+          },
+          {
+            label: '非同期処理',
             path: 'guide/forms/signals/async-operations',
             contentPath: 'guide/forms/signals/async-operations',
             category: 'Signal Forms',
@@ -655,6 +681,7 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             path: 'guide/routing/testing',
             contentPath: 'guide/routing/testing',
             status: 'new',
+            isCrossReferenced: true,
           },
           {
             label: 'テストのデバッグ',
@@ -858,6 +885,7 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             label: 'ルート遷移アニメーション',
             path: 'guide/routing/route-transition-animations',
             contentPath: 'guide/routing/route-transition-animations',
+            isCrossReferenced: true,
           },
         ],
       },
@@ -870,7 +898,6 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
   },
   {
     label: 'Build with AI',
-    status: 'new',
     children: [
       {
         label: 'はじめよう',
@@ -883,9 +910,10 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         contentPath: 'ai/develop-with-ai',
       },
       {
-        label: '設計パターン',
-        path: 'ai/design-patterns',
-        contentPath: 'ai/design-patterns',
+        label: 'エージェントスキル',
+        path: 'ai/agent-skills',
+        contentPath: 'ai/agent-skills',
+        status: 'new',
       },
       {
         label: 'Angular CLI MCPサーバーセットアップ',
@@ -896,6 +924,11 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         label: 'Angular AI Tutor',
         path: 'ai/ai-tutor',
         contentPath: 'ai/ai-tutor',
+      },
+      {
+        label: '設計パターン',
+        path: 'ai/design-patterns',
+        contentPath: 'ai/design-patterns',
       },
     ],
   },
@@ -1032,16 +1065,15 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
           },
           // TODO: create those guides
           // The signal debugging docs should also be added to the signal section
-          // {
           //   label: 'Signals',
           //   path: 'tools/devtools/signals',
           //   contentPath: 'tools/devtools/signals',
           // },
-          // {
-          //   label: 'Router',
-          //   path: 'tools/devtools/router',
-          //   contentPath: 'tools/devtools/router',
-          // }
+          {
+            label: 'ルーターツリー',
+            path: 'tools/devtools/router',
+            contentPath: 'tools/devtools/router',
+          },
         ],
       },
       {
@@ -1086,6 +1118,12 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
           },
 
           // Loading Performance
+          {
+            label: '遅延読み込みルート',
+            path: 'best-practices/performance/lazy-loaded-routes',
+            contentPath: 'guide/routing/loading-strategies',
+            category: 'Loading Performance',
+          },
           {
             label: '@deferによる遅延読み込み',
             path: 'best-practices/performance/defer',

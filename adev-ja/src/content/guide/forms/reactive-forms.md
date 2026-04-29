@@ -231,7 +231,7 @@ Just as a form group contains a group of controls, the _profileForm_ `FormGroup`
 
 ユーザーがボタンをクリックすると、`profileForm` モデルが、`firstName` と `street` の新しい値で更新されます。`street` は、`address` プロパティ内のオブジェクトで提供されることに注意してください。
 これは、`patchValue()` メソッドが、モデル構造に対して更新を適用するためです。
-`PatchValue()` は、フォームモデルで定義されているプロパティのみを更新します。
+`patchValue()` は、フォームモデルで定義されているプロパティのみを更新します。
 
 ## FormBuilder サービスを使用してコントロールを生成する
 

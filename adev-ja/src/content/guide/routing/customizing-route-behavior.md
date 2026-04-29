@@ -141,7 +141,7 @@ bootstrapApplication(App, {
 });
 ```
 
-また、アプリケーションで`NoTrailingSlashPathLocationStrategy`を提供することで、ブラウザに書き込まれるすべてのURLに末尾のスラッシュを付けないように`Location`サービスを設定することもできます。
+また、アプリケーションで`NoTrailingSlashPathLocationStrategy`を提供することで、ブラウザに書き込まれるすべてのURLに末尾のスラッシュを付けないように`Location`サービスを設定できます。
 
 ```ts
 import {LocationStrategy, NoTrailingSlashPathLocationStrategy} from '@angular/common';

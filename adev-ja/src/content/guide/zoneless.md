@@ -127,7 +127,7 @@ readonly myObservableState = someObservable.pipe(pendingUntilEvent());
 
 リアクティブフォームのモデル更新（`setValue`、`patchValue`、`FormArray.push`、および類似のAPI）は、フォームの状態を更新してフォームのObservableを発行しますが、コンポーネントの変更検知を自動的にスケジュールしません。
 
-テンプレートがリアクティブフォームの状態に依存している場合、フォームのObservableを変更検知通知（例: `ChangeDetectorRef.markForCheck()`）に接続するか、テンプレートが使用するシグナルを通じてデータを反映させてください。
+テンプレートがリアクティブフォームの状態に依存している場合、フォームのObservableを変更検知の通知（例: `ChangeDetectorRef.markForCheck()`）に接続するか、テンプレートが使用するシグナルを通じてデータを反映させてください。
 
 ## テストとデバッグ
 

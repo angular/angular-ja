@@ -269,3 +269,7 @@ email(schemaPath.email, {message: 'Please enter a valid email address'});
 - [フォームモデル](guide/forms/signals/models) - シグナルを使用したフォームデータの作成と管理
 - [フィールドの状態管理](guide/forms/signals/field-state-management) - バリデーション状態、インタラクションの追跡、フィールドの可視性の操作
 - [バリデーション](guide/forms/signals/validation) - 組み込みバリデーター、カスタムバリデーションルール、非同期バリデーション
+
+<docs-pill-row>
+  <docs-pill title="依存性の注入によるモジュール設計" href="essentials/dependency-injection" />
+</docs-pill-row>

@@ -138,7 +138,7 @@ You can repeat part of a template multiple times with Angular's `@for` block:
 </ul>
 ```
 
-Angular's uses the `track` keyword, shown in the example above, to associate data with the DOM elements created by `@for`. See [_Why is track in @for blocks important?_](guide/templates/control-flow#why-is-track-in-for-blocks-important) for more info.
+Angular uses the `track` keyword, shown in the example above, to associate data with the DOM elements created by `@for`. See [_Why is track in @for blocks important?_](guide/templates/control-flow#why-is-track-in-for-blocks-important) for more info.
 
 TIP: Want to know more about Angular templates? See the [In-depth Templates guide](guide/templates) for the full details.
 
@@ -147,6 +147,6 @@ TIP: Want to know more about Angular templates? See the [In-depth Templates guid
 Now that you have dynamic data and templates in the application, it's time to learn how to enhance templates by conditionally hiding or showing certain elements, looping over elements, and more.
 
 <docs-pill-row>
-  <docs-pill title="Modular design with dependency injection" href="essentials/dependency-injection" />
+  <docs-pill title="Forms with Signals" href="essentials/signal-forms" />
   <docs-pill title="In-depth template guide" href="guide/templates" />
 </docs-pill-row>

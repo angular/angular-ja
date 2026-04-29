@@ -44,7 +44,7 @@ ng deploy
 デフォルトでは、`ng build`は`production`設定を使用します。
 ビルド設定をカスタマイズする場合、[プロダクション最適化](tools/cli/deployment#production-optimizations)がデプロイの前に適用されていることを確認したいかもしれません。
 
-`ng build`はデフォルトで`dist/my-app/`にビルドの中間生成物を出力しますが、このパスは`@angular-devkit/build-angular:browser`ビルダーの`outputPath`で設定可能です。
+`ng build`はデフォルトで`dist/my-app/`にビルドの中間生成物を出力しますが、このパスは`@angular/build:application`ビルダーの`outputPath`で設定可能です。
 このディレクトリをサーバーにコピーし、そのディレクトリでサービスを動かすよう設定してください。
 
 これは最小限のデプロイの解決法ですが、あなたのアプリケーションをサーバーで正しくサービス提供するためには少数の必要条件があります。
@@ -128,7 +128,7 @@ ng build --deploy-url /my/assets
 
 ```
 
-`--deploy-url`の効果と目的は[`<base href>`](guide/routing/common-router-tasks)と重なります。両者とも初期のスクリプト、スタイルシート、遅延して読み込まれるスクリプト、cssリソースのために使用できます。
+`--deploy-url`の効果と目的は[`<base href>`](guide/routing/router-reference#base-href)と重なります。両者とも初期のスクリプト、スタイルシート、遅延して読み込まれるスクリプト、cssリソースのために使用できます。
 
 `<base href>`実行時に一か所で定義できる<base href>`とは違い、`--deploy-url`はビルド時にアプリケーションでハードコーディングされる必要があります。
 可能であれば`<base href>`の方が好ましいです。

@@ -14,7 +14,14 @@
 
    CLIは`src/app/highlight.directive.ts`と、対応するテストファイル`src/app/highlight.directive.spec.ts`を作成します。
 
-   <docs-code header="highlight.directive.ts" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.0.ts"/>
+   ```angular-ts
+   import {Directive} from '@angular/core';
+
+   @Directive({
+     selector: '[appHighlight]',
+   })
+   export class HighlightDirective {}
+   ```
 
    `@Directive()`デコレーターの構成プロパティは、ディレクティブのCSS属性セレクター`[appHighlight]`を指定します。
 
@@ -25,11 +32,13 @@
 
 1. 背景を黄色に設定するロジックを`HighlightDirective`クラスに追加します。
 
-<docs-code header="highlight.directive.ts" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.1.ts"/>
+   <docs-code header="highlight.directive.ts" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.1.ts"/>
 
-HELPFUL: ディレクティブは_ネームスペース_をサポートしていません。
+IMPORTANT: ディレクティブは_ネームスペース_をサポートしていません。
 
-<docs-code header="app.component.avoid.html (unsupported)" path="adev/src/content/examples/attribute-directives/src/app/app.component.avoid.html" region="unsupported"/>
+```angular-html {avoid}
+<p app:Highlight>This is invalid</p>
+```
 
 ## 属性ディレクティブの適用
 

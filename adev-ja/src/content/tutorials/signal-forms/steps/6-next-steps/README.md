@@ -26,6 +26,6 @@
 
 ## 学び続ける {#keep-learning}
 
-覚えておいてください: シグナルフォームは実験的であるため、APIの更新については[公式ドキュメント](guide/forms/signals/overview)を確認してください。
+重要: シグナルフォームは実験的であるため、APIの更新については[公式ドキュメント](guide/forms/signals/overview)を確認してください。
 
 楽しいコーディングを!

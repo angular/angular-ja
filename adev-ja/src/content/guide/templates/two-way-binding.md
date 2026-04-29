@@ -46,8 +46,7 @@ export class App {
 
 ここでは、`App`が初期カウント状態を設定しますが、カウンターのUIを更新およびレンダリングするためのロジックは、主にその子である`Counter`にある例を示します。
 
-```angular-ts
-// ./app.ts
+```angular-ts {header: 'app.ts'}
 import {Component} from '@angular/core';
 import {Counter} from './counter';
 
@@ -66,8 +65,7 @@ export class App {
 }
 ```
 
-```angular-ts
-// './counter.ts';
+```angular-ts {header: 'counter.ts'}
 import {Component, model} from '@angular/core';
 
 @Component({
@@ -95,8 +93,7 @@ export class Counter {
 
 これは簡略化された例です。
 
-```angular-ts
-// './counter.ts';
+```angular-ts {header: 'counter.ts'}
 import {Component, model} from '@angular/core';
 
 @Component({
@@ -118,8 +115,7 @@ export class Counter {
 
 これは簡略化された例です。
 
-```angular-ts
-// ./app.ts
+```angular-ts {header: 'app.ts'}
 import {Component} from '@angular/core';
 import {Counter} from './counter';
 

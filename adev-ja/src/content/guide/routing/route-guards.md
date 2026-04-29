@@ -39,14 +39,16 @@ Angularは、それぞれ異なる目的を持つ4種類のルートガードを
   <docs-pill href="#canmatch" title="CanMatch"/>
 </docs-pill-row>
 
+すべてのガードは、`route`引数を介して[ルートレベルで提供されるサービス](guide/di/defining-dependency-providers#route-providers)およびルート固有の情報にアクセスできます。
+
 ### CanActivate {#canactivate}
 
 `CanActivate`ガードは、ユーザーがルートにアクセスできるかどうかを決定します。これは、認証と認可に最も一般的に使用されます。
 
 以下のデフォルト引数にアクセスできます。
 
-- `route: ActivatedRouteSnapshot` - アクティブ化されるルートに関する情報を含みます
-- `state: RouterStateSnapshot` - ルーターの現在の状態を含みます
+- `route`: `ActivatedRouteSnapshot` - アクティブ化されるルートに関する情報を含みます
+- `state`: `RouterStateSnapshot` - ルーターの現在の状態を含みます
 
 [標準のガード戻り値の型](#route-guard-return-types)を返すことができます。
 
@@ -70,8 +72,8 @@ Tip: ユーザーをリダイレクトする必要がある場合は、[`URLTree
 
 以下のデフォルト引数にアクセスできます。
 
-- `childRoute: ActivatedRouteSnapshot` - アクティブ化される子ルートの「将来の」スナップショット（つまり、ルーターがナビゲートしようとしている状態）に関する情報を含みます
-- `state: RouterStateSnapshot` - ルーターの現在の状態を含みます
+- `childRoute`: `ActivatedRouteSnapshot` - アクティブ化される子ルートの「将来の」スナップショット（つまり、ルーターがナビゲートしようとしている状態）に関する情報を含みます
+- `state`: `RouterStateSnapshot` - ルーターの現在の状態を含みます
 
 [標準のガード戻り値の型](#route-guard-return-types)を返すことができます。
 
@@ -93,10 +95,10 @@ export const adminChildGuard: CanActivateChildFn = (
 
 以下のデフォルト引数にアクセスできます。
 
-- `component: T` - 非アクティブ化されるコンポーネントインスタンス
-- `currentRoute: ActivatedRouteSnapshot` - 現在のルートに関する情報を含みます
-- `currentState: RouterStateSnapshot` - 現在のルーターの状態を含みます
-- `nextState: RouterStateSnapshot` - ナビゲート先の次のルーターの状態を含みます
+- `component`: `T` - 非アクティブ化されるコンポーネントインスタンス
+- `currentRoute`: `ActivatedRouteSnapshot` - 現在のルートに関する情報を含みます
+- `currentState`: `RouterStateSnapshot` - 現在のルーターの状態を含みます
+- `nextState`: `RouterStateSnapshot` - ナビゲート先の次のルーターの状態を含みます
 
 [標準のガード戻り値の型](#route-guard-return-types)を返すことができます。
 
@@ -121,8 +123,8 @@ export const unsavedChangesGuard: CanDeactivateFn<Form> = (
 
 以下のデフォルト引数にアクセスできます。
 
-- `route: Route` - 評価されているルート設定
-- `segments: UrlSegment[]` - 以前の親ルート評価によって消費されていないURLセグメント
+- `route`: `Route` - 評価されているルート設定
+- `segments`: `UrlSegment[]` - 以前の親ルート評価によって消費されていないURLセグメント
 
 [標準のガード戻り値の型](#route-guard-return-types)を返すことができますが、`false`を返した場合、Angularはナビゲーションを完全にブロックするのではなく、他のマッチングするルートを試行します。
 

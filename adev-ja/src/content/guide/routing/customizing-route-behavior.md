@@ -127,6 +127,33 @@ provideRouter(routes, withRouterConfig({defaultQueryParamsHandling: 'merge'}));
 
 これは、追加のパラメータが提供されたときに既存のフィルターを自動的に保持するために、検索およびフィルターページで特に役立ちます。
 
+### 末尾スラッシュの処理を設定する {#configure-trailing-slash-handling}
+
+デフォルトでは、`Location`サービスはURLの読み取り時に末尾のスラッシュを除去します。
+
+アプリケーションで`TrailingSlashPathLocationStrategy`を提供することで、ブラウザに書き込まれるすべてのURLに末尾のスラッシュを強制するように`Location`サービスを設定できます。
+
+```ts
+import {LocationStrategy, TrailingSlashPathLocationStrategy} from '@angular/common';
+
+bootstrapApplication(App, {
+  providers: [{provide: LocationStrategy, useClass: TrailingSlashPathLocationStrategy}],
+});
+```
+
+また、アプリケーションで`NoTrailingSlashPathLocationStrategy`を提供することで、ブラウザに書き込まれるすべてのURLに末尾のスラッシュを付けないように`Location`サービスを設定することもできます。
+
+```ts
+import {LocationStrategy, NoTrailingSlashPathLocationStrategy} from '@angular/common';
+
+bootstrapApplication(App, {
+  providers: [{provide: LocationStrategy, useClass: NoTrailingSlashPathLocationStrategy}],
+});
+```
+
+これらのストラテジーは、ブラウザに書き込まれるURLにのみ影響します。
+`Location.path()`および`Location.normalize()`は、URLの読み取り時に末尾のスラッシュを引き続き除去します。
+
 Angularルーターは、カスタマイズのための4つの主要な領域を公開しています。
 
   <docs-pill-row>

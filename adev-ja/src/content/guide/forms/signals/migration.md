@@ -207,16 +207,220 @@ const formValue = computed(() => ({
 
 ## Bottom-up migration
 
-This is coming soon.
+### Integrating a Signal Form into a `FormGroup`
+
+You can use `SignalFormControl` to expose a signal-based form as a standard `FormControl`. This is useful when you want
+to migrate leaf nodes of a form to Signals while keeping the parent `FormGroup` structure.
+
+```typescript
+import {Component, signal} from '@angular/core';
+import {ReactiveFormsModule, FormGroup} from '@angular/forms';
+import {SignalFormControl} from '@angular/forms/signals/compat';
+import {required} from '@angular/forms/signals';
+
+@Component({
+  // ...
+  imports: [ReactiveFormsModule],
+})
+export class UserProfile {
+  // 1. Create a SignalFormControl, use signal form rules.
+  emailControl = new SignalFormControl('', (p) => {
+    required(p, {message: 'Email is required'});
+  });
+
+  // 2. Use it in an existing FormGroup
+  form = new FormGroup({
+    email: this.emailControl,
+  });
+}
+```
+
+The `SignalFormControl` synchronizes values bi-directionally between the **Signal Forms** system and the **Reactive Forms** system:
+
+- **Signal -> Reactive**: Updating the value via Signal Forms updates the Reactive Form control immediately.
+
+```typescript
+// Signal Forms update
+this.emailControl.fieldTree().value.set('new@example.com');
+
+// Reactive Forms reflects the change
+console.log(this.form.value); // {email: 'new@example.com'}
+```
+
+- **Reactive -> Signal**: Updating the value via the parent `FormGroup` updates the Signal Forms state.
+
+```typescript
+// Reactive Forms update
+this.form.patchValue({email: 'other@example.com'});
+
+// Signal Forms reflects the change
+console.log(this.emailControl.fieldTree().value()); // 'other@example.com'
+```
+
+### Binding `SignalFormControl`
+
+To use `SignalFormControl` in a `FormGroup`, pass it as a control and bind it in the template using `.fieldTree`:
+
+```typescript
+readonly emailControl = new SignalFormControl('', (p) => { required(p); });
+
+readonly form = new FormGroup({
+  name: new FormControl('Alice'),
+  email: this.emailControl,
+});
+```
+
+```angular-html {prefer}
+<form [formGroup]="form">
+  <!-- Standard control -->
+  <input formControlName="name" />
+
+  <!-- Signal control -->
+  <input [formField]="emailControl.fieldTree" />
+</form>
+```
+
+```angular-html {avoid}
+<!-- Avoid: Using formControlName or [formControl] for SignalFormControl -->
+<input formControlName="email" />
+<input [formControl]="emailControl" />
+```
+
+### Why `SignalFormControl` takes a value instead of a signal
+
+In standard Signal Forms, you create a form by passing a signal: `form(mySignal)`.
+
+However, `SignalFormControl` takes a **raw value** (like a string or object) as its first argument:
+
+```typescript
+// Takes a raw value, not a signal
+const userControl = new SignalFormControl({
+  email: 'pirojok@example.com',
+});
+```
+
+`SignalFormControl` creates the signal internally to intercept writes and trigger the **synchronous updates** expected by Reactive Forms.
+
+You can still access the internal signal via `.sourceValue`:
+
+```typescript
+const value = userControl.sourceValue();
+```
+
+### Disabling/Enabling control
+
+Imperative APIs for changing the enabled/disabled state (like `enable()`, `disable()`) are intentionally not supported
+in `SignalFormControl`. This is because the state of the control should be derived from the signal state and rules.
+
+Attempting to call disable/enable would throw an error.
+
+```typescript {avoid}
+import {signal, effect} from '@angular/core';
+
+export class UserProfile {
+  readonly emailControl = new SignalFormControl('');
+
+  readonly isLoading = signal(false);
+
+  constructor() {
+    // This will throw an error
+    effect(() => {
+      if (this.isLoading()) {
+        this.emailControl.disable();
+      } else {
+        this.emailControl.enable();
+      }
+    });
+  }
+}
+```
+
+Instead, use disabled rule:
+
+```typescript {prefer}
+import {signal} from '@angular/core';
+import {SignalFormControl} from '@angular/forms/signals/compat';
+import {disabled} from '@angular/forms/signals';
+
+export class UserProfile {
+  readonly isLoading = signal(false);
+
+  readonly emailControl = new SignalFormControl('', (p) => {
+    // The control becomes disabled whenever isLoading is true
+    disabled(p, () => this.isLoading());
+  });
+
+  async saveData() {
+    this.isLoading.set(true);
+    // ... perform save ...
+    this.isLoading.set(false);
+  }
+}
+```
+
+### Dynamic manipulation
+
+Imperative APIs for adding or removing validators (like `addValidators()`, `removeValidators()`, `setValidators()`) are
+intentionally not supported in `SignalFormControl`.
+
+Attempting to call these methods will throw an error.
+
+```typescript {avoid}
+export class UserProfile {
+  readonly emailControl = new SignalFormControl('');
+  readonly isRequired = signal(false);
+
+  toggleRequired() {
+    this.isRequired.update((v) => !v);
+    // This will throw an error
+    if (this.isRequired()) {
+      this.emailControl.addValidators(Validators.required);
+    } else {
+      this.emailControl.removeValidators(Validators.required);
+    }
+  }
+}
+```
+
+Instead, use `applyWhen` rule to conditionally apply validators:
+
+```typescript {prefer}
+import {signal} from '@angular/core';
+import {SignalFormControl} from '@angular/forms/signals/compat';
+import {applyWhen, required} from '@angular/forms/signals';
+
+export class UserProfile {
+  readonly isRequired = signal(false);
+
+  readonly emailControl = new SignalFormControl('', (p) => {
+    // The control becomes required whenever isRequired is true
+    applyWhen(
+      p,
+      () => this.isRequired(),
+      (p) => {
+        required(p);
+      },
+    );
+  });
+}
+```
+
+### Manual Error Selection
+
+The `setErrors()` and `markAsPending()` methods are not supported. In Signal Forms, errors are derived from validation
+rules and async validation status. If you need to report an error, it should be done declaratively via a validation rule
+in the schema.
 
 ## Automatic status classes
 
-Reactive/Template Forms automatically adds [class attributes](/guide/forms/template-driven-forms#track-control-states) (such as `.ng-valid` or `.ng-dirty`) to facilitate styling control states. Signal Forms does not do that.
+Reactive/Template Forms automatically adds [class attributes](/guide/forms/template-driven-forms#track-control-states) (
+such as `.ng-valid` or `.ng-dirty`) to facilitate styling control states. Signal Forms does not do that.
 
 If you want to preserve this behavior, you can provide the `NG_STATUS_CLASSES` preset:
 
 ```typescript
-import {NG_STATUS_CLASSES, provideSignalFormsConfig} from '@angular/forms/signals';
+import {provideSignalFormsConfig} from '@angular/forms/signals';
+import {NG_STATUS_CLASSES} from '@angular/forms/signals/compat';
 
 bootstrapApplication(App, {
   providers: [

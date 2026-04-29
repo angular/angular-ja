@@ -1,23 +1,23 @@
-# Agent Skills
+# エージェントスキル
 
-Agent Skills are specialized, domain-specific instructions and capabilities designed for AI agents like Gemini CLI. These skills provide architectural guidance, generate idiomatic Angular code, and help scaffold new projects using modern best practices.
+エージェントスキルは、Gemini CLIのようなAIエージェント向けに設計された、ドメイン固有の専門的な指示と機能です。これらのスキルはアーキテクチャ上のガイダンスを提供し、慣用的なAngularコードを生成し、モダンなベストプラクティスを使用した新しいプロジェクトの足場作りを支援します。
 
-By using Agent Skills, you can ensure that the AI agent you are working with has the most up-to-date information about Angular's conventions, reactivity models (like Signals), and project structure.
+エージェントスキルを使用することで、現在作業しているAIエージェントが、Angularの規約、リアクティビティモデル（シグナルなど）、プロジェクト構造に関する最新の情報を持つことを保証できます。
 
-## Available Skills
+## 利用可能なスキル {#available-skills}
 
-The Angular team maintains a collection of official skills that are regularly updated to stay in sync with the latest framework improvements.
+Angularチームは、最新のフレームワークの改善と同期を保つために定期的に更新される公式スキルのコレクションを管理しています。
 
-| Skill                   | Description                                                                                                                                                                                                                                                                                       |
+| スキル                  | 説明                                                                                                                                                                                                                                                                                              |
 | :---------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **`angular-developer`** | Generates Angular code and provides architectural guidance. Useful for creating components, services, or obtaining best practices on reactivity (signals, linkedSignal, resource), forms, dependency injection, routing, SSR, accessibility (ARIA), animations, styling, testing, or CLI tooling. |
-| **`angular-new-app`**   | Creates a new Angular app using the Angular CLI. Provides important guidelines for effectively setting up and structuring a modern Angular application.                                                                                                                                           |
+| **`angular-developer`** | Angularコードを生成し、アーキテクチャ上のガイダンスを提供します。コンポーネントやサービスの作成、またはリアクティビティ（signals、linkedSignal、resource）、フォーム、依存性の注入、ルーティング、SSR、アクセシビリティ（ARIA）、アニメーション、スタイリング、テスト、CLIツーリングに関するベストプラクティスの取得に役立ちます。 |
+| **`angular-new-app`**   | Angular CLIを使用して新しいAngularアプリケーションを作成します。モダンなAngularアプリケーションを効果的にセットアップし、構造化するための重要なガイドラインを提供します。                                                                                                                                  |
 
-## Using Agent Skills
+## エージェントスキルの使用 {#using-agent-skills}
 
-Agent Skills are designed to be used with agentic coding tools like [Gemini CLI](https://geminicli.com/docs/cli/skills/), [Antigravity](https://antigravity.google/docs/skills) and more. Activating a skill loads the specific instructions and resources needed for that task.
+エージェントスキルは、[Gemini CLI](https://geminicli.com/docs/cli/skills/)、[Antigravity](https://antigravity.google/docs/skills)などのエージェント型コーディングツールで使用できるよう設計されています。スキルをアクティベートすると、そのタスクに必要な特定の指示とリソースが読み込まれます。
 
-To use these skills in your own environment you may follow the instructions for your specific tool or use a community tool like [skills.sh](https://skills.sh/).
+ご自身の環境でこれらのスキルを使用するには、お使いの特定のツールの手順に従うか、[skills.sh](https://skills.sh/)のようなコミュニティツールを使用できます。
 
 ```bash
 npx skills add https://github.com/angular/skills

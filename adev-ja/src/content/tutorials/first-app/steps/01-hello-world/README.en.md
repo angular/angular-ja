@@ -6,7 +6,7 @@ This first lesson serves as the starting point from which each lesson in this tu
 
 ## What you'll learn
 
-The updated app you have after this lesson confirms that you and your IDE are ready to begin creating an Angular app.
+If your application runs successfully in the browser and displays the executed content without errors, it confirms that your development environment and IDE are correctly set up to begin building an Angular app.
 
 NOTE: If you are working with the embedded editor, skip to [step four](#create-hello-world).
 When working in the browser playground, you do not need to `ng serve` to run the app. Other commands like `ng generate` can be done in the console window to your right.
@@ -14,7 +14,7 @@ When working in the browser playground, you do not need to `ng serve` to run the
 <docs-workflow>
 
 <docs-step title="Download the default app">
-Start by clicking the "Download" icon in the top right pan of the code editor. This will download a `.zip` file containing the source code for this tutorial. Open this in your local Terminal and IDE then move on to testing the default app.
+Start by clicking the "Download" icon in the top right pane of the code editor. This will download a `.zip` file containing the source code for this tutorial. Open this in your local Terminal and IDE then move on to testing the default app.
 
 At any step in the tutorial, you can click this icon to download the step's source code and start from there.
 </docs-step>

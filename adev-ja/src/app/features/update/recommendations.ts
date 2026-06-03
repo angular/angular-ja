@@ -14,6 +14,12 @@ export enum ApplicationComplexity {
 
 export interface Step {
   step: string;
+  /**
+   * Action text rendered as Markdown. Use Markdown link syntax `[text](url)`
+   * for any links — raw `<a>` HTML tags bypass the custom link renderer in
+   * `update.component.ts` and will not pick up `target="_blank"` or the
+   * external-link icon.
+   */
   action: string;
   possibleIn: number;
   necessaryAsOf: number;
@@ -155,7 +161,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Advanced,
     step: 'gendir',
     action:
-      '`gendir`に依存せず、代わりに`skipTemplateCodeGen`の使用を検討してください。<a href=https://github.com/angular/angular/issues/19339#issuecomment-332607471" target="_blank">詳細はこちら</a>',
+      '`gendir`に依存せず、代わりに`skipTemplateCodeGen`の使用を検討してください。[詳細はこちら](https://github.com/angular/angular/issues/19339#issuecomment-332607471)',
   },
   {
     possibleIn: 220,
@@ -239,7 +245,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'node 8',
     action:
-      '<a href="http://www.hostingadvice.com/how-to/update-node-js-latest-version/" target="_blank">Node 8以降</a>を使用していることを確認してください。',
+      '[Node 8以降](http://www.hostingadvice.com/how-to/update-node-js-latest-version/)を使用していることを確認してください。',
   },
   {
     possibleIn: 600,
@@ -248,7 +254,7 @@ export const RECOMMENDATIONS: Step[] = [
     windows: false,
     step: 'Update to CLI v6',
     action:
-      'Angular CLIを更新し、次のコマンドを実行して設定を<a href="https://github.com/angular/angular-cli/wiki/angular-workspace" target="_blank">新しいangular.json形式</a>に移行してください。<br/><br/>`NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@6 update @angular/cli@6`<br/>',
+      'Angular CLIを更新し、次のコマンドを実行して設定を[新しいangular.json形式](https://github.com/angular/angular-cli/wiki/angular-workspace)に移行してください。<br/><br/>`NG_DISABLE_VERSION_CHECK=1 npx @angular/cli@6 update @angular/cli@6`<br/>',
   },
   {
     possibleIn: 600,
@@ -257,7 +263,7 @@ export const RECOMMENDATIONS: Step[] = [
     windows: true,
     step: 'Update to CLI v6',
     action:
-      'Angular CLIを更新し、次のコマンドを実行して設定を<a href="https://github.com/angular/angular-cli/wiki/angular-workspace" target="_blank">新しいangular.json形式</a>に移行してください。<br/><br/>`cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@6 update @angular/cli@6 @angular/core@6"`<br/>',
+      'Angular CLIを更新し、次のコマンドを実行して設定を[新しいangular.json形式](https://github.com/angular/angular-cli/wiki/angular-workspace)に移行してください。<br/><br/>`cmd /C "set "NG_DISABLE_VERSION_CHECK=1" && npx @angular/cli@6 update @angular/cli@6 @angular/core@6"`<br/>',
   },
   {
     possibleIn: 600,
@@ -343,7 +349,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Medium,
     step: 'strictPropertyInitializer',
     action:
-      'TypeScriptが厳格に設定されている場合（`tsconfig.json`ファイルで`strict`を`true`に設定している場合）、`tsconfig.json`を更新して`strictPropertyInitialization`を無効にするか、プロパティの初期化を`ngOnInit`からコンストラクターに移動してください。このフラグの詳細については、<a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#strict-class-initialization">TypeScript 2.7リリースノート</a>を参照してください。',
+      'TypeScriptが厳格に設定されている場合（`tsconfig.json`ファイルで`strict`を`true`に設定している場合）、`tsconfig.json`を更新して`strictPropertyInitialization`を無効にするか、プロパティの初期化を`ngOnInit`からコンストラクターに移動してください。このフラグの詳細については、[TypeScript 2.7リリースノート](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#strict-class-initialization)を参照してください。',
   },
   {
     possibleIn: 600,
@@ -351,7 +357,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'update to RxJS 6',
     action:
-      '<a href="https://github.com/ReactiveX/rxjs-tslint" target="_blank">rxjs-tslint自動更新ルール</a>を使用して、非推奨のRxJS 5機能を削除してください。<br/><br/>ほとんどのアプリケーションでは、次の2つのコマンドを実行することになります。<br/><br/>`npx rxjs-tslint`<br/>`rxjs-5-to-6-migrate -p src/tsconfig.app.json`',
+      '[rxjs-tslint自動更新ルール](https://github.com/ReactiveX/rxjs-tslint)を使用して、非推奨のRxJS 5機能を削除してください。<br/><br/>ほとんどのアプリケーションでは、次の2つのコマンドを実行することになります。<br/><br/>`npx rxjs-tslint`<br/>`rxjs-5-to-6-migrate -p src/tsconfig.app.json`',
   },
   {
     possibleIn: 600,
@@ -374,7 +380,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'TypeScript 3.1',
     action:
-      'AngularはTypeScript 3.1を使用するようになりました。潜在的な破壊的変更については、https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-1.htmlを参照してください。',
+      'AngularはTypeScript 3.1を使用するようになりました。[潜在的な破壊的変更](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-1.html)について参照してください。',
   },
   {
     possibleIn: 700,
@@ -382,7 +388,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'Node 10',
     action:
-      'AngularはNode 10のサポートを追加しました: https://nodejs.org/en/blog/release/v10.0.0/',
+      'Angularは[Node 10](https://nodejs.org/en/blog/release/v10.0.0/)のサポートを追加しました。',
   },
   {
     possibleIn: 700,
@@ -464,7 +470,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'use ::ng-deep instead of /deep/',
     action:
-      'スタイル内の`/deep/`を`::ng-deep`に置き換えてください。<a href="https://angular.io/guide/component-styles#deprecated-deep--and-ng-deep">Angularコンポーネントスタイルと`::ng-deep`について詳しくはこちら</a>。`/deep/`と`::ng-deep`はどちらも非推奨ですが、シャドウピアシング子孫コンビネーターが<a href="https://www.chromestatus.com/features/6750456638341120">ブラウザとツールから完全に削除される</a>までは`::ng-deep`の使用が推奨されます。',
+      'スタイル内の`/deep/`を`::ng-deep`に置き換えてください。[Angularコンポーネントスタイルと`::ng-deep`について詳しくはこちら](https://angular.io/guide/component-styles#deprecated-deep--and-ng-deep)。`/deep/`と`::ng-deep`はどちらも非推奨ですが、シャドウピアシング子孫コンビネーターが[ブラウザとツールから完全に削除される](https://chromestatus.com/feature/5045542597951488)までは`::ng-deep`の使用が推奨されます。',
   },
   {
     possibleIn: 800,
@@ -480,7 +486,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'node 10',
     action:
-      '<a href="http://www.hostingadvice.com/how-to/update-node-js-latest-version/" target="_blank">Node 10以降</a>を使用していることを確認してください。',
+      '[Node 10以降](http://www.hostingadvice.com/how-to/update-node-js-latest-version/)を使用していることを確認してください。',
   },
   {
     possibleIn: 800,
@@ -573,7 +579,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'node 10.13',
     action:
-      '<a href="http://www.hostingadvice.com/how-to/update-node-js-latest-version/" target="_blank">Node 10.13以降</a>を使用していることを確認してください。',
+      '[Node 10.13以降](http://www.hostingadvice.com/how-to/update-node-js-latest-version/)を使用していることを確認してください。',
   },
   {
     possibleIn: 900,
@@ -781,9 +787,8 @@ export const RECOMMENDATIONS: Step[] = [
     possibleIn: 1000,
     necessaryAsOf: 1000,
     level: ApplicationComplexity.Basic,
-    step: 'v10 NodeJS 12',
-    action:
-      '<a href="https://nodejs.org/dist/latest-v12.x/" target="_blank">Node 12以降</a>を使用していることを確認してください。',
+    step: 'v10 Node.js 12',
+    action: '[Node 12以降](https://nodejs.org/dist/latest-v12.x/)を使用していることを確認してください。',
   },
   {
     possibleIn: 1000,
@@ -847,7 +852,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Advanced,
     step: 'closure-jsdoc-comments',
     action:
-      'AngularのNPMパッケージには、Closure Compiler（非常に稀）で使用するために必要なjsdocコメントが含まれなくなりました。このサポートは実験的であり、一部のユースケースでのみ機能しました。代替の推奨パスがまもなく発表されます。',
+      'Angularのnpmパッケージには、Closure Compiler（非常に稀）で使用するために必要なjsdocコメントが含まれなくなりました。このサポートは実験的であり、一部のユースケースでのみ機能しました。代替の推奨パスがまもなく発表されます。',
   },
   {
     possibleIn: 1000,
@@ -871,7 +876,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Medium,
     step: 'esm5-bundles',
     action:
-      '[Angular Package Format](https://g.co/ng/apf)が更新され、`esm5`および`fesm5`形式が削除されました。これらはnpmパッケージでは配布されなくなりました。CLIを使用しない場合、Angularコードを自分でES5にダウンレベルする必要があるかもしれません。',
+      '[Angular Package Format](https://angular.dev/tools/libraries/angular-package-format)が更新され、`esm5`および`fesm5`形式が削除されました。これらはnpmパッケージでは配布されなくなりました。CLIを使用しない場合、Angularコードを自分でES5にダウンレベルする必要があるかもしれません。',
   },
   {
     possibleIn: 1000,
@@ -1335,7 +1340,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'TypeScript 4.4',
     action:
-      'AngularはTypeScript 4.4を使用するようになりました。潜在的な破壊的変更については、https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-4.htmlを参照してください。',
+      'AngularはTypeScript 4.4を使用するようになりました。[潜在的な破壊的変更](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-4.html)について参照してください。',
   },
   {
     possibleIn: 1300,
@@ -1343,7 +1348,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'v13 node',
     action:
-      '<a href="http://www.hostingadvice.com/how-to/update-node-js-latest-version/" target="_blank">Node 12.20.0以降</a>を使用していることを確認してください。',
+      '[Node 12.20.0以降](http://www.hostingadvice.com/how-to/update-node-js-latest-version/)を使用していることを確認してください。',
   },
   {
     possibleIn: 1300,
@@ -1457,7 +1462,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'TypeScript 4.6',
     action:
-      'AngularはTypeScript 4.6を使用するようになりました。潜在的な破壊的変更については、https://devblogs.microsoft.com/typescript/announcing-typescript-4-6/を参照してください。',
+      'AngularはTypeScript 4.6を使用するようになりました。[潜在的な破壊的変更](https://devblogs.microsoft.com/typescript/announcing-typescript-4-6/)について参照してください。',
   },
 
   {
@@ -1466,7 +1471,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'v14 node',
     action:
-      '<a href="http://www.hostingadvice.com/how-to/update-node-js-latest-version/" target="_blank">Node 14.15.0以降</a>を使用していることを確認してください。',
+      '[Node 14.15.0以降](http://www.hostingadvice.com/how-to/update-node-js-latest-version/)を使用していることを確認してください。',
   },
   {
     possibleIn: 1400,
@@ -1669,7 +1674,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'v15 node support',
     action:
-      'アプリケーションをアップグレードする前に、サポートされているバージョンのNode.jsを使用していることを確認してください。Angular v15はNode.jsバージョン14.20.x、16.13.x、18.10.xをサポートしています。<a href="https://v15.angular.io/guide/update-to-version-15#v15-bc-01" alt="Link to more information about this change">詳細はこちら</a>',
+      'アプリケーションをアップグレードする前に、サポートされているバージョンのNode.jsを使用していることを確認してください。Angular v15はNode.jsバージョン14.20.x、16.13.x、18.10.xをサポートしています。[詳細はこちら](https://v15.angular.io/guide/update-to-version-15#v15-bc-01)',
   },
   {
     possibleIn: 1500,
@@ -1677,7 +1682,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'v15 ts support',
     action:
-      'アプリケーションをアップグレードする前に、サポートされているバージョンのTypeScriptを使用していることを確認してください。Angular v15はTypeScriptバージョン4.8以降をサポートしています。<a href="https://v15.angular.io/guide/update-to-version-15#v15-bc-02" alt="Link to more information about this change">詳細はこちら</a>',
+      'アプリケーションをアップグレードする前に、サポートされているバージョンのTypeScriptを使用していることを確認してください。Angular v15はTypeScriptバージョン4.8以降をサポートしています。[詳細はこちら](https://v15.angular.io/guide/update-to-version-15#v15-bc-02)',
   },
   {
     possibleIn: 1500,
@@ -1749,7 +1754,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Advanced,
     step: 'v15 RouterOutlet',
     action:
-      '`RouterOutlet`を使用するテストが壊れた場合、変更検知に対する対応するコンポーネントのインスタンス化順序に依存していないことを確認してください。v15では、`RouterOutlet`は変更検知後にコンポーネントをインスタンス化します。<a href="https://v15.angular.io/guide/update-to-version-15#v15-bc-09" alt="Link to more information about this change">詳細はこちら</a>',
+      '`RouterOutlet`を使用するテストが壊れた場合、変更検知に対する対応するコンポーネントのインスタンス化順序に依存していないことを確認してください。v15では、`RouterOutlet`は変更検知後にコンポーネントをインスタンス化します。[詳細はこちら](https://v15.angular.io/guide/update-to-version-15#v15-bc-09)',
   },
   {
     possibleIn: 1500,
@@ -1757,7 +1762,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'v15 relativeLinkResolution',
     action:
-      'v15では、`relativeLinkResolution`はルーターで設定できません。これは、以前のバグ修正からオプトアウトするために使用されていましたが、現在は標準となっています。<a href="https://v15.angular.io/guide/update-to-version-15#v15-bc-10" alt="Link to more information about this change">詳細はこちら</a>',
+      'v15では、`relativeLinkResolution`はルーターで設定できません。これは、以前のバグ修正からオプトアウトするために使用されていましたが、現在は標準となっています。[詳細はこちら](https://v15.angular.io/guide/update-to-version-15#v15-bc-10)',
   },
   {
     possibleIn: 1500,
@@ -1765,7 +1770,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Medium,
     step: 'v15 DATE_PIPE_DEFAULT_OPTIONS',
     action:
-      'タイムゾーンを設定するために、`DATE_PIPE_DEFAULT_TIMEZONE`トークンのインスタンスを`DATE_PIPE_DEFAULT_OPTIONS`を使用するように変更してください。v15では、`DATE_PIPE_DEFAULT_TIMEZONE`トークンは非推奨です。<a href="https://v15.angular.io/guide/update-to-version-15#v15-dp-01" alt="Link to more information about this change">詳細はこちら</a>',
+      'タイムゾーンを設定するために、`DATE_PIPE_DEFAULT_TIMEZONE`トークンのインスタンスを`DATE_PIPE_DEFAULT_OPTIONS`を使用するように変更してください。v15では、`DATE_PIPE_DEFAULT_TIMEZONE`トークンは非推奨です。[詳細はこちら](https://v15.angular.io/guide/update-to-version-15#v15-dp-01)',
   },
   {
     possibleIn: 1500,
@@ -1781,7 +1786,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Medium,
     step: 'v15 Injector.get',
     action:
-      '`InjectFlags`パラメータを使用する`Injector.get()`のインスタンスを、`InjectOptions`パラメータを使用するように更新してください。`Injector.get()`の`InjectFlags`パラメータはv15で非推奨です。<a href="https://v15.angular.io/guide/update-to-version-15#v15-dp-02" alt="Link to more information about this change">詳細はこちら</a>',
+      '`InjectFlags`パラメータを使用する`Injector.get()`のインスタンスを、`InjectOptions`パラメータを使用するように更新してください。`Injector.get()`の`InjectFlags`パラメータはv15で非推奨です。[詳細はこちら](https://v15.angular.io/guide/update-to-version-15#v15-dp-02)',
   },
   {
     possibleIn: 1500,
@@ -1789,7 +1794,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'v15 TestBed.inject',
     action:
-      '`InjectFlags`パラメータを使用する`TestBed.inject()`のインスタンスを、`InjectOptions`パラメータを使用するように更新してください。`TestBed.inject()`の`InjectFlags`パラメータはv15で非推奨です。<a href="https://v15.angular.io/guide/update-to-version-15#v15-dp-01" alt="Link to more information about this change">詳細はこちら</a>',
+      '`InjectFlags`パラメータを使用する`TestBed.inject()`のインスタンスを、`InjectOptions`パラメータを使用するように更新してください。`TestBed.inject()`の`InjectFlags`パラメータはv15で非推奨です。[詳細はこちら](https://v15.angular.io/guide/update-to-version-15#v15-dp-01)',
   },
   {
     possibleIn: 1500,
@@ -1797,7 +1802,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Medium,
     step: 'v15 ngModule in providedIn',
     action:
-      '`@Injectable`および`InjectionToken`に対して`providedIn: ngModule`を使用することはv15で非推奨です。<a href="https://v15.angular.io/guide/update-to-version-15#v15-dp-04" alt="Link to more information about this change">詳細はこちら</a>',
+      '`@Injectable`および`InjectionToken`に対して`providedIn: ngModule`を使用することはv15で非推奨です。[詳細はこちら](https://v15.angular.io/guide/update-to-version-15#v15-dp-04)',
   },
   {
     possibleIn: 1500,
@@ -1805,7 +1810,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'v15 providedIn any',
     action:
-      '`@Injectable`または`InjectionToken`に対して`providedIn: \'any\'`を使用することはv15で非推奨です。<a href="https://v15.angular.io/guide/update-to-version-15#v15-dp-05" alt="Link to more information about this change">詳細はこちら</a>',
+      "`@Injectable`または`InjectionToken`に対して`providedIn: 'any'`を使用することはv15で非推奨です。[詳細はこちら](https://v15.angular.io/guide/update-to-version-15#v15-dp-05)",
   },
   {
     possibleIn: 1500,
@@ -1813,7 +1818,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Medium,
     step: 'v15 RouterLinkWithHref',
     action:
-      '`RouterLinkWithHref`ディレクティブのインスタンスを`RouterLink`ディレクティブを使用するように更新してください。`RouterLinkWithHref`ディレクティブはv15で非推奨です。<a href="https://v15.angular.io/guide/update-to-version-15#v15-dp-06" alt="Link to more information about this change">詳細はこちら</a>',
+      '`RouterLinkWithHref`ディレクティブのインスタンスを`RouterLink`ディレクティブを使用するように更新してください。`RouterLinkWithHref`ディレクティブはv15で非推奨です。[詳細はこちら](https://v15.angular.io/guide/update-to-version-15#v15-dp-06)',
   },
   {
     possibleIn: 1500,
@@ -1822,7 +1827,7 @@ export const RECOMMENDATIONS: Step[] = [
     material: true,
     step: 'v15 mat refactor',
     action:
-      'Angular Material v15では、多くのコンポーネントが公式のMaterial Design Components for Web (MDC) に基づくようにリファクタリングされました。この変更は、多くのコンポーネントのDOMとCSSクラスに影響を与えました。<a href="https://rc.material.angular.dev/guide/mdc-migration" alt="Link to more information about this change">詳細はこちら</a>',
+      'Angular Material v15では、多くのコンポーネントが公式のMaterial Design Components for Web (MDC) に基づくようにリファクタリングされました。この変更は、多くのコンポーネントのDOMとCSSクラスに影響を与えました。[詳細はこちら](https://rc.material.angular.dev/guide/mdc-migration)',
   },
   {
     possibleIn: 1500,
@@ -2669,7 +2674,7 @@ export const RECOMMENDATIONS: Step[] = [
       level: ApplicationComplexity.Basic,
       step: '20.0.0_update_nodejs_version',
       action:
-        'Angular v20に更新する前に、Node.jsのバージョンが20.11.1以上であり、v18またはv22.0-v22.10ではないことを確認してください。サポートされているNode.jsバージョンの完全なリストはhttps://angular.dev/reference/versionsで確認してください。',
+        'Angular v20に更新する前に、Node.jsのバージョンが20.11.1以上であり、v18またはv22.0-v22.10ではないことを確認してください。[サポートされているNode.jsバージョンの完全なリスト](https://angular.dev/reference/versions)を確認してください。',
     },
     {
       possibleIn: 2000,
@@ -2919,5 +2924,13 @@ export const RECOMMENDATIONS: Step[] = [
     step: '21.0.0-lastsuccessfulnavigation-is-a-signal',
     action:
       'Router の `lastSuccessfulNavigation` プロパティがシグナルに変換されました。その値を取得するには、関数として呼び出す必要があります: `router.lastSuccessfulNavigation()`。',
+  },
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
+    level: ApplicationComplexity.Medium,
+    step: '21.0.0-configure-commonengine-allowed-hosts',
+    action:
+      "`@angular/ssr` 21.1.5以降、アプリケーションがSSRで`CommonEngine`を使用している場合は、`server.ts`で`allowedHosts`オプションを設定してください（例: `new CommonEngine({allowedHosts: ['localhost', '*.yourdomain.com']})`）。設定しない場合、SSRはサイレントにクライアントサイドレンダリングにフォールバックします。この要件はセキュリティアドバイザリ [GHSA-x288-3778-4hhx](https://github.com/angular/angular-cli/security/advisories/GHSA-x288-3778-4hhx) に基づくものです（20.3.17および19.2.21にもバックポートされています）。",
   },
 ];

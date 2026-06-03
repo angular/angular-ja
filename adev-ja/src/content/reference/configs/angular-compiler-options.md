@@ -60,7 +60,7 @@ The default value is `'full'`.
 
 For most applications, `'full'` is the correct compilation mode.
 
-Use `'partial'` for independently published libraries, such as NPM packages.
+Use `'partial'` for independently published libraries, such as npm packages.
 `'partial'` compilations output a stable, intermediate format which better supports usage by applications built at different Angular versions from the library.
 Libraries built at "HEAD" alongside their applications and using the same version of Angular such as in a mono-repository can use `'full'` since there is no risk of version skew.
 
@@ -221,6 +221,11 @@ When `true`, reports an error if a component, directive, or pipe is not standalo
 
 When `true`, prints extra information while compiling templates.
 Default is `false`.
+
+### `typeCheckHostBindings`
+
+When `true`, enables type checking of expressions in the `host` object literal and `@HostBinding`/`@HostListener` decorators of components and directives.
+Default is `true`.
 
 ## Command line options
 

@@ -1,15 +1,15 @@
 # DIの実践
 
-このガイドでは、Angularにおける依存性の注入の追加機能について説明します。
+このガイドでは、Angularにおける依存性の注入 (DI) の追加機能について説明します。
 
 NOTE: InjectionTokenとカスタムプロバイダーの包括的な説明については、[依存性プロバイダーの定義ガイド](guide/di/defining-dependency-providers#injection-tokens)を参照してください。
 
 ## コンポーネントのDOM要素を注入する {#inject-the-components-dom-element}
 
-開発者は避けるように努めていても、一部の視覚効果とサードパーティツールでは、直接DOMにアクセスする必要があります。
-そのため、コンポーネントのDOM要素にアクセスする必要がある場合があります。
+一般的に開発者は避けるものですが、一部の視覚効果やサードパーティツールでは、直接DOMにアクセスする必要があります。
+そのような場合には、コンポーネントのDOM要素にアクセスする必要が生じることがあります。
 
-Angularは、`@Component`または`@Directive`の基になる要素を、`ElementRef`インジェクショントークンを使用してインジェクションすることで公開します。
+Angularは、`@Component`または`@Directive`の基になるDOM要素を、`ElementRef`トークンを使用したインジェクションを通じて公開します。
 
 ```ts {highlight:[7]}
 import {Directive, ElementRef, inject} from '@angular/core';
@@ -28,7 +28,7 @@ export class HighlightDirective {
 
 ## ホスト要素のタグ名を注入する {#inject-the-host-elements-tag-name}
 
-ホスト要素のタグ名が必要な場合は、`HOST_TAG_NAME`トークンを使用して注入します。
+ホスト要素のタグ名を取得するには、`HOST_TAG_NAME`トークンを使用して注入します。
 
 ```ts
 import {Directive, HOST_TAG_NAME, inject} from '@angular/core';
@@ -60,18 +60,18 @@ NOTE: ホスト要素がタグ名を持たない可能性がある場合（例: 
 ## 前方参照を使用して循環した依存関係を解決する {#resolve-circular-dependencies-with-a-forward-reference}
 
 TypeScriptでは、クラスの宣言順序が重要です。
-定義されるまでは、クラスを直接参照できません。
+クラスは定義するまで直接参照できません。
 
 これは、特に推奨される_1ファイルにつき1クラス_ルールに従っている場合は通常問題ありません。
-しかし、循環参照は避けられない場合があります。
-たとえば、クラス'A'がクラス'B'を参照し、'B'が'A'を参照する場合、いずれか一方を最初に定義する必要があります。
+しかし、場合によっては循環参照が避けられないことがあります。
+たとえば、クラス'A'がクラス'B'を参照し、クラス'B'がクラス'A'を参照する場合、いずれか一方を最初に定義する必要があります。
 
 Angularの`forwardRef()`関数は、Angularが後で解決できる_間接的な_参照を作成します。
 
 クラスが_自分自身を参照する_場合にも、同様の問題が発生します。
 たとえば、`providers`配列内です。
 `providers`配列は、`@Component()`デコレーター関数のプロパティであり、クラス定義の前に表示される必要があります。
-`forwardRef`を使用して、このような循環参照を解消できます。
+このような循環参照は`forwardRef`を使用して解決できます。
 
 ```typescript {header: 'app.component.ts', highlight: [4]}
 providers: [

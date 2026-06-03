@@ -1,24 +1,24 @@
 # 注入コンテキスト
 
-依存性の注入 (DI) システムは、内部的に現在のインジェクターが利用可能なランタイムコンテキストに依存しています。
+依存性の注入 (DI) システムは、現在のインジェクターが利用可能なランタイムコンテキストに依存しています。
 
-これは、インジェクターは、このようなコンテキストでコードが実行される場合にのみ動作することを意味します。
+これは、このコンテキスト内でコードを実行する場合にのみインジェクターが動作することを意味します。
 
-注入コンテキストは、次の状況で使用できます。
+注入コンテキストは、次の状況で利用できます。
 
 - DIシステムによってインスタンス化されるクラス（`@Injectable` または `@Component` など）の構築（`constructor` を使用）中。
-- このようなクラスのフィールドのイニシャライザー。
+- そのようなクラスのフィールドイニシャライザー内。
 - `Provider` または `@Injectable` の `useFactory` に指定されたファクトリー関数。
 - `InjectionToken` に指定された `factory` 関数。
 - 注入コンテキストで実行されるスタックフレーム内。
 
-注入コンテキストにいるかどうかを知ることで、[`inject`](api/core/inject) 関数を使用してインスタンスを注入できます。
+注入コンテキストにいるかどうかを知ることで、[`inject`](api/core/inject) 関数を使用して依存性を取得できます。
 
 NOTE: クラスコンストラクターとフィールドイニシャライザーでの `inject()` の基本的な使用例については、[概要ガイド](/guide/di#where-can-inject-be-used)を参照してください。
 
 ## コンテキスト内のスタックフレーム
 
-一部のAPIは、注入コンテキストで実行されるように設計されています。これは、たとえば、ルーターガードの場合です。これにより、ガード関数内で [`inject`](api/core/inject) を使用してサービスにアクセスできます。
+一部のAPIは、注入コンテキスト内で実行されるように設計されています。これは、たとえば、ルーターガードの場合です。これにより、ガード関数内で [`inject`](api/core/inject) を使用してサービスにアクセスできます。
 
 `CanActivateFn` の例を次に示します。
 
@@ -33,8 +33,8 @@ const canActivateTeam: CanActivateFn = (
 
 ## 注入コンテキスト内で実行する {#run-within-an-injection-context}
 
-すでに注入コンテキスト内にいない状態で、特定の関数を注入コンテキスト内で実行したい場合は、`runInInjectionContext` を使用できます。
-これには、たとえば `EnvironmentInjector` のような特定のインジェクターへのアクセスが必要です。
+すでに注入コンテキスト内にいない状態で関数を注入コンテキスト内で実行する必要がある場合は、`runInInjectionContext` を使用できます。
+これには、`EnvironmentInjector` のようなインジェクターへのアクセスが必要です。
 
 ```ts {highlight: [9], header"hero.service.ts"}
 @Injectable({
@@ -51,11 +51,11 @@ export class HeroService {
 }
 ```
 
-[`inject`](/api/core/inject) は、インジェクターが要求されたトークンを解決できる場合にのみインスタンスを返します。
+[`inject`](/api/core/inject) は、インジェクターが要求されたトークンを解決できる場合にのみインスタンスを返すことに注意してください。
 
 ## コンテキストのアサート {#asserts-the-context}
 
-Angularは、現在のコンテキストが注入コンテキストであることをアサートし、そうでない場合は明確なエラーをスローするための `assertInInjectionContext` ヘルパー関数を提供します。呼び出し元の関数への参照を渡すと、エラーメッセージが正しいAPIエントリーポイントを指し示すようになります。これにより、デフォルトの汎用的な注入エラーよりも明確で実用的なメッセージが生成されます。
+Angularは、現在のコンテキストが注入コンテキストであることを検証し、そうでない場合は明確なエラーをスローするための `assertInInjectionContext` ヘルパー関数を提供します。呼び出し元の関数への参照を渡すと、エラーメッセージが正しいAPIエントリーポイントを指し示すようになります。これにより、デフォルトの汎用的な注入エラーよりも明確で実用的なメッセージが生成されます。
 
 ```ts
 import {ElementRef, assertInInjectionContext, inject} from '@angular/core';
@@ -86,4 +86,4 @@ export class PreviewCard {
 
 ## コンテキスト外での DI の使用
 
-注入コンテキスト外で [`inject`](api/core/inject) を呼び出したり、`assertInInjectionContext` を呼び出したりすると、[エラー NG0203](/errors/NG0203) がスローされます。
+注入コンテキスト外で [`inject`](api/core/inject) や `assertInInjectionContext` を呼び出すと、Angularは [エラー NG0203](/errors/NG0203) をスローします。

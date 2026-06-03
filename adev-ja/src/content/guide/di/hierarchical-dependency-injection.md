@@ -634,7 +634,7 @@ Emoji from AnimalService: 🐶
 ### `providers` と `viewProviders` の違い {#providers-vs-viewproviders}
 
 `viewProviders` フィールドは、概念的には `providers` と似ていますが、1つの顕著な違いがあります。
-`viewProviders` で構成されたプロバイダーは、コンポーネントの論理的な子になる投影されたコンテンツには可視ではありません。
+`viewProviders` のプロバイダーは、コンポーネント自身のビュー内でのみ可視です。`<ng-content>` を介してコンポーネントに投影されたコンテンツからは、これらのプロバイダーは見えません。
 
 `providers` と `viewProviders` の違いを確認するために、別のコンポーネントを例に追加して、 `Inspector` と呼びます。
 `Inspector` は、 `Child` の子になります。
@@ -705,6 +705,11 @@ Emoji from AnimalService: 🐶
 犬の絵文字 <code>🐶</code> は、 `Child` の `<#VIEW>` 内に宣言され、投影されたコンテンツには可視ではないことを覚えておいてください。
 代わりに、投影されたコンテンツには、クジラ <code>🐳</code> が表示されます。
 
+なぜ投影された `<app-inspector>` が、`App` の `viewProviders` から <code>🐳</code> を依然として見られるのか疑問に思うかもしれません。
+その理由は、Angular DIは**コンポーネントが宣言された場所**を追跡し、最終的にレンダリングされる場所は追跡しないためです。
+`<app-inspector>` は `App` のテンプレート内、つまり `App` の `<#VIEW>` 内にあるので、`App` の `viewProviders` は利用可能です。
+`Child` に投影することで、`Child` の `viewProviders` (<code>🐶</code>) へのアクセスは遮断されますが、`App` のプロバイダー (<code>🐳</code>) はツリーを上に辿って引き続き到達可能です。
+
 ただし、次の出力セクションでは `Inspector` は `Child` の実際の子コンポーネントです。そして `Inspector` は `<#VIEW>` の内側にあるため、 `AnimalService` を要求すると、犬 <code>🐶</code> が表示されます。
 
 論理ツリー内の `AnimalService` は、次のようになります。
@@ -741,8 +746,10 @@ Emoji from AnimalService: 🐶
 </app-root>
 ```
 
-`<app-inspector>` の投影されたコンテンツには、クジラ <code>🐳</code> が表示され、犬 <code>🐶</code> は表示されません。これは、犬 <code>🐶</code> が `<app-child>` の `<#VIEW>` の内側にあるためです。
-`<app-inspector>` は、 `<#VIEW>` の内側にある場合にのみ、犬 <code>🐶</code> を表示できます。
+投影された `<app-inspector>` がクジラ <code>🐳</code> を取得するのは、犬 <code>🐶</code> が `Child` のビューに属しており、投影されたコンテンツからは到達できないためです。
+クジラ <code>🐳</code> にアクセスできるのは、`<app-inspector>` が `App` のテンプレートで宣言されているため、`App` の `viewProviders` まで辿れるからです。
+
+一方、`Child` のテンプレート内に直接置かれた（投影されていない）`<app-inspector>` は、犬 <code>🐶</code> を取得します。これは `<#VIEW>` の内側にあるため、超えるべき境界がないからです。
 
 ### 提供されたトークンの可視性 {#visibility-of-provided-tokens}
 

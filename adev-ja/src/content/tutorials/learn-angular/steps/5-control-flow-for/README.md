@@ -22,7 +22,7 @@ NOTE: [エッセンシャルガイドの制御フロー](/essentials/templates#c
   `,
 })
 export class App {
-  operatingSystems = [{id: 'win', name: 'Windows'}, {id: 'osx', name: 'MacOS'}, {id: 'linux', name: 'Linux'}];
+  operatingSystems = [{id: 'win', name: 'Windows'}, {id: 'osx', name: 'macOS'}, {id: 'linux', name: 'Linux'}];
 }
 ```
 

@@ -65,7 +65,25 @@ export class CustomListbox extends ListboxBase {
 
 ### 注入された依存性の転送
 
-もし基底クラスがコンストラクターのパラメーターとして依存性を注入している場合、子クラスではその依存性を明示的にsuper()に渡す必要があります。
+基底クラスが`inject()`をプロパティイニシャライザーとして使用する場合、子クラスはそのプロパティを自動的に継承します。`super`への転送は不要です。
+
+```ts
+@Component({
+  /*...*/
+})
+export class ListboxBase {
+  protected element = inject(ElementRef);
+}
+
+@Component({
+  /*...*/
+})
+export class CustomListbox extends ListboxBase {
+  // `element` is inherited from `ListboxBase`.
+}
+```
+
+もし基底クラスがコンストラクターのパラメーターとして依存性を注入している場合、子クラスではその依存性を明示的に`super`に渡す必要があります。
 
 ```ts
 @Component({

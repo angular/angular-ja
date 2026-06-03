@@ -92,7 +92,7 @@ Choose one of the following browser providers based on your needs:
 
 - **Playwright**: `@vitest/browser-playwright` for Chromium, Firefox, and WebKit.
 - **WebdriverIO**: `@vitest/browser-webdriverio` for Chrome, Firefox, Safari, and Edge.
-- **Preview**: `@vitest/browser-preview` for Webcontainer environments (like StackBlitz).
+- **Preview**: `@vitest/browser-preview` for WebContainer environments (like StackBlitz).
 
 <docs-code-multifile>
   <docs-code header="npm" language="shell">
@@ -131,8 +131,6 @@ Add the `browsers` option to your `test` target's options. The browser name depe
 ```
 
 Headless mode is enabled automatically if the `CI` environment variable is set or if a browser name includes "Headless" (e.g., `ChromeHeadless`). Otherwise, tests will run in a headed browser.
-
-NOTE: Debugging with `ng test --debug` is not supported by browser mode.
 
 ## Automated test refactoring with schematics
 

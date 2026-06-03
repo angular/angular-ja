@@ -62,7 +62,7 @@ WindowsまたはUnixでこのコマンドを実行する際に問題が発生し
 
 #### 新しいプロジェクトを作成する {#create-a-new-project}
 
-ターミナルで、CLIコマンド`ng new`を実行し、目的のプロジェクト名を入力します。次の例では、`my-first-angular-app`というプロジェクト名を使用します。
+ターミナルで、CLIコマンド[`ng new`](cli/new)を実行し、目的のプロジェクト名を入力します。次の例では、`my-first-angular-app`というプロジェクト名を使用します。
 
 ```shell
 ng new <project-name>

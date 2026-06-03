@@ -108,7 +108,7 @@
   <docs-card title="他のGoogleテクノロジーとのパートナーシップ" titleIconName="sensors">
     <p>Angularは、Webを改善するために他のGoogleテクノロジーやチームと緊密に連携しています。</p>
     <p>ChromeのAuroraとの継続的なパートナーシップは、<code>NgOptimizedImage</code>などの組み込みパフォーマンス最適化やAngularのCore Web Vitalsの改善など、Web全体でユーザー体験の向上を積極的に模索しています。</p>
-    <p>また、<a href="https://firebase.google.com/">Firebase</a>、<a href="https://www.tensorflow.org/">Tensorflow</a>、<a href="https://flutter.dev/">Flutter</a>、<a href="https://m3.material.io/">Material Design</a>、<a href="https://cloud.google.com/">Google Cloud</a>と連携して、開発者ワークフロー全体で有意義な統合を提供しています。</p>
+    <p>また、<a href="https://firebase.google.com/" target="_blank">Firebase</a>、<a href="https://www.tensorflow.org/" target="_blank">Tensorflow</a>、<a href="https://flutter.dev/" target="_blank">Flutter</a>、<a href="https://m3.material.io/" target="_blank">Material Design</a>、<a href="https://cloud.google.com/" target="_blank">Google Cloud</a>と連携して、開発者ワークフロー全体で有意義な統合を提供しています。</p>
   </docs-card>
 </docs-card-container>
 

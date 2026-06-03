@@ -4,7 +4,8 @@
     "allowlist": {
       "allow": [
         "/<docs-code[\\s\\S]*?</docs-code>/m",
-        "/\\{#.*\\}/m"
+        "/\\{#.*\\}/m",
+        "/^[^\\p{Script=Hiragana}\\p{Script=Katakana}\\p{Script=Han}\\n]+$/mu"
       ]
     }
   },

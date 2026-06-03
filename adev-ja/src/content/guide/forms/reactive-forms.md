@@ -151,7 +151,7 @@ Just as a form group contains a group of controls, the _profileForm_ `FormGroup`
 
 <docs-code header="profile-editor.component.html (submit event)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.html" region="ng-submit"/>
 
-`ProfileEditor` コンポーネントの `onSubmit()` メソッドは、`profileForm` の現在の値をキャプチャします。`EventEmitter` を使用してフォームをカプセル化し、コンポーネント外部にフォーム値を提供します。次の例では、`console.warn` を使用して、ブラウザコンソールにメッセージをログ出力します。
+`ProfileEditor` コンポーネントの `onSubmit()` メソッドは、`profileForm` の現在の値をキャプチャします。`output()` を使用してフォームをカプセル化し、コンポーネント外部にフォーム値を提供します。次の例では、`console.warn` を使用して、ブラウザコンソールにメッセージをログ出力します。
 
 <docs-code header="profile-editor.component.ts (submit method)" path="adev/src/content/examples/reactive-forms/src/app/profile-editor/profile-editor.component.ts" region="on-submit"/>
 

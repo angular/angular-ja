@@ -109,7 +109,7 @@ Angular v19では、CSSとテンプレートのHMRの初期サポートを提供
 <docs-card title="Zoneless Angular"  link="Completed in Q4 2025">
 v18では、Angularに実験的なZonelessサポートを提供しました。これにより、バンドルにzone.jsを含めずにフレームワークを使用できるようになり、パフォーマンス、デバッグエクスペリエンス、相互運用性が向上します。初期リリースの一環として、Angular CDKとAngular MaterialにもZonelessサポートを導入しました。
 
-In v19 we introduced zoneless support in server-side rendering, addressed some edge cases, and created a schematic to scaffold zoneless projects. We transitioned <a href="https://fonts.google.com/">Google Fonts</a> to zoneless which improved performance, developer experience, and allowed us to identify gaps that we need to address before moving this feature to developer preview.
+In v19 we introduced zoneless support in server-side rendering, addressed some edge cases, and created a schematic to scaffold zoneless projects. We transitioned <a href="https://fonts.google.com/" target="_blank">Google Fonts</a> to zoneless which improved performance, developer experience, and allowed us to identify gaps that we need to address before moving this feature to developer preview.
 
 As of Angular v20.2, Zoneless Angular is now stable and includes improvements in error handling and server-side rendering.
 </docs-card>
@@ -163,7 +163,7 @@ v17では、viteとesbuildベースのアプリケーションビルダーを提
 <docs-card title="Angular.devをAngular開発者の公式のホームにする" link="2024年第2四半期に完了" href="https://goo.gle/angular-dot-dev">
 Angular.devは、Angular開発のための新しいサイト・ドメイン・ホームです。新しいサイトには、開発者がAngularの最新機能を使用して構築するのに役立つ、更新されたドキュメント、チュートリアル、およびガイダンスが含まれています。
 </docs-card>
-<docs-card title="組み込みの制御フローを導入する" link="2024年第2四半期に完了" href="https://next.angular.dev/essentials/conditionals-and-loops">
+<docs-card title="組み込みの制御フローを導入する" link="2024年第2四半期に完了" href="guide/templates/control-flow">
 v17では、新しい制御フローの開発者プレビューバージョンを提供しました。これは、テンプレートオーサリングのパフォーマンスを大幅に向上させ、使いやすさを高めます。加えて、既存の`*ngIf`、`*ngFor`、`*ngSwitch`のマイグレーションを提供しており、これを実行してプロジェクトを新しい実装に移行できます。v18以降、組み込みの制御フローは安定しています。
 </docs-card>
 <docs-card title="入門チュートリアルを最新化する" link="2023年第4四半期に完了">
@@ -175,7 +175,7 @@ Angular v16では、`ng build`と`ng serve`をサポートするesbuildベース
 <docs-card title="依存性の注入のデバッグAPIを導入する" link="2023年第4四半期に完了" href="tools/devtools">
 AngularとAngular DevToolsのデバッグユーティリティを改善するために、依存性の注入ランタイムにアクセスできるAPIに取り組んでいます。このプロジェクトでは、インジェクター階層とその関連するプロバイダー全体での依存関係を探索できるデバッグメソッドを公開します。v17では、依存性の注入のライフサイクルにプラグインできる機能を提供しました。さらに、インジェクターツリーの可視化と、各ノード内に宣言されたプロバイダーの検査を開始しました。
 </docs-card>
-<docs-card title="スタンドアロンコンポーネントのドキュメントとシェーマティックを改善する" link="2023年第4四半期に完了" href="components">
+<docs-card title="スタンドアロンコンポーネントのドキュメントとシェーマティックを改善する" link="2023年第4四半期に完了" href="essentials/components">
 `ng new --standalone`シェーマティックコレクションの開発者プレビューをリリースしました。これにより、NgModuleを使用せずにアプリケーションを作成できます。v17では、新しいアプリケーションのオーサリング形式をスタンドアロンAPIに変更し、ドキュメントを反映するように変更しました。加えて、既存のアプリケーションをスタンドアロンコンポーネント・ディレクティブ・パイプに更新するシェーマティックを提供しました。NgModuleは当面の間残りますが、新しいAPIの利点を活用して開発者エクスペリエンスを向上させ、構築した新機能を活用することをお勧めします。
 </docs-card>
 <docs-card title="ハイドレーションとサーバーサイドレンダリングの改善を調査する" link="2023年第4四半期に完了">

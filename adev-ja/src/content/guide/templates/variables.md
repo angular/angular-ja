@@ -2,6 +2,8 @@
 
 Angularには、テンプレート内で2種類の変数宣言があります。 ローカルテンプレート変数とテンプレート参照変数です。
 
+HELPFUL: In this guide, “template” does not mean the entire HTML template file. It refers only to a specific template construct or expression within the file.
+
 ## `@let` を使ったローカルテンプレート変数
 
 Angularの `@let` 構文を使用すると、ローカル変数を定義し、テンプレート全体で再利用できます。これは、[JavaScriptの`let`構文](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let)に似ています。
@@ -194,3 +196,35 @@ export class AppComponent {
 ```
 
 クエリの詳細については、[クエリによる子の参照](/guide/components/queries)を参照してください。
+
+### Template variable scope
+
+Just like variables in JavaScript or TypeScript code, template variables are scoped to the template that declares them.
+
+Similarly, [Structural directives](guide/directives/structural-directives) or `<ng-template>` declarations create a new nested template scope, much like JavaScript's control flow statements like `if` and `for` create new lexical scopes. You cannot access template variables within one of these structural directives from outside of its boundaries.
+
+HELPFUL: Define a variable only once in the template so the runtime value remains predictable.
+
+#### Accessing in a nested template
+
+An inner template can access template variables that the outer template defines.
+
+In the following example, changing the text in the `<input>` changes the value in the `<span>` because Angular immediately updates changes through the template variable, `ref1`.
+
+```html
+<input #ref1 type="text" [(ngModel)]="firstExample" />
+
+<span *ngIf="true">Value: {{ ref1.value }}</span>
+```
+
+In this case, the `*ngIf` on `<span>` creates a new template scope, which includes the `ref1` variable from its parent scope.
+
+However, accessing a template variable from a child scope in the parent template doesn't work:
+
+```html {avoid}
+<input *ngIf="true" #ref2 type="text" [(ngModel)]="secondExample" />
+
+<span>Value: {{ ref2?.value }}</span>
+```
+
+Here, `ref2` is declared in the child scope created by `*ngIf`, and is not accessible from the parent template.

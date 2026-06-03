@@ -92,7 +92,7 @@ IMPORTANT: 既存のプロジェクトをVitestに移行することは実験的
 
 - **Playwright**: Chromium、Firefox、WebKit用の`@vitest/browser-playwright`。
 - **WebdriverIO**: Chrome、Firefox、Safari、Edge用の`@vitest/browser-webdriverio`。
-- **Preview**: Webcontainer環境（StackBlitzなど）用の`@vitest/browser-preview`。
+- **Preview**: WebContainer環境（StackBlitzなど）用の`@vitest/browser-preview`。
 
 <docs-code-multifile>
   <docs-code header="npm" language="shell">
@@ -131,8 +131,6 @@ IMPORTANT: 既存のプロジェクトをVitestに移行することは実験的
 ```
 
 ヘッドレスモードは、`CI`環境変数が設定されている場合や、ブラウザ名に"Headless"が含まれている場合（例: `ChromeHeadless`）に自動的に有効になります。それ以外の場合、テストはヘッド付きブラウザで実行されます。
-
-NOTE: `ng test --debug`を使用したデバッグは、ブラウザモードではサポートされていません。
 
 ## schematicsによる自動テストリファクタリング {#automated-test-refactoring-with-schematics}
 

@@ -68,7 +68,7 @@ Angular CLIをインストールするには、ターミナルウィンドウを
 ### PowerShell実行ポリシー {#powershell-execution-policy}
 
 Windowsクライアントコンピューターでは、PowerShellスクリプトの実行はデフォルトで無効になっているため、上記のコマンドはエラーで失敗する可能性があります。
-npmグローバルバイナリに必要なPowerShellスクリプトの実行を許可するには、次の<a href="https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_execution_policies">実行ポリシー</a>を設定する必要があります。
+npmグローバルバイナリに必要なPowerShellスクリプトの実行を許可するには、次の<a href="https://docs.microsoft.com/powershell/module/microsoft.powershell.core/about/about_execution_policies" target="_blank">実行ポリシー</a>を設定する必要があります。
 
 ```sh
 

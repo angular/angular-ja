@@ -40,6 +40,40 @@ export class LoginComponent {
 
 `[formField]`ディレクティブは、各入力要素をフィールドツリー内の対応するフィールドにバインドし、UIとモデル間の自動的な双方向同期を可能にします。
 
+### サポートされるモデル構造 {#supported-model-structures}
+
+シグナルフォームはモデルを走査してフィールドツリーを構築します。走査されるオブジェクトと配列（**構造レイヤー**）は、プレーンなJavaScriptオブジェクトと配列でなければなりません。**リーフ**（ネストされたフィールドを持たない位置）の値は、通常プリミティブ（文字列、数値、真偽値）または `null` です。ネイティブの `date`、`month`、`time`、`week` 入力は `Date` も受け入れ、カスタムコントロールは理解できる任意の値型を受け入れます。
+
+```ts {prefer, header: 'Plain structure'}
+interface UserFormModel {
+  name: string;
+  birthday: Date | null;
+  preferences: {
+    theme: string;
+    notifications: boolean;
+  };
+  tags: string[];
+}
+
+const userModel = signal<UserFormModel>({
+  name: '',
+  birthday: null,
+  preferences: {
+    theme: 'dark',
+    notifications: true,
+  },
+  tags: [],
+});
+```
+
+IMPORTANT: クラスインスタンス、`Map`、`Set` は、TypeScriptが受け入れるとしても**構造レイヤーではサポートされません**。シグナルフォームは実行時にモデルの形状を検証しないため、フレームワークはこれらの値を例外を投げずに受け入れ、その後、形状に応じて異なる形で誤った挙動を引き起こします:
+
+- **クラスインスタンス**は、シグナルフォームが更新時に親オブジェクトをシャローコピーするため、最初の書き込みでプロトタイプを失います。それ以降、メソッド、ゲッター、`instanceof` チェックは機能しなくなります。
+- **配列内の拡張不可または凍結されたオブジェクト**は、シグナルフォームが並び替え時にアイテムの同一性を保持するためのトラッキングシンボルを割り当てる際に例外を投げます。
+- **`Map` および `Set`** は、シグナルフォームが `Object.keys` で子要素を列挙するため、空のフィールドツリーを生成します。
+
+アプリケーションがドメインモデリングにクラスを使用している場合は、フォームの境界でプレーンなオブジェクトに変換してください。[フォームモデルとドメインモデル間の変換](guide/forms/signals/model-design#translating-between-form-model-and-domain-model)を参照してください。
+
 ### TypeScriptの型を使用する {#using-typescript-types}
 
 TypeScriptはオブジェクトリテラルから型を推論しますが、明示的な型を定義することでコードの品質が向上し、より良いIntelliSenseのサポートが提供されます。

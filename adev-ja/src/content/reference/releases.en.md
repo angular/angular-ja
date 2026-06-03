@@ -19,7 +19,7 @@ To make these transitions as straightforward as possible, the Angular team makes
 - We follow the deprecation policy described here, so you have time to update your applications to the latest APIs and best practices
 
 HELPFUL: The practices described in this document apply to Angular 2.0 and later.
-If you are currently using AngularJS, see [Upgrading from AngularJS](https://angular.io/guide/upgrade 'Upgrading from Angular JS').
+If you are currently using AngularJS, see [Upgrading from AngularJS](https://angular.io/guide/upgrade 'Upgrading from AngularJS').
 _AngularJS_ is the name for all v1.x versions of Angular.
 
 ## Angular versioning
@@ -97,9 +97,8 @@ The following table provides the status for Angular versions under support.
 | :------ | :----- | :--------- | :---------- | :--------- |
 | ^21.0.0 | Active | 2025-11-19 | 2026-05-19  | 2027-05-19 |
 | ^20.0.0 | LTS    | 2025-05-28 | 2025-11-19  | 2026-11-28 |
-| ^19.0.0 | LTS    | 2024-11-19 | 2025-05-28  | 2026-05-19 |
 
-Angular versions v2 to v18 are no longer supported.
+Angular versions v2 to v19 are no longer supported.
 
 ### LTS fixes
 

@@ -8,15 +8,12 @@
 
 ## テストの設定
 
-`HttpClient` の使用のテストを開始するには、`TestBed` を構成してテストの設定に `provideHttpClient()` と `provideHttpClientTesting()` を含めます。これにより、`HttpClient` が実際のネットワークではなくテストバックエンドを使用するように構成されます。また、`HttpTestingController` も提供され、これを使用してテストバックエンドとやり取ります。そして、どのリクエストが行われたかについての期待を設定し、それらのリクエストに対するレスポンスを流します。`HttpTestingController` は、構成されたら `TestBed` から注入できます。
-
-IMPORTANT: `provideHttpClientTesting()` は `provideHttpClient()` の一部を上書きするため、`provideHttpClient()` を `provideHttpClientTesting()` の**前**に提供することに留意してください。これを逆に行うと、テストが壊れてしまう可能性があります。
+`HttpClient` の使用のテストを開始するには、`TestBed` を構成してテストの設定に `provideHttpClientTesting()` を含めます。`HttpClient` はAngularのテスト環境によって提供され、`provideHttpClientTesting()` がそれを実際のネットワークではなくテストバックエンドを使用するように構成します。また、`HttpTestingController` も提供され、これを使用してテストバックエンドとやり取ります。そして、どのリクエストが行われたかについての期待を設定し、それらのリクエストに対するレスポンスを流します。`HttpTestingController` は、構成されたら `TestBed` から注入できます。
 
 ```ts
 TestBed.configureTestingModule({
   providers: [
     // ...その他のテストプロバイダー
-    provideHttpClient(),
     provideHttpClientTesting(),
   ],
 });
@@ -26,13 +23,24 @@ const httpTesting = TestBed.inject(HttpTestingController);
 
 これで、テストでリクエストを行うと、通常のバックエンドではなくテストバックエンドにヒットするようになります。`httpTesting` を使用して、それらのリクエストについてアサーションを行うことができます。
 
+### テストにおける `HttpClient` の構成
+
+テストでインターセプターなどの `HttpClient` の機能を構成する必要がある場合は、`provideHttpClientTesting()` の前に `provideHttpClient(...)` を含めます。
+IMPORTANT: `provideHttpClientTesting()` は `provideHttpClient()` の一部を上書きするため、`provideHttpClient()` を `provideHttpClientTesting()` の**前**に提供することに留意してください。これを逆に行うと、テストが壊れてしまう可能性があります。
+
+```ts
+TestBed.configureTestingModule({
+  providers: [provideHttpClient(withInterceptors([authInterceptor])), provideHttpClientTesting()],
+});
+```
+
 ## リクエストの期待と応答
 
 たとえば、GETリクエストが発生することを期待し、モックレスポンスを提供するテストを作成できます。
 
 ```ts
 TestBed.configureTestingModule({
-  providers: [ConfigService, provideHttpClient(), provideHttpClientTesting()],
+  providers: [ConfigService, provideHttpClientTesting()],
 });
 
 const httpTesting = TestBed.inject(HttpTestingController);

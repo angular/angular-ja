@@ -468,7 +468,7 @@ providers: [
 
 いいえ、しかしこれは私たちのロードマップにありますので、ご期待ください。
 
-この機能を待っている場合は、Githubのイシューを[こちら](https://github.com/angular/angular/issues/56594)でアップボートしてください。
+この機能を待っている場合は、GitHubのイシューを[こちら](https://github.com/angular/angular/issues/56594)でアップボートしてください。
 
 ### Chrome DevToolsでLCP画像を見つけるにはどうすればよいですか？ {#how-do-i-find-my-lcp-image-with-chrome-devtools}
 

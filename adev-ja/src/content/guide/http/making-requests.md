@@ -247,7 +247,7 @@ http
 | `HttpEventType.ResponseHeader`   | レスポンスのヘッダーが受信されました。ステータスとヘッダーが含まれています                  |
 | `HttpEventType.DownloadProgress` | レスポンスボディのダウンロードの進捗状況を報告する `HttpDownloadProgressEvent` |
 | `HttpEventType.Response`         | レスポンス全体が受信されました。レスポンスボディが含まれています                         |
-| `HttpEventType.User`             | Http インターセプターからのカスタムイベント                                           |
+| `HttpEventType.User`             | HTTP インターセプターからのカスタムイベント                                           |
 
 ## リクエスト失敗の処理 {#handling-request-failure}
 
@@ -614,7 +614,7 @@ IMPORTANT: `integrity` オプションには、レスポンスコンテンツと
 
 TIP: 外部ソースから重要なリソースを読み込む際は、それらが変更されていないことを確実にするため、サブリソースの整合性を使用してください。`openssl` などのツールを使用してハッシュを生成してください。
 
-## Http `Observable` {#http-observables}
+## HTTP `Observable` {#http-observables}
 
 `HttpClient` の各リクエストメソッドは、要求されたレスポンス型の `Observable` を構築して返します。これらの `Observable` の仕組みを理解することは、`HttpClient` を使用する場合に重要です。
 

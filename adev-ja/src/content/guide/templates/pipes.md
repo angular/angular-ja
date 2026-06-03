@@ -162,7 +162,7 @@ export class AppComponent {
 
 ### パイプによる変更検知
 
-By default, all pipes are considered `pure`, which means that it only executes when a primitive input value (such as a `String`, `Number`, `Boolean`, or `Symbol`) or a object reference (such as `Array`, `Object`, `Function`, or `Date`) is changed. Pure pipes offer a performance advantage because Angular can avoid calling the transformation function if the passed value has not changed.
+デフォルトでは、すべてのパイプは`pure`とみなされます。これは、プリミティブな入力値（`String`、`Number`、`Boolean`、`Symbol`など）またはオブジェクト参照（`Array`、`Object`、`Function`、`Date`など）が変更されたときにのみ実行されることを意味します。Pureなパイプは、渡された値が変更されていない場合にAngularが変換関数の呼び出しを回避できるため、パフォーマンス上の利点があります。
 
 その結果、オブジェクトプロパティや配列項目の変更は、オブジェクトまたは配列参照の全体が別のインスタンスに置き換えられない限り検出されません。このレベルの変更検知が必要な場合は、[配列やオブジェクト内の変更の検出](#detecting-change-within-arrays-or-objects)を参照してください。
 

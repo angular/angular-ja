@@ -518,6 +518,13 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             status: 'new',
           },
           {
+            label: 'フィールドメタデータ',
+            path: 'guide/forms/signals/field-metadata',
+            contentPath: 'guide/forms/signals/field-metadata',
+            category: 'Signal Forms',
+            status: 'new',
+          },
+          {
             label: '非同期処理',
             path: 'guide/forms/signals/async-operations',
             contentPath: 'guide/forms/signals/async-operations',

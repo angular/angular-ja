@@ -53,11 +53,10 @@ Angular CLIは、Vitestの設定のほとんどを処理します。`angular.jso
 たとえば、`src/test-providers.ts`ファイルを作成して、すべてのテストに`provideHttpClientTesting`を提供できます:
 
 ```typescript {header: "src/test-providers.ts"}
-import {Provider} from '@angular/core';
-import {provideHttpClient} from '@angular/common/http';
+import {EnvironmentProviders, Provider} from '@angular/core';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 
-const testProviders: Provider[] = [provideHttpClient(), provideHttpClientTesting()];
+const testProviders: (Provider | EnvironmentProviders)[] = [provideHttpClientTesting()];
 
 export default testProviders;
 ```
@@ -188,7 +187,7 @@ ng test --browsers=chromeHeadless
 
 ### Preview
 
-`@vitest/browser-preview`プロバイダーは、StackBlitzなどのWebcontainer環境向けに設計されており、CI/CDでの使用を目的としていません。
+`@vitest/browser-preview`プロバイダーは、StackBlitzなどのWebContainer環境向けに設計されており、CI/CDでの使用を目的としていません。
 
 <docs-code-multifile>
   <docs-code header="npm" language="shell">

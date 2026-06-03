@@ -2,12 +2,12 @@
 
 IMPORTANT: `@angular/animations`パッケージは現在非推奨です。Angularチームは、新しく書くコードのアニメーションには`animate.enter`と`animate.leave`を使ったネイティブCSSの利用を推奨します。詳しくは、新しいenterとleaveの[アニメーションガイド](guide/animations)を参照してください。また、アプリケーションで純粋なCSSアニメーションへの移行を始める方法については、[AngularのAnimationsパッケージからの移行](guide/animations/migration)も参照してください。
 
-このトピックでは、再利用可能なアニメーションを作成する方法の例をいくつか紹介します。
+このトピックでは、再利用可能なアニメーションを作成する方法の例を紹介します。
 
 ## 再利用可能なアニメーションを作成する {#create-reusable-animations}
 
 再利用可能なアニメーションを作成するには、[`animation()`](api/animations/animation)関数を使って別の`.ts`ファイルにアニメーションを定義し、そのアニメーション定義を`const`のエクスポート変数として宣言します。
-その後、[`useAnimation()`](api/animations/useAnimation)関数を使って、このアニメーションをアプリケーション内の任意のコンポーネントにインポートして再利用できます。
+その後、[`useAnimation()`](api/animations/useAnimation)関数を使って、このアニメーションをアプリケーションのコンポーネントにインポートして再利用できます。
 
 <docs-code header="animations.ts" path="adev/src/content/examples/animations/src/app/animations.1.ts" region="animation-const"/>
 

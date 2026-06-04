@@ -93,7 +93,7 @@ selectパターンは、[Combobox](guide/aria/combobox)と[Listbox](guide/aria/l
   </docs-tab>
 </docs-tab-group>
 
-`ngCombobox`の`readonly`属性は、キーボードナビゲーションを維持しながらテキスト入力を防ぎます。ユーザーは、ネイティブのselect要素と同じように、矢印キーとEnterキーを使用してドロップダウンを操作します。
+`ngCombobox`ディレクティブを`<input>`ではなく、`div`や`button`のような非インタラクティブなホスト要素に直接適用することで、テキスト入力を防ぎます。ユーザーは、ネイティブのselect要素と同じように、矢印キーとEnterキーを使用してドロップダウンを操作します。
 
 ### カスタム表示のセレクト {#select-with-custom-display}
 
@@ -218,7 +218,7 @@ selectパターンは、AngularのAriaライブラリから以下のディレク
 
 ### コンボボックスディレクティブ {#combobox-directives}
 
-selectパターンは、キーボードナビゲーションを維持しつつテキスト入力を防ぐために、`readonly`属性を持つ`ngCombobox`を使用します。
+selectパターンは、キーボードナビゲーションを維持しつつテキスト入力を防ぐために、`ngCombobox`を`div`や`button`のような非インタラクティブなホスト要素に直接適用します。
 
 #### 入力 {#inputs}
 

@@ -223,10 +223,13 @@ IMPORTANT: カスタム設定を使用すると高度なオプションが有効
 **2. ベース設定の自動検索:**
 `runnerConfig`を`true`に設定すると、ビルダーはプロジェクトとワークスペースのルートで共有の`vitest-base.config.*`ファイルを自動的に検索します。
 
-## `zone.js`ベースのヘルパーはサポートされていません {#zonejs-based-helpers-are-not-supported}
+## `zone.js` Vitestパッチ {#zonejs-vitest-patch}
 
-Vitestでテストを実行する場合、zone.jsのパッチは適用されないため、`fakeAsync`、`flush`、`waitForAsync`のような関数は使用できません。
-Vitestに移行するには、テストもネイティブasyncとVitestのフェイクタイマーに移行する必要があります。Vitestでのフェイクタイマーの使用例については、[こちらの例](/guide/testing/components-scenarios#async-test-with-a-vitest-fake-timers)を参照してください。
+`fakeAsync`、`flush`、`waitForAsync`のような関数を使用したい場合、または既存のテストをそれらと一緒に動作させたい場合は、`angular.json`のテストターゲットのポリフィルに`zone.js/plugins/vitest-patch`を追加できます。
+
+いずれにしても、既存のテストスイートをネイティブの`async`とVitestのフェイクタイマーに変換する計画を始めることを強く推奨します。これが確立されたアプローチだからです。
+
+Vitestでのフェイクタイマーの使用例については、[こちらの例](/guide/testing/components-scenarios#async-test-with-a-vitest-fake-timers)を参照してください。
 
 ## バグレポート {#bug-reports}
 

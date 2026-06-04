@@ -36,7 +36,7 @@ const canActivateTeam: CanActivateFn = (
 すでに注入コンテキスト内にいない状態で関数を注入コンテキスト内で実行する必要がある場合は、`runInInjectionContext` を使用できます。
 これには、`EnvironmentInjector` のようなインジェクターへのアクセスが必要です。
 
-```ts {highlight: [9], header"hero.service.ts"}
+```ts {highlight: [9], header:"hero.service.ts"}
 @Injectable({
   providedIn: 'root',
 })

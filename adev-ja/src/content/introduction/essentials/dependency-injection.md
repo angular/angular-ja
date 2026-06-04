@@ -10,15 +10,15 @@
 
 コンポーネントの定義と同様に、サービスは以下で構成されます。
 
-- `@Injectable`を使用してクラスをAngularサービスとして宣言する**TypeScriptデコレーター**。`providedIn`プロパティ（通常は`'root'`）を使用して、サービスにアクセスできるアプリケーションのどの部分かを定義できます。これにより、サービスをアプリケーション内のどこからでもアクセスできます。
+- `@Service`を使用してクラスをAngularサービスとして宣言する**TypeScriptデコレーター**。これにより、アプリケーション内のどこからでもアクセスできるサービスを定義できます。
 - サービスが注入されたときにアクセスできる目的のコードを定義する**TypeScriptクラス**
 
 以下は、`Calculator`サービスの例です。
 
 ```angular-ts
-import {Injectable} from '@angular/core';
+import {Service} from '@angular/core';
 
-@Injectable({providedIn: 'root'})
+@Service()
 export class Calculator {
   add(x: number, y: number) {
     return x + y;

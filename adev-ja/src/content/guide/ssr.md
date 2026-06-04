@@ -345,9 +345,9 @@ export class Checkout {
 サーバーサイドレンダリングを使用する場合、`document` のようなブラウザ固有のグローバルを直接参照することは避けるべきです。代わりに、[`DOCUMENT`](api/core/DOCUMENT) トークンを使用して、プラットフォームに依存しない方法でdocumentオブジェクトにアクセスします。
 
 ```ts
-import {Injectable, inject, DOCUMENT} from '@angular/core';
+import {inject, DOCUMENT, Service} from '@angular/core';
 
-@Injectable({providedIn: 'root'})
+@Service()
 export class CanonicalLinkService {
   private readonly document = inject(DOCUMENT);
 

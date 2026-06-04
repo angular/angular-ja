@@ -1,5 +1,5 @@
 diff --git a/adev/src/app/features/tutorial/tutorial.component.html b/adev/src/app/features/tutorial/tutorial.component.html
-index d786c8fc23..f2931c0203 100644
+index c6547465da..96a2f2eba4 100644
 --- a/adev/src/app/features/tutorial/tutorial.component.html
 +++ b/adev/src/app/features/tutorial/tutorial.component.html
 @@ -58,11 +58,11 @@
@@ -33,11 +33,11 @@ index d786c8fc23..f2931c0203 100644
          }
        </div>
 diff --git a/adev/src/app/features/tutorial/tutorial.component.ts b/adev/src/app/features/tutorial/tutorial.component.ts
-index 5824767d27..87df2f5ed7 100644
+index 507c20dfbe..ad938109b4 100644
 --- a/adev/src/app/features/tutorial/tutorial.component.ts
 +++ b/adev/src/app/features/tutorial/tutorial.component.ts
-@@ -50,7 +50,7 @@ import {SplitResizerHandler} from './split-resizer-handler.service';
- import {PAGE_PREFIX} from '../../core/constants/pages';
+@@ -47,7 +47,7 @@ import {
+ import {SplitResizerHandler} from './split-resizer-handler.service';
  import {TutorialNavigationList} from './tutorial-navigation-list';
  
 -const INTRODUCTION_LABEL = 'Introduction';

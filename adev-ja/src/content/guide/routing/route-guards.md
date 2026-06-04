@@ -125,11 +125,16 @@ export const unsavedChangesGuard: CanDeactivateFn<Form> = (
 
 - `route`: `Route` - 評価されているルート設定
 - `segments`: `UrlSegment[]` - 以前の親ルート評価によって消費されていないURLセグメント
+- `currentSnapshot: PartialMatchRouteSnapshot` - マッチング処理のこの時点までの現在のルートスナップショット
 
 [標準のガード戻り値の型](#route-guard-return-types)を返すことができますが、`false`を返した場合、Angularはナビゲーションを完全にブロックするのではなく、他のマッチングするルートを試行します。
 
 ```ts
-export const featureToggleGuard: CanMatchFn = (route: Route, segments: UrlSegment[]) => {
+export const featureToggleGuard: CanMatchFn = (
+  route: Route,
+  segments: UrlSegment[],
+  currentSnapshot: PartialMatchRouteSnapshot,
+) => {
   const featureService = inject(FeatureService);
   return featureService.isFeatureEnabled('newDashboard');
 };

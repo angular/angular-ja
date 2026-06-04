@@ -9,9 +9,20 @@ Angular Ariaは、一般的な[WAI-ARIAパターン](https://www.w3.org/WAI/ARIA
 
 ## インストール {#installation}
 
-```shell
-npm install @angular/aria
-```
+<docs-code-multifile>
+  <docs-code header="npm" language="shell">
+    npm install @angular/aria
+  </docs-code>
+  <docs-code header="yarn" language="shell">
+    yarn add @angular/aria
+  </docs-code>
+  <docs-code header="pnpm" language="shell">
+    pnpm add @angular/aria
+  </docs-code>
+  <docs-code header="bun" language="shell">
+    bun add @angular/aria
+  </docs-code>
+</docs-code-multifile>
 
 ## ショーケース {#showcase}
 

@@ -237,7 +237,8 @@ export class InnerItem {
 
 ## コンポーネントの遅延読み込み
 
-HELPFUL: コンポーネントを遅延読み込みしたい場合は、代わりに組み込みの[`@defer`機能](/guide/templates/defer)の使用を検討してください。
+HELPFUL: コンポーネントを遅延読み込みしたい場合は、代わりに組み込みの[`@defer`機能](/guide/templates/defer)
+の使用を検討してください。
 
 `@defer`機能でカバーされていないユースケースの場合は、標準のJavaScript [動的インポート](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/import)と
 一緒に`NgComponentOutlet`または`ViewContainerRef`を使用できます。
@@ -283,8 +284,7 @@ export class AdminSettings {
 
 `ViewContainerRef.createComponent`はコンポーネントを作成し、そのホストビューとホスト要素をコンテナのビュー階層内のコンテナの位置に自動的に挿入します。動的コンポーネントがコンテナの論理的および視覚的な構造の一部になる場合(たとえば、リストアイテムやインラインUIの追加)に使用します。
 
-対照的に、スタンドアロンの`createComponent` APIは、新しいコンポーネントを既存のビューやDOM位置にアタッチしません。`ComponentRef`を返し、
-コンポーネントのホスト要素を配置する場所を明示的に制御できます。
+対照的に、スタンドアロンの`createComponent` APIは、新しいコンポーネントを既存のビューやDOM位置にアタッチしません。`ComponentRef`を返し、コンポーネントのホスト要素を配置する場所を明示的に制御できます。
 
 ```angular-ts
 import {Component, input, model, output} from '@angular/core';
@@ -361,10 +361,11 @@ import {
   Injectable,
   inputBinding,
   outputBinding,
+  Service,
 } from '@angular/core';
 import {Popup} from './popup';
 
-@Injectable({providedIn: 'root'})
+@Service()
 export class PopupService {
   private readonly injector = inject(EnvironmentInjector);
   private readonly appRef = inject(ApplicationRef);
@@ -389,9 +390,9 @@ export class PopupService {
 
     // 変更検知サイクルに参加するようにコンポーネントのビューを登録します。
     this.appRef.attachView(ref.hostView);
-    // 提供されたホスト要素をDOM(通常のAngularビュー階層の外側)に挿入します。これにより、ポップアップが画面に表示されます。通常、オーバーレイやモーダルに使用されます。
+    // 提供されたホスト要素をDOM(通常のAngularビュー階層の外側)に挿入します。
+    // これにより、ポップアップが画面に表示されます。通常、オーバーレイやモーダルに使用されます。
     document.body.appendChild(host);
   }
 }
 ```
-

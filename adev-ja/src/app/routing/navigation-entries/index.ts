@@ -117,7 +117,7 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/signals/resource',
           },
           {
-            label: 'デバウンスされたシグナル',
+            label: 'シグナルのデバウンス',
             path: 'guide/signals/debounced',
             contentPath: 'guide/signals/debounced',
             status: 'new',

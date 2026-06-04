@@ -4,13 +4,13 @@ Signal Forms uses a two-layer architecture to separate _how your form is structu
 
 When you pass a schema function to `form()`, that function _runs once_ during form creation. Its job is to set up the form's logic tree by declaring which fields have validation, which fields are disabled, and which fields depend on other fields. This is the **structural layer** of your form.
 
-Inside a schema function, you call rule functions such as `disabled()` and `validate()`. These rule functions accept reactive logic that recomputes whenever the signals they reference change. Other rules like `required()` accept optional configuration, including a `when` function that conditionally activates the rule. Together, these form the **behavioral layer** of your form during runtime.
+Inside a schema function, you call rule functions such as `disabled()` and `validate()`. These rule functions accept reactive logic that recomputes whenever the signals they reference change. Conditional rules like `disabled()` and `required()` accept optional configuration, including a `when` function that activates the rule. Together, these form the **behavioral layer** of your form during runtime.
 
 ```ts
 contactForm = form(this.contactModel, (schemaPath) => {
   // Schema function: runs ONCE during form creation
   required(schemaPath.name);
-  disabled(schemaPath.couponCode, ({valueOf}) => valueOf(schemaPath.total) < 50);
+  disabled(schemaPath.couponCode, {when: ({valueOf}) => valueOf(schemaPath.total) < 50});
   //  ^^^ Reactive logic: recomputes when total changes
 });
 ```
@@ -173,14 +173,14 @@ function isBankTransfer(value: PaymentMethod): value is BankTransfer {
 }
 
 paymentForm = form(this.paymentModel, (schemaPath) => {
-  applyWhenValue(schemaPath.payment, isCreditCard, (payment) => {
+  applyWhenValue(schemaPath, isCreditCard, (payment) => {
     // TypeScript knows payment is scoped to CreditCard
     required(payment.cardNumber);
     required(payment.expiry);
     required(payment.cvv);
   });
 
-  applyWhenValue(schemaPath.payment, isBankTransfer, (payment) => {
+  applyWhenValue(schemaPath, isBankTransfer, (payment) => {
     // TypeScript knows payment is scoped to BankTransfer
     required(payment.accountNumber);
     required(payment.routingNumber);

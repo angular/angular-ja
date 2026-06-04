@@ -73,10 +73,14 @@ ng generate directive select
 Angularは、ディレクティブクラスを作成し、テンプレートでディレクティブを識別するCSSセレクター`[select]`を指定します。
 </docs-step>
 <docs-step title="ディレクティブを構造化">
-`TemplateRef`と`ViewContainerRef`をインポートし、ディレクティブ内で`TemplateRef`と`ViewContainerRef`をプライベートプロパティとしてインジェクトします。
+`TemplateRef`、`ViewContainerRef`、`input`をインポートし、ディレクティブ内で`TemplateRef`と`ViewContainerRef`をプライベートプロパティとしてインジェクトします。
 
 ```ts
-import {Directive, TemplateRef, ViewContainerRef, inject} from '@angular/core';
+import {Directive, TemplateRef, ViewContainerRef, inject, input} from '@angular/core';
+
+export interface DataSource<T> {
+  load(): Promise<T>;
+}
 
 @Directive({
   selector: '[select]',
@@ -94,7 +98,7 @@ export class SelectDirective {
 ```ts
 export class SelectDirective {
   // ...
-  selectFrom = input.required<DataSource>();
+  selectFrom = input.required<DataSource<unknown>>();
 }
 ```
 
@@ -106,7 +110,7 @@ export class SelectDirective {
 export class SelectDirective {
   // ...
   async ngOnInit() {
-    const data = await this.selectFrom.load();
+    const data = await this.selectFrom().load();
     this.viewContainerRef.createEmbeddedView(this.templateRef, {
       // テンプレートコンテキストに`$implicit`キーでデータを含むオブジェクトが含まれるように、
       // 埋め込みビューを作成します。

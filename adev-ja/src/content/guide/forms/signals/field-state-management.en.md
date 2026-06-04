@@ -222,30 +222,31 @@ Availability state signals control whether fields are interactive, editable, or 
 The `disabled()` signal indicates whether a field accepts user input. Disabled fields appear in the UI but users cannot interact with them.
 
 ```angular-ts
-import { Component, signal } from '@angular/core'
-import { form, FormField, disabled } from '@angular/forms/signals'
+import {Component, signal} from '@angular/core';
+import {form, FormField, disabled} from '@angular/forms/signals';
 
 @Component({
   selector: 'app-order',
   imports: [FormField],
+  // TIP: The `[formField]` directive automatically binds the `disabled` attribute based
+  // on the field's `disabled()` state, so you don't need to manually add `[disabled]="field().disabled()"`
   template: `
-    <!-- TIP: The `[formField]` directive automatically binds the `disabled` attribute based on the field's `disabled()` state, so you don't need to manually add `[disabled]="field().disabled()"` -->
     <input [formField]="orderForm.couponCode" />
 
     @if (orderForm.couponCode().disabled()) {
       <p class="info">Coupon code is only available for orders over $50</p>
     }
-  `
+  `,
 })
 export class Order {
   orderModel = signal({
     total: 25,
-    couponCode: ''
-  })
+    couponCode: '',
+  });
 
-  orderForm = form(this.orderModel, schemaPath => {
-    disabled(schemaPath.couponCode, ({valueOf}) => valueOf(schemaPath.total) < 50)
-  })
+  orderForm = form(this.orderModel, (schemaPath) => {
+    disabled(schemaPath.couponCode, {when: ({valueOf}) => valueOf(schemaPath.total) < 50});
+  });
 }
 ```
 
@@ -253,7 +254,7 @@ In this example, we use `valueOf(schemaPath.total)` to check the value of the `t
 
 NOTE: The schema callback parameter (`schemaPath` in these examples) is a `SchemaPathTree` object that provides paths to all fields in your form. You can name this parameter anything you like.
 
-When defining rules like `disabled()`, `hidden()`, or `readonly()`, the logic callback receives a `FieldContext` object that is typically destructured (such as `({valueOf})`). Two methods commonly used in validation rules are:
+When defining rules like `disabled()`, `hidden()`, or `readonly()`, the `when` function receives a `FieldContext` object that is typically destructured (such as `({valueOf})`). Two methods commonly used in validation rules are:
 
 - `valueOf(schemaPath.otherField)` - Read the value of another field in the form
 - `value()` - A signal containing the value of the field the rule is applied to
@@ -292,7 +293,7 @@ export class Profile {
   });
 
   profileForm = form(this.profileModel, (schemaPath) => {
-    hidden(schemaPath.publicUrl, ({valueOf}) => !valueOf(schemaPath.isPublic));
+    hidden(schemaPath.publicUrl, {when: ({valueOf}) => !valueOf(schemaPath.isPublic)});
   });
 }
 ```
@@ -439,7 +440,7 @@ const orderModel = signal({
 });
 
 const orderForm = form(orderModel, (schemaPath) => {
-  hidden(schemaPath.shippingAddress, ({valueOf}) => !valueOf(schemaPath.requiresShipping));
+  hidden(schemaPath.shippingAddress, {when: ({valueOf}) => !valueOf(schemaPath.requiresShipping)});
 });
 ```
 
@@ -516,7 +517,9 @@ export class Order {
   });
 
   orderForm = form(this.orderModel, (schemaPath) => {
-    hidden(schemaPath.shippingAddress, ({valueOf}) => !valueOf(schemaPath.requiresShipping));
+    hidden(schemaPath.shippingAddress, {
+      when: ({valueOf}) => !valueOf(schemaPath.requiresShipping),
+    });
   });
 }
 ```
@@ -621,6 +624,8 @@ While field state typically updates through user interactions (typing, focusing,
 Signal Forms provides a `FormRoot` directive that simplifies form submission. It automatically prevents the default browser form submission behavior and sets the `novalidate` attribute on the `<form>` element.
 
 ```angular-ts
+import {FormField, FormRoot} from '@angular/forms/signals';
+
 @Component({
   imports: [FormRoot, FormField],
   template: `
@@ -691,6 +696,7 @@ import {Component, signal} from '@angular/core';
 import {form, FormField, email} from '@angular/forms/signals';
 
 @Component({
+  imports: [FormField],
   template: `
     <input
       type="email"

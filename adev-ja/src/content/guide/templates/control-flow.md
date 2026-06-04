@@ -160,3 +160,20 @@ export class AppComponent {
   state: 'loggedOut' | 'loading' | 'loggedIn' = 'loggedOut';
 }
 ```
+
+switchの対象式がユニオン内にネストされている場合は、網羅性チェックの対象とする式を明示的に指定する必要があります。
+
+```angular-ts
+@Component({
+  template: `
+    @switch (state.mode) {
+      @case ('show') { {{ state.menu }}; }
+      @case ('hide') {}
+      @default never(state);
+    }
+  `,
+})
+export class App {
+  state!: {mode: 'hide'} | {mode: 'show'; menu: number};
+}
+```

@@ -43,7 +43,7 @@ count.update((value) => value + 1);
 `WritableSignal`は、シグナルの読み取り専用バージョンを返す`asReadonly()`メソッドを提供します。これは、シグナルの値をコンシューマーに公開したいが、直接変更できないようにしたい場合に便利です。
 
 ```ts
-@Injectable({providedIn: 'root'})
+@Service()
 export class CounterState {
   // プライベートな書き込み可能な状態
   private readonly _count = signal(0);

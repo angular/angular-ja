@@ -495,7 +495,7 @@ interface User {
   /* ... */
 })
 export class UserFormComponent {
-  readonly userModel = model<DTO>({
+  readonly userModel = model<User>({
     firstName: '',
     lastName: '',
   });
@@ -621,6 +621,17 @@ export class PasswordChangeComponent {
 ```
 
 確認用のバリデーションルールは`valueOf(schemaPath.password)`を使用してパスワードフィールドの値にアクセスし、確認用の値と比較します。このバリデーションルールはリアクティブに実行されます - どちらかのパスワードが変更されると、バリデーションが自動的に再実行されます。
+
+## 条件付きバリデーション {#conditional-validation}
+
+バリデーションルールは、特定の条件下でのみ適用すべき場合があります。たとえば、注文が国際配送される場合にのみ配送先住所をバリデーションする、あるいは共用体型のフィールドのバリアントごとに異なるルールセットを適用するといったケースです。
+
+バリデーションルールはスキーマ関数内に存在するため、スキーマを構成する同じ構造的な関数を使って条件付きで適用します:
+
+- [`applyWhen()`](guide/forms/signals/form-logic#conditional-logic-with-applywhen)を使用して、他のフィールドの値を含むリアクティブなフォーム状態に基づいてルールのグループを有効化します。
+- [`applyWhenValue()`](guide/forms/signals/schemas#type-narrowing-with-applywhenvalue)を使用して、フィールド自身の値に基づいてルールを適用します。述語が型ガードである場合、ルールは絞り込まれた値の型として扱われます。これにより、判別共用体やその他のバリアント型をバリデーションするための推奨される方法となります。
+
+再利用可能なスキーマや判別共用体を含む完全な例については、[スキーマとスキーマの合成可能性ガイド](guide/forms/signals/schemas)を参照してください。
 
 ## 非同期バリデーション {#async-validation}
 
@@ -749,10 +760,9 @@ export class DynamicSchema {
 
 このガイドでは、バリデーションルールの作成と適用について説明しました。関連ガイドでは、シグナルフォームの他の側面について解説します:
 
-<!-- TODO: UNCOMMENT WHEN THE GUIDES ARE AVAILABLE -->
 <docs-pill-row>
   <docs-pill href="guide/forms/signals/field-state-management" title="Field state management" />
   <docs-pill href="guide/forms/signals/models" title="Form models" />
-  <docs-pill href="guide/forms/signals/custom-controls" title="Custom controls" />
-  <!-- <docs-pill href="guide/forms/signals/arrays" title="Working with Arrays" /> -->
+  <docs-pill href="guide/forms/signals/form-logic" title="Adding form logic" />
+  <docs-pill href="guide/forms/signals/schemas" title="Schemas and schema composability" />
 </docs-pill-row>

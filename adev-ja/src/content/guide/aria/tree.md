@@ -157,6 +157,64 @@
 
 ツリーで`[softDisabled]="true"`の場合、無効化されたアイテムはフォーカスを受け取ることができますが、アクティブ化または選択できません。`[softDisabled]="false"`の場合、無効化されたアイテムはキーボードナビゲーション中にスキップされます。
 
+## Testing
+
+Angular Aria provides component harnesses for testing tree components.
+Here is an example of how to use the harnesses in a component test:
+
+```typescript
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {HarnessLoader} from '@angular/cdk/testing';
+import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
+import {TreeHarness} from '@angular/aria/tree/testing';
+import {MyTreeComponent} from './my-tree'; // Your component
+
+describe('MyTreeComponent', () => {
+  let fixture: ComponentFixture<MyTreeComponent>;
+  let loader: HarnessLoader;
+
+  beforeEach(async () => {
+    TestBed.configureTestingModule({
+      imports: [MyTreeComponent],
+    });
+
+    fixture = TestBed.createComponent(MyTreeComponent);
+    await fixture.whenStable();
+    loader = TestbedHarnessEnvironment.loader(fixture);
+  });
+
+  it('should navigate and expand tree items', async () => {
+    const tree = await loader.getHarness(TreeHarness);
+
+    // Get top-level structure representation
+    expect(await tree.getTreeStructure()).toEqual({
+      children: [{text: 'public'}, {text: 'src'}, {text: 'package.json'}],
+    });
+
+    // Get all items (currently visible)
+    const items = await tree.getItems();
+    expect(items.length).toBe(3);
+
+    // Expand the first item ('public')
+    expect(await items[0].isExpanded()).toBe(false);
+    await items[0].click();
+    expect(await items[0].isExpanded()).toBe(true);
+
+    // Verifying tree structure updates after expansion
+    expect(await tree.getTreeStructure()).toEqual({
+      children: [
+        {
+          text: 'public',
+          children: [{text: 'index.html'}, {text: 'styles.css'}],
+        },
+        {text: 'src'},
+        {text: 'package.json'},
+      ],
+    });
+  });
+});
+```
+
 ## API {#apis}
 
 ### Tree {#tree}
@@ -191,11 +249,12 @@
 
 #### Inputs {#inputs}
 
-| プロパティ | 型        | デフォルト | 説明                                                    |
-| ---------- | --------- | ------- | ------------------------------------------------------- |
-| `value`    | `any`     | —       | **必須。** このツリーアイテムの一意な値                   |
-| `disabled` | `boolean` | `false` | このアイテムを無効にします                                |
-| `expanded` | `boolean` | `false` | ノードが展開されているかどうか（双方向バインディングをサポート） |
+| プロパティ | 型                      | デフォルト | 説明                                                    |
+| ---------- | ----------------------- | ------- | ------------------------------------------------------- |
+| `parent`   | `Tree \| TreeItemGroup` | —       | **必須。** 親のTreeルートまたはTreeItemGroup。           |
+| `value`    | `any`                   | —       | **必須。** このツリーアイテムの一意な値                   |
+| `disabled` | `boolean`               | `false` | このアイテムを無効にします                                |
+| `expanded` | `boolean`               | `false` | ノードが展開されているかどうか（双方向バインディングをサポート） |
 
 #### シグナル {#signals}
 
@@ -213,18 +272,28 @@
 | `collapse` | none       | このノードを折りたたみます        |
 | `toggle`   | none       | 展開状態を切り替えます            |
 
-### TreeGroup {#treegroup}
+### TreeItemGroup {#tree-item-group}
 
-子ツリーアイテムのコンテナです。
+The structural directive applied to an `ng-template` that holds the children nodes of an expandable tree item.
 
-このディレクティブには、入力、出力、メソッドはありません。子`ngTreeItem`要素を整理するためのコンテナとして機能します:
+#### Inputs {#inputs}
+
+| Property  | Type       | Default | Description                                             |
+| --------- | ---------- | ------- | ------------------------------------------------------- |
+| `ownedBy` | `TreeItem` | —       | **Required.** The reference of the parent `ngTreeItem`. |
+
+#### Usage {#usage}
 
 ```angular-html
-<li ngTreeItem value="parent">
-  Parent Item
-  <ul ngTreeGroup>
-    <li ngTreeItem value="child1">Child 1</li>
-    <li ngTreeItem value="child2">Child 2</li>
-  </ul>
-</li>
+<ul ngTree #tree="ngTree">
+  <li ngTreeItem [parent]="tree" value="parent" #parentItem="ngTreeItem">
+    Parent Item
+    <ul role="group">
+      <ng-template ngTreeItemGroup [ownedBy]="parentItem" #group="ngTreeItemGroup">
+        <li ngTreeItem [parent]="group" value="child1">Child 1</li>
+        <li ngTreeItem [parent]="group" value="child2">Child 2</li>
+      </ng-template>
+    </ul>
+  </li>
+</ul>
 ```

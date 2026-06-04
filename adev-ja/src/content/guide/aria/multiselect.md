@@ -157,7 +157,63 @@
   </docs-tab>
 </docs-tab-group>
 
-この例では、選択を3つのアイテムに制限しています。制限に達すると、選択されていないオプションは無効になり、追加の選択ができなくなります。メッセージでユーザーに制約を通知します。
+この例では、選択を2つのアイテムに制限しています。制限に達すると、選択されていないオプションは無効になり、追加の選択ができなくなります。コンボボックスの表示は選択された内容を反映するように更新されます。
+
+## Testing {#testing}
+
+The multiselect pattern can be tested using a combination of `ComboboxHarness` and `ListboxHarness` from `@angular/aria/combobox/testing` and `@angular/aria/listbox/testing`.
+Here is an example of how to use the harnesses to test a multiselect component:
+
+```typescript
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {HarnessLoader} from '@angular/cdk/testing';
+import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
+import {ComboboxHarness} from '@angular/aria/combobox/testing';
+import {ListboxHarness} from '@angular/aria/listbox/testing';
+import {MyMultiselectComponent} from './my-multiselect'; // Your component
+
+describe('MyMultiselectComponent', () => {
+  let fixture: ComponentFixture<MyMultiselectComponent>;
+  let loader: HarnessLoader;
+
+  beforeEach(async () => {
+    TestBed.configureTestingModule({
+      imports: [MyMultiselectComponent],
+    });
+
+    fixture = TestBed.createComponent(MyMultiselectComponent);
+    await fixture.whenStable();
+    loader = TestbedHarnessEnvironment.loader(fixture);
+  });
+
+  it('should allow selecting multiple options', async () => {
+    const select = await loader.getHarness(ComboboxHarness);
+
+    // Open the dropdown
+    await select.open();
+
+    // Get the listbox harness from the popup
+    const listbox = await select.getPopupWidget(ListboxHarness);
+    expect(await listbox.isMulti()).toBe(true);
+
+    const options = await listbox.getOptions();
+
+    // Select first and second options
+    await options[0].click();
+    await options[1].click();
+
+    // Verify both options are selected
+    expect(await options[0].isSelected()).toBe(true);
+    expect(await options[1].isSelected()).toBe(true);
+
+    // Close the dropdown
+    await select.close();
+
+    // Verify value is updated (e.g., comma separated list or count)
+    expect(await (await select.host()).text()).toContain('Option 1, Option 2');
+  });
+});
+```
 
 ## API {#apis}
 
@@ -165,16 +221,31 @@
 
 ### Comboboxディレクティブ {#combobox-directives}
 
-マルチセレクトパターンでは、`ngCombobox`と`readonly`属性を使用して、キーボードナビゲーションを維持しながらテキスト入力を防ぎます。
+マルチセレクトパターンでは、`ngCombobox`をトリガー要素 (`div`や`button`など) に直接使用して、セレクト風のマルチセレクトドロップダウンを作成します。
 
 #### 入力 {#inputs}
 
-| プロパティ   | 型        | デフォルト | 説明                                      |
-| ---------- | --------- | ------- | ----------------------------------------- |
-| `readonly` | `boolean` | `false` | `true`に設定するとドロップダウンの動作になります |
-| `disabled` | `boolean` | `false` | マルチセレクト全体を無効化します          |
+| プロパティ   | 型        | デフォルト | 説明                            |
+| ---------- | --------- | ------- | ------------------------------- |
+| `disabled` | `boolean` | `false` | マルチセレクト全体を無効化します |
 
 利用可能なすべての入力とシグナルの詳細については、[Combobox APIドキュメント](guide/aria/combobox#apis)を参照してください。
+
+#### Popup directives {#popup-directives}
+
+The structural `ngComboboxPopup` directive marks the overlay template and requires a reference to the parent combobox:
+
+| Property   | Type       | Description                                 |
+| ---------- | ---------- | ------------------------------------------- |
+| `combobox` | `Combobox` | Required reference to the parent `Combobox` |
+
+#### ComboboxWidget directive {#comboboxwidget-directive}
+
+The `ngComboboxWidget` directive bridges the listbox with the combobox trigger to support active-descendant focus tracking.
+
+| Property           | Type                  | Description                                                                                                                                  |
+| ------------------ | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `activeDescendant` | `string \| undefined` | The ID of the currently active option (bound to `listbox.activeDescendant()`) to update the `aria-activedescendant` attribute on the trigger |
 
 ### Listboxディレクティブ {#listbox-directives}
 
@@ -182,15 +253,18 @@
 
 #### 入力 {#inputs}
 
-| プロパティ | 型        | デフォルト | 説明                                       |
-| -------- | --------- | ------- | ------------------------------------------ |
-| `multi`  | `boolean` | `false` | `true`に設定すると複数選択が可能になります |
+| プロパティ        | 型                                 | デフォルト   | 説明                                                                                                                          |
+| --------------- | ---------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `multi`         | `boolean`                          | `false`    | `true`に設定すると複数選択が可能になります                                                                                          |
+| `selectionMode` | `'follow'` \| `'explicit'`         | `'follow'` | `'explicit'`に設定すると、アクティブフォーカスに従う代わりに、クリック/Spaceで明示的にオプションが切り替わります                              |
+| `focusMode`     | `'roving'` \| `'activedescendant'` | `'roving'` | リストボックスが使用するフォーカス戦略。`'activedescendant'`に設定すると、ブラウザのフォーカスはコンボボックスのトリガーに残ります。                |
+| `tabIndex`      | `number`                           | `0`        | リストボックスのtabindex。`-1`に設定すると、active-descendantモードでポップアップコンテナにキーボードフォーカスが入るのを防ぎます。              |
 
 #### モデル {#model}
 
-| プロパティ | 型      | 説明                                      |
-| -------- | ------- | ----------------------------------------- |
-| `values` | `any[]` | 選択された値の双方向バインディング可能な配列 |
+| プロパティ | 型                   | 説明                                      |
+| -------- | -------------------- | ----------------------------------------- |
+| `value`  | `ModelSignal<any[]>` | 選択された値の双方向バインディング可能な配列 |
 
 `multi`がtrueの場合、ユーザーはスペースキーを使用して選択を切り替えることで、複数のオプションを選択できます。ポップアップは選択後も開いたままで、追加の選択が可能です。
 
@@ -198,4 +272,4 @@
 
 ### ポジショニング {#positioning}
 
-マルチセレクトパターンは、スマートなポジショニングのために[CDK Overlay](api/cdk/overlay/CdkConnectedOverlay)と統合されています。`cdkConnectedOverlay`を使用すると、ビューポートの端やスクロールを自動的に処理できます。
+マルチセレクトパターンは、スマートなポジショニングのために[CDK Overlay](https://material.angular.io/cdk/overlay/overview)と統合されています。`cdkConnectedOverlay`を使用すると、ビューポートの端やスクロールを自動的に処理できます。

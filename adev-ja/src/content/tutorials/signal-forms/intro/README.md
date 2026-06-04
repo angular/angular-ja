@@ -1,8 +1,6 @@
 # Angularシグナルフォームを学ぶ
 
-このインタラクティブなチュートリアルでは、Angularの実験的なシグナルフォームAPIを使用してリアクティブフォームを構築する方法を学びます。
-
-IMPORTANT: シグナルフォームは現在[実験的](reference/releases#experimental)です。安定化する前にAPIが変更される可能性があります。最新の更新については[公式ドキュメント](guide/forms/signals/overview)を確認してください。
+このインタラクティブなチュートリアルでは、AngularのシグナルフォームAPIを使用してリアクティブフォームを構築する方法を学びます。
 
 ## このチュートリアルの使い方 {#how-to-use-this-tutorial}
 

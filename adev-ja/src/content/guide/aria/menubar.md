@@ -164,6 +164,56 @@
 
 `dir="rtl"`属性はRTLモードを有効にします。左矢印キーは右に、右矢印キーは左に移動し、RTL言語のユーザーにとって自然なナビゲーションを維持します。
 
+## Testing
+
+Angular Aria provides component harnesses for testing menubar components.
+Here is an example of how to use the harnesses in a component test:
+
+```typescript
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {HarnessLoader} from '@angular/cdk/testing';
+import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
+import {MenuHarness} from '@angular/aria/menu/testing';
+import {MyMenubarComponent} from './my-menubar'; // Your component
+
+describe('MyMenubarComponent', () => {
+  let fixture: ComponentFixture<MyMenubarComponent>;
+  let loader: HarnessLoader;
+
+  beforeEach(async () => {
+    TestBed.configureTestingModule({
+      imports: [MyMenubarComponent],
+    });
+
+    fixture = TestBed.createComponent(MyMenubarComponent);
+    await fixture.whenStable();
+    loader = TestbedHarnessEnvironment.loader(fixture);
+  });
+
+  it('should interact with menubar items', async () => {
+    // Load the menubar harness (which is a MenuHarness with selector '[ngMenuBar]')
+    const menubar = await loader.getHarness(MenuHarness.with({selector: '[ngMenuBar]'}));
+
+    // Menubars are persistent and always "open"
+    expect(await menubar.isOpen()).toBe(true);
+    expect(await menubar.isMenuBar()).toBe(true);
+
+    // Get top-level items
+    const items = await menubar.getItems();
+    expect(items.length).toBe(2);
+    expect(await items[0].getText()).toBe('File');
+    expect(await items[1].getText()).toBe('Edit');
+
+    // Click an item to open its dropdown menu
+    await items[0].click();
+
+    const fileMenu = await items[0].getSubmenu();
+    expect(fileMenu).toBeTruthy();
+    expect(await fileMenu!.isOpen()).toBe(true);
+  });
+});
+```
+
 ## API {#apis}
 
 メニューバーパターンはAngularのAriaライブラリのディレクティブを使用します。完全なAPIドキュメントについては、[Menuガイド](guide/aria/menu)を参照してください。
@@ -179,6 +229,8 @@
 | `disabled`     | `boolean` | `false` | メニューバー全体を無効にします                                  |
 | `wrap`         | `boolean` | `true`  | キーボードナビゲーションが最後のアイテムから最初のアイテムにラップするかどうか |
 | `softDisabled` | `boolean` | `true`  | `true`の場合、無効化されたアイテムはフォーカス可能ですが、インタラクティブではありません |
+| `value`          | `V[]`     | `[]`    | Selected menu item values (supports two-way binding)          |
+| `typeaheadDelay` | `number`  | `500`   | Milliseconds before the typeahead buffer is reset             |
 
 利用可能なすべての入力とシグナルの詳細については、[Menu APIドキュメント](guide/aria/menu#apis)を参照してください。
 

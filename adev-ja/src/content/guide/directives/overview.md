@@ -109,28 +109,6 @@ export class AppComponent {}
 これを行うために、完全な例では、`ngOnInit()` を使用して最初に `setCurrentStyles()` を呼び出し、依存プロパティがボタンクリックを通じて変更されたときに呼び出します。
 ただし、これらの手順は、`ngStyle` 自体を実装するために必要ではありません。
 
-## DOM 要素のないディレクティブをホストする
-
-Angularの `<ng-container>` は、AngularがDOMに配置しないため、スタイルやレイアウトに影響を与えないグループ化要素です。
-
-ディレクティブをホストする単一の要素がない場合は、`<ng-container>` を使用します。
-
-以下は、`<ng-container>` を使用した条件付きのパラグラフです。
-
-<docs-code header="app.component.html (ngif-ngcontainer)" path="adev/src/content/examples/structural-directives/src/app/app.component.html" region="ngif-ngcontainer"/>
-
-<img alt="適切なスタイルが適用された ngcontainer パラグラフ" src="assets/images/guide/structural-directives/good-paragraph.png">
-
-1. `FormsModule` から `ngModel` ディレクティブをインポートします。
-
-1. `FormsModule` を、関連するAngularモジュールのインポートセクションに追加します。
-
-1. `<option>` を条件付きで除外するには、`<option>` を `<ng-container>` でラップします。
-
-   <docs-code header="app.component.html (select-ngcontainer)" path="adev/src/content/examples/structural-directives/src/app/app.component.html" region="select-ngcontainer"/>
-
-   <img alt="ngcontainer オプションは正しく機能します" src="assets/images/guide/structural-directives/select-ngcontainer-anim.gif">
-
 ## 次のステップ
 
 <docs-pill-row>

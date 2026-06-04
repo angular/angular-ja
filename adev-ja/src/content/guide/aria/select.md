@@ -93,7 +93,7 @@ selectパターンは、[Combobox](guide/aria/combobox)と[Listbox](guide/aria/l
   </docs-tab>
 </docs-tab-group>
 
-`ngCombobox`の`readonly`属性は、キーボードナビゲーションを維持しながらテキスト入力を防ぎます。ユーザーは、ネイティブのselect要素と同じように、矢印キーとEnterキーを使用してドロップダウンを操作します。
+`ngCombobox`ディレクティブを`<input>`ではなく、`div`や`button`のような非インタラクティブなホスト要素に直接適用することで、テキスト入力を防ぎます。ユーザーは、ネイティブのselect要素と同じように、矢印キーとEnterキーを使用してドロップダウンを操作します。
 
 ### カスタム表示のセレクト {#select-with-custom-display}
 
@@ -159,35 +159,110 @@ selectパターンは、[Combobox](guide/aria/combobox)と[Listbox](guide/aria/l
 
 無効にすると、セレクトは無効の視覚的状態を示し、すべてのユーザー操作をブロックします。スクリーンリーダーは、支援技術のユーザーに無効状態をアナウンスします。
 
+## Testing {#testing}
+
+The select pattern can be tested using a combination of `ComboboxHarness` and `ListboxHarness` from `@angular/aria/combobox/testing` and `@angular/aria/listbox/testing`.
+Here is an example of how to use the harnesses to test a select component:
+
+```typescript
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {HarnessLoader} from '@angular/cdk/testing';
+import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
+import {ComboboxHarness} from '@angular/aria/combobox/testing';
+import {ListboxHarness} from '@angular/aria/listbox/testing';
+import {MySelectComponent} from './my-select'; // Your component
+
+describe('MySelectComponent', () => {
+  let fixture: ComponentFixture<MySelectComponent>;
+  let loader: HarnessLoader;
+
+  beforeEach(async () => {
+    TestBed.configureTestingModule({
+      imports: [MySelectComponent],
+    });
+
+    fixture = TestBed.createComponent(MySelectComponent);
+    await fixture.whenStable();
+    loader = TestbedHarnessEnvironment.loader(fixture);
+  });
+
+  it('should allow selecting an option', async () => {
+    // Load the combobox harness (which acts as the select trigger)
+    const select = await loader.getHarness(ComboboxHarness);
+
+    // Verify it is closed initially
+    expect(await select.isOpen()).toBe(false);
+
+    // Open the dropdown
+    await select.open();
+    expect(await select.isOpen()).toBe(true);
+
+    // Get the listbox harness from the popup
+    const listbox = await select.getPopupWidget(ListboxHarness);
+    const options = await listbox.getOptions();
+    expect(options.length).toBe(3);
+
+    // Click the second option
+    await options[1].click();
+
+    // Verify the dropdown closed and the value updated
+    expect(await select.isOpen()).toBe(false);
+    expect(await (await select.host()).text()).toContain('Option 2');
+  });
+});
+```
+
 ## API
 
 selectパターンは、AngularのAriaライブラリから以下のディレクティブを使用します。詳細なAPIドキュメントについては、リンク先のガイドを参照してください。
 
 ### コンボボックスディレクティブ {#combobox-directives}
 
-selectパターンは、キーボードナビゲーションを維持しつつテキスト入力を防ぐために、`readonly`属性を持つ`ngCombobox`を使用します。
+selectパターンは、キーボードナビゲーションを維持しつつテキスト入力を防ぐために、`ngCombobox`を`div`や`button`のような非インタラクティブなホスト要素に直接適用します。
 
 #### 入力 {#inputs}
 
-| プロパティ   | 型      | デフォルト | 説明                               |
-| ---------- | --------- | ------- | ----------------------------------------- |
-| `readonly` | `boolean` | `false` | `true`に設定すると、ドロップダウンの動作になります |
-| `disabled` | `boolean` | `false` | select全体を無効にします                |
+| プロパティ | 型                     | デフォルト | 説明                       |
+| ---------- | ---------------------- | ---------- | -------------------------- |
+| `disabled` | `boolean`              | `false`    | select全体を無効にします   |
+| `expanded` | `ModelSignal<boolean>` | `false`    | selectの展開状態           |
 
 利用可能なすべての入力とシグナルの詳細については、[コンボボックスAPIドキュメント](guide/aria/combobox#apis)を参照してください。
+
+#### Popup Directives {#popup-directives}
+
+The structural `ngComboboxPopup` directive marks the overlay template and requires a reference to the parent combobox:
+
+| Property   | Type       | Description                                 |
+| ---------- | ---------- | ------------------------------------------- |
+| `combobox` | `Combobox` | Required reference to the parent `Combobox` |
+
+#### ComboboxWidget Directive {#comboboxwidget-directive}
+
+The `ngComboboxWidget` directive bridges the listbox with the combobox trigger to support active-descendant focus tracking.
+
+| Property           | Type                  | Description                                                                                                                                  |
+| ------------------ | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `activeDescendant` | `string \| undefined` | The ID of the currently active option (bound to `listbox.activeDescendant()`) to update the `aria-activedescendant` attribute on the trigger |
 
 ### リストボックスディレクティブ {#listbox-directives}
 
 selectパターンは、ドロップダウンリストに`ngListbox`を、選択可能な各項目に`ngOption`を使用します。
 
+#### Inputs {#listbox-inputs}
+
+| Property        | Type                               | Default      | Description                                                                                                                     |
+| --------------- | ---------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| `selectionMode` | `'follow'` \| `'explicit'`         | `'explicit'` | Set to `'explicit'` so options are toggled explicitly via click/Enter instead of following active focus                         |
+| `focusMode`     | `'roving'` \| `'activedescendant'` | `'roving'`   | The focus strategy used by the listbox. Set to `'activedescendant'` so browser focus remains on the combobox trigger.           |
+| `tabIndex`      | `number`                           | `0`          | The tabindex of the listbox. Set to `-1` to prevent keyboard focus from entering the popup container in active-descendant mode. |
+
 #### モデル {#model}
 
-| プロパティ | 型    | 説明                                                                  |
-| -------- | ------- | ---------------------------------------------------------------------------- |
-| `values` | `any[]` | 選択された値の双方向バインディング可能な配列（selectの場合は単一の値を含む） |
-
-リストボックスの設定、選択モード、およびオプションのプロパティに関する完全な詳細については、[リストボックスAPIドキュメント](guide/aria/listbox#apis)を参照してください。
+| プロパティ | 型                   | 説明                                                                         |
+| ---------- | -------------------- | ---------------------------------------------------------------------------- |
+| `value`    | `ModelSignal<any[]>` | 選択された値の双方向バインディング可能な配列（selectの場合は単一の値を含む） |
 
 ### ポジショニング {#positioning}
 
-selectパターンは、スマートなポジショニングのために[CDK Overlay](api/cdk/overlay/CdkConnectedOverlay)と統合されています。ビューポートの端やスクロールを自動的に処理するには`cdkConnectedOverlay`を使用してください。
+selectパターンは、スマートなポジショニングのために[CDK Overlay](https://material.angular.io/cdk/overlay/overview)と統合されています。ビューポートの端やスクロールを自動的に処理するには`cdkConnectedOverlay`を使用してください。

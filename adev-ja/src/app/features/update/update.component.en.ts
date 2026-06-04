@@ -6,16 +6,16 @@
  * found in the LICENSE file at https://angular.dev/license
  */
 
-import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
-import {Step, RECOMMENDATIONS, ApplicationComplexity} from './recommendations';
 import {Clipboard} from '@angular/cdk/clipboard';
 import {CdkMenu, CdkMenuItem, CdkMenuTrigger} from '@angular/cdk/menu';
-import {MatCheckbox} from '@angular/material/checkbox';
-import {MatButtonToggleGroup, MatButtonToggle} from '@angular/material/button-toggle';
+import {Component, inject, signal} from '@angular/core';
 import {IconComponent} from '@angular/docs';
+import {MatButtonToggle, MatButtonToggleGroup} from '@angular/material/button-toggle';
+import {MatCheckbox} from '@angular/material/checkbox';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
 import {marked} from 'marked';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import {ApplicationComplexity, RECOMMENDATIONS, Step} from './recommendations';
 
 /**
  * Configure marked with a custom link renderer so external links in the
@@ -52,7 +52,6 @@ const isWindows = typeof window !== 'undefined' && window.navigator.userAgent.in
     CdkMenuItem,
     IconComponent,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '(click)': 'copyCode($event)',
   },
@@ -82,6 +81,7 @@ export default class UpdateComponent {
   protected afterRecommendations: Step[] = [];
 
   protected readonly versions = [
+    {name: '22.0', number: 2200},
     {name: '21.0', number: 2100},
     {name: '20.0', number: 2000},
     {name: '19.0', number: 1900},
@@ -120,9 +120,9 @@ export default class UpdateComponent {
     {name: '2.1', number: 201},
     {name: '2.0', number: 200},
   ];
-  protected from = this.versions.find((version) => version.name === '20.0')!;
-  protected to = this.versions.find((version) => version.name === '21.0')!;
-  protected futureVersion = 2200;
+  protected from = this.versions.find((version) => version.name === '21.0')!;
+  protected to = this.versions.find((version) => version.name === '22.0')!;
+  protected futureVersion = 2300;
 
   protected readonly steps: Step[] = RECOMMENDATIONS;
 

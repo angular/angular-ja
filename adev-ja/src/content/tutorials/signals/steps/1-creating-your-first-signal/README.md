@@ -116,9 +116,3 @@ toggleStatus() {
 おめでとうございます！初めてのシグナルを作成し、`set()`と`update()`の両方のメソッドを使用して更新する方法を学びました。`signal()`関数は、Angularが追跡するリアクティブな値を作成し、それを更新すると、UIが自動的に変更を反映します。
 
 次に、[computedを使用してシグナルから状態を派生させる方法](/tutorials/signals/2-deriving-state-with-computed-signals)を学びます！
-
-<docs-callout helpful title="ChangeDetectionStrategy.OnPushについて">
-
-このチュートリアル全体で、コンポーネントデコレーターに`ChangeDetectionStrategy.OnPush`があることに気づくかもしれません。これは、シグナルを使用するAngularコンポーネントのパフォーマンス最適化です。今のところ、これは安全に無視して構いません。シグナルを使用する際にアプリケーションの実行を高速化するのに役立つとだけ知っておいてください！詳細については、[変更検知戦略APIドキュメント](/api/core/ChangeDetectionStrategy)を参照してください。
-
-</docs-callout>

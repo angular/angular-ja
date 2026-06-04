@@ -2933,4 +2933,285 @@ export const RECOMMENDATIONS: Step[] = [
     action:
       "`@angular/ssr` 21.1.5以降、アプリケーションがSSRで`CommonEngine`を使用している場合は、`server.ts`で`allowedHosts`オプションを設定してください（例: `new CommonEngine({allowedHosts: ['localhost', '*.yourdomain.com']})`）。設定しない場合、SSRはサイレントにクライアントサイドレンダリングにフォールバックします。この要件はセキュリティアドバイザリ [GHSA-x288-3778-4hhx](https://github.com/angular/angular-cli/security/advisories/GHSA-x288-3778-4hhx) に基づくものです（20.3.17および19.2.21にもバックポートされています）。",
   },
+  {
+    action:
+      "アプリケーションのプロジェクトディレクトリで、`ng update @angular/core@22 @angular/cli@22` を実行して、アプリケーションを Angular v22 に更新します。",
+    level: ApplicationComplexity.Basic,
+    necessaryAsOf: 2200,
+    possibleIn: 2200,
+    step: '22.0.0_ng_update',
+  },
+
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Basic,
+    material: true,
+    step: 'update @angular/material',
+    action: '`ng update @angular/material@22` を実行します。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Basic,
+    step: '22.0.0-update-nodejs-version',
+    action:
+      'Angular v22 には Node.js v22.22.3 または v24.15.0 以降が必要です。この最小要件を満たすように Node.js のバージョンを更新してください。`node --version` で現在のバージョンを確認できます。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Basic,
+    step: '22.0.0-update-typescript-version',
+    action:
+      'プロジェクトを TypeScript 6.0 以降を使用するように更新してください。6.0 より古いバージョンはサポートされなくなりました。`ng update` を使用すれば自動的に処理されます。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Medium,
+    step: '22.0.0-data-attributes-input-output-binding',
+    action:
+      'data プレフィックス付き属性 (例: `data-*`) は入力や出力にバインドされなくなりました。この動作に依存していた場合は、明示的なプロパティバインディングを使用してください (例: `[attr.data-value]="value"` や、コンポーネント入力に対する `[dataValue]="value"`)。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Medium,
+    step: '22.0.0-duplicate-input-output-bindings',
+    action:
+      '入力、出力、または model が同じプロパティ/出力にバインドされている場合、コンパイラーがエラーをスローするようになりました。コンポーネントデコレーターを確認し、重複したバインディングが存在しないようにしてください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Medium,
+    step: '22.0.0-safe-navigation-nullability-narrowing',
+    action:
+      'セーフナビゲーション (`?.`) と nullish 合体 (`??`) がテンプレート内で nullable 型を正しく絞り込むようになりました。既存プロジェクトでは `nullishCoalescingNotNullable` と `optionalChainNotNullable` の診断が発生する可能性があります。テンプレートを更新して診断を修正するか、`tsconfig.json` の `angularCompilerOptions` でこれらを一時的に無効化してください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Medium,
+    step: '22.0.0-safe-navigation-returns-undefined',
+    action:
+      'オプショナルチェイニング (`?.`) を使用した Angular の式は、`null` の代わりに `undefined` を返すようになりました。以前の動作に戻すには `$safeNavigationMigration()` マジック関数を使用できます。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Advanced,
+    step: '22.0.0-remove-in-expressions',
+    action:
+      'テンプレート式中の `in` 変数は、ネイティブ JavaScript と同様にエラーをスローするようになりました。コンポーネントやテンプレートに `in` という名前の変数がある場合は、テンプレート式を `this.in` に更新するか、変数の名前を変更してください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Advanced,
+    step: '22.0.0-animation-callback-event-signature-change',
+    action:
+      '`AnimationCallbackEvent.animationComplete` のシグネチャが変更されました。このイベントの古いシグネチャに依存しているコードを更新してください。アニメーションイベントハンドラーとテストを確認してください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Medium,
+    step: '22.0.0-http-xhr-backend-explicit-opt-in',
+    action:
+      'アプリケーションが `HttpXhrBackend` 経由でアップロードの進捗レポートを使用している場合は、`provideHttpClient(withXhr())` を使用して明示的にオプトインしてください。デフォルトの HTTP クライアントは、XHR サポートをデフォルトで含まなくなりました。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Medium,
+    step: '22.0.0-deprecate-report-progress-option',
+    action:
+      'HTTP リクエストの `reportProgress` オプションは非推奨になりました。進捗レポートをより明示的に制御するには、代わりに `reportUploadProgress` または `reportDownloadProgress` を使用してください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Medium,
+    step: '22.0.0-provide-routes-removed',
+    action:
+      '`provideRoutes()` は削除されました。代わりに `provideRouter()` を使用するか、必要に応じて `ROUTES` を使用してマルチトークンとしてルートを設定してください。アプリケーションのブートストラップ設定を更新してください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Advanced,
+    step: '22.0.0-upgrade-angular-js-global-migration',
+    action:
+      'AngularJS との相互運用を使用している場合は、非推奨の `getAngularLib()` および `setAngularLib()` をそれぞれ `getAngularJSGlobal()` および `setAngularJSGlobal()` に置き換えてください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Advanced,
+    step: '22.0.0-remove-component-factory-resolver',
+    action:
+      '`ComponentFactoryResolver` と `ComponentFactory` は使用できなくなりました。`ViewContainerRef.createComponent()` のような API にコンポーネントクラスを直接渡すか、代わりにスタンドアロンの `createComponent()` 関数を使用してください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Advanced,
+    step: '22.0.0-remove-create-ng-module-ref',
+    action:
+      '`createNgModuleRef` は削除されました。動的なモジュール作成シナリオでは、代わりに `createNgModule()` を使用してください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Medium,
+    step: '22.0.0-compile-time-duplicate-selectors',
+    action:
+      '複数の一致するセレクターを持つ要素は、コンパイル時エラーをスローするようになりました。コンポーネントが一意のセレクターを使用していることを確認し、競合するセレクターを持つディレクティブを確認してください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Medium,
+    step: '22.0.0-component-onpush-default',
+    action:
+      '`changeDetection` プロパティが定義されていないコンポーネントは、デフォルトで `OnPush` になりました。`Eager` (以前のデフォルト) の変更検知を維持するには、コンポーネントデコレーターで `changeDetection: ChangeDetectionStrategy.Eager` を明示的に設定してください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Advanced,
+    step: '22.0.0-remove-check-no-changes',
+    action:
+      '`ChangeDetectorRef.checkNoChanges()` は削除されました。テストでは、代わりに `fixture.detectChanges()` を使用するか、他の手段でコンポーネントの状態を検証してください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Medium,
+    step: '22.0.0-leave-animations-scope-change',
+    action:
+      'leave アニメーションは、削除される要素のみに限定されなくなりました。コンポーネント境界にスコープされたネストされたアニメーションをサポートするようになりました。以前のスコープ動作に依存していた場合は、アニメーション設定を確認してください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Medium,
+    step: '22.0.0-params-inheritance-strategy-default',
+    action:
+      '`paramsInheritanceStrategy` のデフォルトが `"emptyOnly"` から `"always"` に変更されました。これにより、ルートパラメーターがすべての親ルートから継承されるようになります。以前の動作に戻すには、ルーター設定で `paramsInheritanceStrategy: "emptyOnly"` を明示的に設定してください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Advanced,
+    step: '22.0.0-can-match-current-snapshot-required',
+    action:
+      '`CanMatchFn` および `CanMatch` インターフェースの `canMatch` メソッドの `currentSnapshot` パラメーターが必須になりました。`CanMatch` のクラス実装を更新して、必須の第3引数を含めるようにしてください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Medium,
+    step: '22.0.0-hammer-js-removed',
+    action:
+      'Hammer.js 統合は Angular の platform-browser から削除されました。タッチジェスチャーのサポートが必要な場合は、独自のジェスチャー検出を実装するか、代替ライブラリを使用してください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Advanced,
+    step: '22.0.0-app-ref-bootstrap-typing',
+    action:
+      '`appRef.bootstrap()` の第2引数は `any` 型を受け付けなくなりました。渡す要素が nullable でなく、期待される型と一致していることを確認してください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Medium,
+    step: '22.0.0-platform-browser-styles-removal',
+    action:
+      '関連付けられた `host` が削除されると、未使用のスタイルが自動的に削除されるようになりました。これらのスタイルが Angular の外部の要素で使用されている場合や `ViewEncapsulation.Emulated` を使用していない場合、ページ上の他の DOM に影響する可能性があることに注意してください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Advanced,
+    step: '22.0.0-title-strategy-return-type',
+    action:
+      '`TitleStrategy.getResolvedTitleForRoute` の戻り型が `any` からより厳密な型 (例: `string | undefined`) に変更されました。新しいシグネチャに合わせて、カスタム `TitleStrategy` の実装を更新してください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Basic,
+    step: '22.0.0-incremental-hydration-default',
+    action:
+      'サーバーサイドレンダリング (SSR) を使用するアプリケーションのデフォルト動作として、インクリメンタルハイドレーションが採用されました。以前の非インクリメンタルハイドレーションの動作に依存していた場合は、アプリケーションを確認してください。必要に応じて `withNoIncrementalHydration()` を使用すれば以前の動作に戻せます。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Medium,
+    step: '22.0.0-full-template-type-check-removed',
+    action:
+      '`fullTemplateTypeCheck` コンパイラーオプションは削除されました。`tsconfig.json` で厳密なテンプレート型チェックを有効にするには、代わりに `strictTemplates` を使用してください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Basic,
+    step: '22.0.0-strict-templates-default',
+    action:
+      '`strictTemplates` コンパイラーオプションがデフォルトで `true` になりました。プロジェクトで厳密なテンプレート型チェックを使用していなかった場合、新しいコンパイルエラーが表示される可能性があります。これらのエラーを解決するか、`tsconfig.json` で `strictTemplates: false` を明示的に設定してオプトアウトしてください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Advanced,
+    step: '22.0.0-webpack-builders-deprecated',
+    action:
+      'Webpack ビルダー (`@angular-devkit/build-angular` と `@angular-devkit/build-webpack`) は非推奨になりました。アプリケーションのビルドには `@angular/build` ビルダー (esbuild/application) に移行してください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Advanced,
+    step: '22.0.0-ssr-commonengine-deprecated',
+    action:
+      '`@angular/ssr` の `CommonEngine` API は非推奨になりました。代わりに `AngularNodeAppEngine` または `AngularAppEngine` に移行してください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Medium,
+    step: '22.0.0-istanbul-lib-instrument-optional',
+    action:
+      '`istanbul-lib-instrument` はオプションのピア依存関係になりました。プロジェクトでコードカバレッジを有効にした Karma を使用している場合は、`istanbul-lib-instrument` を明示的にインストールしてください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Basic,
+    step: '22.0.0-dev-server-port-env-priority',
+    action:
+      '`ng serve` は `PORT` 環境変数に最も高い優先度を与えるようになりました。この値は `angular.json` で設定されたポートや `--port` フラグで渡されたポートを上書きします。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Advanced,
+    step: '22.0.0-architect-cli-removed',
+    action:
+      '`@angular-devkit/architect-cli` パッケージは使用できなくなりました。代わりに `@angular-devkit/architect` パッケージの `architect` CLI ツールを使用してください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Medium,
+    step: '22.0.0-experimental-test-builders-removed',
+    action:
+      '実験的な `@angular-devkit/build-angular:jest` および `@angular-devkit/build-angular:web-test-runner` テストビルダーは削除されました。',
+  },
 ];

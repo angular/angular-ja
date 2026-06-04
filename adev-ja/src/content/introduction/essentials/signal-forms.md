@@ -1,7 +1,5 @@
 <docs-decorative-header title="シグナルを使ったフォーム" imgSrc="adev/src/assets/images/signals.svg"> </docs-decorative-header>
 
-IMPORTANT: シグナルフォームは[実験的](/reference/releases#experimental)です。APIは将来のリリースで変更される可能性があります。本番アプリケーションでは、リスクを理解せずに実験的なAPIを使用しないでください。
-
 シグナルフォームはAngularのシグナルを使用してフォームの状態を管理し、AngularのシグナルでデータモデルとUI間の自動的な同期を提供します。
 
 このガイドでは、シグナルフォームでフォームを作成するための中心的な概念を順を追って説明します。その仕組みは次のとおりです:

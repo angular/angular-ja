@@ -47,10 +47,10 @@ router.navigate(['/some-path'], {onSameUrlNavigation: 'reload'});
 
 `paramsInheritanceStrategy`は、ルートパラメータとデータが親ルートからどのように流れるかを定義します。
 
-デフォルトの`'emptyOnly'`では、子ルートはパスが空の場合、または親がコンポーネントを宣言していない場合にのみパラメータを継承します。
+デフォルト（`'always'`）では、子ルートは親ルートからパラメータ、ルートデータ、および解決された値を自動的に継承します。
 
 ```ts
-provideRouter(routes, withRouterConfig({paramsInheritanceStrategy: 'always'}));
+provideRouter(routes, withRouterConfig({paramsInheritanceStrategy: 'emptyOnly'}));
 ```
 
 ```ts
@@ -87,7 +87,7 @@ export class Customer {
 }
 ```
 
-`'always'`を使用すると、マトリックスパラメータ、ルートデータ、および解決された値がルートツリーのさらに下で利用可能になります。これは、次のような機能領域間でコンテキスト識別子を共有する場合に便利です:
+これにより、マトリックスパラメータ、ルートデータ、および解決された値がルートツリーのさらに下で利用可能になります。これは、次のような機能領域間でコンテキスト識別子を共有する場合に便利です:
 
 ```text {hideCopy}
 /org/:orgId/projects/:projectId/customers/:customerId

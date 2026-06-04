@@ -145,10 +145,10 @@ NOTE: `multiExpandable`入力はデフォルトで`true`です。単一展開の
 ```angular-html
 <div ngAccordionGroup>
   <div>
-    <button ngAccordionTrigger panelId="item-1">Trigger Text</button>
-    <div ngAccordionPanel panelId="item-1">
+    <button ngAccordionTrigger [panel]="panel1">Trigger Text</button>
+    <div ngAccordionPanel #panel1="ngAccordionPanel">
       <ng-template ngAccordionContent>
-        <!-- このコンテンツは、パネルが最初に開かれたときにのみレンダリングされます -->
+        <!-- This content only renders when the panel first opens -->
         <img src="large-image.jpg" alt="Description" />
         <app-expensive-component />
       </ng-template>
@@ -158,6 +158,55 @@ NOTE: `multiExpandable`入力はデフォルトで`true`です。単一展開の
 ```
 
 デフォルトでは、パネルが折りたたまれた後もコンテンツはDOMに残ります。パネルが閉じたときにDOMからコンテンツを削除するには、`[preserveContent]="false"`を設定します。
+
+## Testing {#testing}
+
+Angular Aria provides component harnesses for testing accordion components.
+Here is an example of how to use the harnesses in a component test:
+
+```typescript
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {HarnessLoader} from '@angular/cdk/testing';
+import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
+import {AccordionGroupHarness} from '@angular/aria/accordion/testing';
+import {MyAccordionComponent} from './my-accordion'; // Your component
+
+describe('MyAccordionComponent', () => {
+  let fixture: ComponentFixture<MyAccordionComponent>;
+  let loader: HarnessLoader;
+
+  beforeEach(async () => {
+    TestBed.configureTestingModule({
+      imports: [MyAccordionComponent],
+    });
+
+    fixture = TestBed.createComponent(MyAccordionComponent);
+    await fixture.whenStable();
+    loader = TestbedHarnessEnvironment.loader(fixture);
+  });
+
+  it('should allow expanding panels', async () => {
+    // Load the accordion group harness
+    const group = await loader.getHarness(AccordionGroupHarness);
+
+    // Get all individual accordions (items) in the group
+    const accordions = await group.getAccordions();
+    expect(accordions.length).toBe(3);
+
+    // Verify initial state (first expanded, others collapsed)
+    expect(await accordions[0].isExpanded()).toBe(true);
+    expect(await accordions[1].isExpanded()).toBe(false);
+
+    // Expand the second panel
+    await accordions[1].expand();
+
+    // Verify updated state
+    expect(await accordions[1].isExpanded()).toBe(true);
+    // If multiExpandable is false, the first one should now be collapsed
+    expect(await accordions[0].isExpanded()).toBe(false);
+  });
+});
+```
 
 ## API
 
@@ -187,12 +236,12 @@ NOTE: `multiExpandable`入力はデフォルトで`true`です。単一展開の
 
 #### Inputs {#inputs}
 
-| プロパティ | 型        | デフォルト | 説明                                                           |
-| ---------- | --------- | ------- | -------------------------------------------------------------- |
-| `id`       | `string`  | auto    | トリガーの一意の識別子                                         |
-| `panelId`  | `string`  | —       | **必須。**関連付けられたパネルの`panelId`と一致する必要があります |
-| `disabled` | `boolean` | `false` | このトリガーを無効にします                                     |
-| `expanded` | `boolean` | `false` | パネルが展開されているかどうか（双方向バインディングをサポート） |
+| プロパティ | 型               | デフォルト | 説明                                                           |
+| ---------- | ---------------- | ------- | -------------------------------------------------------------- |
+| `panel`    | `AccordionPanel` | —       | **必須。**制御対象のアコーディオンパネルへの参照                |
+| `id`       | `string`         | auto    | トリガーの一意の識別子                                         |
+| `disabled` | `boolean`        | `false` | このトリガーを無効にします                                     |
+| `expanded` | `boolean`        | `false` | パネルが展開されているかどうか（双方向バインディングをサポート） |
 
 #### シグナル {#signals}
 
@@ -214,11 +263,10 @@ NOTE: `multiExpandable`入力はデフォルトで`true`です。単一展開の
 
 #### Inputs {#inputs}
 
-| プロパティ        | 型        | デフォルト | 説明                                                             |
-| ----------------- | --------- | ------- | ---------------------------------------------------------------- |
-| `id`              | `string`  | auto    | パネルの一意の識別子                                             |
-| `panelId`         | `string`  | —       | **必須。**関連付けられたトリガーの`panelId`と一致する必要があります |
-| `preserveContent` | `boolean` | `true`  | パネルが折りたたまれた後もコンテンツをDOMに保持するかどうか      |
+| プロパティ        | 型        | デフォルト | 説明                                                 |
+| ----------------- | --------- | ------- | ---------------------------------------------------- |
+| `id`              | `string`  | auto    | パネルの一意の識別子                                 |
+| `preserveContent` | `boolean` | `true`  | パネルが折りたたまれた後もコンテンツをDOMに保持するかどうか |
 
 #### シグナル {#signals}
 
@@ -241,7 +289,7 @@ NOTE: `multiExpandable`入力はデフォルトで`true`です。単一展開の
 このディレクティブには、input、output、メソッドはありません。`ng-template`要素に適用してください:
 
 ```angular-html
-<div ngAccordionPanel panelId="item-1">
+<div ngAccordionPanel #panel1="ngAccordionPanel">
   <ng-template ngAccordionContent>
     <!-- Content here is lazily rendered -->
   </ng-template>

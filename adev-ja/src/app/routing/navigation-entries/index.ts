@@ -117,6 +117,12 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/signals/resource',
           },
           {
+            label: 'シグナルのデバウンス',
+            path: 'guide/signals/debounced',
+            contentPath: 'guide/signals/debounced',
+            status: 'new',
+          },
+          {
             label: '非リアクティブAPIのための副作用',
             path: 'guide/signals/effect',
             contentPath: 'guide/signals/effect',
@@ -314,6 +320,12 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             path: 'guide/di/creating-and-using-services',
             contentPath: 'guide/di/creating-and-using-services',
             status: 'updated',
+          },
+          {
+            label: 'サービスの遅延読み込み',
+            path: 'guide/di/lazy-loading-services',
+            contentPath: 'guide/di/lazy-loading-services',
+            status: 'new',
           },
           {
             label: '依存性プロバイダーの定義',
@@ -937,6 +949,12 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         path: 'ai/design-patterns',
         contentPath: 'ai/design-patterns',
       },
+      {
+        label: 'WebMCP',
+        path: 'ai/webmcp',
+        contentPath: 'ai/webmcp',
+        status: 'new',
+      },
     ],
   },
   {
@@ -1138,6 +1156,12 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             category: 'Loading Performance',
           },
           {
+            label: 'サービスの遅延読み込み',
+            path: 'best-practices/performance/lazy-loading-services',
+            contentPath: 'guide/di/lazy-loading-services',
+            category: 'Loading Performance',
+          },
+          {
             label: '画像の最適化',
             path: 'best-practices/performance/image-optimization',
             contentPath: 'guide/image-optimization',
@@ -1201,10 +1225,15 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
     label: '開発者向けイベント',
     children: [
       {
+        label: 'Angular v22 Release',
+        path: 'events/v22',
+        contentPath: 'events/v22',
+        status: 'new',
+      },
+      {
         label: 'Angular v21 Release',
         path: 'events/v21',
         contentPath: 'events/v21',
-        status: 'new',
       },
     ],
   },

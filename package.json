@@ -16,7 +16,7 @@
     "list-untranslated": "tsx tools/list-untranslated.ts",
     "translate": "tsx --env-file=.env tools/translator/main.ts"
   },
-  "packageManager": "pnpm@10.15.0",
+  "packageManager": "pnpm@10.34.1",
   "devDependencies": {
     "@langchain/core": "0.3.58",
     "@langchain/google-genai": "0.2.12",

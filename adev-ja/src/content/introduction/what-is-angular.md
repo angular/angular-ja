@@ -76,8 +76,8 @@
     Trusted Typesサポートなどの組み込みセキュリティ機能は、
     クロスサイトスクリプティングやクロスサイトリクエストフォージェリなどの一般的な脆弱性からユーザーを保護します。
   </docs-card>
-  <docs-card title="ViteとesbuildでTeamの生産性を維持" href="tools/cli/build-system-migration" link="ESBuildとVite" titleIconName="sensors">
-    Angular CLIには、ViteとESBuildを使用した高速で最新のビルドパイプラインが含まれています。開発者は、
+  <docs-card title="ViteとesbuildでTeamの生産性を維持" href="tools/cli/build-system-migration" link="Viteとesbuild" titleIconName="sensors">
+    Angular CLIには、Viteとesbuildを使用した高速で最新のビルドパイプラインが含まれています。開発者は、
     数十万行のコードを含むプロジェクトを1分未満でビルドしていると報告しています。
   </docs-card>
   <docs-card title="Googleの最大級のWebアプリで実証済み" titleIconName="sensors">
@@ -108,7 +108,7 @@
   <docs-card title="他のGoogleテクノロジーとのパートナーシップ" titleIconName="sensors">
     <p>Angularは、Webを改善するために他のGoogleテクノロジーやチームと緊密に連携しています。</p>
     <p>ChromeのAuroraとの継続的なパートナーシップは、<code>NgOptimizedImage</code>などの組み込みパフォーマンス最適化やAngularのCore Web Vitalsの改善など、Web全体でユーザー体験の向上を積極的に模索しています。</p>
-    <p>また、<a href="https://firebase.google.com/" target="_blank">Firebase</a>、<a href="https://www.tensorflow.org/" target="_blank">Tensorflow</a>、<a href="https://flutter.dev/" target="_blank">Flutter</a>、<a href="https://m3.material.io/" target="_blank">Material Design</a>、<a href="https://cloud.google.com/" target="_blank">Google Cloud</a>と連携して、開発者ワークフロー全体で有意義な統合を提供しています。</p>
+    <p>また、<a href="https://firebase.google.com/" target="_blank">Firebase</a>、<a href="https://www.tensorflow.org/" target="_blank">TensorFlow</a>、<a href="https://flutter.dev/" target="_blank">Flutter</a>、<a href="https://m3.material.io/" target="_blank">Material Design</a>、<a href="https://cloud.google.com/" target="_blank">Google Cloud</a>と連携して、開発者ワークフロー全体で有意義な統合を提供しています。</p>
   </docs-card>
 </docs-card-container>
 

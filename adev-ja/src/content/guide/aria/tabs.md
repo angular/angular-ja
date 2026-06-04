@@ -224,6 +224,66 @@
 
 タブリストで `[softDisabled]="true"` の場合、無効化されたタブはフォーカスを受け取れますが、アクティブにはできません。`[softDisabled]="false"` の場合、無効化されたタブはキーボードナビゲーション中にスキップされます。
 
+## Testing
+
+Angular Aria provides component harnesses for testing tabs components.
+Here is an example of how to use the harnesses in a component test:
+
+```typescript
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
+import {ComponentHarness, HarnessLoader} from '@angular/cdk/testing';
+import {TabsHarness} from '@angular/aria/tabs/testing';
+import {MyTabsComponent} from './my-tabs'; // Your component
+
+// A simple harness to help query content inside the tab panel
+class TestContentHarness extends ComponentHarness {
+  static hostSelector = '.test-content';
+  async getText(): Promise<string> {
+    return (await this.host()).text();
+  }
+}
+
+describe('MyTabsComponent', () => {
+  let fixture: ComponentFixture<MyTabsComponent>;
+  let loader: HarnessLoader;
+
+  beforeEach(async () => {
+    TestBed.configureTestingModule({
+      imports: [MyTabsComponent],
+    });
+
+    fixture = TestBed.createComponent(MyTabsComponent);
+    await fixture.whenStable();
+    loader = TestbedHarnessEnvironment.loader(fixture);
+  });
+
+  it('should switch tabs and scope panel queries', async () => {
+    const tabs = await loader.getHarness(TabsHarness);
+
+    // Get all tabs
+    const tabItems = await tabs.getTabs();
+    expect(tabItems.length).toBe(3);
+
+    // Verify initial selection
+    expect(await tabItems[0].isSelected()).toBe(true);
+    expect(await tabItems[1].isSelected()).toBe(false);
+
+    // Query content inside the active tab panel
+    // TabHarness automatically scopes queries to its associated panel
+    const content = await tabItems[0].getHarness(TestContentHarness);
+    expect(await content.getText()).toBe('Content 1');
+
+    // Switch to the second tab
+    await tabItems[1].select();
+
+    // Verify selection updated
+    expect(await tabItems[0].isSelected()).toBe(false);
+    expect(await tabItems[1].isSelected()).toBe(true);
+  });
+});
+```
+
 ## API
 
 ### Tabs {#tabs}
@@ -243,8 +303,9 @@
 | `orientation`   | `'horizontal' \| 'vertical'` | `'horizontal'` | タブリストのレイアウト方向                                         |
 | `wrap`          | `boolean`                    | `false`        | キーボードナビゲーションが最後のタブから最初のタブにラップするかどうか |
 | `softDisabled`  | `boolean`                    | `true`         | `true`の場合、無効化されたタブはフォーカス可能ですが、アクティブにはできません |
-| `selectionMode` | `'follow' \| 'explicit'`     | `'follow'`     | タブがフォーカス時にアクティブになるか、明示的なアクティベーションが必要か |
-| `selectedTab`   | `any`                        | —              | 現在選択されているタブの値（双方向バインディングをサポート）       |
+| `selectionMode` | `'follow' \| 'explicit'`         | `'follow'`     | タブがフォーカス時にアクティブになるか、明示的なアクティベーションが必要か |
+| `focusMode`     | `'roving' \| 'activedescendant'` | `'roving'`     | Focus management strategy                                          |
+| `selectedTab`   | `any`                            | —              | 現在選択されているタブの値（双方向バインディングをサポート）       |
 
 ### Tab {#tab}
 

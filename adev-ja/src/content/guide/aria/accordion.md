@@ -1,14 +1,14 @@
-<docs-decorative-header title="アコーディオン">
+<docs-decorative-header title="Accordion">
 </docs-decorative-header>
 
 <docs-pill-row>
-  <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/accordion/" title="アコーディオンARIAパターン"/>
-  <docs-pill href="/api?query=accordion#angular_aria_accordion" title="アコーディオンAPIリファレンス"/>
+  <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/accordion/" title="Accordion ARIA pattern"/>
+  <docs-pill href="/api?query=accordion#angular_aria_accordion" title="Accordion API Reference"/>
 </docs-pill-row>
 
-## 概要 {#overview}
+## Overview
 
-アコーディオンは、関連するコンテンツを展開・折りたたみ可能なセクションに整理し、ページのスクロールを減らし、ユーザーが関連情報に集中するのを助けます。各セクションには、トリガーボタンとコンテンツパネルがあります。トリガーをクリックすると、関連するパネルの表示/非表示が切り替わります。
+An accordion organizes related content into expandable and collapsible sections, reducing page scrolling and helping users focus on relevant information. Each section has a trigger button and a content panel. Clicking a trigger toggles the visibility of its associated panel.
 
 <docs-code-multifile preview hideCode path="adev/src/content/examples/aria/accordion/src/single-expansion/basic/app/app.ts">
   <docs-code header="TS" path="adev/src/content/examples/aria/accordion/src/single-expansion/basic/app/app.ts"/>
@@ -16,39 +16,39 @@
   <docs-code header="CSS" path="adev/src/content/examples/aria/accordion/src/single-expansion/basic/app/app.css"/>
 </docs-code-multifile>
 
-## 使い方 {#usage}
+## Usage
 
-アコーディオンは、ユーザーが通常一度に1つのセクションを表示する必要がある場合に、コンテンツを論理的なグループに整理するのに適しています。
+Accordions work well for organizing content into logical groups where users typically need to view one section at a time.
 
-**アコーディオンを使用する場合:**
+**Use accordions when:**
 
-- 複数の質問と回答を持つFAQを表示する
-- 長いフォームを管理しやすいセクションに整理する
-- コンテンツの多いページでのスクロールを減らす
-- 関連情報を段階的に開示する
+- Displaying FAQs with multiple questions and answers
+- Organizing long forms into manageable sections
+- Reducing scrolling on content-heavy pages
+- Progressively disclosing related information
 
-**アコーディオンを避けるべき場合:**
+**Avoid accordions when:**
 
-- ナビゲーションメニューを構築する（代わりに[Menu](guide/aria/menu)コンポーネントを使用してください）
-- タブ付きインターフェースを作成する（代わりに[Tabs](guide/aria/tabs)コンポーネントを使用してください）
-- 単一の折りたたみ可能なセクションを表示する（代わりにdisclosureパターンを使用してください）
-- ユーザーが複数のセクションを同時に見る必要がある（異なるレイアウトを検討してください）
+- Building navigation menus (use the [Menu](guide/aria/menu) component instead)
+- Creating tabbed interfaces (use the [Tabs](guide/aria/tabs) component instead)
+- Showing a single collapsible section (use a disclosure pattern instead)
+- Users need to see multiple sections simultaneously (consider a different layout)
 
-## 機能 {#features}
+## Features
 
-- **展開モード** - 一度に1つまたは複数のパネルを開けるかどうかを制御します
-- **キーボードナビゲーション** - 矢印キー、Home、Endを使用してトリガー間を移動します
-- **遅延レンダリング** - コンテンツはパネルが最初に展開されたときにのみ作成され、初期読み込みのパフォーマンスを向上させます
-- **無効状態** - グループ全体または個々のトリガーを無効にします
-- **フォーカス管理** - 無効化されたアイテムがキーボードフォーカスを受け取れるかどうかを制御します
-- **プログラムによる制御** - コンポーネントのコードからパネルを展開、折りたたみ、または切り替えます
-- **RTLサポート** - 右から左へ記述する言語を自動的にサポートします
+- **Expansion modes** - Control whether one or multiple panels can be open at the same time
+- **Keyboard navigation** - Navigate between triggers using arrow keys, Home, and End
+- **Lazy rendering** - Content is only created when a panel first expands, improving initial load performance
+- **Disabled states** - Disable the entire group or individual triggers
+- **Focus management** - Control whether disabled items can receive keyboard focus
+- **Programmatic control** - Expand, collapse, or toggle panels from your component code
+- **RTL support** - Automatic support for right-to-left languages
 
-## 例 {#examples}
+## Examples
 
-### 単一展開モード {#single-expansion-mode}
+### Single expansion mode
 
-`[multiExpandable]="false"`を設定すると、一度に開けるパネルが1つだけになります。新しいパネルを開くと、以前に開いていたパネルは自動的に閉じます。
+Set `[multiExpandable]="false"` to allow only one panel to be open at a time. Opening a new panel automatically closes any previously open panel.
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -74,11 +74,11 @@
   </docs-tab>
 </docs-tab-group>
 
-このモードは、FAQや、ユーザーに一度に1つの回答に集中してもらいたい場合に適しています。
+This mode works well for FAQs or situations where you want users to focus on one answer at a time.
 
-### 複数展開モード {#multiple-expansion-mode}
+### Multiple expansion mode
 
-`[multiExpandable]="true"`を設定すると、複数のパネルを同時に開くことができます。ユーザーは他のパネルを閉じることなく、必要なだけパネルを展開できます。
+Set `[multiExpandable]="true"` to allow multiple panels to be open simultaneously. Users can expand as many panels as needed without closing others.
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -104,13 +104,13 @@
   </docs-tab>
 </docs-tab-group>
 
-このモードは、フォームのセクションや、ユーザーが複数のパネルにわたるコンテンツを比較する必要がある場合に便利です。
+This mode is useful for form sections or when users need to compare content across multiple panels.
 
-NOTE: `multiExpandable`入力はデフォルトで`true`です。単一展開の動作が必要な場合は、明示的に`false`に設定してください。
+NOTE: The `multiExpandable` input defaults to `true`. Set it to `false` explicitly if you want single expansion behavior.
 
-### 無効化されたアコーディオンアイテム {#disabled-accordion-items}
+### Disabled accordion items
 
-`disabled`入力を使用して特定のトリガーを無効にします。アコーディオンのグループで`softDisabled`入力を使用し、キーボードナビゲーション中に無効化されたアイテムの動作を制御します。
+Disable specific triggers using the `disabled` input. Control how disabled items behave during keyboard navigation using the `softDisabled` input on the accordion group.
 
 <docs-tab-group>
   <docs-tab label="Basic">
@@ -136,19 +136,19 @@ NOTE: `multiExpandable`入力はデフォルトで`true`です。単一展開の
   </docs-tab>
 </docs-tab-group>
 
-`[softDisabled]="true"`（デフォルト）の場合、無効化されたアイテムはフォーカスを受け取れますが、アクティブにはできません。`[softDisabled]="false"`の場合、無効化されたアイテムはキーボードナビゲーション中に完全にスキップされます。
+When `[softDisabled]="true"` (the default), disabled items can receive focus but cannot be activated. When `[softDisabled]="false"`, disabled items are skipped entirely during keyboard navigation.
 
-### コンテンツの遅延レンダリング {#lazy-content-rendering}
+### Lazy content rendering
 
-`ngAccordionContent`ディレクティブを`ng-template`で使用すると、パネルが最初に展開されるまでコンテンツのレンダリングを遅延させることができます。これにより、画像、チャート、または複雑なコンポーネントなどの重いコンテンツを持つアコーディオンのパフォーマンスが向上します。
+Use the `ngAccordionContent` directive on an `ng-template` to defer rendering content until the panel first expands. This improves performance for accordions with heavy content like images, charts, or complex components.
 
 ```angular-html
 <div ngAccordionGroup>
   <div>
-    <button ngAccordionTrigger panelId="item-1">Trigger Text</button>
-    <div ngAccordionPanel panelId="item-1">
+    <button ngAccordionTrigger [panel]="panel1">Trigger Text</button>
+    <div ngAccordionPanel #panel1="ngAccordionPanel">
       <ng-template ngAccordionContent>
-        <!-- このコンテンツは、パネルが最初に開かれたときにのみレンダリングされます -->
+        <!-- This content only renders when the panel first opens -->
         <img src="large-image.jpg" alt="Description" />
         <app-expensive-component />
       </ng-template>
@@ -157,91 +157,139 @@ NOTE: `multiExpandable`入力はデフォルトで`true`です。単一展開の
 </div>
 ```
 
-デフォルトでは、パネルが折りたたまれた後もコンテンツはDOMに残ります。パネルが閉じたときにDOMからコンテンツを削除するには、`[preserveContent]="false"`を設定します。
+By default, content remains in the DOM after the panel collapses. Set `[preserveContent]="false"` to remove the content from the DOM when the panel closes.
 
-## API
+## Testing
 
-### AccordionGroup {#accordiongroup}
+Angular Aria provides component harnesses for testing accordion components.
+Here is an example of how to use the harnesses in a component test:
 
-アコーディオンアイテムのグループのキーボードナビゲーションと展開動作を管理するコンテナディレクティブです。
+```typescript
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {HarnessLoader} from '@angular/cdk/testing';
+import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
+import {AccordionGroupHarness} from '@angular/aria/accordion/testing';
+import {MyAccordionComponent} from './my-accordion'; // Your component
 
-#### Inputs {#inputs}
+describe('MyAccordionComponent', () => {
+  let fixture: ComponentFixture<MyAccordionComponent>;
+  let loader: HarnessLoader;
 
-| プロパティ        | 型        | デフォルト | 説明                                                                      |
+  beforeEach(async () => {
+    TestBed.configureTestingModule({
+      imports: [MyAccordionComponent],
+    });
+
+    fixture = TestBed.createComponent(MyAccordionComponent);
+    await fixture.whenStable();
+    loader = TestbedHarnessEnvironment.loader(fixture);
+  });
+
+  it('should allow expanding panels', async () => {
+    // Load the accordion group harness
+    const group = await loader.getHarness(AccordionGroupHarness);
+
+    // Get all individual accordions (items) in the group
+    const accordions = await group.getAccordions();
+    expect(accordions.length).toBe(3);
+
+    // Verify initial state (first expanded, others collapsed)
+    expect(await accordions[0].isExpanded()).toBe(true);
+    expect(await accordions[1].isExpanded()).toBe(false);
+
+    // Expand the second panel
+    await accordions[1].expand();
+
+    // Verify updated state
+    expect(await accordions[1].isExpanded()).toBe(true);
+    // If multiExpandable is false, the first one should now be collapsed
+    expect(await accordions[0].isExpanded()).toBe(false);
+  });
+});
+```
+
+## APIs
+
+### AccordionGroup
+
+The container directive that manages keyboard navigation and expansion behavior for a group of accordion items.
+
+#### Inputs
+
+| Property          | Type      | Default | Description                                                               |
 | ----------------- | --------- | ------- | ------------------------------------------------------------------------- |
-| `disabled`        | `boolean` | `false` | グループ内のすべてのトリガーを無効にします                                |
-| `multiExpandable` | `boolean` | `true`  | 複数のパネルを同時に展開できるかどうか                                    |
-| `softDisabled`    | `boolean` | `true`  | `true`の場合、無効化されたアイテムはフォーカス可能です。`false`の場合、スキップされます |
-| `wrap`            | `boolean` | `false` | キーボードナビゲーションが最後のアイテムから最初のアイテムへ、またはその逆にラップするかどうか |
+| `disabled`        | `boolean` | `false` | Disables all triggers in the group                                        |
+| `multiExpandable` | `boolean` | `true`  | Whether multiple panels can be expanded simultaneously                    |
+| `softDisabled`    | `boolean` | `true`  | When `true`, disabled items are focusable. When `false`, they are skipped |
+| `wrap`            | `boolean` | `false` | Whether keyboard navigation wraps from last to first item and vice versa  |
 
-#### Methods {#methods}
+#### Methods
 
-| メソッド      | パラメータ | 説明                                                             |
+| Method        | Parameters | Description                                                      |
 | ------------- | ---------- | ---------------------------------------------------------------- |
-| `expandAll`   | none       | すべてのパネルを展開します（`multiExpandable`が`true`の場合のみ機能します） |
-| `collapseAll` | none       | すべてのパネルを折りたたみます                                     |
+| `expandAll`   | none       | Expands all panels (only works when `multiExpandable` is `true`) |
+| `collapseAll` | none       | Collapses all panels                                             |
 
-### AccordionTrigger {#accordiontrigger}
+### AccordionTrigger
 
-パネルの表示/非表示を切り替えるボタン要素に適用されるディレクティブです。
+The directive applied to the button element that toggles panel visibility.
 
-#### Inputs {#inputs}
+#### Inputs
 
-| プロパティ | 型        | デフォルト | 説明                                                           |
-| ---------- | --------- | ------- | -------------------------------------------------------------- |
-| `id`       | `string`  | auto    | トリガーの一意の識別子                                         |
-| `panelId`  | `string`  | —       | **必須。**関連付けられたパネルの`panelId`と一致する必要があります |
-| `disabled` | `boolean` | `false` | このトリガーを無効にします                                     |
-| `expanded` | `boolean` | `false` | パネルが展開されているかどうか（双方向バインディングをサポート） |
+| Property   | Type             | Default | Description                                                    |
+| ---------- | ---------------- | ------- | -------------------------------------------------------------- |
+| `panel`    | `AccordionPanel` | —       | **Required.** The reference of the controlled accordion panel. |
+| `id`       | `string`         | auto    | Unique identifier for the trigger                              |
+| `disabled` | `boolean`        | `false` | Disables this trigger                                          |
+| `expanded` | `boolean`        | `false` | Whether the panel is expanded (supports two-way binding)       |
 
-#### シグナル {#signals}
+#### Signals
 
-| プロパティ | 型                | 説明                                    |
+| Property | Type              | Description                             |
 | -------- | ----------------- | --------------------------------------- |
-| `active` | `Signal<boolean>` | トリガーが現在フォーカスを持っているかどうか    |
+| `active` | `Signal<boolean>` | Whether the trigger currently has focus |
 
-#### Methods {#methods}
+#### Methods
 
-| メソッド   | パラメータ | 説明                              |
+| Method     | Parameters | Description                       |
 | ---------- | ---------- | --------------------------------- |
-| `expand`   | none       | 関連付けられたパネルを展開します      |
-| `collapse` | none       | 関連付けられたパネルを折りたたみます    |
-| `toggle`   | none       | パネルの展開状態を切り替えます        |
+| `expand`   | none       | Expands the associated panel      |
+| `collapse` | none       | Collapses the associated panel    |
+| `toggle`   | none       | Toggles the panel expansion state |
 
-### AccordionPanel {#accordionpanel}
+### AccordionPanel
 
-折りたたみ可能なコンテンツを含む要素に適用されるディレクティブです。
+The directive applied to the element containing the collapsible content.
 
-#### Inputs {#inputs}
+#### Inputs
 
-| プロパティ        | 型        | デフォルト | 説明                                                             |
-| ----------------- | --------- | ------- | ---------------------------------------------------------------- |
-| `id`              | `string`  | auto    | パネルの一意の識別子                                             |
-| `panelId`         | `string`  | —       | **必須。**関連付けられたトリガーの`panelId`と一致する必要があります |
-| `preserveContent` | `boolean` | `true`  | パネルが折りたたまれた後もコンテンツをDOMに保持するかどうか      |
+| Property          | Type      | Default | Description                                          |
+| ----------------- | --------- | ------- | ---------------------------------------------------- |
+| `id`              | `string`  | auto    | Unique identifier for the panel                      |
+| `preserveContent` | `boolean` | `true`  | Whether to keep content in DOM after panel collapses |
 
-#### シグナル {#signals}
+#### Signals
 
-| プロパティ | 型                | 説明                                    |
+| Property  | Type              | Description                             |
 | --------- | ----------------- | --------------------------------------- |
-| `visible` | `Signal<boolean>` | パネルが現在展開されているかどうか        |
+| `visible` | `Signal<boolean>` | Whether the panel is currently expanded |
 
-#### Methods {#methods}
+#### Methods
 
-| メソッド   | パラメータ | 説明                        |
+| Method     | Parameters | Description                 |
 | ---------- | ---------- | --------------------------- |
-| `expand`   | none       | このパネルを展開します          |
-| `collapse` | none       | このパネルを折りたたみます        |
-| `toggle`   | none       | 展開状態を切り替えます          |
+| `expand`   | none       | Expands this panel          |
+| `collapse` | none       | Collapses this panel        |
+| `toggle`   | none       | Toggles the expansion state |
 
-### AccordionContent {#accordioncontent}
+### AccordionContent
 
-遅延レンダリングを有効にするために、アコーディオンパネル内の`ng-template`に適用される構造ディレクティブです。
+The structural directive applied to an `ng-template` inside an accordion panel to enable lazy rendering.
 
-このディレクティブには、input、output、メソッドはありません。`ng-template`要素に適用してください:
+This directive has no inputs, outputs, or methods. Apply it to an `ng-template` element:
 
 ```angular-html
-<div ngAccordionPanel panelId="item-1">
+<div ngAccordionPanel #panel1="ngAccordionPanel">
   <ng-template ngAccordionContent>
     <!-- Content here is lazily rendered -->
   </ng-template>

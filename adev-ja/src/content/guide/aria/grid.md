@@ -159,6 +159,58 @@
 - `roving`: `tabindex`を使用してフォーカスがセルに移動します（単純なグリッドに適しています）
 - `activedescendant`: フォーカスはグリッドコンテナに留まり、`aria-activedescendant`がアクティブなセルを示します（仮想スクロールに適しています）
 
+## Testing
+
+Angular Aria provides component harnesses for testing grid components.
+Here is an example of how to use the harnesses in a component test:
+
+```typescript
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {HarnessLoader} from '@angular/cdk/testing';
+import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
+import {GridHarness} from '@angular/aria/grid/testing';
+import {MyGridComponent} from './my-grid'; // Your component
+
+describe('MyGridComponent', () => {
+  let fixture: ComponentFixture<MyGridComponent>;
+  let loader: HarnessLoader;
+
+  beforeEach(async () => {
+    TestBed.configureTestingModule({
+      imports: [MyGridComponent],
+    });
+
+    fixture = TestBed.createComponent(MyGridComponent);
+    await fixture.whenStable();
+    loader = TestbedHarnessEnvironment.loader(fixture);
+  });
+
+  it('should read cell values and focus cells', async () => {
+    const grid = await loader.getHarness(GridHarness);
+
+    // Get all cells text in a 2D array organized by rows
+    const cellTexts = await grid.getCellTextByIndex();
+    expect(cellTexts).toEqual([
+      ['Cell 1.1', 'Cell 1.2'],
+      ['Cell 2.1', 'Cell 2.2'],
+    ]);
+
+    // Get a specific cell by text
+    const cells = await grid.getCells({text: 'Cell 1.1'});
+    expect(cells.length).toBe(1);
+    const cell = cells[0];
+
+    // Verify cell state
+    expect(await cell.isSelected()).toBe(true);
+    expect(await cell.isActive()).toBe(true);
+
+    // Focus the cell
+    await cell.focus();
+    expect(await cell.isFocused()).toBe(true);
+  });
+});
+```
+
 ## API
 
 ### Grid {#grid}
@@ -214,3 +266,31 @@
 | プロパティ | 型                | 説明                                 |
 | -------- | ----------------- | ------------------------------------ |
 | `active` | `Signal<boolean>` | セルが現在フォーカスを持っているかどうか |
+
+### GridCellWidget
+
+Applied to an interactive element inside a grid cell to allow for pausing grid navigation.
+
+#### Inputs
+
+| Property      | Type                                  | Default    | Description                                               |
+| ------------- | ------------------------------------- | ---------- | --------------------------------------------------------- |
+| `id`          | `string`                              | auto       | Unique identifier for the widget                          |
+| `widgetType`  | `'simple' \| 'complex' \| 'editable'` | `'simple'` | The widget type, controlling how activation behaves       |
+| `disabled`    | `boolean`                             | `false`    | Disables this cell widget                                 |
+| `focusTarget` | `ElementResolver<HTMLElement>`        | —          | Optional element reference to receive focus on activation |
+| `tabindex`    | `number`                              | —          | Tabindex override for the widget                          |
+
+#### Outputs
+
+| Property      | Type                                                     | Description                                    |
+| ------------- | -------------------------------------------------------- | ---------------------------------------------- |
+| `activated`   | `EventEmitter<KeyboardEvent \| FocusEvent \| undefined>` | Emits when the cell widget becomes activated   |
+| `deactivated` | `EventEmitter<KeyboardEvent \| FocusEvent \| undefined>` | Emits when the cell widget becomes deactivated |
+
+#### Methods
+
+| Method       | Parameters | Description                       |
+| ------------ | ---------- | --------------------------------- |
+| `activate`   | none       | Forcefully activates the widget   |
+| `deactivate` | none       | Forcefully deactivates the widget |

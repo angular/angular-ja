@@ -57,8 +57,48 @@ internalId = linkedSignal(() => this.id() ?? getDefaultId());
 </docs-workflow>
 
 NOTE: 静的なルートデータ、解決されたルートデータ、パスパラメータ、マトリックスパラメータ、クエリパラメータなど、すべてのルートデータをキーと値のペアでコンポーネントの入力にバインドできます。
-親コンポーネントのルート情報を使用する場合は、ルーターの `paramsInheritanceStrategy` オプションを設定する必要があります。
-`withRouterConfig({paramsInheritanceStrategy: 'always'})` 。他の利用可能な設定の詳細については、[ルーター設定オプション](guide/routing/customizing-route-behavior#router-configuration-options)を参照してください。
+
+### Disable query parameter binding
+
+Use `ComponentInputBindingOptions` to disable query parameter binding if you manage query parameters separately:
+
+```ts
+provideRouter(appRoutes, withComponentInputBinding({queryParams: false}));
+```
+
+### Configure behavior for inputs not available in router data
+
+By default, the router sets an input to `undefined` if it was not available in the router data during a navigation. This ensures that stale data is not retained.
+
+If you want to avoid setting `undefined` for inputs that have _never_ been available in the router data for the active component instance, you can set the `unmatchedInputBehavior` option to `'undefinedIfStale'`:
+
+```ts
+provideRouter(appRoutes, withComponentInputBinding({unmatchedInputBehavior: 'undefinedIfStale'}));
+```
+
+When you combine `unmatchedInputBehavior: 'undefinedIfStale'` with `queryParams: false`, inputs retain their initial values unless they are explicitly provided by the router. The exception is matrix parameters: if a matrix parameter is provided in one navigation and removed in a subsequent one, the router will set the input to `undefined` to avoid retaining stale data.
+
+```ts
+provideRouter(
+  appRoutes,
+  withComponentInputBinding({
+    queryParams: false,
+    unmatchedInputBehavior: 'undefinedIfStale',
+  }),
+);
+```
+
+### Inherit parent route data
+
+By default, child routes inherit parameters and data from parent routes (equivalent to `paramsInheritanceStrategy: 'always'`). This means you can access parent route info directly in child components.
+
+If you need to restore the legacy behavior where parameters were only inherited from empty path routes, you can set `paramsInheritanceStrategy` to `'emptyOnly'`:
+
+```ts
+provideRouter(routes, withRouterConfig({paramsInheritanceStrategy: 'emptyOnly'}));
+```
+
+See [router configuration options](guide/routing/customizing-route-behavior#router-configuration-options) for details on other available settings.
 
 ## 404 ページの表示 {#displaying-a-404-page}
 

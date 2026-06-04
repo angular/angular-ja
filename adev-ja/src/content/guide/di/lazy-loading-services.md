@@ -27,7 +27,7 @@ export class Report {
 }
 ```
 
-`this.exporter()`への最初の呼び出しは動的インポートをトリガーし、DIからサービスを解決します。後続の呼び出しは同じPromiseを再利用するため、チャンクは一度だけ取得されます。
+`this.exporter()`への最初の呼び出しは動的インポートをトリガーし、DIからサービスを解決します。後続の呼び出しは同じPromiseを再利用するため、チャンクは一度だけ読み込まれます。
 
 遅延読み込みされるサービスが[デフォルトエクスポート](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export#using_the_default_export)である場合、動的インポートを直接渡すと、Angularが自動的に`default`を展開します:
 
@@ -44,7 +44,7 @@ private exporter = injectAsync(() => import('./report-exporter'));
 
 ## 依存関係のプリフェッチ {#prefetching-the-dependency}
 
-デフォルトでは、遅延チャンクは返された関数を呼び出したときにのみ取得されます。オプションで`prefetch`トリガーを渡すことで、ダウンロードをより早く開始できます。トリガーは`Promise`を返す任意の関数であり、それが解決されると、Angularはローダーを起動します。
+デフォルトでは、遅延チャンクは返された関数を呼び出したときにのみ読み込まれます。オプションで`prefetch`トリガーを渡すことで、ダウンロードをより早く開始できます。トリガーは`Promise`を返す任意の関数であり、それが解決されると、Angularはローダーを起動します。
 
 Angularには、ブラウザがアイドル状態になるまで待機する組み込みトリガーである`onIdle`が同梱されています:
 

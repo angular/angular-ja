@@ -67,7 +67,7 @@ export class Report {
 injectAsync(loader, {prefetch: () => onIdle({timeout: 1_000})});
 ```
 
-NOTE: プリフェッチはオポチュニスティックです。プリフェッチが発火する前にユーザーが機能を呼び出した場合、Angularは依然として依存関係を即座にロードし、準備ができ次第`await`を解決します。
+NOTE: プリフェッチは状況に応じて実行されます。プリフェッチが発火する前にユーザーが機能を呼び出した場合、Angularは依然として依存関係を即座にロードし、準備ができ次第`await`を解決します。
 
 ## カスタムプリフェッチトリガーの提供 {#provide-a-custom-prefetch-trigger}
 

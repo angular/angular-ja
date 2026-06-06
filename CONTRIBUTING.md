@@ -54,6 +54,14 @@ $ pnpm install
 $ pnpm build
 ```
 
+> [!IMPORTANT]
+> macOSでビルドする場合は、`pnpm build` を実行する前に `.bazelrc.user.example` を `.bazelrc.user` という名前でコピーしてください（`.bazelrc.user` は `.gitignore` 対象です）。
+> macOSのBazel sandboxがプレレンダリング中のネットワークアクセス（Algolia API呼び出し）をブロックするため、これがないとビルドが失敗します。
+>
+> ```
+> $ cp .bazelrc.user.example .bazelrc.user
+> ```
+
 ### 開発用サーバーを使った作業
 
 開発用ローカルサーバーを起動すると、ビルド結果を確認しながら翻訳作業ができます。

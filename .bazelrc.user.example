@@ -1,6 +1,10 @@
 # Local development settings for macOS
 # Copy this file to .bazelrc.user to enable these settings.
-#
 # macOS sandbox blocks network access during prerendering (Algolia API calls).
 # Use local spawn strategy to allow network access.
+#
+# macOS向けのローカル開発設定です。
+# このファイルを .bazelrc.user という名前でコピーすると有効になります。
+# macOSのBazel sandboxは、プレレンダリング中のネットワークアクセス（Algolia API呼び出し）を
+# ブロックするため、sandboxを使わないlocal spawn strategyに切り替えて回避します。
 build --spawn_strategy=local

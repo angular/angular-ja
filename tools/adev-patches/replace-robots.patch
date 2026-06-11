@@ -1,0 +1,13 @@
+diff --git a/adev/src/robots.txt b/adev/src/robots.txt
+index 20a871a810..8fd1157557 100644
+--- a/adev/src/robots.txt
++++ b/adev/src/robots.txt
+@@ -1,3 +1,6 @@
+-# Allow all URLs (see https://www.robotstxt.org/robotstxt.html)
++# Allow most URLs, disallow auto-generated English /api/ from crawlers.
++# /api/ is not localized (auto-generated from upstream Angular source).
+ User-agent: *
+-Disallow:
++Disallow: /api/
++
++Sitemap: https://angular.jp/sitemap.xml

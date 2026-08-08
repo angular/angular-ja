@@ -117,7 +117,7 @@ Karmaをカスタマイズしたい場合は、次のコマンドを実行して
 ng generate config karma
 ```
 
-HELPFUL: Karmaの設定については、[Karma設定ガイド](http://karma-runner.github.io/6.4/config/configuration-file.html)で詳しく説明されています。
+HELPFUL: Karmaの設定については、[Karma設定ガイド](https://karma-runner.github.io/6.4/config/configuration-file.html)で詳しく説明されています。
 
 ### `angular.json`でのテストランナーの設定 {#setting-the-test-runner-in-angularjson}
 

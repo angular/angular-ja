@@ -8,7 +8,7 @@ Angularアプリケーションを作成するための基本的な構成要素
 
 すべてのコンポーネントには、いくつかの主要な部分があります。
 
-1. Angularによって使用されるいくつかの設定を含む`@Component`[デコレーター](https://www.typescriptlang.org/docs/handbook/decorators.html)。
+1. Angularによって使用されるいくつかの設定を含む`@Component` [デコレーター](https://www.typescriptlang.org/docs/handbook/decorators.html)。
 2. DOMにレンダリングされる内容を制御するHTMLテンプレート。
 3. HTMLでコンポーネントがどのように使用されるかを定義する[CSSセレクター](https://developer.mozilla.org/docs/Learn/CSS/Building_blocks/Selectors)。
 4. ユーザー入力の処理やサーバーへのリクエストの実行など、動作を定義するTypeScriptクラス。

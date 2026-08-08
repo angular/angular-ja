@@ -20,12 +20,13 @@
 
 ### 実験的に利用可能
 
-- [Signal Forms](/guide/forms/signals/overview)
-- [Resource API](/guide/signals/resource)
-- [httpResource](/api/common/http/httpResource)
+- [Web MCP](/ai/webmcp)
 
 ### 本番環境向け
 
+- [Signal Forms](/guide/forms/signals/overview)
+- [Resource API](/guide/signals/resource)
+- [httpResource](/api/common/http/httpResource)
 - [Zoneless change detection](/guide/zoneless)
 - [Linked Signal API](/guide/signals/linked-signal)
 - [Incremental hydration](/guide/incremental-hydration)
@@ -70,18 +71,8 @@ As part of this project, we'll explore the requirement space of cross framework 
 
   </docs-card>
 
-  <docs-card title="Signal Forms" href="/guide/forms/signals/overview">
-  In Angular v21, we landed an experimental version of Signal Forms. This new approach allows developers to manage form state using signals, providing an ergonomic forms creation experience. Next, our plans include promoting Signal Forms to stable and enhancing interoperability with reactive forms - enabling teams to progressively migrate large forms at their own pace.
-  </docs-card>
-  <docs-card title="Reactivity">
-  We introduced experimental signal APIs, resource() and httpResource(), for flexible asynchronous data handling. We plan to promote these APIs to developer preview/stable based on community feedback.
-  We are also evaluating new APIs for unhandled use cases, considering community benefits and tradeoffs before implementation after careful consideration.
-  </docs-card>
-  <docs-card title="Change Detection">
-  With Zoneless being stable and default, we are also planning to shift the default change detection strategy to OnPush, to follow current best practices. [See the RFC discussion for details](https://github.com/angular/angular/discussions/66779).
-  </docs-card>
   <docs-card title="Components">
-  In Angular v21, we launched Angular Aria in developer preview, providing eight patterns for accessible, headless components. We're planning to promote these patterns to stable and introduce new patterns where needed . We want to provide developers with a solid foundation for developing their own components using Angular Aria - we provide the interactions and you bring the style that matches your design systems. Developers will have the choice of developing custom components with Angular Aria, use interaction patterns from the CDK, or use ready-made styled Material Components.
+  In Angular v21, we launched Angular Aria in developer preview, providing eight patterns for accessible, headless components. We're planning to promote these patterns to stable and introduce new patterns where needed. We want to provide developers with a solid foundation for developing their own components using Angular Aria - we provide the interactions and you bring the style that matches your design systems. Developers will have the choice of developing custom components with Angular Aria, use interaction patterns from the CDK, or use ready-made styled Material Components.
 
 For accessibility, we are continuously evaluating the components and patterns against accessibility standards such as WCAG and are working to fix any issues that arise from this process.
 </docs-card>
@@ -98,14 +89,29 @@ For accessibility, we are continuously evaluating the components and patterns ag
 ## 完了したプロジェクト
 
 <docs-card-container>
-  <docs-card title="Signal debugging in Angular DevTools" link="Completed in 2025">
-  Angularのシグナルの進化に伴い、シグナルのデバッグを支援するより良いツールの開発に取り組んでいます。最優先事項の1つは、シグナルの状態を確認・デバッグできるUIの提供です。
-  </docs-card>
-  <docs-card title="Improve HMR (Hot Module Reload)" href="https://github.com/angular/angular/issues/39367#issuecomment-1439537306" link="Completed in 2025">
-  ホットモジュールリプレースメントを有効にすることで、編集/リフレッシュサイクルを高速化することに取り組んでいます。
 
-Angular v19では、CSSとテンプレートのHMRの初期サポートを提供し、v20ではテンプレートのHMRを安定版に卒業させました。このプロジェクトを完了としてマークする前に、開発者のニーズに対応していることを確認するために、フィードバックを収集し続けます。
+  <docs-card title="Signal Forms" href="/guide/forms/signals/overview" link="Completed in 2026">
+  Signal Forms are now stable. This new approach allows developers to manage form state using signals, providing an ergonomic forms creation experience. We promoted Signal Forms to stable and enhanced interoperability with reactive forms - enabling teams to progressively migrate large forms at their own pace.
+  </docs-card>
+
+  <docs-card title="Reactivity" href="/guide/signals" link="Completed in 2026">
+  We introduced new signal APIs, `resource()` and `httpResource()`, for flexible asynchronous data handling. We promoted these APIs to developer stable.
+  </docs-card>
+
+  <docs-card title="Change Detection" href="/api/core/ChangeDetectionStrategy" link="Completed in 2026">
+  With Zoneless being stable and default, we set the default change detection strategy to `OnPush`, to follow current best practices. We also renamed `ChangeDetectionStrategy.Default` to `ChangeDetectionStrategy.Eager`.
+
+[See the RFC discussion for details](https://github.com/angular/angular/discussions/66779).
 </docs-card>
+
+  <docs-card title="Signal debugging in Angular DevTools" link="Completed in 2026">
+  We've added better tooling for debugging Signals using Angular DevTools. This change includes a new UI for inspecting and debugging signals.
+  </docs-card>
+
+  <docs-card title="Improve HMR (Hot Module Reload)" href="https://github.com/angular/angular/issues/39367#issuecomment-1439537306" link="Completed in 2025">
+  ホットモジュールリプレースメントを有効にすることで、編集/リフレッシュサイクルを高速化することに取り組んでいます。Angular v19では、CSSとテンプレートのHMRの初期サポートを提供し、v20ではテンプレートのHMRを安定版に卒業させました。このプロジェクトを完了としてマークする前に、開発者のニーズに対応していることを確認するために、フィードバックを収集し続けます。
+</docs-card>
+
 <docs-card title="Zoneless Angular"  link="Completed in Q4 2025">
 v18では、Angularに実験的なZonelessサポートを提供しました。これにより、バンドルにzone.jsを含めずにフレームワークを使用できるようになり、パフォーマンス、デバッグエクスペリエンス、相互運用性が向上します。初期リリースの一環として、Angular CDKとAngular MaterialにもZonelessサポートを導入しました。
 
@@ -144,14 +150,14 @@ To make it easier for developers to use modern Angular APIs, we enabled integrat
 As part of this initiative, the language service automatically imports components and pipes in standalone and NgModule-based apps. Additionally, we've added a template diagnostic to highlight unused imports in standalone components, which should help make application bundles smaller.
 </docs-card>
 <docs-card title="Local template variables" link="Completed in Q3 2024">
-We've released the support for local template variables in Angular, see [`@let` docs](/api/core/@let) for additional information.
+We've released the support for local template variables in Angular, see [`@let`](/api/core/@let) for additional information.
 </docs-card>
 <docs-card title="Angular Materialのカスタマイズを拡張する" link="2024年第2四半期に完了" href="https://material.angular.dev/guide/theming">
 Angular Materialコンポーネントのカスタマイズを向上させ、Material 3機能を有効にするために、トークンベースのテーマAPIを定義するためにGoogleのMaterial Designチームと協力しています。
 
 v17.2では、Angular Material 3の実験的なサポートを共有し、v18では安定版に卒業しました。
 </docs-card>
-<docs-card title="遅延読み込みを導入する" link="2024年第2四半期に完了" href="https://next.angular.dev/guide/templates/defer">
+<docs-card title="遅延読み込みを導入する" link="2024年第2四半期に完了" href="guide/templates/defer">
 v17では、遅延コード読み込みのための使い慣れたAPIを提供する、開発者プレビューで遅延表示を提供しました。v18では、ライブラリ開発者向けの遅延表示を有効にし、APIを安定版に卒業させました。
 </docs-card>
 <docs-card title="Angular DevToolsのiframeサポート" link="2024年第2四半期に完了">

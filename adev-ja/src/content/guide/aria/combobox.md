@@ -235,62 +235,23 @@ describe('MyComboboxComponent', () => {
 });
 ```
 
-## API {#apis}
+## API reference {#api-reference}
 
-### Comboboxディレクティブ {#combobox-directive}
+詳細なAPIドキュメントについては、以下のAPIリファレンスを参照してください。
 
-インタラクティブなトリガー要素（テキスト入力、ボタン、divなど）とポップアップコンテナを連携させます。
-
-#### 入力 / モデル {#inputs--model}
-
-| プロパティ         | 型                     | デフォルト | 説明                                                                |
-| ------------------ | ---------------------- | ------- | ------------------------------------------------------------------- |
-| `value`            | `ModelSignal<string>`  | `''`    | コンボボックスの双方向バインディング可能なテキスト値                |
-| `expanded`         | `ModelSignal<boolean>` | `false` | ポップアップの開閉状態を双方向バインディングできる値                |
-| `disabled`         | `boolean`              | `false` | コンボボックスのトリガー要素を無効にします                          |
-| `softDisabled`     | `boolean`              | `true`  | 要素をキーボードフォーカス可能に保ちながら、インタラクションを無効にします |
-| `alwaysExpanded`   | `boolean`              | `false` | ポップアップを常に開いたままにします                                |
-| `inlineSuggestion` | `string \| undefined`  | -       | 入力の末尾でハイライト表示するインライン補完候補を設定します        |
-| `tabIndex`         | `number \| undefined`  | -       | コンボボックス要素のtabindex（`tabindex`のエイリアス）              |
-
-すべてのキーボードイベント、フォーカス連携、ARIA状態プロパティ（`role="combobox"`、`aria-autocomplete`、`aria-expanded`を含む）は、ホスト要素で自動的に処理されます。
-
----
-
-### ComboboxPopupディレクティブ {#comboboxpopup-directive}
-
-`<ng-template>`をコンボボックスのポップアップコンテナとしてマークします。
-
-#### 入力 {#comboboxpopup-inputs}
-
-| プロパティ  | 型                                          | デフォルト  | 説明                                           |
-| ----------- | ------------------------------------------- | ----------- | ---------------------------------------------- |
-| `combobox`  | `Combobox`                                  | (必須)      | 親`Combobox`ディレクティブへの参照             |
-| `popupType` | `'listbox' \| 'tree' \| 'grid' \| 'dialog'` | `'listbox'` | ポップアップのレイアウト/ロールプロファイルを指定します |
-
----
-
-### ComboboxWidgetディレクティブ {#comboboxwidget-directive}
-
-ポップアップコンテンツ（リストボックスやグリッドなど）を親コンボボックストリガーに接続します。
-
-#### 入力 {#comboboxwidget-inputs}
-
-| プロパティ         | 型                    | 説明                                                                                |
-| ------------------ | --------------------- | ----------------------------------------------------------------------------------- |
-| `activeDescendant` | `string \| undefined` | 現在アクティブなオプションのID（ウィジェット内のアクティブなオプションIDにバインド） |
-
----
+- [`Combobox`](/api/aria/combobox/Combobox)
+- [`ComboboxPopup`](/api/aria/combobox/ComboboxPopup)
+- [`ComboboxWidget`](/api/aria/combobox/ComboboxWidget)
 
 ### 関連するパターンとディレクティブ {#related-patterns-and-directives}
 
 Comboboxは、これらのドキュメント化されたパターンのためのプリミティブディレクティブです:
 
-- **[オートコンプリート](guide/aria/autocomplete)** - フィルタリングと提案のパターン（入力タイピングとオプションリストを連携）
-- **[セレクト](guide/aria/select)** - 単一選択のドロップダウンパターン（編集不可のボタントリガーに直接適用）
-- **[マルチセレクト](guide/aria/multiselect)** - 複数選択のパターン（複数選択が有効なListboxを持つ編集不可トリガーに適用）
+- [オートコンプリート](guide/aria/autocomplete) - フィルタリングと提案のパターン（入力タイピングとオプションリストを連携）
+- [セレクト](guide/aria/select) - 単一選択のドロップダウンパターン（編集不可のボタントリガーに直接適用）
+- [マルチセレクト](guide/aria/multiselect) - 複数選択のパターン（複数選択が有効なListboxを持つ編集不可トリガーに適用）
 
 Comboboxは通常、以下と組み合わせて使用されます:
 
-- **[Listbox](guide/aria/listbox)** - 最も一般的なポップアップコンテンツ
-- **[Tree](guide/aria/tree)** - 階層的なポップアップコンテンツ（例についてはTreeガイドを参照）
+- [Listbox](guide/aria/listbox) - 最も一般的なポップアップコンテンツ
+- [Tree](guide/aria/tree) - 階層的なポップアップコンテンツ（例についてはTreeガイドを参照）

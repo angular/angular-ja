@@ -18,7 +18,7 @@
 
 このテンプレートには、すべての要素間に空白が含まれています。次のスニペットは、同じHTMLで、存在する空白をすべてハッシュ（`#`）文字に置き換えたもので、どのくらいの空白が存在するかを示しています。
 
-<!-- prettier-ignore>
+<!-- prettier-ignore -->
 ```html
 <!-- Total Whitespace: 20 -->
 <section>###<h3>User profile</h3>###<label>#####User name#####<input>###</label>#</section>

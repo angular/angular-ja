@@ -1,5 +1,10 @@
 # Angular チュートリアルへようこそ
 
+<div class="docs-tutorial-mascot">
+  <img class="docs-tutorial-mascot__angie" src="assets/images/angie/greeting.svg" aria-hidden="true">
+  <p class="docs-tutorial-mascot__bubble">ようこそ！Angularの構成要素を学びましょう。</p>
+</div>
+
 このインタラクティブなチュートリアルでは、Angularを使用してすばらしいアプリケーションを作成するための基本的な構成要素を学びます。
 
 ## このチュートリアルの使い方

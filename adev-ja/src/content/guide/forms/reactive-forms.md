@@ -3,7 +3,7 @@
 リアクティブフォームは、時間の経過とともに値が変化するフォーム入力の処理に、モデル駆動型のアプローチを提供します。
 このガイドでは、基本的なフォームコントロールの作成と更新、複数のコントロールをグループで使用すること、フォーム値の検証、実行時にコントロールを追加または削除できる動的フォームの作成について説明します。
 
-## リアクティブフォームの概要
+## リアクティブフォームの概要 {#overview-of-reactive-forms}
 
 リアクティブフォームは、特定の時点におけるフォームの状態を管理するために、明示的で不変のアプローチを使用します。
 フォーム状態に対する各変更は、新しい状態を返します。この状態は、変更間でモデルの整合性を維持します。
@@ -60,7 +60,7 @@ Use the constructor of `FormControl` to set its initial value, which in this cas
 </docs-step>
 </docs-workflow>
 
-### フォームコントロール値の表示
+### フォームコントロール値の表示 {#displaying-a-form-control-value}
 
 値は、次の方法で表示できます。
 
@@ -78,7 +78,7 @@ Use the constructor of `FormControl` to set its initial value, which in this cas
 
 [API リファレンス](api/forms/FormControl "詳細な構文リファレンス") で、他の `FormControl` プロパティとメソッドについて説明します。
 
-### フォームコントロール値の置換
+### フォームコントロール値の置換 {#replacing-a-form-control-value}
 
 リアクティブフォームには、ユーザーの操作なしに値をプログラムで更新できる、コントロールの値をプログラムで変更するためのメソッドがあります。
 フォームコントロールインスタンスは、フォームコントロールの値を更新し、提供された値の構造をコントロールの構造に対して検証する `setValue()` メソッドを提供します。
@@ -207,7 +207,7 @@ Just as a form group contains a group of controls, the _profileForm_ `FormGroup`
 </docs-step>
 </docs-workflow>
 
-### データモデルの一部を更新する
+### データモデルの一部を更新する {#updating-parts-of-the-data-model}
 
 複数のコントロールを含むフォームグループインスタンスの値を更新する場合は、モデルの一部だけを更新する場合があります。
 このセクションでは、フォームコントロールデータモデルの特定の部分を更新する方法について説明します。
@@ -233,7 +233,7 @@ Just as a form group contains a group of controls, the _profileForm_ `FormGroup`
 これは、`patchValue()` メソッドが、モデル構造に対して更新を適用するためです。
 `patchValue()` は、フォームモデルで定義されているプロパティのみを更新します。
 
-## FormBuilder サービスを使用してコントロールを生成する
+## FormBuilder サービスを使用してコントロールを生成する {#using-the-formbuilder-service-to-generate-controls}
 
 複数のフォームを扱う場合は、手動でフォームコントロールインスタンスを作成すると、反復処理になる可能性があります。
 `FormBuilder` サービスは、コントロールを生成するための便利なメソッドを提供します。
@@ -401,7 +401,7 @@ export class ProfileEditor {
 
 </docs-step>
 
-### トップレベルフォーム配列での `FormArrayDirective` の使用
+### トップレベルフォーム配列での `FormArrayDirective` の使用 {#using-formarraydirective-for-top-level-form-arrays}
 
 `FormArrayDirective` を使用して、`FormArray` を `<form>` 要素に直接バインドできます。
 これは、フォームがトップレベルの `FormGroup` を使用せず、配列自体が完全なフォームモデルを表す場合に便利です。
@@ -537,7 +537,7 @@ control.events.subscribe((e) => {
 
 NOTE: 値の変更時、このコントロールの値が更新された直後に発行が発生します。親コントロールの値（たとえば、このFormControlがFormGroupの一部である場合）は後で更新されるため、このイベントのコールバックから親コントロールの値（`value` プロパティを使用）にアクセスすると、まだ更新されていない値を取得する可能性があります。代わりに親コントロールの `events` をサブスクライブしてください。
 
-## フォームコントロール状態の管理
+## フォームコントロール状態の管理 {#managing-form-control-state}
 
 リアクティブフォームは、**touched/untouched** と **pristine/dirty** を通じてコントロールの状態を追跡します。AngularはDOM操作中にこれらを自動的に更新しますが、プログラムで管理もできます。
 
@@ -606,11 +606,11 @@ onSubmit() {
 }
 ```
 
-## イベント発行と伝播の制御
+## イベント発行と伝播の制御 {#controlling-event-emission-and-propagation}
 
 フォームコントロールをプログラムで更新する場合、フォーム階層を通じて変更を伝播する方法と、イベントを発行するかどうかを正確に制御できます。
 
-### イベント発行の理解
+### イベント発行の理解 {#understanding-event-emission}
 
 デフォルトで `emitEvent: true` の場合、コントロールへの変更は `valueChanges` と `statusChanges` Observableを通じてイベントを発行します。`emitEvent: false` を設定すると、これらの発行が抑制されます。これは、自動保存のようなリアクティブな動作をトリガーせずにプログラムで値を設定する場合、コントロール間の循環更新を回避する場合、またはイベントが最後に一度だけ発行されるべき一括更新を実行する場合に便利です。
 
@@ -638,7 +638,7 @@ export class BlogPostEditor {
 }
 ```
 
-### 伝播制御の理解
+### 伝播制御の理解 {#understanding-propagation-control}
 
 デフォルトで `onlySelf: false` の場合、更新は親コントロールにカスケードし、値と検証ステータスを再計算します。`onlySelf: true` を設定すると、更新が現在のコントロールに分離され、親への通知が防止されます。これは、親の更新を一度だけ手動でトリガーしたいバッチ操作に便利です。
 
@@ -689,7 +689,7 @@ export function positiveValues(control: AbstractControl) {
 次の表は、リアクティブフォームコントロールの作成と管理に使用されるベースクラスとサービスをリストしています。
 構文の詳細については、[フォームパッケージ](api#forms "API リファレンス") のAPIリファレンスドキュメントを参照してください。
 
-### クラス
+### クラス {#classes}
 
 | クラス             | 詳細 |
 |:---               |:---     |
@@ -700,7 +700,7 @@ export function positiveValues(control: AbstractControl) {
 | `FormBuilder`     | コントロールインスタンスを作成するためのファクトリメソッドを提供する、注入可能なサービスです。                                                                                                     |
 | `FormRecord`      | 各々が同じ値タイプを持つ `FormControl` インスタンスのコレクションの値と有効性状態を追跡します。                                                                  |
 
-### ディレクティブ
+### ディレクティブ {#directives}
 
 | ディレクティブ              | 詳細 |
 |:---                    |:---     |

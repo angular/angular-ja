@@ -4,7 +4,7 @@ Angularディレクティブは、再利用可能な動作をカプセル化す�
 
 *ディレクティブ合成API* を使用すると、コンポーネントのTypeScriptクラスの*内部*からコンポーネントのホスト要素にディレクティブを適用できます。
 
-## コンポーネントにディレクティブを追加する
+## コンポーネントにディレクティブを追加する {#adding-directives-to-a-component}
 
 コンポーネントにディレクティブを適用するには、コンポーネントのデコレーターに `hostDirectives` プロパティを追加します。このようなディレクティブを*ホストディレクティブ*と呼びます。
 
@@ -74,7 +74,7 @@ export class AdminMenu {}
 <admin-menu id="top-menu" (closed)="logMenuClosed()"></admin-menu>
 ```
 
-## 別のディレクティブにディレクティブを追加する
+## 別のディレクティブにディレクティブを追加する {#adding-directives-to-another-directive}
 
 コンポーネントに加えて、他のディレクティブにも `hostDirectives` を追加できます。これにより、複数の動作を推移的に集約できます。
 
@@ -102,9 +102,9 @@ export class MenuWithTooltip {}
 export class SpecializedMenuWithTooltip {}
 ```
 
-## ホストディレクティブのセマンティクス
+## ホストディレクティブのセマンティクス {#host-directive-semantics}
 
-### ディレクティブの実行順序
+### ディレクティブの実行順序 {#directive-execution-order}
 
 ホストディレクティブは、テンプレートで直接使用されるコンポーネントやディレクティブと同じライフサイクルを経ます。ただし、ホストディレクティブは常に適用されているコンポーネントまたはディレクティブの*前*に、コンストラクターやライフサイクルフックおよびバインディングを実行します。
 
@@ -159,7 +159,7 @@ export class EvenMoreCustomTooltip { }
 8. `CustomTooltip` がホストバインディングを適用する
 9. `EvenMoreCustomTooltip` がホストバインディングを適用する
 
-### 依存性の注入
+### 依存性の注入 {#dependency-injection}
 
 `hostDirectives` を指定するコンポーネントまたはディレクティブは、それらのホストディレクティブのインスタンスを注入でき、その逆も可能です。
 

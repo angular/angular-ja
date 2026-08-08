@@ -4,11 +4,11 @@ Angularには、テンプレート内で2種類の変数宣言があります。
 
 HELPFUL: In this guide, “template” does not mean the entire HTML template file. It refers only to a specific template construct or expression within the file.
 
-## `@let` を使ったローカルテンプレート変数
+## `@let` を使ったローカルテンプレート変数 {#local-template-variables-with-let}
 
 Angularの `@let` 構文を使用すると、ローカル変数を定義し、テンプレート全体で再利用できます。これは、[JavaScriptの`let`構文](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let)に似ています。
 
-### `@let` の使用方法
+### `@let` の使用方法 {#using-let}
 
 `@let` を使用して、テンプレート式の結果に基づいた値を持つ変数を宣言します。 Angularは、[バインディング](/guide/templates/binding)と同様に、指定された式を使用して変数の値を自動的に最新の状態に保ちます。
 
@@ -26,7 +26,7 @@ Angularの `@let` 構文を使用すると、ローカル変数を定義し、�
 
 各`@let`ブロックでは、ちょうど1つの変数を宣言できます。コンマを使用して同じブロックに複数の変数の宣言はできません。
 
-### `@let` の値を参照する
+### `@let` の値を参照する {#referencing-the-value-of-let}
 
 `@let` で変数を宣言したら、同じテンプレート内で再利用できます。
 
@@ -47,7 +47,7 @@ Angularの `@let` 構文を使用すると、ローカル変数を定義し、�
 }
 ```
 
-### 代入可能性
+### 代入可能性 {#assignability}
 
 `@let` とJavaScriptの `let` の主な違いは、`@let` は宣言後に再代入できないことです。ただし、Angularは指定された式を使用して変数の値を自動的に最新の状態に保ちます。
 
@@ -58,7 +58,7 @@ Angularの `@let` 構文を使用すると、ローカル変数を定義し、�
 <button (click)="value = value + 1">Increment the value</button>
 ```
 
-### 変数のスコープ
+### 変数のスコープ {#variable-scope}
 
 `@let` 宣言は、現在のビューとその子孫にスコープされます。 Angularは、コンポーネントの境界と、テンプレートに動的なコンテンツ（制御フローブロック、`@defer`ブロック、または構造ディレクティブなど）が含まれる可能性がある場所に新しいビューを作成します。
 
@@ -92,7 +92,7 @@ Angularの `@let` 構文を使用すると、ローカル変数を定義し、�
 {{ nested }}
 ```
 
-### 構文全体
+### 構文全体 {#full-syntax}
 
 `@let`構文は正式には次のように定義されています。
 
@@ -124,7 +124,7 @@ Angularの `@let` 構文を使用すると、ローカル変数を定義し、�
 <input #taskInput placeholder="Enter task name" />
 ```
 
-### テンプレート参照変数に値を代入する
+### テンプレート参照変数に値を代入する {#assigning-values-to-template-reference-variables}
 
 Angularは、変数が宣言されている要素に基づいて、テンプレート変数に値を代入します。
 
@@ -151,7 +151,7 @@ Angularは、変数が宣言されている要素に基づいて、テンプレ�
 <input #taskInput placeholder="Enter task name" />
 ```
 
-#### Angularディレクティブへの参照を代入する
+#### Angularディレクティブへの参照を代入する {#assigning-a-reference-to-an-angular-directive}
 
 Angularディレクティブには、テンプレートでディレクティブを参照できる名前を定義する `exportAs` プロパティがある場合があります。
 
@@ -174,7 +174,7 @@ export class DropZone {
 
 `exportAs` 名を指定していないディレクティブは参照できません。
 
-### クエリでのテンプレート参照変数の使用
+### クエリでのテンプレート参照変数の使用 {#using-template-reference-variables-with-queries}
 
 テンプレート参照変数は、同じテンプレートの別の部分から値を読み取るだけでなく、[コンポーネントとディレクティブのクエリ](/guide/components/queries)のために要素を「マーク」するためにも使用できます。
 
@@ -197,7 +197,7 @@ export class AppComponent {
 
 クエリの詳細については、[クエリによる子の参照](/guide/components/queries)を参照してください。
 
-### Template variable scope
+### Template variable scope {#template-variable-scope}
 
 Just like variables in JavaScript or TypeScript code, template variables are scoped to the template that declares them.
 

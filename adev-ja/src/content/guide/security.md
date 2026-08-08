@@ -49,7 +49,7 @@ Angularは、XSSのバグを体系的に阻止するために、すべての値�
 これらのWebプラットフォーム機能は、DOMレベルで動作するため、XSSの問題を防ぐための最も効果的な手段です。これにより、他の低レベルAPIを使用したバイパスはできません。
 そのため、これらの機能を活用することを強くお勧めします。これを行うには、アプリケーションの[コンテンツセキュリティポリシー](#content-security-policy)を構成し、[Trusted Typesの強制](#enforcing-trusted-types)を有効にします。
 
-### サニタイズとセキュリティコンテキスト {#sanitization-and-security-context}
+### サニタイズとセキュリティコンテキスト {#sanitization-and-security-contexts}
 
 _サニタイズ_とは、信頼されていない値を検査して、DOMに挿入しても安全な値に変換することです。
 多くの場合、サニタイズは値をまったく変更しません。
@@ -68,7 +68,7 @@ Angularは、次のセキュリティコンテキストを定義しています�
 Angularは、信頼されていない値をHTMLとURLに対してサニタイズします。リソースURLのサニタイズは、リソースURLに任意のコードが含まれているため、不可能です。
 開発モードでは、Angularはサニタイズ中に値を変更する必要がある場合、コンソールに警告を表示します。
 
-### サニタイズの例
+### サニタイズの例 {#sanitization-example}
 
 次のテンプレートは、`htmlSnippet`の値をバインディングします。1つは要素の内容に補間して、もう1つは要素の`innerHTML`プロパティにバインディングします。
 
@@ -86,7 +86,7 @@ Angularは、値を安全ではないと認識し、自動的にサニタイズ�
 
 <img alt="補間されたHTML値とバインディングされたHTML値を示すスクリーンショット" src="assets/images/guide/security/binding-inner-html.png#small">
 
-### DOM APIの直接使用と明示的なサニタイズ呼び出し
+### DOM APIの直接使用と明示的なサニタイズ呼び出し {#direct-use-of-the-dom-apis-and-explicit-sanitization-calls}
 
 信頼済みタイプを強制しない限り、組み込みのブラウザDOM APIは、セキュリティの脆弱性から自動的に保護しません。
 たとえば、`document`、`ElementRef`を通じてアクセスできるノード、および多くのサードパーティAPIには、安全ではないメソッドが含まれています。

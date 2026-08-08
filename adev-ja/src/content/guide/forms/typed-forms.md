@@ -4,7 +4,7 @@ Angular 14から、リアクティブフォームはデフォルトで厳密に�
 
 このガイドの背景として、[Angular リアクティブフォーム](guide/forms/reactive-forms) に既に精通している必要があります。
 
-## 型付きフォームの概要
+## 型付きフォームの概要 {#overview-of-typed-forms}
 
 <docs-video src="https://www.youtube.com/embed/L-odCf4MfJc" alt="Angular の型付きフォーム" />
 
@@ -31,7 +31,7 @@ const emailDomain = login.value.email.domain;
 
 これらの改善は、現時点では _リアクティブ_ フォーム（[_テンプレート駆動_ フォーム](guide/forms/template-driven-forms) ではありません）のみに適用されます。
 
-## 型なしフォーム
+## 型なしフォーム {#untyped-forms}
 
 型なしフォームは引き続きサポートされており、これまでどおり動作します。それらを使用するには、`@angular/forms` から `Untyped` シンボルをインポートする必要があります。
 
@@ -44,7 +44,7 @@ const login = new UntypedFormGroup({
 
 各 `Untyped` シンボルは、以前のバージョンのAngularとまったく同じ意味を持ちます。`Untyped` プレフィックスを削除することで、段階的に型を有効にできます。
 
-## `FormControl`: はじめに
+## `FormControl`: はじめに {#formcontrol-getting-started}
 
 最も単純なフォームは、単一のコントロールで構成されます。
 
@@ -54,7 +54,7 @@ const email = new FormControl('angularrox@gmail.com');
 
 このコントロールは、自動的に `FormControl<string|null>` 型であると推測されます。TypeScriptは、`email.value`、`email.valueChanges`、および `email.setValue(...)` のような [`FormControl` API](api/forms/FormControl) 全体にわたってこの型を自動的に強制します。
 
-### ヌラビリティ
+### ヌラビリティ {#nullability}
 
 疑問に思うかもしれません。なぜこのコントロールの型には `null` が含まれているのでしょうか? これは、コントロールがいつでも `reset` を呼び出すことで `null` になる可能性があるためです。
 
@@ -74,7 +74,7 @@ console.log(email.value); // angularrox@gmail.com
 
 繰り返しますが、このオプションは `.reset()` が呼び出されたときのフォームのランタイム動作に影響を与え、注意深く切り替える必要があります。
 
-### 明示的な型の指定
+### 明示的な型の指定 {#specifying-an-explicit-type}
 
 推測に頼るのではなく、型を指定できます。初期値が `null` であるコントロールを考えてみましょう。初期値が `null` であるため、TypeScriptは `FormControl<null>` を推測し、これは私たちが望むよりも狭いです。
 
@@ -90,7 +90,7 @@ const email = new FormControl<string | null>(null);
 email.setValue('angularrox@gmail.com');
 ```
 
-## `FormArray`: 動的な同種コレクション
+## `FormArray`: 動的な同種コレクション {#formarray-dynamic-homogenous-collections}
 
 `FormArray` は、コントロールのオープンエンドリストを含んでいます。型パラメーターは、各内部コントロールの型に対応します。
 
@@ -118,11 +118,11 @@ aliases.clear();
 console.log(aliases.length); // 0
 ```
 
-## `FormGroup` と `FormRecord`
+## `FormGroup` と `FormRecord` {#formgroup-and-formrecord}
 
 Angularは、列挙されたキーセットを持つフォームに `FormGroup` 型を提供し、オープンエンドまたは動的なグループに `FormRecord` という型を提供します。
 
-### 部分的な値
+### 部分的な値 {#partial-values}
 
 再びログインフォームを考えてみましょう。
 
@@ -141,7 +141,7 @@ const login = new FormGroup({
 
 無効なコントロールを_含む_値にアクセスしたい場合、つまり `undefined` である可能性のあるフィールドをバイパスしたい場合は、`login.getRawValue()` を使用できます。
 
-### オプションのコントロールと動的グループ
+### オプションのコントロールと動的グループ {#optional-controls-and-dynamic-groups}
 
 一部のフォームには、存在する可能性がある場合とない場合があるコントロールが含まれており、実行時に追加または削除できます。これらのコントロールは、_オプションフィールド_ を使用して表すことができます。
 
@@ -180,7 +180,7 @@ addresses.addControl('Andrew', new FormControl('2340 Folsom St'));
 const addresses = fb.record({'Andrew': '2340 Folsom St'});
 ```
 
-## `FormBuilder` と `NonNullableFormBuilder`
+## `FormBuilder` と `NonNullableFormBuilder` {#formbuilder-and-nonnullableformbuilder}
 
 `FormBuilder` クラスは、上記の例と同じように、新しい型をサポートするようにアップグレードされました。
 

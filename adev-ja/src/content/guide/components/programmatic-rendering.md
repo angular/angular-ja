@@ -14,7 +14,7 @@ HELPFUL: 遅延読み込みのユースケース(たとえば、重いコンポ�
 自動的に別のJavaScriptチャンクに抽出され、設定されたトリガーに基づいて必要な場合にのみ
 読み込まれます。
 
-## NgComponentOutletの使用
+## NgComponentOutletの使用 {#using-ngcomponentoutlet}
 
 `NgComponentOutlet`は、テンプレートで指定されたコンポーネントを動的にレンダリングする
 構造ディレクティブです。
@@ -41,7 +41,7 @@ export class CustomDialog {
 }
 ```
 
-### 動的にレンダリングされたコンポーネントへのインプットの渡し方
+### 動的にレンダリングされたコンポーネントへのインプットの渡し方 {#passing-inputs-to-dynamically-rendered-components}
 
 `ngComponentOutletInputs`プロパティを使用して、動的にレンダリングされたコンポーネントにインプットを渡すことができます。このプロパティは、キーがインプット名で値がインプット値であるオブジェクトを受け入れます。
 
@@ -73,7 +73,7 @@ export class ProfileView {
 
 インプットは`greetingInputs`シグナルが変更されるたびに更新され、動的コンポーネントを親の状態と同期させます。
 
-### コンテンツプロジェクションの提供
+### コンテンツプロジェクションの提供 {#providing-content-projection}
 
 `ngComponentOutletContent`を使用して、動的にレンダリングされたコンポーネントにプロジェクトされたコンテンツを渡すことができます。これは、動的コンポーネントが`<ng-content>`を使用してコンテンツを表示する場合に便利です。
 
@@ -117,7 +117,7 @@ export class DynamicCard {
 
 NOTE: Hydrationは、ネイティブDOM APIで作成されたDOMノードのプロジェクションをサポートしていません。これにより[NG0503エラー](/errors/NG0503)が発生します。Angular APIを使用してプロジェクトされたコンテンツを作成するか、コンポーネントに`ngSkipHydration`を追加してください。
 
-### インジェクターの提供
+### インジェクターの提供 {#providing-injectors}
 
 `ngComponentOutletInjector`を使用して、動的に作成されたコンポーネントにカスタムインジェクターを提供できます。これは、コンポーネント固有のサービスや設定を提供する場合に便利です。
 
@@ -148,7 +148,7 @@ export class DynamicPanel {
 }
 ```
 
-### コンポーネントインスタンスへのアクセス
+### コンポーネントインスタンスへのアクセス {#accessing-the-component-instance}
 
 ディレクティブの`exportAs`機能を使用して、動的に作成されたコンポーネントのインスタンスにアクセスできます。
 
@@ -182,7 +182,7 @@ NOTE: `componentInstance`プロパティは、コンポーネントがレンダ�
 ディレクティブの機能の詳細については、[NgComponentOutlet APIリファレンス](api/common/NgComponentOutlet)を
 参照してください。
 
-## ViewContainerRefの使用
+## ViewContainerRefの使用 {#using-viewcontainerref}
 
 **ビューコンテナ**は、Angularのコンポーネントツリー内のノードで、コンテンツを含むことができます。任意のコンポーネント
 またはディレクティブは`ViewContainerRef`を注入して、DOM内のそのコンポーネントまたはディレクティブの位置に対応する
@@ -235,7 +235,7 @@ export class InnerItem {
 </outer-container>
 ```
 
-## コンポーネントの遅延読み込み
+## コンポーネントの遅延読み込み {#lazy-loading-components}
 
 HELPFUL: コンポーネントを遅延読み込みしたい場合は、代わりに組み込みの[`@defer`機能](/guide/templates/defer)
 の使用を検討してください。
@@ -274,13 +274,13 @@ export class AdminSettings {
 
 上記の例では、ボタンクリックを受け取ると`AdvancedSettings`を読み込んで表示します。
 
-## 作成時のインプット、アウトプットのバインディングとホストディレクティブの設定
+## 作成時のインプット、アウトプットのバインディングとホストディレクティブの設定 {#binding-inputs-outputs-and-setting-host-directives-at-creation}
 
 コンポーネントを動的に作成する場合、手動でインプットを設定し、アウトプットを購読するのはエラーが発生しやすくなります。コンポーネントがインスタンス化された後にバインディングを接続するためだけに、余分なコードを記述する必要があることがよくあります。
 
 これを簡素化するために、`createComponent`と`ViewContainerRef.createComponent`の両方が、`inputBinding()`、`outputBinding()`、`twoWayBinding()`などのヘルパーを使用した`bindings`配列を渡して、インプットとアウトプットを事前に設定できるようにサポートしています。また、ホストディレクティブを適用するための`directives`配列を指定できます。これにより、単一の宣言的な呼び出しで、テンプレートのようなバインディングでコンポーネントをプログラム的に作成できます。
 
-### `ViewContainerRef.createComponent`を使用したホストビュー
+### `ViewContainerRef.createComponent`を使用したホストビュー {#host-view-using-viewcontainerrefcreatecomponent}
 
 `ViewContainerRef.createComponent`はコンポーネントを作成し、そのホストビューとホスト要素をコンテナのビュー階層内のコンテナの位置に自動的に挿入します。動的コンポーネントがコンテナの論理的および視覚的な構造の一部になる場合(たとえば、リストアイテムやインラインUIの追加)に使用します。
 
@@ -348,7 +348,7 @@ export class Host {
 
 上記の例では、動的な**AppWarning**は、`canClose`インプットがリアクティブシグナルにバインドされ、`isExpanded`状態で双方向バインディングが行われ、`close`のアウトプットリスナーが設定されて作成されます。`FocusTrap`と`ThemeDirective`は、`directives`を介してホスト要素にアタッチされます。
 
-### `createComponent` + `hostElement`で`document.body`にアタッチされたポップアップ
+### `createComponent` + `hostElement`で`document.body`にアタッチされたポップアップ {#popup-attached-to-documentbody-with-createcomponent--hostelement}
 
 現在のビュー階層の外側にレンダリングする場合(オーバーレイなど)に使用します。提供された`hostElement`がDOM内のコンポーネントのホストになるため、Angularはセレクターに一致する新しい要素を作成しません。**bindings**を直接設定できます。
 

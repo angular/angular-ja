@@ -51,7 +51,7 @@ export class CustomSlider {
 
 **入力名は大文字と小文字が区別されます。**
 
-## 入力の読み取り
+## 入力の読み取り {#reading-inputs}
 
 `input`関数は`InputSignal`を返します。シグナルを呼び出すことで値を読み取ることができます。
 
@@ -86,11 +86,11 @@ Angularは、テンプレートでコンポーネントを使用する際に、�
 
 必須入力は、返される`InputSignal`のジェネリックパラメーターに`undefined`を自動的に含めません。
 
-## 入力の構成
+## 入力の構成 {#configuring-inputs}
 
 `input`関数は、入力の動作を変更できる2番目のパラメーターとしてconfigオブジェクトを受け取ります。
 
-### 入力変換
+### 入力変換 {#input-transforms}
 
 入力がAngularによって設定されるときに、その値を変更する`transform`関数を指定できます。
 
@@ -120,7 +120,7 @@ function trimString(value: string | undefined): string {
 
 **入力変換関数は常に[純粋関数](https://en.wikipedia.org/wiki/Pure_function)でなければなりません。**変換関数外の状態に依存すると、予期せぬ動作につながる可能性があります。
 
-#### 型チェック
+#### 型チェック {#type-checking}
 
 入力変換を指定すると、変換関数の引数の型によって、テンプレートで入力に設定できる値の型が決まります。
 
@@ -137,7 +137,7 @@ function appendPx(value: number): string {
 
 上記の例では、`widthPx`入力は`number`を受け入れる一方、`InputSignal`プロパティは`string`を返します。
 
-#### 組み込み変換
+#### 組み込み変換 {#built-in-transformations}
 
 Angularには、最も一般的な2つのシナリオのための2つの組み込み変換関数が含まれています。ブール値と数値への値の強制変換です。
 
@@ -175,7 +175,7 @@ export class CustomSlider {
 
 一般的にコンポーネントの入力をエイリアス化することは避けるべきですが、この機能は、元の名前のエイリアスを保持しながらプロパティの名前を変更したり、ネイティブDOM要素プロパティの名前との競合を回避したりする場合に役立ちます。
 
-## モデル入力
+## モデル入力 {#model-inputs}
 
 **モデル入力**は、コンポーネントが新しい値を親コンポーネントに伝播できるようにする特殊なタイプの入力です。
 
@@ -214,7 +214,7 @@ export class MediaControls {
 
 テンプレートでの双方向バインディングの詳細については、[双方向バインディング](guide/templates/two-way-binding)を参照してください。
 
-### プレーンプロパティとの双方向バインディング
+### プレーンプロパティとの双方向バインディング {#two-way-binding-with-plain-properties}
 
 プレーンなJavaScriptプロパティをモデル入力にバインドできます。
 
@@ -232,7 +232,7 @@ export class MediaControls {
 
 上記の例では、`CustomSlider`は`value`モデル入力に値を書き込むことができ、それによって`MediaControls`の`volume`プロパティに値が伝播します。このバインディングにより、`value`と`volume`の値が同期します。
 
-### 暗黙的な`change`イベント
+### 暗黙的な`change`イベント {#implicit-change-events}
 
 コンポーネントまたはディレクティブでモデル入力を宣言すると、Angularはそのモデルに対応する[出力](guide/components/outputs)を自動的に作成します。出力の名前は、モデル入力の名前に「Change」が付いたものです。
 
@@ -249,13 +249,13 @@ export class CustomCheckbox {
 
 出力の詳細については、[出力によるカスタムイベント](guide/components/outputs)を参照してください。
 
-### モデル入力のカスタマイズ
+### モデル入力のカスタマイズ {#customizing-model-inputs}
 
 標準入力と同様に、モデル入力を[必須](#required-inputs)としてマークしたり、[エイリアス](#input-aliases)を提供したりできます。
 
 モデル入力は入力変換をサポートしません。
 
-### モデル入力を使用する場合
+### モデル入力を使用する場合 {#when-to-use-model-inputs}
 
 コンポーネントが双方向バインディングをサポートする場合に、モデル入力を使用します。これは通常、ユーザーの操作に基づいて値を変更するためにコンポーネントが存在する場合に適しています。最も一般的には、日付ピッカーやコンボボックスなどのカスタムフォームコントロールは、主要な値にモデル入力を使用する必要があります。
 
@@ -284,11 +284,11 @@ export class CustomSlider {
 <custom-slider [value]="50" />
 ```
 
-### デコレーターベースの入力のカスタマイズ
+### デコレーターベースの入力のカスタマイズ {#customizing-decorator-based-inputs}
 
 `@Input`デコレーターは、入力の動作を変更できるconfigオブジェクトを受け取ります。
 
-#### 必須入力
+#### 必須入力 {#required-inputs}
 
 `required`オプションを指定して、特定の入力が常に値を持つ必要があることを強制できます。
 
@@ -301,7 +301,7 @@ export class CustomSlider {
 
 すべての必須入力を指定せずにコンポーネントを使用しようとすると、Angularはビルド時にエラーを報告します。
 
-#### 入力変換
+#### 入力変換 {#input-transforms}
 
 Angularによって入力が設定されるときにその値を変更する`transform`関数を指定できます。この変換関数は、上記で説明したシグナルベースの入力の変換関数と同様に機能します。
 
@@ -319,7 +319,7 @@ function trimString(value: string | undefined) {
 }
 ```
 
-#### 入力エイリアス
+#### 入力エイリアス {#input-aliases}
 
 `alias`オプションを指定して、テンプレートでの入力の名前を変更できます。
 
@@ -338,7 +338,7 @@ export class CustomSlider {
 
 入力エイリアスは、上記で説明したシグナルベースの入力と同じように機能します。
 
-### ゲッターとセッターを持つ入力
+### ゲッターとセッターを持つ入力 {#inputs-with-getters-and-setters}
 
 デコレーターベースの入力を使用する場合、ゲッターとセッターで実装されたプロパティを入力にできます。
 
@@ -374,7 +374,7 @@ export class CustomSlider {
 
 複雑なゲッターとセッター、またはコストの高いゲッターとセッターは避けてください。Angularは入力のセッターを複数回呼び出す可能性があり、セッターがDOM操作などのコストの高い処理を実行する場合、アプリケーションのパフォーマンスに悪影響を与える可能性があります。
 
-## `@Component`デコレーターでの入力の指定
+## `@Component`デコレーターでの入力の指定 {#specify-inputs-in-the-component-decorator}
 
 `@Input`デコレーターに加えて、`@Component`デコレーターの`inputs`プロパティを使用して、コンポーネントの入力を指定できます。これは、コンポーネントが基本クラスからプロパティを継承する場合に役立ちます。
 

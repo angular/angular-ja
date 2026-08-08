@@ -1,6 +1,6 @@
 # ZoneJSを使わないAngular (Zoneless)
 
-## なぜZonelessを使うのか？
+## なぜZonelessを使うのか？ {#why-use-zoneless}
 
 ZoneJSを依存関係として削除する主な利点は次のとおりです。
 
@@ -9,7 +9,7 @@ ZoneJSを依存関係として削除する主な利点は次のとおりです�
 - **デバッグ体験の向上**: ZoneJSは、コードのデバッグをより困難にします。スタックトレースはZoneJSでは理解しにくくなります。また、コードがAngular Zoneの外部にあるために壊れた場合も理解しにくいです。
 - **より良いエコシステム互換性**: ZoneJSはブラウザAPIをパッチ適用することで動作しますが、すべての新しいブラウザAPIに対して自動的にパッチが適用されるわけではありません。一部のAPIは、`async`/`await`のように効果的にパッチを適用できず、ZoneJSで動作するようにダウンレベルする必要があります。場合によっては、エコシステム内のライブラリも、ZoneJSがネイティブAPIにパッチを適用する方法と互換性がないことがあります。ZoneJSを依存関係として削除すると、複雑さ、モンキーパッチ、および継続的なメンテナンスのソースが削除されるため、長期的な互換性が向上します。
 
-## アプリケーションでZonelessを有効にする
+## アプリケーションでZonelessを有効にする {#enabling-zoneless-in-an-application}
 
 Angular v21以降、Zonelessがデフォルトなので、有効にするための特別な操作は不要です。デフォルト設定を上書きする`provideZoneChangeDetection`がどこでも使用されていないことを確認してください。
 
@@ -28,7 +28,7 @@ platformBrowser().bootstrapModule(AppModule);
 export class AppModule {}
 ```
 
-## ZoneJSの削除
+## ZoneJSの削除 {#removing-zonejs}
 
 Zonelessアプリケーションは、バンドルサイズを削減するために、ビルドからZoneJSを完全に削除する必要があります。ZoneJSは通常、
 `angular.json`の`polyfills`オプションを介して、`build`と`test`の両方のターゲットでロードされます。ビルドから削除するには、
@@ -42,7 +42,7 @@ Zonelessアプリケーションは、バンドルサイズを削減するため
 npm uninstall zone.js
 ```
 
-## Zoneless互換性の要件
+## Zoneless互換性の要件 {#requirements-for-zoneless-compatibility}
 
 Angularは、変更検知をいつ、どのビューで実行するかを判断するために、コアAPIからの通知に依存しています。
 これらの通知には次のものが含まれます。
@@ -53,7 +53,7 @@ Angularは、変更検知をいつ、どのビューで実行するかを判断�
 - バインドされたホストまたはテンプレートリスナーのコールバック
 - 上記のいずれかによってダーティーとしてマークされたビューのアタッチ
 
-### `OnPush`互換コンポーネント
+### `OnPush`互換コンポーネント {#onpush-compatible-components}
 
 コンポーネントが上記の正しい通知メカニズムを使用していることを確認する1つの方法は、
 [ChangeDetectionStrategy.OnPush](/best-practices/skipping-subtrees#using-onpush)を使用することです。
@@ -62,7 +62,7 @@ Angularは、変更検知をいつ、どのビューで実行するかを判断�
 ライブラリコンポーネントが`ChangeDetectionStrategy.Eager`/`Default`を使用する可能性のあるユーザーコンポーネントのホストである場合、子コンポーネントが`OnPush`互換ではなく、ZoneJSに依存して変更検知をトリガーする場合、子コンポーネントが更新されなくなるため、`OnPush`を使用できません。コンポーネントは、変更検知を実行する必要があるときにAngularに通知する限り（`markForCheck`の呼び出し、シグナルの使用、`AsyncPipe`など）、`Default`戦略を使用できます。
 ユーザーコンポーネントのホストとは、`ViewContainerRef.createComponent`のようなAPIを使用することを意味し、ユーザーコンポーネントのテンプレートの一部（コンテンツプロジェクションやテンプレートref入力の使用）をホストするだけではありません。
 
-### `NgZone.onMicrotaskEmpty`、`NgZone.onUnstable`、`NgZone.isStable`、または`NgZone.onStable`の削除
+### `NgZone.onMicrotaskEmpty`、`NgZone.onUnstable`、`NgZone.isStable`、または`NgZone.onStable`の削除 {#remove-ngzoneonmicrotaskempty-ngzoneonunstable-ngzoneisstable-or-ngzoneonstable}
 
 アプリケーションとライブラリは、`NgZone.onMicrotaskEmpty`、`NgZone.onUnstable`、および`NgZone.onStable`の使用を削除する必要があります。
 アプリケーションがZoneless変更検知を有効にすると、これらのObservableは発行されません。
@@ -82,7 +82,7 @@ Angularは、変更検知をいつ、どのビューで実行するかを判断�
 パフォーマンスが低下する可能性があります。
 </docs-callout>
 
-### サーバーサイドレンダリング（SSR）の`PendingTasks`
+### サーバーサイドレンダリング（SSR）の`PendingTasks` {#pendingtasks-for-server-side-rendering-ssr}
 
 If you are using SSR with Angular, you may know that it relies on ZoneJS to help determine when the application
 is "stable" and can be serialized. If there are asynchronous tasks that should prevent serialization, an application
@@ -128,9 +128,9 @@ readonly myObservableState = someObservable.pipe(pendingUntilEvent());
 
 テンプレートがリアクティブフォームの状態に依存している場合、フォームのObservableを変更検知の通知（例: `ChangeDetectorRef.markForCheck()`）に接続するか、テンプレートが使用するシグナルを通じてデータを反映させてください。
 
-## テストとデバッグ
+## テストとデバッグ {#testing-and-debugging}
 
-### `TestBed`でZonelessを使用する
+### `TestBed`でZonelessを使用する {#using-zoneless-in-testbed}
 
 `TestBed`は、`polyfills`経由で`zone.js`がロードされている場合、デフォルトでZoneベースの変更検知を使用します。
 
@@ -165,7 +165,7 @@ the component to use signals for state or call `ChangeDetectorRef.markForCheck()
 If the component is only used as a test wrapper and never used in an application,
 it is acceptable to use `fixture.changeDetectorRef.markForCheck()`.
 
-### 更新が検出されることを確認するためのデバッグモードチェック
+### 更新が検出されることを確認するためのデバッグモードチェック {#debug-mode-check-to-ensure-updates-are-detected}
 
 Angular also provides an additional tool to help verify that an application is making
 updates to state in a zoneless-compatible way. `provideCheckNoChangesConfig({exhaustive: true, interval: <milliseconds>})`

@@ -33,7 +33,7 @@ Angularでは、`output`関数で初期化されたプロパティを**出力**�
 
 `output`関数は、Angularコンパイラにとって特別な意味を持ちます。**`output`は、コンポーネントとディレクティブのプロパティ初期化子でのみ呼び出すことができます。**
 
-## イベントデータの送出
+## イベントデータの送出 {#emitting-event-data}
 
 `emit`を呼び出す際に、イベントデータを渡すことができます。
 
@@ -68,7 +68,7 @@ export class App {
 
 ```
 
-## 出力名のカスタマイズ
+## 出力名のカスタマイズ {#customizing-output-names}
 
 `output`関数は、テンプレートでイベントに異なる名前を指定できるパラメーターを受け入れます。
 
@@ -87,7 +87,7 @@ export class CustomSlider {
 
 一般的に、コンポーネントの出力のエイリアスは避けるべきですが、この機能は元の名前のエイリアスを保持しながらプロパティの名前を変更する場合や、ネイティブDOMイベントの名前との衝突を避ける場合に役立ちます。
 
-## プログラムによる出力の購読
+## プログラムによる出力の購読 {#subscribing-to-outputs-programmatically}
 
 コンポーネントを動的に作成する場合は、コンポーネントインスタンスから出力イベントをプログラムで購読できます。
 `OutputRef`型には`subscribe`メソッドが含まれています。
@@ -120,11 +120,11 @@ HTMLElementなどのDOM要素のイベントと衝突する出力名を選択す
 
 常に[camelCase](https://en.wikipedia.org/wiki/Camel_case)出力名を使用してください。「on」で始まる出力名は避けてください。
 
-## RxJSを使用したoutputs
+## RxJSを使用したoutputs {#using-outputs-with-rxjs}
 
 outputsとRxJSの相互運用性については、[RxJS interop with component and directive outputs](ecosystem/rxjs-interop/output-interop)を参照してください。
 
-## `@Output`デコレーターを使用した出力の宣言
+## `@Output`デコレーターを使用した出力の宣言 {#declaring-outputs-with-the-output-decorator}
 
 TIP: Angularチームは新規プロジェクトでは`output`関数の使用を推奨していますが、
 元のデコレーターベースの`@Output`APIは引き続き完全にサポートされています。
@@ -140,7 +140,7 @@ export class ExpandablePanel {
 
 `EventEmitter`の`emit`メソッドを呼び出すことで、イベントを発生させることができます。
 
-### `@Output`デコレーターを使用したエイリアス
+### `@Output`デコレーターを使用したエイリアス {#aliases-with-the-output-decorator}
 
 `@Output`デコレーターは、テンプレートでイベントに異なる名前を指定できるパラメーターを受け入れます。
 
@@ -157,7 +157,7 @@ export class CustomSlider {
 
 このエイリアスは、TypeScriptコードでのプロパティの使用には影響しません。
 
-## `@Component`デコレーターでの出力の指定
+## `@Component`デコレーターでの出力の指定 {#specify-outputs-in-the-component-decorator}
 
 `@Output`デコレーターに加えて、`@Component`デコレーターの`outputs`プロパティを使用して、コンポーネントの出力を指定できます。これは、コンポーネントが基底クラスからプロパティを継承する場合に役立ちます。
 

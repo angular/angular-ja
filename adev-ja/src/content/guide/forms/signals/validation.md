@@ -346,7 +346,7 @@ export class OrderComponent {
 }
 ```
 
-## バリデーションエラー
+## バリデーションエラー {#validation-errors}
 
 バリデーションルールが失敗すると、何が問題だったかを説明するエラーオブジェクトが生成されます。エラーの構造を理解することは、ユーザーに明確なフィードバックを提供するのに役立ちます。
 
@@ -721,7 +721,7 @@ export class UsernameFormComponent {
 
 `valid()`シグナルは、まだエラーがない場合でも、バリデーションがペンディング中の間は`false`を返します。`invalid()`シグナルは、エラーが存在する場合にのみ`true`を返します。
 
-## スキーマバリデーションライブラリとの統合
+## スキーマバリデーションライブラリとの統合 {#integration-with-schema-validation-libraries}
 
 シグナルフォームは、[Zod](https://zod.dev/)や[Valibot](https://valibot.dev/)のような[Standard Schema](https://standardschema.dev/)に準拠したライブラリに対する組み込みサポートを提供しています。統合は`validateStandardSchema`関数によって提供されます。これにより、シグナルフォームのリアクティブなバリデーションの利点を維持しながら、既存のスキーマを使用できます。
 

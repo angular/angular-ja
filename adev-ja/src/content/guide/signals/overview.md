@@ -4,7 +4,7 @@ Angularシグナルは、アプリケーション全体で状態がどのよう�
 
 TIP: この包括的なガイドを読む前に、Angularの[基本概念](essentials/signals)をご覧ください。
 
-## シグナルとは何か？
+## シグナルとは何か？ {#what-are-signals}
 
 **シグナル**は、値が変更されたときに興味のあるコンシューマーに通知する、値をラップしたものです。シグナルは、プリミティブから複雑なデータ構造まで、あらゆる値を含めることができます。
 
@@ -12,7 +12,7 @@ TIP: この包括的なガイドを読む前に、Angularの[基本概念](essen
 
 シグナルは、*書き込み可能*または*読み取り専用*のいずれかになります。
 
-### 書き込み可能なシグナル
+### 書き込み可能なシグナル {#writable-signals}
 
 書き込み可能なシグナルは、値を直接更新するためのAPIを提供します。書き込み可能なシグナルは、シグナルの初期値を指定して`signal`関数を呼び出すことで作成します。
 
@@ -38,7 +38,7 @@ count.update((value) => value + 1);
 
 書き込み可能なシグナルは、`WritableSignal`という型になります。
 
-#### 書き込み可能なシグナルを読み取り専用に変換する
+#### 書き込み可能なシグナルを読み取り専用に変換する {#converting-writable-signals-to-readonly}
 
 `WritableSignal`は、シグナルの読み取り専用バージョンを返す`asReadonly()`メソッドを提供します。これは、シグナルの値をコンシューマーに公開したいが、直接変更できないようにしたい場合に便利です。
 
@@ -84,7 +84,7 @@ const doubleCount: Signal<number> = computed(() => count() * 2);
 
 `doubleCount` シグナルは、`count` シグナルに依存しています。`count`が更新されるたびに、Angularは`doubleCount`も更新する必要があることを認識します。
 
-#### 算出シグナルは、遅延評価とメモ化が行われる
+#### 算出シグナルは、遅延評価とメモ化が行われる {#computed-signals-are-both-lazily-evaluated-and-memoized}
 
 `doubleCount`の派生関数は、最初に`doubleCount`を読み取るまで、その値を計算するために実行されません。計算された値はキャッシュされ、`doubleCount`を再び読み取ると、再計算せずにキャッシュされた値が返されます。
 
@@ -92,7 +92,7 @@ const doubleCount: Signal<number> = computed(() => count() * 2);
 
 その結果、配列のフィルタリングなど、計算量が多い派生を算出シグナルで安全に実行できます。
 
-#### 算出シグナルは、書き込み可能なシグナルではない
+#### 算出シグナルは、書き込み可能なシグナルではない {#computed-signals-are-not-writable-signals}
 
 算出シグナルに値を直接割り当てることはできません。つまり、
 
@@ -102,7 +102,7 @@ doubleCount.set(3);
 
 はコンパイルエラーになります。なぜなら、`doubleCount`は`WritableSignal`ではないからです。
 
-#### 算出シグナルの依存関係は動的である
+#### 算出シグナルの依存関係は動的である {#computed-signal-dependencies-are-dynamic}
 
 派生中に実際に読み取られたシグナルのみが追跡されます。たとえば、この`computed`では、`count` シグナルは`showCount` シグナルが真の場合にのみ読み取られます。
 
@@ -138,7 +138,7 @@ Angularは次の場合に自動的にリアクティブコンテキストに入�
 
 これらの操作中、Angularは_ライブ_接続を作成します。追跡されたシグナルが変更されると、Angularは_最終的に_コンシューマーを再実行します。
 
-### リアクティブコンテキストをアサートする
+### リアクティブコンテキストをアサートする {#asserts-the-reactive-context}
 
 Angularは、コードがリアクティブコンテキスト内で実行されていないことをアサートするための`assertNotInReactiveContext`ヘルパー関数を提供します。呼び出し元の関数への参照を渡すことで、アサーションが失敗した場合、エラーメッセージが正しいAPIエントリポイントを指すようにします。これにより、一般的なリアクティブコンテキストエラーよりも明確でアクションにつながるエラーメッセージが生成されます。
 
@@ -151,7 +151,7 @@ function subscribeToEvents() {
 }
 ```
 
-### 依存関係を追跡せずに読み取る
+### 依存関係を追跡せずに読み取る {#reading-without-tracking-dependencies}
 
 まれに、`computed`や`effect`などのリアクティブ関数内でシグナルを読み取るコードを実行する必要があり、依存関係を作成しない場合があります。
 
@@ -232,7 +232,7 @@ effect(async () => {
 
 ## 詳細なトピック {#advanced-topics}
 
-### シグナルの等価関数
+### シグナルの等価関数 {#signal-equality-functions}
 
 シグナルを作成する際には、オプションで等価関数を指定できます。これは、新しい値が前の値と実際に異なるかどうかを確認するために使用されます。
 
@@ -251,7 +251,7 @@ data.set(['test']);
 
 HELPFUL: デフォルトでは、シグナルは参照の等価性（[`Object.is()`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/is) 比較）を使用します。
 
-### シグナルの型チェック
+### シグナルの型チェック {#type-checking-signals}
 
 `isSignal`を使用して、値が`Signal`かどうかをチェックできます:
 
@@ -274,6 +274,6 @@ isWritableSignal(count); // true
 isWritableSignal(doubled); // false
 ```
 
-## RxJSとシグナルを併用する
+## RxJSとシグナルを併用する {#using-signals-with-rxjs}
 
 シグナルとRxJSの相互運用性の詳細については、[RxJSとAngularシグナルの相互運用](ecosystem/rxjs-interop) を参照してください。

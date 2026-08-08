@@ -18,7 +18,7 @@ Angularアプリケーション全体に関連するライフサイクルフッ�
 このトラバーサルは、各コンポーネントをちょうど1回だけ訪問するため、
 プロセス中にさらに状態を変更することは避けるべきです。
 
-## 概要
+## 概要 {#summary}
 
 <div class="docs-table docs-scroll-track-transparent">
   <table>
@@ -100,7 +100,7 @@ Angularアプリケーション全体に関連するライフサイクルフッ�
 
 初期化中は、最初の `ngOnChanges` は `ngOnInit` の前に実行されます。
 
-#### 変更の検査
+#### 変更の検査 {#inspecting-changes}
 
 `ngOnChanges` メソッドは、1つの `SimpleChanges` 引数を受け取ります。
 このオブジェクトは、[`Record`](https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type) であり、
@@ -162,7 +162,7 @@ export class UserProfile {
 `DestroyRef` を使用して、クリーンアップコードをすべて `ngOnDestroy` メソッドに置くのではなく、
 クリーンアップコードに近い場所にセットアップコードを保持できます。
 
-##### インスタンス破棄の検出
+##### インスタンス破棄の検出 {#detecting-instance-destruction}
 
 `DestroyRef` は、指定されたインスタンスが既に破棄されているかどうかを確認できる `destroyed` プロパティを提供します。これは、特に遅延または非同期ロジックを扱う際に、破棄されたコンポーネントでの操作を避けるのに役立ちます。
 
@@ -226,7 +226,7 @@ Angularがコンポーネントのテンプレートの変更をチェックす�
 このメソッドで状態を変更しようとすると、
 [ExpressionChangedAfterItHasBeenCheckedError](errors/NG0100) が発生します。
 
-### afterEveryRender と afterNextRender
+### afterEveryRender と afterNextRender {#aftereveryrender-and-afternextrender}
 
 `afterEveryRender` と `afterNextRender` 関数は、
 Angularがページ上の*すべてのコンポーネント*をDOMにレンダリングし終えた後に呼び出される**レンダリングコールバック** を登録できます。
@@ -244,7 +244,7 @@ AngularでDOMを操作する方法については、[DOM API の使用](guide/co
 
 レンダリングコールバックは、サーバーサイドレンダリング中またはビルド時の事前レンダリング中は実行されません。
 
-#### after\*Render フェーズ
+#### after\*Render フェーズ {#afterrender-phases}
 
 `afterEveryRender` または `afterNextRender` を使用する場合、
 オプションで作業をフェーズに分割できます。
@@ -296,7 +296,7 @@ export class UserProfile {
 | `mixedReadWrite`    | デフォルトのフェーズ。レイアウトに影響を与えるプロパティとスタイルを読み書きする必要がある操作に使用します。可能な限り、このフェーズを避け、明示的な `write` フェーズと `read` フェーズを優先します。  |
 | `read`              | このフェーズを使用して、レイアウトに影響を与えるDOMプロパティを読み取ります。                                                                                                                              |
 
-## ライフサイクルインターフェース
+## ライフサイクルインターフェース {#lifecycle-interfaces}
 
 Angularは、各ライフサイクルメソッド用のTypeScriptインターフェースを提供します。
 これらのインターフェースをインポートして `implement` することで、
@@ -316,11 +316,11 @@ export class UserProfile implements OnInit {
 }
 ```
 
-## 実行順序
+## 実行順序 {#execution-order}
 
 次の図は、Angularのライフサイクルフックの実行順序を示しています。
 
-### 初期化中
+### 初期化中 {#during-initialization}
 
 ```mermaid
 graph TD;
@@ -337,7 +337,7 @@ end
 CHANGE--Rendering-->afterNextRender-->afterEveryRender
 ```
 
-### 後続の更新
+### 後続の更新 {#subsequent-updates}
 
 ```mermaid
 graph TD;
@@ -350,7 +350,7 @@ end
 CHANGE--Rendering-->afterEveryRender
 ```
 
-### ディレクティブとの順序付け
+### ディレクティブとの順序付け {#ordering-with-directives}
 
 テンプレートまたは `hostDirectives` プロパティで、コンポーネントと同じ要素に1つ以上のディレクティブを配置する場合、
 フレームワークは単一の要素上のコンポーネントとディレクティブの間で特定のライフサイクルフックの順序を保証しません。

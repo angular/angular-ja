@@ -2,7 +2,7 @@
 
 [ネイティブの `<template>` 要素](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template) に触発されて、`<ng-template>` 要素を使用すると、**テンプレートフラグメント**、つまり動的またはプログラムによってレンダリングできるコンテンツのセクションを宣言できます。
 
-## テンプレートフラグメントの作成
+## テンプレートフラグメントの作成 {#creating-a-template-fragment}
 
 `<ng-template>` 要素を使用して、コンポーネントテンプレート内のどこにでもテンプレートフラグメントを作成できます。
 
@@ -16,7 +16,7 @@
 
 上記のコードをレンダリングすると、`<ng-template>` 要素の内容はページにレンダリングされません。代わりに、テンプレートフラグメントへの参照を取得して、コードを記述して動的にレンダリングできます。
 
-### フラグメントのコンテキストの結合
+### フラグメントのコンテキストの結合 {#binding-context-for-fragments}
 
 テンプレートフラグメントには、動的な式を含む結合を含めることができます。
 
@@ -32,7 +32,7 @@ export class ItemCounter {
 
 テンプレートフラグメント内の式またはステートメントは、フラグメントがレンダリングされる場所とは関係なく、フラグメントが宣言されているコンポーネントに対して評価されます。
 
-## テンプレートフラグメントへの参照の取得
+## テンプレートフラグメントへの参照の取得 {#getting-a-reference-to-a-template-fragment}
 
 テンプレートフラグメントへの参照は、次のいずれかの方法で取得できます。
 
@@ -42,7 +42,7 @@ export class ItemCounter {
 
 これらのすべての場合において、フラグメントは [TemplateRef](/api/core/TemplateRef) オブジェクトによって表されます。
 
-### テンプレート参照変数を使用したテンプレートフラグメントへの参照
+### テンプレート参照変数を使用したテンプレートフラグメントへの参照 {#referencing-a-template-fragment-with-a-template-reference-variable}
 
 テンプレート参照変数を `<ng-template>` 要素に追加することで、同じテンプレートファイル内の他の部分でそのテンプレートフラグメントを参照できます。
 
@@ -56,7 +56,7 @@ export class ItemCounter {
 
 その後、`myFragment` 変数を使用して、テンプレート内の他の場所でこのフラグメントを参照できます。
 
-### クエリを使用したテンプレートフラグメントへの参照
+### クエリを使用したテンプレートフラグメントへの参照 {#referencing-a-template-fragment-with-queries}
 
 [コンポーネントまたはディレクティブクエリAPI](/guide/components/queries) を使用して、テンプレートフラグメントへの参照を取得できます。
 
@@ -105,7 +105,7 @@ export class ComponentWithFragment {
 
 繰り返しますが、他のクラスメンバーと同様に、コンポーネントコードまたはコンポーネントのテンプレート内でこれらのフラグメントを参照できます。
 
-### テンプレートフラグメントの注入
+### テンプレートフラグメントの注入 {#injecting-a-template-fragment}
 
 ディレクティブは、そのディレクティブが `<ng-template>` 要素に直接適用されている場合、`TemplateRef` を注入できます。
 
@@ -126,11 +126,11 @@ export class MyDirective {
 
 その後、他のクラスメンバーと同様に、ディレクティブコード内でこのフラグメントを参照できます。
 
-## テンプレートフラグメントのレンダリング
+## テンプレートフラグメントのレンダリング {#rendering-a-template-fragment}
 
 `TemplateRef` オブジェクトへの参照を取得したら、`NgTemplateOutlet` ディレクティブを使用してテンプレート内でフラグメントをレンダリングするか、`ViewContainerRef` を使用してTypeScriptコード内でフラグメントをレンダリングできます。
 
-### `NgTemplateOutlet` の使用
+### `NgTemplateOutlet` の使用 {#using-ngtemplateoutlet}
 
 `@angular/common` の `NgTemplateOutlet` ディレクティブは、`TemplateRef` を受け取り、アウトレットに要素を持つ要素の**兄弟**としてフラグメントをレンダリングします。通常、`NgTemplateOutlet` は [`<ng-container>` 要素](/guide/templates/ng-container) で使用する必要があります。
 
@@ -159,7 +159,7 @@ import {NgTemplateOutlet} from '@angular/common';
 <p>これはフラグメントです</p>
 ```
 
-### `ViewContainerRef` の使用
+### `ViewContainerRef` の使用 {#using-viewcontainerref}
 
 **ビューコンテナ**は、Angularのコンポーネントツリー内の、コンテンツを含めることができるノードです。コンポーネントまたはディレクティブはすべて、`ViewContainerRef` を注入して、そのコンポーネントまたはディレクティブのDOM内の位置に対応するビューコンテナへの参照を取得できます。
 
@@ -210,7 +210,7 @@ export class MyOutlet {
 </component-with-fragment>
 ```
 
-## テンプレートフラグメントのレンダリング時のパラメータの受け渡し
+## テンプレートフラグメントのレンダリング時のパラメータの受け渡し {#passing-parameters-when-rendering-a-template-fragment}
 
 `<ng-template>` を使用してテンプレートフラグメントを宣言する際、さらにフラグメントで受け入れられるパラメータを宣言できます。フラグメントをレンダリングする際には、これらのパラメータに対応する `context` オブジェクトを最適に渡すことができます。このコンテキストオブジェクトのデータは、結合式やステートメント内で使用できます。また、フラグメントが宣言されているコンポーネントからのデータも参照できます。
 
@@ -242,7 +242,7 @@ export class MyOutlet {
 this.viewContainer.createEmbeddedView(this.myFragment, {topping: '玉ねぎ'});
 ```
 
-## テンプレートフラグメントへのインジェクターの提供
+## テンプレートフラグメントへのインジェクターの提供 {#providing-injectors-to-template-fragments}
 
 テンプレートフラグメントをレンダリングする際、そのインジェクターコンテキストは、レンダリング場所からではなく、**テンプレート宣言の場所**から取得されます。カスタムインジェクターを提供することで、この動作をオーバーライドできます。
 
@@ -280,7 +280,7 @@ export class Root {
 }
 ```
 
-#### アウトレットのインジェクターの継承
+#### アウトレットのインジェクターの継承 {#inheriting-the-outlets-injector}
 
 `ngTemplateOutletInjector` を文字列 `'outlet'` に設定することで、埋め込まれたビューがテンプレートが宣言された場所からではなく、DOM内のアウトレットの場所からインジェクターを継承するようにできます。
 
@@ -312,7 +312,7 @@ this.viewContainer.createEmbeddedView(this.myFragment, context, {
 });
 ```
 
-## 構造ディレクティブ
+## 構造ディレクティブ {#structural-directives}
 
 **構造ディレクティブ**とは、次のいずれかの条件を満たすディレクティブです。
 
@@ -341,7 +341,7 @@ Angularは、構造ディレクティブ向けの特別な便利な構文をサ�
 
 詳細については、[構造ディレクティブ](/guide/directives/structural-directives) を参照してください。
 
-## さらなるリソース
+## さらなるリソース {#additional-resources}
 
 `ng-template` が他のライブラリで使用される方法の例については、以下を確認してください。
 

@@ -168,6 +168,72 @@ NOTE: `message`プロパティはオプションです。バリデーターは�
 
 `touched()`シグナルは、ユーザーがフィールドにフォーカスし、その後ブラーしたかどうかを追跡します。ユーザー操作によって（プログラム的にではなく）フィールドにフォーカスし、その後ブラーすると`true`になります。非表示、無効、読み取り専用のフィールドは非インタラクティブであり、ユーザー操作によってtouchedになることはありません。
 
+When you need a section-level action to reveal validation errors within that section, call `markAsTouched()` on the section field. The default value of `skipDescendants` is `false`, so the call marks the section field and each descendant field as touched.
+
+For example, a checkout flow can validate the shipping section before allowing the user to continue to the next step:
+
+```angular-ts
+import {Component, signal} from '@angular/core';
+import {form, FormField, required} from '@angular/forms/signals';
+
+@Component({
+  selector: 'app-checkout-shipping',
+  imports: [FormField],
+  template: `
+    <label>
+      Name
+      <input [formField]="checkoutForm.shipping.name" />
+    </label>
+    @if (checkoutForm.shipping.name().touched() && checkoutForm.shipping.name().invalid()) {
+      <p>{{ checkoutForm.shipping.name().errors()[0].message }}</p>
+    }
+
+    <label>
+      Address
+      <input [formField]="checkoutForm.shipping.address" />
+    </label>
+    @if (checkoutForm.shipping.address().touched() && checkoutForm.shipping.address().invalid()) {
+      <p>{{ checkoutForm.shipping.address().errors()[0].message }}</p>
+    }
+
+    <button type="button" (click)="continueToPayment()">Continue</button>
+
+    @if (showPayment() && checkoutForm.shipping().valid()) {
+      <p>Ready for payment.</p>
+    }
+  `,
+})
+export class CheckoutShipping {
+  checkoutModel = signal({
+    shipping: {
+      name: '',
+      address: '',
+    },
+  });
+
+  showPayment = signal(false);
+
+  checkoutForm = form(this.checkoutModel, (schemaPath) => {
+    required(schemaPath.shipping.name, {message: 'Enter a name'});
+    required(schemaPath.shipping.address, {message: 'Enter an address'});
+  });
+
+  continueToPayment() {
+    this.checkoutForm.shipping().markAsTouched();
+
+    if (this.checkoutForm.shipping().invalid()) {
+      return;
+    }
+
+    this.showPayment.set(true);
+  }
+}
+```
+
+When `continueToPayment()` calls `markAsTouched()` on `checkoutForm.shipping()`, it uses the default `skipDescendants: false` behavior. Angular marks `shipping`, `shipping.name`, and `shipping.address` as touched, so the child `touched() && invalid()` error messages become visible before the whole form is submitted.
+
+NOTE: Pass `{skipDescendants: true}` only when the field receiving the call should become touched without changing the touched state of its descendants.
+
 ### Dirty状態 {#dirty-state}
 
 フォームでは、データが実際に変更されたかどうかを検出する必要があることがよくあります。たとえば、未保存の変更についてユーザーに警告したり、必要な場合にのみ保存ボタンを有効にしたりするためです。`dirty()`シグナルは、ユーザーがフィールドを変更したかどうかを追跡します。
@@ -726,6 +792,89 @@ export class StyleExample {
 ```
 
 `touched()`とバリデーション状態の両方をチェックすることで、ユーザーがフィールドを操作した後にのみスタイルが表示されるようになります。
+
+## Focus a form control bound to a form field
+
+Angular Signal Forms provide a `focusBoundControl()` method on field state that lets you programmatically move [focus](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) to the form control associated with a given form field.
+
+A common use case is improving accessibility on form submission: when a form is invalid, display error messages and automatically move focus to the first invalid field, guiding the user to correct it.
+
+### Basic usage
+
+Given a registration form:
+
+```ts
+@Component({
+  /* ... */
+})
+export class Registration {
+  registrationModel = signal({username: '', email: '', password: ''});
+  registrationForm = form(this.registrationModel, (schemaPath) => {
+    required(schemaPath.username);
+    email(schemaPath.email);
+    required(schemaPath.password);
+  });
+}
+```
+
+To move focus to the control bound to the `email` field:
+
+```ts
+registrationForm.email().focusBoundControl();
+```
+
+### Preventing scroll
+
+If the target control is outside the viewport and you want to focus it without triggering a scroll, you can set the [preventScroll](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus#preventscroll) option to `true` when calling the `focusBoundControl()` method.
+
+```ts
+registrationForm.email().focusBoundControl({preventScroll: true});
+```
+
+### Focusing the first invalid field on submission
+
+Use `errorSummary()` to locate the first invalid field and focus it when the user submits the form with errors:
+
+```ts
+onSubmit() {
+  const firstError = this.registrationForm().errorSummary()[0];
+  if (firstError?.fieldTree) {
+    firstError.fieldTree().focusBoundControl();
+  } else {
+    // proceed with submission
+  }
+}
+```
+
+### Custom controls
+
+By default, calling `focusBoundControl()` on a custom control has no effect because a custom control can contain multiple native inputs. For example, a date picker can contain separate day, month, and year fields. As a result, Angular cannot determine which element should receive focus or what action to perform.
+
+To support programmatic focus in a custom control, implement a `focus()` method. When `focusBoundControl()` is called on the field state associated with a custom control, Angular calls the control's `focus()` method if one is present.
+
+Consider a custom password input:
+
+```html
+<div class="password-block">
+  <input type="password" #passwordCtrl [value]="value()" (input)="value.set($event.target.value)" />
+</div>
+```
+
+```ts
+@Component({
+  /* ... */
+})
+export class PasswordInput implements FormValueControl<string> {
+  readonly value = model<string>('');
+  readonly passwordCtrl = viewChild.required<ElementRef<HTMLInputElement>>('passwordCtrl');
+
+  // Called automatically when focusBoundControl() is invoked
+  // on the field state associated with this custom control
+  focus(): void {
+    this.passwordCtrl().nativeElement.focus();
+  }
+}
+```
 
 ## 次のステップ {#next-steps}
 

@@ -6,6 +6,8 @@ NOTE: このガイドは、[Signal Formsの基本](essentials/signal-forms)に�
 
 シグナルフォームは、特定のインターフェースを実装するあらゆるコンポーネントと連携して動作します。**コントロールインターフェース**は、コンポーネントがフォームシステムと通信するためのプロパティとシグナルを定義します。コンポーネントがこれらのインターフェースのいずれかを実装すると、`[formField]`ディレクティブが自動的にコントロールをフォームの状態、バリデーション、データバインディングに接続します。
 
+HELPFUL: Custom Signal Form Controls [can be used](guide/forms/signals/migration#custom-controls) with Signal, Reactive and Template-Driven Forms without any extra compatibility code.
+
 ## 基本的なカスタムコントロールの作成 {#creating-a-basic-custom-control}
 
 最小限の実装から始めて、必要に応じて機能を追加していきましょう。
@@ -245,7 +247,7 @@ TIP: フォームモデルの作成と管理に関する完全な情報につい
 以下は、一般的な状態プロパティを実装する包括的な例です:
 
 ```angular-ts
-import {Component, model, input, ChangeDetectionStrategy} from '@angular/core';
+import {Component, model, input, output, ChangeDetectionStrategy} from '@angular/core';
 import {
   FormValueControl,
   WithOptionalFieldTree,
@@ -266,7 +268,7 @@ import {
           [readonly]="readonly()"
           [class.invalid]="invalid()"
           [attr.aria-invalid]="invalid()"
-          (blur)="touched.set(true)"
+          (blur)="touch.emit()"
         />
 
         @if (invalid()) {
@@ -293,7 +295,8 @@ export class StatefulInput implements FormValueControl<string> {
   value = model<string>('');
 
   // Writable interaction state - control updates these
-  touched = model<boolean>(false);
+  touched = input<boolean>(false);
+  touch = output<void>();
 
   // Read-only state - form system manages these
   disabled = input<boolean>(false);
@@ -335,9 +338,53 @@ export class Login {
 
 ユーザーが無効なメールアドレスを入力すると、`FormField`ディレクティブが自動的に`invalid()`と`errors()`を更新します。あなたのコントロールは、そのバリデーションフィードバックを表示できます。
 
-### 状態プロパティのシグナルタイプ {#signal-types-for-state-properties}
+### Working with `debounce('blur')`
 
-ほとんどの状態プロパティは`input()`（フォームからの読み取り専用）を使用します。コントロールがユーザーインタラクションに応じて更新する場合は、`touched`に`model()`を使用します。`touched`プロパティは、ニーズに応じて`model()`、`input()`、または`OutputRef`を一意にサポートします。
+The [`debounce('blur')`](api/forms/signals/debounce) rule delays updates from the UI to the form model until the field is blurred, instead of applying them on every keystroke. Built-in controls report a blur to the form automatically. A custom control only participates if it emits its `touch` output in response to the native [`blur` event](https://developer.mozilla.org/en-US/docs/Web/API/Element/blur_event):
+
+```angular-ts
+import {Component, model, output} from '@angular/core';
+import {FormValueControl} from '@angular/forms/signals';
+
+@Component({
+  selector: 'app-custom-input',
+  template: `
+    <input
+      type="text"
+      [value]="value()"
+      (input)="value.set($event.target.value)"
+      (blur)="touch.emit()"
+    />
+  `,
+})
+export class CustomInput implements FormValueControl<string> {
+  value = model('');
+  touch = output<void>();
+}
+```
+
+With the `touch` output in place, `debounce('blur')` behaves the same for your control as it does for built-in inputs:
+
+```angular-ts
+import {Component, signal} from '@angular/core';
+import {debounce, form, FormField} from '@angular/forms/signals';
+import {CustomInput} from './custom-input';
+
+@Component({
+  selector: 'app-root',
+  imports: [CustomInput, FormField],
+  template: `<app-custom-input [formField]="userForm.name" />`,
+})
+export class App {
+  userModel = signal({name: ''});
+
+  userForm = form(this.userModel, (schemaPath) => {
+    debounce(schemaPath.name, 'blur');
+  });
+}
+```
+
+IMPORTANT: Emit `touch` on `blur` (when focus leaves the control), not on `focus`. Without the `touch` output the field never registers as blurred, so `debounce('blur')` has no effect on your control.
 
 ## 値の変換 {#value-transformation}
 
@@ -417,6 +464,38 @@ accountForm = form(this.accountModel, (schemaPath) => {
   minLength(schemaPath.password, 8, {message: 'Password must be at least 8 characters'});
 });
 ```
+
+## Making controls reusable
+
+A custom control often carries implicit expectations about validation. An email input needs `required` and `email` rules in every form that uses it. Instead of relying on each consumer to redeclare those rules, package a companion schema alongside the control and export both from the same module:
+
+```ts {header: 'email-input.ts'}
+import {schema, required, email} from '@angular/forms/signals';
+
+export const emailFieldSchema = schema<string>((path) => {
+  required(path, {message: 'Email is required'});
+  email(path, {message: 'Enter a valid email address'});
+});
+```
+
+A consumer imports the companion schema and composes it into their form with `apply()`:
+
+```ts {header: 'registration.ts'}
+import {form, apply} from '@angular/forms/signals';
+import {emailFieldSchema} from './email-input';
+
+registrationForm = form(this.registrationModel, (path) => {
+  apply(path.email, emailFieldSchema);
+});
+```
+
+`apply()` merges the companion schema's rules into the parent form at the specified path. The consumer can still add more rules to the same field because `apply()` composes with other rules rather than replacing them. See the [Schemas guide](guide/forms/signals/schemas) for complete coverage of `schema()`, `apply()`, and conditional composition with `applyWhen()`.
+
+### Design considerations
+
+The consumer's model must initialize every field with a defined value. In Signal Forms, `undefined` signifies the absence of a field and not an empty value. For a reusable email control, that means the consumer should use `''` as the initial value, and not leave the property undefined. See the [Form Models guide](guide/forms/signals/models) for details on choosing initial values.
+
+In addition, controls should not register their own effects for state management. The form system manages field state through internal effects. This means that your control receives state updates through input signals. If a control needs to transform values, use `linkedSignal()` as shown in the "[Value transformation](#value-transformation)" section rather than an `effect()`.
 
 ## 次のステップ {#next-steps}
 

@@ -5,7 +5,7 @@ Angular Routerは、アプリケーションのナビゲーションを支援す
 また、URLがより複雑な状況で独自のカスタムパターンマッチを作成できます。
 
 このチュートリアルでは、Angularの`UrlMatcher`を使用してカスタムルートマッチャーを作成します。
-このマッチャーは、URL内のTwitterハンドルを検索します。
+このマッチャーは、URL内のX（旧Twitter）ハンドルを検索します。
 
 ## 目標
 
@@ -46,7 +46,7 @@ Angular CLIを使用して、新しいアプリケーション_angular-custom-ro
 ## アプリケーションのルートを構成する
 
 アプリケーションフレームワークが整ったら、次に`app.config.ts`ファイルにルーティング機能を追加する必要があります。
-このプロセスの一環として、URL内のTwitterハンドルを検索するカスタムURLマッチャーを作成します。
+このプロセスの一環として、URL内のXハンドルを検索するカスタムURLマッチャーを作成します。
 このハンドルは、先行する`@`シンボルによって識別されます。
 
 1. コードエディタで`app.config.ts`ファイルを開きます。
@@ -113,4 +113,4 @@ Angular Routerの詳細については、以下のトピックを参照してく
   <docs-pill href="api/router/Router" title="Router API"/>
 </docs-pill-row>
 
-HELPFUL: このコンテンツは、[Brandon Roberts](https://twitter.com/brandontroberts)による[Angular Routerを使用したカスタムルートマッチング](https://medium.com/@brandontroberts/custom-route-matching-with-the-angular-router-fbdd48665483)に基づいています。
+HELPFUL: このコンテンツは、[Brandon Roberts](https://x.com/brandontroberts)による[Angular Routerを使用したカスタムルートマッチング](https://medium.com/@brandontroberts/custom-route-matching-with-the-angular-router-fbdd48665483)に基づいています。

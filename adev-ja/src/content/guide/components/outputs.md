@@ -4,7 +4,7 @@ TIP: このガイドは、[基本概念のガイド](essentials) を既読して
 
 Angularコンポーネントは、`output`関数にプロパティを割り当てることでカスタムイベントを定義できます。
 
-```ts {highlight:[3]}
+```ts {highlight:[5]}
 @Component({
   /*...*/
 })
@@ -73,9 +73,7 @@ export class App {
 `output`関数は、テンプレートでイベントに異なる名前を指定できるパラメーターを受け入れます。
 
 ```ts
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class CustomSlider {
   changed = output({alias: 'valueChanged'});
 }
@@ -134,9 +132,7 @@ TIP: Angularチームは新規プロジェクトでは`output`関数の使用を
 代替として、新しい`EventEmitter`にプロパティを割り当て、`@Output`デコレーターを追加することで、カスタムイベントを定義できます。
 
 ```ts
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class ExpandablePanel {
   @Output() panelClosed = new EventEmitter<void>();
 }
@@ -149,9 +145,7 @@ export class ExpandablePanel {
 `@Output`デコレーターは、テンプレートでイベントに異なる名前を指定できるパラメーターを受け入れます。
 
 ```ts
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class CustomSlider {
   @Output('valueChanged') changed = new EventEmitter<number>();
 }

@@ -7,9 +7,7 @@ Angularは、ほとんどのDOM作成、更新、および削除を自動的に�
 コンポーネントは `ElementRef` を注入して、コンポーネントのホスト要素への参照を取得できます。
 
 ```ts
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class ProfilePhoto {
   constructor() {
     const elementRef = inject(ElementRef);
@@ -25,9 +23,7 @@ Angularの `afterEveryRender` および `afterNextRender` 関数を使用して�
 Angularがページのレンダリングを完了したときに実行される **レンダリングコールバック** を登録できます。
 
 ```ts
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class ProfilePhoto {
   constructor() {
     const elementRef = inject(ElementRef);

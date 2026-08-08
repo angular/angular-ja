@@ -256,9 +256,7 @@ AngularでDOMを操作する方法については、[DOM API の使用](guide/co
 ```ts
 import {Component, ElementRef, afterNextRender} from '@angular/core';
 
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class UserProfile {
   private prevPadding = 0;
   private elementHeight = 0;

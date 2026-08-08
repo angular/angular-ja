@@ -61,6 +61,7 @@ it('should have skyblue <h2>', () => {
   const bgColor = h2.style.backgroundColor;
   expect(bgColor).toBe('skyblue');
 });
+```
 
 しかし、単一のユースケースをテストしても、ディレクティブの機能のすべてを調べられるとは限りません。
 ディレクティブを使用するすべてのコンポーネントを見つけてテストすることは、面倒で壊れやすく、完全なカバレッジを実現する可能性もほとんどありません。
@@ -154,3 +155,34 @@ it('bare <h2> should not have a backgroundColor', () => {
 
 - `DebugElement.properties`は、ディレクティブによって設定された人工的なカスタムプロパティにアクセスできます。
 
+## Testing a directive in isolation
+
+A directive can't be constructed through TestBed; it must be rendered through a component's template to behave correctly.
+The `Highlight` directive can be tested this way, using a local test component's input to control the directive.
+
+```ts
+@Component({
+  imports: [Highlight],
+  template: `<p [highlight]="color()">{{ color() }}</p>`,
+})
+class Test {
+  readonly color = input('');
+}
+
+describe('Highlight', () => {
+  let fixture: ComponentFixture<Test>;
+
+  beforeEach(async () => {
+    fixture = TestBed.createComponent(Test);
+    await fixture.whenStable();
+  });
+
+  it('should use the specified color once an input is provided', async () => {
+    fixture.componentRef.setInput('color', 'blue');
+    await fixture.whenStable();
+
+    const p = fixture.nativeElement.querySelector('p');
+    expect(p.style.backgroundColor).toBe('blue');
+  });
+});
+```

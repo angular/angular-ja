@@ -97,6 +97,36 @@ Angular AIチューターは、完全でモダンなAngularアプリケーショ
 
 ## **トラブルシューティング** {#troubleshooting}
 
+### セットアップの問題 {#setup-issues}
+
+**"launch the Angular AI tutor"と入力しても何も起こらない場合**
+
+まず、プロジェクトを開いていることを確認してください。チューターには、実際に操作対象となるAngularプロジェクトが必要です:
+
+```bash
+ng new my-app
+cd my-app
+code .
+```
+
+次に、MCPサーバーが起動していることを確認してください。VS Codeでは、`.vscode/mcp.json`ファイルを開き、ファイル上部にある**"Start"**ボタンをクリックします。
+
+"launch the Angular AI tutor"と入力すると、
+"Reviewed .vscode/mcp.json and ran start task"、および
+"Allow task run?"という確認が表示されるので、そのままAllowをクリックしてください。
+
+**それでも動作しない場合**
+
+まず`#angular-cli`と入力してAngularのコンテキストを読み込み、次にチュートリアルのURL `https://angular.dev/ai/ai-tutor` を貼り付けてみてください。
+
+**サーバーが起動しているかを確認する方法**
+
+コマンドパレット（`Ctrl+Shift+P`）を開き、"MCP: List Running Servers"と入力して、一覧に"angular-cli"があるかを確認してください。
+
+---
+
+### 一般的な問題 {#general-issues}
+
 チューターが正しく応答しない場合や、アプリケーションに問題があると思われる場合は、以下のことを試してみてください:
 
 1. **"proceed"と入力する:** これにより、チューターがスタックした場合に次のステップに進むよう促すことができます。

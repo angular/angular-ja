@@ -18,11 +18,11 @@ NOTE: これらのファイルは、Angularの規約に準拠するために定�
 
 ## ルールファイル {#rules-files}
 
-いくつかのエディター（例: <a href="https://studio.firebase.google.com?utm_source=adev&utm_medium=website&utm_campaign=BUILD_WITH_AI_ANGULAR&utm_term=angular_devrel&utm_content=build_with_ai_angular_firebase_studio" target="_blank">Firebase Studio</a>）には、LLMに重要なコンテキストを提供するのに役立つルールファイルがあります。
+いくつかのツール（例: <a href="https://antigravity.google?utm_source=adev&utm_medium=website&utm_campaign=BUILD_WITH_AI_ANGULAR&utm_term=angular_devrel&utm_content=build_with_ai_angular_antigravity" target="_blank">Antigravity</a>）には、LLMに重要なコンテキストを提供するのに役立つルールファイルがあります。
 
 | 環境/IDE        | ルールファイル                                                  | インストール手順                                                                                                 |
 |:----------------|:----------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------|
-| Firebase Studio | <a download href="/assets/context/airules.md" target="_blank">airules.md</a>    | <a href="https://firebase.google.com/docs/studio/set-up-gemini#custom-instructions" target="_blank">`airules.md`を設定</a>         |
+| Antigravity     | <a download href="/assets/context/GEMINI.md" target="_blank">GEMINI.md</a>    | <a href="https://antigravity.google/docs/rules-workflows" target="_blank">`GEMINI.md`を設定</a>         |
 | Copilot powered IDEs | <a download="copilot-instructions.md" href="/assets/context/guidelines.md" target="_blank">copilot-instructions.md</a>  | <a href="https://code.visualstudio.com/docs/copilot/copilot-customization#_custom-instructions" target="_blank">`.github/copilot-instructions.md`を設定</a> |
 | Cursor          | <a download href="/assets/context/angular-20.mdc" target="_blank">cursor.md</a> | <a href="https://docs.cursor.com/context/rules" target="_blank">`cursorrules.md`を設定</a>                         |
 | JetBrains IDEs  | <a download href="/assets/context/guidelines.md" target="_blank">guidelines.md</a>  | <a href="https://www.jetbrains.com/help/junie/customize-guidelines.html" target="_blank">`guidelines.md`を設定</a> |

@@ -21,7 +21,7 @@ Effects should be the last API you reach for. Always prefer `computed()` for der
 TIP: There are no situations where effect is good, only situations where it is appropriate.
 
 - Logging signal values, either for analytics or as a debugging tool.
-- Keeping data in sync with different kind of storages: `window.localStorage`, session storage, cookies etc.
+- Keeping data in sync with different kinds of storage: `window.localStorage`, session storage, cookies, etc.
 - Adding custom DOM behavior that can't be expressed with template syntax.
 - Performing custom rendering to a `<canvas>` element, charting library, or other third party UI library.
 
@@ -36,9 +36,7 @@ Instead, use `computed` signals to model state that depends on other state.
 By default, you can only create an `effect()` within an [injection context](guide/di/dependency-injection-context) (where you have access to the `inject` function). The easiest way to satisfy this requirement is to call `effect` within a component, directive, or service `constructor`:
 
 ```ts
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class EffectiveCounter {
   readonly count = signal(0);
 
@@ -54,9 +52,7 @@ export class EffectiveCounter {
 To create an effect outside the constructor, you can pass an `Injector` to `effect` via its options:
 
 ```ts
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class EffectiveCounter {
   readonly count = signal(0);
   private injector = inject(Injector);
@@ -123,9 +119,7 @@ The `effect` function is a general-purpose tool for running code in reaction to 
 For these situations, you can use `afterRenderEffect`. It functions like `effect`, but runs after Angular has finished rendering and committed its changes to the DOM.
 
 ```ts
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class MyFancyChart {
   chartData = input.required<ChartData>();
   canvas = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');

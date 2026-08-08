@@ -6,7 +6,7 @@ For more about Angular's `resource` pattern, see [Async reactivity with `resourc
 
 ## `Using httpResource`
 
-TIP: Make sure to include `provideHttpClient` in your application providers. See [Setting up HttpClient](/guide/http/setup) for details.
+TIP: `httpResource` uses the globally available `HttpClient`. Use `provideHttpClient(...)` only when you need to configure HTTP features, such as interceptors or XSRF options. See [Setting up HttpClient](/guide/http/setup) for details.
 
 You can define an HTTP resource by returning a url:
 
@@ -16,7 +16,7 @@ userId = input.required<string>();
 user = httpResource(() => `/api/user/${userId()}`); // A reactive function as argument
 ```
 
-`httpResource` is reactive, meaning that whenever one of the signal it depends on changes (like `userId`), the resource will emit a new http request.
+`httpResource` is reactive, meaning that whenever one of the signals it depends on changes (like `userId`), the resource will emit a new http request.
 If a request is already pending, the resource cancels the outstanding request before issuing a new one.
 
 HELPFUL: `httpResource` differs from the `HttpClient` as it initiates the request _eagerly_. In contrast, the `HttpClient` only initiates requests upon subscription to the returned `Observable`.
@@ -53,8 +53,8 @@ TIP: Avoid using `httpResource` for _mutations_ like `POST` or `PUT`. Instead, p
 The signals of the `httpResource` can be used in the template to control which elements should be displayed.
 
 ```angular-html
-@if(user.hasValue()) {
-  <user-details [user]="user.value()">
+@if (user.hasValue()) {
+  <user-details [user]="user.value()" />
 } @else if (user.error()) {
   <div>Could not load user information</div>
 } @else if (user.isLoading()) {
@@ -66,7 +66,7 @@ HELPFUL: Reading the `value` signal on a `resource` that is in error state throw
 
 ### Response types
 
-By default, `httpResource` returns and parses the response as JSON. However, you can specify alternate return with additional functions on `httpResource`:
+By default, `httpResource` returns and parses the response as JSON. However, you can specify an alternate return type with additional functions on `httpResource`:
 
 ```ts
 httpResource.text(() => ({ … })); // returns a string in value()
@@ -107,7 +107,7 @@ The following example shows a unit test for code using `httpResource`.
 
 ```ts
 TestBed.configureTestingModule({
-  providers: [provideHttpClient(), provideHttpClientTesting()],
+  providers: [provideHttpClientTesting()],
 });
 
 const id = signal(0);

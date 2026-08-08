@@ -1,6 +1,6 @@
 # サービスの遅延読み込み
 
-IMPORTANT: 遅延読み込みを機能させるには、読み込むサービスが自動提供されている必要があります。`@Injectable({providedIn: 'root'})`または[`@Service()`](guide/di/creating-and-using-services#using-the-service-decorator)のいずれかで装飾してください。自動提供がない場合、Angularは読み込み後にサービスを構築する方法がありません。
+IMPORTANT: 遅延読み込みを機能させるには、読み込むサービスが自動提供されている必要があります。`@Injectable({providedIn: 'root'})`または[`@Service()`](guide/di/creating-and-using-services#using-the-service-vs-injectable-decorator)のいずれかで装飾してください。自動提供がない場合、Angularは読み込み後にサービスを構築する方法がありません。
 
 Angularの`injectAsync`関数を使用すると、実際に必要なときにのみサービスを読み込むことができます。これは、サービスが大規模なライブラリやめったに使用されない機能に依存しており、初期ページ読み込み時にそのコストを払いたくない場合に便利です。
 

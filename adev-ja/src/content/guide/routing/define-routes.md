@@ -28,7 +28,7 @@ const adminPage = {
 ```ts
 import {Routes} from '@angular/router';
 import {HomePage} from './home-page';
-import {AdminPage} from './about-page';
+import {AdminPage} from './admin-page';
 
 export const routes: Routes = [
   {

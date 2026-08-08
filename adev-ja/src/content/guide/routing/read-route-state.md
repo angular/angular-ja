@@ -44,9 +44,7 @@ export class Product {
 ```angular-ts
 import {ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
 
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class UserProfile {
   readonly userId: string;
   private route = inject(ActivatedRoute);

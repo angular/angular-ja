@@ -1,6 +1,9 @@
 # おめでとうございます!
 
-シグナルフォームチュートリアルを完了し、ゼロから完全なログインフォームを構築しました!
+<div class="docs-tutorial-mascot">
+  <img class="docs-tutorial-mascot__angie" src="assets/images/angie/superhero.svg" aria-hidden="true">
+  <p class="docs-tutorial-mascot__bubble">やりました！シグナルフォームチュートリアルを完了し、ゼロからログインフォームを構築しました。</p>
+</div>
 
 ## 学んだこと {#what-you-learned}
 

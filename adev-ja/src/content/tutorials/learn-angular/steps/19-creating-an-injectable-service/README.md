@@ -10,31 +10,25 @@ NOTE: [エッセンシャルガイドの依存性の注入](/essentials/dependen
 
 サービスを使用する1つの方法は、データやAPIとの対話方法として機能させることです。サービスを再利用可能にするため、サービス内のロジックを保持し、必要に応じてアプリケーション全体で共有する必要があります。
 
-サービスをDIシステムによって注入されるようにするには、`@Injectable`デコレーターを使用します。例えば:
+クラスをDIシステムによって注入されるようにするには、`@Service`デコレーターを使用します。例えば:
 
-```ts {highlight:[1,2,3]}
-@Injectable({
-  providedIn: 'root',
-})
+```ts {highlight:[1]}
+@Service()
 class UserService {
   // データを取得して返すためのメソッド
 }
 ```
 
-`@Injectable`デコレーターは、DIシステムに`UserService`がクラス内で要求できることを教えます。`providedIn`は、このリソースが利用可能なスコープを設定します。現時点では、`providedIn: 'root'`は`UserService`がアプリケーション全体で利用可能であることを意味すると理解しておけば十分です。
+`@Service`デコレーターは、クラスをサービスとしてマークし、DIシステムに`UserService`がアプリケーション内のどこからでもアクセスできることを通知します。デフォルトでは、Angularはアプリケーション全体でサービスを提供するため、追加の構成を記述する必要はありません。
+
+NOTE: デフォルトでは、`@Service`はクラスをルートインジェクターで提供します。特定のルートやコンポーネントにスコープを限定するなど、手動で提供したい場合は、`autoProvided: false`を設定します。詳しくは[サービスの作成と使用に関するガイド](guide/di/creating-and-using-services#using-the-service-vs-injectable-decorator)をご覧ください。
 
 では、試してみましょう。
 
 <docs-workflow>
 
-<docs-step title="`@Injectable`デコレーターを追加する">
-`car.service.ts`のコードを更新して、`@Injectable`デコレーターを追加します。
-</docs-step>
-
-<docs-step title="デコレーターを構成する">
-デコレーターに渡されるオブジェクトの値は、デコレーターの構成と見なされます。
-<br>
-`car.service.ts`の`@Injectable`デコレーターを更新して、`providedIn: 'root'`の構成を含めます。
+<docs-step title="`@Service`デコレーターを追加する">
+`car.service.ts`のコードを更新して、`CarService`クラスに`@Service()`デコレーターを追加します。
 
 TIP: 上記の例を使用して、正しい構文を確認してください。
 

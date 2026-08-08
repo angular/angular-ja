@@ -2,7 +2,7 @@
 
 `NgOptimizedImage` ディレクティブは、画像の読み込みにおけるパフォーマンスのベストプラクティスを簡単に採用できるようにします。
 
-このディレクティブは、[Largest Contentful Paint (LCP)](http://web.dev/lcp) 画像の読み込みが以下の方法で優先されるようにします。
+このディレクティブは、[Largest Contentful Paint (LCP)](https://web.dev/lcp) 画像の読み込みが以下の方法で優先されるようにします。
 
 - `<img>` タグに `fetchpriority` 属性を自動的に設定する
 - デフォルトで他の画像を遅延読み込みする

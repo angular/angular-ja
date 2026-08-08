@@ -328,9 +328,7 @@ const serverConfig: ApplicationConfig = {
 コンポーネントでサービスを注入して使用します。
 
 ```ts
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class Checkout {
   private analytics = inject(AnalyticsService);
 
@@ -427,6 +425,32 @@ IMPORTANT: 上記のトークンは、次のシナリオでは `null` になり�
 
 `HttpClient` は、サーバーで実行されているときに送信ネットワークリクエストをキャッシュします。この情報はシリアル化され、サーバーから送信される初期HTMLの一部としてブラウザに転送されます。ブラウザでは、`HttpClient` はキャッシュにデータがあるかどうかを確認し、ある場合は、初期アプリケーションレンダリング中に新しいHTTPリクエストを行う代わりにそれを再利用します。`HttpClient` は、ブラウザで実行中にアプリケーションが[安定](api/core/ApplicationRef#isStable)すると、キャッシュの使用を停止します。
 
+### Configuring the response body size limit
+
+When `HttpClient` uses the default fetch backend during server-side rendering, Angular limits each response body to 1 MB. This limit prevents the server from buffering unexpectedly large responses during rendering. If a response exceeds the configured limit, the request fails with the [NG02825](errors/NG02825) error.
+
+If your application needs to fetch larger responses during server rendering, set `maxResponseBodySize` in the `provideServerRendering` options:
+
+```ts
+import {provideServerRendering, withRoutes} from '@angular/ssr';
+import {serverRoutes} from './app.routes.server';
+
+const serverConfig: ApplicationConfig = {
+  providers: [
+    provideServerRendering(
+      {
+        maxResponseBodySize: 5 * 1024 * 1024, // 5MB
+      },
+      withRoutes(serverRoutes),
+    ),
+  ],
+};
+```
+
+`maxResponseBodySize` is configured in bytes and applies globally to server-side `HttpClient` requests that use the fetch backend.
+
+IMPORTANT: Keep this limit as small as your application allows. Increasing it lets server-side requests buffer larger response bodies, which can increase memory use and denial-of-service risk. Prefer moving large downloads outside server rendering.
+
 ### キャッシュオプションの設定 {#configuring-the-caching-options}
 
 サーバーサイドレンダリング (SSR) 中にAngularがHTTPレスポンスをキャッシュし、ハイドレーション中にそれらを再利用する方法を、`HttpTransferCacheOptions` を設定することでカスタマイズできます。
@@ -452,8 +476,6 @@ bootstrapApplication(App, {
 });
 ```
 
----
-
 ### `includeHeaders` {#includeheaders}
 
 サーバーレスポンスのどのヘッダーをキャッシュエントリに含めるかを指定します。
@@ -467,7 +489,7 @@ withHttpTransferCacheOptions({
 
 IMPORTANT: 認証トークンのような機密性の高いヘッダーを含めることは避けてください。これらはリクエスト間でユーザー固有のデータを漏洩させる可能性があります。
 
----
+Including `Cache-Control` in `includeHeaders` only makes that header available on the hydrated response. Angular already evaluates `Cache-Control` headers automatically when deciding whether a request or response is eligible for transfer cache.
 
 ### `includePostRequests` {#includepostrequests}
 
@@ -482,12 +504,10 @@ withHttpTransferCacheOptions({
 
 これは、`POST` リクエストが**冪等**であり、サーバーとクライアントのレンダリング間で再利用しても安全な場合にのみ使用してください。
 
----
-
 ### `includeRequestsWithAuthHeaders` {#includerequestswithauthheaders}
 
 `Authorization`、`Proxy‑Authorization`、または `Cookie` ヘッダーを含むリクエストをキャッシュ対象とするかどうかを決定します。
-デフォルトでは、ユーザー固有のレスポンスのキャッシュを防ぐために、これらは除外されます。`withCredentials` で送信されるリクエストもデフォルトで除外されます。
+デフォルトでは、ユーザー固有のレスポンスのキャッシュを防ぐために、これらは除外されます。
 
 ```ts
 withHttpTransferCacheOptions({
@@ -496,6 +516,32 @@ withHttpTransferCacheOptions({
 ```
 
 認証ヘッダーがレスポンス内容に影響を**与えない**場合(例: 分析API用のパブリックトークン)のみ有効にしてください。
+
+### `includeRequestsWithCredentials`
+
+Determines whether requests sent using `withCredentials` or Fetch API `credentials` modes (`include` or `same-origin`) are eligible for caching.  
+By default, these are excluded to prevent caching user‑specific responses.
+
+```ts
+withHttpTransferCacheOptions({
+  includeRequestsWithCredentials: true,
+});
+```
+
+Enable only when credentialed requests return responses that are safe to cache.
+
+### `includeNonCacheableRequests`
+
+Determines whether requests and responses containing `Cache-Control` directives that forbid caching (`no-store`, `no-cache`, or `private`), responses with a `Set-Cookie` header, or requests using Fetch API `cache` options (`no-store` or `no-cache`), are eligible for caching.  
+By default, these are excluded to respect HTTP caching controls.
+
+```ts
+withHttpTransferCacheOptions({
+  includeNonCacheableRequests: true,
+});
+```
+
+Enable only when you need to bypass cache-control restrictions for transfer caching.
 
 ### リクエストごとのオーバーライド {#perrequest-overrides}
 
@@ -557,6 +603,8 @@ bootstrapApplication(App, {
 ```ts
 httpClient.get('/api/sensitive-data', {transferCache: false});
 ```
+
+`HttpTransferCache` does not cache requests or responses that explicitly opt out of caching. Angular skips transfer cache entries when a request includes a `Cache-Control` header with `no-store`, `no-cache`, or `private`, or when the request uses the Fetch API `cache` option set to `no-store` or `no-cache`. Responses with `Cache-Control: no-store`, `Cache-Control: no-cache`, or `Cache-Control: private` are also not stored in the transfer cache. Responses that include a `Set-Cookie` header are likewise not stored, as they typically carry user-specific state.
 
 NOTE: アプリケーションがサーバーとクライアントで異なるHTTPオリジンを使用してAPIコールを行う場合、`HTTP_TRANSFER_CACHE_ORIGIN_MAP`トークンを使用してそれらのオリジン間のマッピングを確立できます。これにより、`HttpTransferCache`機能がそれらのリクエストを同じものとして認識し、クライアントでのハイドレーション中にサーバーでキャッシュされたデータを再利用できます。
 

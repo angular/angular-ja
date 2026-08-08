@@ -257,57 +257,10 @@ describe('MyToolbarComponent', () => {
 });
 ```
 
-## API
+## APIリファレンス {#api-reference}
 
-### Toolbarディレクティブ {#toolbar-directive}
+詳細なAPIドキュメントについては、以下のAPIリファレンスを参照してください。
 
-`ngToolbar`ディレクティブは、ツールバー機能のコンテナを提供します。
-
-#### 入力 {#inputs}
-
-| プロパティ     | 型                             | デフォルト     | 説明                                                   |
-| -------------- | ------------------------------ | -------------- | ------------------------------------------------------ |
-| `orientation`  | `'vertical'` \| `'horizontal'` | `'horizontal'` | ツールバーが垂直方向か水平方向か                       |
-| `disabled`     | `boolean`                      | `false`        | ツールバー全体を無効にします                           |
-| `softDisabled` | `boolean`                      | `true`         | 無効化された項目がフォーカスを受け取れるかどうか       |
-| `wrap`         | `boolean`                      | `true`         | フォーカスが端で折り返すかどうか                       |
-| `value`        | `V[]`                          | `[]`           | Selected widget values (supports two-way binding)      |
-
-### ToolbarWidgetディレクティブ {#toolbarwidget-directive}
-
-`ngToolbarWidget`ディレクティブは、要素をツールバー内のナビゲート可能なウィジェットとしてマークします。
-
-#### 入力 {#inputs}
-
-| プロパティ | 型        | デフォルト | 説明                                            |
-| ---------- | --------- | ------- | ----------------------------------------------- |
-| `id`       | `string`  | auto    | ウィジェットの一意の識別子                      |
-| `disabled` | `boolean` | `false` | ウィジェットを無効にします                      |
-| `value`    | `V`       | -       | ウィジェットに関連付けられた値（必須）          |
-
-#### シグナル {#signals}
-
-| プロパティ | 型                | 説明                                        |
-| ---------- | ----------------- | ------------------------------------------- |
-| `active`   | `Signal<boolean>` | ウィジェットが現在フォーカスされているかどうか      |
-| `selected` | `Signal<boolean>` | ウィジェットが（グループ内で）選択されているかどうか |
-
-### ToolbarWidgetGroupディレクティブ {#toolbarwidgetgroup-directive}
-
-`ngToolbarWidgetGroup`ディレクティブは、関連するウィジェットをグループ化します。
-
-#### 入力 {#inputs}
-
-| プロパティ | 型        | デフォルト | 説明                                     |
-| ---------- | --------- | ------- | ---------------------------------------- |
-| `disabled` | `boolean` | `false` | グループ内のすべてのウィジェットを無効にします |
-| `multi`    | `boolean` | `false` | 複数のウィジェットを選択できるかどうか     |
-
-### 関連コンポーネント {#related-components}
-
-ツールバーには、ボタン、ツリー、コンボボックスなど、さまざまなウィジェットタイプを含めることができます。特定のウィジェットの実装については、個々のコンポーネントのドキュメントを参照してください。
-
-<docs-pill-row>
-  <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/" title="Toolbar ARIA pattern"/>
-  <docs-pill href="/api/aria/toolbar/Toolbar" title="Toolbar API Reference"/>
-</docs-pill-row>
+- [`Toolbar`](/api/aria/toolbar/Toolbar)
+- [`ToolbarWidget`](/api/aria/toolbar/ToolbarWidget)
+- [`ToolbarWidgetGroup`](/api/aria/toolbar/ToolbarWidgetGroup)

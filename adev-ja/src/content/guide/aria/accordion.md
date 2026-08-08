@@ -208,90 +208,11 @@ describe('MyAccordionComponent', () => {
 });
 ```
 
-## API
+## API reference {#api-reference}
 
-### AccordionGroup {#accordiongroup}
+詳細なAPIドキュメントについては、以下のAPIリファレンスを参照してください。
 
-アコーディオンアイテムのグループのキーボードナビゲーションと展開動作を管理するコンテナディレクティブです。
-
-#### Inputs {#inputs}
-
-| プロパティ        | 型        | デフォルト | 説明                                                                      |
-| ----------------- | --------- | ------- | ------------------------------------------------------------------------- |
-| `disabled`        | `boolean` | `false` | グループ内のすべてのトリガーを無効にします                                |
-| `multiExpandable` | `boolean` | `true`  | 複数のパネルを同時に展開できるかどうか                                    |
-| `softDisabled`    | `boolean` | `true`  | `true`の場合、無効化されたアイテムはフォーカス可能です。`false`の場合、スキップされます |
-| `wrap`            | `boolean` | `false` | キーボードナビゲーションが最後のアイテムから最初のアイテムへ、またはその逆にラップするかどうか |
-
-#### Methods {#methods}
-
-| メソッド      | パラメータ | 説明                                                             |
-| ------------- | ---------- | ---------------------------------------------------------------- |
-| `expandAll`   | none       | すべてのパネルを展開します（`multiExpandable`が`true`の場合のみ機能します） |
-| `collapseAll` | none       | すべてのパネルを折りたたみます                                     |
-
-### AccordionTrigger {#accordiontrigger}
-
-パネルの表示/非表示を切り替えるボタン要素に適用されるディレクティブです。
-
-#### Inputs {#inputs}
-
-| プロパティ | 型               | デフォルト | 説明                                                           |
-| ---------- | ---------------- | ------- | -------------------------------------------------------------- |
-| `panel`    | `AccordionPanel` | —       | **必須。**制御対象のアコーディオンパネルへの参照                |
-| `id`       | `string`         | auto    | トリガーの一意の識別子                                         |
-| `disabled` | `boolean`        | `false` | このトリガーを無効にします                                     |
-| `expanded` | `boolean`        | `false` | パネルが展開されているかどうか（双方向バインディングをサポート） |
-
-#### シグナル {#signals}
-
-| プロパティ | 型                | 説明                                    |
-| -------- | ----------------- | --------------------------------------- |
-| `active` | `Signal<boolean>` | トリガーが現在フォーカスを持っているかどうか    |
-
-#### Methods {#methods}
-
-| メソッド   | パラメータ | 説明                              |
-| ---------- | ---------- | --------------------------------- |
-| `expand`   | none       | 関連付けられたパネルを展開します      |
-| `collapse` | none       | 関連付けられたパネルを折りたたみます    |
-| `toggle`   | none       | パネルの展開状態を切り替えます        |
-
-### AccordionPanel {#accordionpanel}
-
-折りたたみ可能なコンテンツを含む要素に適用されるディレクティブです。
-
-#### Inputs {#inputs}
-
-| プロパティ        | 型        | デフォルト | 説明                                                 |
-| ----------------- | --------- | ------- | ---------------------------------------------------- |
-| `id`              | `string`  | auto    | パネルの一意の識別子                                 |
-| `preserveContent` | `boolean` | `true`  | パネルが折りたたまれた後もコンテンツをDOMに保持するかどうか |
-
-#### シグナル {#signals}
-
-| プロパティ | 型                | 説明                                    |
-| --------- | ----------------- | --------------------------------------- |
-| `visible` | `Signal<boolean>` | パネルが現在展開されているかどうか        |
-
-#### Methods {#methods}
-
-| メソッド   | パラメータ | 説明                        |
-| ---------- | ---------- | --------------------------- |
-| `expand`   | none       | このパネルを展開します          |
-| `collapse` | none       | このパネルを折りたたみます        |
-| `toggle`   | none       | 展開状態を切り替えます          |
-
-### AccordionContent {#accordioncontent}
-
-遅延レンダリングを有効にするために、アコーディオンパネル内の`ng-template`に適用される構造ディレクティブです。
-
-このディレクティブには、input、output、メソッドはありません。`ng-template`要素に適用してください:
-
-```angular-html
-<div ngAccordionPanel #panel1="ngAccordionPanel">
-  <ng-template ngAccordionContent>
-    <!-- Content here is lazily rendered -->
-  </ng-template>
-</div>
-```
+- [`AccordionGroup`](/api/aria/accordion/AccordionGroup)
+- [`AccordionTrigger`](/api/aria/accordion/AccordionTrigger)
+- [`AccordionPanel`](/api/aria/accordion/AccordionPanel)
+- [`AccordionContent`](/api/aria/accordion/AccordionContent)

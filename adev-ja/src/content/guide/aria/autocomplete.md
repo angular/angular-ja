@@ -216,73 +216,12 @@ describe('MyAutocompleteComponent', () => {
 });
 ```
 
-## API {#apis}
+## API reference {#api-reference}
 
-### Comboboxディレクティブ {#combobox-directive}
+詳細なAPIドキュメントについては、以下のAPIリファレンスを参照してください。
 
-`ngCombobox`ディレクティブは、編集可能なテキスト`<input>`または`<textarea>`に直接適用され、キーボードトリガーとポップオーバーの状態を管理します。
-
-#### 入力 {#inputs}
-
-| プロパティ         | 型                    | デフォルト  | 説明                                                                   |
-| ------------------ | --------------------- | ----------- | ---------------------------------------------------------------------- |
-| `disabled`         | `boolean`             | `false`     | コンボボックスを無効にします                                           |
-| `softDisabled`     | `boolean`             | `true`      | 無効化されていてもフォーカス可能にします                               |
-| `inlineSuggestion` | `string \| undefined` | `undefined` | オートコンプリートモード向けにインライン補完候補を表示します           |
-
-#### モデル {#models}
-
-| プロパティ | 型                     | デフォルト | 説明                                                                              |
-| ---------- | ---------------------- | ---------- | --------------------------------------------------------------------------------- |
-| `value`    | `ModelSignal<string>`  | `''`       | `[(value)]`を使用した、inputの値の双方向バインディング                            |
-| `expanded` | `ModelSignal<boolean>` | `false`    | `[(expanded)]`を使用した、ポップアップの展開状態の双方向バインディング            |
-
----
-
-### ComboboxPopupディレクティブ {#comboboxpopup-directive}
-
-ポップアップとして使用されるコンテナを示すために`<ng-template>`に適用される構造ディレクティブです。
-
-#### 入力 {#combobox-popup-inputs}
-
-| プロパティ | 型         | 説明                                       |
-| ---------- | ---------- | ------------------------------------------ |
-| `combobox` | `Combobox` | 親の`Combobox`への必須の参照               |
-
----
-
-### ComboboxWidgetディレクティブ {#comboboxwidget-directive}
-
-アクティブな子孫要素のフォーカス変更を入力トリガーに橋渡しするため、ポップアップのコンテンツコンテナに適用されます。
-
-#### 入力 {#combobox-widget-inputs}
-
-| プロパティ         | 型                    | 説明                                                                                       |
-| ------------------ | --------------------- | ------------------------------------------------------------------------------------------ |
-| `activeDescendant` | `string \| undefined` | 現在アクティブな子孫要素のID（`listbox.activeDescendant()`にバインド）                     |
-
----
-
-### Listboxディレクティブ {#listbox-directives}
-
-オートコンプリートの候補リストには、標準のスタンドアロンlistboxディレクティブを使用します。
-
-#### 入力 {#listbox-inputs}
-
-| プロパティ      | 型                                 | デフォルト | 説明                                                                                                            |
-| --------------- | ---------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------- |
-| `selectionMode` | `'follow'` \| `'explicit'`         | `'follow'` | manual/explicitモードでは、フォーカス追従ではなくクリックやEnterで明示的に更新を確定します                      |
-| `focusMode`     | `'roving'` \| `'activedescendant'` | `'roving'` | `'activedescendant'`に設定すると、ブラウザのフォーカスはトリガー入力に留まります                                |
-| `tabIndex`      | `number`                           | `0`        | `-1`に設定すると、キーボードのタブフォーカスがポップアップlistboxコンテナに入るのを防ぎます                     |
-
-#### モデル {#listbox-models}
-
-| プロパティ | 型                   | 説明                                                                |
-| ---------- | -------------------- | ------------------------------------------------------------------- |
-| `value`    | `ModelSignal<any[]>` | `[(value)]`を使用した、選択された値の配列の双方向バインディング     |
-
----
-
-### 関連コンポーネント {#related-components}
-
-オートコンプリートは、標準のスタンドアロンの[Listbox](/api/aria/listbox/Listbox)と[Option](/api/aria/listbox/Option)ディレクティブを使用します。高度なオプションについては、[Listboxのドキュメント](/guide/aria/listbox)を参照してください。
+- [`Combobox`](/api/aria/combobox/Combobox)
+- [`ComboboxPopup`](/api/aria/combobox/ComboboxPopup)
+- [`ComboboxWidget`](/api/aria/combobox/ComboboxWidget)
+- [`Listbox`](/api/aria/listbox/Listbox)
+- [`Option`](/api/aria/listbox/Option)

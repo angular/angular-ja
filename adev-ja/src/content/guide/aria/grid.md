@@ -211,86 +211,11 @@ describe('MyGridComponent', () => {
 });
 ```
 
-## API
+## API reference {#api-reference}
 
-### Grid {#grid}
+詳細なAPIドキュメントについては、以下のAPIリファレンスを参照してください。
 
-行とセルのキーボードナビゲーションとフォーカス管理を提供するコンテナディレクティブです。
-
-#### Inputs {#inputs}
-
-| プロパティ             | 型                                   | デフォルト   | 説明                                                          |
-| ---------------------- | ------------------------------------ | ---------- | ------------------------------------------------------------- |
-| `enableSelection`      | `boolean`                            | `false`    | グリッドの選択が有効かどうか                                  |
-| `disabled`             | `boolean`                            | `false`    | グリッド全体を無効にします                                    |
-| `softDisabled`         | `boolean`                            | `true`     | `true`の場合、無効化されたセルはフォーカス可能ですが、インタラクティブではありません |
-| `focusMode`            | `'roving' \| 'activedescendant'`     | `'roving'` | グリッドで使用されるフォーカス戦略                            |
-| `rowWrap`              | `'continuous' \| 'loop' \| 'nowrap'` | `'loop'`   | 行に沿ったナビゲーションの折り返し動作                        |
-| `colWrap`              | `'continuous' \| 'loop' \| 'nowrap'` | `'loop'`   | 列に沿ったナビゲーションの折り返し動作                        |
-| `multi`                | `boolean`                            | `false`    | 複数のセルを選択できるかどうか                                |
-| `selectionMode`        | `'follow' \| 'explicit'`             | `'follow'` | 選択がフォーカスに追従するか、明示的なアクションを必要とするか |
-| `enableRangeSelection` | `boolean`                            | `false`    | 修飾キーまたはドラッグによる範囲選択を有効にします            |
-
-### GridRow {#gridrow}
-
-グリッド内の行を表し、グリッドセルのコンテナとして機能します。
-
-#### Inputs {#inputs}
-
-| プロパティ | 型       | デフォルト | 説明                                  |
-| ---------- | -------- | ------- | ------------------------------------- |
-| `rowIndex` | `number` | auto    | グリッド内でのこの行のインデックス    |
-
-### GridCell {#gridcell}
-
-グリッド行内の個々のセルを表します。
-
-#### Inputs {#inputs}
-
-| プロパティ    | 型                           | デフォルト     | 説明                                                    |
-| ------------- | ---------------------------- | -------------- | ------------------------------------------------------- |
-| `id`          | `string`                     | auto           | セルの一意の識別子                                      |
-| `role`        | `string`                     | `'gridcell'`   | セルのロール: `gridcell`、`columnheader`、または`rowheader` |
-| `disabled`    | `boolean`                    | `false`        | このセルを無効にします                                  |
-| `selected`    | `boolean`                    | `false`        | セルが選択されているかどうか (双方向バインディングをサポート) |
-| `selectable`  | `boolean`                    | `true`         | セルが選択可能かどうか                                  |
-| `rowSpan`     | `number`                     | —              | セルがまたがる行の数                                    |
-| `colSpan`     | `number`                     | —              | セルがまたがる列の数                                    |
-| `rowIndex`    | `number`                     | —              | セルの行インデックス                                    |
-| `colIndex`    | `number`                     | —              | セルの列インデックス                                    |
-| `orientation` | `'vertical' \| 'horizontal'` | `'horizontal'` | セル内のウィジェットの方向                              |
-| `wrap`        | `boolean`                    | `true`         | ウィジェットのナビゲーションがセル内で折り返すかどうか    |
-
-#### シグナル {#signals}
-
-| プロパティ | 型                | 説明                                 |
-| -------- | ----------------- | ------------------------------------ |
-| `active` | `Signal<boolean>` | セルが現在フォーカスを持っているかどうか |
-
-### GridCellWidget
-
-Applied to an interactive element inside a grid cell to allow for pausing grid navigation.
-
-#### Inputs
-
-| Property      | Type                                  | Default    | Description                                               |
-| ------------- | ------------------------------------- | ---------- | --------------------------------------------------------- |
-| `id`          | `string`                              | auto       | Unique identifier for the widget                          |
-| `widgetType`  | `'simple' \| 'complex' \| 'editable'` | `'simple'` | The widget type, controlling how activation behaves       |
-| `disabled`    | `boolean`                             | `false`    | Disables this cell widget                                 |
-| `focusTarget` | `ElementResolver<HTMLElement>`        | —          | Optional element reference to receive focus on activation |
-| `tabindex`    | `number`                              | —          | Tabindex override for the widget                          |
-
-#### Outputs
-
-| Property      | Type                                                     | Description                                    |
-| ------------- | -------------------------------------------------------- | ---------------------------------------------- |
-| `activated`   | `EventEmitter<KeyboardEvent \| FocusEvent \| undefined>` | Emits when the cell widget becomes activated   |
-| `deactivated` | `EventEmitter<KeyboardEvent \| FocusEvent \| undefined>` | Emits when the cell widget becomes deactivated |
-
-#### Methods
-
-| Method       | Parameters | Description                       |
-| ------------ | ---------- | --------------------------------- |
-| `activate`   | none       | Forcefully activates the widget   |
-| `deactivate` | none       | Forcefully deactivates the widget |
+- [`Grid`](/api/aria/grid/Grid)
+- [`GridRow`](/api/aria/grid/GridRow)
+- [`GridCell`](/api/aria/grid/GridCell)
+- [`GridCellWidget`](/api/aria/grid/GridCellWidget)

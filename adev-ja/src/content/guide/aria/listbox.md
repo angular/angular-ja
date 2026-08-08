@@ -182,77 +182,19 @@ describe('MyListboxComponent', () => {
 });
 ```
 
-## API {#apis}
+## API reference {#api-reference}
 
-### Listboxディレクティブ {#listbox-directive}
+詳細なAPIドキュメントについては、以下のAPIリファレンスを参照してください。
 
-`ngListbox`ディレクティブは、選択可能なオプションのアクセシブルなリストを作成します。
-
-#### 入力 {#inputs}
-
-| プロパティ       | 型                                 | デフォルト   | 説明                                         |
-| ---------------- | ---------------------------------- | ------------ | -------------------------------------------- |
-| `id`             | `string`                           | auto         | リストボックスの一意の識別子                 |
-| `multi`          | `boolean`                          | `false`      | 複数選択を有効にします                       |
-| `orientation`    | `'vertical'` \| `'horizontal'`     | `'vertical'` | リストのレイアウト方向                       |
-| `wrap`           | `boolean`                          | `true`       | リストの端でフォーカスをラップするかどうか     |
-| `selectionMode`  | `'follow'` \| `'explicit'`         | `'follow'`   | 選択がどのようにトリガーされるか             |
-| `focusMode`      | `'roving'` \| `'activedescendant'` | `'roving'`   | フォーカス管理戦略                           |
-| `softDisabled`   | `boolean`                          | `true`       | 無効化されたアイテムがフォーカス可能かどうか   |
-| `disabled`       | `boolean`                          | `false`      | リストボックス全体を無効にします             |
-| `readonly`       | `boolean`                          | `false`      | リストボックスを読み取り専用にします         |
-| `typeaheadDelay` | `number`                           | `500`        | 先行入力の検索がリセットされるまでのミリ秒   |
-
-#### モデル {#model}
-
-| プロパティ | 型    | 説明                                       |
-| -------- | ----- | ------------------------------------------ |
-| `value`  | `V[]` | 選択された値の双方向バインディング可能な配列 |
-
-#### シグナル {#signals}
-
-| プロパティ | 型            | 説明                                  |
-| -------- | ------------- | ------------------------------------- |
-| `value`  | `Signal<V[]>` | 現在選択されている値（シグナルとして）    |
-
-#### メソッド {#methods}
-
-| メソッド                   | パラメータ                        | 説明                                       |
-| -------------------------- | --------------------------------- | ------------------------------------------ |
-| `scrollActiveItemIntoView` | `options?: ScrollIntoViewOptions` | アクティブなアイテムを表示領域にスクロールします |
-| `gotoFirst`                | none                              | リストボックスの最初のアイテムに移動します     |
-
-### Optionディレクティブ {#option-directive}
-
-`ngOption`ディレクティブは、リストボックス内のアイテムをマークします。
-
-#### 入力 {#inputs}
-
-| プロパティ | 型        | デフォルト | 説明                                             |
-| ---------- | --------- | ------- | ------------------------------------------------ |
-| `id`       | `string`  | auto    | オプションの一意の識別子                         |
-| `value`    | `V`       | -       | このオプションに関連付けられた値（必須）         |
-| `label`    | `string`  | -       | スクリーンリーダー用のオプションのラベル         |
-| `disabled` | `boolean` | `false` | このオプションが無効かどうか                     |
-
-#### シグナル {#signals}
-
-| プロパティ | 型                | 説明                            |
-| ---------- | ----------------- | ------------------------------- |
-| `selected` | `Signal<boolean>` | このオプションが選択されているかどうか |
-| `active`   | `Signal<boolean>` | このオプションにフォーカスがあるかどうか |
+- [`Listbox`](/api/aria/listbox/Listbox)
+- [`Option`](/api/aria/listbox/Option)
 
 ### 関連パターン {#related-patterns}
 
 Listboxは、これらのドキュメント化されたドロップダウンパターンで使用されます：
 
-- **[Select](guide/aria/select)** - 読み取り専用のcombobox + listboxを使用した単一選択のドロップダウンパターン
-- **[Multiselect](guide/aria/multiselect)** - `multi`を使用した読み取り専用のcombobox + listboxによる複数選択のドロップダウンパターン
-- **[Autocomplete](guide/aria/autocomplete)** - combobox + listboxを使用したフィルタリング可能なドロップダウンパターン
+- [Select](guide/aria/select) - 読み取り専用のcombobox + listboxを使用した単一選択のドロップダウンパターン
+- [Multiselect](guide/aria/multiselect) - `multi`を使用した読み取り専用のcombobox + listboxによる複数選択のドロップダウンパターン
+- [Autocomplete](guide/aria/autocomplete) - combobox + listboxを使用したフィルタリング可能なドロップダウンパターン
 
 トリガー、ポップアップ、オーバーレイの配置を含む完全なドロップダウンパターンについては、listboxを単独で使用するのではなく、それらのパターンガイドを参照してください。
-
-<docs-pill-row>
-  <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/listbox/" title="Listbox ARIA pattern"/>
-  <docs-pill href="/api/aria/listbox/Listbox" title="Listbox API Reference"/>
-</docs-pill-row>

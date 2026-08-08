@@ -215,61 +215,12 @@ describe('MyMultiselectComponent', () => {
 });
 ```
 
-## API {#apis}
+## APIリファレンス {#api-reference}
 
-マルチセレクトパターンは、AngularのAriaライブラリから以下のディレクティブを使用します。詳細なAPIドキュメントについては、リンク先のガイドを参照してください。
+詳細なAPIドキュメントについては、以下のAPIリファレンスを参照してください。
 
-### Comboboxディレクティブ {#combobox-directives}
-
-マルチセレクトパターンでは、`ngCombobox`をトリガー要素 (`div`や`button`など) に直接使用して、セレクト風のマルチセレクトドロップダウンを作成します。
-
-#### 入力 {#inputs}
-
-| プロパティ   | 型        | デフォルト | 説明                            |
-| ---------- | --------- | ------- | ------------------------------- |
-| `disabled` | `boolean` | `false` | マルチセレクト全体を無効化します |
-
-利用可能なすべての入力とシグナルの詳細については、[Combobox APIドキュメント](guide/aria/combobox#apis)を参照してください。
-
-#### Popup directives {#popup-directives}
-
-The structural `ngComboboxPopup` directive marks the overlay template and requires a reference to the parent combobox:
-
-| Property   | Type       | Description                                 |
-| ---------- | ---------- | ------------------------------------------- |
-| `combobox` | `Combobox` | Required reference to the parent `Combobox` |
-
-#### ComboboxWidget directive {#comboboxwidget-directive}
-
-The `ngComboboxWidget` directive bridges the listbox with the combobox trigger to support active-descendant focus tracking.
-
-| Property           | Type                  | Description                                                                                                                                  |
-| ------------------ | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `activeDescendant` | `string \| undefined` | The ID of the currently active option (bound to `listbox.activeDescendant()`) to update the `aria-activedescendant` attribute on the trigger |
-
-### Listboxディレクティブ {#listbox-directives}
-
-マルチセレクトパターンでは、複数選択のために`ngListbox`と`multi`属性を、各選択可能な項目のために`ngOption`を使用します。
-
-#### 入力 {#inputs}
-
-| プロパティ        | 型                                 | デフォルト   | 説明                                                                                                                          |
-| --------------- | ---------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `multi`         | `boolean`                          | `false`    | `true`に設定すると複数選択が可能になります                                                                                          |
-| `selectionMode` | `'follow'` \| `'explicit'`         | `'follow'` | `'explicit'`に設定すると、アクティブフォーカスに従う代わりに、クリック/Spaceで明示的にオプションが切り替わります                              |
-| `focusMode`     | `'roving'` \| `'activedescendant'` | `'roving'` | リストボックスが使用するフォーカス戦略。`'activedescendant'`に設定すると、ブラウザのフォーカスはコンボボックスのトリガーに残ります。                |
-| `tabIndex`      | `number`                           | `0`        | リストボックスのtabindex。`-1`に設定すると、active-descendantモードでポップアップコンテナにキーボードフォーカスが入るのを防ぎます。              |
-
-#### モデル {#model}
-
-| プロパティ | 型                   | 説明                                      |
-| -------- | -------------------- | ----------------------------------------- |
-| `value`  | `ModelSignal<any[]>` | 選択された値の双方向バインディング可能な配列 |
-
-`multi`がtrueの場合、ユーザーはスペースキーを使用して選択を切り替えることで、複数のオプションを選択できます。ポップアップは選択後も開いたままで、追加の選択が可能です。
-
-リストボックスの設定、選択モード、オプションのプロパティに関する完全な詳細については、[Listbox APIドキュメント](guide/aria/listbox#apis)を参照してください。
-
-### ポジショニング {#positioning}
-
-マルチセレクトパターンは、スマートなポジショニングのために[CDK Overlay](https://material.angular.io/cdk/overlay/overview)と統合されています。`cdkConnectedOverlay`を使用すると、ビューポートの端やスクロールを自動的に処理できます。
+- [`Combobox`](/api/aria/combobox/Combobox)
+- [`ComboboxPopup`](/api/aria/combobox/ComboboxPopup)
+- [`ComboboxWidget`](/api/aria/combobox/ComboboxWidget)
+- [`Listbox`](/api/aria/listbox/Listbox)
+- [`Option`](/api/aria/listbox/Option)

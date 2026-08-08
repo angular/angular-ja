@@ -244,85 +244,12 @@ describe('MyMenuComponent', () => {
 });
 ```
 
-## API {#apis}
+## API reference {#api-reference}
 
-### Menu {#menu}
+詳細なAPIドキュメントについては、以下のAPIリファレンスを参照してください。
 
-メニューアイテムのコンテナディレクティブです。
-
-#### 入力 {#inputs}
-
-| Property       | Type      | Default | Description                                                   |
-| -------------- | --------- | ------- | ------------------------------------------------------------- |
-| `disabled`     | `boolean` | `false` | メニュー内のすべてのアイテムを無効にします |
-| `wrap`         | `boolean` | `true`  | キーボードナビゲーションが端で折り返すかどうか |
-| `softDisabled` | `boolean` | `true`  | `true`の場合、無効化されたアイテムはフォーカス可能ですが、インタラクティブではありません |
-
-#### メソッド {#methods}
-
-| Method  | Parameters | Description     |
-| ------- | ---------- | --------------- |
-| `close` | none       | メニューを閉じます |
-
-### MenuBar {#menubar}
-
-複数のメニューを格納する水平コンテナです。
-
-#### 入力 {#inputs}
-
-| Property       | Type      | Default | Description                                                   |
-| -------------- | --------- | ------- | ------------------------------------------------------------- |
-| `disabled`     | `boolean` | `false` | メニューバー全体を無効にします |
-| `wrap`         | `boolean` | `true`  | キーボードナビゲーションが端で折り返すかどうか |
-| `softDisabled` | `boolean` | `true`  | `true`の場合、無効化されたアイテムはフォーカス可能ですが、インタラクティブではありません |
-
-### MenuItem {#menuitem}
-
-メニュー内の個々のアイテムです。
-
-#### 入力 {#inputs}
-
-| Property     | Type      | Default | Description                                          |
-| ------------ | --------- | ------- | ---------------------------------------------------- |
-| `value`      | `any`     | —       | **必須。** このアイテムの値です |
-| `role`       | `'menuitem' \| 'menuitemcheckbox' \| 'menuitemradio'` | `'menuitem'` | The ARIA role for the menu item                      |
-| `disabled`   | `boolean` | `false` | このメニューアイテムを無効にします |
-| `submenu`    | `Menu`    | —       | サブメニューへの参照です |
-| `searchTerm` | `string`  | `''`    | タイプアヘッドの検索語です（双方向バインディングをサポート） |
-
-#### シグナル {#signals}
-
-| Property   | Type              | Description                                |
-| ---------- | ----------------- | ------------------------------------------ |
-| `active`   | `Signal<boolean>` | アイテムが現在フォーカスを持っているかどうか |
-| `expanded` | `Signal<boolean>` | サブメニューが展開されているかどうか |
-| `hasPopup` | `Signal<boolean>` | アイテムに関連付けられたサブメニューがあるかどうか |
-
-NOTE: MenuItemはパブリックメソッドを公開しません。`submenu`入力を使用して、サブメニューをメニューアイテムに関連付けます。
-
-### MenuTrigger {#menutrigger}
-
-メニューを開くボタンまたは要素です。
-
-#### 入力 {#inputs}
-
-| Property       | Type      | Default | Description                                |
-| -------------- | --------- | ------- | ------------------------------------------ |
-| `menu`         | `Menu`    | —       | **必須。** トリガーするメニューです |
-| `disabled`     | `boolean` | `false` | トリガーを無効にします |
-| `softDisabled` | `boolean` | `true`  | `true`の場合、無効化されたトリガーはフォーカス可能です |
-
-#### シグナル {#signals}
-
-| Property   | Type              | Description                                |
-| ---------- | ----------------- | ------------------------------------------ |
-| `expanded` | `Signal<boolean>` | メニューが現在開いているかどうか |
-| `hasPopup` | `Signal<boolean>` | トリガーに関連付けられたメニューがあるかどうか |
-
-#### メソッド {#methods}
-
-| Method   | Parameters | Description                  |
-| -------- | ---------- | ---------------------------- |
-| `open`   | none       | メニューを開きます |
-| `close`  | none       | メニューを閉じます |
-| `toggle` | none       | メニューの開閉を切り替えます |
+- [`Menu`](/api/aria/menu/Menu)
+- [`MenuBar`](/api/aria/menu/MenuBar)
+- [`MenuItem`](/api/aria/menu/MenuItem)
+- [`MenuTrigger`](/api/aria/menu/MenuTrigger)
+- [`MenuContent`](/api/aria/menu/MenuContent)

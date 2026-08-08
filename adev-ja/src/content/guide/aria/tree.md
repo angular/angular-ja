@@ -215,85 +215,10 @@ describe('MyTreeComponent', () => {
 });
 ```
 
-## API {#apis}
+## APIリファレンス {#api-reference}
 
-### Tree {#tree}
+詳細なAPIドキュメントについては、以下のAPIリファレンスを参照してください。
 
-階層的なナビゲーションと選択を管理するコンテナディレクティブです。
-
-#### Inputs {#inputs}
-
-| プロパティ      | 型                               | デフォルト   | 説明                                                          |
-| --------------- | -------------------------------- | ------------ | ------------------------------------------------------------- |
-| `disabled`      | `boolean`                        | `false`      | ツリー全体を無効にします                                      |
-| `softDisabled`  | `boolean`                        | `true`       | `true`の場合、無効化されたアイテムはフォーカス可能ですが、インタラクティブではありません |
-| `multi`         | `boolean`                        | `false`      | 複数アイテムの選択が可能かどうか                                |
-| `selectionMode` | `'explicit' \| 'follow'`         | `'explicit'` | 選択に明示的なアクションが必要か、フォーカスに追従するかどうか  |
-| `nav`           | `boolean`                        | `false`      | ツリーがナビゲーションモードであるかどうか（`aria-current`を使用） |
-| `wrap`          | `boolean`                        | `true`       | キーボードナビゲーションが最後のアイテムから最初のアイテムにラップするかどうか |
-| `focusMode`     | `'roving' \| 'activedescendant'` | `'roving'`   | ツリーで使用されるフォーカス戦略                              |
-| `values`        | `any[]`                          | `[]`         | 選択されたアイテムの値（双方向バインディングをサポート）      |
-
-#### メソッド {#methods}
-
-| メソッド         | パラメータ | 説明                                          |
-| ---------------- | ---------- | --------------------------------------------- |
-| `expandAll`      | none       | すべてのツリーノードを展開します                      |
-| `collapseAll`    | none       | すべてのツリーノードを折りたたみます                  |
-| `selectAll`      | none       | すべてのアイテムを選択します（複数選択モードのみ）    |
-| `clearSelection` | none       | すべての選択をクリアします                            |
-
-### TreeItem {#treeitem}
-
-子ノードを含むことができるツリー内の個々のノードです。
-
-#### Inputs {#inputs}
-
-| プロパティ | 型                      | デフォルト | 説明                                                    |
-| ---------- | ----------------------- | ------- | ------------------------------------------------------- |
-| `parent`   | `Tree \| TreeItemGroup` | —       | **必須。** 親のTreeルートまたはTreeItemGroup。           |
-| `value`    | `any`                   | —       | **必須。** このツリーアイテムの一意な値                   |
-| `disabled` | `boolean`               | `false` | このアイテムを無効にします                                |
-| `expanded` | `boolean`               | `false` | ノードが展開されているかどうか（双方向バインディングをサポート） |
-
-#### シグナル {#signals}
-
-| プロパティ    | 型                | 説明                                 |
-| ------------- | ----------------- | ------------------------------------ |
-| `selected`    | `Signal<boolean>` | アイテムが選択されているかどうか             |
-| `active`      | `Signal<boolean>` | アイテムが現在フォーカスを持っているかどうか   |
-| `hasChildren` | `Signal<boolean>` | アイテムが子ノードを持っているかどうか         |
-
-#### メソッド {#methods}
-
-| メソッド   | パラメータ | 説明                        |
-| ---------- | ---------- | --------------------------- |
-| `expand`   | none       | このノードを展開します            |
-| `collapse` | none       | このノードを折りたたみます        |
-| `toggle`   | none       | 展開状態を切り替えます            |
-
-### TreeItemGroup {#tree-item-group}
-
-The structural directive applied to an `ng-template` that holds the children nodes of an expandable tree item.
-
-#### Inputs {#inputs}
-
-| Property  | Type       | Default | Description                                             |
-| --------- | ---------- | ------- | ------------------------------------------------------- |
-| `ownedBy` | `TreeItem` | —       | **Required.** The reference of the parent `ngTreeItem`. |
-
-#### Usage {#usage}
-
-```angular-html
-<ul ngTree #tree="ngTree">
-  <li ngTreeItem [parent]="tree" value="parent" #parentItem="ngTreeItem">
-    Parent Item
-    <ul role="group">
-      <ng-template ngTreeItemGroup [ownedBy]="parentItem" #group="ngTreeItemGroup">
-        <li ngTreeItem [parent]="group" value="child1">Child 1</li>
-        <li ngTreeItem [parent]="group" value="child2">Child 2</li>
-      </ng-template>
-    </ul>
-  </li>
-</ul>
-```
+- [`Tree`](/api/aria/tree/Tree)
+- [`TreeItem`](/api/aria/tree/TreeItem)
+- [`TreeItemGroup`](/api/aria/tree/TreeItemGroup)

@@ -284,74 +284,12 @@ describe('MyTabsComponent', () => {
 });
 ```
 
-## API
+## APIリファレンス {#api-reference}
 
-### Tabs {#tabs}
+詳細なAPIドキュメントについては、以下のAPIリファレンスを参照してください。
 
-タブリストとパネルを調整するコンテナディレクティブです。
-
-このディレクティブには入力と出力がありません。`ngTabList`、`ngTab`、`ngTabPanel`ディレクティブのルートコンテナとして機能します。
-
-### TabList {#tablist}
-
-選択とキーボードナビゲーションを管理するタブボタンのコンテナです。
-
-#### Inputs {#inputs}
-
-| プロパティ      | 型                           | デフォルト     | 説明                                                               |
-| --------------- | ---------------------------- | -------------- | ------------------------------------------------------------------ |
-| `orientation`   | `'horizontal' \| 'vertical'` | `'horizontal'` | タブリストのレイアウト方向                                         |
-| `wrap`          | `boolean`                    | `false`        | キーボードナビゲーションが最後のタブから最初のタブにラップするかどうか |
-| `softDisabled`  | `boolean`                    | `true`         | `true`の場合、無効化されたタブはフォーカス可能ですが、アクティブにはできません |
-| `selectionMode` | `'follow' \| 'explicit'`         | `'follow'`     | タブがフォーカス時にアクティブになるか、明示的なアクティベーションが必要か |
-| `focusMode`     | `'roving' \| 'activedescendant'` | `'roving'`     | Focus management strategy                                          |
-| `selectedTab`   | `any`                            | —              | 現在選択されているタブの値（双方向バインディングをサポート）       |
-
-### Tab {#tab}
-
-個々のタブボタンです。
-
-#### Inputs {#inputs}
-
-| プロパティ   | 型        | デフォルト | 説明                                |
-| ---------- | --------- | ------- | ----------------------------------- |
-| `value`    | `any`     | —       | **必須。** このタブの一意な値       |
-| `disabled` | `boolean` | `false` | このタブを無効化します              |
-
-#### シグナル {#signals}
-
-| プロパティ   | 型                | 説明                                |
-| ---------- | ----------------- | ----------------------------------- |
-| `selected` | `Signal<boolean>` | タブが現在選択されているかどうか    |
-| `active`   | `Signal<boolean>` | タブが現在フォーカスを持っているかどうか |
-
-### TabPanel {#tabpanel}
-
-タブに関連付けられたコンテンツパネルです。
-
-#### Inputs {#inputs}
-
-| プロパティ        | 型        | デフォルト | 説明                                                       |
-| ----------------- | --------- | ------- | ---------------------------------------------------------- |
-| `value`           | `any`     | —       | **必須。** 関連付けられたタブの`value`と一致する必要があります |
-| `preserveContent` | `boolean` | `true`  | 非アクティブ化後もパネルコンテンツをDOMに保持するかどうか    |
-
-#### シグナル {#signals}
-
-| プロパティ | 型                | 説明                           |
-| --------- | ----------------- | ------------------------------ |
-| `visible` | `Signal<boolean>` | パネルが現在表示されているかどうか |
-
-### TabContent {#tabcontent}
-
-タブパネルのコンテンツを遅延レンダリングするための構造ディレクティブです。
-
-このディレクティブには入力、出力、メソッドはありません。タブパネル内の`ng-template`要素に適用します:
-
-```angular-html
-<div ngTabPanel value="tab1">
-  <ng-template ngTabContent>
-    <!-- ここのコンテンツは遅延レンダリングされます -->
-  </ng-template>
-</div>
-```
+- [`Tabs`](/api/aria/tabs/Tabs)
+- [`TabList`](/api/aria/tabs/TabList)
+- [`Tab`](/api/aria/tabs/Tab)
+- [`TabPanel`](/api/aria/tabs/TabPanel)
+- [`TabContent`](/api/aria/tabs/TabContent)

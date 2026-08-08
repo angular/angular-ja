@@ -212,57 +212,16 @@ describe('MySelectComponent', () => {
 });
 ```
 
-## API
+## APIリファレンス {#api-reference}
 
-selectパターンは、AngularのAriaライブラリから以下のディレクティブを使用します。詳細なAPIドキュメントについては、リンク先のガイドを参照してください。
+詳細なAPIドキュメントについては、以下のAPIリファレンスを参照してください。
 
-### コンボボックスディレクティブ {#combobox-directives}
-
-selectパターンは、キーボードナビゲーションを維持しつつテキスト入力を防ぐために、`ngCombobox`を`div`や`button`のような非インタラクティブなホスト要素に直接適用します。
-
-#### 入力 {#inputs}
-
-| プロパティ | 型                     | デフォルト | 説明                       |
-| ---------- | ---------------------- | ---------- | -------------------------- |
-| `disabled` | `boolean`              | `false`    | select全体を無効にします   |
-| `expanded` | `ModelSignal<boolean>` | `false`    | selectの展開状態           |
-
-利用可能なすべての入力とシグナルの詳細については、[コンボボックスAPIドキュメント](guide/aria/combobox#apis)を参照してください。
-
-#### Popup Directives {#popup-directives}
-
-The structural `ngComboboxPopup` directive marks the overlay template and requires a reference to the parent combobox:
-
-| Property   | Type       | Description                                 |
-| ---------- | ---------- | ------------------------------------------- |
-| `combobox` | `Combobox` | Required reference to the parent `Combobox` |
-
-#### ComboboxWidget Directive {#comboboxwidget-directive}
-
-The `ngComboboxWidget` directive bridges the listbox with the combobox trigger to support active-descendant focus tracking.
-
-| Property           | Type                  | Description                                                                                                                                  |
-| ------------------ | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `activeDescendant` | `string \| undefined` | The ID of the currently active option (bound to `listbox.activeDescendant()`) to update the `aria-activedescendant` attribute on the trigger |
-
-### リストボックスディレクティブ {#listbox-directives}
-
-selectパターンは、ドロップダウンリストに`ngListbox`を、選択可能な各項目に`ngOption`を使用します。
-
-#### Inputs {#listbox-inputs}
-
-| Property        | Type                               | Default      | Description                                                                                                                     |
-| --------------- | ---------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| `selectionMode` | `'follow'` \| `'explicit'`         | `'explicit'` | Set to `'explicit'` so options are toggled explicitly via click/Enter instead of following active focus                         |
-| `focusMode`     | `'roving'` \| `'activedescendant'` | `'roving'`   | The focus strategy used by the listbox. Set to `'activedescendant'` so browser focus remains on the combobox trigger.           |
-| `tabIndex`      | `number`                           | `0`          | The tabindex of the listbox. Set to `-1` to prevent keyboard focus from entering the popup container in active-descendant mode. |
-
-#### モデル {#model}
-
-| プロパティ | 型                   | 説明                                                                         |
-| ---------- | -------------------- | ---------------------------------------------------------------------------- |
-| `value`    | `ModelSignal<any[]>` | 選択された値の双方向バインディング可能な配列（selectの場合は単一の値を含む） |
+- [`Combobox`](/api/aria/combobox/Combobox)
+- [`ComboboxPopup`](/api/aria/combobox/ComboboxPopup)
+- [`ComboboxWidget`](/api/aria/combobox/ComboboxWidget)
+- [`Listbox`](/api/aria/listbox/Listbox)
+- [`Option`](/api/aria/listbox/Option)
 
 ### ポジショニング {#positioning}
 
-selectパターンは、スマートなポジショニングのために[CDK Overlay](https://material.angular.io/cdk/overlay/overview)と統合されています。ビューポートの端やスクロールを自動的に処理するには`cdkConnectedOverlay`を使用してください。
+selectパターンは、スマートなポジショニングのために[CDK Overlay](https://material.angular.dev/cdk/overlay/overview)と統合されています。ビューポートの端やスクロールを自動的に処理するには`cdkConnectedOverlay`を使用してください。

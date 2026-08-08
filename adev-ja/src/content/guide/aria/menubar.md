@@ -214,37 +214,11 @@ describe('MyMenubarComponent', () => {
 });
 ```
 
-## API {#apis}
+## APIリファレンス {#api-reference}
 
-メニューバーパターンはAngularのAriaライブラリのディレクティブを使用します。完全なAPIドキュメントについては、[Menuガイド](guide/aria/menu)を参照してください。
+詳細なAPIドキュメントについては、以下のAPIリファレンスを参照してください。
 
-### MenuBar {#menubar}
-
-トップレベルのメニューアイテムのための水平コンテナです。
-
-#### Inputs {#inputs}
-
-| プロパティ     | 型        | デフォルト | 説明                                                          |
-| -------------- | --------- | ------- | ------------------------------------------------------------- |
-| `disabled`     | `boolean` | `false` | メニューバー全体を無効にします                                  |
-| `wrap`         | `boolean` | `true`  | キーボードナビゲーションが最後のアイテムから最初のアイテムにラップするかどうか |
-| `softDisabled` | `boolean` | `true`  | `true`の場合、無効化されたアイテムはフォーカス可能ですが、インタラクティブではありません |
-| `value`          | `V[]`     | `[]`    | Selected menu item values (supports two-way binding)          |
-| `typeaheadDelay` | `number`  | `500`   | Milliseconds before the typeahead buffer is reset             |
-
-利用可能なすべての入力とシグナルの詳細については、[Menu APIドキュメント](guide/aria/menu#apis)を参照してください。
-
-### MenuItem {#menuitem}
-
-メニューバー内の個々のアイテムです。Menuと同じAPIです - [MenuItem](guide/aria/menu#menuitem)を参照してください。
-
-**メニューバー固有の動作:**
-
-- 左右の矢印キーでメニューバーのアイテム間を移動します（垂直メニューでは上下）
-- 最初のキーボード操作またはクリックで、サブメニューのホバーで開く機能が有効になります
-- Enterキーまたは下矢印キーでサブメニューを開き、最初のアイテムにフォーカスします
-- `aria-haspopup="menu"`はサブメニューを持つアイテムを示します
-
-### MenuTrigger {#menutrigger}
-
-通常メニューバーでは使用されません - MenuItemは関連するサブメニューがある場合、トリガーの動作を直接処理します。スタンドアロンのメニュートリガーパターンについては、[MenuTrigger](guide/aria/menu#menutrigger)を参照してください。
+- [`MenuBar`](/api/aria/menu/MenuBar)
+- [`MenuItem`](/api/aria/menu/MenuItem)
+- [`MenuTrigger`](/api/aria/menu/MenuTrigger)
+- [`Menu`](/api/aria/menu/Menu)

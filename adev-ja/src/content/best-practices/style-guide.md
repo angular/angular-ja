@@ -3,7 +3,8 @@
 ## はじめに {#introduction}
 
 このガイドでは、Angularアプリケーションコードのさまざまなスタイル規約について説明します。これらの推奨事項は
-Angularが機能するために必須ではありませんが、Angularエコシステム全体で一貫性を促進する一連のコーディングプラクティスを確立します。
+Angularが機能するために必須ではありませんが、
+Angularエコシステム全体で一貫性を促進する一連のコーディングプラクティスを確立します。
 一貫したプラクティスセットにより、コードの共有やプロジェクト間の移動が容易になります。
 
 このガイドは、TypeScriptやAngularに無関係な一般的なコーディングプラクティスは_対象としていません_。
@@ -41,8 +42,7 @@ TypeScriptクラスを含む場合、ファイル名はそのクラス名を反�
 
 ### コンポーネントのTypeScript、テンプレート、スタイルに同じファイル名を使用する {#use-the-same-file-name-for-a-components-typescript-template-and-styles}
 
-コンポーネントは通常、1つのTypeScriptファイル、1つのテンプレートファイル、
-1つのスタイルファイルで構成されます。これらのファイルは異なるファイル拡張子を持つ
+コンポーネントは通常、1つのTypeScriptファイル、1つのテンプレートファイル、1つのスタイルファイルで構成されます。これらのファイルは異なるファイル拡張子を持つ
 同じ名前を共有するべきです。例えば、`UserProfile`コンポーネントは
 `user-profile.ts`、`user-profile.html`、`user-profile.css`というファイルを持つことができます。
 
@@ -196,9 +196,7 @@ Angularによって初期化されるコンポーネントとディレクティ�
 readonlyアクセス修飾子は、Angularによって設定された値が上書きされないことを保証します。
 
 ```ts
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class UserProfile {
   readonly userId = input();
   readonly userSaved = output();
@@ -210,9 +208,7 @@ export class UserProfile {
 このアドバイスは出力プロパティとクエリに適用されますが、入力プロパティには適用されません。
 
 ```ts
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class UserProfile {
   @Output() readonly userSaved = new EventEmitter<void>();
   @ViewChildren(PaymentMethod) readonly paymentMethods?: QueryList<PaymentMethod>;
@@ -275,9 +271,7 @@ export class UserProfile {
 イベントの詳細に基づいてより具体的な動作に委譲しても問題ありません。
 
 ```ts
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 class RichText {
   handleKeydown(event: KeyboardEvent) {
     if (event.ctrlKey) {
@@ -322,9 +316,7 @@ Angularは、各ライフサイクルメソッドに対応するTypeScriptイン
 ```ts
 import {Component, OnInit} from '@angular/core';
 
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class UserProfile implements OnInit {
   // The `OnInit` interface ensures this method is named correctly.
   ngOnInit() {

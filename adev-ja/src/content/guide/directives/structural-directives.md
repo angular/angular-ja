@@ -2,13 +2,15 @@
 
 構造ディレクティブは、`<ng-template>`要素に適用され、その`<ng-template>`の内容を条件付きまたは繰り返しでレンダリングするディレクティブです。
 
+日常的な条件付きレンダリングや繰り返しレンダリングには、Angular組み込みの[制御フローブロック](guide/templates/control-flow)(`@if`、`@for`、`@switch`)を使用してください。権限チェックによってコンテンツの表示を制限したり、外部ソースからのデータをテンプレートに提供したりするなど、制御フローでは対応できない再利用可能なレンダリング動作が必要な場合に、構造ディレクティブを作成します。
+
 ## 使用例
 
-このガイドでは、指定されたデータソースからデータを取得し、そのデータが利用可能になったときにテンプレートをレンダリングする構造ディレクティブを作成します。このディレクティブは、SQLキーワード`SELECT`にちなんで`SelectDirective`と呼ばれ、属性セレクター`[select]`と一致させます。
+このガイドでは、`SelectDirective`という名前のディレクティブを実例として使用します。このディレクティブは、指定されたデータソースからデータを取得し、そのデータが利用可能になったときにテンプレートをレンダリングします。SQLキーワード`SELECT`にちなんで名付けられ、属性セレクター`[select]`と一致させます。
 
-`SelectDirective`には、使用するデータソースの名前を指定する入力があり、`selectFrom`と呼びます。この入力の`select`プレフィックスは、[省略記法](#structural-directive-shorthand)にとって重要です。ディレクティブは、選択されたデータを提供するテンプレートコンテキストを使用して、`<ng-template>`をインスタンス化します。
+`SelectDirective`には、使用するデータソースの名前を指定する`selectFrom`という入力があります。この入力の`select`プレフィックスは、[省略記法](#structural-directive-shorthand)にとって重要です。ディレクティブは、選択されたデータを提供するテンプレートコンテキストを使用して、`<ng-template>`をインスタンス化します。
 
-以下は、`<ng-template>`に直接このディレクティブを適用した例です。
+このディレクティブを`<ng-template>`に直接使用すると、次のようになります。
 
 ```angular-html
 <ng-template select let-data [selectFrom]="source">
@@ -60,20 +62,12 @@ Angularは、構造ディレクティブの省略記法をサポートしてお�
 
 ## 構造ディレクティブの作成
 
-このセクションでは、`SelectDirective`の作成について説明します。
+構造ディレクティブは、2つの依存関係を注入するディレクティブクラスです。
 
-<docs-workflow>
-<docs-step title="ディレクティブを生成">
-Angular CLIを使用して、次のコマンドを実行します。ここで、`select`はディレクティブの名前です。
+- [`TemplateRef`](api/core/TemplateRef)は、ディレクティブが適用されている`<ng-template>`の内容へのアクセスを提供します。
+- [`ViewContainerRef`](api/core/ViewContainerRef)は、ディレクティブがそのテンプレートをレンダリングできるDOM上の位置を表します。
 
-```shell
-ng generate directive select
-```
-
-Angularは、ディレクティブクラスを作成し、テンプレートでディレクティブを識別するCSSセレクター`[select]`を指定します。
-</docs-step>
-<docs-step title="ディレクティブを構造化">
-`TemplateRef`、`ViewContainerRef`、`input`をインポートし、ディレクティブ内で`TemplateRef`と`ViewContainerRef`をプライベートプロパティとしてインジェクトします。
+ディレクティブは、ビューコンテナ内のテンプレートから埋め込みビューを作成する、または作成しないことでレンダリングを制御します。完成した`SelectDirective`は次のようになります。
 
 ```ts
 import {Directive, TemplateRef, ViewContainerRef, inject, input} from '@angular/core';
@@ -88,27 +82,9 @@ export interface DataSource<T> {
 export class SelectDirective {
   private templateRef = inject(TemplateRef);
   private viewContainerRef = inject(ViewContainerRef);
-}
-```
 
-</docs-step>
-<docs-step title="'selectFrom'入力を追加">
-`selectFrom` `input()`プロパティを追加します。
-
-```ts
-export class SelectDirective {
-  // ...
   selectFrom = input.required<DataSource<unknown>>();
-}
-```
 
-</docs-step>
-<docs-step title="ビジネスロジックを追加">
-`SelectDirective`が、入力を持つ構造ディレクティブとしてスキャフォールディングされたので、データを取得し、テンプレートをデータと共にレンダリングするロジックを追加できます。
-
-```ts
-export class SelectDirective {
-  // ...
   async ngOnInit() {
     const data = await this.selectFrom().load();
     this.viewContainerRef.createEmbeddedView(this.templateRef, {
@@ -120,10 +96,15 @@ export class SelectDirective {
 }
 ```
 
-</docs-step>
-</docs-workflow>
+`selectFrom`入力は、ディレクティブが読み取るデータソースの名前を指定します。ディレクティブはデータソースなしでは何も役に立たないため、[`input.required()`](guide/components/inputs#required-inputs)を使用しています。
 
-これで`SelectDirective`は起動して実行できるようになりました。次のステップとして、[テンプレートタイプチェックのサポートを追加](#typing-the-directives-context)できます。
+Angularがディレクティブを初期化すると、データを読み込んでから`createEmbeddedView()`を呼び出してテンプレートをレンダリングします。2番目の引数はテンプレートの*コンテキストオブジェクト*であり、テンプレートが`let`宣言でバインドできる値です。データを`$implicit`キーに割り当てることで、`let-data`(または省略記法での`let data`)が受け取るデフォルト値になります。
+
+NOTE: この例では、ディレクティブが初期化されるときに一度だけテンプレートをレンダリングします。バインドされたデータソースが変更されても再レンダリングされません。
+
+ディレクティブが動作するようになったら、[テンプレートタイプチェックのサポートを追加](#typing-the-directives-context)することを検討してください。
+
+HELPFUL: CLIコマンド[`ng generate directive`](tools/cli/schematics)は、テストファイルとともにディレクティブをスキャフォールディングします。
 
 ## 構造ディレクティブの構文リファレンス {#structural-directive-syntax-reference}
 
@@ -167,8 +148,8 @@ Angularは、構造ディレクティブの省略記法を次の通常のバイ�
 | :-------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------ |
 | `*myDir="let item of [1,2,3]"`                                        | `<ng-template myDir let-item [myDirOf]="[1, 2, 3]">`                                                          |
 | `*myDir="let item of [1,2,3] as items; trackBy: myTrack; index as i"` | `<ng-template myDir let-item [myDirOf]="[1,2,3]" let-items="myDirOf" [myDirTrackBy]="myTrack" let-i="index">` |
-| `*ngComponentOutlet="componentClass";`                                | `<ng-template [ngComponentOutlet]="componentClass">`                                                          |
-| `*ngComponentOutlet="componentClass; inputs: myInputs";`              | `<ng-template [ngComponentOutlet]="componentClass" [ngComponentOutletInputs]="myInputs">`                     |
+| `*ngComponentOutlet="componentClass"`                                 | `<ng-template [ngComponentOutlet]="componentClass">`                                                          |
+| `*ngComponentOutlet="componentClass; inputs: myInputs"`               | `<ng-template [ngComponentOutlet]="componentClass" [ngComponentOutletInputs]="myInputs">`                     |
 | `*myDir="exp as value"`                                               | `<ng-template [myDir]="exp" let-value="myDir">`                                                               |
 
 ## カスタムディレクティブのテンプレートタイプチェックを改善する {#improving-template-type-checking-for-custom-directives}
@@ -251,3 +232,11 @@ export class SelectDirective<T> {
   }
 }
 ```
+
+## What's next
+
+<docs-pill-row>
+  <docs-pill href="guide/directives/directive-composition-api" title="Directive composition API"/>
+  <docs-pill href="guide/templates/ng-template" title="ng-template"/>
+  <docs-pill href="guide/templates/control-flow" title="Control flow"/>
+</docs-pill-row>

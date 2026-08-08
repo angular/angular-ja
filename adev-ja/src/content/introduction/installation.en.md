@@ -17,7 +17,7 @@ If you're starting a new project, you'll most likely want to create a local proj
 
 ### Prerequisites
 
-- **Node.js** - [v20.19.0 or newer](/reference/versions)
+- **Node.js** - [v22.22.3 or newer](/reference/versions)
 - **Text editor** - We recommend [Visual Studio Code](https://code.visualstudio.com/)
 - **Terminal** - Required for running [Angular CLI](/tools/cli) commands
 - **Development Tool** - To improve your development workflow, we recommend the [Angular Language Service](/tools/language-service)
@@ -55,7 +55,6 @@ Open a terminal (if you're using [Visual Studio Code](https://code.visualstudio.
     >
     bun install -g @angular/cli
     </docs-code>
-
 </docs-code-multifile>
 
 If you are having issues running this command in Windows or Unix, check out the [CLI docs](/tools/cli/setup-local#install-the-angular-cli) for more info.

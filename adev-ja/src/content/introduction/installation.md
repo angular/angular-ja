@@ -17,7 +17,7 @@ Angularアプリを試す最速の方法です。設定は不要です。
 
 ### 前提条件 {#prerequisites}
 
-- **Node.js** - [v20.19.0以降](/reference/versions)
+- **Node.js** - [v22.22.3以降](/reference/versions)
 - **テキストエディタ** - [Visual Studio Code](https://code.visualstudio.com/)を推奨
 - **ターミナル** - [Angular CLI](/tools/cli)コマンドを実行するために必要
 - **開発ツール** - 開発ワークフローを改善するために、[Angular Language Service](/tools/language-service) をおすすめします
@@ -55,7 +55,6 @@ Angularアプリを試す最速の方法です。設定は不要です。
     >
     bun install -g @angular/cli
     </docs-code>
-
 </docs-code-multifile>
 
 WindowsまたはUnixでこのコマンドを実行する際に問題が発生した場合は、[CLIドキュメント](/tools/cli/setup-local#install-the-angular-cli)を参照してください。

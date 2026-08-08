@@ -419,7 +419,9 @@ http
 - `'cors'`: CORSでクロスオリジンリクエストを許可（デフォルト）
 - `'no-cors'`: CORSなしでシンプルなクロスオリジンリクエストを許可、レスポンスは不透明
 
-TIP: クロスオリジンに行くべきでない機密リクエストには `mode: 'same-origin'` を使用してください。
+TIP: ブラウザ環境では、クロスオリジンに行くべきでない機密リクエストには `mode: 'same-origin'` を使用してください。
+
+IMPORTANT: Node.js上でのSSR中、`HttpClient` はNode.jsの[UndiciベースのFetch実装](https://nodejs.org/api/globals.html#fetch)を使用します。[UndiciはブラウザのCORSチェックを強制しません](https://undici.nodejs.org/#cors)。そのため `mode: 'same-origin'` はサーバーサイドのリクエストを制限しません。ユーザーの入力に影響されるURLは、許可リストと照合して検証してください。
 
 #### リダイレクト処理 {#redirect-handling}
 
@@ -528,6 +530,8 @@ IMPORTANT: `withCredentials` オプションは `credentials` オプションよ
 - `'include'`: クロスオリジンリクエストでも常に認証情報を送信
 
 TIP: CORSをサポートする異なるドメインに認証Cookieやヘッダーを送信する必要がある場合は `credentials: 'include'` を使用してください。混乱を避けるため、`credentials` と `withCredentials` オプションを混在させることは避けてください。
+
+IMPORTANT: Node.js上でのSSR中、`credentials: 'include'` は受信したブラウザリクエストのCookieを自動的に転送しません。`credentials` オプションは、明示的に追加した `Cookie` や `Authorization` ヘッダーを削除するものでもありません。[Undiciはブラウザが禁止する一部のヘッダーを許可します](https://undici.nodejs.org/#forbidden-and-safelisted-header-names)。そのため、認証情報を含むヘッダーは信頼できるオリジンにのみ転送してください。
 
 #### Referrer {#referrer}
 

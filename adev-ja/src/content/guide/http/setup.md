@@ -1,22 +1,22 @@
 # `HttpClient` の設定
 
-`HttpClient` をアプリケーションで使用するには、まず [依存性の注入](guide/di) を使って設定する必要があります。
+`HttpClient` は、Angular v21以降ではデフォルトで注入可能です。
 
 ## 依存性の注入による `HttpClient` の提供
 
-`HttpClient` は `provideHttpClient` ヘルパー関数を使って提供されます。ほとんどのアプリケーションは、`app.config.ts` のアプリケーション `providers` にこれを含めます。
+`provideHttpClient` ヘルパー関数を使うと、`app.config.ts` のアプリケーション `providers` で、デフォルトのHTTP機能セットを設定したり、機能を追加したりできます。
 
 ```ts
 export const appConfig: ApplicationConfig = {
-  providers: [provideHttpClient()],
+  providers: [provideHttpClient(/* add features here, such as withInterceptors(...) */)],
 };
 ```
 
-アプリケーションがNgModuleベースのブートストラップを使用している場合は、アプリケーションのNgModuleのプロバイダーに `provideHttpClient` を含めることができます。
+アプリケーションがNgModuleベースのブートストラップを使用している場合は、アプリケーションのNgModuleのプロバイダーに `provideHttpClient` を含めて、デフォルトのHTTP機能セットを設定したり、機能を追加したりできます。
 
 ```ts
 @NgModule({
-  providers: [provideHttpClient()],
+  providers: [provideHttpClient(/* add features here, such as withInterceptors(...) */)],
   // ...その他のアプリケーション設定
 })
 export class AppModule {}
@@ -47,6 +47,12 @@ export const appConfig: ApplicationConfig = {
 デフォルトでは、`HttpClient` は [`fetch`](https://developer.mozilla.org/docs/Web/API/Fetch_API) APIを使ってリクエストを行います。`withXhr` 機能は、クライアントを [`XMLHttpRequest`](https://developer.mozilla.org/docs/Web/API/XMLHttpRequest) APIを代わりに使うように切り替えます。
 
 `fetch` はより新しいAPIであり、`XMLHttpRequest` がサポートされていないいくつかの環境で使用できます。アップロードの進行状況イベントを生成しないなど、いくつかの制限があります。
+
+<docs-callout critical title="サーバーサイドレンダリング（SSR）環境では `withXhr` を使用しないでください">
+
+サーバー上でのXHRサポートは**非推奨**であり、Angular 23で削除される予定です。基盤となる `xhr2` ライブラリはリダイレクトを安全に処理しません。クロスオリジンのリダイレクトで `Authorization` ヘッダーを転送してしまう可能性があり、リダイレクトループによるサービス拒否（DoS）攻撃の影響も受けます。SSRアプリケーションでは、代わりにデフォルトの `fetch` バックエンドを使用してください。
+
+</docs-callout>
 
 ### `withInterceptors(...)`
 

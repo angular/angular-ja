@@ -1,22 +1,22 @@
 # Setting up `HttpClient`
 
-Before you can use `HttpClient` in your app, you must configure it using [dependency injection](guide/di).
+`HttpClient` is available for injection by default in Angular v21 and later.
 
 ## Providing `HttpClient` through dependency injection
 
-`HttpClient` is provided using the `provideHttpClient` helper function, which most apps include in the application `providers` in `app.config.ts`.
+You can use the `provideHttpClient` helper function to configure the default HTTP feature set or add features in the application `providers` in `app.config.ts`.
 
 ```ts
 export const appConfig: ApplicationConfig = {
-  providers: [provideHttpClient()],
+  providers: [provideHttpClient(/* add features here, such as withInterceptors(...) */)],
 };
 ```
 
-If your app is using NgModule-based bootstrap instead, you can include `provideHttpClient` in the providers of your app's NgModule:
+If your app is using NgModule-based bootstrap instead, you can include `provideHttpClient` in the providers of your app's NgModule to configure the default HTTP feature set or add features:
 
 ```ts
 @NgModule({
-  providers: [provideHttpClient()],
+  providers: [provideHttpClient(/* add features here, such as withInterceptors(...) */)],
   // ... other application configuration
 })
 export class AppModule {}
@@ -47,6 +47,12 @@ export const appConfig: ApplicationConfig = {
 By default, `HttpClient` uses the [`fetch`](https://developer.mozilla.org/docs/Web/API/Fetch_API) API to make requests. The `withXhr` feature switches the client to use the [`XMLHttpRequest`](https://developer.mozilla.org/docs/Web/API/XMLHttpRequest) API instead.
 
 `fetch` is a more modern API and is available in a few environments where `XMLHttpRequest` is not supported. It does have a few limitations, such as not producing upload progress events.
+
+<docs-callout critical title="Do not use `withXhr` in server-side rendering (SSR) environments">
+
+XHR support on the server is **deprecated** and is intended to be removed in Angular 23. The underlying `xhr2` library does not safely handle redirects: it can forward `Authorization` headers on cross-origin redirects and is susceptible to denial-of-service (DoS) via redirect loops. For SSR applications, use the default `fetch` backend instead.
+
+</docs-callout>
 
 ### `withInterceptors(...)`
 

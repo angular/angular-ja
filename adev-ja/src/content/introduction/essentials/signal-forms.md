@@ -24,14 +24,15 @@ const loginModel = signal<LoginData>({
 
 ### 2. フォームモデルを`form()`に渡して`FieldTree`を作成する {#2-pass-the-form-model-to-form-to-create-a-fieldtree}
 
-次に、フォームモデルを`form()`関数に渡して**フィールドツリー**を作成します。これはモデルの形状を反映したオブジェクト構造で、ドット記法でフィールドにアクセスできます:
+次に、フォームモデルを`form()`関数に渡して**フィールドツリー**を作成します。これはモデルの形状を反映したオブジェクト構造で、ドット記法でフィールドにアクセスできます。
+
+Both the root form object and its nested properties are `FieldTree` nodes:
 
 ```ts
 const loginForm = form(loginModel);
 
-// Access fields directly by property name
-loginForm.email;
-loginForm.password;
+loginForm; // is a FieldTree
+loginForm.email; // is also a FieldTree
 ```
 
 ### 3. `[formField]`ディレクティブでHTML入力をバインドする {#3-bind-html-inputs-with-field-directive}
@@ -47,18 +48,20 @@ loginForm.password;
 
 NOTE: `[formField]`ディレクティブは、必要に応じて`required`、`disabled`、`readonly`などの属性のフィールドの状態も同期します。
 
-### 4. `value()`でフィールドの値を読み取る {#4-read-field-values-with-value}
+### 4. `FieldTree`シグナルで状態を読み取る {#4-read-state-with-fieldtree-signals}
 
-フィールドを関数として呼び出すことで、フィールドの状態にアクセスできます。これにより、フィールドの値、バリデーションステータス、インタラクションの状態に対するリアクティブなシグナルを含む`FieldState`オブジェクトが返されます:
+ツリーの任意の部分の状態には、`FieldTree`ノードを関数として呼び出すことでアクセスできます。これにより、値、バリデーションステータス、インタラクションの状態に対するリアクティブなシグナルを含む状態オブジェクトが返されます:
 
 ```ts
-loginForm.email(); // Returns FieldState with value(), valid(), touched(), etc.
+loginForm(); // Returns state for the whole form
+loginForm.email(); // Returns state for the email field
 ```
 
 フィールドの現在の値を読み取るには、`value()`シグナルにアクセスします:
 
 ```html
-<!-- Render form value that updates automatically as user types -->
+<!-- Render values that update automatically as user types -->
+<p>Form value: {{ loginForm().value() | json }}</p>
 <p>Email: {{ loginForm.email().value() }}</p>
 ```
 
@@ -67,9 +70,9 @@ loginForm.email(); // Returns FieldState with value(), valid(), touched(), etc.
 const currentEmail = loginForm.email().value();
 ```
 
-### 5. `set()`でフィールドの値を更新する {#5-update-field-values-with-set}
+### 5. `set()`で値を更新する {#5-update-values-with-set}
 
-`value.set()`メソッドを使用して、プログラムからフィールドの値を更新できます。これにより、フィールドと基になるモデルシグナルの両方が更新されます:
+任意のノードで`value.set()`メソッドを使用して、プログラムから値を更新できます。これにより、`FieldTree`と基になるモデルシグナルの両方が更新されます:
 
 ```ts
 // Update the value programmatically
@@ -83,7 +86,7 @@ loginForm.email().value.set('alice@wonderland.com');
 console.log(loginModel().email); // 'alice@wonderland.com'
 ```
 
-完全な例は次のとおりです:
+### Complete example
 
 <docs-code-multifile preview path="adev/src/content/examples/signal-forms/src/login-simple/app/app.ts">
   <docs-code header="app.ts" path="adev/src/content/examples/signal-forms/src/login-simple/app/app.ts"/>
@@ -235,29 +238,30 @@ required(schemaPath.email, {message: 'Email is required'});
 email(schemaPath.email, {message: 'Please enter a valid email address'});
 ```
 
-各フォームフィールドは、シグナルを通じてそのバリデーション状態を公開します。たとえば、`field().valid()`をチェックしてバリデーションが成功したか、`field().touched()`をチェックしてユーザーが操作したかを確認し、`field().errors()`をチェックしてバリデーションエラーのリストを取得できます。
+各`FieldTree`のノードは、リアクティブなシグナルを通じてそのバリデーションおよびインタラクションの状態を公開します。
 
-以下に完全な例を示します:
+### `FieldTree`の状態シグナル {#fieldtree-state-signals}
+
+Every node in the tree, including the root form object, provides the same signals to track its state. Since every node is a `FieldTree`, the API for monitoring validity and interaction is identical at every level.
+
+| State        | Description                                                                     |
+| ------------ | ------------------------------------------------------------------------------- |
+| `valid()`    | Returns `true` if the node passes all validation rules                          |
+| `invalid()`  | Returns `true` if there are validation errors                                   |
+| `pending()`  | Returns `true` if async validation is in progress                               |
+| `touched()`  | Returns `true` if the user has focused and blurred the field or any child field |
+| `dirty()`    | Returns `true` if the value has been changed by the user                        |
+| `disabled()` | Returns `true` if the node is disabled                                          |
+| `readonly()` | Returns `true` if the node is readonly                                          |
+| `errors()`   | Returns an array of validation errors with `kind` and `message` properties      |
+
+### Complete example
 
 <docs-code-multifile preview path="adev/src/content/examples/signal-forms/src/login-validation/app/app.ts">
   <docs-code header="app.ts" path="adev/src/content/examples/signal-forms/src/login-validation/app/app.ts"/>
   <docs-code header="app.html" path="adev/src/content/examples/signal-forms/src/login-validation/app/app.html"/>
   <docs-code header="app.css" path="adev/src/content/examples/signal-forms/src/login-validation/app/app.css"/>
 </docs-code-multifile>
-
-### フィールドの状態シグナル {#field-state-signals}
-
-すべての`field()`は、これらの状態シグナルを提供します:
-
-| 状態         | 説明                                                                       |
-| ------------ | -------------------------------------------------------------------------- |
-| `valid()`    | フィールドがすべてのバリデーションルールをパスした場合に`true`を返します     |
-| `touched()`  | ユーザーがフィールドにフォーカスしてぼかした場合に`true`を返します           |
-| `dirty()`    | ユーザーが値を変更した場合に`true`を返します                               |
-| `disabled()` | フィールドが無効になっている場合に`true`を返します                           |
-| `readonly()` | フィールドが読み取り専用になっている場合に`true`を返します                   |
-| `pending()`  | 非同期バリデーションが進行中の場合に`true`を返します                         |
-| `errors()`   | `kind`と`message`プロパティを持つバリデーションエラーの配列を返します       |
 
 ## 次のステップ {#next-steps}
 

@@ -237,7 +237,7 @@ bootstrapApplication(App, {
 }
 ```
 
-または、`@defer`ブロックと同じテンプレート内に、対話が監視される要素として[テンプレート参照変数](/guide/templates/variables)を指定できます。この変数は、viewportトリガーのパラメータとして渡されます。
+または、`@defer`ブロックと同じテンプレート内に、対話が監視される要素として[テンプレート参照変数](/guide/templates/variables)を指定できます。この変数は、interactionトリガーのパラメータとして渡されます。
 
 ```angular-html
 <div #greeting>こんにちは！</div>
@@ -260,7 +260,7 @@ bootstrapApplication(App, {
 }
 ```
 
-または、`@defer`ブロックと同じテンプレート内に、ビューポートに入っているかどうかが監視される要素として[テンプレート参照変数](/guide/templates/variables)を指定できます。この変数は、ビューポートトリガーのパラメータとして渡されます。
+または、`@defer`ブロックと同じテンプレート内に、ホバーされる要素として[テンプレート参照変数](/guide/templates/variables)を指定できます。この変数は、hoverトリガーのパラメータとして渡されます。
 
 ```angular-html
 <div #greeting>こんにちは！</div>

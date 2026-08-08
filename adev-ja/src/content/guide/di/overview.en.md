@@ -62,7 +62,7 @@ export class AnalyticsLogger {
 
 NOTE: The `@Service` makes this service available throughout your entire application as a singleton. This is the recommended approach for most services.
 
-HELPFUL: The [`@Service`](guide/di/creating-and-using-services#using-the-service-decorator) decorator is an ergonomic shorthand for `@Injectable({providedIn: 'root'})`.
+HELPFUL: The [`@Service`](guide/di/creating-and-using-services#using-the-service-vs-injectable-decorator) decorator is an ergonomic shorthand for `@Injectable({providedIn: 'root'})`.
 
 ## Injecting dependencies with `inject()`
 
@@ -96,9 +96,7 @@ export class Navbar {
 You can inject dependencies during construction of a component, directive, or service. The call to [`inject`](/api/core/inject) can appear in either the `constructor` or in a field initializer. Here are some common examples:
 
 ```ts
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class MyComponent {
   // ✅ In class field initializer
   private service = inject(MyService);

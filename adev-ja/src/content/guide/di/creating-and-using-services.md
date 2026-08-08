@@ -35,38 +35,26 @@ export class BasicDataStore {
 
 ## サービスが利用可能になる仕組み {#how-services-become-available}
 
-サービスで`@Injectable({ providedIn: 'root' })`を使用すると、Angularは次のことを行います:
+デフォルトでは、サービスはルートレベルでプロビジョニングされます。サービスをグローバルに提供すると、Angularは主に3つのメリットを保証します。
 
-- **アプリケーション全体で単一のインスタンス** (シングルトン) を作成します
-- **アプリケーション全体で利用可能**にします (追加の設定は不要です)
-- **ツリーシェイキングを有効にし**、実際に使用される場合にのみAngularがJavaScriptバンドルにサービスを含めるようにします
+- **シングルトンインスタンス:** アプリケーション全体で共有される単一のインスタンスを作成します。
+- **グローバルな可用性:** プロバイダーを手動で登録しなくても、どこからでも自動的にアクセスできます。
+- **ツリーシェイク可能性:** コードがそのサービスを明示的に使用しない場合、本番用の最終バンドルから確実に除外されます。
 
-これは、ほとんどのサービスで推奨されるアプローチです。
+### `@Service`デコレーターと`@Injectable`デコレーターの使い分け {#using-the-service-vs-injectable-decorator}
 
-## Using the `@Service` decorator {#using-the-service-decorator}
+`@Service`デコレーターは、従来の`@Injectable({ providedIn: 'root' })`構文に代わる、モダンで扱いやすい短縮形です。
 
-For the common case of a singleton service available throughout your application, Angular provides the `@Service` decorator as a more ergonomic alternative to `@Injectable({providedIn: 'root'})`.
+どちらのデコレーターがシナリオに適しているかを判断するには、次のクイックリファレンスを使用してください。
 
-The earlier `BasicDataStore` example can be rewritten with `@Service`:
-
-```ts {header: "src/app/basic-data-store.ts"}
-import {Service} from '@angular/core';
-
-@Service()
-export class BasicDataStore {
-  private data: string[] = [];
-
-  addData(item: string): void {
-    this.data.push(item);
-  }
-
-  getData(): string[] {
-    return [...this.data];
-  }
-}
-```
-
-This behaves the same as the `@Injectable({providedIn: 'root'})` version above: Angular creates a single instance, makes it available everywhere, and tree-shakes it from the bundle if it is never injected.
+| 機能 / 要件                                     | `@Service` | `@Injectable`                           |
+| ------------------------------------------------ | ---------- | ---------------------------------------- |
+| **`inject()`関数のサポート**                     | Yes        | Yes                                      |
+| **コンストラクターベースのDI**                   | ❌ No      | Yes                                      |
+| **暗黙的なルートシングルトンプロバイダー**       | Yes        | ❌ No (`{providedIn: 'root'}`が必要)      |
+| **高度なプロバイダーキー (`useClass`など)**      | ❌ No      | Yes                                      |
+| **カスタム初期化ファクトリー**                   | Yes        | Yes                                      |
+| **ルート以外のスコープ (`platform`など)**        | ❌ No      | Yes                                      |
 
 ### Replacing the implementation with a factory {#replacing-the-implementation-with-a-factory}
 

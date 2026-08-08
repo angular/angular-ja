@@ -62,7 +62,7 @@ export class AnalyticsLogger {
 
 NOTE: `@Service` により、このサービスはシングルトンとしてアプリケーション全体で利用可能になります。これはほとんどのサービスで推奨されるアプローチです。
 
-HELPFUL: [`@Service`](guide/di/creating-and-using-services#using-the-service-decorator) デコレーターは、`@Injectable({providedIn: 'root'})` の人間工学的な短縮形です。
+HELPFUL: [`@Service`](guide/di/creating-and-using-services#using-the-service-vs-injectable-decorator) デコレーターは、`@Injectable({providedIn: 'root'})` の人間工学的な短縮形です。
 
 ## `inject()` による依存性の注入 {#injecting-dependencies-with-inject}
 
@@ -96,9 +96,7 @@ export class Navbar {
 コンポーネント、ディレクティブ、またはサービスの構築中に依存関係を注入できます。[`inject`](/api/core/inject) の呼び出しは、`constructor` またはフィールドイニシャライザーのいずれかに配置できます。一般的な例をいくつか示します。
 
 ```ts
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class MyComponent {
   // ✅ クラスフィールドイニシャライザー内
   private service = inject(MyService);

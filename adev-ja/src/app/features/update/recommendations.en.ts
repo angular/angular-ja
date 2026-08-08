@@ -245,7 +245,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'node 8',
     action:
-      'Make sure you are using [Node 8 or later](http://www.hostingadvice.com/how-to/update-node-js-latest-version/)',
+      'Make sure you are using [Node 8 or later](https://www.hostingadvice.com/how-to/update-node-js-latest-version/)',
   },
   {
     possibleIn: 600,
@@ -486,7 +486,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'node 10',
     action:
-      'Make sure you are using [Node 10 or later](http://www.hostingadvice.com/how-to/update-node-js-latest-version/).',
+      'Make sure you are using [Node 10 or later](https://www.hostingadvice.com/how-to/update-node-js-latest-version/).',
   },
   {
     possibleIn: 800,
@@ -579,7 +579,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'node 10.13',
     action:
-      'Make sure you are using [Node 10.13 or later](http://www.hostingadvice.com/how-to/update-node-js-latest-version/).',
+      'Make sure you are using [Node 10.13 or later](https://www.hostingadvice.com/how-to/update-node-js-latest-version/).',
   },
   {
     possibleIn: 900,
@@ -708,7 +708,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Advanced,
     step: 'wtf',
     action:
-      'Support for web tracing framework in Angular was deprecated in version 8. You should stop using any of the `wtf*` APIs. To do performance tracing, we recommend using [browser performance tools](https://developers.google.com/web/tools/lighthouse/audits/user-timing).',
+      'Support for web tracing framework in Angular was deprecated in version 8. You should stop using any of the `wtf*` APIs. To do performance tracing, we recommend using [browser performance tools](https://developer.chrome.com/docs/lighthouse/performance/user-timings).',
   },
   {
     possibleIn: 800,
@@ -780,7 +780,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Medium,
     step: '$localize',
     action:
-      "If you use [Angular's i18n support](http://angular.io/guide/i18n), you will need to begin using `@angular/localize`. Learn more about the [$localize Global Import Migration](https://v9.angular.io/guide/migration-localize).",
+      "If you use [Angular's i18n support](https://angular.io/guide/i18n), you will need to begin using `@angular/localize`. Learn more about the [$localize Global Import Migration](https://v9.angular.io/guide/migration-localize).",
   },
 
   {
@@ -981,7 +981,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'v11 browser support',
     action:
-      'Support for IE9, IE10, and IE mobile has been removed. This was announced in the [v10 update](http://blog.angular.dev/version-10-of-angular-now-available-78960babd41#c357). ',
+      'Support for IE9, IE10, and IE mobile has been removed. This was announced in the [v10 update](https://blog.angular.dev/version-10-of-angular-now-available-78960babd41#c357). ',
   },
   {
     possibleIn: 1100,
@@ -1348,7 +1348,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'v13 node',
     action:
-      'Make sure you are using [Node 12.20.0 or later](http://www.hostingadvice.com/how-to/update-node-js-latest-version/)',
+      'Make sure you are using [Node 12.20.0 or later](https://www.hostingadvice.com/how-to/update-node-js-latest-version/)',
   },
   {
     possibleIn: 1300,
@@ -1471,7 +1471,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'v14 node',
     action:
-      'Make sure you are using [Node 14.15.0 or later](http://www.hostingadvice.com/how-to/update-node-js-latest-version/)',
+      'Make sure you are using [Node 14.15.0 or later](https://www.hostingadvice.com/how-to/update-node-js-latest-version/)',
   },
   {
     possibleIn: 1400,
@@ -2544,6 +2544,14 @@ export const RECOMMENDATIONS: Step[] = [
   },
   {
     action:
+      'Remove the `allowSignalWrites` option from `effect()` calls. The option is deprecated and no longer required, as signal writes inside effects are allowed by default.',
+    level: ApplicationComplexity.Medium,
+    necessaryAsOf: 1900,
+    possibleIn: 1900,
+    step: '19.0.0-remove-allow-signal-writes',
+  },
+  {
+    action:
       "In the application's project directory, run `ng update @angular/core@20 @angular/cli@20` to update your application to Angular v20.",
     level: ApplicationComplexity.Basic,
     necessaryAsOf: 2000,
@@ -2784,6 +2792,15 @@ export const RECOMMENDATIONS: Step[] = [
   {
     possibleIn: 2100,
     necessaryAsOf: 2100,
+    level: ApplicationComplexity.Medium,
+    material: true,
+    step: '21.0.0-cdk-overlay-top-layer-stacking',
+    action:
+      "CDK overlays can now render in the browser's native top layer, causing elements that previously appeared above Material overlays via `z-index` to render beneath them. You can restore the previous behavior by providing `OVERLAY_DEFAULT_CONFIG` from `@angular/cdk/overlay` with the value `{usePopover: false}`.",
+  },
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
     level: ApplicationComplexity.Advanced,
     step: '21.0.0-update-signal-input-access-in-custom-elements',
     action:
@@ -3001,6 +3018,14 @@ export const RECOMMENDATIONS: Step[] = [
   {
     possibleIn: 2200,
     necessaryAsOf: 2200,
+    level: ApplicationComplexity.Medium,
+    step: '22.0.0-resource-stream-synchronous-resolution',
+    action:
+      'The `stream` property on `Resource`, including `rxResource`, now resolves synchronously when the stream or observable emits synchronously. Tests that assumed asynchronous resolution may need to wait for the value immediately instead.',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
     level: ApplicationComplexity.Advanced,
     step: '22.0.0-remove-in-expressions',
     action:
@@ -3029,6 +3054,14 @@ export const RECOMMENDATIONS: Step[] = [
     step: '22.0.0-deprecate-report-progress-option',
     action:
       'The `reportProgress` option in HTTP requests is deprecated. Use `reportUploadProgress` or `reportDownloadProgress` instead for more explicit control over progress reporting.',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Medium,
+    step: '22.0.0-deprecate-server-xhr',
+    action:
+      'XHR support in `@angular/platform-server` is deprecated and is intended to be removed in Angular 23. The underlying `xhr2` library does not safely handle redirects (e.g. it can forward `Authorization` headers on cross-origin redirects and is susceptible to DoS via redirect loops). For server-side rendering, use the default `fetch` backend instead of `withXhr()`.',
   },
   {
     possibleIn: 2200,

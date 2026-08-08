@@ -245,7 +245,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'node 8',
     action:
-      '[Node 8以降](http://www.hostingadvice.com/how-to/update-node-js-latest-version/)を使用していることを確認してください。',
+      '[Node 8以降](https://www.hostingadvice.com/how-to/update-node-js-latest-version/)を使用していることを確認してください。',
   },
   {
     possibleIn: 600,
@@ -486,7 +486,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'node 10',
     action:
-      '[Node 10以降](http://www.hostingadvice.com/how-to/update-node-js-latest-version/)を使用していることを確認してください。',
+      '[Node 10以降](https://www.hostingadvice.com/how-to/update-node-js-latest-version/)を使用していることを確認してください。',
   },
   {
     possibleIn: 800,
@@ -579,7 +579,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'node 10.13',
     action:
-      '[Node 10.13以降](http://www.hostingadvice.com/how-to/update-node-js-latest-version/)を使用していることを確認してください。',
+      '[Node 10.13以降](https://www.hostingadvice.com/how-to/update-node-js-latest-version/)を使用していることを確認してください。',
   },
   {
     possibleIn: 900,
@@ -708,7 +708,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Advanced,
     step: 'wtf',
     action:
-      'AngularでのWebトレーシングフレームワークのサポートはバージョン8で非推奨になりました。`wtf*` APIの使用をやめるべきです。パフォーマンス追跡を行うには、[ブラウザのパフォーマンスツール](https://developers.google.com/web/tools/lighthouse/audits/user-timing)の使用をお勧めします。',
+      'AngularでのWebトレーシングフレームワークのサポートはバージョン8で非推奨になりました。`wtf*` APIの使用をやめるべきです。パフォーマンス追跡を行うには、[ブラウザのパフォーマンスツール](https://developer.chrome.com/docs/lighthouse/performance/user-timings)の使用をお勧めします。',
   },
   {
     possibleIn: 800,
@@ -780,7 +780,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Medium,
     step: '$localize',
     action:
-      '[Angularのi18nサポート](http://angular.io/guide/i18n)を使用している場合、`@angular/localize`の使用を開始する必要があります。[$localizeグローバルインポートマイグレーション](https://v9.angular.io/guide/migration-localize)について詳しくはこちらを参照してください。',
+      '[Angularのi18nサポート](https://angular.io/guide/i18n)を使用している場合、`@angular/localize`の使用を開始する必要があります。[$localizeグローバルインポートマイグレーション](https://v9.angular.io/guide/migration-localize)について詳しくはこちらを参照してください。',
   },
 
   {
@@ -981,7 +981,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'v11 browser support',
     action:
-      'IE9、IE10、およびIEモバイルのサポートは削除されました。これは[v10アップデート](http://blog.angular.dev/version-10-of-angular-now-available-78960babd41#c357)で発表されました。',
+      'IE9、IE10、およびIEモバイルのサポートは削除されました。これは[v10アップデート](https://blog.angular.dev/version-10-of-angular-now-available-78960babd41#c357)で発表されました。',
   },
   {
     possibleIn: 1100,
@@ -1348,7 +1348,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'v13 node',
     action:
-      '[Node 12.20.0以降](http://www.hostingadvice.com/how-to/update-node-js-latest-version/)を使用していることを確認してください。',
+      '[Node 12.20.0以降](https://www.hostingadvice.com/how-to/update-node-js-latest-version/)を使用していることを確認してください。',
   },
   {
     possibleIn: 1300,
@@ -1471,7 +1471,7 @@ export const RECOMMENDATIONS: Step[] = [
     level: ApplicationComplexity.Basic,
     step: 'v14 node',
     action:
-      '[Node 14.15.0以降](http://www.hostingadvice.com/how-to/update-node-js-latest-version/)を使用していることを確認してください。',
+      '[Node 14.15.0以降](https://www.hostingadvice.com/how-to/update-node-js-latest-version/)を使用していることを確認してください。',
   },
   {
     possibleIn: 1400,
@@ -2543,6 +2543,14 @@ export const RECOMMENDATIONS: Step[] = [
     step: '19.0.0-update-fakeasync-to-flush-pending-timers',
   },
   {
+    action:
+      '`effect()`の呼び出しから`allowSignalWrites`オプションを削除してください。エフェクト内でのシグナルへの書き込みがデフォルトで許可されるようになったため、このオプションは非推奨となり不要になりました。',
+    level: ApplicationComplexity.Medium,
+    necessaryAsOf: 1900,
+    possibleIn: 1900,
+    step: '19.0.0-remove-allow-signal-writes',
+  },
+  {
       action:
         'アプリケーションのプロジェクトディレクトリで、`ng update @angular/core@20 @angular/cli@20` を実行して、アプリケーションをAngular v20に更新します。',
       level: ApplicationComplexity.Basic,
@@ -2784,6 +2792,15 @@ export const RECOMMENDATIONS: Step[] = [
   {
     possibleIn: 2100,
     necessaryAsOf: 2100,
+    level: ApplicationComplexity.Medium,
+    material: true,
+    step: '21.0.0-cdk-overlay-top-layer-stacking',
+    action:
+      'CDKオーバーレイは、ブラウザのネイティブなトップレイヤーにレンダリングできるようになりました。これにより、以前は`z-index`によってMaterialオーバーレイの上に表示されていた要素が、その下に表示されるようになる場合があります。以前の動作に戻すには、`@angular/cdk/overlay`から`OVERLAY_DEFAULT_CONFIG`を`{usePopover: false}`という値で提供してください。',
+  },
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
     level: ApplicationComplexity.Advanced,
     step: '21.0.0-update-signal-input-access-in-custom-elements',
     action:
@@ -3001,6 +3018,14 @@ export const RECOMMENDATIONS: Step[] = [
   {
     possibleIn: 2200,
     necessaryAsOf: 2200,
+    level: ApplicationComplexity.Medium,
+    step: '22.0.0-resource-stream-synchronous-resolution',
+    action:
+      '`rxResource`を含む`Resource`の`stream`プロパティは、ストリームやObservableが同期的にemitする場合、同期的に解決されるようになりました。非同期的な解決を前提としていたテストは、代わりに値をすぐに待つように修正する必要があるかもしれません。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
     level: ApplicationComplexity.Advanced,
     step: '22.0.0-remove-in-expressions',
     action:
@@ -3029,6 +3054,14 @@ export const RECOMMENDATIONS: Step[] = [
     step: '22.0.0-deprecate-report-progress-option',
     action:
       'HTTP リクエストの `reportProgress` オプションは非推奨になりました。進捗レポートをより明示的に制御するには、代わりに `reportUploadProgress` または `reportDownloadProgress` を使用してください。',
+  },
+  {
+    possibleIn: 2200,
+    necessaryAsOf: 2200,
+    level: ApplicationComplexity.Medium,
+    step: '22.0.0-deprecate-server-xhr',
+    action:
+      '`@angular/platform-server`におけるXHRサポートは非推奨となり、Angular 23で削除される予定です。基盤となる`xhr2`ライブラリはリダイレクトを安全に処理できません（たとえば、クロスオリジンのリダイレクトで`Authorization`ヘッダーを転送してしまうことがあり、リダイレクトループによるDoSの影響を受けやすくなっています）。サーバーサイドレンダリングでは、`withXhr()`の代わりにデフォルトの`fetch`バックエンドを使用してください。',
   },
   {
     possibleIn: 2200,

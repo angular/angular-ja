@@ -1,118 +1,69 @@
-<docs-decorative-header title="組み込みディレクティブ" imgSrc="adev/src/assets/images/directives.svg"> <!-- markdownlint-disable-line -->
-ディレクティブは、Angularアプリケーションの要素に追加の動作を追加するクラスです。
+<docs-decorative-header title="Directives" imgSrc="adev/src/assets/images/directives.svg"> <!-- markdownlint-disable-line -->
+Directives add behavior to elements and components in your Angular applications.
 </docs-decorative-header>
 
-Angularの組み込みディレクティブを使用して、フォームやリスト、スタイルおよびユーザーに見えるものを管理します。
+A directive can change how an element looks, how it behaves, or how it fits into the DOM. Angular ships with several built-in directives, and you can write your own.
 
-Angularディレクティブの種類は以下のとおりです。
+## When to use a directive
 
-| ディレクティブの種類                                                  | 詳細                                                                           |
-| :--------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
-| [コンポーネント](guide/components)                                   | テンプレートで使用されます。このタイプのディレクティブは、最も一般的なディレクティブタイプです。   |
-| [属性ディレクティブ](#built-in-attribute-directives)           | 要素、コンポーネント、または他のディレクティブの外観や動作を変更します。 |
-| [構造ディレクティブ](/guide/directives/structural-directives) | DOM要素を追加または削除することによって、DOMレイアウトを変更します。                        |
+Directives are most effective when they encapsulate **reusable** behavior that you want to apply to an existing element or component.
 
-このガイドでは、組み込みの [属性ディレクティブ](#built-in-attribute-directives)を取り上げます。
+Common examples include:
 
-## 組み込み属性ディレクティブ {#built-in-attribute-directives}
+- Applying the same appearance or behavior across many elements, such as autofocus or a tooltip.
+- Reading from or writing to the host element's DOM, attributes, or classes.
+- Adding behavior to a component you don't own without changing its source.
 
-属性ディレクティブは、他のHTML要素、属性、プロパティ、およびコンポーネントの動作を監視して変更します。
+If you need to render your own markup or manage a piece of UI with its own template, reach for a [component](guide/components), a specialized directive with its own template.
 
-最も一般的な属性ディレクティブは以下のとおりです。
+## A quick example
 
-| 一般的なディレクティブ                                      | 詳細                                            |
-| :----------------------------------------------------- | :------------------------------------------------- |
-| [`NgClass`](#adding-and-removing-classes-with-ngclass) | CSS クラスのセットを追加および削除します。             |
-| [`NgStyle`](#setting-inline-styles-with-ngstyle)       | HTML スタイルのセットを追加および削除します。             |
-| [`NgModel`](guide/forms/template-driven-forms)         | HTML フォーム要素に双方向データバインディングを追加します。 |
+Suppose you want elements to highlight when the user hovers over them with a mouse, changing their background color to yellow. Rather than repeat the same event-handling logic on every element, you can package that behavior in a directive and apply it wherever you need it.
 
-HELPFUL: 組み込みディレクティブは、公開APIのみを使用します。他のディレクティブがアクセスできないプライベートAPIには、特別なアクセス権がありません。
+The following `appHighlight` directive sets the host element's background color when the mouse enters and clears it when the mouse leaves:
 
-## `NgClass` を使用してクラスを追加および削除する {#adding-and-removing-classes-with-ngclass}
+```ts
+import {Directive, signal} from '@angular/core';
 
-`ngClass` を使用して、複数のCSSクラスを同時に追加または削除します。
-
-HELPFUL: _単一の_ クラスを追加または削除するには、`NgClass` ではなく [クラスバインディング](/guide/templates/binding#css-class-and-style-property-bindings) を使用します。
-
-### コンポーネントに `NgClass` をインポートする
-
-`NgClass` を使用するには、コンポーネントの `imports` リストに追加します。
-
-```angular-ts
-import {NgClass} from '@angular/common';
-
-@Component({
-  /* ... */
-  imports: [NgClass],
+@Directive({
+  selector: '[appHighlight]',
+  host: {
+    '(mouseenter)': 'isHovered.set(true)',
+    '(mouseleave)': 'isHovered.set(false)',
+    '[style.background-color]': 'isHovered() ? "yellow" : null',
+  },
 })
-export class AppComponent {}
+export class HighlightDirective {
+  protected isHovered = signal(false);
+}
 ```
 
-### 式を使用して `NgClass` を使用
+The `host` metadata listens for mouse events to update the `isHovered` signal, and binds the host element's `background-color` style to the signal's value.
 
-スタイルを設定する要素に、`[ngClass]` を追加して、式に等しく設定します。
-この場合、`isSpecial` はブール値であり、`app.component.ts` で `true` に設定されています。
-`isSpecial` がtrueのため、`ngClass` は `<div>` に `special` というクラスを適用します。
+Apply the directive by adding its selector as an attribute on an element:
 
-<docs-code header="app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" region="special-div"/>
-
-### メソッドを使用して `NgClass` を使用
-
-1. メソッドを使用して `NgClass` を使用するには、メソッドをコンポーネントクラスに追加します。
-   次の例では、`setCurrentClasses()` は3つの他のコンポーネントプロパティの `true` または `false` 状態に基づいて、3つのクラスを追加または削除するオブジェクトを使用して`currentClasses` プロパティを設定します。
-
-   オブジェクトの各キーは、CSSクラス名です。
-   キーが `true` の場合、`ngClass` はクラスを追加します。
-   キーが `false` の場合、`ngClass` はクラスを削除します。
-
-   <docs-code header="app.component.ts" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" region="setClasses"/>
-
-1. テンプレートで、要素のクラスを設定するために、`currentClasses` に対する `ngClass` プロパティバインディングを追加します。
-
-   <docs-code header="app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" region="NgClass-1"/>
-
-このユースケースでは、Angularは初期化時に、および `currentClasses` オブジェクトの再代入によって発生した変更が発生した場合に、クラスを適用します。
-完全な例では、ユーザーが `Refresh currentClasses` ボタンをクリックしたときに、`ngOnInit()` を使用して最初に `setCurrentClasses()` を呼び出します。
-これらの手順は、`ngClass` を実装するために必要ではありません。
-
-## `NgStyle` を使用してインラインスタイルを設定する {#setting-inline-styles-with-ngstyle}
-
-HELPFUL: To add or remove a _single_ style, use [style bindings](guide/templates/binding#css-class-and-style-property-bindings) rather than `NgStyle`.
-
-### コンポーネントに `NgStyle` をインポートする
-
-`NgStyle` を使用するには、コンポーネントの `imports` リストに追加します。
-
-```angular-ts
-import {NgStyle} from '@angular/common';
-
-@Component({
-  /* ... */
-  imports: [NgStyle],
-})
-export class AppComponent {}
+```angular-html
+<p appHighlight>Highlight me!</p>
 ```
 
-`NgStyle` を使用して、コンポーネントの状態に基づいて、複数のインラインスタイルを同時に設定します。
+Every element that carries the `appHighlight` attribute gains the same hover behavior, with the logic defined in one place.
 
-1. `NgStyle` を使用するには、コンポーネントクラスにメソッドを追加します。
+## Types of directives
 
-   次の例では、`setCurrentStyles()` は3つの他のコンポーネントプロパティの状態に基づいて、3つのスタイルを定義するオブジェクトを使用して `currentStyles` プロパティを設定します。
+Angular has three primary types of directives:
 
-   <docs-code header="app.component.ts" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" region="setStyles"/>
+| Directive type                                                  | Details                                                                           |
+| :-------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
+| [Components](guide/components)                                  | Define reusable UI with their own template.                                       |
+| [Attribute directives](guide/directives/attribute-directives)   | Change the appearance or behavior of an element, component, or another directive. |
+| [Structural directives](guide/directives/structural-directives) | Change the DOM layout by adding and removing DOM elements.                        |
 
-1. 要素のスタイルを設定するには、`currentStyles` に対する `ngStyle` プロパティバインディングを追加します。
+## What's next
 
-   <docs-code header="app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" region="NgStyle-2"/>
-
-このユースケースでは、Angularは初期化時と、変更が発生した場合にスタイルを適用します。
-これを行うために、完全な例では、`ngOnInit()` を使用して最初に `setCurrentStyles()` を呼び出し、依存プロパティがボタンクリックを通じて変更されたときに呼び出します。
-ただし、これらの手順は、`ngStyle` 自体を実装するために必要ではありません。
-
-## 次のステップ
+Learn more about each type of directive in the following guides.
 
 <docs-pill-row>
-  <docs-pill href="guide/directives/attribute-directives" title="属性ディレクティブ"/>
-  <docs-pill href="guide/directives/structural-directives" title="構造ディレクティブ"/>
-  <docs-pill href="guide/directives/directive-composition-api" title="ディレクティブ合成API"/>
+  <docs-pill href="guide/directives/attribute-directives" title="Attribute directives"/>
+  <docs-pill href="guide/directives/structural-directives" title="Structural directives"/>
+  <docs-pill href="guide/directives/directive-composition-api" title="Directive composition API"/>
 </docs-pill-row>

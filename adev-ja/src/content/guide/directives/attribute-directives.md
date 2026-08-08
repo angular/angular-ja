@@ -1,159 +1,102 @@
-# 属性ディレクティブ
+# Attribute directives
 
-属性ディレクティブを使用して、DOM要素とAngularコンポーネントの外観や動作を変更します。
+Attribute directives change the appearance or behavior of DOM elements and Angular components.
 
-## 属性ディレクティブの作成
+## Use template bindings for one-off behavior
 
-このセクションでは、ホスト要素の背景色を黄色に設定するハイライトディレクティブを作成する方法について説明します。
+Angular's template syntax already covers changing a single element's classes, styles, properties, and events:
 
-1. ディレクティブを作成するには、CLIコマンド[`ng generate directive`](tools/cli/schematics)を使用します。
+- [Class and style bindings](guide/templates/binding#css-class-and-style-property-bindings) add and remove CSS classes and inline styles.
+- [Property and attribute bindings](guide/templates/binding) set DOM properties and HTML attributes.
+- [Event listeners](guide/templates/event-listeners) respond to user interaction.
 
-   ```shell
-   ng generate directive highlight
-   ```
+Attribute directives are useful when you want to package this kind of behavior into a reusable unit that you can apply to any element or component.
 
-   CLIは`src/app/highlight.directive.ts`と、対応するテストファイル`src/app/highlight.directive.spec.ts`を作成します。
+## Building an attribute directive
 
-   ```angular-ts
-   import {Directive} from '@angular/core';
+A custom attribute directive is a JavaScript class with the `@Directive()` decorator. The decorator's `selector` defines the attribute that applies the directive. The square brackets make this an attribute selector, so the directive matches elements that carry the attribute. By convention, use a prefix such as `app` to avoid naming collisions:
 
-   @Directive({
-     selector: '[appHighlight]',
-   })
-   export class HighlightDirective {}
-   ```
+```ts
+import {Directive} from '@angular/core';
 
-   `@Directive()`デコレーターの構成プロパティは、ディレクティブのCSS属性セレクター`[appHighlight]`を指定します。
+@Directive({
+  selector: '[appHighlight]',
+})
+export class HighlightDirective {}
+```
 
-1. `@angular/core`から`ElementRef`と`inject`をインポートします。
-   `ElementRef`は、`nativeElement`プロパティを通じてホストDOM要素への直接アクセスを提供します。
+HELPFUL: The CLI command [`ng generate directive`](tools/cli/schematics) scaffolds a directive along with its test file.
 
-1. [`inject`](guide/di)を使用して、`appHighlight`を適用する要素であるホストDOM要素への参照を取得します。
+A directive can change its host declaratively through host bindings or imperatively through a reference to the host element. This example [injects](guide/di) [`ElementRef`](api/core/ElementRef) and accesses the element through its `nativeElement` property to set the background to yellow:
 
-1. 背景を黄色に設定するロジックを`HighlightDirective`クラスに追加します。
+<docs-code header="highlight.directive.ts" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.1.ts"/>
 
-   <docs-code header="highlight.directive.ts" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.1.ts"/>
-
-IMPORTANT: ディレクティブは_ネームスペース_をサポートしていません。
+IMPORTANT: Directives _do not_ support namespaces.
 
 ```angular-html {avoid}
 <p app:Highlight>This is invalid</p>
 ```
 
-## 属性ディレクティブの適用
+## Applying an attribute directive
 
-`HighlightDirective`を使用するには、ディレクティブを属性として持つ`<p>`要素をHTMLテンプレートに追加します。
+To apply the directive, add its selector as an attribute on an element:
 
 <docs-code header="app.component.html" path="adev/src/content/examples/attribute-directives/src/app/app.component.1.html" region="applied"/>
 
-Angularは`HighlightDirective`クラスのインスタンスを作成し、`inject(ElementRef)`を使用して`<p>`要素への参照を取得し、その背景スタイルを黄色に設定します。
+Angular creates an instance of `HighlightDirective` for that `<p>` element, injects a reference to the element, and sets its background to yellow.
 
-## ユーザーイベントの処理
+## Handling user events
 
-このセクションでは、ユーザーが要素内または要素外にマウスを移動したときに検出する方法と、ハイライトカラーを設定またはクリアして応答する方法について説明します。
-
-1. `@Directive()`デコレーターの`host`プロパティを使用してホストイベントバインディングを構成します。
-
-   <docs-code header="src/app/highlight.directive.ts (decorator)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.2.ts" region="decorator"/>
-
-1. 2つのイベントハンドラーメソッドを追加し、`host`プロパティを介してホスト要素イベントをそれらにマッピングします。
-
-   <docs-code header="highlight.directive.ts (mouse-methods)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.2.ts" region="mouse-methods"/>
-
-属性ディレクティブをホストするDOM要素（この場合は`<p>`）のイベントを購読するには、ディレクティブの[`host`プロパティ](guide/components/host-elements#binding-to-the-host-element)でイベントリスナーを構成します。
-
-HELPFUL: ハンドラーは、ホストDOM要素`el`に色を設定するヘルパーメソッド`highlight()`に委任します。
-
-完全なディレクティブは次のとおりです。
+To respond to user interaction, bind host element events to handler methods through the `host` property of the `@Directive()` decorator. The following directive highlights the host element while the pointer is over it and clears the highlight when the pointer leaves:
 
 <docs-code header="highlight.directive.ts" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.2.ts"/>
 
-ポインタが段落要素の上にホバーすると背景色が表示され、ポインタが外れると背景色が消えます。
+The `host` property maps the `mouseenter` and `mouseleave` events to the `onMouseEnter()` and `onMouseLeave()` methods, which delegate to a `highlight()` helper that sets the background color on the host element. For more on host event bindings, see [binding to the host element](guide/components/host-elements#binding-to-the-host-element).
 
-<img alt="Second Highlight" src="assets/images/guide/attribute-directives/highlight-directive-anim.gif">
+## Accepting input values
 
-## 属性ディレクティブに値を渡す
+Like components, directives accept inputs through the [`input()`](guide/components/inputs) function. Give an input the same name as the selector so that a single binding both applies the directive and passes a value to it:
 
-このセクションでは、`HighlightDirective`を適用するときにハイライトカラーを設定する方法について説明します。
+<docs-code header="highlight.directive.ts" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.3.ts" region="input"/>
 
-1. `highlight.directive.ts`で、`@angular/core`から`input`をインポートします。
+Read the input by calling it as a signal, and fall back to a default when no color is set:
 
-   <docs-code header="highlight.directive.ts (imports)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.3.ts" region="imports"/>
+<docs-code header="highlight.directive.ts" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.3.ts" region="mouse-enter"/>
 
-1. `appHighlight` `input`プロパティを追加します。
+In the template, bind the value to the selector. Because the input shares the selector's name, `[appHighlight]` both applies the directive and sets its value. Here the bound `color` is a property on the component:
 
-   <docs-code header="highlight.directive.ts" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.3.ts" region="input"/>
+<docs-code header="app.component.html" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" region="color"/>
 
-   `input()`関数は、ディレクティブの`appHighlight`プロパティをバインディングで使用できるようにするメタデータをクラスに追加します。
+<docs-code header="app.component.ts" path="adev/src/content/examples/attribute-directives/src/app/app.component.ts" region="class"/>
 
-1. `app.component.ts`で、`AppComponent`に`color`プロパティを追加します。
+A directive can declare more than one input. The following directive adds a `defaultColor` input, then falls back through `appHighlight`, `defaultColor`, and finally `red`:
 
-   <docs-code header="app.component.ts (class)" path="adev/src/content/examples/attribute-directives/src/app/app.component.1.ts" region="class"/>
+<docs-code header="highlight.directive.ts" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.ts"/>
 
-1. ディレクティブと色を同時に適用するには、`appHighlight`ディレクティブセレクターを使用してプロパティバインディングを使用し、それを`color`に設定します。
+Bind both inputs on the same element. Because `defaultColor` takes a static string rather than a dynamic expression, it doesn't need square brackets:
 
-   <docs-code header="app.component.html (color)" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" region="color"/>
+<docs-code header="app.component.html" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" region="defaultColor"/>
 
-   `[appHighlight]`属性バインディングは次の2つのタスクを実行します。
-   - `<p>`要素にハイライトディレクティブを適用する
-   - プロパティバインディングを使用してディレクティブのハイライトカラーを設定する
+## Deactivating Angular processing with `NgNonBindable`
 
-### ユーザー入力を使用して値を設定する
+To prevent expression evaluation in the browser, add `ngNonBindable` to the host element.
+`ngNonBindable` deactivates interpolation, directives, and binding in templates.
 
-このセクションでは、カラー選択を`appHighlight`ディレクティブにバインドするラジオボタンを追加する方法について説明します。
-
-1. 色を選択するためのマークアップを`app.component.html`に追加します。
-
-<docs-code header="app.component.html (v2)" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" region="v2"/>
-
-1. `AppComponent.color`を修正して、初期値を持たないようにします。
-
-<docs-code header="app.component.ts (class)" path="adev/src/content/examples/attribute-directives/src/app/app.component.ts" region="class"/>
-
-1. `highlight.directive.ts`で、`onMouseEnter`メソッドを修正して、最初に`appHighlight`でハイライトしようとします。`appHighlight`が`undefined`の場合は`red`にフォールバックします。
-   <docs-code header="highlight.directive.ts (mouse-enter)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.3.ts" region="mouse-enter"/>
-
-4. アプリケーションを起動して、ユーザーがラジオボタンで色を選択できることを確認します。
-
-   <img alt="Animated gif of the refactored highlight directive changing color according to the radio button the user selects" src="assets/images/guide/attribute-directives/highlight-directive-v2-anim.gif">
-
-## 2番目のプロパティにバインドする
-
-このセクションでは、開発者がデフォルトカラーを設定できるようにアプリケーションを構成する方法について説明します。
-
-1. `HighlightDirective`に`defaultColor`という名前の2番目の`input()`プロパティを追加します。
-
-   <docs-code header="highlight.directive.ts (defaultColor)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.ts" region="defaultColor"/>
-
-2. ディレクティブの`onMouseEnter`を修正して、最初に`appHighlight`でハイライトしようとします。次に`defaultColor`でハイライトしようとします。両方のプロパティが`undefined`の場合は`red`にフォールバックします。
-
-   <docs-code header="highlight.directive.ts (mouse-enter)" path="adev/src/content/examples/attribute-directives/src/app/highlight.directive.ts" region="mouse-enter"/>
-
-3. `AppComponent.color`にバインドし、デフォルトカラーとして「violet」を使用するには、次のHTMLを追加します。
-   この場合、`defaultColor`バインディングは、動的な式ではなく静的な文字列であるため、角括弧`[]`を使用しません。
-
-   <docs-code header="app.component.html (defaultColor)" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" region="defaultColor"/>
-
-   コンポーネントと同様に、ホスト要素に複数のディレクティブプロパティバインディングを追加できます。
-
-デフォルトカラーは、デフォルトカラーバインディングがない場合は赤です。
-ユーザーが色を選択すると、選択した色がアクティブなハイライトカラーになります。
-
-<img alt="Animated gif of final highlight directive that shows red color with no binding and violet with the default color set. When user selects color, the selection takes precedence." src="assets/images/guide/attribute-directives/highlight-directive-final-anim.gif">
-
-## `NgNonBindable`を使用してAngularの処理を無効にする
-
-ブラウザでの式評価を防ぐには、ホスト要素に`ngNonBindable`を追加します。
-`ngNonBindable`は、テンプレート内の補間、ディレクティブ、バインディングを無効にします。
-
-次の例では、式`{{ 1 + 1 }}`はコードエディタと同じようにレンダリングされ、`2`は表示されません。
+In the following example, the expression `{{ 1 + 1 }}` renders just as it does in your code editor, and does not display `2`.
 
 <docs-code header="app.component.html" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" region="ngNonBindable"/>
 
-`ngNonBindable`を要素に適用すると、その要素の子要素のバインディングが停止します。
-ただし、`ngNonBindable`は、`ngNonBindable`を適用した要素に対しては、ディレクティブを動作させます。
-次の例では、`appHighlight`ディレクティブはアクティブですが、Angularは式`{{ 1 + 1 }}`を評価しません。
+Applying `ngNonBindable` to an element stops binding for that element's child elements.
+However, `ngNonBindable` still lets directives work on the element where you apply `ngNonBindable`.
+In the following example, the `appHighlight` directive is still active but Angular does not evaluate the expression `{{ 1 + 1 }}`.
 
 <docs-code header="app.component.html" path="adev/src/content/examples/attribute-directives/src/app/app.component.html" region="ngNonBindable-with-directive"/>
 
-`ngNonBindable`を親要素に適用すると、Angularは要素の子要素に対して、プロパティバインディングやイベントバインディングなどあらゆる種類の補間とバインディングを無効にします。
+If you apply `ngNonBindable` to a parent element, Angular disables interpolation and binding of any sort, such as property binding or event binding, for the element's children.
+
+## What's next
+
+<docs-pill-row>
+  <docs-pill href="guide/directives/structural-directives" title="Structural directives"/>
+  <docs-pill href="guide/directives/directive-composition-api" title="Directive composition API"/>
+</docs-pill-row>

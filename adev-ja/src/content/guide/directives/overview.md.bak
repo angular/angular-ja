@@ -1,0 +1,118 @@
+<docs-decorative-header title="組み込みディレクティブ" imgSrc="adev/src/assets/images/directives.svg"> <!-- markdownlint-disable-line -->
+ディレクティブは、Angularアプリケーションの要素に追加の動作を追加するクラスです。
+</docs-decorative-header>
+
+Angularの組み込みディレクティブを使用して、フォームやリスト、スタイルおよびユーザーに見えるものを管理します。
+
+Angularディレクティブの種類は以下のとおりです。
+
+| ディレクティブの種類                                                  | 詳細                                                                           |
+| :--------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
+| [コンポーネント](guide/components)                                   | テンプレートで使用されます。このタイプのディレクティブは、最も一般的なディレクティブタイプです。   |
+| [属性ディレクティブ](#built-in-attribute-directives)           | 要素、コンポーネント、または他のディレクティブの外観や動作を変更します。 |
+| [構造ディレクティブ](/guide/directives/structural-directives) | DOM要素を追加または削除することによって、DOMレイアウトを変更します。                        |
+
+このガイドでは、組み込みの [属性ディレクティブ](#built-in-attribute-directives)を取り上げます。
+
+## 組み込み属性ディレクティブ {#built-in-attribute-directives}
+
+属性ディレクティブは、他のHTML要素、属性、プロパティ、およびコンポーネントの動作を監視して変更します。
+
+最も一般的な属性ディレクティブは以下のとおりです。
+
+| 一般的なディレクティブ                                      | 詳細                                            |
+| :----------------------------------------------------- | :------------------------------------------------- |
+| [`NgClass`](#adding-and-removing-classes-with-ngclass) | CSS クラスのセットを追加および削除します。             |
+| [`NgStyle`](#setting-inline-styles-with-ngstyle)       | HTML スタイルのセットを追加および削除します。             |
+| [`NgModel`](guide/forms/template-driven-forms)         | HTML フォーム要素に双方向データバインディングを追加します。 |
+
+HELPFUL: 組み込みディレクティブは、公開APIのみを使用します。他のディレクティブがアクセスできないプライベートAPIには、特別なアクセス権がありません。
+
+## `NgClass` を使用してクラスを追加および削除する {#adding-and-removing-classes-with-ngclass}
+
+`ngClass` を使用して、複数のCSSクラスを同時に追加または削除します。
+
+HELPFUL: _単一の_ クラスを追加または削除するには、`NgClass` ではなく [クラスバインディング](/guide/templates/binding#css-class-and-style-property-bindings) を使用します。
+
+### コンポーネントに `NgClass` をインポートする
+
+`NgClass` を使用するには、コンポーネントの `imports` リストに追加します。
+
+```angular-ts
+import {NgClass} from '@angular/common';
+
+@Component({
+  /* ... */
+  imports: [NgClass],
+})
+export class AppComponent {}
+```
+
+### 式を使用して `NgClass` を使用
+
+スタイルを設定する要素に、`[ngClass]` を追加して、式に等しく設定します。
+この場合、`isSpecial` はブール値であり、`app.component.ts` で `true` に設定されています。
+`isSpecial` がtrueのため、`ngClass` は `<div>` に `special` というクラスを適用します。
+
+<docs-code header="app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" region="special-div"/>
+
+### メソッドを使用して `NgClass` を使用
+
+1. メソッドを使用して `NgClass` を使用するには、メソッドをコンポーネントクラスに追加します。
+   次の例では、`setCurrentClasses()` は3つの他のコンポーネントプロパティの `true` または `false` 状態に基づいて、3つのクラスを追加または削除するオブジェクトを使用して`currentClasses` プロパティを設定します。
+
+   オブジェクトの各キーは、CSSクラス名です。
+   キーが `true` の場合、`ngClass` はクラスを追加します。
+   キーが `false` の場合、`ngClass` はクラスを削除します。
+
+   <docs-code header="app.component.ts" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" region="setClasses"/>
+
+1. テンプレートで、要素のクラスを設定するために、`currentClasses` に対する `ngClass` プロパティバインディングを追加します。
+
+   <docs-code header="app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" region="NgClass-1"/>
+
+このユースケースでは、Angularは初期化時に、および `currentClasses` オブジェクトの再代入によって発生した変更が発生した場合に、クラスを適用します。
+完全な例では、ユーザーが `Refresh currentClasses` ボタンをクリックしたときに、`ngOnInit()` を使用して最初に `setCurrentClasses()` を呼び出します。
+これらの手順は、`ngClass` を実装するために必要ではありません。
+
+## `NgStyle` を使用してインラインスタイルを設定する {#setting-inline-styles-with-ngstyle}
+
+HELPFUL: To add or remove a _single_ style, use [style bindings](guide/templates/binding#css-class-and-style-property-bindings) rather than `NgStyle`.
+
+### コンポーネントに `NgStyle` をインポートする
+
+`NgStyle` を使用するには、コンポーネントの `imports` リストに追加します。
+
+```angular-ts
+import {NgStyle} from '@angular/common';
+
+@Component({
+  /* ... */
+  imports: [NgStyle],
+})
+export class AppComponent {}
+```
+
+`NgStyle` を使用して、コンポーネントの状態に基づいて、複数のインラインスタイルを同時に設定します。
+
+1. `NgStyle` を使用するには、コンポーネントクラスにメソッドを追加します。
+
+   次の例では、`setCurrentStyles()` は3つの他のコンポーネントプロパティの状態に基づいて、3つのスタイルを定義するオブジェクトを使用して `currentStyles` プロパティを設定します。
+
+   <docs-code header="app.component.ts" path="adev/src/content/examples/built-in-directives/src/app/app.component.ts" region="setStyles"/>
+
+1. 要素のスタイルを設定するには、`currentStyles` に対する `ngStyle` プロパティバインディングを追加します。
+
+   <docs-code header="app.component.html" path="adev/src/content/examples/built-in-directives/src/app/app.component.html" region="NgStyle-2"/>
+
+このユースケースでは、Angularは初期化時と、変更が発生した場合にスタイルを適用します。
+これを行うために、完全な例では、`ngOnInit()` を使用して最初に `setCurrentStyles()` を呼び出し、依存プロパティがボタンクリックを通じて変更されたときに呼び出します。
+ただし、これらの手順は、`ngStyle` 自体を実装するために必要ではありません。
+
+## 次のステップ
+
+<docs-pill-row>
+  <docs-pill href="guide/directives/attribute-directives" title="属性ディレクティブ"/>
+  <docs-pill href="guide/directives/structural-directives" title="構造ディレクティブ"/>
+  <docs-pill href="guide/directives/directive-composition-api" title="ディレクティブ合成API"/>
+</docs-pill-row>

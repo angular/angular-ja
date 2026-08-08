@@ -1,20 +1,16 @@
 # ディレクティブ合成API
 
-Angularディレクティブは、再利用可能な動作をカプセル化するすばらしい方法を提供します。
-ディレクティブは、属性、CSSクラス、およびイベントリスナーを要素に適用できます。
+Angularディレクティブは、再利用可能な動作をカプセル化するすばらしい方法を提供します。ディレクティブは、属性、CSSクラス、およびイベントリスナーを要素に適用できます。
 
-*ディレクティブ合成API* を使用すると、
-コンポーネントのTypeScriptクラスの*内部*からコンポーネントのホスト要素にディレクティブを適用できます。
+*ディレクティブ合成API* を使用すると、コンポーネントのTypeScriptクラスの*内部*からコンポーネントのホスト要素にディレクティブを適用できます。
 
 ## コンポーネントにディレクティブを追加する
 
-コンポーネントにディレクティブを適用するには、コンポーネントのデコレーターに `hostDirectives` プロパティを追加します。
-このようなディレクティブを*ホストディレクティブ*と呼びます。
+コンポーネントにディレクティブを適用するには、コンポーネントのデコレーターに `hostDirectives` プロパティを追加します。このようなディレクティブを*ホストディレクティブ*と呼びます。
 
-この例では、`MenuBehavior` ディレクティブを `AdminMenu` のホスト要素に適用します。
-これは、テンプレートの `<admin-menu>` 要素に `MenuBehavior` を適用するのと同じように機能します。
+この例では、`MenuBehavior` ディレクティブを `AdminMenu` のホスト要素に適用します。これは、テンプレートの `<admin-menu>` 要素に `MenuBehavior` を適用するのと同じように機能します。
 
-```typescript
+```ts
 @Component({
   selector: 'admin-menu',
   templateUrl: './admin-menu.html',
@@ -23,25 +19,20 @@ Angularディレクティブは、再利用可能な動作をカプセル化す�
 export class AdminMenu {}
 ```
 
-フレームワークがコンポーネントをレンダリングすると、Angularは各ホストディレクティブのインスタンスも作成します。
-ディレクティブのホストバインディングは、コンポーネントのホスト要素に適用されます。
-デフォルトでは、ホストディレクティブの入力と出力は、コンポーネントの公開APIの一部として公開されません。
-詳細については、以下の[入力と出力を含める](#including-inputs-and-outputs)を参照してください。
+フレームワークがコンポーネントをレンダリングすると、Angularは各ホストディレクティブのインスタンスも作成します。ディレクティブのホストバインディングは、コンポーネントのホスト要素に適用されます。デフォルトでは、ホストディレクティブの入力と出力は、コンポーネントの公開APIの一部として公開されません。詳細については、以下の[入力と出力を含める](#including-inputs-and-outputs)を参照してください。
 
-**Angularはコンパイル時に静的にホストディレクティブを適用します。** 
-ランタイム時には動的にディレクティブを追加できません。
+Host directives come with the following constraints:
 
-**`hostDirectives` で使用されるディレクティブは `standalone: false` を指定できません。**
-
-**Angularは `hostDirectives` プロパティで適用されたディレクティブの `selector` を無視します。**
+- **Angularはコンパイル時に静的にホストディレクティブを適用します。**
+  ランタイム時には動的にディレクティブを追加できません。
+- **`hostDirectives` で使用されるディレクティブは `standalone: false` を指定できません。**
+- **Angularは `hostDirectives` プロパティで適用されたディレクティブの `selector` を無視します。**
 
 ## 入力と出力を含める {#including-inputs-and-outputs}
 
-コンポーネントに `hostDirectives` を適用すると、
-ホストディレクティブからの入力と出力は、デフォルトではコンポーネントのAPIには含まれません。
-`hostDirectives` のエントリを拡張することで、コンポーネントのAPIに入力と出力を明示的に含めることができます。
+コンポーネントに `hostDirectives` を適用すると、ホストディレクティブからの入力と出力は、デフォルトではコンポーネントのAPIには含まれません。`hostDirectives` のエントリを拡張することで、コンポーネントのAPIに入力と出力を明示的に含めることができます。
 
-```typescript
+```ts
 @Component({
   selector: 'admin-menu',
   templateUrl: './admin-menu.html',
@@ -56,17 +47,15 @@ export class AdminMenu {}
 export class AdminMenu {}
 ```
 
-入力と出力を明示的に指定することで、`hostDirective` を持つコンポーネントのコンシューマーは
-テンプレートでそれらにバインドできます。
+入力と出力を明示的に指定することで、`hostDirectives` を持つコンポーネントのコンシューマーはテンプレートでそれらにバインドできます。
 
 ```angular-html
 <admin-menu menuId="top-menu" (menuClosed)="logMenuClosed()"></admin-menu>
 ```
 
-さらに、`hostDirective` から入力と出力をエイリアスして、
-コンポーネントのAPIをカスタマイズできます。
+さらに、ホストディレクティブから入力と出力をエイリアスして、コンポーネントのAPIをカスタマイズできます。
 
-```typescript
+```ts
 @Component({
   selector: 'admin-menu',
   templateUrl: './admin-menu.html',
@@ -87,26 +76,17 @@ export class AdminMenu {}
 
 ## 別のディレクティブにディレクティブを追加する
 
-コンポーネントに加えて、他のディレクティブにも `hostDirectives` を追加できます。
-これにより、複数の動作を推移的に集約できます。
+コンポーネントに加えて、他のディレクティブにも `hostDirectives` を追加できます。これにより、複数の動作を推移的に集約できます。
 
-次の例では、`Menu` と `Tooltip` の2つのディレクティブを定義しています。
-次に、`MenuWithTooltip` でこれらの2つのディレクティブの動作を構成します。
-最後に、`SpecializedMenuWithTooltip` に `MenuWithTooltip` を適用します。
+次の例では、`Menu` と `Tooltip` の2つのディレクティブを定義しています。次に、`MenuWithTooltip` でこれらの2つのディレクティブの動作を構成します。最後に、`SpecializedMenuWithTooltip` に `MenuWithTooltip` を適用します。
 
-`SpecializedMenuWithTooltip` がテンプレートで使用されると、
-`Menu`、`Tooltip`、`MenuWithTooltip` のすべてをインスタンス化します。
-これらのディレクティブの各ホストバインディングは、`SpecializedMenuWithTooltip` のホスト要素に適用されます。
+`SpecializedMenuWithTooltip` がテンプレートで使用されると、`Menu`、`Tooltip`、`MenuWithTooltip` のすべてをインスタンス化します。これらのディレクティブの各ホストバインディングは、`SpecializedMenuWithTooltip` のホスト要素に適用されます。
 
 ```ts
-@Directive({
-  /* ... */
-})
+@Directive({/* ... */})
 export class Menu {}
 
-@Directive({
-  /* ... */
-})
+@Directive({/* ... */})
 export class Tooltip {}
 
 // MenuWithTooltip は、他の複数のディレクティブから動作を構成できます
@@ -126,12 +106,11 @@ export class SpecializedMenuWithTooltip {}
 
 ### ディレクティブの実行順序
 
-ホストディレクティブは、テンプレートで直接使用されるコンポーネントやディレクティブと同じライフサイクルを経ます。
-ただし、ホストディレクティブは常に適用されているコンポーネントまたはディレクティブの*前*に、コンストラクターやライフサイクルフックおよびバインディングを実行します。
+ホストディレクティブは、テンプレートで直接使用されるコンポーネントやディレクティブと同じライフサイクルを経ます。ただし、ホストディレクティブは常に適用されているコンポーネントまたはディレクティブの*前*に、コンストラクターやライフサイクルフックおよびバインディングを実行します。
 
 次の例は、ホストディレクティブの最小限の使用を示しています。
 
-```typescript
+```ts
 @Component({
   selector: 'admin-menu',
   templateUrl: './admin-menu.html',
@@ -149,13 +128,11 @@ export class AdminMenu {}
 5. `MenuBehavior` がホストバインディングを適用する
 6. `AdminMenu` がホストバインディングを適用する
 
-この動作順序により、`hostDirectives` を持つコンポーネントは、
-ホストディレクティブで指定されたホストバインディングをオーバーライドできます。
+この動作順序により、`hostDirectives` を持つコンポーネントは、ホストディレクティブで指定されたホストバインディングをオーバーライドできます。
 
-この動作順序は次の例のように、
-ホストディレクティブのネストされたチェーンにも適用されます。
+この動作順序は次の例のように、ホストディレクティブのネストされたチェーンにも適用されます。
 
-```typescript
+```ts
 @Directive({...})
 export class Tooltip { }
 
@@ -184,15 +161,11 @@ export class EvenMoreCustomTooltip { }
 
 ### 依存性の注入
 
-`hostDirectives` を指定するコンポーネントまたはディレクティブは、
-それらのホストディレクティブのインスタンスを注入でき、その逆も可能です。
+`hostDirectives` を指定するコンポーネントまたはディレクティブは、それらのホストディレクティブのインスタンスを注入でき、その逆も可能です。
 
-ホストディレクティブをコンポーネントに適用する場合、
-コンポーネントとホストディレクティブの両方でプロバイダーを定義できます。
+ホストディレクティブをコンポーネントに適用する場合、コンポーネントとホストディレクティブの両方でプロバイダーを定義できます。
 
-`hostDirectives` を持つコンポーネントと、それらのホストディレクティブの両方が同じ注入トークンを提供する場合、
-`hostDirectives` を持つクラスで定義されたプロバイダーは
-ホストディレクティブで定義されたプロバイダーよりも優先されます。
+`hostDirectives` を持つコンポーネントと、それらのホストディレクティブの両方が同じ注入トークンを提供する場合、`hostDirectives` を持つクラスで定義されたプロバイダーはホストディレクティブで定義されたプロバイダーよりも優先されます。
 
 ### Host directive de-duplication
 
@@ -200,17 +173,14 @@ When the same directive appears more than once in the resolved host directive tr
 
 #### Template match takes precedence
 
-If a directive matches an element once through a **template selector** and also appears as a
-**host directive**, Angular keeps only the template match and discards all host directive matches.
+If a directive matches an element once through a **template selector** and also appears as a **host directive**, Angular keeps only the template match and discards all host directive matches.
 
-The mental model is that a host directive match represents `Partial<YourDirective>` , a partial
-application where only the inputs and outputs explicitly listed in `hostDirectives` are exposed,
-while a template match represents the full directive with its complete public API.
+The mental model is that a host directive match represents `Partial<YourDirective>`, a partial application where only the inputs and outputs explicitly listed in `hostDirectives` are exposed, while a template match represents the full directive with its complete public API.
 
-```ts
 @Directive({selector: '[hoverable]'})
 export class Hoverable {}
 
+```ts
 @Component({
   selector: 'app-button',
   hostDirectives: [Hoverable],
@@ -226,10 +196,7 @@ export class Button {}
 
 #### Multiple host directive matches are merged
 
-If the same directive appears **more than once as a host directive** , for example, when two
-directives both declare a common dependency in their `hostDirectives` , Angular merges all
-instances into a single directive instance. The input and output mappings from all instances are
-combined.
+If the same directive appears **more than once as a host directive**, for example, when two directives both declare a common dependency in their `hostDirectives`, Angular merges all instances into a single directive instance. The input and output mappings from all instances are combined.
 
 This resolves the classic [diamond problem](https://en.wikipedia.org/wiki/Multiple_inheritance#The_diamond_problem) in host directive composition:
 
@@ -237,11 +204,11 @@ This resolves the classic [diamond problem](https://en.wikipedia.org/wiki/Multip
 // A shared behavior that both triggers need
 @Directive({
   host: {
-    '[attr.data-trigger-id]': 'triggerId',
+    '[attr.data-trigger-id]': 'triggerId()',
   },
 })
 export class TriggerRef {
-  readonly triggerId = `trigger-${crypto.randomUUID()}`;
+  readonly triggerId = input(`trigger-${crypto.randomUUID()}`);
 }
 
 // Two separate triggers, each declaring TriggerRef as a host directive
@@ -267,14 +234,13 @@ export class DropdownTrigger {
 <button popoverTrigger dropdownTrigger>Actions</button>
 ```
 
-HELPFUL: Because Angular produces only one instance of the shared directive, both `PopoverTrigger`
-and `DropdownTrigger` receive the same `TriggerRef` instance when they inject it.
+HELPFUL: Because Angular produces only one instance of the shared directive, both `PopoverTrigger` and `DropdownTrigger` receive the same `TriggerRef` instance when they inject it.
 
 #### Conflicting aliases
 
 When Angular merges duplicate host directive matches it also merges their input and output mappings.
-If two instances of the same host directive expose the **same input or output under different
-aliases**, Angular throws an error at compile time ([NG8024](errors/NG8024))
+
+If two instances of the same host directive expose the **same input or output under different aliases**, Angular throws an error at compile time ([NG8024](errors/NG8024)).
 
 ```ts
 @Directive({
@@ -297,5 +263,11 @@ export class DropdownTrigger {}
 <button popoverTrigger dropdownTrigger></button>
 ```
 
-To resolve this, ensure that both paths expose the shared input or output under the same alias, or
-do not expose it at all.
+To resolve this, ensure that both paths expose the shared input or output under the same alias, or do not expose it at all.
+
+## What's next
+
+<docs-pill-row>
+  <docs-pill href="guide/directives/structural-directives" title="Structural directives"/>
+  <docs-pill href="guide/components/host-elements" title="Component host elements"/>
+</docs-pill-row>

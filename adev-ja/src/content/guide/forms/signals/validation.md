@@ -21,8 +21,8 @@
 <docs-code
   header="app.ts"
   path="adev/src/content/examples/signal-forms/src/login-validation-complete/app/app.ts"
-  visibleLines="[21,22,23,24,25,26,27]"
-  highlight="[23,24,26]"
+  visibleLines="[29,30,31,32,33,34]"
+  highlight="[30,31,33]"
 />
 
 スキーマ関数はフォームの初期化中に一度だけ実行されます。バリデーションルールはスキーマパスパラメータ（`schemaPath.email`や`schemaPath.password`など）を使用してフィールドにバインドされ、フィールドの値が変更されるたびにバリデーションが自動的に実行されます。
@@ -51,6 +51,20 @@ NOTE: スキーマのコールバックパラメータ（この例では`schemaP
 同期バリデーションルール（`required()`や`email()`など）は即座に完了します。非同期バリデーションルール（`validateHttp()`など）は時間がかかる場合があり、実行中は`pending()`シグナルを`true`に設定します。
 
 すべてのバリデーションルールは変更のたびに実行されます - バリデーションは最初のエラーで中断されません。フィールドに`required()`と`email()`の両方のバリデーションルールがある場合、両方が実行され、両方が同時にエラーを生成する可能性があります。
+
+### ネイティブHTMLバリデーション {#native-html-validation}
+
+シグナルフォームは、バリデーションルールの実行にブラウザ組み込みの[制約バリデーション](https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Constraint_validation)を**使用しません**。これは意図的な設計です。シグナルフォームは、ネイティブのフォーム要素だけでなく、任意のコンポーネントをフォームコントロールとして扱えるようにするためです。
+
+代わりに、バリデーションルールはすべてAngular内で実行され、バリデーションの状態は要素のネイティブなvalidity状態ではなく、`valid()`、`invalid()`、`errors()`などのフィールド状態シグナルを通じて公開されます。[`FormRoot`ディレクティブ](guide/forms/signals/form-submission)は、フォーム要素に`novalidate`属性も設定するため、ブラウザが送信をブロックすることはありません。
+
+フィールドがネイティブのフォーム要素にバインドされている場合、一部の組み込みバリデーションルールは、その制約を対応するネイティブ属性にミラーリングします。`required()`、`min()`、`max()`、`minLength()`、`maxLength()`は、要素がサポートしていれば`required`、`min`、`max`、`minlength`、`maxlength`属性を設定します。例外は`pattern()`で、これはネイティブの`pattern`属性を設定しません。シグナルフォームがこれらの属性を設定するのは、入力の挙動を制御し、アクセシビリティを向上させるためであり、**ネイティブのバリデーションをトリガーするためではありません**。
+
+NOTE: シグナルフォームがネイティブのvalidity状態を読み取るケースが1つだけあります。ブラウザがネイティブの入力値をパースできない場合（たとえば、日付の途中入力など）、シグナルフォームはそれをパースエラーとして報告します。この場合も、エラーは他のバリデーションエラーと同様にフィールドの`errors()`シグナルを通じて公開されます。詳細は[値の変換](guide/forms/signals/custom-controls#value-transformation)を参照してください。
+
+IMPORTANT: `:valid`や`:invalid`のCSS疑似クラス、要素の`validity`プロパティ、`validationMessage`といったネイティブのvalidity機能に依存しないでください。ミラーリングされた属性の副作用として、ブラウザが一部の入力を無効と報告することがあります（たとえば、`min`を下回る値を持つnumber入力など）が、この挙動はバリデーションルールと入力タイプによって異なり、バリデーション状態を観測するためにサポートされた方法ではありません。
+
+バリデーション状態に基づいてコントロールをスタイリングするには、フィールド状態シグナルにクラスをバインドする（[フィールド状態管理](guide/forms/signals/field-state-management#conditional-error-display)を参照）か、自動ステータスクラスを設定してください（[自動ステータスクラス](guide/forms/signals/migration#automatic-status-classes)を参照）。
 
 ## 組み込みのバリデーションルール {#built-in-validation-rules}
 
@@ -116,7 +130,7 @@ registrationForm = form(this.registrationModel, (schemaPath) => {
 
 バリデーションルールは、`when`関数が`true`を返す場合にのみ実行されます。
 
-NOTE: `required`は空の配列に対して`true`を返します。配列のバリデーションには[`minLength()`](#minlength-and-maxlength)を使用してください。
+Note: `required`は空の配列を「存在する（有効）」として扱うため、配列の最小要素数を強制するには[`minLength()`](#minlength-and-maxlength)を使用してください。また、`<input type="checkbox" required>`と同様に、`false`は「未入力（無効）」として扱われます。
 
 ### email() {#email}
 

@@ -21,8 +21,8 @@ The schema function receives a `SchemaPathTree` object that lets you define your
 <docs-code
   header="app.ts"
   path="adev/src/content/examples/signal-forms/src/login-validation-complete/app/app.ts"
-  visibleLines="[21,22,23,24,25,26,27]"
-  highlight="[23,24,26]"
+  visibleLines="[29,30,31,32,33,34]"
+  highlight="[30,31,33]"
 />
 
 The schema function runs once during form initialization. Validation rules bind to fields using the schema path parameter (such as `schemaPath.email`, `schemaPath.password`), and validation runs automatically whenever field values change.
@@ -51,6 +51,20 @@ Validation rules execute in this order:
 Synchronous validation rules (like `required()`, `email()`) complete immediately. Asynchronous validation rules (like `validateHttp()`) may take time and set the `pending()` signal to `true` while executing.
 
 All validation rules run on every change - validation doesn't short-circuit after the first error. If a field has both `required()` and `email()` validation rules, both run, and both can produce errors simultaneously.
+
+### Native HTML validation
+
+Signal Forms **does not** use the browser's built-in [constraint validation](https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Constraint_validation) to run validation rules. This is by design: Signal Forms allows any component to act as a form control, not just native form elements.
+
+Instead, your validation rules run entirely in Angular, and validation state is exposed through field state signals such as `valid()`, `invalid()`, and `errors()` rather than through the element's native validity state. The [`FormRoot` directive](guide/forms/signals/form-submission) also sets the `novalidate` attribute on the form element so the browser does not block submission.
+
+When a field is bound to a native form element, some built-in validation rules mirror their constraint to the corresponding native attribute: `required()`, `min()`, `max()`, `minLength()`, and `maxLength()` set the `required`, `min`, `max`, `minlength`, and `maxlength` attributes when the element supports them. An exception is `pattern()`, which does not set the native `pattern` attribute. Signal Forms sets these attributes to control input behavior and to improve accessibility, **not to trigger native validation**.
+
+NOTE: There is one case where Signal Forms reads native validity state: when the browser cannot parse a native input's value (for example, a partially typed date), Signal Forms reports it as a parse error. Even then, the error surfaces through the field's `errors()` signal like any other validation error. See [Value transformation](guide/forms/signals/custom-controls#value-transformation) for details.
+
+IMPORTANT: Do not rely on native validity features such as the `:valid` and `:invalid` CSS pseudo-classes, the element's `validity` property, or `validationMessage`. The browser may report some inputs as invalid as a side effect of the mirrored attributes (for example, a number input whose value is below its `min`), but this behavior varies by validation rule and input type and is not a supported way to observe validation state.
+
+To style controls based on validation state, bind classes to field state signals (see [Field state management](guide/forms/signals/field-state-management#conditional-error-display)) or configure automatic status classes (see [Automatic status classes](guide/forms/signals/migration#automatic-status-classes)).
 
 ## Built-in validation rules
 
@@ -116,7 +130,7 @@ registrationForm = form(this.registrationModel, (schemaPath) => {
 
 The validation rule only runs when the `when` function returns `true`.
 
-NOTE: `required` will return `true` for empty array. Use [`minLength()`](#minlength-and-maxlength) to validate arrays.
+Note: `required` treats an empty array as present (valid), so use [`minLength()`](#minlength-and-maxlength) to enforce a minimum number of array items; it treats `false` as missing (invalid), matching `<input type="checkbox" required>`.
 
 ### email()
 

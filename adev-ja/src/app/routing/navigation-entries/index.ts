@@ -313,13 +313,11 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             label: '概要',
             path: 'guide/di',
             contentPath: 'guide/di/overview',
-            status: 'updated',
           },
           {
             label: 'サービスの作成と使用',
             path: 'guide/di/creating-and-using-services',
             contentPath: 'guide/di/creating-and-using-services',
-            status: 'updated',
           },
           {
             label: 'サービスの遅延読み込み',
@@ -331,7 +329,6 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             label: '依存性プロバイダーの定義',
             path: 'guide/di/defining-dependency-providers',
             contentPath: 'guide/di/defining-dependency-providers',
-            status: 'updated',
           },
           {
             label: '注入コンテキスト',
@@ -363,7 +360,6 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
       },
       {
         label: 'ルーティング',
-        status: 'updated',
         children: [
           {
             label: '概要',
@@ -419,7 +415,6 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             label: 'ルーティングとナビゲーションのテスト',
             path: 'guide/routing/testing',
             contentPath: 'guide/routing/testing',
-            status: 'new',
           },
           {
             label: 'その他のルーティングタスク',
@@ -435,13 +430,11 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             label: 'レンダリング戦略',
             path: 'guide/routing/rendering-strategies',
             contentPath: 'guide/routing/rendering-strategies',
-            status: 'new',
           },
           {
             label: 'ルートの動作のカスタマイズ',
             path: 'guide/routing/customizing-route-behavior',
             contentPath: 'guide/routing/customizing-route-behavior',
-            status: 'new',
           },
           {
             label: 'ルーターリファレンス',
@@ -459,6 +452,11 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         label: 'フォーム',
         status: 'updated',
         preserveOtherCategoryOrder: true,
+        categoriesStatus: [
+          {
+            'Signal Forms': 'new',
+          },
+        ],
         children: [
           {
             label: '概要',
@@ -471,98 +469,96 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             path: 'guide/forms/signals/overview',
             contentPath: 'guide/forms/signals/overview',
             category: 'Signal Forms',
-            status: 'new',
           },
           {
             label: 'フォームモデル',
             path: 'guide/forms/signals/models',
             contentPath: 'guide/forms/signals/models',
             category: 'Signal Forms',
-            status: 'new',
           },
           {
             label: 'フォームモデルの設計',
             path: 'guide/forms/signals/model-design',
             contentPath: 'guide/forms/signals/designing-your-form-model',
             category: 'Signal Forms',
-            status: 'new',
           },
           {
             label: 'フィールド状態管理',
             path: 'guide/forms/signals/field-state-management',
             contentPath: 'guide/forms/signals/field-state-management',
             category: 'Signal Forms',
-            status: 'new',
           },
           {
             label: 'バリデーション',
             path: 'guide/forms/signals/validation',
             contentPath: 'guide/forms/signals/validation',
             category: 'Signal Forms',
-            status: 'new',
           },
           {
             label: 'フォームロジック',
             path: 'guide/forms/signals/form-logic',
             contentPath: 'guide/forms/signals/form-logic',
             category: 'Signal Forms',
-            status: 'new',
           },
           {
             label: 'フィールド間ロジック',
             path: 'guide/forms/signals/cross-field-logic',
             contentPath: 'guide/forms/signals/cross-field-logic',
             category: 'Signal Forms',
-            status: 'new',
           },
           {
             label: 'フォームの送信',
             path: 'guide/forms/signals/form-submission',
             contentPath: 'guide/forms/signals/form-submission',
             category: 'Signal Forms',
-            status: 'new',
           },
           {
             label: 'スキーマ',
             path: 'guide/forms/signals/schemas',
             contentPath: 'guide/forms/signals/schemas',
             category: 'Signal Forms',
-            status: 'new',
           },
           {
             label: 'フィールドメタデータ',
             path: 'guide/forms/signals/field-metadata',
             contentPath: 'guide/forms/signals/field-metadata',
             category: 'Signal Forms',
-            status: 'new',
           },
           {
             label: '非同期処理',
             path: 'guide/forms/signals/async-operations',
             contentPath: 'guide/forms/signals/async-operations',
             category: 'Signal Forms',
-            status: 'new',
+          },
+          {
+            label: 'JSONを使った動的フォームの構築',
+            path: 'guide/forms/signals/dynamic-forms-with-json',
+            contentPath: 'guide/forms/signals/dynamic-forms-with-json',
+            category: 'Signal Forms',
           },
           {
             label: 'カスタムコントロール',
             path: 'guide/forms/signals/custom-controls',
             contentPath: 'guide/forms/signals/custom-controls',
             category: 'Signal Forms',
-            status: 'new',
+          },
+          {
+            label: 'テスト',
+            path: 'guide/forms/signals/testing',
+            contentPath: 'guide/forms/signals/testing',
+            category: 'Signal Forms',
           },
           {
             label: '他のフォームシステムとの比較',
             path: 'guide/forms/signals/comparison',
             contentPath: 'guide/forms/signals/comparison',
             category: 'Signal Forms',
-            status: 'new',
           },
           {
             label: 'Migrating from Reactive Forms',
             path: 'guide/forms/signals/migration',
             contentPath: 'guide/forms/signals/migration',
             category: 'Signal Forms',
-            status: 'new',
           },
           {
             label: 'リアクティブフォーム',
@@ -887,13 +883,11 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
       },
       {
         label: 'アニメーション',
-        status: 'updated',
         children: [
           {
             label: 'Enter and Leave アニメーション',
             path: 'guide/animations',
             contentPath: 'guide/animations/enter-and-leave',
-            status: 'new',
           },
           {
             label: '複雑なCSSアニメーション',
@@ -1115,7 +1109,6 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         label: 'スタイルガイド',
         path: 'style-guide',
         contentPath: 'best-practices/style-guide',
-        status: 'updated',
       },
       {
         label: 'セキュリティ',
@@ -1354,7 +1347,6 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
         label: 'Tailwind',
         path: 'guide/tailwind',
         contentPath: 'guide/tailwind',
-        status: 'new',
       },
       {
         label: 'Angular Fire',
@@ -1760,25 +1752,21 @@ export const REFERENCE_SUB_NAVIGATION_DATA: NavigationItem[] = [
         label: 'NgClassからClassへ',
         path: 'reference/migrations/ngclass-to-class',
         contentPath: 'reference/migrations/ngclass-to-class',
-        status: 'new',
       },
       {
         label: 'NgStyleからStyleへ',
         path: 'reference/migrations/ngstyle-to-style',
         contentPath: 'reference/migrations/ngstyle-to-style',
-        status: 'new',
       },
       {
         label: 'Routerテストモジュールのマイグレーション',
         path: 'reference/migrations/router-testing-module-migration',
         contentPath: 'reference/migrations/router-testing-module-migration',
-        status: 'new',
       },
       {
         label: 'CommonModuleからスタンドアロンへ',
         path: 'reference/migrations/common-to-standalone',
         contentPath: 'reference/migrations/common-to-standalone',
-        status: 'new',
       },
     ],
   },

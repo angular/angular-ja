@@ -15,6 +15,7 @@
 | `NG0300`  | [Selector Collision](errors/NG0300)                                                  |
 | `NG0301`  | [Export Not Found](errors/NG0301)                                                    |
 | `NG0302`  | [Pipe Not Found](errors/NG0302)                                                      |
+| `NG0318`  | [Invalid style property binding value](errors/NG0318)                                |
 | `NG0401`  | [Missing platform](errors/NG0401)                                                    |
 | `NG0403`  | [Bootstrapped NgModule doesn't specify which component to initialize](errors/NG0403) |
 | `NG0500`  | [Hydration Node Mismatch](errors/NG0500)                                             |
@@ -43,8 +44,10 @@
 | `NG02200` | [Missing Iterable Differ](errors/NG02200)                                            |
 | `NG02800` | [JSONP support in HttpClient configuration](errors/NG02800)                          |
 | `NG02802` | [Headers not transferred by HttpTransferCache](errors/NG02802)                       |
-| `NG05000`  | [Hydration with unsupported Zone.js instance.](errors/NG05000)                      |
+| `NG02825` | [Fetch response body exceeds the configured limit](errors/NG02825)                   |
+| `NG05000` | [Hydration with unsupported Zone.js instance.](errors/NG05000)                       |
 | `NG05104` | [Root element was not found.](errors/NG05104)                                        |
+| `NG05703` | [Suspicious URL origin change during SSR](errors/NG05703)                            |
 
 ## コンパイラエラー
 

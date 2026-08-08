@@ -105,9 +105,9 @@ export class CardBody {}
   selector: 'custom-card',
   template: `
   <div class="card-shadow">
-    <ng-content select="card-title"></ng-content>
+    <ng-content select="card-title" />
     <div class="card-divider"></div>
-    <ng-content select="card-body"></ng-content>
+    <ng-content select="card-body" />
   </div>
   `,
 })
@@ -150,10 +150,10 @@ export class App {}
 ```angular-html
 <!-- コンポーネントテンプレート -->
 <div class="card-shadow">
-  <ng-content select="card-title"></ng-content>
+  <ng-content select="card-title" />
   <div class="card-divider"></div>
   <!-- "card-title"以外をすべてキャプチャ -->
-  <ng-content></ng-content>
+  <ng-content />
 </div>
 ```
 
@@ -222,7 +222,7 @@ Angularは要素のIDではなく`ngProjectAs`の値と比較します。
 ```angular-html
 <!-- コンポーネントテンプレート -->
 <div class="card-shadow">
-  <ng-content select="card-title"></ng-content>
+  <ng-content select="card-title" />
   <div class="card-divider"></div>
   <ng-content />
 </div>

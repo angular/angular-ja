@@ -12,9 +12,7 @@ export class ListboxBase {
   value: string;
 }
 
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class CustomListbox extends ListboxBase {
   // CustomListboxは`value`プロパティを継承します。
 }
@@ -68,16 +66,12 @@ export class CustomListbox extends ListboxBase {
 基底クラスが`inject()`をプロパティイニシャライザーとして使用する場合、子クラスはそのプロパティを自動的に継承します。`super`への転送は不要です。
 
 ```ts
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class ListboxBase {
   protected element = inject(ElementRef);
 }
 
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class CustomListbox extends ListboxBase {
   // `element` is inherited from `ListboxBase`.
 }
@@ -86,16 +80,12 @@ export class CustomListbox extends ListboxBase {
 もし基底クラスがコンストラクターのパラメーターとして依存性を注入している場合、子クラスではその依存性を明示的に`super`に渡す必要があります。
 
 ```ts
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class ListboxBase {
   constructor(private element: ElementRef) {}
 }
 
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class CustomListbox extends ListboxBase {
   constructor(element: ElementRef) {
     super(element);
@@ -110,9 +100,7 @@ export class CustomListbox extends ListboxBase {
 基底クラスのライフサイクルメソッドを保持したい場合は、`super`で明示的にメソッドを呼び出します。
 
 ```ts
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class ListboxBase {
   protected isInitialized = false;
   ngOnInit() {
@@ -120,9 +108,7 @@ export class ListboxBase {
   }
 }
 
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class CustomListbox extends ListboxBase {
   override ngOnInit() {
     super.ngOnInit();

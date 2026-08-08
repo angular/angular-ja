@@ -147,9 +147,7 @@ export class UserProfile {}
 場合によっては、特に`viewChild`を使用する場合、特定の子が常に利用可能であることが確実な場合があります。他の場合では、特定の子が存在することを厳格に適用したい場合があります。これらの場合、_必須クエリ_を使用できます。
 
 ```ts
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class CustomCard {
   header = viewChild.required(CustomCardHeader);
   body = contentChild.required(CustomCardBody);
@@ -199,7 +197,7 @@ const SUB_ITEM = new InjectionToken<string>('sub-item');
 })
 export class SpecialItem {}
 
-@Component({/*...*/})
+@Component(/* ... */)
 export class CustomList {
   subItemType = contentChild(SUB_ITEM);
 }
@@ -216,9 +214,7 @@ export class CustomList {
 デフォルトでは、クエリロケーターは、検索対象の要素と取得される値の両方を示します。代わりに、`read`オプションを指定して、ロケーターによって一致した要素から別の値を取得できます。
 
 ```ts
-@Component({
-  /*...*/
-})
+@Component(/* ... */)
 export class CustomExpando {
   toggle = contentChild(ExpandoContent, {read: TemplateRef});
 }
@@ -335,10 +331,10 @@ export class CustomCard {
 
 `@ContentChild`デコレーターを使用して、単一の結果をクエリできます。
 
-```angular-ts {highlight: [15, 16, 17, 18, 19, 26]}
+```angular-ts {highlight: [14, 16, 17, 18]}
 @Component({
   selector: 'custom-toggle',
-  /* ... */
+  /*...*/
 })
 export class CustomToggle {
   text: string;
@@ -346,10 +342,9 @@ export class CustomToggle {
 
 @Component({
   selector: 'custom-expando',
-  /* ... */
+  /*...*/
 })
-
-export class CustomExpando {
+export class CustomExpando implements AfterContentInit {
   @ContentChild(CustomToggle) toggle: CustomToggle;
 
   ngAfterContentInit() {
@@ -363,9 +358,9 @@ export class CustomExpando {
     <custom-expando>
       <custom-toggle>Show</custom-toggle>
     </custom-expando>
-  `
+  `,
 })
-export class UserProfile { }
+export class UserProfile {}
 ```
 
 この例では、`CustomExpando`コンポーネントは子`CustomToggle`をクエリし、`ngAfterContentInit`で結果にアクセスしています。
@@ -376,10 +371,10 @@ Angularは、アプリケーションの状態が変化するにつれて`@Conte
 
 `@ContentChildren`デコレーターを使用して、複数の結果をクエリできます。
 
-```angular-ts {highlight: [15, 17, 18, 19, 20, 21]}
+```angular-ts {highlight: [14, 16, 17, 18, 19, 20]}
 @Component({
   selector: 'custom-menu-item',
-  /* ... */
+  /*...*/
 })
 export class CustomMenuItem {
   text: string;
@@ -387,14 +382,13 @@ export class CustomMenuItem {
 
 @Component({
   selector: 'custom-menu',
-  /* ... */
+  /*...*/
 })
-
-export class CustomMenu {
+export class CustomMenu implements AfterContentInit {
   @ContentChildren(CustomMenuItem) items: QueryList<CustomMenuItem>;
 
   ngAfterContentInit() {
-    this.items.forEach(item => {
+    this.items.forEach((item) => {
       console.log(item.text);
     });
   }
@@ -407,9 +401,9 @@ export class CustomMenu {
       <custom-menu-item>Cheese</custom-menu-item>
       <custom-menu-item>Tomato</custom-menu-item>
     </custom-menu>
-  `
+  `,
 })
-export class UserProfile { }
+export class UserProfile {}
 ```
 
 `@ContentChildren`は、クエリ結果を含む`QueryList`オブジェクトを作成します。`changes`プロパティを使用して、時間の経過とともにクエリ結果の変更を購読できます。

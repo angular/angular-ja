@@ -1,5 +1,10 @@
 # Angularシグナルを学ぶ
 
+<div class="docs-tutorial-mascot">
+  <img class="docs-tutorial-mascot__angie" src="assets/images/angie/greeting.svg" aria-hidden="true">
+  <p class="docs-tutorial-mascot__bubble">ようこそ！シグナルを探求してみましょう。</p>
+</div>
+
 このインタラクティブなチュートリアルでは、Angularシグナルの基礎と、それらを使用してリアクティブなアプリケーションを構築する方法を学びます。
 
 ## このチュートリアルの使い方 {#how-to-use-this-tutorial}

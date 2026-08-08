@@ -140,6 +140,8 @@ NOTE: `*ngFor`とは異なり、`@for`ブロックはビューの再利用を優
 
 `@default never;` を使用することで、残りのケースが存在しないことを明示的に宣言します。ユニオン型が後で拡張され、新しいケースが `@case` でカバーされていない場合、Angularのテンプレート型チェッカーはエラーを報告し、見落としたブランチを早期に検出できます。
 
+NOTE: 網羅性チェックはTypeScriptの型の絞り込みに依存しており、これは変数に対してのみ機能します。switchの条件が関数呼び出しやシグナルの場合（たとえば `@switch (state())`）は機能しません。これを回避するには、シグナルを`@let`変数に代入します。例: `@let mySignal = this.mySignal()`。
+
 ```angular-html
 @Component({
   template: `
@@ -163,11 +165,14 @@ export class AppComponent {
 
 switchの対象式がユニオン内にネストされている場合は、網羅性チェックの対象とする式を明示的に指定する必要があります。
 
+<!-- prettier-ignore -->
 ```angular-ts
 @Component({
   template: `
     @switch (state.mode) {
-      @case ('show') { {{ state.menu }}; }
+      @case ('show') {
+        {{ state.menu }};
+      }
       @case ('hide') {}
       @default never(state);
     }

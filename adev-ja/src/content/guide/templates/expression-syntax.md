@@ -91,7 +91,20 @@ Angular式は、さらに次の非標準の演算子もサポートしていま�
 | オプショナルチェーン\*             | `someObj.someProp?.nestedProp` |
 | 非nullアサーション（TypeScript） | `someObj!.someProp`            |
 
-NOTE: オプショナルチェーンは、標準JavaScriptバージョンとは異なる動作をします。Angularのオプショナルチェーン演算子の左辺が`null`または`undefined`の場合、`undefined`ではなく`null`を返します。
+### セーフナビゲーションの移行 {#safe-navigation-migration}
+
+Angular 22より前は、オプショナルチェーン演算子（`?.`）は、左辺が`null`または`undefined`の場合に`null`を返していましたが、標準JavaScriptの`?.`は`undefined`を返します。
+Angular 22以降、Angular式におけるオプショナルチェーン演算子の動作は、標準JavaScriptの動作に合わせられました。
+
+v22への移行中、`ng update`のスキマティクスは、以前の`null`を返す動作を保持するために、既存の式に`$safeNavigationMigration`というマジック関数を追加しました。
+
+```html
+{{ $safeNavigationMigration(foo?.bar) }}
+```
+
+`$safeNavigationMigration`は**一時的な移行支援のためだけ**のものです。これは、ラップされたセーフナビゲーション式を、標準JavaScriptの`?.`のセマンティクスではなく、レガシーな`null`を返すセマンティクスでコンパイルするようコンパイラに指示します。これは実際の関数ではなく、TypeScriptから呼び出すことはできません。
+
+NOTE: `$safeNavigationMigration`を削除できるように、`null`と`undefined`の区別に依存しない式へ移行することを推奨します。この関数は将来のAngularのバージョンで削除される可能性があります。
 
 ### サポートされていない演算子
 
@@ -120,7 +133,7 @@ Angular式は、コンポーネントクラスのコンテキストと、関連�
 | アロー関数       | `() => { }`                                 |
 | クラス          | `class Rectangle { }`                       |
 
-# イベントリスナー文
+## イベントリスナー文
 
 イベントハンドラーは、**式**ではなく**文**です。Angular式と同じ構文をすべてサポートしていますが、2つの重要な違いがあります。
 

@@ -128,7 +128,7 @@ The value of the conditional expression is compared to the case expression using
 
 **`@switch` does not have a fallthrough**, so you do not need an equivalent to a `break` or `return` statement in the block.
 
-You can specify multiple conditions for a single block by have consecutive `@case` statements.
+You can specify multiple conditions for a single block by having consecutive `@case` statements.
 
 You can optionally include a `@default` block. The content of the `@default` block displays if none of the preceding case expressions match the switch value.
 
@@ -139,6 +139,8 @@ If no `@case` matches the expression and there is no `@default` block, nothing i
 `@switch` supports exhaustive type checking, allowing Angular to verify at compile time that all possible values of a union type are handled.
 
 By using `@default never;`, you explicitly declare that no remaining cases should exist. If the union type is later extended and a new case is not covered by an @case, Angular’s template type checker will report an error, helping you catch missing branches early.
+
+NOTE: Exhaustiveness checking relies on TypeScript's type narrowing, which only works on variables. It will not work if the switch condition is a function call or a signal (for example, `@switch (state())`). To work around this, assign the signal to a `@let` variable, e.g.: `@let mySignal = this.mySignal()`.
 
 ```angular-html
 @Component({
@@ -163,11 +165,14 @@ export class AppComponent {
 
 When the switched expression is nested within a union, you must explicitly specify the expression to check for exhaustiveness.
 
+<!-- prettier-ignore -->
 ```angular-ts
 @Component({
   template: `
     @switch (state.mode) {
-      @case ('show') { {{ state.menu }}; }
+      @case ('show') {
+        {{ state.menu }};
+      }
       @case ('hide') {}
       @default never(state);
     }

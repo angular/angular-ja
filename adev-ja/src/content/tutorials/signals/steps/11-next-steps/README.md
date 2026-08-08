@@ -1,5 +1,10 @@
 # シグナルをさらに深く掘り下げたいですか？
 
+<div class="docs-tutorial-mascot">
+  <img class="docs-tutorial-mascot__angie" src="assets/images/angie/superhero.svg" aria-hidden="true">
+  <p class="docs-tutorial-mascot__bubble">やりました！シグナルチュートリアルを完了し、シグナルを使ったリアクティブな状態管理の方法を学びました。</p>
+</div>
+
 以下のリソースでシグナルについてさらに学ぶことができます。
 
 <docs-card-container>

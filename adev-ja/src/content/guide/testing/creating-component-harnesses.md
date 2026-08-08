@@ -30,7 +30,7 @@ ng add @angular/cdk
   template: `
     <button (click)="toggle()">{{ triggerText() }}</button>
     @if (isOpen()) {
-      <div class="my-popup-content"><ng-content></ng-content></div>
+      <div class="my-popup-content"><ng-content /></div>
     }
   `,
 })

@@ -84,7 +84,7 @@ HELPFUL: テスト設定やプロバイダー用に`src/test-providers.ts`のよ
 
 ### 高度なVitest設定 {#advanced-vitest-configuration}
 
-高度なユースケースでは、`angular.json`の`configFile`オプションを使用してカスタムVitest設定ファイルを提供できます。
+高度なユースケースでは、`angular.json`の`runnerConfig`オプションを使用してカスタムVitest設定ファイルを提供できます。
 
 IMPORTANT: カスタム設定を使用すると高度なオプションが有効になりますが、Angularチームは設定ファイルの内容やサードパーティプラグインについてサポートを提供していません。また、CLIは適切な統合を保証するために特定のプロパティ（`test.projects`、`test.include`）を上書きします。
 

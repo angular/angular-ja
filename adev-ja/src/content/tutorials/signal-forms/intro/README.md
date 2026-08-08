@@ -1,5 +1,10 @@
 # Angularシグナルフォームを学ぶ
 
+<div class="docs-tutorial-mascot">
+  <img class="docs-tutorial-mascot__angie" src="assets/images/angie/greeting.svg" aria-hidden="true">
+  <p class="docs-tutorial-mascot__bubble">ようこそ！シグナルを使ってフォームを構築しましょう。</p>
+</div>
+
 このインタラクティブなチュートリアルでは、AngularのシグナルフォームAPIを使用してリアクティブフォームを構築する方法を学びます。
 
 ## このチュートリアルの使い方 {#how-to-use-this-tutorial}

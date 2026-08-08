@@ -120,8 +120,7 @@ the application remains unstable until the observable emits, completes, errors, 
 readonly myObservableState = someObservable.pipe(pendingUntilEvent());
 ```
 
-フレームワークは、非同期タスクが完了するまでシリアライズを防ぐために、このサービスを内部的にも使用します。これには、
-進行中のルーターナビゲーションや未完了の`HttpClient`リクエストが含まれますが、これらに限定されません。
+フレームワークは、非同期タスクが完了するまでシリアライズを防ぐために、このサービスを内部的にも使用します。これには、進行中のルーターナビゲーションや未完了の`HttpClient`リクエストが含まれますが、これらに限定されません。
 
 ### Zonelessアプリケーションにおけるリアクティブフォーム {#reactive-forms-in-zoneless-applications}
 

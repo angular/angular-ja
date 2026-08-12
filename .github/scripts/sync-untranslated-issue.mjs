@@ -7,18 +7,20 @@
  * @property {string} path - File path relative to adev-ja
  * @property {string} category - File category (guide, tutorial, etc.)
  * @property {string} extension - File extension without dot
+ * @property {string|null} url - URL path on angular.jp, null when the file has no page
  */
 
 /**
  * @typedef {Object} FilesData
  * @property {number} count - Total number of untranslated files
  * @property {UntranslatedFile[]} files - Array of untranslated files
+ * @property {string[]} orphaned - Files skipped because they have no route on the site
  */
 
 /**
  * @typedef {Object} FileLinks
  * @property {string} githubUrl - GitHub blob URL
- * @property {string|null} previewUrl - Preview URL on angular.jp (null for non-md files)
+ * @property {string|null} previewUrl - Preview URL on angular.jp (null when the file has no page)
  * @property {string} issueUrl - Issue creation URL with pre-filled title
  */
 
@@ -48,76 +50,47 @@ const LABELS = ['type: translation', '翻訳者募集中'];
 
 /** @type {Record<string, string>} */
 const CATEGORY_EMOJIS = {
+  introduction: '🚀 Introduction',
   guide: '📖 Guide',
   tutorial: '🎓 Tutorial',
   reference: '📚 Reference',
   'best-practices': '⚡ Best Practices',
+  ai: '🤖 AI',
   cli: '🔧 CLI',
   tools: '🛠️ Tools',
   ecosystem: '🌐 Ecosystem',
+  events: '📅 Events',
   app: '🧩 Components/App',
   other: '📦 その他'
 };
 
 /** @type {string[]} */
-const CATEGORY_ORDER = ['guide', 'tutorial', 'reference', 'best-practices', 'cli', 'tools', 'ecosystem', 'app', 'other'];
+const CATEGORY_ORDER = ['introduction', 'guide', 'tutorial', 'reference', 'best-practices', 'ai', 'cli', 'tools', 'ecosystem', 'events', 'app', 'other'];
 
 /**
- * Generate preview path from file path
+ * Identify a file the way a Translation Checkout issue title spells it out:
+ * the path without the src/content/ prefix and without the extension.
  * @param {string} filepath - File path relative to adev-ja
- * @returns {string} Preview path for angular.jp
+ * @returns {string} Declaration key
  */
-function generatePreviewPath(filepath) {
-  const basePath = filepath
-    .replace('src/content/', '')
-    .replace(/\/README\.md$/, '') // READMEの場合はディレクトリのみ
-    .replace(/\.md$/, '');
-
-  // reference 配下の特殊なパス変換: reference/ プレフィックスを削除
-  const referenceTopLevelPaths = ['press-kit', 'roadmap', 'cli'];
-  if (basePath.startsWith('reference/')) {
-    const subPath = basePath.replace('reference/', '');
-    // トップレベルパス（press-kit, roadmap, cli）
-    if (referenceTopLevelPaths.includes(subPath)) {
-      return subPath;
-    }
-    // サブディレクトリパス（errors/*, extended-diagnostics/*）
-    if (subPath.startsWith('errors/') || subPath.startsWith('extended-diagnostics/')) {
-      return subPath;
-    }
-  }
-
-  // チュートリアルの特殊なパス変換
-  if (basePath.startsWith('tutorials/')) {
-    // tutorials/first-app/intro -> tutorials/first-app
-    // tutorials/first-app/steps/01-hello-world -> tutorials/first-app/01-hello-world
-    return basePath
-      .replace(/\/intro$/, '') // intro ディレクトリを削除
-      .replace(/\/steps\//, '/'); // steps/ を削除
-  }
-
-  return basePath;
+function toDeclarationKey(filepath) {
+  return filepath
+    .replace(/^src\/content\//, '')
+    .replace(/\.(md|ts|html|json)$/, '');
 }
 
 /**
  * Generate URLs for a file
- * @param {string} filepath - File path relative to adev-ja
+ * @param {UntranslatedFile} file - Untranslated file entry
  * @returns {FileLinks} Object containing GitHub, preview, and issue URLs
  */
-function generateLinks(filepath) {
-  const githubUrl = `https://github.com/angular/angular-ja/blob/main/adev-ja/${filepath}`;
+function generateLinks(file) {
+  const githubUrl = `https://github.com/angular/angular-ja/blob/main/adev-ja/${file.path}`;
 
-  // タイトル生成: パスから拡張子を除去したシンプルな形式
-  const title = filepath
-    .replace('src/content/', '')
-    .replace(/\.(md|ts|html|json)$/, '');
+  const issueUrl = `https://github.com/angular/angular-ja/issues/new?template=translation-checkout.md&title=${encodeURIComponent('translate: ' + toDeclarationKey(file.path))}`;
 
-  const issueUrl = `https://github.com/angular/angular-ja/issues/new?template=translation-checkout.md&title=${encodeURIComponent('translate: ' + title)}`;
-
-  // .mdファイルのみプレビューURL生成
-  const previewUrl = filepath.endsWith('.md')
-    ? `https://angular.jp/${generatePreviewPath(filepath)}`
-    : null;
+  // ページを持つファイルのみプレビューURLを生成する
+  const previewUrl = file.url ? `https://angular.jp/${file.url}` : null;
 
   return { githubUrl, previewUrl, issueUrl };
 }
@@ -212,7 +185,7 @@ function generateIssueBody(filesData, checkoutIssuesMap) {
     body += `### ${emoji} (${categoryFiles.length}件)\n\n`;
 
     for (const file of categoryFiles) {
-      const links = generateLinks(file.path);
+      const links = generateLinks(file);
       const checkoutIssueNumber = checkoutIssuesMap.get(file.path) || null;
       body += formatFileEntry(file.path, links, checkoutIssueNumber) + '\n';
     }
@@ -246,30 +219,34 @@ export default async ({github, context, core, filesData}) => {
   const repo = context.repo.repo;
 
   core.info(`Processing ${filesData.count} untranslated files...`);
+  if (filesData.orphaned?.length) {
+    core.info(`Skipped ${filesData.orphaned.length} files with no route: ${filesData.orphaned.join(', ')}`);
+  }
 
   // Translation Checkout ラベルの全Issue (open only) を取得
-  const { data: checkoutIssues } = await github.rest.issues.listForRepo({
+  // paginate しないと既定の30件で打ち切られ、宣言済みの表示が欠落する
+  const checkoutIssues = await github.paginate(github.rest.issues.listForRepo, {
     owner,
     repo,
     state: 'open',
-    labels: 'type: Translation Checkout'
+    labels: 'type: Translation Checkout',
+    per_page: 100
   });
 
   core.info(`Found ${checkoutIssues.length} Translation Checkout issues`);
 
   // Issueタイトルからファイルパスを抽出してマップを作成
-  // タイトル形式: "translate: {ファイルパス}"
-  // 前方一致でマッチング（ディレクトリ名での宣言に対応）
+  // タイトル形式: "translate: {拡張子を除いたパス}"
+  // ディレクトリ単位の宣言にも対応するが、パス境界でのみ一致させる
   const checkoutIssuesMap = new Map();
   for (const issue of checkoutIssues) {
-    const match = issue.title.match(/^translate:\s*(.+)$/);
-    if (match) {
-      const declaredPath = `src/content/${match[1]}`;
-      // 各未翻訳ファイルに対して前方一致チェック
-      for (const file of filesData.files) {
-        if (file.path.startsWith(declaredPath)) {
-          checkoutIssuesMap.set(file.path, issue.number);
-        }
+    const match = issue.title.match(/^translate:\s*(.+?)\s*$/);
+    if (!match) continue;
+    const declared = toDeclarationKey(match[1]);
+    for (const file of filesData.files) {
+      const key = toDeclarationKey(file.path);
+      if (key === declared || key.startsWith(`${declared}/`)) {
+        checkoutIssuesMap.set(file.path, issue.number);
       }
     }
   }
@@ -277,12 +254,14 @@ export default async ({github, context, core, filesData}) => {
   core.info(`Mapped ${checkoutIssuesMap.size} files to checkout issues`);
 
   // 既存のトラッキングIssueを検索 (state: all で closed も含む)
-  const { data: issues } = await github.rest.issues.listForRepo({
+  // paginate しないとIssue増加に伴いトラッキングIssueを取り逃がし、重複作成に至る
+  const issues = await github.paginate(github.rest.issues.listForRepo, {
     owner,
     repo,
     state: 'all',
     labels: LABELS[0],
-    creator: 'github-actions[bot]'
+    creator: 'github-actions[bot]',
+    per_page: 100
   });
 
   const trackingIssue = issues.find(issue => issue.title === ISSUE_TITLE);

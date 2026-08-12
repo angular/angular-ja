@@ -16,8 +16,8 @@ const navigationEntriesFile = resolve(
 );
 
 /**
- * Content files published without a navigable route. They still reach readers, so
- * they remain subject to translation.
+ * Pages published without a navigable route. Reviewed and expected: they still reach
+ * readers, so they stay subject to translation even without a preview link.
  */
 export const ROUTELESS_TRANSLATABLE_CONTENT: readonly string[] = [
   // Body of the 404 page, rendered by the catch-all route.
@@ -25,8 +25,9 @@ export const ROUTELESS_TRANSLATABLE_CONTENT: readonly string[] = [
 ];
 
 /**
- * Content files upstream keeps in the repository but no longer routes. They are
- * unreachable on the site, so translating them is wasted effort.
+ * Pages upstream keeps in the repository but no longer routes. They have no page of
+ * their own, so they are dropped from translation tracking. Note that they are still
+ * bundled into llms-full.txt, so the drop trades reader-facing value for focus.
  */
 export const KNOWN_ORPHANED_CONTENT: readonly string[] = [
   // Superseded by guide/di/creating-and-using-services, kept only as a redirect source.
@@ -52,35 +53,57 @@ const GENERATED_ROUTE_RULES: readonly [RegExp, (match: RegExpMatchArray) => stri
 
 export type ContentRouteMap = ReadonlyMap<string, string>;
 
-/** Builds the `contentPath` -> URL path table from the navigation entries source. */
-export async function loadContentRouteMap(): Promise<ContentRouteMap> {
-  const lines = (await readFile(navigationEntriesFile, 'utf-8')).split('\n');
-  const routes = new Map<string, string>();
-
-  for (let i = 0; i < lines.length; i++) {
-    const contentPath = lines[i].match(/^\s*contentPath:\s*'([^']+)'/)?.[1];
-    if (!contentPath) continue;
-
-    const path = lines[i - 1]?.match(/^\s*path:\s*'([^']+)'/)?.[1];
-    if (path === undefined) {
-      throw new Error(
-        `${navigationEntriesFile}:${i + 1}: contentPath is not preceded by a path line. ` +
-          `The navigation entries format changed; update loadContentRouteMap().`
-      );
-    }
+/**
+ * A page may be listed under several sections, giving one `contentPath` several URLs.
+ * The URL that repeats the content path is the page's own address; the others are
+ * cross-listings, so they must not displace it.
+ */
+function addRoute(routes: Map<string, string>, contentPath: string, path: string) {
+  const known = routes.get(contentPath);
+  if (known === undefined || (known !== contentPath && path === contentPath)) {
     routes.set(contentPath, path);
   }
+}
 
+/**
+ * Braces, and the two keys we care about, in source order. Strings and comments are
+ * matched only so that the scan steps over them without reading their contents.
+ */
+const NAV_TOKEN =
+  /'(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*"|`(?:[^`\\]|\\.)*`|\/\/[^\n]*|\/\*[\s\S]*?\*\/|\b(path|contentPath)\s*:\s*'((?:[^'\\]|\\.)*)'|([{}])/g;
+
+export function parseContentRouteMap(source: string): ContentRouteMap {
+  const routes = new Map<string, string>();
+  // Keys belong to the innermost open object, whatever order they are written in.
+  const stack: { path?: string; contentPath?: string }[] = [];
+
+  for (const [, key, value, brace] of source.matchAll(NAV_TOKEN)) {
+    if (brace === '{') {
+      stack.push({});
+    } else if (brace === '}') {
+      const closed = stack.pop();
+      if (closed?.path !== undefined && closed.contentPath !== undefined) {
+        addRoute(routes, closed.contentPath, closed.path);
+      }
+    } else if (key !== undefined) {
+      const entry = stack.at(-1);
+      if (entry) entry[key as 'path' | 'contentPath'] = value;
+    }
+  }
+  return routes;
+}
+
+export async function loadContentRouteMap(): Promise<ContentRouteMap> {
+  const routes = parseContentRouteMap(await readFile(navigationEntriesFile, 'utf-8'));
   if (routes.size === 0) {
     throw new Error(
       `No path/contentPath pairs found in ${navigationEntriesFile}. ` +
-        `The navigation entries format changed; update loadContentRouteMap().`
+        `The navigation entries format changed; update parseContentRouteMap().`
     );
   }
   return routes;
 }
 
-/** Returns the `contentPath` of a documentation page, or null for any other file. */
 export function toContentPath(filepath: string): string | null {
   if (!filepath.startsWith('src/content/') || !filepath.endsWith('.md')) {
     return null;
@@ -88,7 +111,6 @@ export function toContentPath(filepath: string): string | null {
   return filepath.slice('src/content/'.length).replace(/\.md$/, '');
 }
 
-/** Returns the URL path a documentation page is published at, or null if it has none. */
 export function resolveContentRoute(
   routes: ContentRouteMap,
   filepath: string
@@ -109,11 +131,10 @@ export function resolveContentRoute(
 export interface TranslationTarget {
   /** URL path on angular.jp, or null when the file has no page of its own. */
   url: string | null;
-  /** True when the file is unreachable on the site and should not be tracked. */
+  /** True when the file is dead upstream content and should not be tracked. */
   orphaned: boolean;
 }
 
-/** Decides whether a file is worth translating, and where readers can preview it. */
 export function classifyTranslationTarget(
   routes: ContentRouteMap,
   filepath: string
@@ -127,8 +148,7 @@ export function classifyTranslationTarget(
   const url = resolveContentRoute(routes, filepath);
   if (url !== null) return { url, orphaned: false };
 
-  return {
-    url: null,
-    orphaned: !ROUTELESS_TRANSLATABLE_CONTENT.includes(filepath),
-  };
+  // Dropping a page needs a deliberate entry. An unclassified page stays tracked,
+  // so a gap in route resolution is noisy rather than silently destructive.
+  return { url: null, orphaned: KNOWN_ORPHANED_CONTENT.includes(filepath) };
 }

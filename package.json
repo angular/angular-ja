@@ -10,9 +10,10 @@
     "start": "tsx tools/watch.ts",
     "build": "tsx tools/build.ts",
     "lint": "tsx tools/lint.ts",
-    "test": "pnpm run test:patch && pnpm run test:routes",
+    "test": "pnpm run test:patch",
     "test:patch": "git apply -v --check --directory origin ./tools/adev-patches/*.patch",
     "test:routes": "tsx tools/verify-content-routes.ts",
+    "test:unit": "tsx --test tools/lib/*.test.ts .github/scripts/*.test.mjs",
     "update-origin": "tsx tools/update-origin.ts",
     "list-untranslated": "tsx tools/list-untranslated.ts",
     "translate": "tsx --env-file=.env tools/translator/main.ts"

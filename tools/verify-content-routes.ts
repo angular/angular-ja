@@ -25,25 +25,22 @@ async function main() {
     { cwd: adevJaDir }
   );
 
-  const expected = new Set([
-    ...ROUTELESS_TRANSLATABLE_CONTENT,
-    ...KNOWN_ORPHANED_CONTENT,
-  ]);
-  const unexpected = files.filter(
-    (file) => resolveContentRoute(routes, file) === null && !expected.has(file)
-  );
-  const stale = [...expected].filter(
+  const declared = [...ROUTELESS_TRANSLATABLE_CONTENT, ...KNOWN_ORPHANED_CONTENT];
+  const unrouted = files.filter((file) => resolveContentRoute(routes, file) === null);
+  const undeclared = unrouted.filter((file) => !declared.includes(file));
+  const stale = declared.filter(
     (file) => !files.includes(file) || resolveContentRoute(routes, file) !== null
   );
 
-  if (unexpected.length) {
+  if (undeclared.length) {
     consola.error(
-      `${unexpected.length} pages resolve to no URL:\n${unexpected
+      `${undeclared.length} pages resolve to no URL:\n${undeclared
         .map((f) => `  ${f}`)
-        .join(
-          '\n'
-        )}\nEither the page moved in src/app/routing/navigation-entries/index.ts, ` +
-        `or it is dead upstream content that belongs in KNOWN_ORPHANED_CONTENT.`
+        .join('\n')}\n` +
+        `If a page moved, fix src/app/routing/navigation-entries/index.ts. Otherwise decide ` +
+        `in tools/lib/content-routes.ts: ROUTELESS_TRANSLATABLE_CONTENT keeps it in the ` +
+        `tracking issue without a preview link, KNOWN_ORPHANED_CONTENT removes it from ` +
+        `translation tracking for good.`
     );
   }
   if (stale.length) {
@@ -52,12 +49,12 @@ async function main() {
         `(the file is gone, or it resolves again):\n${stale.map((f) => `  ${f}`).join('\n')}`
     );
   }
-  if (unexpected.length || stale.length) {
+  if (undeclared.length || stale.length) {
     process.exit(1);
   }
 
   consola.success(
-    `All ${files.length} pages accounted for (${expected.size} known exceptions).`
+    `All ${files.length} pages accounted for (${declared.length} declared exceptions).`
   );
 }
 

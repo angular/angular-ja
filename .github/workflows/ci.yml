@@ -21,6 +21,8 @@ jobs:
       - run: pnpm install
       - run: pnpm run lint
       - run: pnpm run test
+      - run: pnpm run test:unit
+      - run: pnpm run test:routes
   build-ubuntu:
     runs-on: ubuntu-latest
     steps:

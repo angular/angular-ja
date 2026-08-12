@@ -73,10 +73,37 @@ const CATEGORY_ORDER = ['introduction', 'guide', 'tutorial', 'reference', 'best-
  * @param {string} filepath - File path relative to adev-ja
  * @returns {string} Declaration key
  */
-function toDeclarationKey(filepath) {
+export function toDeclarationKey(filepath) {
   return filepath
     .replace(/^src\/content\//, '')
-    .replace(/\.(md|ts|html|json)$/, '');
+    .replace(/\.(md|ts|html|json)$/, '')
+    .replace(/\/+$/, ''); // ディレクトリ単位の宣言は末尾に / が付くことがある
+}
+
+/**
+ * Map each untranslated file to the Translation Checkout issue that claims it.
+ * A declaration may name one file or a whole directory, but it only ever claims
+ * files under a path boundary — `guide/signals` must not claim `guide/signals-rfc.md`.
+ * @param {{number: number, title: string}[]} checkoutIssues - Open Translation Checkout issues
+ * @param {UntranslatedFile[]} files - Untranslated files
+ * @returns {Map<string, number>} File path to issue number
+ */
+export function buildCheckoutIssuesMap(checkoutIssues, files) {
+  const map = new Map();
+  for (const issue of checkoutIssues) {
+    // タイトル形式: "translate: {拡張子を除いたパス}"
+    const match = issue.title.match(/^translate:\s*(\S.*?)\s*$/);
+    if (!match) continue;
+    const declared = toDeclarationKey(match[1]);
+    if (!declared) continue;
+    for (const file of files) {
+      const key = toDeclarationKey(file.path);
+      if (key === declared || key.startsWith(`${declared}/`)) {
+        map.set(file.path, issue.number);
+      }
+    }
+  }
+  return map;
 }
 
 /**
@@ -137,6 +164,17 @@ function groupByCategory(files) {
 }
 
 /**
+ * 追跡から外したファイルを本文に残す。黙って消えると、翻訳されないまま誰にも気づかれない。
+ * @param {string[]|undefined} orphaned - Files with no page of their own
+ * @returns {string} Markdown line, empty when nothing was skipped
+ */
+function formatOrphanedNote(orphaned) {
+  if (!orphaned?.length) return '';
+  const list = orphaned.map(f => `\`${f.replace('src/content/', '')}\``).join(', ');
+  return `**追跡対象外**: ${orphaned.length}件（サイト上にページを持たないため: ${list}）\n`;
+}
+
+/**
  * Generate issue body
  * @param {FilesData} filesData - Object containing untranslated files data
  * @param {Map<string, number>} checkoutIssuesMap - Map of file paths to issue numbers
@@ -170,7 +208,7 @@ function generateIssueBody(filesData, checkoutIssuesMap) {
 
 **最終更新**: ${new Date().toISOString()}
 **未翻訳ファイル数**: ${count}件
-
+${formatOrphanedNote(filesData.orphaned)}
 ---
 
 `;
@@ -235,21 +273,7 @@ export default async ({github, context, core, filesData}) => {
 
   core.info(`Found ${checkoutIssues.length} Translation Checkout issues`);
 
-  // Issueタイトルからファイルパスを抽出してマップを作成
-  // タイトル形式: "translate: {拡張子を除いたパス}"
-  // ディレクトリ単位の宣言にも対応するが、パス境界でのみ一致させる
-  const checkoutIssuesMap = new Map();
-  for (const issue of checkoutIssues) {
-    const match = issue.title.match(/^translate:\s*(.+?)\s*$/);
-    if (!match) continue;
-    const declared = toDeclarationKey(match[1]);
-    for (const file of filesData.files) {
-      const key = toDeclarationKey(file.path);
-      if (key === declared || key.startsWith(`${declared}/`)) {
-        checkoutIssuesMap.set(file.path, issue.number);
-      }
-    }
-  }
+  const checkoutIssuesMap = buildCheckoutIssuesMap(checkoutIssues, filesData.files);
 
   core.info(`Mapped ${checkoutIssuesMap.size} files to checkout issues`);
 

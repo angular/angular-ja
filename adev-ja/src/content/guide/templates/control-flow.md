@@ -142,7 +142,7 @@ NOTE: `*ngFor`とは異なり、`@for`ブロックはビューの再利用を優
 
 NOTE: 網羅性チェックはTypeScriptの型の絞り込みに依存しており、これは変数に対してのみ機能します。switchの条件が関数呼び出しやシグナルの場合（たとえば `@switch (state())`）は機能しません。これを回避するには、シグナルを`@let`変数に代入します。例: `@let mySignal = this.mySignal()`。
 
-```angular-html
+```angular-ts
 @Component({
   template: `
     @switch (state) {
@@ -154,7 +154,8 @@ NOTE: 網羅性チェックはTypeScriptの型の絞り込みに依存してお�
         <p>Welcome back!</p>
       }
 
-      @default never; // throws because `@case ('loading')` is missing
+      @default never;
+      <!-- throws because @case ('loading') is missing -->
     }
   `,
 })

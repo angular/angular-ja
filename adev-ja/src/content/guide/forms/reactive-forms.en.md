@@ -164,12 +164,14 @@ Use a `button` element to add a button to the bottom of the form to trigger the 
 The button in the preceding snippet also has a `disabled` binding attached to it to disable the button when `profileForm` is invalid. You aren't performing any validation yet, so the button is always enabled. Basic form validation is covered in the [Validating form input](#validating-form-input) section.
 </docs-step>
 
-<docs-step title="Display the component">
+<docs-step title="Display the component {#display-the-component-form-group}">
 To display the `ProfileEditor` component that contains the form, add it to a component template.
 
 <docs-code header="app.component.html (profile editor)" path="adev/src/content/examples/reactive-forms/src/app/app.component.1.html" region="app-profile-editor"/>
 
 `ProfileEditor` lets you manage the form control instances for the `firstName` and `lastName` controls within the form group instance.
+</docs-step>
+</docs-workflow>
 
 ### Creating nested form groups
 
@@ -369,7 +371,7 @@ In the template, each control is displayed as a separate input field.
 
 <docs-step title="Display the form array in the template">
 
-To attach the aliases from your form model, you must add it to the template. Similar to the `formGroupName` input provided by `FormGroupNameDirective`, `formArrayName` binds communication from the form array instance to the template with `FormArrayNameDirective`.
+To attach the aliases from your form model, you must add it to the template. Similar to the `formGroupName` input provided by `FormGroupName`, `formArrayName` binds communication from the form array instance to the template with `FormArrayName`.
 
 Add the following template HTML after the `<div>` closing the `formGroupName` element.
 
@@ -385,9 +387,7 @@ NOTE: In zoneless applications, mutating a reactive forms model (for example cal
 import {ChangeDetectorRef, Component, inject} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
-@Component({
-  /* ... */
-})
+@Component({/* ... */})
 export class ProfileEditor {
   private readonly cdr = inject(ChangeDetectorRef);
 
@@ -520,7 +520,7 @@ control.events
 **Before**
 
 ```ts
-import {combineLatest} from 'rxjs/operators';
+import {combineLatest} from 'rxjs';
 
 combineLatest([control.valueChanges, control.statusChanges]).subscribe(([value, status]) => {
   /* ... */
@@ -615,9 +615,7 @@ When updating form controls programmatically, you have precise control over how 
 By default `emitEvent: true`, any change to a control emits events through the `valueChanges` and `statusChanges` observables. Setting `emitEvent: false` suppresses these emissions, which is useful when setting values programmatically without triggering reactive behavior like auto-save, avoiding circular updates between controls, or performing bulk updates where events should emit only once at the end.
 
 ```ts
-@Component({
-  /* ... */
-})
+@Component({/* ... */})
 export class BlogPostEditor {
   postForm = new FormGroup({
     title: new FormControl(''),
@@ -687,7 +685,7 @@ export function positiveValues(control: AbstractControl) {
 ## Reactive forms API summary
 
 The following table lists the base classes and services used to create and manage reactive form controls.
-For complete syntax details, see the API reference documentation for the [Forms package](api#forms 'API reference').
+For complete syntax details, see the API reference documentation for the [Forms package](api#angular_forms 'API reference').
 
 ### Classes
 

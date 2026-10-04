@@ -53,7 +53,7 @@ Use the constructor of `FormControl` to set its initial value, which in this cas
 テンプレートバインディング構文を使用することで、フォームコントロールがテンプレートの `name` 入力要素に登録されました。フォームコントロールとDOM要素は相互に通信します。ビューはモデルの変更を反映し、モデルはビューの変更を反映します。
 </docs-step>
 
-<docs-step title="コンポーネントを表示">
+<docs-step title="コンポーネントを表示 {#display-the-component-form-group}">
 `name` プロパティに割り当てられた `FormControl` は、`<app-name-editor>` コンポーネントをテンプレートに追加すると表示されます。
 
 <docs-code header="app.component.html (name editor)" path="adev/src/content/examples/reactive-forms/src/app/app.component.1.html" region="app-name-editor"/>
@@ -164,12 +164,14 @@ Just as a form group contains a group of controls, the _profileForm_ `FormGroup`
 前述のスニペットのボタンにも、`disabled` バインディングが付けられています。これにより、`profileForm` が無効な場合、ボタンが無効になります。まだ検証していないため、ボタンは常に有効になっています。基本的なフォーム検証については、[フォーム入力の検証](#validating-form-input) セクションを参照してください。
 </docs-step>
 
-<docs-step title="コンポーネントを表示">
+<docs-step title="コンポーネントを表示 {#display-the-component-form-group}">
 フォームを含む `ProfileEditor` コンポーネントを表示するには、コンポーネントテンプレートに追加します。
 
 <docs-code header="app.component.html (profile editor)" path="adev/src/content/examples/reactive-forms/src/app/app.component.1.html" region="app-profile-editor"/>
 
 `ProfileEditor` を使用して、フォームグループインスタンス内の `firstName` と `lastName` コントロールのフォームコントロールインスタンスを管理できます。
+</docs-step>
+</docs-workflow>
 
 ### ネストされたフォームグループの作成 {#creating-nested-form-groups}
 
@@ -369,7 +371,7 @@ _フォーム検証_ は、ユーザー入力が完全で正しいことを確�
 
 <docs-step title="テンプレートにフォーム配列を表示">
 
-フォームモデルからエイリアスを添付するには、テンプレートに追加する必要があります。`FormGroupNameDirective` によって提供される `formGroupName` 入力と同様に、`formArrayName` は、フォーム配列インスタンスからの通信を、`FormArrayNameDirective` を使用してテンプレートにバインドします。
+フォームモデルからエイリアスを添付するには、テンプレートに追加する必要があります。`FormGroupName` によって提供される `formGroupName` 入力と同様に、`formArrayName` は、フォーム配列インスタンスからの通信を、`FormArrayName` を使用してテンプレートにバインドします。
 
 次のテンプレートHTMLを、`formGroupName` 要素を閉じる `<div>` の後に追加します。
 
@@ -385,9 +387,7 @@ NOTE: In zoneless applications, mutating a reactive forms model (for example cal
 import {ChangeDetectorRef, Component, inject} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
-@Component({
-  /* ... */
-})
+@Component({/* ... */})
 export class ProfileEditor {
   private readonly cdr = inject(ChangeDetectorRef);
 
@@ -520,7 +520,7 @@ control.events
 **Before**
 
 ```ts
-import {combineLatest} from 'rxjs/operators';
+import {combineLatest} from 'rxjs';
 
 combineLatest([control.valueChanges, control.statusChanges]).subscribe(([value, status]) => {
   /* ... */
@@ -615,9 +615,7 @@ onSubmit() {
 デフォルトで `emitEvent: true` の場合、コントロールへの変更は `valueChanges` と `statusChanges` Observableを通じてイベントを発行します。`emitEvent: false` を設定すると、これらの発行が抑制されます。これは、自動保存のようなリアクティブな動作をトリガーせずにプログラムで値を設定する場合、コントロール間の循環更新を回避する場合、またはイベントが最後に一度だけ発行されるべき一括更新を実行する場合に便利です。
 
 ```ts
-@Component({
-  /* ... */
-})
+@Component({/* ... */})
 export class BlogPostEditor {
   postForm = new FormGroup({
     title: new FormControl(''),
@@ -687,7 +685,7 @@ export function positiveValues(control: AbstractControl) {
 ## リアクティブフォームAPIの概要 {#reactive-forms-api-summary}
 
 次の表は、リアクティブフォームコントロールの作成と管理に使用されるベースクラスとサービスをリストしています。
-構文の詳細については、[フォームパッケージ](api#forms "API リファレンス") のAPIリファレンスドキュメントを参照してください。
+構文の詳細については、[フォームパッケージ](api#angular_forms "API リファレンス") のAPIリファレンスドキュメントを参照してください。
 
 ### クラス {#classes}
 

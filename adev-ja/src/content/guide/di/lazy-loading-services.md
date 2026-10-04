@@ -31,14 +31,14 @@ export class Report {
 
 遅延読み込みされるサービスが[デフォルトエクスポート](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export#using_the_default_export)である場合、動的インポートを直接渡すと、Angularが自動的に`default`を展開します:
 
-```ts {header: report-exporter.ts}
+```ts {header: "report-exporter.ts"}
 @Service()
 export default class ReportExporter {
   /* … */
 }
 ```
 
-```ts {header: report.ts}
+```ts {header: "report.ts"}
 private exporter = injectAsync(() => import('./report-exporter'));
 ```
 
@@ -51,9 +51,7 @@ Angularには、ブラウザがアイドル状態になるまで待機する組�
 ```ts
 import {Component, injectAsync, onIdle} from '@angular/core';
 
-@Component({
-  /* … */
-})
+@Component({/* … */})
 export class Report {
   private exporter = injectAsync(() => import('./report-exporter').then((m) => m.ReportExporter), {
     prefetch: onIdle,

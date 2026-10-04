@@ -28,8 +28,7 @@ NOTE: デフォルトでは、Angularはアプリケーション全体をプリ�
 
 [`ServerRoute`](api/ssr/ServerRoute 'API reference') オブジェクトの配列を宣言することで、サーバールート設定を作成できます。この設定は通常、`app.routes.server.ts` というファイルに記述されます。
 
-```typescript
-// app.routes.server.ts
+```typescript {header: "app.routes.server.ts"}
 import {RenderMode, ServerRoute} from '@angular/ssr';
 
 export const serverRoutes: ServerRoute[] = [
@@ -54,11 +53,10 @@ export const serverRoutes: ServerRoute[] = [
 
 この設定は、[`withRoutes`](api/ssr/withRoutes 'API reference') 関数を使用して [`provideServerRendering`](api/ssr/provideServerRendering 'API reference') でアプリケーションに追加できます。
 
-```typescript
+```typescript {header: "app.config.server.ts"}
 import {provideServerRendering, withRoutes} from '@angular/ssr';
 import {serverRoutes} from './app.routes.server';
 
-// app.config.server.ts
 const serverConfig: ApplicationConfig = {
   providers: [
     provideServerRendering(withRoutes(serverRoutes)),
@@ -137,8 +135,7 @@ NOTE: Angular Service Workerを使用する場合、最初のリクエストは�
 
 `ServerRoute` 設定の `headers` および `status` プロパティを使用して、個々のサーバールートにカスタムヘッダーとステータスコードを設定できます。
 
-```typescript
-// app.routes.server.ts
+```typescript {header: "app.routes.server.ts"}
 import {RenderMode, ServerRoute} from '@angular/ssr';
 
 export const serverRoutes: ServerRoute[] = [
@@ -178,8 +175,7 @@ Angularは、ルート設定の [`redirectTo`](api/router/Route#redirectTo 'API 
 
 この関数は、キャッチオールルート (例: `/**`) でも使用できます。この場合、パラメーター名は `"**"` となり、戻り値は `foo/bar` のようなパスのセグメントになります。これらは他のパラメーター (例: `/post/:id/**`) と組み合わせて、より複雑なルート設定を処理できます。
 
-```ts
-// app.routes.server.ts
+```ts {header: "app.routes.server.ts"}
 import {RenderMode, ServerRoute} from '@angular/ssr';
 
 export const serverRoutes: ServerRoute[] = [
@@ -220,8 +216,7 @@ IMPORTANT: `getPrerenderParams` 内で [`inject`](api/core/inject 'API reference
 - **Client:** クライアントサイドレンダリングにフォールバックします。
 - **None:** フォールバックなし。Angularは、プリレンダリングされていないパスへのリクエストを処理しません。
 
-```ts
-// app.routes.server.ts
+```ts {header: "app.routes.server.ts"}
 import {RenderMode, PrerenderFallback, ServerRoute} from '@angular/ssr';
 
 export const serverRoutes: ServerRoute[] = [
@@ -309,8 +304,7 @@ export class ServerAnalyticsService implements AnalyticsService {
 
 メインアプリケーション構成でブラウザ実装を登録します。
 
-```ts
-// app.config.ts
+```ts {header: "app.config.ts"}
 export const appConfig: ApplicationConfig = {
   providers: [{provide: AnalyticsService, useClass: BrowserAnalyticsService}],
 };
@@ -318,8 +312,7 @@ export const appConfig: ApplicationConfig = {
 
 サーバー構成の中で、サーバー実装でオーバーライドします。
 
-```ts
-// app.config.server.ts
+```ts {header: "app.config.server.ts"}
 const serverConfig: ApplicationConfig = {
   providers: [{provide: AnalyticsService, useClass: ServerAnalyticsService}],
 };
@@ -450,6 +443,8 @@ const serverConfig: ApplicationConfig = {
 `maxResponseBodySize` is configured in bytes and applies globally to server-side `HttpClient` requests that use the fetch backend.
 
 IMPORTANT: Keep this limit as small as your application allows. Increasing it lets server-side requests buffer larger response bodies, which can increase memory use and denial-of-service risk. Prefer moving large downloads outside server rendering.
+
+CRITICAL: During SSR, the Fetch implementation reads the entire response body to verify `integrity` before returning a response, as required by the [Fetch Standard](https://fetch.spec.whatwg.org/#concept-main-fetch). Angular enforces [`maxResponseBodySize`](/guide/ssr#configuring-the-response-body-size-limit) only after Fetch returns a response, so this limit does not constrain the data buffered during integrity verification.
 
 ### キャッシュオプションの設定 {#configuring-the-caching-options}
 
@@ -614,8 +609,7 @@ NOTE: アプリケーションがサーバーとクライアントで異なるHT
 
 `@angular/ssr/node` は、Node.js環境向けに `@angular/ssr` を拡張したものです。Node.jsアプリケーション内でサーバーサイドレンダリングを実装しやすくするAPIを提供します。関数と使用例の完全なリストについては、[`@angular/ssr/node` APIリファレンス](api/ssr/node/AngularNodeAppEngine) を参照してください。
 
-```ts
-// server.ts
+```ts {header: "server.ts"}
 import {
   AngularNodeAppEngine,
   createNodeRequestHandler,
@@ -649,8 +643,7 @@ export const reqHandler = createNodeRequestHandler(app);
 
 `@angular/ssr` は、Node.js以外のプラットフォームでAngularアプリケーションをサーバーサイドレンダリングするための重要なAPIを提供します。Web APIの標準的な [`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request) および [`Response`](https://developer.mozilla.org/en-US/docs/Web/API/Response) オブジェクトを活用することで、さまざまなサーバー環境にAngular SSRを統合できます。詳細情報と例については、[`@angular/ssr` APIリファレンス](api/ssr/AngularAppEngine) を参照してください。
 
-```ts
-// server.ts
+```ts {header: "server.ts"}
 import {AngularAppEngine, createRequestHandler} from '@angular/ssr';
 
 const angularApp = new AngularAppEngine();
@@ -659,7 +652,7 @@ const angularApp = new AngularAppEngine();
  * これは、Angular CLI (開発サーバーおよびビルド時) で使用されるリクエストハンドラーです。
  */
 export const reqHandler = createRequestHandler(async (req: Request) => {
-  const res: Response | null = await angularApp.render(req);
+  const res: Response | null = await angularApp.handle(req);
 
   // ...
 });

@@ -1,19 +1,19 @@
-# Data fetching with resources
+# リソースを使用したデータ取得
 
-The Angular Router integrates with Angular signals through the `resources` route configuration. This allows you to fetch data reactively using `Resource` APIs.
+Angularルーターは、`resources`ルート設定を通じてAngularシグナルと統合します。これにより、`Resource`APIを使用してリアクティブにデータを取得できます。
 
-## Why use route resources?
+## ルートリソースを使用する理由 {#why-use-route-resources}
 
-Route resources offer several advantages over traditional [data resolvers](/guide/routing/data-resolvers):
+ルートリソースは、従来の[データリゾルバ](/guide/routing/data-resolvers)に比べていくつかの利点を提供します:
 
-- **Parallel execution**: Route resources across all matched routes load concurrently instead of one route at a time.
-- **Non-blocking data loading**: Use `nonBlocking()` to activate the route immediately and render loading skeletons or UI states while data loads in the background.
-- **Reload without renavigation**: Call `.reload()` on individual resources or update signal parameters to refresh data without rerunning guards or rematching routes.
-- **Reactive data fetching**: Resources integrate directly with Angular signals, automatically re-evaluating when signal dependencies change and exposing reactive status signals like `isLoading()` and `error()`.
+- **並列実行**: 一致したすべてのルートにわたるルートリソースは、1ルートずつ順番にではなく同時に読み込まれます。
+- **ノンブロッキングなデータ読み込み**: `nonBlocking()`を使用してルートを即座にアクティブ化し、バックグラウンドでデータを読み込んでいる間にローディングスケルトンやUI状態をレンダリングします。
+- **再ナビゲーションなしの再読み込み**: 個々のリソースで`.reload()`を呼び出すか、シグナルパラメーターを更新することで、ガードを再実行したりルートを再マッチングしたりすることなくデータを更新します。
+- **リアクティブなデータ取得**: リソースはAngularシグナルと直接統合されており、シグナルの依存関係が変更されたときに自動的に再評価され、`isLoading()`や`error()`のようなリアクティブなステータスシグナルを公開します。
 
-## Enabling route resources
+## ルートリソースの有効化 {#enabling-route-resources}
 
-To enable route resources, provide `withRouterResources()` to your router configuration:
+ルートリソースを有効にするには、ルーター設定に`withRouterResources()`を提供します:
 
 ```ts
 import {provideRouter, withComponentInputBinding, withRouterResources} from '@angular/router';
@@ -23,11 +23,11 @@ bootstrapApplication(App, {
 });
 ```
 
-TIP: Enable `withComponentInputBinding()` so the router can bind resolved resources directly to component inputs.
+TIP: ルーターが解決されたリソースをコンポーネントの入力に直接バインドできるように、`withComponentInputBinding()`を有効にします。
 
-## Defining route resources
+## ルートリソースの定義 {#defining-route-resources}
 
-You define resources on a route with the `resources` function. The function runs in an injection context, so you can use `inject()` to access services, API clients, or stores directly inside the route definition.
+ルート上のリソースは`resources`関数を使用して定義します。この関数は注入コンテキストで実行されるため、`inject()`を使用してルート定義内で直接サービス、APIクライアント、またはストアにアクセスできます。
 
 ```angular-ts
 import {Component, inject, input, resource} from '@angular/core';
@@ -59,13 +59,13 @@ export class UserProfile {
 }
 ```
 
-### The `ResourceContext` object
+### `ResourceContext`オブジェクト {#the-resourcecontext-object}
 
-The `resources` function receives a `ResourceContext` that provides access to reactive route signals: `params`, `queryParams`, `fragment`, and `data`.
+`resources`関数は、リアクティブなルートシグナル(`params`、`queryParams`、`fragment`、および`data`)へのアクセスを提供する`ResourceContext`を受け取ります。
 
-### Supported resource implementations
+### サポートされているリソースの実装 {#supported-resource-implementations}
 
-The `resources` function can return any Angular `Resource` implementation, such as `resource()`, `rxResource()`, or a custom resource.
+`resources`関数は、`resource()`、`rxResource()`、またはカスタムリソースなど、任意のAngularの`Resource`実装を返すことができます。
 
 ```ts
 import {Routes} from '@angular/router';
@@ -85,9 +85,9 @@ const routes: Routes = [
 ];
 ```
 
-NOTE: `rxResource` uses the `stream` property instead of `loader` to accept a function that returns an Observable.
+NOTE: `rxResource`は`loader`の代わりに`stream`プロパティを使用して、Observableを返す関数を受け取ります。
 
-The `resources` function can also be `async` and return a `Promise` if you need to perform asynchronous setup or dynamic imports before configuring resources:
+リソースを構成する前に非同期セットアップや動的インポートを実行する必要がある場合、`resources`関数を`async`にして`Promise`を返すこともできます。
 
 ```ts
 resources: async (ctx) => {
@@ -101,9 +101,9 @@ resources: async (ctx) => {
 },
 ```
 
-## Fine-grained change tracking with signals
+## シグナルによるきめ細かい変更追跡 {#fine-grained-change-tracking-with-signals}
 
-A resource tracks the signals that its `params` function reads. Read the exact value you need so that the resource refetches only when that value changes:
+リソースは、その`params`関数が読み取るシグナルを追跡します。その値が変更されたときにのみリソースが再フェッチされるように、必要な正確な値を読み取ってください:
 
 ```ts
 resources: (ctx) => ({
@@ -115,23 +115,23 @@ resources: (ctx) => ({
 }),
 ```
 
-A navigation that changes an unrelated query parameter, such as `?sort=desc` or `?page=2`, leaves `category` unchanged, so the resource does not refetch.
+`?sort=desc`や`?page=2`などの無関係なクエリパラメーターを変更するナビゲーションでは、`category`は変更されないため、リソースは再フェッチされません。
 
-TIP: Read specific properties, such as `ctx.params()['id']`, instead of returning an entire parameters object, such as `ctx.params()`. The router creates a new object on every navigation, so returning the whole object refetches the resource even when the individual values are unchanged.
+TIP: `ctx.params()`のようにパラメーターオブジェクト全体を返すのではなく、`ctx.params()['id']`のような特定のプロパティを読み取ってください。ルーターはナビゲーションごとに新しいオブジェクトを作成するため、オブジェクト全体を返すと、個々の値が変更されていなくてもリソースが再フェッチされます。
 
-## Parallel execution
+## 並列実行 {#parallel-execution}
 
-Data resolvers execute sequentially from parent route to child route. If a parent route resolver takes 200ms and a child route resolver takes 300ms, the navigation is blocked for 500ms.
+データリゾルバは親ルートから子ルートへ順次実行されます。親ルートのリゾルバに200ms、子ルートのリゾルバに300msかかる場合、ナビゲーションは500msブロックされます。
 
-Route resources across the matched route hierarchy run concurrently, so the same navigation completes in 300ms, the time of the slowest resource.
+一致したすべてのルートのルートリソースは並行して実行されるため、同じナビゲーションは最も遅いリソースの時間である300msで完了します。
 
-## Blocking and non-blocking resources
+## ブロッキングリソースとノンブロッキングリソース {#blocking-and-non-blocking-resources}
 
-By default, every resource returned from `resources` is blocking: the router waits until the data is fully loaded before it activates the route and the component.
+デフォルトでは、`resources`から返されるすべてのリソースはブロッキングです。ルーターはデータが完全に読み込まれるまで待機してから、ルートとコンポーネントをアクティブにします。
 
-For a blocking resource, the router binds the resolved value to the component input, so the input type is `T` instead of `Resource<T>`. The component never observes a `loading` state because the router blocks navigation until the resource loads, and it never observes an `error` state because the router cancels the navigation when the resource errors.
+ブロッキングリソースの場合、ルーターは解決された値をコンポーネントの入力にバインドするため、入力の型は`Resource<T>`ではなく`T`になります。ルーターはリソースが読み込まれるまでナビゲーションをブロックするため、コンポーネントが`loading`状態を監視することはなく、リソースがエラーになった場合はルーターがナビゲーションをキャンセルするため、`error`状態を監視することもありません。
 
-To handle loading states in the UI instead, wrap the resource in `nonBlocking()`. The router activates the component immediately and binds the full `Resource<T>` object to the component input, which gives you access to `isLoading()`, `error()`, and the other resource signals.
+代わりにUIで読み込み状態を処理するには、リソースを`nonBlocking()`でラップします。ルーターはコンポーネントを即座にアクティブにし、完全な`Resource<T>`オブジェクトをコンポーネントの入力にバインドします。これにより、`isLoading()`、`error()`、およびその他のリソースシグナルにアクセスできるようになります。
 
 ```angular-ts
 import {Component, input, Resource, resource} from '@angular/core';
@@ -167,11 +167,11 @@ export class Reports {
 }
 ```
 
-NOTE: If a blocking resource errors, the router cancels the navigation and emits a `NavigationError` event. A resource wrapped in `nonBlocking()` completes the navigation and exposes the failure through its `error()` signal.
+NOTE: ブロッキングリソースがエラーになった場合、ルーターはナビゲーションをキャンセルし、`NavigationError`イベントを発行します。`nonBlocking()`でラップされたリソースはナビゲーションを完了し、その`error()`シグナルを通じて失敗を公開します。
 
-### Redirecting from a resource
+### リソースからのリダイレクト {#redirecting-from-a-resource}
 
-If a blocking resource needs to redirect the user (for example, if an item is not found), throw a `RedirectCommand` inside the resource loader. The router cancels the current navigation and redirects to the specified URL:
+ブロッキングリソースがユーザーをリダイレクトする必要がある場合（例えば、アイテムが見つからない場合など）、リソースローダー内で`RedirectCommand`をスローします。ルーターは現在のナビゲーションをキャンセルし、指定されたURLにリダイレクトします:
 
 ```ts
 import {inject, resource} from '@angular/core';
@@ -201,16 +201,16 @@ const routes: Routes = [
 ];
 ```
 
-## Reloading resources without renavigation
+## 再ナビゲーションなしでのリソースの再読み込み {#reloading-resources-without-renavigation}
 
-With data resolvers, refetching data requires a route navigation (for example, navigating with `onSameUrlNavigation: 'reload'`), which rematches routes and reruns guards and resolvers.
+データリゾルバを使用する場合、データの再取得にはルートナビゲーション（例えば、`onSameUrlNavigation: 'reload'`を使用したナビゲーション）が必要であり、これによりルートの再マッチングとガードおよびリゾルバの再実行が行われます。
 
-Route resources support two ways to refresh data in place:
+ルートリソースは、その場でデータを更新するための2つの方法をサポートしています:
 
-1. **Programmatic reload**: Call `.reload()` on the `Resource` instance.
-2. **Reactive reload**: Update a signal that the resource's `params` function reads, such as an application filter or state signal, which reruns the loader.
+1. **プログラムによる再読み込み**: `Resource`インスタンスで`.reload()`を呼び出します。
+2. **リアクティブな再読み込み**: アプリケーションのフィルターや状態シグナルなど、リソースの`params`関数が読み取るシグナルを更新することで、ローダーを再実行します。
 
-Because the router binds only the value of a blocking resource to a component input, read the `Resource` instance from `ActivatedRoute` or `ActivatedRouteSnapshot` when you need to call `.reload()` or inspect status signals:
+ルーターはブロッキングリソースの値のみをコンポーネントの入力にバインドするため、`.reload()`を呼び出したりステータスシグナルを検査したりする必要がある場合は、`ActivatedRoute`または`ActivatedRouteSnapshot`から`Resource`インスタンスを読み取ります:
 
 ```angular-ts
 import {Component, inject, input} from '@angular/core';
@@ -233,18 +233,18 @@ export class UserProfile {
 }
 ```
 
-## Transitional states during pending navigations
+## 保留中のナビゲーション時の過渡的状態 {#transitional-states-during-pending-navigations}
 
-While a navigation is pending, the router freezes the resources that it exposes on `ActivatedRoute`, which masks intermediate `loading` and `reloading` states.
+ナビゲーションが保留中の間、ルーターは`ActivatedRoute`で公開するリソースをフリーズし、中間の`loading`および`reloading`状態を隠蔽します。
 
-If you navigate from `/user/1` to `/user/2` and the router reuses the `UserProfile` component, the component keeps rendering the data from `/user/1` until `/user/2` resolves. The router then unfreezes the resources and the UI transitions directly to the new data with no loading flash.
+`/user/1`から`/user/2`へナビゲートし、ルーターが`UserProfile`コンポーネントを再利用する場合、コンポーネントは`/user/2`が解決されるまで`/user/1`のデータをレンダリングし続けます。その後、ルーターはリソースのフリーズを解除し、UIは読み込み中のちらつきなしに新しいデータへ直接遷移します。
 
-The router exposes these resources as read-only, even when the `resources` function returns a writable resource such as `resource()`. You can read the resource signals and call `reload()`, but not `set()` or `update()`. A `reload()` call during an active navigation or during rollback recovery returns `false` so that it cannot interrupt the router's transition tracking.
+ルーターは、`resources`関数が`resource()`のような書き込み可能なリソースを返す場合でも、これらのリソースを読み取り専用として公開します。リソースのシグナルを読み取って`reload()`を呼び出すことはできますが、`set()`や`update()`は呼び出せません。アクティブなナビゲーション中やロールバック回復中の`reload()`呼び出しは、ルーターの遷移トラッキングを中断できないように`false`を返します。
 
-### Rollback recovery on cancellation
+### キャンセル時のロールバック回復 {#rollback-recovery-on-cancellation}
 
-If a navigation is cancelled (for example, by a guard), the router reverts the state tree to the previous state. This reversion can cause the resource's signal dependencies, such as route parameters, to revert to their previous values.
+ナビゲーションが（例えばガードによって）キャンセルされた場合、ルーターは状態ツリーを前の状態に戻します。この復元により、ルートパラメーターなどのリソースのシグナル依存関係が前の値に戻る可能性があります。
 
-Because the parameters changed back, the resource might automatically trigger a new load to fetch data for the old parameters. To prevent flashing a loading state for data that was already visible, the router retains the previous resource snapshot in the UI until the resource has settled in the reverted state.
+パラメーターが元に戻ったため、リソースは古いパラメーターのデータを取得するために新しい読み込みを自動的に開始する場合があります。すでに表示されていたデータの読み込み状態がちらつくのを防ぐため、ルーターはリソースが復元された状態で安定するまで、UIに以前のリソーススナップショットを保持します。
 
-TIP: Forward the `abortSignal` provided by the resource loader to your asynchronous calls (like `fetch`). When the router rolls back parameters or supersedes navigations, the pending request is cleanly aborted: `loader: ({params: id, abortSignal}) => fetchUser(id, {signal: abortSignal})`.
+TIP: リソースローダーによって提供される`abortSignal`を非同期呼び出し（`fetch`など）に転送してください。ルーターがパラメーターをロールバックしたり、ナビゲーションを置き換えたりすると、保留中のリクエストは適切に中止されます: `loader: ({params: id, abortSignal}) => fetchUser(id, {signal: abortSignal})`。

@@ -124,15 +124,15 @@ export const routes: Routes = [
 ];
 ```
 
-NOTE: 特定のルートにツールを登録する場合、ユーザーがルートから移動したときにツールが自動的に_登録解除_されるように、ルーターを構成して[`withExperimentalAutoCleanupInjectors`](api/router/withExperimentalAutoCleanupInjectors)を使用することを検討してください。このオプションがない場合、ルートで宣言されたWebMCPツールは、ユーザーが別のルートに移動した後でもAIエージェントからアクセス可能なままになります。
+NOTE: 特定のルートにツールを登録する場合、ユーザーがルートから移動したときにツールが自動的に_登録解除_されるように、ルーターを構成して[`withAutoCleanupInjectors`](api/router/withAutoCleanupInjectors)を使用することを検討してください。このオプションがない場合、ルートで宣言されたWebMCPツールは、ユーザーが別のルートに移動した後でもAIエージェントからアクセス可能なままになります。
 
 ```ts {header:"app.config.ts"}
 import {ApplicationConfig} from '@angular/core';
-import {provideRouter, withExperimentalAutoCleanupInjectors} from '@angular/router';
+import {provideRouter, withAutoCleanupInjectors} from '@angular/router';
 import {routes} from './routes';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes, withExperimentalAutoCleanupInjectors())],
+  providers: [provideRouter(routes, withAutoCleanupInjectors())],
 };
 ```
 
@@ -214,7 +214,7 @@ export class UserRegistration {
       },
       submission: {
         action: async (formValue) => {
-          console.log('Submitting user:', formValue);
+          console.log('Submitting user:', formValue().value());
           // ...
         },
       },

@@ -48,7 +48,7 @@ Angularテンプレートを使用して、ログインフォーム、コンタ�
    - 状態に基づいて視覚的なフィードバックを提供するためのカスタムCSSを追加する
    - 検証エラーメッセージを表示および非表示にする
 1. モデルデータに追加することで、ネイティブHTMLボタンのクリックイベントに対応する。
-1. フォームの[`ngSubmit`](api/forms/NgForm#properties)出力プロパティを使用して、フォームの送信を処理する。
+1. フォームの[`ngSubmit`](api/forms/NgForm#ngSubmit)出力プロパティを使用して、フォームの送信を処理する。
    - フォームが有効になるまで、**Submit**ボタンを無効にする
    - 送信後、ページ上の異なるコンテンツに、完了したフォームを交換する
 
@@ -321,7 +321,7 @@ Angularは、`form`要素に`ng-submitted`クラスを適用しますが、`form
 <docs-workflow>
 
 <docs-step title="ngOnSubmitを監視する">
-フォームの[`ngSubmit`](api/forms/NgForm#properties)イベントプロパティを、アクターフォームコンポーネントの`onSubmit()`メソッドにバインドします。
+フォームの[`ngSubmit`](api/forms/NgForm#ngSubmit)イベントプロパティを、アクターフォームコンポーネントの`onSubmit()`メソッドにバインドします。
 
 <docs-code header="actor-form.component.html (ngSubmit)" path="adev/src/content/examples/forms/src/app/actor-form/actor-form.component.html" region="ngSubmit"/>
 </docs-step>

@@ -127,10 +127,9 @@ describe('classifyTranslationTarget', () => {
 
   it('drops only pages listed as orphaned', () => {
     assert.equal(
-      classifyTranslationTarget(
-        routes,
-        'src/content/guide/di/creating-injectable-service.md'
-      ).orphaned,
+      classifyTranslationTarget(routes, 'src/content/guide/retired.md', [
+        'src/content/guide/retired.md',
+      ]).orphaned,
       true
     );
   });

@@ -26,10 +26,11 @@ export class Product {
 
 | プロパティ      | 詳細                                                                                                                           |
 | :------------ | :-------------------------------------------------------------------------------------------------------------------------------- |
-| `url`         | ルートパスの`Observable`。ルートパスの各部分が文字列の配列として表現されます。                           |
+| `url`         | ルートパスの`Observable`。ルートパスの各部分が`UrlSegment`オブジェクトの配列として表現されます。        |
 | `data`        | ルートに提供される`data`オブジェクトを含む`Observable`。また、resolveガードから解決された値も含まれます。 |
 | `params`      | ルートに固有の必須およびオプションのパラメーターを含む`Observable`。                                         |
 | `queryParams` | すべてのルートで利用可能なクエリパラメーターを含む`Observable`。                                                       |
+| `resources`   | ルートに定義された`Resource`インスタンスのレコード (任意)。`withRouterResources`が有効な場合に使用できます。            |
 
 ルート内でアクセスできるものの完全なリストについては、[`ActivatedRoute` APIドキュメント](/api/router/ActivatedRoute)を参照してください。
 
@@ -58,7 +59,7 @@ export class UserProfile {
     // 複数のルート要素にアクセス
     const snapshot = this.route.snapshot;
     console.log({
-      url: snapshot.url, // https://www.angular.dev
+      url: snapshot.url, // Array of UrlSegments matched by this route
       // ルートパラメーターオブジェクト: {id: '123'}
       params: snapshot.params,
       // クエリパラメーターオブジェクト: {role: 'admin', status: 'active'}
@@ -254,9 +255,7 @@ NOTE: `ActivatedRoute`を使用する代わりに、`withComponentInputBinding`�
 <a routerLink="/user/bob" [routerLinkActive]="['class1', 'class2']">Bob</a>
 ```
 
-`routerLinkActive`に値を指定すると、`ariaCurrentWhenActive`にも同じ値が定義されます。これにより、視覚障害のあるユーザー（適用されている異なるスタイルを認識できない場合がある）もアクティブなボタンを識別できます。
-
-ariaに異なる値を定義したい場合は、`ariaCurrentWhenActive`ディレクティブを使用して明示的に値を設定する必要があります。
+`routerLinkActive`だけでは`aria-current`は設定されません。上記の例のように`ariaCurrentWhenActive`入力を設定すると、視覚障害のあるユーザー（適用されている異なるスタイルを認識できない場合がある）もアクティブなリンクを識別できます。
 
 ### ルートマッチング戦略 {#route-matching-strategy}
 

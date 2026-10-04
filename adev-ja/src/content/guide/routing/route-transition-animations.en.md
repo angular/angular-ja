@@ -27,7 +27,7 @@ For more details about the browser API, see the [Chrome Explainer](https://devel
 
 Angular Router integrates view transitions into the navigation lifecycle to create seamless route changes. During navigation, the Router:
 
-1. **Completes navigation preparation** - Route matching, [lazy loading](guide/routing/loading-strategies#lazily-loaded-components-and-routes), [guards](/guide/routing/route-guards), and [resolvers](/guide/routing/data-resolvers) execute
+1. **Completes navigation preparation** - Route matching, [lazy loading](guide/routing/loading-strategies#lazily-loaded-components-and-routes), [guards](/guide/routing/route-guards), [resources](/guide/routing/data-fetching-with-resources), and [resolvers](/guide/routing/data-resolvers) execute
 2. **Initiates the view transition** - Router calls `startViewTransition` when routes are ready for activation
 3. **Updates the DOM** - Router activates new routes and deactivates old ones within the transition callback
 4. **Finalizes the transition** - The transition Promise resolves when Angular completes rendering
@@ -122,7 +122,7 @@ Use this callback to customize transition behavior based on navigation context. 
 
 ```ts
 import {inject} from '@angular/core';
-import {Router, withViewTransitions, isActive} from '@angular/router';
+import {Router, withViewTransitions, isActive, IsActiveMatchOptions} from '@angular/router';
 
 withViewTransitions({
   onViewTransitionCreated: ({transition}) => {
@@ -130,7 +130,7 @@ withViewTransitions({
     const targetUrl = router.currentNavigation()!.finalUrl!;
 
     // Skip transition if only fragment or query params change
-    const config = {
+    const config: Partial<IsActiveMatchOptions> = {
       paths: 'exact',
       matrixParams: 'exact',
       fragment: 'ignored',

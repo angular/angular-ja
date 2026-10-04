@@ -42,7 +42,7 @@ export const routes: Routes = [
 ];
 ```
 
-Tip: Angular CLIでプロジェクトを生成した場合、ルートは`src/app/app.routes.ts`で定義されます。
+TIP: Angular CLIでプロジェクトを生成した場合、ルートは`src/app/app.routes.ts`で定義されます。
 
 ### アプリケーションにルーターを追加する {#adding-the-router-to-your-application}
 
@@ -112,7 +112,7 @@ import {SocialMediaFeed} from './social-media-feed';
 
 const routes: Routes = [
   {path: 'user/:id/:social-media', component: SocialMediaFeed},
-  {path: 'user/:id/', component: UserProfile},
+  {path: 'user/:id', component: UserProfile},
 ];
 ```
 
@@ -140,7 +140,7 @@ const routes: Routes = [
 
 このルート配列では、ユーザーが`home`と`user/:id`以外のパスにアクセスすると、アプリケーションは`NotFound`コンポーネントを表示します。
 
-Tip: ワイルドカードルートは通常、ルート配列の最後に配置されます。
+TIP: ワイルドカードルートは通常、ルート配列の最後に配置されます。
 
 ## AngularがURLを照合する方法 {#how-angular-matches-urls}
 
@@ -216,7 +216,8 @@ const routes: Routes = [
 ```ts
 const titleResolver: ResolveFn<string> = (route) => route.queryParams['id'];
 const routes: Routes = [
-  ...{
+  // ...
+  {
     path: 'products',
     component: Products,
     title: titleResolver,
@@ -320,9 +321,12 @@ const routes: Routes = [
 
 この静的データは`ActivatedRoute`を注入することで読み取ることができます。詳細については、[ルート状態の読み取り](/guide/routing/read-route-state)を参照してください。
 
-### データリゾルバーによる動的データ {#dynamic-data-with-data-resolvers}
+### リソースとリゾルバーによる動的データ {#dynamic-data-with-resources-and-resolvers}
 
-ルートに動的データを提供する必要がある場合は、[ルートデータリゾルバーに関するガイド](/guide/routing/data-resolvers)を参照してください。
+ルートのデータを取得する必要がある場合、Angularルーターはデータリゾルバーに加えて、リアクティブなルートリソースもサポートしています。
+
+- [リソースによるデータ取得](/guide/routing/data-fetching-with-resources): Angularシグナルの`Resource` APIを使用して、リアクティブにデータを取得します。
+- [ルートデータリゾルバー](/guide/routing/data-resolvers): リゾルバー関数を使用して、ルートのアクティブ化前にデータを取得します。
 
 ## ネストされたルート {#nested-routes}
 

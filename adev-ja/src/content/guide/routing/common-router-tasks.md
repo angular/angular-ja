@@ -33,7 +33,7 @@ providers: [provideRouter(appRoutes, withComponentInputBinding())];
 
 ```ts
 id = input.required<string>();
-hero = computed(() => this.service.getHero(id()));
+hero = computed(() => this.service.getHero(this.id()));
 ```
 
 </docs-step>
@@ -56,7 +56,18 @@ internalId = linkedSignal(() => this.id() ?? getDefaultId());
 </docs-step>
 </docs-workflow>
 
-NOTE: 静的なルートデータ、解決されたルートデータ、パスパラメータ、マトリックスパラメータ、クエリパラメータなど、すべてのルートデータをキーと値のペアでコンポーネントの入力にバインドできます。
+NOTE: ルートリソース、静的なルートデータ、解決されたルートデータ、パスパラメータ、マトリックスパラメータ、クエリパラメータなど、すべてのルートデータをキーと値のペアでコンポーネントの入力にバインドできます。
+
+### 入力バインディングの優先順位 {#input-binding-priority}
+
+複数のルートソースが同じキーを定義している場合、ルーターは次の優先順位 (高い順) で衝突を解決します。
+
+1. **ルートリソース**: ルートの`resources`マップで定義された値です。ブロッキングリソースはラップを解除した値 (`resource.value()`) をバインドし、ノンブロッキングリソースは`Resource`インスタンスをバインドします。
+2. **ルートデータとリゾルバー**: `data`で定義された静的データ、または`resolve`で解決された値です。
+3. **パスパラメータとマトリックスパラメータ**: URLパスのパラメータ (`:id`など) とマトリックスパラメータです。
+4. **クエリパラメータ**: クエリ文字列のパラメータ (`?id=123`など) です。
+
+たとえば、ルートにパスパラメータ`:id`とクエリパラメータ`?id=...`の両方がある場合、パスパラメータの値がコンポーネントの`id`入力にバインドされます。ルートが`id`という名前のリソースも定義している場合は、そのリソースの値が両方より優先されます。
 
 ### Disable query parameter binding
 

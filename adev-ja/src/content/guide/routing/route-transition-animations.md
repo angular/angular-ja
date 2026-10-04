@@ -27,7 +27,7 @@ document.startViewTransition(async () => {
 
 Angular Routerは、シームレスなルート変更を作成するために、ナビゲーションライフサイクルにビュー遷移を統合します。ナビゲーション中、Routerは以下を行います。
 
-1. **ナビゲーションの準備を完了する** - ルートのマッチング、[遅延ロード](guide/routing/loading-strategies#lazily-loaded-components-and-routes)、[ガード](/guide/routing/route-guards)、および[リゾルバー](/guide/routing/data-resolvers)が実行されます
+1. **ナビゲーションの準備を完了する** - ルートのマッチング、[遅延ロード](guide/routing/loading-strategies#lazily-loaded-components-and-routes)、[ガード](/guide/routing/route-guards)、[リソース](/guide/routing/data-fetching-with-resources)、および[リゾルバー](/guide/routing/data-resolvers)が実行されます
 2. **ビュー遷移を開始する** - ルートがアクティベーションの準備ができたときに、Routerは`startViewTransition`を呼び出します
 3. **DOMを更新する** - Routerは、遷移コールバック内で新しいルートをアクティブ化し、古いルートを非アクティブ化します
 4. **遷移を完了する** - Angularがレンダリングを完了すると、遷移Promiseが解決されます
@@ -122,7 +122,7 @@ IMPORTANT: ビューのトランジションアニメーションは、コンポ
 
 ```ts
 import {inject} from '@angular/core';
-import {Router, withViewTransitions, isActive} from '@angular/router';
+import {Router, withViewTransitions, isActive, IsActiveMatchOptions} from '@angular/router';
 
 withViewTransitions({
   onViewTransitionCreated: ({transition}) => {
@@ -130,7 +130,7 @@ withViewTransitions({
     const targetUrl = router.currentNavigation()!.finalUrl!;
 
     // Skip transition if only fragment or query params change
-    const config = {
+    const config: Partial<IsActiveMatchOptions> = {
       paths: 'exact',
       matrixParams: 'exact',
       fragment: 'ignored',

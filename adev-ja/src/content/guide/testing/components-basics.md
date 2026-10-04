@@ -100,7 +100,7 @@ IMPORTANT: `createComponent` を呼び出した後に `TestBed` を再構成し�
 
 `createComponent` メソッドは、現在の `TestBed` 定義を凍結し、さらなる構成を締め切ります。
 
-`configureTestingModule()` や `get()`、`override...` メソッドなど、`TestBed` の構成メソッドをさらに呼び出すことはできません。
+`configureTestingModule()` や `override...` メソッドなど、`TestBed` の構成メソッドをさらに呼び出すことはできません。
 呼び出そうとすると、`TestBed` はエラーをスローします。
 
 ### `ComponentFixture`
@@ -156,7 +156,7 @@ setup関数は、パラメーターを介してカスタマイズできるとい
 setup関数の例を次に示します。
 
 ```ts
-function setup(providers?: StaticProviders[]): ComponentFixture<Banner> {
+function setup(providers?: Provider[]): ComponentFixture<Banner> {
   TestBed.configureTestingModule({providers});
   return TestBed.createComponent(Banner);
 }

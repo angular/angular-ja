@@ -157,7 +157,7 @@ it('bare <h2> should not have a backgroundColor', () => {
 
 ## Testing a directive in isolation
 
-A directive can't be constructed through TestBed; it must be rendered through a component's template to behave correctly.
+A directive can be created on its own with `TestBed.createDirective()`, which returns a `DirectiveFixture`. Alternatively, you can render it through a component's template.
 The `Highlight` directive can be tested this way, using a local test component's input to control the directive.
 
 ```ts

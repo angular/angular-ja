@@ -2,6 +2,8 @@
 
 データリゾルバーを使用すると、ルートにナビゲートする前にデータをフェッチでき、コンポーネントが必要なデータをレンダリング前に確実に受け取るようにします。これにより、ローディング状態の必要性を防ぎ、重要なデータを事前に読み込むことでユーザー体験を向上させることができます。
 
+TIP: If your application uses Angular Signals, consider using [route resources](/guide/routing/data-fetching-with-resources) for reactive data fetching with `Resource` APIs and built-in support for non-blocking data loading.
+
 ## データリゾルバーとは？ {#what-are-data-resolvers}
 
 データリゾルバーは、`ResolveFn`関数を実装するサービスです。これは、ルートがアクティブになる前に実行され、API、データベース、またはその他のソースからデータをフェッチできます。解決されたデータは、`ActivatedRoute`を介してコンポーネントで利用可能になります。
@@ -149,9 +151,8 @@ export class UserDetail {
 
 ```ts
 import {bootstrapApplication} from '@angular/platform-browser';
-import {provideRouter, withNavigationErrorHandler} from '@angular/router';
+import {provideRouter, Router, withNavigationErrorHandler} from '@angular/router';
 import {inject} from '@angular/core';
-import {Router} from '@angular/router';
 import {routes} from './app.routes';
 
 bootstrapApplication(App, {
@@ -272,6 +273,8 @@ export const userResolver: ResolveFn<User | RedirectCommand> = (route) => {
 
 データリゾルバーはコンポーネント内の読み込み状態を防ぎますが、別のUX上の考慮事項をもたらします。リゾルバーの実行中はナビゲーションがブロックされます。特にネットワークリクエストが遅い場合、ユーザーはリンクをクリックしてから新しいルートが表示されるまでに遅延を経験する可能性があります。
 
+TIP: To avoid blocking navigation and render components immediately with skeleton or loading indicators, use [non-blocking route resources](/guide/routing/data-fetching-with-resources#blocking-and-non-blocking-resources).
+
 ### ナビゲーションフィードバックの提供 {#providing-navigation-feedback}
 
 リゾルバーの実行中のユーザー体験を向上させるには、ルーターイベントをリッスンして読み込みインジケーターを表示できます。
@@ -310,18 +313,20 @@ export class App {
 
 リゾルバーは親から子へと実行されます。親ルートがリゾルバーを定義している場合、その解決済みデータは、後で実行される子リゾルバーで利用可能になります。
 
+NOTE: Because resolvers execute sequentially from parent to child, each nested level adds to the total navigation wait time (a network waterfall). If your child routes do not depend on parent data, consider [route resources](/guide/routing/data-fetching-with-resources), which execute concurrently across all routes.
+
 ```ts
-import { inject } from '@angular/core';
-import { provideRouter , ActivatedRouteSnapshot } from '@angular/router';
-import { userResolver } from './resolvers';
-import { UserPosts } from './pages';
-import { PostService } from './services',
-import type { User } from './types';
+import {inject} from '@angular/core';
+import {provideRouter, ActivatedRouteSnapshot} from '@angular/router';
+import {userResolver} from './resolvers';
+import {UserPosts} from './pages';
+import {PostService} from './services';
+import type {User} from './types';
 
 provideRouter([
   {
     path: 'users/:id',
-    resolve: { user: userResolver }, // user resolver in the parent route
+    resolve: {user: userResolver}, // user resolver in the parent route
     children: [
       {
         path: 'posts',
@@ -340,3 +345,10 @@ provideRouter([
   },
 ]);
 ```
+
+## Next steps
+
+<docs-pill-row>
+  <docs-pill href="/guide/routing/data-fetching-with-resources" title="Data fetching with resources"/>
+  <docs-pill href="/guide/routing/route-guards" title="Control route access with guards"/>
+</docs-pill-row>

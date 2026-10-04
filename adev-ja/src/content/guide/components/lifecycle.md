@@ -111,9 +111,7 @@ Angularアプリケーション全体に関連するライフサイクルフッ�
 より強力な型チェックのために、オプションで現在のクラスまたはthisを最初のジェネリック引数として渡すことができます。
 
 ```ts
-@Component({
-  /* ... */
-})
+@Component({/* ... */})
 export class UserProfile {
   name = input('');
 
@@ -143,9 +141,7 @@ Angularは、コンポーネントがページに表示されなくなった場�
 `DestroyRef` の `onDestroy` メソッドを呼び出します。
 
 ```ts
-@Component({
-  /* ... */
-})
+@Component({/* ... */})
 export class UserProfile {
   constructor() {
     inject(DestroyRef).onDestroy(() => {
@@ -306,9 +302,7 @@ Angularは、各ライフサイクルメソッド用のTypeScriptインターフ
 たとえば、`ngOnInit` のインターフェースは `OnInit` です。
 
 ```ts
-@Component({
-  /* ... */
-})
+@Component({/* ... */})
 export class UserProfile implements OnInit {
   ngOnInit() {
     /* ... */

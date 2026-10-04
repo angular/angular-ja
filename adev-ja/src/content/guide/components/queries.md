@@ -102,7 +102,7 @@ export class UserProfile {}
 
 クエリが結果を見つけられない場合、その値は`undefined`になります。これは、ターゲット要素が存在しないか、`@if`によって非表示になっている場合に発生する可能性があります。Angularは、アプリケーションの状態が変化するにつれて`contentChild`の結果を最新の状態に保ちます。
 
-デフォルトでは、コンテンツクエリはコンポーネントの_直接_の子のみを見つけ、子孫にはトラバースしません。
+デフォルトでは、`contentChild`クエリは子孫にトラバースしますが、`contentChildren`クエリは_直接_の子のみを見つけます。[コンテンツの子孫](#content-descendants)を参照してください。
 
 `contentChildren`関数を使用して、複数結果をクエリできます。
 
@@ -224,6 +224,30 @@ export class CustomExpando {
 その要素に関連付けられた`TemplateRef`を取得します。
 
 開発者は、`read`を使用して`ElementRef`と`TemplateRef`を取得することが最も一般的です。
+
+`read`には`Injector`も渡せます。
+
+```angular-ts
+@Component({
+  selector: 'custom-table',
+  template: `
+    <third-party-table #inner>
+      <ng-template>
+        <ng-container [ngTemplateOutlet]="columns()" [ngTemplateOutletInjector]="innerInjector()" />
+      </ng-template>
+    </third-party-table>
+  `,
+})
+export class CustomTable {
+  columns = contentChild(TemplateRef);
+  innerInjector = viewChild('inner', {read: Injector});
+}
+```
+
+上記の例では、`third-party-table`要素のノードインジェクター、
+つまりその要素のツリー上の位置から見えるインジェクターを取得します。これを
+`ngTemplateOutletInjector`経由で`NgTemplateOutlet`に渡すことで、投影されたテンプレート内の
+ディレクティブが、サードパーティコンポーネントの提供する値を注入できるようになります。
 
 ### コンテンツの子孫 {#content-descendants}
 

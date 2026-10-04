@@ -2780,6 +2780,14 @@ export const RECOMMENDATIONS: Step[] = [
     possibleIn: 2100,
     step: '21.0.0_ng_update',
   },
+  {
+    possibleIn: 2100,
+    necessaryAsOf: 2100,
+    level: ApplicationComplexity.Advanced,
+    step: '21.0.0-safe-resource-url-audio-src',
+    action:
+      '`SafeResourceUrl` の値を `audio[src]` バインディングで使用している場合、Angular v21 では `audio[src]` がサニタイズされなくなる点に注意してください。そのため、既存の `bypassSecurityTrustResourceUrl` の使用が `SafeValue must use [property]=binding` というメッセージを出力することがあります。不要なサニタイズを削除し、URLを直接バインドしてください。',
+  },
 
   {
     possibleIn: 2100,

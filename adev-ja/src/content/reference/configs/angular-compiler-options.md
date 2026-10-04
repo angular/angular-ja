@@ -64,13 +64,6 @@ Use `'partial'` for independently published libraries, such as npm packages.
 `'partial'` compilations output a stable, intermediate format which better supports usage by applications built at different Angular versions from the library.
 Libraries built at "HEAD" alongside their applications and using the same version of Angular such as in a mono-repository can use `'full'` since there is no risk of version skew.
 
-### `disableExpressionLowering`
-
-When `true`, the default, transforms code that is or could be used in an annotation, to allow it to be imported from template factory modules.
-See [metadata rewriting](tools/cli/aot-compiler#metadata-rewriting) for more information.
-
-When `false`, disables this rewriting, requiring the rewriting to be done manually.
-
 ### `disableTypeScriptVersionCheck`
 
 When `true`, the compiler does not look at the TypeScript version and does not report an error when an unsupported version of TypeScript is used.
@@ -91,6 +84,9 @@ These message formats have some issues, such as whitespace handling and reliance
 The new message format is more resilient to whitespace changes, is the same across all translation file formats, and can be created directly from calls to `$localize`.
 This allows `$localize` messages in application code to use the same ID as identical `i18n` messages in component templates.
 
+IMPORTANT: This option is only supported by the `@angular-devkit/build-angular:browser` builder.
+When using the `@angular/build:application` builder (esbuild), this option has no effect and the new decimal message ID format is always used regardless of this setting.
+
 ### `enableResourceInlining`
 
 When `true`, replaces the `templateUrl` and `styleUrls` properties in all `@Component` decorators with inline content in the `template` and `styles` properties.
@@ -98,12 +94,6 @@ When `true`, replaces the `templateUrl` and `styleUrls` properties in all `@Comp
 When enabled, the `.js` output of `ngc` does not include any lazy-loaded template or style URLs.
 
 For library projects created with the Angular CLI, the development configuration default is `true`.
-
-### `enableLegacyTemplate`
-
-When `true`, enables the deprecated `<template>` element in place of `<ng-template>`.
-Default is `false`.
-Might be required by some third-party Angular libraries.
 
 ### `flatModuleId`
 

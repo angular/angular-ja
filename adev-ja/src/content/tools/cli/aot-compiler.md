@@ -45,7 +45,7 @@ In the following example, the `@Component()` metadata object and the class const
 ```angular-ts
 @Component({
   selector: 'app-typical',
-  template: '<div>A typical component for {{data.name}}</div>',
+  template: '<div>A typical component for {{data().name}}</div>',
 })
 export class Typical {
   data = input.required<TypicalData>();
@@ -60,11 +60,11 @@ When it needs to create a `Typical` instance, Angular calls the factory, which p
 
 There are three phases of AOT compilation.
 
-|     | Phase                  | Details                                                                                                                                                                                                                                                                                                        |
-| :-- | :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | code analysis          | In this phase, the TypeScript compiler and _AOT collector_ create a representation of the source. The collector does not attempt to interpret the metadata it collects. It represents the metadata as best it can and records errors when it detects a metadata syntax violation.                              |
-| 2   | code generation        | In this phase, the compiler's `StaticReflector` interprets the metadata collected in phase 1, performs additional validation of the metadata, and throws an error if it detects a metadata restriction violation.                                                                                              |
-| 3   | template type checking | In this optional phase, the Angular _template compiler_ uses the TypeScript compiler to validate the binding expressions in templates. You can enable this phase explicitly by setting the `strictTemplates` configuration option; see [Angular compiler options](reference/configs/angular-compiler-options). |
+|     | Phase                  | Details                                                                                                                                                                                                                                                                                                                     |
+| :-- | :--------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | code analysis          | In this phase, the TypeScript compiler and _AOT collector_ create a representation of the source. The collector does not attempt to interpret the metadata it collects. It represents the metadata as best it can and records errors when it detects a metadata syntax violation.                                           |
+| 2   | code generation        | In this phase, the compiler's `StaticReflector` interprets the metadata collected in phase 1, performs additional validation of the metadata, and throws an error if it detects a metadata restriction violation.                                                                                                           |
+| 3   | template type checking | In this phase, the Angular _template compiler_ uses the TypeScript compiler to validate the binding expressions in templates. Strict checking in this phase is enabled by default and controlled by the `strictTemplates` configuration option; see [Angular compiler options](reference/configs/angular-compiler-options). |
 
 ### Metadata restrictions
 
@@ -133,43 +133,6 @@ HELPFUL: If you want `ngc` to report syntax errors immediately rather than produ
 ```
 
 Angular libraries have this option to ensure that all Angular `.metadata.json` files are clean and it is a best practice to do the same when building your own libraries.
-
-### No arrow functions
-
-The AOT compiler does not support [function expressions](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/function)
-and [arrow functions](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Arrow_functions), also called _lambda_ functions.
-
-Consider the following component decorator:
-
-```ts
-
-@Component({
-  …
-  providers: [{provide: server, useFactory: () => new Server()}]
-})
-
-```
-
-The AOT collector does not support the arrow function, `() => new Server()`, in a metadata expression.
-It generates an error node in place of the function.
-When the compiler later interprets this node, it reports an error that invites you to turn the arrow function into an _exported function_.
-
-You can fix the error by converting to this:
-
-```ts
-
-export function serverFactory() {
-  return new Server();
-}
-
-@Component({
-  …
-  providers: [{provide: server, useFactory: serverFactory}]
-})
-
-```
-
-In version 5 and later, the compiler automatically performs this rewriting while emitting the `.js` file.
 
 ### Code folding
 
@@ -258,7 +221,7 @@ The following table describes which expressions the collector can and cannot fol
 | Conditional operator             | yes, if condition is foldable            |
 | Parentheses                      | yes, if the expression is foldable       |
 
-If an expression is not foldable, the collector writes it to `.metadata.json` as an [AST](https://en.wikipedia.org/wiki/Abstract*syntax*tree) for the compiler to resolve.
+If an expression is not foldable, the collector writes it to `.metadata.json` as an [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) for the compiler to resolve.
 
 ## Phase 2: code generation
 
@@ -284,11 +247,10 @@ The compiler, however, can later refuse to generate a call to a _particular_ fun
 
 The compiler can only create instances of certain classes, supports only core decorators, and only supports calls to macros \(functions or static methods\) that return expressions.
 
-| Compiler action      | Details                                                                                                                                                |
-| :------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| New instances        | The compiler only allows metadata that create instances of the class `InjectionToken` from `@angular/core`.                                            |
-| Supported decorators | The compiler only supports metadata for the [Angular decorators in the `@angular/core` module](/api?type=decorator).                                   |
-| Function calls       | Factory functions must be exported, named functions. The AOT compiler does not support lambda expressions \("arrow functions"\) for factory functions. |
+| Compiler action      | Details                                                                                                              |
+| :------------------- | :------------------------------------------------------------------------------------------------------------------- |
+| New instances        | The compiler only allows metadata that create instances of the class `InjectionToken` from `@angular/core`.          |
+| Supported decorators | The compiler only supports metadata for the [Angular decorators in the `@angular/core` module](/api?type=decorator). |
 
 ### Functions and static method calls
 
@@ -327,49 +289,12 @@ The Angular [`RouterModule`](api/router/RouterModule) exports two macro static m
 Review the [source code](https://github.com/angular/angular/blob/main/packages/router/src/router_module.ts#L139 'RouterModule.forRoot source code')
 for these methods to see how macros can simplify configuration of complex [NgModules](guide/ngmodules/overview).
 
-### Metadata rewriting
-
-The compiler treats object literals containing the fields `useClass`, `useValue`, `useFactory`, and `data` specially, converting the expression initializing one of these fields into an exported variable that replaces the expression.
-This process of rewriting these expressions removes all the restrictions on what can be in them because
-the compiler doesn't need to know the expression's value — it just needs to be able to generate a reference to the value.
-
-You might write something like:
-
-```ts
-class TypicalServer {}
-
-@NgModule({
-  providers: [{provide: SERVER, useFactory: () => TypicalServer}],
-})
-export class TypicalModule {}
-```
-
-Without rewriting, this would be invalid because lambdas are not supported and `TypicalServer` is not exported.
-To allow this, the compiler automatically rewrites this to something like:
-
-```ts
-class TypicalServer {}
-
-export const θ0 = () => new TypicalServer();
-
-@NgModule({
-  providers: [{provide: SERVER, useFactory: θ0}],
-})
-export class TypicalModule {}
-```
-
-This allows the compiler to generate a reference to `θ0` in the factory without having to know what the value of `θ0` contains.
-
-The compiler does the rewriting during the emit of the `.js` file.
-It does not, however, rewrite the `.d.ts` file, so TypeScript doesn't recognize it as being an export.
-And it does not interfere with the ES module's exported API.
-
 ## Phase 3: Template type checking
 
 One of the Angular compiler's most helpful features is the ability to type-check expressions within templates, and catch any errors before they cause crashes at runtime.
 In the template type-checking phase, the Angular template compiler uses the TypeScript compiler to validate the binding expressions in templates.
 
-Enable this phase explicitly by adding the compiler option `"strictTemplates"` in the `"angularCompilerOptions"` of the project's TypeScript configuration file
+Strict checking in this phase is enabled by default and controlled by the compiler option `"strictTemplates"` in the `"angularCompilerOptions"` of the project's TypeScript configuration file
 (see [Angular Compiler Options](reference/configs/angular-compiler-options)).
 
 Template validation produces error messages when a type error is detected in a template binding
@@ -407,7 +332,7 @@ If the error is in an attribute binding such as `[value]="person.address.street"
 location is the location of the attribute that contains the error.
 
 The validation uses the TypeScript type checker and the options supplied to the TypeScript compiler to control how detailed the type validation is.
-For example, if the `strictTypeChecks` is specified, the error
+For example, if the `strictNullChecks` TypeScript option is enabled, the error
 
 ```shell {hideCopy}
 

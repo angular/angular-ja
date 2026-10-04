@@ -4,11 +4,11 @@
 
 ## フィールドの状態を理解する
 
-[`form()`](api/forms/signals/form)関数でフォームを作成すると、**フィールドツリー**が返されます。これはフォームモデルを反映したオブジェクト構造です。ツリー内の各フィールドには、ドット記法（[`form.email`](api/forms/signals/form#email)など）でアクセスできます。
+[`form()`](api/forms/signals/form)関数でフォームを作成すると、**フィールドツリー**が返されます。これはフォームモデルを反映したオブジェクト構造です。ツリー内の各フィールドには、ドット記法（[`form.email`](api/forms/signals/FieldTree)など）でアクセスできます。
 
 ### フィールドの状態へのアクセス {#accessing-field-state}
 
-フィールドツリー内の任意のフィールドを関数として（[`form.email()`](api/forms/signals/form#email)のように）呼び出すと、`FieldState`オブジェクトが返されます。これには、フィールドのバリデーション、インタラクション、および可用性の状態を追跡するリアクティブなシグナルが含まれています。たとえば、`invalid()`シグナルは、フィールドにバリデーションエラーがあるかどうかを示します:
+フィールドツリー内の任意のフィールドを関数として（[`form.email()`](api/forms/signals/FieldState)のように）呼び出すと、`FieldState`オブジェクトが返されます。これには、フィールドのバリデーション、インタラクション、および可用性の状態を追跡するリアクティブなシグナルが含まれています。たとえば、`invalid()`シグナルは、フィールドにバリデーションエラーがあるかどうかを示します:
 
 ```angular-ts
 import {Component, signal} from '@angular/core';
@@ -804,9 +804,7 @@ A common use case is improving accessibility on form submission: when a form is 
 Given a registration form:
 
 ```ts
-@Component({
-  /* ... */
-})
+@Component({/* ... */})
 export class Registration {
   registrationModel = signal({username: '', email: '', password: ''});
   registrationForm = form(this.registrationModel, (schemaPath) => {
@@ -861,9 +859,7 @@ Consider a custom password input:
 ```
 
 ```ts
-@Component({
-  /* ... */
-})
+@Component({/* ... */})
 export class PasswordInput implements FormValueControl<string> {
   readonly value = model<string>('');
   readonly passwordCtrl = viewChild.required<ElementRef<HTMLInputElement>>('passwordCtrl');

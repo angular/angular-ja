@@ -110,7 +110,7 @@ handleSubmit() {
 フォームの値にアクセスできるようになりました。次は、送信イベントを処理し、`handleSubmit`メソッドを使用します。
 Angularには、`ngSubmit`というこの特定の目的に合わせたイベントハンドラーがあります。フォーム要素を更新して、フォームが送信されたときに`handleSubmit`メソッドを呼び出します。
 
-```angular-html {highlight:[3]}
+```angular-html {highlight:[1]}
 <form [formGroup]="profileForm" (ngSubmit)="handleSubmit()"></form>
 ```
 

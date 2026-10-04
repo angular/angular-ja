@@ -36,10 +36,8 @@ const canActivateTeam: CanActivateFn = (
 すでに注入コンテキスト内にいない状態で関数を注入コンテキスト内で実行する必要がある場合は、`runInInjectionContext` を使用できます。
 これには、`EnvironmentInjector` のようなインジェクターへのアクセスが必要です。
 
-```ts {highlight: [9], header:"hero.service.ts"}
-@Injectable({
-  providedIn: 'root',
-})
+```ts {highlight: [7], header:"hero.service.ts"}
+@Service()
 export class HeroService {
   private environmentInjector = inject(EnvironmentInjector);
 
@@ -72,9 +70,7 @@ export function injectNativeElement<T extends Element>(): T {
 import {Component, inject} from '@angular/core';
 import {injectNativeElement} from './dom-helpers';
 
-@Component({
-  /* … */
-})
+@Component({/* … */})
 export class PreviewCard {
   readonly hostEl = injectNativeElement<HTMLElement>(); // フィールドイニシャライザーは注入コンテキスト内で実行されます。
 

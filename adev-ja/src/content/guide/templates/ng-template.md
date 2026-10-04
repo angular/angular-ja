@@ -202,7 +202,7 @@ export class MyOutlet {
 
 ```angular-html
 <component-with-fragment>
-  <h2>フラグメントを含むコンポーネント>
+  <h2>フラグメントを含むコンポーネント</h2>
   <my-outlet>
     <button>表示</button>
   </my-outlet>

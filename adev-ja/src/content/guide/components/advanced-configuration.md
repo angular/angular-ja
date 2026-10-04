@@ -45,4 +45,4 @@ import {Component, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 export class ComponentWithCustomElements { }
 ```
 
-Angularは、現時点で他のスキーマをサポートしていません。
+Angularは、任意の要素と任意のプロパティを許可する`NO_ERRORS_SCHEMA`も提供しています。

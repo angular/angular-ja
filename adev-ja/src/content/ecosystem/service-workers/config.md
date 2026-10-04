@@ -201,7 +201,7 @@ export interface DataGroup {
 
 Each `DataGroup` is defined by the following data group properties.
 
-#### `name`
+#### `name` {#datagroups-name}
 
 Similar to `assetGroups`, every data group has a `name` which uniquely identifies it.
 
@@ -318,7 +318,7 @@ If you are not able to implement CORS — for example, if you don't control the 
 
 </docs-callout>
 
-#### `cacheQueryOptions`
+#### `cacheQueryOptions` {#datagroups-cachequeryoptions}
 
 See [assetGroups](#assetgroups) for details.
 
@@ -332,7 +332,7 @@ The ServiceWorker redirects navigation requests that don't match any `asset` or 
 A request is considered to be a navigation request if:
 
 - Its [method](https://developer.mozilla.org/docs/Web/API/Request/method) is `GET`
-- Its [mode](https://developer.mozilla.org/docs/Web/API/Request/mode) is `navigation`
+- Its [mode](https://developer.mozilla.org/docs/Web/API/Request/mode) is `navigate`
 - It accepts a `text/html` response as determined by the value of the `Accept` header
 - Its URL matches the following criteria:
   - The URL must not contain a file extension (that is, a `.`) in the last path segment

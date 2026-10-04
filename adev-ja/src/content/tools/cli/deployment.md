@@ -110,7 +110,7 @@ CLIのビルドオプションとそれらの効果についてより多く知�
 
 - [`expression-changed-after-checked`](errors/NG0100)の検出のような安全な追加のチェック。
 - より詳細なエラーメッセージ。
-- [デバッグ関数](api#core-global)および[Angular DevTools](tools/devtools)をサポートするグローバルな`ng`変数のような追加のデバッグユーティリティ。
+- [デバッグ関数](api#angular_core_globals)および[Angular DevTools](tools/devtools)をサポートするグローバルな`ng`変数のような追加のデバッグユーティリティ。
 
 これらの機能は開発中は便利ですが、アプリケーションに追加のコードが必要で、プロダクションでは望まれません。
 エンドユーザーのためのバンドルサイズにネガティブな影響を与えないよう、これらの機能を安全に使うために、Angular CLIは

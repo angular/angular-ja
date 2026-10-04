@@ -64,6 +64,11 @@ export class CustomSlider {
 
 NOTE: イベント名にプレフィックスとして使用できるグローバルターゲット名は `document:`、`window:`、`body:` です。
 
+NOTE: `'(keydown.enter)'`のようなキー名は`KeyboardEvent.key`と照合されます。これはユーザーのキーボードレイアウトや入力言語に依存します。
+レイアウトに関係なく物理キーに一致させるには、
+代わりに`code`修飾子を使用します。例: `'(keydown.code.Enter)'`。
+詳細は[キー修飾子の使用](guide/templates/event-listeners#using-key-modifiers)を参照してください。
+
 ## `@HostBinding`および`@HostListener`デコレーター {#the-hostbinding-and-hostlistener-decorators}
 
 クラスメンバーに`@HostBinding`および`@HostListener`デコレーターを適用することにより、
@@ -72,9 +77,7 @@ NOTE: イベント名にプレフィックスとして使用できるグロー�
 `@HostBinding`を使用すると、ホストのプロパティと属性を、プロパティとゲッターにバインドできます。
 
 ```ts
-@Component({
-  /* ... */
-})
+@Component({/* ... */})
 export class CustomSlider {
   @HostBinding('attr.aria-valuenow')
   value: number = 0;

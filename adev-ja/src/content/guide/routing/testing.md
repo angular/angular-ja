@@ -20,9 +20,8 @@
 
 ```ts { header: 'user-profile.spec.ts'}
 import {TestBed} from '@angular/core/testing';
-import {Router} from '@angular/router';
+import {provideRouter, Router} from '@angular/router';
 import {RouterTestingHarness} from '@angular/router/testing';
-import {provideRouter} from '@angular/router';
 import {UserProfile} from './user-profile';
 
 describe('UserProfile', () => {

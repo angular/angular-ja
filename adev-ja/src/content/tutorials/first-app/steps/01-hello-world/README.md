@@ -100,7 +100,7 @@ Angularアプリケーションプロジェクトを構成するファイルを�
 
 1. `app.ts`の`App`クラスの定義で、`title`の行を次のコードに置き換えてコンポーネントのタイトルを変更します。
 
-   <docs-code header="src/app/app.tsを置き換えてください" path="adev/src/content/tutorials/first-app/steps/02-Home/src/app/app.ts" visibleLines="[11,13]"/>
+   <docs-code header="src/app/app.tsを置き換えてください" path="adev/src/content/tutorials/first-app/steps/02-Home/src/app/app.ts" visibleLines="[10]"/>
 
    その次に、変更した`app.ts`を保存してください.
 

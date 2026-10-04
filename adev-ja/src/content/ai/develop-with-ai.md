@@ -25,7 +25,7 @@ NOTE: これらのファイルは、Angularの規約に準拠するために定�
 | Antigravity     | <a download href="/assets/context/GEMINI.md" target="_blank">GEMINI.md</a>    | <a href="https://antigravity.google/docs/rules-workflows" target="_blank">`GEMINI.md`を設定</a>         |
 | Copilot powered IDEs | <a download="copilot-instructions.md" href="/assets/context/guidelines.md" target="_blank">copilot-instructions.md</a>  | <a href="https://code.visualstudio.com/docs/copilot/copilot-customization#_custom-instructions" target="_blank">`.github/copilot-instructions.md`を設定</a> |
 | Cursor          | <a download href="/assets/context/angular-20.mdc" target="_blank">cursor.md</a> | <a href="https://docs.cursor.com/context/rules" target="_blank">`cursorrules.md`を設定</a>                         |
-| JetBrains IDEs  | <a download href="/assets/context/guidelines.md" target="_blank">guidelines.md</a>  | <a href="https://www.jetbrains.com/help/junie/customize-guidelines.html" target="_blank">`guidelines.md`を設定</a> |
+| JetBrains IDEs  | <a download href="/assets/context/AGENTS.md" target="_blank">AGENTS.md</a>  | <a href="https://junie.jetbrains.com/docs/guidelines-and-memory.html#how-junie-cli-discovers-guidelines" target="_blank">`AGENTS.md`を設定</a> |
 | VS Code | <a download=".instructions.md" href="/assets/context/guidelines.md" target="_blank">.instructions.md</a>  | <a href="https://code.visualstudio.com/docs/copilot/copilot-customization#_custom-instructions" target="_blank">`.instructions.md`を設定</a> |
 | Windsurf | <a download href="/assets/context/guidelines.md" target="_blank">guidelines.md</a>  | <a href="https://docs.windsurf.com/windsurf/cascade/memories#rules" target="_blank">`guidelines.md`を設定</a> |
 
@@ -43,7 +43,3 @@ Angular CLIには、開発環境のAIアシスタントがAngular CLIと連携�
 - <a href="/assets/context/llms-full.txt" target="_blank">llms-full.txt</a> - Angularの動作方法とAngularアプリケーションの構築方法を記述した、より堅牢なコンパイル済みリソースセット。
 
 AngularアプリケーションにAIを統合する方法に関する詳細情報については、[概要ページ](/ai)もご確認ください。
-
-## Web Codegen Scorer
-
-Angularチームは[Web Codegen Scorer](https://github.com/angular/web-codegen-scorer)を開発し、オープンソース化しました。これは、AI生成ウェブコードの品質を評価・スコア化するためのツールです。このツールを使用して、Angular向けにLLM生成コードの精度を向上させるプロンプトの微調整など、AI生成コードに関するエビデンスベースの意思決定を行うことができます。これらのプロンプトは、AIツールのシステム指示として含めたり、プロンプトとともにコンテキストとして含めたりできます。また、このツールを使用して、異なるモデルが生成するコードの品質を比較したり、モデルやエージェントの進化に伴う品質の経時変化を監視したりできます。

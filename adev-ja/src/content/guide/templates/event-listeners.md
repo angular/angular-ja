@@ -2,7 +2,7 @@
 
 Angularは、イベント名とイベントが発生するたびに実行されるステートメントを括弧で囲むことで、テンプレート内の要素にイベントリスナーを定義することをサポートしています。
 
-## ネイティブイベントのリスナー
+## ネイティブイベントのリスナー {#listening-to-native-events}
 
 HTML要素にイベントリスナーを追加する場合は、イベントを括弧 `()` で囲みます。これにより、リスナーのステートメントを指定できます。
 
@@ -24,7 +24,7 @@ export class App{
 
 `click`、`keydown`、`mouseover` などのネイティブイベントのリスナーを追加できます。詳細については、[MDNの要素のすべての利用可能なイベント](https://developer.mozilla.org/en-US/docs/Web/API/Element#events)をご覧ください。
 
-## イベント引数へのアクセス
+## イベント引数へのアクセス {#accessing-the-event-argument}
 
 Angularは、すべてのテンプレートイベントリスナーで、イベントオブジェクトへの参照を含む `$event` という名前の変数を提供します。
 
@@ -42,7 +42,7 @@ export class App {
 }
 ```
 
-## キー修飾子の使用
+## キー修飾子の使用 {#using-key-modifiers}
 
 特定のキーの特定のキーボードイベントをキャプチャする場合は、次のようなコードを記述できます。
 
@@ -106,9 +106,9 @@ Angularでは、組み込みの `code` サフィックスを提供すること�
 @Component({
   /* ... */
   host: {
-    'window:click': 'onWindowClick()',
-    'document:click': 'onDocumentClick()',
-    'body:click': 'onBodyClick()',
+    '(window:click)': 'onWindowClick()',
+    '(document:click)': 'onDocumentClick()',
+    '(body:click)': 'onBodyClick()',
   },
 })
 export class MyView {}

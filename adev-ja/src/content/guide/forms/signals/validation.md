@@ -110,12 +110,22 @@ export class RegistrationComponent {
 }
 ```
 
-フィールドは次の場合に「空」と見なされます:
+A field is considered "empty" when its value is one of the following, and non-empty for every other
+value — including `0` and the empty array `[]`:
 
-| 条件                     | 例      |
-| ------------------------ | ------- |
-| 値が`null`である         | `null`, |
-| 値が空文字列である       | `''`    |
+| Condition                | Example     |
+| ------------------------ | ----------- |
+| Value is `null`          | `null`      |
+| Value is `undefined`     | `undefined` |
+| Value is an empty string | `''`        |
+| Value is `false`         | `false`     |
+| Value is `NaN`           | `NaN`       |
+
+The last two are worth calling out:
+
+- `false` is empty to follow the native semantics of `required` on `<input type="checkbox">`, where
+  an unchecked box fails validation.
+- `NaN` is empty because it is usually the result of a parsing error, and is not a valid number.
 
 条件付きの要件には、`when`オプションを使用します:
 
@@ -130,7 +140,7 @@ registrationForm = form(this.registrationModel, (schemaPath) => {
 
 バリデーションルールは、`when`関数が`true`を返す場合にのみ実行されます。
 
-Note: `required`は空の配列を「存在する（有効）」として扱うため、配列の最小要素数を強制するには[`minLength()`](#minlength-and-maxlength)を使用してください。また、`<input type="checkbox" required>`と同様に、`false`は「未入力（無効）」として扱われます。
+NOTE: `required`は空の配列を「存在する（有効）」として扱うため、配列の最小要素数を強制するには[`minLength()`](#minlength-and-maxlength)を使用してください。
 
 ### email() {#email}
 
@@ -482,7 +492,7 @@ export class UrlFormComponent {
 | --------------- | ---------- | ------------------------------------------- |
 | `value`         | Signal     | 現在のフィールド値を含むSignal              |
 | `state`         | FieldState | フィールドの状態への参照                    |
-| `field`         | FieldTree  | フィールドツリーへの参照                    |
+| `fieldTree`     | FieldTree  | フィールドツリーへの参照                    |
 | `valueOf()`     | Method     | パスで指定された他のフィールドの値を取得します |
 | `stateOf()`     | Method     | パスで指定された他のフィールドの状態を取得します |
 | `fieldTreeOf()` | Method     | パスで指定された他のフィールドのフィールドツリーを取得します |
@@ -505,9 +515,7 @@ interface User {
   lastName: string;
 }
 
-@Component({
-  /* ... */
-})
+@Component({/* ... */})
 export class UserFormComponent {
   readonly userModel = model<User>({
     firstName: '',
@@ -660,7 +668,7 @@ import {Component, signal} from '@angular/core';
 import {form, FormField, required, validateHttp} from '@angular/forms/signals';
 
 @Component({
-  selector: 'app-username-form',|
+  selector: 'app-username-form',
   imports: [FormField],
   template: `
     <form novalidate>
@@ -750,9 +758,7 @@ import {Component, computed, signal} from '@angular/core';
 import {form, FormField, validateStandardSchema} from '@angular/forms/signals';
 import z from 'zod';
 
-@Component({
-  /* ... */
-})
+@Component({/* ... */})
 export class DynamicSchema {
   model = signal({document: '', type: 'dni'});
 

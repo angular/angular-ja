@@ -288,7 +288,7 @@ export class CustomSlider {
 
 `@Input`デコレーターは、入力の動作を変更できるconfigオブジェクトを受け取ります。
 
-#### 必須入力 {#required-inputs}
+#### 必須入力 {#required-inputs-decorator}
 
 `required`オプションを指定して、特定の入力が常に値を持つ必要があることを強制できます。
 
@@ -301,7 +301,7 @@ export class CustomSlider {
 
 すべての必須入力を指定せずにコンポーネントを使用しようとすると、Angularはビルド時にエラーを報告します。
 
-#### 入力変換 {#input-transforms}
+#### 入力変換 {#input-transforms-decorator}
 
 Angularによって入力が設定されるときにその値を変更する`transform`関数を指定できます。この変換関数は、上記で説明したシグナルベースの入力の変換関数と同様に機能します。
 
@@ -319,7 +319,7 @@ function trimString(value: string | undefined) {
 }
 ```
 
-#### 入力エイリアス {#input-aliases}
+#### 入力エイリアス {#input-aliases-decorator}
 
 `alias`オプションを指定して、テンプレートでの入力の名前を変更できます。
 

@@ -202,7 +202,7 @@ export class Stats {
 
 Angularがそのアウトレット内で`Stats`をアクティブ化すると、インジェクトされたデータとして`{ layout: 'sidebar' }`を受け取ります。
 
-NOTE: `routerOutletData`入力が設定されていない場合、インジェクトされる値はデフォルトでnullです。
+NOTE: `routerOutletData`入力が設定されていない場合、インジェクトされるシグナルの値はデフォルトで`undefined`です。
 
 ---
 

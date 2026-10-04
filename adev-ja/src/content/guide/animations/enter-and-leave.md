@@ -57,13 +57,15 @@ NOTE: 要素に複数のキーフレームアニメーションまたはtransiti
 
 ### 要素の削除順序 {#element-removal-order}
 
-`animate.leave`アニメーションの実行方法とアニメーションが発生するタイミングには、いくつかの微妙な点があります。`animate.leave`は、削除される要素に配置されている場合に機能します。また、`animate.leave`が削除される要素の_子孫_要素に配置されている場合、それらの子アニメーションは親ノードがDOMから削除される_前に_実行されます。これにより、親ノードが早期に消えることなく、子要素を確実にアニメーションで退場させることができます。
+`animate.leave`アニメーションの実行方法とアニメーションが発生するタイミングには、いくつかの微妙な点があります。`animate.leave`は、削除される要素に配置されている場合に機能します。また、`animate.leave`が、削除される要素の_子孫_要素で、かつ_同じコンポーネントのテンプレート内_に配置されている場合、それらの子の`animate.leave`アニメーションは親ノードがDOMから削除される_前に_実行されます。これにより、親ノードが早期に消えることなく、子要素を確実にアニメーションで消すことができます。
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-parent.ts">
-    <docs-code header="leave.ts" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-parent.ts" />
-    <docs-code header="leave.html" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-parent.html" />
-    <docs-code header="leave.css" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-parent.css"/>
+    <docs-code header="leave-parent.ts" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-parent.ts" />
+    <docs-code header="leave-parent.html" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-parent.html" />
+    <docs-code header="leave-parent.css" path="adev/src/content/examples/animations/src/app/enter-and-leave/leave-parent.css"/>
 </docs-code-multifile>
+
+IMPORTANT: 子のアニメーションが発火するのは、同じコンポーネントのテンプレート内にある要素だけです。削除される要素が子コンポーネントを含む場合、それらの子コンポーネントのテンプレート内で定義された`animate.leave`アニメーションは、親が削除される前には実行され**ません**。子コンポーネントを削除時にアニメーションさせるには、親のテンプレート内で子コンポーネントのホスト要素に直接`animate.leave`を適用します。または、子コンポーネント内でアニメーションの開始をプログラムで処理し、そのアニメーションが完了するまで親の削除を遅らせます。
 
 ## イベントバインディング、関数、およびサードパーティライブラリ {#event-bindings-functions-and-third-party-libraries}
 

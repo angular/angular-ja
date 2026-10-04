@@ -29,12 +29,7 @@ export const ROUTELESS_TRANSLATABLE_CONTENT: readonly string[] = [
  * their own, so they are dropped from translation tracking. Note that they are still
  * bundled into llms-full.txt, so the drop trades reader-facing value for focus.
  */
-export const KNOWN_ORPHANED_CONTENT: readonly string[] = [
-  // Superseded by guide/di/creating-and-using-services, kept only as a redirect source.
-  'src/content/guide/di/creating-injectable-service.md',
-  // Dropped from the navigation without a replacement or a redirect.
-  'src/content/guide/http/security.md',
-];
+export const KNOWN_ORPHANED_CONTENT: readonly string[] = [];
 
 /**
  * Routes that Bazel generates at build time (`generate_nav_items` for the error and
@@ -137,7 +132,8 @@ export interface TranslationTarget {
 
 export function classifyTranslationTarget(
   routes: ContentRouteMap,
-  filepath: string
+  filepath: string,
+  orphaned: readonly string[] = KNOWN_ORPHANED_CONTENT
 ): TranslationTarget {
   // Non-documentation files (app sources, tutorial configs) carry translatable
   // strings but have no page of their own.
@@ -150,5 +146,5 @@ export function classifyTranslationTarget(
 
   // Dropping a page needs a deliberate entry. An unclassified page stays tracked,
   // so a gap in route resolution is noisy rather than silently destructive.
-  return { url: null, orphaned: KNOWN_ORPHANED_CONTENT.includes(filepath) };
+  return { url: null, orphaned: orphaned.includes(filepath) };
 }

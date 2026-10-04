@@ -26,6 +26,7 @@
 | `NG0505`  | [No hydration info in server response](errors/NG0505)                                |
 | `NG0506`  | [NgZone remains unstable](errors/NG0506)                                             |
 | `NG0507`  | [HTML content was altered after SSR](errors/NG0507)                                  |
+| `NG0600`  | [Signal write in a disallowed context](errors/NG0600)                                |
 | `NG0602`  | [Disallowed function call inside reactive context](errors/NG0602)                    |
 | `NG0750`  | [@defer dependencies failed to load](errors/NG0750)                                  |
 | `NG0751`  | [@defer behavior when HMR is enabled](errors/NG0751)                                 |
@@ -37,6 +38,7 @@
 | `NG0951`  | [Child query result is required but no value is available](errors/NG0951)            |
 | `NG0955`  | [Track expression resulted in duplicated keys for a given collection](errors/NG0955) |
 | `NG0956`  | [Tracking expression caused re-creation of the DOM structure](errors/NG0956)         |
+| `NG0991`  | [Resource completed before producing a value](errors/NG0991)                         |
 | `NG01002` | [Missing Control Value](errors/NG01002)                                              |
 | `NG01101` | [Wrong Async Validator Return Type](errors/NG01101)                                  |
 | `NG01203` | [Missing value accessor](errors/NG01203)                                             |
@@ -47,19 +49,21 @@
 | `NG02825` | [Fetch response body exceeds the configured limit](errors/NG02825)                   |
 | `NG05000` | [Hydration with unsupported Zone.js instance.](errors/NG05000)                       |
 | `NG05104` | [Root element was not found.](errors/NG05104)                                        |
+| `NG05106` | [Insertion reference node not found](errors/NG05106)                                 |
 | `NG05703` | [Suspicious URL origin change during SSR](errors/NG05703)                            |
 
 ## Compiler errors
 
-| Code     | Name                                                       |
-| :------- | :--------------------------------------------------------- |
-| `NG1001` | [Argument Not Literal](errors/NG1001)                      |
-| `NG2003` | [Missing Token](errors/NG2003)                             |
-| `NG2009` | [Invalid Shadow DOM selector](errors/NG2009)               |
-| `NG3003` | [Import Cycle Detected](errors/NG3003)                     |
-| `NG6100` | [NgModule.id Set to module.id anti-pattern](errors/NG6100) |
-| `NG8001` | [Invalid Element](errors/NG8001)                           |
-| `NG8002` | [Invalid Attribute](errors/NG8002)                         |
-| `NG8003` | [Missing Reference Target](errors/NG8003)                  |
-| `NG8023` | [Multiple Components Match Same Element](errors/NG8023)    |
-| `NG8024` | [Conflicting Host Directive Binding](errors/NG8024)        |
+| Code     | Name                                                        |
+| :------- | :---------------------------------------------------------- |
+| `NG1001` | [Argument Not Literal](errors/NG1001)                       |
+| `NG2003` | [Missing Token](errors/NG2003)                              |
+| `NG2009` | [Invalid Shadow DOM selector](errors/NG2009)                |
+| `NG3003` | [Import Cycle Detected](errors/NG3003)                      |
+| `NG6100` | [NgModule.id Set to module.id anti-pattern](errors/NG6100)  |
+| `NG8001` | [Invalid Element](errors/NG8001)                            |
+| `NG8002` | [Invalid Attribute](errors/NG8002)                          |
+| `NG8003` | [Missing Reference Target](errors/NG8003)                   |
+| `NG8011` | [Control Flow Preventing Content Projection](errors/NG8011) |
+| `NG8023` | [Multiple Components Match Same Element](errors/NG8023)     |
+| `NG8024` | [Conflicting Host Directive Binding](errors/NG8024)         |

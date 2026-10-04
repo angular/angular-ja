@@ -72,7 +72,7 @@ bootstrapApplication(App, appConfig);
 `bootstrapApplication()` メソッドは、 `ApplicationConfig` インスタンスによって構成されたプラットフォームインジェクターの子インジェクターを作成します。
 これが `root` `EnvironmentInjector` です。
 
-`platformBrowserDynamic()` メソッドは、プラットフォーム固有の依存関係を含む `PlatformModule` によって構成されたインジェクターを作成します。
+`bootstrapApplication()` メソッドは、プラットフォーム固有の依存関係を含むプラットフォームインジェクターも作成（または再利用）します。
 これにより、複数のアプリケーションがプラットフォーム構成を共有できます。
 たとえば、ブラウザには、実行中のアプリケーションの数にかかわらず、URLバーは1つだけです。
 `platformBrowser()` 関数を使用して `extraProviders` を提供することにより、プラットフォームレベルで追加のプラットフォーム固有のプロバイダーを構成できます。
@@ -744,6 +744,41 @@ Emoji from AnimalService: 🐶
 クジラ <code>🐳</code> にアクセスできるのは、`<app-inspector>` が `App` のテンプレートで宣言されているため、`App` の `viewProviders` まで辿れるからです。
 
 一方、`Child` のテンプレート内に直接置かれた（投影されていない）`<app-inspector>` は、犬 <code>🐶</code> を取得します。これは `<#VIEW>` の内側にあるため、超えるべき境界がないからです。
+
+### Giving projected content access to a view injector {#giving-projected-content-access-to-a-view-injector}
+
+Content projected with `<ng-content>` can't see a component's `viewProviders`, because Angular resolves injection against the injector where the content is declared, not where it renders.
+
+When you specifically want projected content to reach a view-level service — or the projecting component instance itself — accept the content as a template instead of `<ng-content>` and render it with an explicit injector.
+
+Update `Child` to provide `AnimalService` in `viewProviders`, query the projected template, and render it through [`NgTemplateOutlet`](/api/common/NgTemplateOutlet) with `ngTemplateOutletInjector` set to an injector that can see that service:
+
+```ts
+@Component({
+  selector: 'app-child',
+  viewProviders: [AnimalService],
+  imports: [NgTemplateOutlet],
+  template: `
+    <ng-container [ngTemplateOutlet]="content()" [ngTemplateOutletInjector]="injector" />
+  `,
+})
+export class Child {
+  readonly content = contentChild.required(TemplateRef);
+  readonly injector = inject(Injector);
+}
+```
+
+The consumer wraps the projected markup in an `<ng-template>`:
+
+```html
+<app-child>
+  <ng-template>
+    <app-inspector />
+  </ng-template>
+</app-child>
+```
+
+`Child` now creates `<app-inspector>` at the outlet using its own injector, so `AnimalService` resolves to the dog <code>🐶</code> even though the markup is written in `App`'s template. The cost is a little extra markup on both sides compared with `<ng-content>`.
 
 ### 提供されたトークンの可視性 {#visibility-of-provided-tokens}
 

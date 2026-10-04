@@ -58,7 +58,7 @@ isLoading = computed(() => this.userResource.status() === 'loading');
 hasError = computed(() => this.userResource.status() === 'error');
 ```
 
-リソースは、'loading'、'success'、または'error'になり得る`status()`シグナル、ロードされたデータ用の`value()`シグナル、そしてデータが利用可能かどうかを安全にチェックする`hasValue()`メソッドを提供します。
+リソースは、'loading'、'resolved'、または'error'になり得る`status()`シグナル、ロードされたデータ用の`value()`シグナル、そしてデータが利用可能かどうかを安全にチェックする`hasValue()`メソッドを提供します。
 </docs-step>
 
 <docs-step title="ボタンを接続し、リソースの状態を表示する" {#wire-up-the-buttons-and-display-resource-states}>

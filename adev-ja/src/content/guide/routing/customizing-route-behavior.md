@@ -29,7 +29,7 @@ provideRouter(routes, withRouterConfig({canceledNavigationResolution: 'computed'
 
 ### 同じURLへのナビゲーションへの対応 {#react-to-same-url-navigations}
 
-`onSameUrlNavigation`は、ユーザーが現在のURLへのナビゲーションを要求したときに何が起こるかを設定します。デフォルトの`'ignore'`は処理をスキップし、`'reload'`はガードとリゾルバーを再実行し、コンポーネントインスタンスを更新します。
+`onSameUrlNavigation`は、ユーザーが現在のURLへのナビゲーションを要求したときに何が起こるかを設定します。デフォルトの`'ignore'`は処理をスキップし、`'reload'`はURLをスキップせずにルーターのナビゲーションパイプラインで処理するよう指示します。Guard and resolver reruns are governed by [`runGuardsAndResolvers`](api/router/RunGuardsAndResolvers), and component reuse is determined by the [route reuse strategy](#route-reuse-strategy).
 
 これは、URLが変更されない場合でも、リストフィルター、左側のナビゲーション項目、または更新ボタンを繰り返しクリックして新しいデータ取得をトリガーしたい場合に便利です。
 
@@ -43,14 +43,16 @@ provideRouter(routes, withRouterConfig({onSameUrlNavigation: 'reload'}));
 router.navigate(['/some-path'], {onSameUrlNavigation: 'reload'});
 ```
 
+TIP: If you use [route resources](/guide/routing/data-fetching-with-resources#reloading-resources-without-renavigation), you can refresh data on-demand by calling `.reload()` on the resource or by updating signals read in `params`, without needing to configure `onSameUrlNavigation` or trigger a router navigation.
+
 ### パラメータ継承の制御 {#control-parameter-inheritance}
 
 `paramsInheritanceStrategy`は、ルートパラメータとデータが親ルートからどのように流れるかを定義します。
 
-デフォルト（`'always'`）では、子ルートは親ルートからパラメータ、ルートデータ、および解決された値を自動的に継承します。
+デフォルト（`'always'`）では、子ルートは親ルートからパラメータ、ルートデータ、および解決された値を自動的に継承します。これにより、マトリックスパラメータ、ルートデータ、解決された値がルートツリーのさらに下で利用可能になります。これは、次のような機能領域間でコンテキスト識別子を共有する場合に便利です:
 
-```ts
-provideRouter(routes, withRouterConfig({paramsInheritanceStrategy: 'emptyOnly'}));
+```text {hideCopy}
+/org/:orgId/projects/:projectId/customers/:customerId
 ```
 
 ```ts
@@ -75,34 +77,32 @@ export const routes: Routes = [
 ```
 
 ```ts
-@Component({
-  /* ... */
-})
-export class Customer {
-  private route = inject(ActivatedRoute);
-
-  orgId = this.route.parent?.parent?.snapshot.params['orgId'];
-  projectId = this.route.parent?.snapshot.params['projectId'];
-  customerId = this.route.snapshot.params['customerId'];
-}
-```
-
-これにより、マトリックスパラメータ、ルートデータ、および解決された値がルートツリーのさらに下で利用可能になります。これは、次のような機能領域間でコンテキスト識別子を共有する場合に便利です:
-
-```text {hideCopy}
-/org/:orgId/projects/:projectId/customers/:customerId
-```
-
-```ts
-@Component({
-  /* ... */
-})
+@Component({/* ... */})
 export class Customer {
   private route = inject(ActivatedRoute);
 
   // All parent parameters are available directly
   orgId = this.route.snapshot.params['orgId'];
   projectId = this.route.snapshot.params['projectId'];
+  customerId = this.route.snapshot.params['customerId'];
+}
+```
+
+To restore the legacy behavior, set `paramsInheritanceStrategy` to `'emptyOnly'`. With `'emptyOnly'`, child routes inherit params only when their path is empty or the parent does not declare a component:
+
+```ts
+provideRouter(routes, withRouterConfig({paramsInheritanceStrategy: 'emptyOnly'}));
+```
+
+In that case, the `Customer` component has to read the parent parameters from its ancestor routes:
+
+```ts
+@Component({/* ... */})
+export class Customer {
+  private route = inject(ActivatedRoute);
+
+  orgId = this.route.parent?.parent?.snapshot.params['orgId'];
+  projectId = this.route.parent?.snapshot.params['projectId'];
   customerId = this.route.snapshot.params['customerId'];
 }
 ```
@@ -191,7 +191,7 @@ Angularの`RouteReuseStrategy`クラスを使用すると、「デタッチさ�
 | [`shouldAttach`](api/router/RouteReuseStrategy#shouldAttach)                   | 保存されたルートにナビゲートするときに、それを再アタッチすべきかどうかを決定します                                             |
 | [`retrieve`](api/router/RouteReuseStrategy#retrieve)                           | 以前に保存されたルートハンドルを再アタッチのために返します                                                         |
 | [`shouldReuseRoute`](api/router/RouteReuseStrategy#shouldReuseRoute)           | ナビゲーション中に現在のルートインスタンスを破棄する代わりに、ルーターが再利用すべきかどうかを決定します         |
-| [`shouldDestroyInjector`](api/router/RouteReuseStrategy#shouldDestroyInjector) | (実験的) ルーターが、保存されなくなったデタッチされたルートのインジェクターを破棄すべきかどうかを決定します |
+| [`shouldDestroyInjector`](api/router/RouteReuseStrategy#shouldDestroyInjector) | ルーターが、保存されなくなったデタッチされたルートのインジェクターを破棄すべきかどうかを決定します |
 
 次の例は、ルートメタデータに基づいてコンポーネントの状態を選択的に保持するカスタムルート再利用戦略を示しています:
 
@@ -265,17 +265,17 @@ if (this.handles.size > MAX_CACHE_SIZE) {
 
 NOTE: `canMatch`ガードが関与している場合、重複したエントリにつながる可能性があるため、キーとしてルートパスを使用することは避けてください。
 
-### (実験的) 未使用のルートインジェクターの自動クリーンアップ {#experimental-automatic-cleanup-of-unused-route-injectors}
+### 未使用のルートインジェクターの自動クリーンアップ {#automatic-cleanup-of-unused-route-injectors}
 
 デフォルトでは、Angularは、`RouteReuseStrategy`によって保存されなくなった場合でも、デタッチされたルートのインジェクターを破棄しません。これは主に、このレベルのメモリ管理がほとんどのアプリケーションで一般的に必要とされていないためです。
 
-未使用のルートインジェクターの自動クリーンアップを有効にするには、ルーター設定で`withExperimentalAutoCleanupInjectors`機能を使用できます。この機能は、ナビゲーション後に現在ストラテジーによって保存されているルートを確認し、現在の再利用戦略によって保存されていないデタッチされたルートのインジェクターを破棄します。
+未使用のルートインジェクターの自動クリーンアップを有効にするには、ルーター設定で`withAutoCleanupInjectors`機能を使用できます。この機能は、ナビゲーション後に現在ストラテジーによって保存されているルートを確認し、現在の再利用戦略によって保存されていないデタッチされたルートのインジェクターを破棄します。
 
 ```ts
-import {provideRouter, withExperimentalAutoCleanupInjectors} from '@angular/router';
+import {provideRouter, withAutoCleanupInjectors} from '@angular/router';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes, withExperimentalAutoCleanupInjectors())],
+  providers: [provideRouter(routes, withAutoCleanupInjectors())],
 };
 ```
 
@@ -307,7 +307,7 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
     this.handles.set(route.routeConfig!, handle);
   }
 
-  retrieveStoredRouteHandles(): DetachedRouteHandle {
+  retrieveStoredRouteHandles(): DetachedRouteHandle[] {
     return Array.from(this.handles.values());
   }
 
@@ -472,8 +472,7 @@ Angularの依存性の注入システムを通じて、カスタムストラテ�
 
 ```ts
 import {ApplicationConfig} from '@angular/core';
-import {provideRouter} from '@angular/router';
-import {UrlHandlingStrategy} from '@angular/router';
+import {provideRouter, UrlHandlingStrategy} from '@angular/router';
 
 export const appConfig: ApplicationConfig = {
   providers: [

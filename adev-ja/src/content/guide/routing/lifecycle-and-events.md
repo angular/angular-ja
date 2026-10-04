@@ -12,8 +12,8 @@ Angularルーターは、ナビゲーションライフサイクルを追跡す�
 | [`RoutesRecognized`](api/router/RoutesRecognized)   | ルーターがURLに一致するルートを決定した後、ルートの状態情報が含まれるときに発生します。                  |
 | [`GuardsCheckStart`](api/router/GuardsCheckStart)   | ルートガードフェーズを開始します。ルーターは`canActivate`や`canDeactivate`のようなルートガードを評価します。|
 | [`GuardsCheckEnd`](api/router/GuardsCheckEnd)       | ガード評価の完了を通知します。結果（許可/拒否）が含まれます。                                            |
-| [`ResolveStart`](api/router/ResolveStart)           | データ解決フェーズを開始します。ルートリゾルバーがデータのフェッチを開始します。                         |
-| [`ResolveEnd`](api/router/ResolveEnd)               | データ解決が完了します。必要なすべてのデータが利用可能になります。                                       |
+| [`ResolveStart`](api/router/ResolveStart)           | データ解決フェーズを開始します。ルートリゾルバーとリソースがデータのフェッチを開始します。              |
+| [`ResolveEnd`](api/router/ResolveEnd)               | データ解決が完了します。必要なすべてのデータとブロッキングリソースが利用可能になります。         |
 | [`NavigationEnd`](api/router/NavigationEnd)         | ナビゲーションが正常に完了したときの最終イベントです。ルーターはURLを更新します。                        |
 | [`NavigationSkipped`](api/router/NavigationSkipped) | ルーターがナビゲーションをスキップするとき（例: 同じURLへのナビゲーション）に発生します。               |
 
@@ -22,7 +22,7 @@ Angularルーターは、ナビゲーションライフサイクルを追跡す�
 | イベント                                          | 説明                                                                     |
 | ------------------------------------------------- | ------------------------------------------------------------------------ |
 | [`NavigationCancel`](api/router/NavigationCancel) | ルーターがナビゲーションをキャンセルするときに発生します。多くの場合、ガードがfalseを返すことが原因です。|
-| [`NavigationError`](api/router/NavigationError)   | ナビゲーションが失敗したときに発生します。無効なルートやリゾルバーエラーが原因である可能性があります。|
+| [`NavigationError`](api/router/NavigationError)   | ナビゲーションが失敗したときに発生します。無効なルート、リゾルバーエラー、拒否されたブロッキングリソースが原因である可能性があります。|
 
 すべてのライフサイクルイベントのリストについては、[このガイドの完全な表](#all-router-events)を参照してください。
 
@@ -34,6 +34,7 @@ Angularルーターは、ナビゲーションライフサイクルを追跡す�
 // Example of subscribing to router events
 import {Component, inject, signal, effect} from '@angular/core';
 import {Event, Router, NavigationStart, NavigationEnd} from '@angular/router';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component(/* ... */)
 export class RouterEvents {
@@ -236,4 +237,4 @@ export class ErrorHandler {
 
 ## 次のステップ {#next-steps}
 
-[ルートガード](/guide/routing/route-guards)および[一般的なルータタスク](/guide/routing/common-router-tasks)についてさらに学ぶ。
+[ルートガード](/guide/routing/route-guards)、[リソースによるデータ取得](/guide/routing/data-fetching-with-resources)、[一般的なルータタスク](/guide/routing/common-router-tasks)についてさらに学ぶ。

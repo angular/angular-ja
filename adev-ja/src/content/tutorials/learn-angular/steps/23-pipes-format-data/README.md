@@ -24,7 +24,7 @@ template: `{{ date | date: 'medium' }}`;
 
 `app.ts` のテンプレートを更新して、`decimal` パイプのパラメーターを含めます。
 
-```ts {highlight:[3]}
+```ts {highlight:[2]}
 template: ` ...
 <li>Number with "decimal" {{ num | number: '3.2-2' }}</li>
 `
@@ -38,7 +38,7 @@ NOTE: このフォーマットは何でしょう？`DecimalPipe` のパラメー
 
 次に、テンプレートを更新して `date` パイプを使用します。
 
-```ts {highlight:[3]}
+```ts {highlight:[2]}
 template: ` ...
 <li>Date with "date" {{ birthday | date: 'medium' }}</li>
 `
@@ -52,7 +52,7 @@ template: ` ...
 
 最後の作業として、テンプレートを更新して `currency` パイプを使用します。
 
-```ts {highlight:[3]}
+```ts {highlight:[2]}
 template: ` ...
 <li>Currency with "currency" {{ cost | currency }}</li>
 `

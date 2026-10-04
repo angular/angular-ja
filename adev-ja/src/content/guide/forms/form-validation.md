@@ -209,7 +209,7 @@ const actorForm = new FormGroup(
 
 より良いユーザー体験を提供するために、フォームが無効な場合、テンプレートに適切なエラーメッセージが表示されます。
 
-<docs-code header="actor-form-template.component.html" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.html" region="cross-validation-error-message"/>
+<docs-code header="actor-form-reactive.component.html" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.html" region="cross-validation-error-message"/>
 
 この`@if`は、`FormGroup`に`unambiguousRoleValidator`バリデーターが返したクロス検証エラーがある場合に、エラーを表示しますが、ユーザーが[フォームとやり取りを完了](#control-status-css-classes)した場合のみです。
 
@@ -296,7 +296,7 @@ interface ActorsService {
 
 リアクティブフォームで非同期バリデーターを使用するには、最初にバリデーターをコンポーネントクラスのプロパティに注入します。
 
-<docs-code header="actor-form-reactive.component.2.ts" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.2.ts" region="async-validator-inject"/>
+<docs-code header="actor-form-reactive.component.ts" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.2.ts" region="async-validator-inject"/>
 
 次に、バリデーター関数を`FormControl`に直接渡して、適用します。
 
@@ -304,7 +304,7 @@ interface ActorsService {
 `asyncValidators`の値は、単一の非同期バリデーター関数、または関数の配列にできます。
 `FormControl`オプションの詳細については、[AbstractControlOptions](api/forms/AbstractControlOptions) APIリファレンスを参照してください。
 
-<docs-code header="actor-form-reactive.component.2.ts" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.2.ts" region="async-validator-usage"/>
+<docs-code header="actor-form-reactive.component.ts" path="adev/src/content/examples/form-validation/src/app/reactive/actor-form-reactive.component.2.ts" region="async-validator-usage"/>
 
 ### 非同期バリデーターをテンプレート駆動フォームに追加する {#adding-async-validators-to-template-driven-forms}
 
@@ -372,7 +372,7 @@ Use [`setValidators`](api/forms/AbstractControl#setValidators) to replace all ex
 toggleStrictNameValidation(isStrict: boolean) {
   const nameControl = this.profileForm.get('name');
 
-  if (enable) {
+  if (isStrict) {
     // Set strict validation rules
     nameControl.setValidators([
       Validators.required,

@@ -6,7 +6,7 @@ Angular 14から、リアクティブフォームはデフォルトで厳密に�
 
 ## 型付きフォームの概要 {#overview-of-typed-forms}
 
-<docs-video src="https://www.youtube.com/embed/L-odCf4MfJc" alt="Angular の型付きフォーム" />
+<docs-video src="https://www.youtube.com/embed/L-odCf4MfJc" title="Angular の型付きフォーム" />
 
 Angularリアクティブフォームでは、_フォームモデル_ を明示的に指定します。単純な例として、この基本的なユーザーログインフォームを考えてみましょう。
 

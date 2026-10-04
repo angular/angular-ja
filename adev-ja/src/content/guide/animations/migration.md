@@ -36,13 +36,13 @@ v20.2以降、`@angular/animations`パッケージは非推奨になり、同時
 
 アニメーションパッケージでは、コンポーネント内で[`state()`](api/animations/state)関数を使ってさまざまな状態を定義できました。たとえば、定義の中にそれぞれの状態に対応するスタイルを含む`open`や`closed`といった状態です。例を示します。
 
-#### Animationsパッケージの場合
+#### Animationsパッケージの場合 {#animating-state-and-styles-with-animations-package}
 
 <docs-code header="open-close.ts" path="adev/src/content/examples/animations/src/app/open-close.ts" region="state1"/>
 
 この動作は、キーフレームアニメーションまたはトランジションスタイルとCSSクラスを使うことで、ネイティブにも実現できます。
 
-#### ネイティブCSSの場合
+#### ネイティブCSSの場合 {#animating-state-and-styles-with-native-css}
 
 <docs-code header="animations.css" path="adev/src/content/examples/animations/src/app/animations.css" region="animation-states"/>
 
@@ -66,7 +66,7 @@ v20.2以降、`@angular/animations`パッケージは非推奨になり、同時
 
 アニメーションパッケージでは、`trigger()`関数を使ってトリガーを指定し、その中にすべての状態をネストする必要がありました。ネイティブCSSでは、これは不要です。CSSのスタイルやクラスを切り替えるだけでアニメーションをトリガーできます。要素にクラスが存在するとアニメーションが実行され、クラスを削除すると、その要素に定義されているCSSへ戻ります。これにより、同じアニメーションをはるかに少ないコードで実現できます。例を示します。
 
-#### Animationsパッケージの場合
+#### Animationsパッケージの場合 {#triggering-an-animation-with-animations-package}
 
 <docs-code-multifile>
     <docs-code header="open-close.ts" path="adev/src/content/examples/animations/src/app/animations-package/open-close.ts" />
@@ -74,7 +74,7 @@ v20.2以降、`@angular/animations`パッケージは非推奨になり、同時
     <docs-code header="open-close.css" path="adev/src/content/examples/animations/src/app/animations-package/open-close.css"/>
 </docs-code-multifile>
 
-#### ネイティブCSSの場合
+#### ネイティブCSSの場合 {#triggering-an-animation-with-native-css}
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/open-close.ts">
     <docs-code header="open-close.ts" path="adev/src/content/examples/animations/src/app/native-css/open-close.ts" />
@@ -94,7 +94,7 @@ CSSで直接アニメーション化する場合、こうした状態マッチ�
 
 アニメーションパッケージでは、固定した高さから`height: auto`へのアニメーションのように、従来は難しかったアニメーションを実現できました。これは現在では純粋なCSSでも可能です。
 
-#### Animationsパッケージの場合
+#### Animationsパッケージの場合 {#automatic-property-calculation-with-animations-package}
 
 <docs-code-multifile>
     <docs-code header="auto-height.ts" path="adev/src/content/examples/animations/src/app/animations-package/auto-height.ts" />
@@ -104,7 +104,7 @@ CSSで直接アニメーション化する場合、こうした状態マッチ�
 
 CSS Gridを使うと、height: autoへのアニメーションを実現できます。
 
-#### ネイティブCSSの場合
+#### ネイティブCSSの場合 {#automatic-property-calculation-with-native-css}
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/auto-height.ts">
     <docs-code header="auto-height.ts" path="adev/src/content/examples/animations/src/app/native-css/auto-height.ts" />
@@ -118,7 +118,7 @@ CSS Gridを使うと、height: autoへのアニメーションを実現できま
 
 アニメーションパッケージでは、前述のenterとleaveのパターンマッチングに加えて、`:enter`と`:leave`というショートハンドエイリアスも提供していました。
 
-#### Animationsパッケージの場合
+#### Animationsパッケージの場合 {#enter-and-leave-with-animations-package}
 
 <docs-code-multifile>
     <docs-code header="insert-remove.ts" path="adev/src/content/examples/animations/src/app/animations-package/insert-remove.ts" />
@@ -126,7 +126,7 @@ CSS Gridを使うと、height: autoへのアニメーションを実現できま
     <docs-code header="insert-remove.css" path="adev/src/content/examples/animations/src/app/animations-package/insert-remove.css" />
 </docs-code-multifile>
 
-#### ネイティブCSSの場合
+#### ネイティブCSSの場合 {#enter-with-native-css}
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/insert.ts">
     <docs-code header="insert.ts" path="adev/src/content/examples/animations/src/app/native-css/insert.ts" />
@@ -134,7 +134,7 @@ CSS Gridを使うと、height: autoへのアニメーションを実現できま
     <docs-code header="insert.css" path="adev/src/content/examples/animations/src/app/native-css/insert.css"  />
 </docs-code-multifile>
 
-#### ネイティブCSSの場合
+#### ネイティブCSSの場合 {#leave-with-native-css}
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/remove.ts">
     <docs-code header="remove.ts" path="adev/src/content/examples/animations/src/app/native-css/remove.ts" />
@@ -148,7 +148,7 @@ CSS Gridを使うと、height: autoへのアニメーションを実現できま
 
 前述の`:enter`と`:leave`に加えて、`:increment`と`:decrement`もあります。これらもクラスを追加・削除することでアニメーションできます。アニメーションパッケージの組み込みエイリアスとは異なり、値が増減したときにクラスが自動で適用されるわけではありません。適切なクラスをプログラムから付与できます。例を示します。
 
-#### Animationsパッケージの場合
+#### Animationsパッケージの場合 {#increment-and-decrement-with-animations-package}
 
 <docs-code-multifile>
     <docs-code header="increment-decrement.ts" path="adev/src/content/examples/animations/src/app/animations-package/increment-decrement.ts" />
@@ -156,7 +156,7 @@ CSS Gridを使うと、height: autoへのアニメーションを実現できま
     <docs-code header="increment-decrement.css" path="adev/src/content/examples/animations/src/app/animations-package/increment-decrement.css" />
 </docs-code-multifile>
 
-#### ネイティブCSSの場合
+#### ネイティブCSSの場合 {#increment-and-decrement-with-native-css}
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/increment-decrement.ts">
     <docs-code header="increment-decrement.ts" path="adev/src/content/examples/animations/src/app/native-css/increment-decrement.ts" />
@@ -167,6 +167,8 @@ CSS Gridを使うと、height: autoへのアニメーションを実現できま
 ### 親子アニメーション {#parent-child-animations}
 
 アニメーションパッケージとは異なり、あるコンポーネント内に複数のアニメーションを指定しても、どのアニメーションも他より優先されず、どのアニメーションの発火もブロックされません。アニメーションの順序付けは、animationやtransitionの遅延を使ったCSSアニメーション定義、あるいは次にアニメーションさせるCSSを追加するための`animationend`または`transitionend`によって処理する必要があります。
+
+Child animations fire only within the same component template. In the `@angular/animations` package, parent animations could query and trigger animations in nested child components using `query()` and `animateChild()`. With `animate.leave` and native CSS animations, animations defined inside nested child component templates will not fire when a parent component removes an element or view. Only nested animations within the same Angular component template will execute. See the [Enter and Leave Animations guide](guide/animations#element-removal-order) for more information on this.
 
 ### アニメーションまたはすべてのアニメーションを無効にする {#disabling-an-animation-or-all-animations}
 
@@ -219,7 +221,7 @@ NOTE: これらのコールバックではバブリングの問題に注意し�
 
 `stagger()`関数では、指定した時間だけリスト内の各項目のアニメーションを遅らせて、カスケード効果を作成できました。この挙動は、ネイティブCSSでも`animation-delay`または`transition-delay`を利用して再現できます。以下はそのCSSの例です。
 
-#### Animationsパッケージの場合
+#### Animationsパッケージの場合 {#stagger-with-animations-package}
 
 <docs-code-multifile>
     <docs-code header="stagger.ts" path="adev/src/content/examples/animations/src/app/animations-package/stagger.ts" />
@@ -227,7 +229,7 @@ NOTE: これらのコールバックではバブリングの問題に注意し�
     <docs-code header="stagger.css" path="adev/src/content/examples/animations/src/app/animations-package/stagger.css" />
 </docs-code-multifile>
 
-#### ネイティブCSSの場合
+#### ネイティブCSSの場合 {#stagger-with-native-css}
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/stagger.ts">
     <docs-code header="stagger.ts" path="adev/src/content/examples/animations/src/app/native-css/stagger.ts" />
@@ -253,7 +255,7 @@ NOTE: これらのコールバックではバブリングの問題に注意し�
 
 リスト項目の並び替えは、前述の手法を使うだけでそのまま機能します。特別な追加作業は必要ありません。`@for`ループ内の項目は適切に削除されて再追加されるため、enterアニメーションとして`@starting-styles`を使用したアニメーションが発火します。代わりに、同じ挙動を`animate.enter`で実現できます。上の例のように、要素が削除されるときは`animate.leave`を使ってアニメーションします。
 
-#### Animationsパッケージの場合
+#### Animationsパッケージの場合 {#reordering-list-with-animations-package}
 
 <docs-code-multifile>
     <docs-code header="reorder.ts" path="adev/src/content/examples/animations/src/app/animations-package/reorder.ts" />
@@ -261,7 +263,7 @@ NOTE: これらのコールバックではバブリングの問題に注意し�
     <docs-code header="reorder.css" path="adev/src/content/examples/animations/src/app/animations-package/reorder.css" />
 </docs-code-multifile>
 
-#### ネイティブCSSの場合
+#### ネイティブCSSの場合 {#reordering-list-with-native-css}
 
 <docs-code-multifile preview path="adev/src/content/examples/animations/src/app/native-css/reorder.ts">
     <docs-code header="reorder.ts" path="adev/src/content/examples/animations/src/app/native-css/reorder.ts" />

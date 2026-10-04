@@ -55,9 +55,7 @@ export class CounterState {
   }
 }
 
-@Component({
-  /* ... */
-})
+@Component({/* ... */})
 export class AwesomeCounter {
   state = inject(CounterState);
 
@@ -228,7 +226,7 @@ effect(async () => {
 
 ## `OnPush`コンポーネントでのシグナルの読み取り {#reading-signals-in-onpush-components}
 
-`OnPush`コンポーネントのテンプレート内でシグナルを読み取ると、Angularはシグナルをそのコンポーネントの依存関係として追跡します。そのシグナルの値が変更されると、Angularは自動的にコンポーネントを[マーク](api/core/ChangeDetectorRef#markforcheck)して、次に変更検知が実行されたとき更新されるようにします。`OnPush`コンポーネントの詳細については、[コンポーネントのサブツリーをスキップする](best-practices/skipping-subtrees)ガイドを参照してください。
+`OnPush`コンポーネントのテンプレート内でシグナルを読み取ると、Angularはシグナルをそのコンポーネントの依存関係として追跡します。そのシグナルの値が変更されると、Angularは自動的にコンポーネントを[マーク](api/core/ChangeDetectorRef#markForCheck)して、次に変更検知が実行されたとき更新されるようにします。`OnPush`コンポーネントの詳細については、[コンポーネントのサブツリーをスキップする](best-practices/skipping-subtrees)ガイドを参照してください。
 
 ## 詳細なトピック {#advanced-topics}
 

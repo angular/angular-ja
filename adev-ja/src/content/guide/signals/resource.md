@@ -90,7 +90,7 @@ const userResource = resource({
   loader: ({params, abortSignal}): Promise<User> => {
     // 与えられた`AbortSignal`がリクエストの中断を示している場合、
     // fetchは未処理のHTTPリクエストをキャンセルします。
-    return fetch(`users/${params.id}`, {signal: abortSignal});
+    return fetch(`users/${params.id}`, {signal: abortSignal}).then((res) => res.json());
   },
 });
 ```
@@ -131,7 +131,7 @@ userResource.reload();
 | ステータス        | `value()`         | 説明                                                                  |
 | ------------- | :---------------- | ---------------------------------------------------------------------------- |
 | `'idle'`      | `undefined`       | リソースに有効なリクエストがなく、ローダーが実行されていません。                |
-| `'error'`     | `undefined`       | ローダーの読み込みがエラーになりました。                                         |
+| `'error'`     | エラーをスローする   | ローダーの読み込みがエラーになりました。                                         |
 | `'loading'`   | `undefined`       | `params` 値の変更の結果としてローダーが実行中です。            |
 | `'reloading'` | 前の値    | リソースの `reload` メソッドの呼び出しの結果としてローダーが実行中です。 |
 | `'resolved'`  | 解決された値    | ローダーが完了しました。                                                    |
@@ -252,9 +252,7 @@ function withPreviousValue<T>(input: Resource<T>): Resource<T> {
   return resourceFromSnapshots(derived);
 }
 
-@Component({
-  /*... */
-})
+@Component({/*... */})
 export class AwesomeProfile {
   userId = input.required<number>();
   user = withPreviousValue(httpResource(() => `/user/${this.userId()}`));

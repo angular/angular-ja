@@ -19,7 +19,7 @@ LCP画像の読み込みを最適化することに加えて、`NgOptimizedImage
 
 CSSで背景画像を使用している場合は、[こちらから開始してください](#how-to-migrate-your-background-image)。
 
-**NOTE: `NgOptimizedImage` ディレクティブはAngularバージョン15で安定版機能となりましたが、バックポートされており、バージョン13.4.0および14.3.0でも安定版機能として利用可能です。**
+NOTE: `NgOptimizedImage` ディレクティブはAngularバージョン15で安定版機能となりましたが、バックポートされており、バージョン13.4.0および14.3.0でも安定版機能として利用可能です。
 
 ## はじめに {#getting-started}
 

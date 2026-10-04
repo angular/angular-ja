@@ -168,8 +168,9 @@ You can customize the `idle` trigger by providing your own `IdleService` impleme
 ```ts
 @Service()
 class CustomIdleService implements IdleService {
-  requestOnIdle(callback: (deadline?: IdleDeadline) => void, options?: IdleRequestOptions) {
+  requestOnIdle(callback: (deadline?: IdleDeadline) => void, options?: IdleRequestOptions): number {
     // Custom idle scheduling logic can be implemented here.
+    return requestIdleCallback(callback, options);
   }
 
   cancelOnIdle(id: number) {
@@ -386,14 +387,12 @@ it('さまざまな状態で`@defer`ブロックをレンダリングする', as
 
 If you're using `@defer` but not seeing a separate lazy chunk in your build output, check how you're importing the deferred component. Importing through a barrel file (`index.ts`) is a common culprit — bundlers see the barrel as a single module and keep all its exports together, so your component ends up in the main bundle regardless of `@defer`.
 
-```typescript
-// index.ts
+```typescript {header: "index.ts"}
 export {HeavyComponent} from './heavy.component';
 export {OtherComponent} from './other.component';
 ```
 
-```typescript
-// parent.component.ts
+```typescript {header: "parent.component.ts"}
 import {HeavyComponent} from './index'; // pulls in OtherComponent too
 
 @Component({

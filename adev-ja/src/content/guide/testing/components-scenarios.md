@@ -8,7 +8,7 @@
 
 いくつかの変更を加えた後、`Banner`コンポーネントは次のようにコンポーネントの`title`プロパティにバインドすることで、動的なタイトルを表示します。
 
-```angular-ts {header="banner.ts"}
+```angular-ts {header: "banner.ts"}
 import {Component, signal} from '@angular/core';
 
 @Component({
@@ -446,7 +446,7 @@ it('should show quote after getQuote', async () => {
 
 TIP: ネイティブの非同期テスト戦略や、VitestやJasmineなどの他のフェイクタイマー（モッククロックとも呼ばれます）を使用することを推奨します。
 
-IMPORTANT: `fakeAsync`はVitestテストランナーでは使用できません。このランナーには`zone.js`パッチが適用されないためです。
+IMPORTANT: `fakeAsync`には`zone.js`が必要です。Vitestテストランナーで使用するには、[Vitestへの移行ガイド](guide/testing/migrating-to-vitest#zonejs-vitest-patch)の説明に従い、`zone.js/plugins/vitest-patch`ポリフィルを追加します。
 
 ## 入力と出力を持つコンポーネント {#component-with-inputs-and-outputs}
 
@@ -558,7 +558,7 @@ it('should raise selected event when clicked (triggerEventHandler)', () => {
 });
 ```
 
-コンポーネントの`selected`プロパティは`EventEmitter`を返します。これはコンシューマーにはRxJSの同期的な`Observable`のように見えます。
+コンポーネントの`selected`プロパティは`OutputEmitterRef`であり、その`subscribe`メソッドはサブスクライバーに同期的に通知します。
 テストは、ホストコンポーネントが_暗黙的に_行うのと同様に、_明示的に_それにサブスクライブします。
 
 コンポーネントが期待どおりに動作する場合、ヒーローの要素をクリックすると、コンポーネントの`selected`プロパティに`hero`オブジェクトを発行するように指示するはずです。
@@ -567,7 +567,7 @@ it('should raise selected event when clicked (triggerEventHandler)', () => {
 
 ### `triggerEventHandler` {#triggereventhandler}
 
-前のテストの`heroDe`は、ヒーローの`<div>`を表す`DebugElement`です。
+前のテストの`heroDe`は、ヒーローの`<button>`を表す`DebugElement`です。
 
 これには、ネイティブ要素との対話を抽象化するAngularのプロパティとメソッドがあります。
 このテストは、"click"イベント名を指定して`DebugElement.triggerEventHandler`を呼び出します。
@@ -783,9 +783,7 @@ private router = inject(Router);
 ```ts
 constructor() {
   // get hero when `id` param changes
-  this.route.paramMap
-    .pipe(takeUntilDestroyed())
-    .subscribe((pmap) => this.getHero(pmap.get('id')));
+  this.route.paramMap.subscribe((pmap) => this.getHero(pmap.get('id')));
 }
 ```
 

@@ -177,8 +177,7 @@ TypeScriptクラスは、さらに`PipeTransform`インターフェースを実�
 
 文字列をケバブケースに変換するカスタムパイプの例を以下に示します。
 
-```angular-ts
-// kebab-case.pipe.ts
+```angular-ts {header: "kebab-case.pipe.ts"}
 import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({

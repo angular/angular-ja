@@ -81,6 +81,6 @@ If line counts cannot be reconciled or translation requires paragraph-level rewr
 ## Rules
 
 - Follow the `prh-terminology` skill for any uncertain terminology.
-- Apply the project translation conventions (see "Translation rules" in `AGENTS.md`).
+- Apply the project translation conventions (see "Translation Rules Reference" in `AGENTS.md`).
 - Do **not** rewrite untouched paragraphs. Class-b is strictly localized changes.
 - Do **not** commit. The orchestrator commits per directory.

@@ -32,7 +32,7 @@ For each `.en.md` file:
 4. **Retranslate each affected paragraph**:
    - Translate the new English paragraph to Japanese.
    - Follow the `prh-terminology` skill for terminology consistency.
-   - Apply the project translation rules (see "Translation rules" in `AGENTS.md`):
+   - Apply the project translation rules (see "Translation Rules Reference" in `AGENTS.md`):
      - Italic: `*text*` not `_text_`
      - Standardized terminology: 基本ガイド, 真の情報源, 即座に, 最新情報, etc.
      - Heading IDs: `{#kebab-case}` on `##` and `###` headings

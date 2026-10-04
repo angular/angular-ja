@@ -15,8 +15,7 @@ Angularアプリケーションを作成するための基本的な構成要素
 
 `UserProfile`コンポーネントの簡略化された例を以下に示します。
 
-```angular-ts
-// user-profile.ts
+```angular-ts {header: "user-profile.ts"}
 @Component({
   selector: 'user-profile',
   template: `
@@ -31,8 +30,7 @@ export class UserProfile {
 
 `@Component`デコレーターは、テンプレートに適用するCSSを指定するために、オプションで`styles`プロパティも受け付けます。
 
-```angular-ts
-// user-profile.ts
+```angular-ts {header: "user-profile.ts"}
 @Component({
   selector: 'user-profile',
   template: `
@@ -54,8 +52,7 @@ export class UserProfile {
 
 `templateUrl`と`styleUrl`を使用して、コンポーネントのHTMLとCSSを別々のファイルで定義できます。
 
-```angular-ts
-// user-profile.ts
+```angular-ts {header: "user-profile.ts"}
 @Component({
   selector: 'user-profile',
   templateUrl: 'user-profile.html',
@@ -66,14 +63,12 @@ export class UserProfile {
 }
 ```
 
-```angular-html
-<!-- user-profile.html -->
+```angular-html {header: "user-profile.html"}
 <h1>User profile</h1>
 <p>This is the user profile page</p>
 ```
 
-```css
-/* user-profile.css */
+```css {header: "user-profile.css"}
 h1 {
   font-size: 3em;
 }
@@ -102,9 +97,8 @@ flowchart TD
 
 `ProfilePhoto`コンポーネントをインポートする`UserProfile`コンポーネントの例を次に示します。
 
-```angular-ts
-// user-profile.ts
-import {ProfilePhoto} from 'profile-photo.ts';
+```angular-ts {header: "user-profile.ts"}
+import {ProfilePhoto} from './profile-photo';
 
 @Component({
   selector: 'user-profile',

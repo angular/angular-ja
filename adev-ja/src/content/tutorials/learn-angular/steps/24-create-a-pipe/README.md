@@ -70,7 +70,7 @@ export class ReversePipe implements PipeTransform {
 ```angular-ts {highlight:[3,4]}
 @Component({
   ...
-  template: `Reverse Machine: {{ word | reverse }}`
+  template: `Reverse Machine: {{ word | reverse }}`,
   imports: [ReversePipe]
 })
 ```

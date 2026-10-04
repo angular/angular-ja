@@ -5,7 +5,7 @@ description: "Single entry point for syncing Angular upstream changes to angular
 
 # update-origin: Origin Sync Orchestrator
 
-Single source of truth for the origin-update workflow. **Do not perform individual file migration in the orchestrating session itself.** All per-file work follows the role instruction files in `roles/`, so the orchestrating context stays small.
+Single source of truth for the origin-update workflow. All per-file work follows the role instruction files in `roles/`. When your harness can delegate to sub-agents, do not perform per-file migration in the orchestrating session itself; delegate it to the roles so the orchestrating context stays small.
 
 ## Usage
 
@@ -24,7 +24,7 @@ Per-file migration instructions live in `roles/<name>.md`. For each batch:
 - If your harness supports delegating work to sub-agents, pass the matching `roles/<name>.md` as the instructions, together with the inputs the role lists (file paths, mode, directory), and delegate. Independent batches (for example different classes within one directory) may run in parallel.
 - If it does not, follow the same `roles/<name>.md` yourself, one batch at a time, in the order given by this document.
 
-Each role returns the report shape defined in its "Output" section. The orchestrator (this workflow) reads that report before verifying or committing.
+Each role returns the report shape defined in its "Output" section. The orchestrator (this workflow) reads that report before verifying or committing. When you follow a role yourself, you are also the orchestrator: produce the same report, then continue with verification and commits as this document describes.
 
 ## Phase 0: Determine the correct sync target (MANDATORY)
 
@@ -133,7 +133,7 @@ Only when h2 deletion or ≥3 h3 deletions occur, use d-structural (backup `.md`
 | --- | --- | --- |
 | `adev-ja/src/content/reference/roadmap.md` | `roles/migrate-md-roadmap.md` | The roadmap accumulates completed work as historical records; in-progress items move to "Completed projects" rather than being replaced. The generic d roles would discard previously translated Completed entries. |
 
-**Do not process files in the orchestrating session itself; use the roles.**
+**Process files only through the roles** (delegated, or followed one batch at a time when delegation is unavailable).
 
 ### 3.3 Verify (per directory, after all classes done)
 
@@ -275,7 +275,7 @@ Note: the PR is created **from `<fork-owner>:<branch>` to `angular/angular-ja:ma
 
 ## Rules (apply throughout)
 
-- **Never** process per-file migration in the orchestrating session itself. Always go through the roles (delegated, or followed one by one when delegation is unavailable).
+- **Always** process per-file migration through the roles: delegated when your harness supports it, otherwise followed one batch at a time.
 - **Never** combine multiple `(class, directory)` batches into one commit.
 - **Never** verify until all classes in the directory have been processed (the verifier is directory-scoped).
 - **Never** skip `verify-migration.ts`. Its exit code is the gate.

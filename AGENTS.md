@@ -37,7 +37,7 @@ Workflow automation lives in `.agents/skills/`. Use the skills below before reac
 
 | Skill | Purpose | When to use |
 | --- | --- | --- |
-| `.agents/skills/update-origin/SKILL.md` | Single entry point for syncing upstream `angular/angular` into `adev-ja`. Covers branch, submodule update, diff classification, migration by role, verification, per-class commits, and PR. | Any origin sync. Never perform per-file migration in the orchestrating session itself; follow the role files in `roles/`. |
+| `.agents/skills/update-origin/SKILL.md` | Single entry point for syncing upstream `angular/angular` into `adev-ja`. Covers branch, submodule update, diff classification, migration by role, verification, per-class commits, and PR. | Any origin sync. Per-file migration always follows the role files in `roles/` (delegated when possible). |
 | `.agents/skills/translate-file/SKILL.md` | First-time translation of a new `.en.md` / `.en.ts` / `.en.json` file into Japanese with strict line-count and anchor-ID rules. | A file is added upstream and you are ready to translate it. NOT for diff sync of an already-translated file (that is the `update-origin` flow). |
 | `.agents/skills/prh-terminology/SKILL.md` | Manage the `prh.yml` terminology dictionary. | **Always before adopting a translation for a new technical term** (see "Terminology management" below). |
 
@@ -171,7 +171,7 @@ Before committing commands for CI workflows:
 
 **Single entry point**: the `update-origin` skill (`.agents/skills/update-origin/SKILL.md`), started with the upstream commit hash.
 
-All steps (branch creation, origin sync, diff classification, role-based migration, deterministic verification, per-directory commits, PR creation) are defined there. Do NOT perform per-file migration in the orchestrating session itself; follow the role files so that context stays isolated.
+All steps (branch creation, origin sync, diff classification, role-based migration, deterministic verification, per-directory commits, PR creation) are defined there. Per-file migration always follows the role files. When your harness can delegate to sub-agents, delegate each batch so that the orchestrating context stays isolated; otherwise follow the role files yourself one batch at a time.
 
 **Key invariants enforced by the skill:**
 

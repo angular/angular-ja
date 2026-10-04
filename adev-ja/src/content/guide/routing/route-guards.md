@@ -62,7 +62,7 @@ export const authGuard: CanActivateFn = (
 };
 ```
 
-Tip: ユーザーをリダイレクトする必要がある場合は、[`URLTree`](api/router/UrlTree)または[`RedirectCommand`](api/router/RedirectCommand)を返します。`false`を返してから、プログラムでユーザーを`navigate`しては**いけません**。
+TIP: ユーザーをリダイレクトする必要がある場合は、[`URLTree`](api/router/UrlTree)または[`RedirectCommand`](api/router/RedirectCommand)を返します。`false`を返してから、プログラムでユーザーを`navigate`しては**いけません**。
 
 詳細については、[CanActivateFnのAPIドキュメント](api/router/CanActivateFn)を参照してください。
 
@@ -142,8 +142,7 @@ export const featureToggleGuard: CanMatchFn = (
 
 また、同じパスに対して異なるコンポーネントを使用できます。
 
-```ts
-// 📄 routes.ts
+```ts {header: "routes.ts"}
 const routes: Routes = [
   {
     path: 'dashboard',

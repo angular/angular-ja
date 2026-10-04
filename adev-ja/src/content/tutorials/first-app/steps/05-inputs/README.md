@@ -30,7 +30,7 @@ NOTE: この動画は古い構文を使っていますが、主要なコンセ�
 <docs-step title="inputプロパティを追加する">
 必須のプロパティであるhousingLocationを追加し、`HousingLocationInfo`型として`input.required()`を使って初期化します。
 
-  <docs-code header="housing-location.tsでinputプロパティを宣言する" path="adev/src/content/tutorials/first-app/steps/06-property-binding/src/app/housing-location/housing-location.ts" visibleLines="[12]"/>
+  <docs-code header="housing-location.tsでinputプロパティを宣言する" path="adev/src/content/tutorials/first-app/steps/06-property-binding/src/app/housing-location/housing-location.ts" visibleLines="[10]"/>
 
 親コンポーネントが値を必ず提供しなければならないことを示すために、`input`の`required`メソッドを呼び出す必要があります。例のアプリケーションでは、この値は設計上必ず渡されます。`.required()`を呼ぶことで、TypeScriptコンパイラがこの制約をチェックし、さらにテンプレートでコンポーネントが使用される際に、このプロパティを非nullとして扱います。
 

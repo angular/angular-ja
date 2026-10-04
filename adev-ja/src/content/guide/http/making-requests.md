@@ -210,7 +210,7 @@ http.get<Config>('/api/config', {observe: 'response'}).subscribe((res) => {
 
 進捗イベントは、デフォルトでは無効になっています（パフォーマンス上のコストがかかるため）が、`reportUploadProgress` オプションと `reportDownloadProgress` オプションを使用して有効にできます。
 
-NOTE: `HttpClient` のデフォルトのfetchバックエンドは、*アップロード*の進捗イベントを報告しません。アプリケーションでアップロードの進捗イベントが必要な場合は、`provideHttpClient(...)` で `withXhr()` を使用して `HttpClient` を構成してください。
+NOTE: `HttpClient` のデフォルトのfetchバックエンドは、*アップロード*の進捗イベントをサポートしておらず、`reportUploadProgress` を設定するとエラーをスローします。アプリケーションでアップロードの進捗イベントが必要な場合は、`provideHttpClient(...)` で `withXhr()` を使用して `HttpClient` を構成してください。
 
 イベントストリームを観察するには、`observe` オプションを `'events'` に設定します。
 

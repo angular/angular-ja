@@ -53,7 +53,7 @@ Use the constructor of `FormControl` to set its initial value, which in this cas
 テンプレートバインディング構文を使用することで、フォームコントロールがテンプレートの `name` 入力要素に登録されました。フォームコントロールとDOM要素は相互に通信します。ビューはモデルの変更を反映し、モデルはビューの変更を反映します。
 </docs-step>
 
-<docs-step title="コンポーネントを表示 {#display-the-component-form-group}">
+<docs-step title="コンポーネントを表示">
 `name` プロパティに割り当てられた `FormControl` は、`<app-name-editor>` コンポーネントをテンプレートに追加すると表示されます。
 
 <docs-code header="app.component.html (name editor)" path="adev/src/content/examples/reactive-forms/src/app/app.component.1.html" region="app-name-editor"/>

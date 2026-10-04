@@ -113,7 +113,7 @@ try {
 }
 ```
 
-In addition, the [pendingUntilEvent](/api/core/rxjs-interop/pendingUntilEvent#) helper in `rxjs-interop` ensures
+In addition, the [pendingUntilEvent](/api/core/rxjs-interop/pendingUntilEvent) helper in `rxjs-interop` ensures
 the application remains unstable until the observable emits, completes, errors, or is unsubscribed.
 
 ```typescript
@@ -132,9 +132,9 @@ readonly myObservableState = someObservable.pipe(pendingUntilEvent());
 
 ### `TestBed`でZonelessを使用する {#using-zoneless-in-testbed}
 
-`TestBed`は、`polyfills`経由で`zone.js`がロードされている場合、デフォルトでZoneベースの変更検知を使用します。
+`TestBed`は、`polyfills`経由で`zone.js`がロードされている場合でも、デフォルトでZonelessの変更検知を使用します。
 
-`zone.js`が存在しない場合、`TestBed`はデフォルトでZonelessとして実行されます。`zone.js`がロードされている場合にZonelessモードを強制するには、`provideZonelessChangeDetection()`を追加します:
+テストでZoneベースの変更検知を使用するには、`TestBed`のプロバイダーに`provideZoneChangeDetection()`を追加します。`provideZonelessChangeDetection()`の追加は任意です:
 
 ```typescript
 TestBed.configureTestingModule({

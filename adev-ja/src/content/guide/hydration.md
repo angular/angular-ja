@@ -63,13 +63,19 @@ HELPFUL: Angularの構成要素に切り替えるか、`ngSkipHydration` を使�
 
 ## イベントのキャプチャとリプレイ {#capturing-and-replaying-events}
 
-アプリケーションがサーバーでレンダリングされると、生成されたHTMLがロードされ次第、ブラウザに表示されます。ユーザーはページを操作できると考えるかもしれませんが、ハイドレーションが完了するまでイベントリスナーはアタッチされません。v18以降では、ハイドレーションの前に発生したすべてのイベントをキャプチャし、ハイドレーションが完了した後にそれらのイベントをリプレイできるようにするイベントリプレイ機能を有効にできます。たとえば、`withEventReplay()` 関数を使用して有効にできます。
+アプリケーションがサーバーでレンダリングされると、生成されたHTMLがロードされ次第、ブラウザに表示されます。ユーザーはページを操作できると考えるかもしれませんが、ハイドレーションが完了するまでイベントリスナーはアタッチされません。イベントリプレイ機能は、ハイドレーションの前に発生したすべてのイベントをキャプチャし、ハイドレーションが完了した後にそれらのイベントをリプレイします。
+
+イベントリプレイは、[インクリメンタルハイドレーション](guide/incremental-hydration)とあわせて有効になります。`withNoIncrementalHydration()`でインクリメンタルハイドレーションを無効にした場合でも、`withEventReplay()`関数を使用してイベントリプレイを有効にできます。
 
 ```typescript
-import {provideClientHydration, withEventReplay} from '@angular/platform-browser';
+import {
+  provideClientHydration,
+  withEventReplay,
+  withNoIncrementalHydration,
+} from '@angular/platform-browser';
 
 bootstrapApplication(App, {
-  providers: [provideClientHydration(withEventReplay())],
+  providers: [provideClientHydration(withNoIncrementalHydration(), withEventReplay())],
 });
 ```
 
@@ -91,8 +97,6 @@ bootstrapApplication(App, {
 イベントリプレイは、`click`、`mouseover`、`focusin` などの _ネイティブブラウザイベント_ をサポートしています。イベントリプレイを強化するライブラリであるJSActionについて詳しく知りたい場合は、[readme](https://github.com/angular/angular/tree/main/packages/core/primitives/event-dispatch#readme) を参照してください。
 
 この機能は、ハイドレーションの前に実行されたユーザーアクションが無視されるのを防ぎ、一貫したユーザー体験を保証します。
-
-NOTE: [インクリメンタルハイドレーション](guide/incremental-hydration)を有効にしている場合、イベントリプレイは内部的に自動で有効になります。
 
 ## 制約 {#constraints}
 

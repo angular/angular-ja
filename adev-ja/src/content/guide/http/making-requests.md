@@ -208,7 +208,7 @@ http.get<Config>('/api/config', {observe: 'response'}).subscribe((res) => {
 
 `HttpClient` は、レスポンスボディとレスポンスオブジェクトに加えて、リクエストライフサイクルの特定の時点に対応する生の*イベント*のストリームを返せます。これらのイベントには、リクエストが送信されたとき、レスポンスヘッダーが返されたとき、ボディが完了したときなどが含まれます。これらのイベントには、大きなリクエストボディとレスポンスボディのアップロードとダウンロードの状態を報告する*進捗イベント*も含まれる場合があります。
 
-進捗イベントは、デフォルトでは無効になっています（パフォーマンス上のコストがかかるため）が、`reportProgress` オプションを使用して有効にできます。
+進捗イベントは、デフォルトでは無効になっています（パフォーマンス上のコストがかかるため）が、`reportUploadProgress` オプションと `reportDownloadProgress` オプションを使用して有効にできます。
 
 NOTE: `HttpClient` のデフォルトのfetchバックエンドは、*アップロード*の進捗イベントを報告しません。アプリケーションでアップロードの進捗イベントが必要な場合は、`provideHttpClient(...)` で `withXhr()` を使用して `HttpClient` を構成してください。
 
@@ -216,17 +216,17 @@ NOTE: `HttpClient` のデフォルトのfetchバックエンドは、*アップ�
 
 ```ts
 http
-  .post('/api/upload', myData, {
-    reportProgress: true,
+  .get('/api/download', {
+    reportDownloadProgress: true,
     observe: 'events',
   })
   .subscribe((event) => {
     switch (event.type) {
-      case HttpEventType.UploadProgress:
-        console.log('Uploaded ' + event.loaded + ' out of ' + event.total + ' bytes');
+      case HttpEventType.DownloadProgress:
+        console.log('Downloaded ' + event.loaded + ' out of ' + event.total + ' bytes');
         break;
       case HttpEventType.Response:
-        console.log('Finished uploading!');
+        console.log('Finished downloading!');
         break;
     }
   });
@@ -257,7 +257,7 @@ HTTPリクエストは、次の3つの方法で失敗する可能性がありま
 - timeoutオプションが設定されている場合に、リクエストが時間内に応答しませんでした。
 - バックエンドがリクエストを受け取りますが、処理に失敗し、エラーレスポンスを返す場合があります。
 
-`HttpClient` は、上記のすべての種類のエラーを `HttpErrorResponse` に捕捉し、`Observable` のエラーチャネルを通じて返します。ネットワークエラーとタイムアウトエラーの `status` コードは `0` で、`error` は [`ProgressEvent`](https://developer.mozilla.org/docs/Web/API/ProgressEvent) のインスタンスです。バックエンドエラーの `status` コードは、バックエンドによって返された失敗したコードであり、`error` はエラーレスポンスです。レスポンスを調べて、エラーの原因とエラーを処理するための適切なアクションを特定します。
+`HttpClient` は、上記のすべての種類のエラーを `HttpErrorResponse` に捕捉し、`Observable` のエラーチャネルを通じて返します。ネットワークエラーとタイムアウトエラーの `status` コードは `0` です。タイムアウトの場合、`error` は `TimeoutError` という名前の `DOMException` です。ネットワークエラーの場合、`error` は `fetch` がスローしたエラー（`withXhr()` を使用する場合は [`ProgressEvent`](https://developer.mozilla.org/docs/Web/API/ProgressEvent)）です。バックエンドエラーの `status` コードは、バックエンドによって返された失敗したコードであり、`error` はエラーレスポンスです。レスポンスを調べて、エラーの原因とエラーを処理するための適切なアクションを特定します。
 
 [RxJS ライブラリ](https://rxjs.dev/) は、エラー処理に役立つ演算子をいくつか提供しています。
 
@@ -616,6 +616,8 @@ http
 
 IMPORTANT: `integrity` オプションには、レスポンスコンテンツと提供されたハッシュとの厳密な一致が必要です。コンテンツが一致しない場合、リクエストはネットワークエラーで失敗します。
 
+CRITICAL: SSR中、Fetchの実装は[Fetch Standard](https://fetch.spec.whatwg.org/#concept-main-fetch)の要求に従い、レスポンスを返す前に `integrity` を検証するためレスポンスボディ全体を読み取ります。Angularが[`maxResponseBodySize`](/guide/ssr#configuring-the-response-body-size-limit)を適用するのはFetchがレスポンスを返した後だけなので、この上限は整合性の検証中にバッファリングされるデータを制限しません。
+
 TIP: 外部ソースから重要なリソースを読み込む際は、それらが変更されていないことを確実にするため、サブリソースの整合性を使用してください。`openssl` などのツールを使用してハッシュを生成してください。
 
 ## HTTP `Observable` {#http-observables}
@@ -669,7 +671,7 @@ export class UserProfile {
 
   private userService = inject(UserService);
 
-  constructor(): void {
+  constructor() {
     effect(() => {
       this.user$ = this.userService.getUser(this.userId());
     });

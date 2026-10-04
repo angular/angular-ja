@@ -215,9 +215,9 @@ export function authRedirectInterceptor(
 
 ## レスポンスタイプの操作 {#working-with-response-types}
 
-`HttpClient` がfetchバックエンドを使用する場合、レスポンスには、CORSポリシーとリクエストモードに基づいてブラウザがレスポンスを処理した方法を示す `type` プロパティが含まれます。このプロパティはネイティブのFetch API仕様に沿っており、CORSの問題をデバッグしたり、レスポンスのアクセス可能性を理解したりするための貴重な洞察を提供します。
+`HttpClient` がfetchバックエンドを使用する場合、レスポンスには、CORSポリシーとリクエストモードに基づいてブラウザがレスポンスを処理した方法を示す `responseType` プロパティが含まれます。このプロパティはネイティブのFetch API仕様に沿っており、CORSの問題をデバッグしたり、レスポンスのアクセス可能性を理解したりするための貴重な洞察を提供します。
 
-レスポンスの `type` プロパティには、次の値を設定できます。
+レスポンスの `responseType` プロパティには、次の値を設定できます。
 
 - `'basic'` - 同一オリジンのレスポンスで、すべてのヘッダーにアクセス可能
 - `'cors'` - CORSヘッダーが適切に構成されたクロスオリジンレスポンス
@@ -233,7 +233,7 @@ export function responseTypeInterceptor(
   next: HttpHandlerFn,
 ): Observable<HttpEvent<unknown>> {
   return next(req).pipe(
-    map((event) => {
+    tap((event) => {
       if (event.type === HttpEventType.Response) {
         // さまざまなレスポンスタイプを適切に処理する
         switch (event.responseType) {

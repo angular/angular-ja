@@ -1,17 +1,25 @@
 diff --git a/adev/src/app/core/services/version-manager.service.ts b/adev/src/app/core/services/version-manager.service.ts
-index 29c20e63b5..50176062a9 100644
+index a05aec8058..83ff5c323b 100644
 --- a/adev/src/app/core/services/version-manager.service.ts
 +++ b/adev/src/app/core/services/version-manager.service.ts
-@@ -60,7 +60,7 @@ export class VersionManager {
+@@ -10,7 +10,6 @@ import {httpResource} from '@angular/common/http';
+ import {DOCUMENT, Service, VERSION, computed, inject} from '@angular/core';
+ 
+ import versionJson from '../../../assets/others/versions.json';
+-import {ANGULAR_DEV} from '../constants/links';
+ 
+ type VersionMode = 'stable' | 'deprecated' | 'rc' | 'next' | number;
+ 
+@@ -52,7 +51,7 @@ export class VersionManager {
    // which is the most up-to-date anyway.
    remoteVersions = httpResource(
      () => ({
--      url: 'https://angular.dev/assets/others/versions.json',
+-      url: `${ANGULAR_DEV}/assets/others/versions.json`,
 +      url: 'https://angular.jp/assets/others/versions.json',
        transferCache: false,
        cache: 'no-cache',
      }),
-@@ -92,8 +92,12 @@ export class VersionManager {
+@@ -84,8 +83,12 @@ export class VersionManager {
    );
  
    readonly currentDocsVersion = computed(() => {

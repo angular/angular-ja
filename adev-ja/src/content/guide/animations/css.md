@@ -90,6 +90,8 @@ CSS Gridを使用すると、`height: auto`へのアニメーションを実現�
     <docs-code header="remove.css" path="adev/src/content/examples/animations/src/app/native-css/remove.css"  />
 </docs-code-multifile>
 
+NOTE: 子要素の`animate.leave`アニメーションは、同じコンポーネントのテンプレート内でのみ発火します。親要素が削除されたとき、ネストしたコンポーネントの`animate.leave`アニメーションは発火しません。
+
 `animate.enter`と`animate.leave`について詳しくは、[EnterとLeaveのアニメーションガイド](guide/animations)を参照してください。
 
 ### インクリメントとデクリメントをアニメーション化する {#animating-increment-and-decrement}

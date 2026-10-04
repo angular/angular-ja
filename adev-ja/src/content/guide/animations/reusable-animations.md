@@ -18,7 +18,7 @@ HELPFUL: `height`、`opacity`、`backgroundColor`、`time`の入力値は実行�
 アニメーションの一部もエクスポートできます。
 たとえば、次のスニペットではアニメーションの`trigger`をエクスポートしています。
 
-<docs-code header="animations.1.ts" path="adev/src/content/examples/animations/src/app/animations.1.ts" region="trigger-const"/>
+<docs-code header="animations.ts" path="adev/src/content/examples/animations/src/app/animations.1.ts" region="trigger-const"/>
 
 ここから先は、再利用可能なアニメーション変数をコンポーネントクラスにインポートできます。
 たとえば、次のコードスニペットでは`transitionAnimation`変数をインポートし、`useAnimation()`関数を通して使用しています。

@@ -37,41 +37,26 @@ jobs:
           bazelrc: |
             build --discard_analysis_cache
             build --nokeep_state_after_build
+            build --notrack_incremental_state
             # Allow network access in sandbox for Algolia API calls during SSR prerendering.
             build --sandbox_default_allow_network
       - run: pnpm install --frozen-lockfile
-      - name: Record memory state before build
-        run: |
-          if [ -r /sys/fs/cgroup/memory.events ]; then
-            cp /sys/fs/cgroup/memory.events "$RUNNER_TEMP/memory.events.before"
-          fi
       - name: Build
         run: |
-          if [ -r /sys/fs/cgroup/memory.current ]; then
-            (
-              while true; do
-                printf 'cgroup memory.current=%s memory.peak=%s ' "$(cat /sys/fs/cgroup/memory.current)" "$(cat /sys/fs/cgroup/memory.peak)"
-                awk '/^oom / || /^oom_kill / {printf "%s=%s ", $1, $2} END {print ""}' /sys/fs/cgroup/memory.events
-                sleep 5
-              done
-            ) &
-            monitor_pid=$!
-            trap 'kill "$monitor_pid" 2>/dev/null || true' EXIT
-          fi
+          (
+            while true; do
+              printf 'memory monitor: '
+              awk '/^(MemTotal|MemAvailable|SwapTotal|SwapFree):/ {printf "%s=%s%s ", $1, $2, $3}' /proc/meminfo
+              awk '$1 == "oom_kill" {print "oom_kill=" $2}' /proc/vmstat
+              sleep 5
+            done
+          ) &
+          monitor_pid=$!
+          trap 'kill "$monitor_pid" 2>/dev/null || true' EXIT
           pnpm run build
         env:
           _JAVA_OPTIONS: -Xms512m -Xmx2g
           NODE_OPTIONS: --max-old-space-size=4096
-      - name: Report memory state after build
-        if: always()
-        run: |
-          for file in "$RUNNER_TEMP/memory.events.before" /sys/fs/cgroup/memory.events /sys/fs/cgroup/memory.max /sys/fs/cgroup/memory.peak /home/runner/.bazel/server/jvm.out; do
-            if [ -r "$file" ]; then
-              echo "::group::$file"
-              tail -n 200 "$file"
-              echo '::endgroup::'
-            fi
-          done
       - uses: angular/dev-infra/github-actions/previews/pack-and-upload-artifact@0512a5b9381ccff00c278d7b4b6ee38e5c09654d
         with:
           workflow-artifact-name: 'adev-preview'

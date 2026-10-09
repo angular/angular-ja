@@ -41,6 +41,7 @@ jobs:
           disk-cache: ${{ github.workflow }}
           repository-cache: true
           bazelrc: |
+            startup --host_jvm_args=-Xmx2g
             build --discard_analysis_cache
             build --nokeep_state_after_build
             build --notrack_incremental_state
@@ -50,7 +51,6 @@ jobs:
       - name: Build
         run: pnpm run build
         env:
-          _JAVA_OPTIONS: -Xms512m -Xmx2g
           NODE_OPTIONS: --max-old-space-size=4096
   # build-windows:
   #   runs-on: windows-latest

@@ -35,6 +35,7 @@ jobs:
           disk-cache: ${{ github.workflow }}
           repository-cache: true
           bazelrc: |
+            startup --host_jvm_args=-Xmx2g
             build --discard_analysis_cache
             build --nokeep_state_after_build
             build --notrack_incremental_state
@@ -48,6 +49,7 @@ jobs:
               printf 'memory monitor: '
               awk '/^(MemTotal|MemAvailable|SwapTotal|SwapFree):/ {printf "%s=%s%s ", $1, $2, $3}' /proc/meminfo
               awk '$1 == "oom_kill" {print "oom_kill=" $2}' /proc/vmstat
+              ps -eo pid,comm,rss --sort=-rss | sed -n '1,6p'
               sleep 5
             done
           ) &
@@ -55,7 +57,6 @@ jobs:
           trap 'kill "$monitor_pid" 2>/dev/null || true' EXIT
           pnpm run build
         env:
-          _JAVA_OPTIONS: -Xms512m -Xmx2g
           NODE_OPTIONS: --max-old-space-size=4096
       - uses: angular/dev-infra/github-actions/previews/pack-and-upload-artifact@0512a5b9381ccff00c278d7b4b6ee38e5c09654d
         with:

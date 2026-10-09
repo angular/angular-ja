@@ -24,7 +24,7 @@ jobs:
         with:
           submodules: true
       - name: setup pnpm
-        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # 4.1.0
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version-file: '.node-version'
@@ -46,7 +46,19 @@ jobs:
             cp /sys/fs/cgroup/memory.events "$RUNNER_TEMP/memory.events.before"
           fi
       - name: Build
-        run: pnpm run build
+        run: |
+          if [ -r /sys/fs/cgroup/memory.current ]; then
+            (
+              while true; do
+                printf 'cgroup memory.current=%s memory.peak=%s ' "$(cat /sys/fs/cgroup/memory.current)" "$(cat /sys/fs/cgroup/memory.peak)"
+                awk '/^oom / || /^oom_kill / {printf "%s=%s ", $1, $2} END {print ""}' /sys/fs/cgroup/memory.events
+                sleep 5
+              done
+            ) &
+            monitor_pid=$!
+            trap 'kill "$monitor_pid" 2>/dev/null || true' EXIT
+          fi
+          pnpm run build
         env:
           _JAVA_OPTIONS: -Xms512m -Xmx2g
           NODE_OPTIONS: --max-old-space-size=4096

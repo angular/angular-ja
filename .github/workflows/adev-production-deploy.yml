@@ -8,6 +8,8 @@ on:
 env:
   BAZEL_REPO_CACHE_PATH: '~/.cache/bazel_repo_cache'
 
+permissions: read-all
+
 jobs:
   adev-build:
     runs-on: ubuntu-latest
@@ -29,6 +31,8 @@ jobs:
           bazelrc: |
             build --discard_analysis_cache
             build --nokeep_state_after_build
+            # Allow network access in sandbox for Algolia API calls during SSR prerendering.
+            build --sandbox_default_allow_network
       - run: pnpm install --frozen-lockfile
       - name: Build
         run: pnpm run build

@@ -24,7 +24,7 @@ jobs:
         with:
           submodules: true
       - name: setup pnpm
-        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # 4.1.0
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version-file: '.node-version'
@@ -35,19 +35,29 @@ jobs:
           disk-cache: ${{ github.workflow }}
           repository-cache: true
           bazelrc: |
-            # Limit resources for CI runners (ubuntu-latest: 7GB RAM, 2 CPUs)
-            build --local_ram_resources=4096
-            build --local_cpu_resources=2
-            build --jobs=2
+            startup --host_jvm_args=-Xmx2g
             build --discard_analysis_cache
             build --nokeep_state_after_build
+            build --notrack_incremental_state
+            build --worker_max_instances=1
             # Allow network access in sandbox for Algolia API calls during SSR prerendering.
             build --sandbox_default_allow_network
       - run: pnpm install --frozen-lockfile
       - name: Build
-        run: pnpm run build
+        run: |
+          (
+            while true; do
+              printf 'memory monitor: '
+              awk '/^(MemTotal|MemAvailable|SwapTotal|SwapFree):/ {printf "%s=%s%s ", $1, $2, $3}' /proc/meminfo
+              awk '$1 == "oom_kill" {print "oom_kill=" $2}' /proc/vmstat
+              ps -eo pid,comm,rss --sort=-rss | sed -n '1,6p'
+              sleep 5
+            done
+          ) &
+          monitor_pid=$!
+          trap 'kill "$monitor_pid" 2>/dev/null || true' EXIT
+          pnpm run build
         env:
-          _JAVA_OPTIONS: -Xms512m -Xmx2g
           NODE_OPTIONS: --max-old-space-size=4096
       - uses: angular/dev-infra/github-actions/previews/pack-and-upload-artifact@0512a5b9381ccff00c278d7b4b6ee38e5c09654d
         with:

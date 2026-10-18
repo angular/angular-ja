@@ -1,6 +1,6 @@
 # `@boundary`によるエラーバウンダリ
 
-IMPORTANT: `@boundary`は[デベロッパープレビュー](reference/releases#developer-preview)です。
+IMPORTANT: `@boundary`は[開発者プレビュー](reference/releases#developer-preview)です。
 
 Angularテンプレートは、レンダリングや変更検知中に発生するランタイムエラーを適切に処理するためのエラーバウンダリをサポートしています。
 

@@ -19,6 +19,9 @@ rules:
   - expected: 双方向
     pattern: 二方向
 
+  - expected: 開発者プレビュー
+    pattern: デベロッパープレビュー
+
   - expected: 変更検知
     pattern: 変更検出
 

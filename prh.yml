@@ -110,6 +110,9 @@ rules:
   - expected: ブラウザ
     pattern: /ブラウザー/
 
+  - expected: バウンダリ
+    pattern: /バウンダリー/
+
   - expected: サブスクライバー
     pattern: /サブスクライバ(?!ー)/
 

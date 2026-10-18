@@ -1,14 +1,14 @@
-# Error boundaries with `@boundary`
+# `@boundary`によるエラーバウンダリ
 
-IMPORTANT: `@boundary` is in [developer preview](reference/releases#developer-preview).
+IMPORTANT: `@boundary`は[デベロッパープレビュー](reference/releases#developer-preview)です。
 
-Angular templates support error boundaries to gracefully handle runtime errors that occur during rendering and change detection.
+Angularテンプレートは、レンダリングや変更検知中に発生するランタイムエラーを適切に処理するためのエラーバウンダリをサポートしています。
 
-Error boundaries prevent a single component's failure from crashing the entire application and provide a way to display fallback UI to the user.
+エラーバウンダリは、単一のコンポーネントの障害によってアプリケーション全体がクラッシュするのを防ぎ、ユーザーにフォールバックUIを表示する方法を提供します。
 
-## Catching errors with `@boundary` and `@error`
+## `@boundary`と`@error`によるエラーの捕捉 {#catching-errors-with-boundary-and-error}
 
-The `@boundary` block wraps a section of your template. If any component or directive inside this boundary throws an error during initialization or change detection, the framework catches the error and renders the `@error` block instead.
+`@boundary`ブロックはテンプレートの一部をラップします。このバウンダリ内のコンポーネントやディレクティブが初期化または変更検知中にエラーをスローした場合、フレームワークはそのエラーを捕捉し、代わりに`@error`ブロックをレンダリングします。
 
 ```angular-html
 @boundary {
@@ -18,9 +18,9 @@ The `@boundary` block wraps a section of your template. If any component or dire
 }
 ```
 
-## Accessing the error object
+## エラーオブジェクトへのアクセス {#accessing-the-error-object}
 
-You can access the caught error by accessing the implicit `$error` variable:
+暗黙の`$error`変数を参照すると、捕捉されたエラーにアクセスできます:
 
 ```angular-html
 @boundary {
@@ -30,9 +30,9 @@ You can access the caught error by accessing the implicit `$error` variable:
 }
 ```
 
-## Resetting the boundary
+## バウンダリのリセット {#resetting-the-boundary}
 
-You can attempt to re-render the content of the `@boundary` by calling the implicit `$reset` function in the `@error` block. When called, it resets the boundary state and tries to render the original content again.
+`@error`ブロック内で暗黙の`$reset`関数を呼び出すことで、`@boundary`のコンテンツの再レンダリングを試みることができます。呼び出されると、バウンダリの状態をリセットし、元のコンテンツのレンダリングを再試行します。
 
 ```angular-html
 @boundary {
@@ -43,9 +43,9 @@ You can attempt to re-render the content of the `@boundary` by calling the impli
 }
 ```
 
-## Conditional error handling with `when`
+## `when`による条件付きエラーハンドリング {#conditional-error-handling-with-when}
 
-You can use `when` clauses to conditionally handle specific types of errors, allowing you to provide different fallback UIs. Angular evaluates this condition when it catches an error.
+`when`句を使用すると、特定の種類のエラーを条件付きで処理し、異なるフォールバックUIを提供できます。Angularはエラーを捕捉したときにこの条件を評価します。
 
 ```angular-html
 @boundary {
@@ -58,11 +58,11 @@ You can use `when` clauses to conditionally handle specific types of errors, all
 }
 ```
 
-Order your `@error` blocks from most specific to least specific, as Angular evaluates the `when` clauses in order and uses the first one that evaluates to true. A final `@error` block without a `when` clause acts as a catch-all fallback.
+Angularは`when`句を順番に評価し、最初にtrueと評価されたものを使用するため、`@error`ブロックは条件が具体的なものから一般的なものの順に配置してください。`when`句のない最後の`@error`ブロックは、すべてのエラーを捕捉するフォールバックとして機能します。
 
-## Global error handler integration
+## グローバルエラーハンドラーの統合 {#global-error-handler-integration}
 
-When a boundary catches an error, Angular can still notify the global `ErrorHandler`. You can implement the optional `onViewError` hook in your custom `ErrorHandler` to log these caught errors to your error tracking service.
+バウンダリがエラーを捕捉した場合でも、Angularはグローバルな`ErrorHandler`に通知できます。カスタム`ErrorHandler`にオプションの`onViewError`フックを実装することで、捕捉されたこれらのエラーをエラー追跡サービスに記録できます。
 
 ```ts
 @Injectable()
@@ -79,13 +79,13 @@ export class MyErrorHandler implements ErrorHandler {
 }
 ```
 
-IMPORTANT: If an `@error` block itself throws an error, the error propagates to the next outer `@boundary` or Angular treats it as an unhandled application error.
+IMPORTANT: `@error`ブロック自体がエラーをスローした場合、そのエラーは1つ外側の`@boundary`に伝播します。外側に`@boundary`がなければ、Angularはそれを未処理のアプリケーションエラーとして扱います。
 
-## Content projection
+## コンテンツプロジェクション {#content-projection}
 
-If your component uses [content projection](guide/components/content-projection), wrapping `<ng-content>` in a `@boundary` does not catch errors from projected content. That content belongs to the view that declares it, not the receiving component's view.
+コンポーネントが[コンテンツプロジェクション](guide/components/content-projection)を使用している場合、`<ng-content>`を`@boundary`でラップしても、投影されたコンテンツのエラーは捕捉されません。そのコンテンツは、それを受け取るコンポーネントのビューではなく、それを宣言したビューに属します。
 
-For example, a wrapper component with the following template does not catch errors from components projected into it:
+例えば、以下のテンプレートを持つラッパーコンポーネントは、そこに投影されたコンポーネントのエラーを捕捉しません。
 
 ```angular-html {avoid}
 @boundary {
@@ -95,7 +95,7 @@ For example, a wrapper component with the following template does not catch erro
 }
 ```
 
-To catch those errors, wrap the wrapper component and its projected content in a `@boundary` in the parent template:
+これらのエラーを捕捉するには、親テンプレートの`@boundary`でラッパーコンポーネントとその投影されたコンテンツをラップします。
 
 ```angular-html {prefer}
 @boundary {
@@ -107,6 +107,6 @@ To catch those errors, wrap the wrapper component and its projected content in a
 }
 ```
 
-## Dynamic views and programmatic error handling
+## 動的ビューとプログラムによるエラー処理 {#dynamic-views-and-programmatic-error-handling}
 
-Error handling isn't limited to template syntax. If you are creating components or embedded views dynamically, you can use the `onError` option to handle errors. See the [Handling rendering errors](guide/components/programmatic-rendering#handling-rendering-errors) section in the programmatic rendering guide for more information.
+エラー処理はテンプレート構文に限定されません。コンポーネントや埋め込みビューを動的に作成している場合は、`onError`オプションを使用してエラーを処理できます。詳細については、プログラムによるレンダリングガイドの[レンダリングエラーの処理](guide/components/programmatic-rendering#handling-rendering-errors)セクションを参照してください。

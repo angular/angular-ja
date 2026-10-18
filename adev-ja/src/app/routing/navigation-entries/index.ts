@@ -257,7 +257,7 @@ export const DOCS_SUB_NAVIGATION_DATA: NavigationItem[] = [
             contentPath: 'guide/templates/defer',
           },
           {
-            label: 'Error boundaries with @boundary',
+            label: '@boundaryによるエラーバウンダリ',
             path: 'guide/templates/error-boundaries',
             contentPath: 'guide/templates/error-boundaries',
             status: 'new',

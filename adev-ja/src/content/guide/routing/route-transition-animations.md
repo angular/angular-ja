@@ -2,7 +2,7 @@
 
 ルート遷移アニメーションは、Angularアプリケーション内の異なるビュー間を移動する際にスムーズな視覚的遷移を提供することで、ユーザー体験を向上させます。[Angular Router](/guide/routing)は、ブラウザのView Transitions APIの組み込みサポートを含んでおり、サポートされているブラウザでルート変更間のシームレスなアニメーションを可能にします。
 
-HELPFUL: RouterのネイティブView Transitions統合は現在[デベロッパープレビュー](/reference/releases#developer-preview)中です。ネイティブView Transitionsは比較的新しいブラウザ機能であり、すべてのブラウザでのサポートは限られています。
+HELPFUL: RouterのネイティブView Transitions統合は現在[開発者プレビュー](/reference/releases#developer-preview)中です。ネイティブView Transitionsは比較的新しいブラウザ機能であり、すべてのブラウザでのサポートは限られています。
 
 ## Viewトランジションの仕組み {#how-view-transitions-work}
 

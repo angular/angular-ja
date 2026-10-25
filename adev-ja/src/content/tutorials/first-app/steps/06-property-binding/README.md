@@ -15,7 +15,7 @@
 
 プロパティバインディングを使うと、Angularテンプレート内で変数を`Input`プロパティに結びつけることができます。こうして渡されたデータは`Input`に動的にバインドされます。
 
-より詳しい説明は、ガイドの[プロパティバインディング](/guide/templates/binding#css-class-and-style-property-bindings)を参照してください。
+より詳しい説明は、ガイドの[プロパティバインディング](/guide/templates/binding#binding-dynamic-properties-and-attributes)を参照してください。
 
 <docs-workflow>
 
@@ -46,5 +46,5 @@ SUMMARY: このレッスンでは、新しいプロパティバインディン�
 このレッスンで扱った内容について、さらに詳しく知りたい場合は次のページをご覧ください:
 
 <docs-pill-row>
-  <docs-pill href="/guide/templates/binding#css-class-and-style-property-bindings" title="プロパティのバインディング"/>
+  <docs-pill href="/guide/templates/binding#binding-dynamic-properties-and-attributes" title="プロパティのバインディング"/>
 </docs-pill-row>

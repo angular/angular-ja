@@ -98,6 +98,7 @@ flowchart TD
 `ProfilePhoto`コンポーネントをインポートする`UserProfile`コンポーネントの例を次に示します。
 
 ```angular-ts {header: "user-profile.ts"}
+import {Component} from '@angular/core';
 import {ProfilePhoto} from './profile-photo';
 
 @Component({

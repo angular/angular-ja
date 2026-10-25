@@ -55,6 +55,7 @@ export const serverRoutes: ServerRoute[] = [
 
 ```typescript {header: "app.config.server.ts"}
 import {provideServerRendering, withRoutes} from '@angular/ssr';
+import {ApplicationConfig} from '@angular/core';
 import {serverRoutes} from './app.routes.server';
 
 const serverConfig: ApplicationConfig = {
@@ -69,6 +70,7 @@ const serverConfig: ApplicationConfig = {
 
 ```typescript
 import {provideServerRendering, withRoutes, withAppShell} from '@angular/ssr';
+import {ApplicationConfig} from '@angular/core';
 import {AppShell} from './app-shell';
 
 const serverConfig: ApplicationConfig = {
@@ -169,7 +171,7 @@ Angularは、ルート設定の [`redirectTo`](api/router/Route#redirectTo 'API 
 
 [`RenderMode.Prerender`](api/ssr/RenderMode#Prerender 'API reference') を持つ各ルートについて、[`getPrerenderParams`](api/ssr/ServerRoutePrerenderWithParams#getPrerenderParams 'API reference') 関数を指定できます。この関数を使用すると、どの特定のパラメーターが個別のプリレンダリングされたドキュメントを生成するかを制御できます。
 
-[`getPrerenderParams`](api/ssr/ServerRoutePrerenderWithParams#getPrerenderParams 'API reference') 関数は、オブジェクトの配列に解決される `Promise` を返します。各オブジェクトは、ルートパラメーター名から値へのキーと値のマップです。たとえば、`post/:id` のようなルートを定義した場合、`getPrerenderParams` は配列 `[{id: 123}, {id: 456}]` を返し、`post/123` と `post/456` の個別のドキュメントをレンダリングできます。
+[`getPrerenderParams`](api/ssr/ServerRoutePrerenderWithParams#getPrerenderParams 'API reference') 関数は、オブジェクトの配列に解決される `Promise` を返します。各オブジェクトは、ルートパラメーター名から値へのキーと値のマップです。たとえば、`post/:id` というルートでは、`getPrerenderParams` が `[{id: '123'}, {id: '456'}]` を返すと、`post/123` と `post/456` の文書が個別にレンダリングされます。
 
 [`getPrerenderParams`](api/ssr/ServerRoutePrerenderWithParams#getPrerenderParams 'API reference') の本体は、Angularの [`inject`](api/core/inject 'API reference') 関数を使用して依存性を注入し、どのルートをプリレンダリングするかを決定するための任意の作業ができます。これには通常、パラメーター値の配列を構築するためにデータを取得するリクエストを行うことが含まれます。
 
@@ -177,6 +179,7 @@ Angularは、ルート設定の [`redirectTo`](api/router/Route#redirectTo 'API 
 
 ```ts {header: "app.routes.server.ts"}
 import {RenderMode, ServerRoute} from '@angular/ssr';
+import {inject} from '@angular/core';
 
 export const serverRoutes: ServerRoute[] = [
   {
@@ -228,7 +231,7 @@ export const serverRoutes: ServerRoute[] = [
       // この関数は、/post/1、/post/2、/post/3 のパスで
       // プリレンダリングされた投稿を表すオブジェクトの配列を返します。
       // /post/4 のパスがリクエストされた場合、フォールバック動作が利用されます。
-      return [{id: 1}, {id: 2}, {id: 3}];
+      return [{id: '1'}, {id: '2'}, {id: '3'}];
     },
   },
 ];
@@ -241,7 +244,7 @@ export const serverRoutes: ServerRoute[] = [
 一般に、ブラウザ固有のシンボルに依存するコードは、サーバーではなくブラウザでのみ実行されるべきです。これは、`afterEveryRender` および `afterNextRender` ライフサイクルフックによって強制できます。これらはブラウザでのみ実行され、サーバーではスキップされます。
 
 ```angular-ts
-import {Component, viewChild, afterNextRender} from '@angular/core';
+import {Component, ElementRef, viewChild, afterNextRender} from '@angular/core';
 
 @Component({
   selector: 'my-cmp',
@@ -364,7 +367,7 @@ HELPFUL: メタタグの管理には、Angularは `Meta` サービスを提供�
 -   **[`REQUEST_CONTEXT`](api/core/REQUEST_CONTEXT 'API reference'):** 現在のリクエストに関連する追加のコンテキストへのアクセスを提供します。このコンテキストは、[`handle`](api/ssr/AngularAppEngine#handle 'API reference') 関数の2番目のパラメーターとして渡すことができます。通常、これは標準のWeb APIの一部ではない追加のリクエスト関連情報を提供するために使用されます。
 
 ```angular-ts
-import {inject, REQUEST} from '@angular/core';
+import {inject, REQUEST, Component} from '@angular/core';
 
 @Component({
   selector: 'app-my-component',
@@ -426,6 +429,7 @@ If your application needs to fetch larger responses during server rendering, set
 
 ```ts
 import {provideServerRendering, withRoutes} from '@angular/ssr';
+import {ApplicationConfig} from '@angular/core';
 import {serverRoutes} from './app.routes.server';
 
 const serverConfig: ApplicationConfig = {
@@ -454,8 +458,11 @@ CRITICAL: During SSR, the Fetch implementation reads the entire response body to
 デフォルトでは、`HttpClient` は `Authorization`、`Proxy-Authorization`、または `Cookie` ヘッダーを含まず、`withCredentials` で送信されないすべての `HEAD` および `GET` リクエストをキャッシュします。ハイドレーション設定に `withHttpTransferCacheOptions` を使用することで、これらの設定をオーバーライドできます。
 
 ```ts
-import {bootstrapApplication} from '@angular/platform-browser';
-import {provideClientHydration, withHttpTransferCacheOptions} from '@angular/platform-browser';
+import {
+  bootstrapApplication,
+  provideClientHydration,
+  withHttpTransferCacheOptions,
+} from '@angular/platform-browser';
 
 bootstrapApplication(App, {
   providers: [
@@ -620,7 +627,7 @@ import express from 'express';
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
-app.use('*', (req, res, next) => {
+app.use((req, res, next) => {
   angularApp
     .handle(req)
     .then((response) => {

@@ -163,9 +163,16 @@ change notification (i.e. `fixture.componentInstance.someValue = 'newValue';`).
 If the component is used in production, this issue should be addressed by updating
 the component to use signals for state or call `ChangeDetectorRef.markForCheck()`.
 If the component is only used as a test wrapper and never used in an application,
-it is acceptable to use `fixture.changeDetectorRef.markForCheck()`.
+`ChangeDetectionStrategy.Eager`を使用し、`fixture.changeDetectorRef.markForCheck()`を呼び出してもかまいません。
+
+IMPORTANT: `fixture.changeDetectorRef`はフィクスチャのホストビューに属するため、その`markForCheck()`を
+呼び出しても、`OnPush`コンポーネントのテンプレートは更新されません。アプリケーションのコンポーネントでは、
+通常、テストでこの呼び出しは不要です。必要な場合、コンポーネントのリアクティブ性が不十分か、
+[ゾーンレスとの互換性](#requirements-for-zoneless-compatibility)を満たしていない可能性があります。
 
 ### 更新が検出されることを確認するためのデバッグモードチェック {#debug-mode-check-to-ensure-updates-are-detected}
+
+IMPORTANT: `provideCheckNoChangesConfig`は[開発者プレビュー](reference/releases#developer-preview)です。
 
 Angular also provides an additional tool to help verify that an application is making
 updates to state in a zoneless-compatible way. `provideCheckNoChangesConfig({exhaustive: true, interval: <milliseconds>})`

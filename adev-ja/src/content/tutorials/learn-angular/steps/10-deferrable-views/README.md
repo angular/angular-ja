@@ -81,6 +81,10 @@ NOTE: 詳しくは、[詳細ガイドの @defer を使った遅延読み込み](
 ```angular-html {highlight:[1]}
 @defer (on viewport) {
   <comments />
+} @placeholder {
+  <p>Future comments</p>
+} @loading (minimum 2s) {
+  <p>Loading comments...</p>
 }
 ```
 

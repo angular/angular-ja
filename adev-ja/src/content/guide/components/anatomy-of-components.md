@@ -63,6 +63,7 @@ export class ProfilePhoto {}
 `@Component`デコレーターの`imports`配列に追加する必要があります。
 
 ```ts
+import {Component} from '@angular/core';
 import {ProfilePhoto} from './profile-photo';
 
 @Component({

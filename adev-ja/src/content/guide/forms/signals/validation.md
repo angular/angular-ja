@@ -224,6 +224,49 @@ ageForm = form(this.ageModel, (schemaPath) => {
 });
 ```
 
+### minDate() and maxDate()
+
+The `minDate()` and `maxDate()` validation rules work with `Date` values, such as a field bound to `<input type="date">`. They also set the `min` and `max` attributes of that input.
+
+```angular-ts
+import {Component, signal} from '@angular/core';
+import {form, FormField, minDate, maxDate} from '@angular/forms/signals';
+
+@Component({
+  selector: 'app-booking-form',
+  imports: [FormField],
+  template: `
+    <form novalidate>
+      <label>
+        Check-in
+        <input type="date" [formField]="bookingForm.checkIn" />
+      </label>
+    </form>
+  `,
+})
+export class BookingFormComponent {
+  bookingModel = signal<{checkIn: Date | null}>({checkIn: null});
+
+  bookingForm = form(this.bookingModel, (schemaPath) => {
+    minDate(schemaPath.checkIn, new Date('2026-06-01'), {message: 'Bookings open on June 1'});
+    maxDate(schemaPath.checkIn, new Date('2026-08-31'), {message: 'Bookings close on August 31'});
+  });
+}
+```
+
+IMPORTANT: An `<input type="date">` reads and writes `Date` values at midnight UTC, whatever the user's time zone, because that is how the browser's `valueAsDate` works. Build the limits the same way, for example with `new Date('2026-06-01')` or `new Date(Date.UTC(2026, 5, 1))`. A `Date` created from local time, such as `new Date(2026, 5, 1)` or `new Date()`, is shifted by the user's UTC offset. Depending on the time zone, the `min` or `max` attribute can then be off by a day, and the limit date itself can be rejected.
+
+To require a date that is not before today, use today's calendar date in the user's time zone, expressed at midnight UTC:
+
+```ts
+const now = new Date();
+const today = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
+
+minDate(schemaPath.checkIn, today, {message: 'Check-in cannot be in the past'});
+```
+
+Passing `new Date()` directly can reject today's date, because the value picked in the input is midnight UTC, which is earlier than the current time. This happens in UTC and in the time zones behind it.
+
 ### minLength()とmaxLength() {#minlength-and-maxlength}
 
 `minLength()`と`maxLength()`バリデーションルールは、文字列と配列に対して機能します:
@@ -360,9 +403,7 @@ export class OrderComponent {
 
 バリデーションルールが失敗すると、何が問題だったかを説明するエラーオブジェクトが生成されます。エラーの構造を理解することは、ユーザーに明確なフィードバックを提供するのに役立ちます。
 
-<!-- TODO: フィールド状態管理ガイドが公開されたらコメントを解除する
-
-NOTE: このセクションでは、バリデーションルールが生成するエラーについて説明します。UIでバリデーションエラーを表示して使用する方法については、[フィールド状態管理ガイド](guide/forms/signals/field-state-management)を参照してください。 -->
+NOTE: このセクションでは、バリデーションルールが生成するエラーについて説明します。UIでバリデーションエラーを表示して使用する方法については、[フィールド状態管理ガイド](guide/forms/signals/field-state-management)を参照してください。
 
 ### エラーの構造 {#error-structure}
 
@@ -735,6 +776,7 @@ export class UsernameFormComponent {
 
 ```ts
 import {form, validateStandardSchema} from '@angular/forms/signals';
+import {signal} from '@angular/core';
 import * as z from 'zod';
 
 // スキーマを定義

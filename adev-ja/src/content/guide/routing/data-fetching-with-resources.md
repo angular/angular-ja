@@ -1,5 +1,7 @@
 # リソースを使用したデータ取得
 
+IMPORTANT: ルートリソースは[開発者プレビュー](reference/releases#developer-preview)です。
+
 Angularルーターは、`resources`ルート設定を通じてAngularシグナルと統合します。これにより、`Resource`APIを使用してリアクティブにデータを取得できます。
 
 ## ルートリソースを使用する理由 {#why-use-route-resources}
@@ -17,6 +19,7 @@ Angularルーターは、`resources`ルート設定を通じてAngularシグナ�
 
 ```ts
 import {provideRouter, withComponentInputBinding, withRouterResources} from '@angular/router';
+import {bootstrapApplication} from '@angular/platform-browser';
 
 bootstrapApplication(App, {
   providers: [provideRouter(routes, withComponentInputBinding(), withRouterResources())],
@@ -91,11 +94,13 @@ NOTE: `rxResource`は`loader`の代わりに`stream`プロパティを使用し�
 
 ```ts
 resources: async (ctx) => {
+  const injector = inject(Injector);
   const {fetchUserData} = await import('./user-api');
   return {
     user: resource({
       params: () => ctx.params()['id'],
       loader: ({params: id}) => fetchUserData(id),
+      injector,
     }),
   };
 },

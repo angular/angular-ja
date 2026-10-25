@@ -1,5 +1,7 @@
 # Data fetching with resources
 
+IMPORTANT: Route resources are in [developer preview](reference/releases#developer-preview).
+
 The Angular Router integrates with Angular signals through the `resources` route configuration. This allows you to fetch data reactively using `Resource` APIs.
 
 ## Why use route resources?
@@ -17,6 +19,7 @@ To enable route resources, provide `withRouterResources()` to your router config
 
 ```ts
 import {provideRouter, withComponentInputBinding, withRouterResources} from '@angular/router';
+import {bootstrapApplication} from '@angular/platform-browser';
 
 bootstrapApplication(App, {
   providers: [provideRouter(routes, withComponentInputBinding(), withRouterResources())],
@@ -91,11 +94,13 @@ The `resources` function can also be `async` and return a `Promise` if you need 
 
 ```ts
 resources: async (ctx) => {
+  const injector = inject(Injector);
   const {fetchUserData} = await import('./user-api');
   return {
     user: resource({
       params: () => ctx.params()['id'],
       loader: ({params: id}) => fetchUserData(id),
+      injector,
     }),
   };
 },

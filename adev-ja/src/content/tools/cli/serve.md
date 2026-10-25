@@ -18,12 +18,8 @@ Angular CLIアプリケーションは、`ng serve`コマンドで配信でき�
           "builder": "@angular/build:dev-server"
           // ...
         },
-        "build": {
-          /* ... */
-        },
-        "test": {
-          /* ... */
-        }
+        "build": {/* ... */},
+        "test": {/* ... */}
       }
     }
   }
@@ -70,14 +66,8 @@ Angular CLIアプリケーションは、`ng serve`コマンドで配信でき�
 
 NOTE: プロキシ設定ファイルに加えた変更を適用するには、`ng serve`プロセスを再起動する必要があります。
 
-### パスマッチングの挙動はビルダーに依存する {#path-matching-behavior-depends-on-the-builder}
+### パスマッチングの挙動 {#path-matching-behavior}
 
-**`@angular/build:dev-server`** ([Vite](https://vite.dev/config/server-options#server-proxy)ベース)
-
-- `/api`は`/api`のみにマッチします。
-- `/api/*`は`/api/users`にマッチしますが、`/api/users/123`にはマッチしません。
-- `/api/**`は`/api/users`と`/api/users/123`の両方にマッチします。
-
-**`@angular-devkit/build-angular:dev-server`** ([Webpack DevServer](https://webpack.js.org/configuration/dev-server/#devserverproxy)ベース)
-
-- `/api`は`/api`とすべてのサブパスにマッチします(`/api/**`と同等)。
+- `/api`は`/api`と、`/api/users/123`や`/api-docs`のように`/api`で始まるすべてのパスにマッチします。
+- `/api/*`は`/api/users`にマッチしますが、`/api`や`/api/users/123`にはマッチしません。
+- `/api/**`は`/api`、`/api/users`、`/api/users/123`にマッチしますが、`/api-docs`にはマッチしません。

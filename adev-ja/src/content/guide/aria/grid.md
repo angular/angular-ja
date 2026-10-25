@@ -1,5 +1,4 @@
-<docs-decorative-header title="グリッド">
-</docs-decorative-header>
+# グリッド
 
 <docs-pill-row>
   <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/grid/" title="グリッドARIAパターン"/>

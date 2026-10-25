@@ -1,5 +1,4 @@
-<docs-decorative-header title="リストボックス">
-</docs-decorative-header>
+# リストボックス
 
 <docs-pill-row>
   <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/listbox/" title="リストボックスパターン"/>

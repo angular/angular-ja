@@ -1,5 +1,4 @@
-<docs-decorative-header title="ツリー">
-</docs-decorative-header>
+# ツリー
 
 <docs-pill-row>
   <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/treeview/" title="ツリーARIAパターン"/>

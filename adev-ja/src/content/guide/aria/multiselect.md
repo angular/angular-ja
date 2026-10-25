@@ -1,5 +1,4 @@
-<docs-decorative-header title="マルチセレクト">
-</docs-decorative-header>
+# マルチセレクト
 
 ## 概要 {#overview}
 

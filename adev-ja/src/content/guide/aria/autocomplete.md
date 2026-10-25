@@ -1,5 +1,4 @@
-<docs-decorative-header title="オートコンプリート">
-</docs-decorative-header>
+# オートコンプリート
 
 ## 概要 {#overview}
 

@@ -74,6 +74,12 @@ CRITICAL: 現在のインジェクターよりも上の `HttpClient` のイン�
 
 ### `withJsonpSupport()`
 
+<docs-callout critical title="JSONPは非推奨">
+
+`withJsonpSupport`、`HttpClientJsonpModule`、`HttpClient`の`.jsonp()`メソッドは、JSONPにクロスサイトスクリプティング（XSS）の脆弱性があるため非推奨です。代わりに[CORS](https://developer.mozilla.org/docs/Web/HTTP/CORS)を使用した通常のHTTPリクエストを利用してください。
+
+</docs-callout>
+
 `withJsonpSupport` を含めると、`HttpClient` の `.jsonp()` メソッドが有効になり、[JSONP 規約](https://en.wikipedia.org/wiki/JSONP) を介してGETリクエストを行い、データのクロスドメインロードを行います。
 
 HELPFUL: 可能であれば、JSONPの代わりに [CORS](https://developer.mozilla.org/docs/Web/HTTP/CORS) を使ってクロスドメインリクエストを行うことをお勧めします。
@@ -95,9 +101,11 @@ HELPFUL: 可能であれば、JSONPの代わりに [CORS](https://developer.mozi
 | **NgModule**                            | `provideHttpClient()` に相当する                         |
 | --------------------------------------- | -------------------------------------------------------- |
 | `HttpClientModule`                      | `provideHttpClient(withInterceptorsFromDi(), withXhr())` |
-| `HttpClientJsonpModule`                 | `withJsonpSupport()`                                     |
+| `HttpClientJsonpModule`（非推奨）    | `withJsonpSupport()`（非推奨）                        |
 | `HttpClientXsrfModule.withOptions(...)` | `withXsrfConfiguration(...)`                             |
 | `HttpClientXsrfModule.disable()`        | `withNoXsrfProtection()`                                 |
+
+NOTE: `HttpClientModule`と`HttpClientXsrfModule`も非推奨です。代わりに`provideHttpClient`と対応する機能を使用してください。
 
 <docs-callout important title="複数のインジェクターで HttpClientModule を使用する場合、注意してください。">
 `HttpClientModule` が複数のインジェクターに存在する場合、インターセプターの動作は明確に定義されておらず、オプションやプロバイダー/インポートの順序に依存します。

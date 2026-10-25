@@ -54,11 +54,11 @@ paramsシグナルを変更すると自動的にリロードがトリガーさ�
 リソースの異なる状態にアクセスするための算出シグナルを追加します。
 
 ```ts
-isLoading = computed(() => this.userResource.status() === 'loading');
+isLoading = this.userResource.isLoading;
 hasError = computed(() => this.userResource.status() === 'error');
 ```
 
-リソースは、'loading'、'resolved'、または'error'になり得る`status()`シグナル、ロードされたデータ用の`value()`シグナル、そしてデータが利用可能かどうかを安全にチェックする`hasValue()`メソッドを提供します。
+リソースは、'loading'、'reloading'、'resolved'、'error'のいずれかになる`status()`シグナル、読み込んだデータの`value()`シグナル、データが利用可能かを安全に確認する`hasValue()`メソッドを提供します。`isLoading()`シグナルは'loading'と'reloading'のどちらでもtrueになります。
 </docs-step>
 
 <docs-step title="ボタンを接続し、リソースの状態を表示する" {#wire-up-the-buttons-and-display-resource-states}>

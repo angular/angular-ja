@@ -31,7 +31,7 @@ export class App {
 2つの注意すべき点があります。
 
 - `if`に`@`プレフィックスが付いているのは、[Angularテンプレート構文](guide/templates)と呼ばれる特殊なタイプの構文だからです。
-- v16以前のアプリケーションを使用している場合は、詳細については[AngularドキュメントのNgIf](guide/directives/structural-directives)を参照してください。
+- 引き続き`*ngIf`を使用しているアプリケーションでは、詳しくは[AngularのNgIfドキュメント](guide/directives/structural-directives)を参照してください。
 
 <docs-workflow>
 

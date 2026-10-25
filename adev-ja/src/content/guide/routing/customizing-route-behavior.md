@@ -135,6 +135,7 @@ provideRouter(routes, withRouterConfig({defaultQueryParamsHandling: 'merge'}));
 
 ```ts
 import {LocationStrategy, TrailingSlashPathLocationStrategy} from '@angular/common';
+import {bootstrapApplication} from '@angular/platform-browser';
 
 bootstrapApplication(App, {
   providers: [{provide: LocationStrategy, useClass: TrailingSlashPathLocationStrategy}],
@@ -145,6 +146,7 @@ bootstrapApplication(App, {
 
 ```ts
 import {LocationStrategy, NoTrailingSlashPathLocationStrategy} from '@angular/common';
+import {bootstrapApplication} from '@angular/platform-browser';
 
 bootstrapApplication(App, {
   providers: [{provide: LocationStrategy, useClass: NoTrailingSlashPathLocationStrategy}],
@@ -273,6 +275,7 @@ NOTE: `canMatch`ガードが関与している場合、重複したエントリ�
 
 ```ts
 import {provideRouter, withAutoCleanupInjectors} from '@angular/router';
+import {ApplicationConfig} from '@angular/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes, withAutoCleanupInjectors())],
@@ -304,7 +307,9 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
   private readonly handles = new Map<Route, DetachedRouteHandle>();
 
   store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle | null) {
-    this.handles.set(route.routeConfig!, handle);
+    if (handle) {
+      this.handles.set(route.routeConfig!, handle);
+    }
   }
 
   retrieveStoredRouteHandles(): DetachedRouteHandle[] {
@@ -552,8 +557,7 @@ export const routes: Routes = [
 コンポーネントは、ルート入力を介して抽出されたパラメーターを受け取ります:
 
 ```angular-ts
-import {Component, input, inject} from '@angular/core';
-import {resource} from '@angular/core';
+import {Component, input, inject, resource} from '@angular/core';
 
 @Component({
   selector: 'app-documentation',

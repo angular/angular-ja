@@ -70,11 +70,11 @@ IDEの**ターミナル**ペインで、
 
 1.  `src/app/home/home.ts`で、空の`export class Home {}`の定義をコンポーネント内で新しいインターフェースの単一のインスタンスを作成する次のコードに置き換えてください。
 
-      <docs-code language="angular-ts" header="src/app/home/home.tsにサンプルデータを追加する" path="adev/src/content/tutorials/first-app/steps/05-inputs/src/app/home/home.ts" visibleLines="[22,35]"/>
+      <docs-code language="angular-ts" header="src/app/home/home.tsにサンプルデータを追加する" path="adev/src/content/tutorials/first-app/steps/05-inputs/src/app/home/home.ts" visibleLines="[21,34]"/>
 
 1.  `home.ts`ファイルが次の例と一致していることを確認してください。
 
-      <docs-code language="angular-ts" header="src/app/home/home.ts" path="adev/src/content/tutorials/first-app/steps/05-inputs/src/app/home/home.ts" visibleLines="[[1,7],[9,36]]" />
+      <docs-code language="angular-ts" header="src/app/home/home.ts" path="adev/src/content/tutorials/first-app/steps/05-inputs/src/app/home/home.ts" visibleLines="[1,34]" />
 
     `Home`クラスに`HousingLocation`型の`housingLocation`プロパティを追加することで、データがインターフェースの定義どおりであることを確認できます。もしデータがインターフェースの定義を満たしていなければ、IDEがその旨のエラーを表示して知らせてくれます。
 

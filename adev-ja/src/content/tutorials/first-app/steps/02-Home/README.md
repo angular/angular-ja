@@ -18,7 +18,6 @@ Angularでは、コンポーネントにはプロパティを定義するため�
 `Home`コンポーネントを作成するときには、これらのプロパティを使用します。
 
 - `selector`: テンプレートでAngularがコンポーネントを参照する方法を示します。
-- `standalone`: コンポーネントが`NgModule`を必要とするかを示します。
 - `imports`: コンポーネントの依存関係を示します。
 - `template`: コンポーネントのHTMLマークアップとレイアウトを示します。
 - `styleUrls`: コンポーネントが使用するCSSファイルのURLを配列で指定します。
@@ -98,12 +97,12 @@ IDEの**編集**ペインで、
 (ng newで)スターターを使わずに、新しいAngularプロジェクトを作成した場合、
 検索ボタンと入力欄の枠線が表示されるよう`src/styles.css`に次のグローバルスタイルを追加します。
 
-```
+```css
 :root {
-  --primary-color: #605DC8;
-  --secondary-color: #8B89E6;
+  --primary-color: #605dc8;
+  --secondary-color: #8b89e6;
   --accent-color: #e8e7fa;
-  --shadow-color: #E8E8E8;
+  --shadow-color: #e8e8e8;
 }
 
 button.primary {

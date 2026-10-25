@@ -29,7 +29,7 @@ export class App {
 注意すべき点が2つあります。
 
 - `for` に `@` プレフィックスが付いているのは、[Angular テンプレート構文](guide/templates)と呼ばれる特殊な構文であるためです。
-- v16以前のアプリケーションを使用している場合は、[NgFor の Angular ドキュメント](guide/directives/structural-directives)を参照してください。
+- 引き続き`*ngFor`を使用しているアプリケーションでは、[AngularのNgForドキュメント](guide/directives/structural-directives)を参照してください。
 
 <docs-workflow>
 

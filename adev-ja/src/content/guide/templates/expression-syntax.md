@@ -2,11 +2,11 @@
 
 Angular式はJavaScriptに基づいていますが、いくつかの重要な点で異なります。このガイドでは、Angular式と標準JavaScriptの類似点と相違点を説明します。
 
-## 値リテラル
+## 値リテラル {#value-literals}
 
 Angularは、[リテラル値](https://developer.mozilla.org/en-US/docs/Glossary/Literal)のサブセットをJavaScriptからサポートしています。
 
-### サポートされる値リテラル
+### サポートされる値リテラル {#supported-value-literals}
 
 | Literal type           | Example values                  |
 | ---------------------- | ------------------------------- |
@@ -20,13 +20,13 @@ Angularは、[リテラル値](https://developer.mozilla.org/en-US/docs/Glossary
 | Template string        | `` `Hello ${name}` ``           |
 | Tagged template string | `` tag`Hello ${name}` ``        |
 
-### サポートされていない値リテラル
+### サポートされていない値リテラル {#unsupported-value-literals}
 
 | Literal type | Example values |
 | ------------ | -------------- |
 | BigInt       | `1n`           |
 
-## グローバル
+## グローバル {#globals}
 
 Angular式は、次の[グローバル](https://developer.mozilla.org/en-US/docs/Glossary/Global_object)をサポートしています。
 
@@ -35,15 +35,15 @@ Angular式は、次の[グローバル](https://developer.mozilla.org/en-US/docs
 
 その他のJavaScriptグローバルはサポートされていません。一般的なJavaScriptグローバルには、`Number`、`Boolean`、`NaN`、`Infinity`、`parseInt`などがあります。
 
-## ローカル変数
+## ローカル変数 {#local-variables}
 
 Angularは、特定のコンテキストで式に使用できる特別なローカル変数を自動的に用意します。これらの特別な変数は、常にドル記号文字（`$`）で始まります。
 
 たとえば、`@for`ブロックはループに関する情報に対応する複数のローカル変数（`$index`など）を提供します。
 
-## どのような演算子がサポートされていますか？
+## どのような演算子がサポートされていますか？ {#what-operators-are-supported}
 
-### サポートされる演算子
+### サポートされる演算子 {#supported-operators}
 
 Angularは、標準JavaScriptの次の演算子をサポートしています。
 
@@ -82,6 +82,11 @@ Angularは、標準JavaScriptの次の演算子をサポートしています。
 | Spread in object literals   | `{...obj, foo: 'bar'}`                         |
 | Spread in array literals    | `[...arr, 1, 2, 3]`                            |
 | Rest in function calls      | `fn(...args)`                                  |
+| アロー関数                    | `items.filter((i) => i.active)`                |
+
+NOTE: 代入演算子とインクリメント・デクリメント演算子は、[イベントリスナー文](#event-listener-statements)でのみ使用できます。バインディングや補間で使用するとコンパイルエラーになります。ただし、アロー関数の内部で使用する場合は除きます。
+
+アロー関数の本体は式である必要があります。アロー関数の内部ではパイプを使用できませんが、アロー関数をパイプの引数として渡すことはできます。
 
 Angular式は、さらに次の非標準の演算子もサポートしています。
 
@@ -106,7 +111,7 @@ v22への移行中、`ng update`のスキマティクスは、以前の`null`を
 
 NOTE: `$safeNavigationMigration`を削除できるように、`null`と`undefined`の区別に依存しない式へ移行することを推奨します。この関数は将来のAngularのバージョンで削除される可能性があります。
 
-### サポートされていない演算子
+### サポートされていない演算子 {#unsupported-operators}
 
 | 演算子              | 例(複数)                        |
 | --------------------- | --------------------------------- |
@@ -116,24 +121,24 @@ NOTE: `$safeNavigationMigration`を削除できるように、`null`と`undefine
 | カンマ演算子        | `x = (x++, x)`                    |
 | new                   | `new Car()`                       |
 
-## 式の字句コンテキスト
+## 式の字句コンテキスト {#lexical-context-for-expressions}
 
 Angular式は、コンポーネントクラスのコンテキストと、関連する[テンプレート変数](/guide/templates/variables)、ローカル変数、およびグローバル変数のコンテキストで評価されます。
 
 コンポーネントクラスのメンバーを参照する場合、`this`は常に暗黙的に指定されます。ただし、テンプレートが同じ名前の[テンプレート変数](guide/templates/variables)を宣言している場合、その変数はメンバーをシャドウします。このようなクラスメンバーは、明示的に`this.`を使用することで明確に参照できます。これは、クラスメンバーをシャドウする`@let`宣言を作成する場合に便利です。たとえば、シグナルの絞り込み目的で使用できます。
 
-## 宣言
+## 宣言 {#declarations}
 
 一般的に、Angular式では宣言はサポートされていません。これには、以下が含まれますが、これらに限定されません。
 
 | 宣言          | 例(複数)                                  |
-| --------------- | ------------------------------------------- |
+| --------------------------------- | ------------------------------------------- |
 | 変数            | `let label = 'abc'`, `const item = 'apple'` |
 | 関数            | `function myCustomFunction() { }`           |
-| アロー関数       | `() => { }`                                 |
+| ブロック本体を持つアロー関数       | `() => { }`                                 |
 | クラス          | `class Rectangle { }`                       |
 
-## イベントリスナー文
+## イベントリスナー文 {#event-listener-statements}
 
 イベントハンドラーは、**式**ではなく**文**です。Angular式と同じ構文をすべてサポートしていますが、2つの重要な違いがあります。
 

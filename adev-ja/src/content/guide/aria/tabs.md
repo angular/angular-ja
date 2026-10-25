@@ -1,5 +1,4 @@
-<docs-decorative-header title="タブ">
-</docs-decorative-header>
+# タブ
 
 <docs-pill-row>
   <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/tabs/" title="タブのARIAパターン"/>
@@ -60,7 +59,7 @@
 - **選択モード** - フォーカス時にタブを自動的にアクティブにするか、手動でのアクティベーションを要求します
 - **キーボードナビゲーション** - 矢印キー、Home、Endキーによる効率的なタブナビゲーション
 - **向き** - 水平または垂直のタブリストレイアウト
-- **遅延コンテンツ** - タブパネルは最初にアクティブになったときにのみレンダリングされます
+- **遅延コンテンツ** - タブパネルはアクティブになったときにのみレンダリングされます
 - **無効化されたタブ** - フォーカス管理機能付きで個々のタブを無効化します
 - **フォーカスモード** - roving tabindexまたはactivedescendantによるフォーカス戦略
 - **RTLサポート** - 右から左へ記述する言語のナビゲーション
@@ -165,7 +164,7 @@
 
 ### コンテンツの遅延レンダリング {#lazy-content-rendering}
 
-`ng-template` で `ngTabContent` ディレクティブを使用すると、タブパネルが最初に表示されるまでレンダリングを遅延させることができます。
+`ng-template`で`ngTabContent`ディレクティブを使用すると、タブパネルが表示されるまでレンダリングを遅延させることができます。
 
 ```angular-html
 <div ngTabs>
@@ -176,21 +175,21 @@
 
   <div ngTabPanel value="tab1">
     <ng-template ngTabContent>
-      <!-- このコンテンツは、タブ1が最初に表示されたときにのみレンダリングされます -->
+      <!-- This content only renders when Tab 1 is shown -->
       <app-heavy-component />
     </ng-template>
   </div>
 
   <div ngTabPanel value="tab2">
     <ng-template ngTabContent>
-      <!-- このコンテンツは、タブ2が最初に表示されたときにのみレンダリングされます -->
+      <!-- This content only renders when Tab 2 is shown -->
       <app-another-component />
     </ng-template>
   </div>
 </div>
 ```
 
-デフォルトでは、パネルが非表示になった後もコンテンツはDOMに残ります。パネルが非アクティブ化されたときにコンテンツを削除するには、`[preserveContent]="false"` を設定します。
+デフォルトでは、パネルが非表示になるとコンテンツがDOMから削除されます。タブの切り替え時に動画の状態をリセットしたくない場合などは、`[preserveContent]="true"`を設定してコンテンツを保持します。
 
 ### 無効化されたタブ {#disabled-tabs}
 

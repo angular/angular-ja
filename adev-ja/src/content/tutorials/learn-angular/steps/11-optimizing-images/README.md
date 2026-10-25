@@ -56,7 +56,7 @@ imports: [NgOptimizedImage],
 
 上記のコード例では、各画像に `width` と `height` の両方の属性が設定されていることに注意してください。[レイアウトシフト](https://web.dev/articles/cls) を防ぐために、`NgOptimizedImage` ディレクティブでは、各画像に両方のサイズ属性を設定する必要があります。
 
-画像に対して静的な `height` と `width` を指定できない場合、または指定したくない場合は、[fill 属性](https://web.dev/articles/cls)を使用します。画像を「背景画像」のように動作させ、そのコンテナ要素を塗りつぶすようにできます。
+画像に対して静的な `height` と `width` を指定できない場合、または指定したくない場合は、[fill 属性](/guide/image-optimization#using-fill-mode)を使用します。画像を「背景画像」のように動作させ、そのコンテナ要素を塗りつぶすようにできます。
 
 ```angular-html
 // コンテナ div は 'position: "relative"'

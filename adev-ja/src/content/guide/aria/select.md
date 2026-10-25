@@ -1,5 +1,4 @@
-<docs-decorative-header title="セレクト">
-</docs-decorative-header>
+# セレクト
 
 ## 概要 {#overview}
 

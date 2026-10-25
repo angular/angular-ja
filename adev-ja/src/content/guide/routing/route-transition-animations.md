@@ -148,6 +148,20 @@ withViewTransitions({
 
 この例では、ナビゲーションが[URLフラグメントまたはクエリパラメータ](/guide/routing/read-route-state#query-parameters)のみを変更する場合（同じページ内のアンカーリンクなど）にビュー遷移をスキップします。`skipTransition()`メソッドは、ナビゲーションの完了を許可しながらアニメーションを防止します。
 
+## ユーザーの動きに関する設定を尊重する {#respecting-the-users-motion-preferences}
+
+ルーターは、ユーザーの[`prefers-reduced-motion`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)設定に関係なくビュー遷移を開始します。動きを減らす設定は、動きをすべてなくしたいという意味とは限りません。アプリケーション側で[控えめなアニメーションを提供する](https://developer.chrome.com/docs/web-platform/view-transitions/same-document#react_to_the_reduced_motion_preference)か、`onViewTransitionCreated`コールバックで遷移をスキップできます。
+
+```ts
+withViewTransitions({
+  onViewTransitionCreated: ({transition}) => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      transition.skipTransition();
+    }
+  },
+});
+```
+
 ## Chrome ExplainerのAngularへの適応例 {#examples-from-the-chrome-explainer-adapted-to-angular}
 
 以下の例は、ChromeチームのドキュメントからAngular Routerで使用するために適応された、さまざまなビュー遷移テクニックを示しています。

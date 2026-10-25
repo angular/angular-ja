@@ -67,7 +67,7 @@ IDEの**エクスプローラー**ペイン:
       1. `app.css`はこのコンポーネントのスタイルシートです。
       1. 新しいコンポーネントはこのディレクトリに追加されます。
 
-   1. ディレクトリ(`/assets`)にはアプリケーションで使用される画像が含まれています。
+   1. ディレクトリ(`/public`)にはアプリケーションで使用される画像が含まれています。
    1. Angularアプリケーションのビルドと実行に必要ですが、通常は直接操作しないファイルやディレクトリもあります。
       1. `.angular`はAngularアプリケーションをビルドするのに必要なファイルを含みます。
       1. `.e2e`はアプリケーションをテストするのに使用されるファイルを含みます。
@@ -96,7 +96,7 @@ Angularアプリケーションプロジェクトを構成するファイルを�
 1. 次に`first-app/src/app/app.ts`を開いてください。
 1. `app.ts`の`@Component`の定義内にある、`template`の行を次のコードに置き換えてアプリケーションコンポーネントの表示テキストを変更します。
 
-   <docs-code language="angular-ts" header="src/app/app.tsを置き換えてください" path="adev/src/content/tutorials/first-app/steps/02-Home/src/app/app.ts" visibleLines="[6,8]"/>
+   <docs-code language="angular-ts" header="src/app/app.tsを置き換えてください" path="adev/src/content/tutorials/first-app/steps/02-Home/src/app/app.ts" visibleLines="[6]"/>
 
 1. `app.ts`の`App`クラスの定義で、`title`の行を次のコードに置き換えてコンポーネントのタイトルを変更します。
 

@@ -30,6 +30,7 @@
 | `NG0602`  | [Disallowed function call inside reactive context](errors/NG0602)                    |
 | `NG0750`  | [@defer dependencies failed to load](errors/NG0750)                                  |
 | `NG0751`  | [@defer behavior when HMR is enabled](errors/NG0751)                                 |
+| `NG0904`  | [リソースURLのコンテキストで安全でない値を使用](errors/NG0904)                         |
 | `NG0910`  | [Unsafe bindings on an iframe element](errors/NG0910)                                |
 | `NG0912`  | [Component ID generation collision](errors/NG0912)                                   |
 | `NG0913`  | [Runtime Performance Warnings](errors/NG0913)                                        |
@@ -40,6 +41,7 @@
 | `NG0956`  | [Tracking expression caused re-creation of the DOM structure](errors/NG0956)         |
 | `NG0991`  | [Resource completed before producing a value](errors/NG0991)                         |
 | `NG01002` | [Missing Control Value](errors/NG01002)                                              |
+| `NG01055` | [`formControlName`に対応するコントロールがない](errors/NG01055)                              |
 | `NG01101` | [Wrong Async Validator Return Type](errors/NG01101)                                  |
 | `NG01203` | [Missing value accessor](errors/NG01203)                                             |
 | `NG01902` | [Orphan field in signal forms](errors/NG01902)                                       |
@@ -50,6 +52,7 @@
 | `NG05000` | [Hydration with unsupported Zone.js instance.](errors/NG05000)                       |
 | `NG05104` | [Root element was not found.](errors/NG05104)                                        |
 | `NG05106` | [Insertion reference node not found](errors/NG05106)                                 |
+| `NG05201` | [DomSanitizerに安全でないリソースURLを渡した](errors/NG05201)                         |
 | `NG05703` | [Suspicious URL origin change during SSR](errors/NG05703)                            |
 
 ## コンパイラエラー

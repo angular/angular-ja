@@ -250,7 +250,7 @@ AngularでDOMを操作する方法については、[DOM API の使用](guide/co
 次のフェーズでアクセスできる結果値を返すことができます。
 
 ```ts
-import {Component, ElementRef, afterNextRender} from '@angular/core';
+import {Component, ElementRef, afterNextRender, inject} from '@angular/core';
 
 @Component(/* ... */)
 export class UserProfile {

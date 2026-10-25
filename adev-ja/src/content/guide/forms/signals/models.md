@@ -193,8 +193,7 @@ export class LoginComponent {
 
 TIP: フィールドの状態には、`value()`以外にも、バリデーションの状態（例: valid、invalid、errors）、インタラクションの追跡（例: touched、dirty）、可視性（例: hidden、disabled）など、さらに多くのシグナルが含まれています。
 
-<!-- TODO: UNCOMMENT BELOW WHEN GUIDE IS AVAILABLE -->
-<!-- See the [Field State Management guide](guide/forms/signals/field-state-management) for complete coverage. -->
+詳しくは、[フィールド状態管理ガイド](guide/forms/signals/field-state-management)を参照してください。
 
 ## フォームモデルをプログラム的に更新する {#updating-form-models-programmatically}
 
@@ -425,7 +424,6 @@ orderForm.items[0].quantity; // FieldTree<number>
 
 このガイドでは、モデルの作成と値の更新について説明しました。関連ガイドでは、シグナルフォームの他の側面について探求します:
 
-<!-- TODO: UNCOMMENT WHEN THE GUIDES ARE AVAILABLE -->
 <docs-pill-row>
   <docs-pill href="guide/forms/signals/field-state-management" title="Field state management" />
   <docs-pill href="guide/forms/signals/validation" title="Validation" />

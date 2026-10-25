@@ -135,6 +135,7 @@ You can configure the `Location` service to force a trailing slash on all URLs w
 
 ```ts
 import {LocationStrategy, TrailingSlashPathLocationStrategy} from '@angular/common';
+import {bootstrapApplication} from '@angular/platform-browser';
 
 bootstrapApplication(App, {
   providers: [{provide: LocationStrategy, useClass: TrailingSlashPathLocationStrategy}],
@@ -145,6 +146,7 @@ You can also force the `Location` service to never have a trailing slash on all 
 
 ```ts
 import {LocationStrategy, NoTrailingSlashPathLocationStrategy} from '@angular/common';
+import {bootstrapApplication} from '@angular/platform-browser';
 
 bootstrapApplication(App, {
   providers: [{provide: LocationStrategy, useClass: NoTrailingSlashPathLocationStrategy}],
@@ -273,6 +275,7 @@ To enable automatic cleanup of unused route injectors, you can use the `withAuto
 
 ```ts
 import {provideRouter, withAutoCleanupInjectors} from '@angular/router';
+import {ApplicationConfig} from '@angular/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes, withAutoCleanupInjectors())],
@@ -304,7 +307,9 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
   private readonly handles = new Map<Route, DetachedRouteHandle>();
 
   store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle | null) {
-    this.handles.set(route.routeConfig!, handle);
+    if (handle) {
+      this.handles.set(route.routeConfig!, handle);
+    }
   }
 
   retrieveStoredRouteHandles(): DetachedRouteHandle[] {
@@ -552,8 +557,7 @@ export const routes: Routes = [
 The component receives the extracted parameters through route inputs:
 
 ```angular-ts
-import {Component, input, inject} from '@angular/core';
-import {resource} from '@angular/core';
+import {Component, input, inject, resource} from '@angular/core';
 
 @Component({
   selector: 'app-documentation',

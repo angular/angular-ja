@@ -65,6 +65,8 @@ Use `stream` for these continuously updating data sources. Unlike `loader`, whic
 
 Use `loader` for one-time asynchronous operations, such as fetching data from an HTTP endpoint.
 
+この例では、`userUpdates`がWebSocketやSSE接続などの外部データソースを模しています。
+
 ```typescript
 const userUpdates = signal({value: 'Alice'});
 
@@ -72,7 +74,7 @@ const userResource = resource({
   stream: () => userUpdates,
 });
 
-// Later, when new data arrives:
+// Simulate a new value arriving from the external data source:
 userUpdates.set({value: 'Bob'});
 ```
 
@@ -119,8 +121,8 @@ userResource.reload();
 リソースオブジェクトには、非同期ローダーの状態を読み取るためのいくつかのシグナルプロパティがあります。
 
 | プロパティ    | 説明                                                                                                     |
-| ----------- | --------------------------------------------------------------------------------------------------------------- |
-| `value`     | リソースの最新の値、または値が受信されていない場合は`undefined`。                            |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `value`     | リソースの最新値です。値がまだない場合はデフォルト値（`defaultValue`を設定していなければ`undefined`）です。ステータスが`'error'`の場合、`value()`を読み取ると例外が発生します。 |
 | `hasValue`  | リソースが値を持っているかどうか。                                                                               |
 | `error`     | リソースのローダーの実行中に発生した最新のエラー、またはエラーが発生していない場合は`undefined`。 |
 | `isLoading` | リソースローダーが現在実行中かどうか。                                                               |
@@ -229,10 +231,20 @@ Each snapshot contains a `status` and either a `value` or an `error`.
 
 ### Composing resources with snapshots
 
+IMPORTANT: `resourceFromSnapshots`は[試験的な機能](reference/releases#experimental)です。試すことはできますが、正式に提供される前に変更される可能性があります。
+
 You can create new resources from snapshots using `resourceFromSnapshots`. This enables composition with signal APIs like `computed` and `linkedSignal` to transform resource behavior.
 
 ```ts
-import {linkedSignal, resourceFromSnapshots, Resource, ResourceSnapshot} from '@angular/core';
+import {
+  Component,
+  input,
+  linkedSignal,
+  resourceFromSnapshots,
+  Resource,
+  ResourceSnapshot,
+} from '@angular/core';
+import {httpResource} from '@angular/common/http';
 
 function withPreviousValue<T>(input: Resource<T>): Resource<T> {
   const derived = linkedSignal<ResourceSnapshot<T>, ResourceSnapshot<T>>({

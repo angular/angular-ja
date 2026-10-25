@@ -131,7 +131,7 @@ Angularは次の場合に自動的にリアクティブコンテキストに入�
 - `effect`、`afterRenderEffect`のコールバックを実行する
 - `computed`シグナルを評価する
 - `linkedSignal`を評価する
-- `resource`のparamsまたはloader関数を評価する
+- `resource`のparams関数を評価する
 - コンポーネントテンプレートをレンダリングする([ホストプロパティ](guide/components/host-elements#binding-to-the-host-element)のバインディングを含む)
 
 これらの操作中、Angularは_ライブ_接続を作成します。追跡されたシグナルが変更されると、Angularは_最終的に_コンシューマーを再実行します。
@@ -235,6 +235,7 @@ effect(async () => {
 シグナルを作成する際には、オプションで等価関数を指定できます。これは、新しい値が前の値と実際に異なるかどうかを確認するために使用されます。
 
 ```ts
+import {signal} from '@angular/core';
 import isEqual from 'lodash/isEqual';
 
 const data = signal(['test'], {equal: isEqual});
@@ -275,3 +276,8 @@ isWritableSignal(doubled); // false
 ## RxJSとシグナルを併用する {#using-signals-with-rxjs}
 
 シグナルとRxJSの相互運用性の詳細については、[RxJSとAngularシグナルの相互運用](ecosystem/rxjs-interop) を参照してください。
+
+## シグナルのデバッグ {#debugging-signals}
+
+Angular DevToolsでは、コンポーネントやディレクティブのシグナルグラフを表示し、シグナル、computed、effectなどのリアクティブなノード間の依存関係を確認できます。
+グラフの開き方と読み方は、[シグナルグラフをデバッグする](tools/devtools/signals)を参照してください。

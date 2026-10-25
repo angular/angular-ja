@@ -1,5 +1,4 @@
-<docs-decorative-header title="メニュー">
-</docs-decorative-header>
+# メニュー
 
 <docs-pill-row>
   <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/menubar/" title="メニューARIAパターン"/>

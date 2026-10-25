@@ -51,9 +51,7 @@ export const appConfig: ApplicationConfig = {
 
 `App` のテンプレートを更新し、`<router-outlet />` を追加します。
 
-```angular-ts {highlight:[11]}
-import {RouterOutlet} from '@angular/router';
-
+```angular-ts {highlight:[9]}
 @Component({
 ...
 template: `

@@ -408,10 +408,11 @@ export class ProfileEditor {
 
 ```angular-ts
 import {Component} from '@angular/core';
-import {FormArray, FormControl} from '@angular/forms';
+import {FormArray, FormControl, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
   selector: 'form-array-example',
+  imports: [ReactiveFormsModule],
   template: `
     <form [formArray]="form">
       @for (control of form.controls; track $index) {

@@ -7,7 +7,7 @@ Angularルーターを使用すると、ルートに関連付けられた情報�
 `ActivatedRoute`は、現在のルートに関連付けられたすべての情報を提供する`@angular/router`からのサービスです。
 
 ```angular-ts
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
@@ -43,11 +43,12 @@ export class Product {
 ルートスナップショットにアクセスする方法の例を次に示します。
 
 ```angular-ts
-import {ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
+import {Component, inject} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component(/* ... */)
 export class UserProfile {
-  readonly userId: string;
+  readonly userId: string | null;
   private route = inject(ActivatedRoute);
 
   constructor() {
@@ -138,6 +139,7 @@ router.navigate(['/products'], {
 次に、製品リストの表示方法に影響を与えるクエリパラメーターを更新する`ProductList`の例を示します。
 
 ```angular-ts
+import {Component, inject} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({

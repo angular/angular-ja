@@ -129,10 +129,10 @@ it('loads harnesses', async () => {
 const myComponentHarness = await loader.getHarness(MyComponent);
 
 // Get loader for first instance of child element with '.child' selector
-const childLoader = await myComponentHarness.getLoader('.child');
+const childLoader = await loader.getChildLoader('.child');
 
 // Get loaders for all instances of child elements with '.child' selector
-const allChildLoaders = await myComponentHarness.getAllChildLoaders('.child');
+const allChildLoaders = await loader.getAllChildLoaders('.child');
 ```
 
 ### ハーネスのフィルタリング {#filtering-harnesses}
@@ -187,7 +187,7 @@ it('should get value of slider thumb', async () => {
 
 ```ts
 it('checks state while async action is in progress', async () => {
-  const buttonHarness = loader.getHarness(MyButtonHarness);
+  const buttonHarness = await loader.getHarness(MyButtonHarness);
   await manualChangeDetection(async () => {
     await buttonHarness.click();
     fixture.detectChanges();
@@ -212,7 +212,7 @@ Angularチームは、テストの可読性を向上させるために[await](ht
 
 ```ts
 it('reads properties in parallel', async () => {
-  const checkboxHarness = loader.getHarness(MyCheckboxHarness);
+  const checkboxHarness = await loader.getHarness(MyCheckboxHarness);
   // Read the checked and intermediate properties simultaneously.
   const [checked, indeterminate] = await parallel(() => [
     checkboxHarness.isChecked(),

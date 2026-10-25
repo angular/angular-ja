@@ -29,12 +29,10 @@ export class App {
 <docs-workflow>
 
 <docs-step title="イベントハンドラーを追加">
-`App`クラスに`showSecretMessage()`イベントハンドラー関数を追加します。以下のコードを実装に使用します。
+`App`クラスに既にある`showSecretMessage()`メソッドの本体に、次のコードを記述します。
 
 ```ts
-showSecretMessage() {
-  this.message = 'Way to go 🚀';
-}
+this.message = 'Way to go 🚀';
 ```
 
 </docs-step>

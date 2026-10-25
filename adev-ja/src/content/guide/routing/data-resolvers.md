@@ -77,7 +77,7 @@ export const routes: Routes = [
 
 ### ActivatedRouteを使用する {#using-activatedroute}
 
-`signal`関数を使用して`ActivatedRoute`からスナップショットデータにアクセスすることで、コンポーネントで解決済みデータにアクセスできます。
+`ActivatedRoute`の`data` Observableを`toSignal`関数でシグナルに変換すると、コンポーネントから解決済みデータにアクセスできます。
 
 ```angular-ts
 import {Component, inject, computed} from '@angular/core';
@@ -94,7 +94,7 @@ import type {User, Settings} from './types';
 })
 export class UserDetail {
   private route = inject(ActivatedRoute);
-  private data = toSignal(this.route.data);
+  private data = toSignal(this.route.data, {requireSync: true});
   user = computed(() => this.data().user as User);
   settings = computed(() => this.data().settings as Settings);
 }
@@ -162,8 +162,8 @@ bootstrapApplication(App, {
       withNavigationErrorHandler((error) => {
         const router = inject(Router);
 
-        if (error?.message) {
-          console.error('Navigation error occurred:', error.message);
+        if (error.error?.message) {
+          console.error('Navigation error occurred:', error.error.message);
         }
 
         router.navigate(['/error']);
@@ -190,12 +190,13 @@ export const userResolver: ResolveFn<User> = (route) => {
 
 ```angular-ts
 import {Component, inject, signal} from '@angular/core';
-import {Router, NavigationError} from '@angular/router';
+import {Router, NavigationError, RouterOutlet} from '@angular/router';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {map} from 'rxjs';
 
 @Component({
   selector: 'app-root',
+  imports: [RouterOutlet],
   template: `
     @if (errorMessage()) {
       <div class="error-banner">
@@ -280,11 +281,12 @@ TIP: To avoid blocking navigation and render components immediately with skeleto
 リゾルバーの実行中のユーザー体験を向上させるには、ルーターイベントをリッスンして読み込みインジケーターを表示できます。
 
 ```angular-ts
-import {Component, inject} from '@angular/core';
-import {Router} from '@angular/router';
+import {Component, computed, inject} from '@angular/core';
+import {Router, RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-root',
+  imports: [RouterOutlet],
   template: `
     @if (isNavigating()) {
       <div class="loading-bar">Loading...</div>

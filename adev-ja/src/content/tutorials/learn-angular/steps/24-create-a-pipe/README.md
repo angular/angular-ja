@@ -64,7 +64,7 @@ export class ReversePipe implements PipeTransform {
 
 </docs-step>
 
-<docs-step title="テンプレートで `ReversePipe` を使用する"></docs-step>
+<docs-step title="テンプレートで `ReversePipe` を使用する">
 パイプロジックを実装したら、最後のステップとしてテンプレートで使用します。`app.ts` でテンプレートにパイプを含め、コンポーネントのインポートに追加します。
 
 ```angular-ts {highlight:[3,4]}
@@ -74,6 +74,8 @@ export class ReversePipe implements PipeTransform {
   imports: [ReversePipe]
 })
 ```
+
+</docs-step>
 
 </docs-workflow>
 

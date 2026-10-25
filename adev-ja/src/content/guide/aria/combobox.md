@@ -1,5 +1,4 @@
-<docs-decorative-header title="コンボボックス">
-</docs-decorative-header>
+# コンボボックス
 
 <docs-pill-row>
   <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/combobox/" title="コンボボックスARIAパターン"/>

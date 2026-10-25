@@ -1,5 +1,4 @@
-<docs-decorative-header title="アコーディオン">
-</docs-decorative-header>
+# アコーディオン
 
 <docs-pill-row>
   <docs-pill href="https://www.w3.org/WAI/ARIA/apg/patterns/accordion/" title="アコーディオンARIAパターン"/>
@@ -38,7 +37,7 @@
 
 - **展開モード** - 一度に1つまたは複数のパネルを開けるかどうかを制御します
 - **キーボードナビゲーション** - 矢印キー、Home、Endを使用してトリガー間を移動します
-- **遅延レンダリング** - コンテンツはパネルが最初に展開されたときにのみ作成され、初期読み込みのパフォーマンスを向上させます
+- **遅延レンダリング** - コンテンツはパネルが展開されたときにのみ作成され、初期読み込みのパフォーマンスを向上させます
 - **無効状態** - グループ全体または個々のトリガーを無効にします
 - **フォーカス管理** - 無効化されたアイテムがキーボードフォーカスを受け取れるかどうかを制御します
 - **プログラムによる制御** - コンポーネントのコードからパネルを展開、折りたたみ、または切り替えます
@@ -140,7 +139,7 @@ NOTE: `multiExpandable`入力はデフォルトで`true`です。単一展開の
 
 ### コンテンツの遅延レンダリング {#lazy-content-rendering}
 
-`ngAccordionContent`ディレクティブを`ng-template`で使用すると、パネルが最初に展開されるまでコンテンツのレンダリングを遅延させることができます。これにより、画像、チャート、または複雑なコンポーネントなどの重いコンテンツを持つアコーディオンのパフォーマンスが向上します。
+`ngAccordionContent`ディレクティブを`ng-template`で使用すると、パネルが展開されるまでコンテンツのレンダリングを遅延させることができます。これにより、画像、チャート、複雑なコンポーネントなどの重いコンテンツを持つアコーディオンのパフォーマンスが向上します。
 
 ```angular-html
 <div ngAccordionGroup>
@@ -148,7 +147,7 @@ NOTE: `multiExpandable`入力はデフォルトで`true`です。単一展開の
     <button ngAccordionTrigger [panel]="panel1">Trigger Text</button>
     <div ngAccordionPanel #panel1="ngAccordionPanel">
       <ng-template ngAccordionContent>
-        <!-- This content only renders when the panel first opens -->
+        <!-- This content only renders when the panel opens -->
         <img src="large-image.jpg" alt="Description" />
         <app-expensive-component />
       </ng-template>
@@ -157,7 +156,7 @@ NOTE: `multiExpandable`入力はデフォルトで`true`です。単一展開の
 </div>
 ```
 
-デフォルトでは、パネルが折りたたまれた後もコンテンツはDOMに残ります。パネルが閉じたときにDOMからコンテンツを削除するには、`[preserveContent]="false"`を設定します。
+デフォルトでは、パネルを折りたたむとコンテンツがDOMから削除されます。パネルに動画など、折りたたんだときに状態をリセットしたくないものが含まれる場合は、`[preserveContent]="true"`を設定してコンテンツを保持します。
 
 ## Testing {#testing}
 

@@ -65,6 +65,8 @@ Use `stream` for these continuously updating data sources. Unlike `loader`, whic
 
 Use `loader` for one-time asynchronous operations, such as fetching data from an HTTP endpoint.
 
+In this example, `userUpdates` simulates an external source such as a WebSocket or SSE connection.
+
 ```typescript
 const userUpdates = signal({value: 'Alice'});
 
@@ -72,7 +74,7 @@ const userResource = resource({
   stream: () => userUpdates,
 });
 
-// Later, when new data arrives:
+// Simulate a new value arriving from the external data source:
 userUpdates.set({value: 'Bob'});
 ```
 
@@ -118,13 +120,13 @@ userResource.reload();
 
 The resource object has several signal properties for reading the status of the asynchronous loader.
 
-| Property    | Description                                                                                                     |
-| ----------- | --------------------------------------------------------------------------------------------------------------- |
-| `value`     | The most recent value of the resource, or `undefined` if no value has been received.                            |
-| `hasValue`  | Whether the resource has a value.                                                                               |
-| `error`     | The most recent error encountered while running the resource's loader, or `undefined` if no error has occurred. |
-| `isLoading` | Whether the resource loader is currently running.                                                               |
-| `status`    | The resource's specific `ResourceStatus`, as described below.                                                   |
+| Property    | Description                                                                                                                                                                                  |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `value`     | The most recent value of the resource, or the default value (`undefined` unless `defaultValue` is set) if no value has been received. Reading `value()` throws when the status is `'error'`. |
+| `hasValue`  | Whether the resource has a value.                                                                                                                                                            |
+| `error`     | The most recent error encountered while running the resource's loader, or `undefined` if no error has occurred.                                                                              |
+| `isLoading` | Whether the resource loader is currently running.                                                                                                                                            |
+| `status`    | The resource's specific `ResourceStatus`, as described below.                                                                                                                                |
 
 The `status` signal provides a specific `ResourceStatus` that describes the state of the resource using a string constant.
 
@@ -229,10 +231,20 @@ Each snapshot contains a `status` and either a `value` or an `error`.
 
 ### Composing resources with snapshots
 
+IMPORTANT: `resourceFromSnapshots` is [experimental](reference/releases#experimental). It's ready for you to try, but it might change before it is stable.
+
 You can create new resources from snapshots using `resourceFromSnapshots`. This enables composition with signal APIs like `computed` and `linkedSignal` to transform resource behavior.
 
 ```ts
-import {linkedSignal, resourceFromSnapshots, Resource, ResourceSnapshot} from '@angular/core';
+import {
+  Component,
+  input,
+  linkedSignal,
+  resourceFromSnapshots,
+  Resource,
+  ResourceSnapshot,
+} from '@angular/core';
+import {httpResource} from '@angular/common/http';
 
 function withPreviousValue<T>(input: Resource<T>): Resource<T> {
   const derived = linkedSignal<ResourceSnapshot<T>, ResourceSnapshot<T>>({

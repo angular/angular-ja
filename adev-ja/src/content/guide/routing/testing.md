@@ -59,7 +59,7 @@ export class UserProfile {
 以下の例は、認証されたユーザーのナビゲーションを許可し、認証されていないユーザーをログインページにリダイレクトする`authGuard`をテストします。
 
 ```ts {header: 'auth.guard.spec.ts'}
-import {vi, type Mocked} from 'vitest';
+import {describe, expect, it, vi, type Mocked} from 'vitest';
 import {RouterTestingHarness} from '@angular/router/testing';
 import {provideRouter, Router} from '@angular/router';
 import {authGuard} from './auth.guard';

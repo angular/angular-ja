@@ -21,6 +21,7 @@ HELPFUL: 遅延読み込みのユースケース(たとえば、重いコンポ�
 
 ```angular-ts
 import {NgComponentOutlet} from '@angular/common';
+import {Component, input, computed} from '@angular/core';
 
 @Component({/*...*/})
 export class AdminBio {
@@ -405,6 +406,8 @@ export class PopupService {
 ```
 
 ## Handling rendering errors
+
+IMPORTANT: `onError`オプションとその`ErrorDetails`パラメーターは[開発者プレビュー](reference/releases#developer-preview)です。
 
 When dynamically creating components using `ViewContainerRef.createComponent` or the standalone `createComponent` function, you can provide an `onError` callback in the options object to handle errors that occur during the rendering or change detection phases. This is the programmatic equivalent of using an `@error` block in templates.
 

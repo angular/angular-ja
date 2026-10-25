@@ -21,9 +21,9 @@ NOTE: この動画は古い構文を使っていますが、主要なコンセ�
 <docs-workflow>
 
 <docs-step title="input()関数をインポートする">
-コードエディタ―で、`HousingLocation`コンポーネントに`@angular/core`から`input`ヘルパーメソッドをインポートします。
+コードエディターで、`@angular/core`から`input`ヘルパーメソッドを、`../housinglocation`から`HousingLocationInfo`インターフェースを`HousingLocation`コンポーネントにインポートします。
 
-<docs-code header="housing-location.tsでinputをインポートする" path="adev/src/content/tutorials/first-app/steps/06-property-binding/src/app/housing-location/housing-location.ts" visibleLines="[1]"/>
+<docs-code header="housing-location.tsでinputとHousingLocationInfoをインポートする" path="adev/src/content/tutorials/first-app/steps/06-property-binding/src/app/housing-location/housing-location.ts" visibleLines="[1,2]"/>
 
 </docs-step>
 

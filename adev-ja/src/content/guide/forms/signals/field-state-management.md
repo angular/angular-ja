@@ -108,7 +108,7 @@ export class Login {
 
 ### バリデーションエラーの読み取り {#reading-validation-errors}
 
-`errors()`でバリデーションエラーの配列にアクセスします。各エラーオブジェクトには以下が含まれます:
+`errors()`でバリデーションエラーの配列にアクセスするか、`getError()`で個々のエラーにアクセスします。各エラーオブジェクトには以下が含まれます:
 
 | プロパティ    | 説明                                                            |
 | ----------- | --------------------------------------------------------------- |
@@ -118,7 +118,7 @@ export class Login {
 
 NOTE: `message`プロパティはオプションです。バリデーターはカスタムエラーメッセージを提供できますが、指定されていない場合は、エラーの`kind`値を独自メッセージにマッピングする必要があるかもしれません。
 
-以下は、テンプレートでエラーを表示する方法の例です:
+以下は、バリデーションエラーの配列を使ってテンプレートにエラーを表示する例です:
 
 ```angular-ts
 @Component({
@@ -137,6 +137,24 @@ NOTE: `message`プロパティはオプションです。バリデーターは�
 ```
 
 このアプローチでは、フィールドのすべてのエラーをループ処理し、各エラーメッセージをユーザーに表示します。
+
+以下は、`getError()`を使ってテンプレートにエラーを表示する例です:
+
+```angular-ts
+@Component({
+  template: `
+    <input type="email" [formField]="loginForm.email" />
+
+    @if (loginForm.email().getError('required'); as error) {
+      <div class="errors">
+        <p>{{ error.message }}</p>
+      </div>
+    }
+  `
+})
+```
+
+`getError()`にはエラーの`kind`を表す任意の文字列を指定できます。また、組み込みのバリデーションエラーの種類（`required`、`email`、`minLength`など）も認識します。
 
 ### 保留中のバリデーション {#pending-validation}
 
@@ -690,7 +708,8 @@ export class Password {
 シグナルフォームprovides a `FormRoot` directive that simplifies form submission. It automatically prevents the default browser form submission behavior and sets the `novalidate` attribute on the `<form>` element.
 
 ```angular-ts
-import {FormField, FormRoot} from '@angular/forms/signals';
+import {FormField, FormRoot, form, required, email} from '@angular/forms/signals';
+import {Component, signal} from '@angular/core';
 
 @Component({
   imports: [FormRoot, FormField],
@@ -876,7 +895,6 @@ export class PasswordInput implements FormValueControl<string> {
 
 このガイドでは、バリデーションと可用性ステータスの処理、インタラクションの追跡、フィールド状態の伝播について説明しました。関連ガイドでは、シグナルフォームの他の側面について探求します:
 
-<!-- TODO: UNCOMMENT WHEN THE GUIDES ARE AVAILABLE -->
 <docs-pill-row>
   <docs-pill href="guide/forms/signals/models" title="Form models" />
   <docs-pill href="guide/forms/signals/validation" title="Validation" />

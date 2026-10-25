@@ -188,7 +188,7 @@ export class Dashboard {}
 ルーティングされたコンポーネントは、`ROUTER_OUTLET_DATA`を使用して提供されたアウトレットデータをインジェクトできます。
 
 ```angular-ts
-import {Component, inject} from '@angular/core';
+import {Component, inject, Signal} from '@angular/core';
 import {ROUTER_OUTLET_DATA} from '@angular/router';
 
 @Component({

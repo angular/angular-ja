@@ -127,6 +127,7 @@ const routes: Routes = [
 一般的な例は、ページが見つかりませんコンポーネントの定義です。
 
 ```ts
+import {Routes} from '@angular/router';
 import {Home} from './home/home';
 import {UserProfile} from './user-profile';
 import {NotFound} from './not-found';
@@ -171,6 +172,7 @@ const routes: Routes = [
 コンポーネントをレンダリングする代わりに、別のルートにリダイレクトするルートを定義できます。
 
 ```ts
+import {Routes} from '@angular/router';
 import {Blog} from './home/blog';
 
 const routes: Routes = [

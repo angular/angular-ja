@@ -65,7 +65,8 @@ NOTE: `@angular/router`の[`Event`](api/router/Event)型は、通常のグロー
 ルーターイベントシーケンスを検査する必要がある場合、デバッグのために内部ナビゲーションイベントのログ記録を有効にできます。これは、すべてのルーティングイベントの詳細なコンソールログ記録を有効にする設定オプション（`withDebugTracing()`）を渡すことで設定できます。
 
 ```ts
-import {provideRouter, withDebugTracing} from '@angular/router';
+import {provideRouter, Routes, withDebugTracing} from '@angular/router';
+import {bootstrapApplication} from '@angular/platform-browser';
 
 const appRoutes: Routes = [];
 bootstrapApplication(App, {
@@ -84,11 +85,12 @@ bootstrapApplication(App, {
 ナビゲーション中にローディングインジケーターを表示します。
 
 ```angular-ts
-import {Component, inject} from '@angular/core';
-import {Router} from '@angular/router';
+import {Component, computed, inject} from '@angular/core';
+import {Router, RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-root',
+  imports: [RouterOutlet],
   template: `
     @if (isNavigating()) {
       <div class="loading-bar">Loading...</div>

@@ -8,6 +8,7 @@
 
 ```angular-ts
 import {RouterLink} from '@angular/router';
+import {Component} from '@angular/core';
 
 @Component({
   template: `
@@ -80,6 +81,7 @@ HELPFUL: 文字列を渡すのが、相対URLを定義する最も一般的な�
 
 ```angular-ts
 import {Router} from '@angular/router';
+import {Component, inject} from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -112,6 +114,7 @@ export class AppDashboard {
 
 ```angular-ts
 import {Router, ActivatedRoute} from '@angular/router';
+import {Component, inject} from '@angular/core';
 
 @Component({
   selector: 'app-user-detail',
